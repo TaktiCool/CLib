@@ -23,7 +23,7 @@
 if (isServer) then {
     LVAR(ServerNamespace) = false call CFUNC(createNamespace);
 
-    LVAR(supportedLanguages) = getArray(configFile >> "PRA3" >> "cfgLocalisation" >> "supportedLanguages");
+    LVAR(supportedLanguages) = getArray(configFile >> "CLib_Localisation" >> "supportedLanguages");
 
     {
         {
@@ -34,7 +34,7 @@ if (isServer) then {
             } forEach LVAR(supportedLanguages);
             [LVAR(ServerNamespace), configName _x, _allLocalisations, QLVAR(allLocalisations)] call CFUNC(setVariable);
             nil
-        } count configProperties [_x >> "PRA3" >> "cfgLocalisation", "isClass _x", true];
+        } count configProperties [_x >> "CLib_Localisation", "isClass _x", true];
         nil
     } count [configFile, campaignConfigFile, missionConfigFile];
 

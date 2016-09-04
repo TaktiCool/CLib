@@ -1,2 +1,3 @@
-#include "\pr\PRA3\addons\PRA3_Server\Core\macros.hpp"
+#include "\x\Clib\addons\Clib\macros.hpp"
+
 #define AllCompressionTypes ["LZ77", "LZW"]
