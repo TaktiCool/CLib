@@ -63,7 +63,7 @@ if (isServer) then {
 if (hasInterface) then {
     LVAR(ClientNamespace) = false call CFUNC(createNamespace);
 
-    [QLVAR(registerPlayer), [language, PRA3_Player]] call CFUNC(serverEvent);
+    [QLVAR(registerPlayer), [language, CLib_Player]] call CFUNC(serverEvent);
 
     [QLVAR(receive), {
         params ["_localisationData"];

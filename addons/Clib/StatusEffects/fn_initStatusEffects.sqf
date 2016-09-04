@@ -17,5 +17,5 @@ GVAR(StatusEffectsNamespace) = call EFUNC(Core,createNamespace);
 
 ["forceWalk", {
     params ["_allParameters"];
-    PRA3_Player forceWalk (true in _allParameters);
+    CLib_Player forceWalk (true in _allParameters);
 }] call CFUNC(addStatusEffectType)

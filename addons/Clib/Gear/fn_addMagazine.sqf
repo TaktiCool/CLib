@@ -18,6 +18,6 @@ params ["_className", "_count"];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
-        PRA3_Player addMagazine _className;
+        CLib_Player addMagazine _className;
     };
 };

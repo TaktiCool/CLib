@@ -36,7 +36,7 @@ if (hasInterface) then {
     };
 
     waitUntil {!isNull player};
-    PRA3_Player = player;
+    CLib_Player = player;
     waitUntil {GVAR(playerUID) = getPlayerUID player; (GVAR(playerUID) != "")};
 };
 GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);

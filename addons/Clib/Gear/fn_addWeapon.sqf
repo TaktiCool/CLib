@@ -19,5 +19,5 @@ params ["_className", "_magazine", "_count"];
 
 if (_className != "") then {
     [_magazine, _count] call FUNC(addMagazine);
-    PRA3_Player addWeapon _className;
+    CLib_Player addWeapon _className;
 };

@@ -27,4 +27,4 @@ if (_index == -1) exitWith {};
 GVAR(mutexCaches) setVariable [_mutexId, _mutexCache];
 
 // Tell the server that there is something to execute
-[QGVAR(mutexRequest), [PRA3_Player, _mutexId]] call CFUNC(serverEvent);
+[QGVAR(mutexRequest), [CLib_Player, _mutexId]] call CFUNC(serverEvent);

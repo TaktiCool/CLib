@@ -35,7 +35,7 @@ params ["_postion", "_radius"];
         nil
     } count _vehicles;
 
-    [_return, PRA3_Player] call CFUNC(deleteAtEntry);
+    [_return, CLib_Player] call CFUNC(deleteAtEntry);
 
     _return
 }, [_postion, _radius], 2, QGVAR(clearNearUnits)] call CFUNC(cachedCall);

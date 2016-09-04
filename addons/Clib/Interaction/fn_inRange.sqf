@@ -16,11 +16,11 @@
 */
 params["_object", "_distance"];
 
-if (_object isKindOf "CAManBase") exitWith {PRA3_Player distance _object < _distance};
+if (_object isKindOf "CAManBase") exitWith {CLib_Player distance _object < _distance};
 
-private _playerPos = eyePos PRA3_Player;
-private _viewDirection = eyeDirection PRA3_Player;
+private _playerPos = eyePos CLib_Player;
+private _viewDirection = eyeDirection CLib_Player;
 
 private _direction = _viewDirection vectorMultiply (_distance / (vectorMagnitude _viewDirection));
 
-_object in lineIntersectsWith [_playerPos, _playerPos vectorAdd _direction] || PRA3_Player distance _object < _distance
+_object in lineIntersectsWith [_playerPos, _playerPos vectorAdd _direction] || CLib_Player distance _object < _distance

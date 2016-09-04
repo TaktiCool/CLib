@@ -13,7 +13,7 @@
     Returns:
     0: Return Name <TYPE>
 */
-// [PRA3_Player, PRA3_Player,["inNotVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]] call PRA3_Core_fnc_canInteractWith;
+// [CLib_Player, CLib_Player,["inNotVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]] call PRA3_Core_fnc_canInteractWith;
 
 
 // ["isNotInVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]

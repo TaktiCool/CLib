@@ -92,7 +92,7 @@ _condition = _condition call FUNC(codeToString);
 
 _condition = "[_target, _this, " + str _ignoredCanInteractConditions + "] call PRA3_Core_fnc_canInteractWith && " + _condition;
 
-_condition = if (_distance > 0 && !(_onObject isEqualTo PRA3_Player)) then {"[_target, " + (str _distance) + "] call PRA3_Core_fnc_inRange &&" + _condition} else {_condition};
+_condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call PRA3_Core_fnc_inRange &&" + _condition} else {_condition};
 
 _callback = _callback call FUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QFUNC(directCall)]);
@@ -109,7 +109,7 @@ if (_onObject isEqualType []) then {
 };
 
 if (_onObject isEqualType objNull) then {
-    if (_onObject isEqualTo PRA3_Player) then {
+    if (_onObject isEqualTo CLib_Player) then {
         private _argArray = [_onObject call _text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
         private _id = _onObject addAction _argArray;
         [_id, _onObject, _argArray] call _onActionAdded;
