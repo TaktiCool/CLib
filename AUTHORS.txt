@@ -1,0 +1,12 @@
+# ACE3 CONTRIBUTOR LIST
+#
+# Feel free to add yourself to this when creating a pull
+# request, preferably including an email address.
+
+# CORE TEAM
+jokoho482 <jokoho482@gmail.com>
+BadGuy
+NetFusion
+
+# CONTRIBUTORS
+commy2
