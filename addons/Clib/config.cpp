@@ -3,8 +3,8 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = 1.56;
-        author = "CLib Team";
-        authors[] = {"joko // Jonas", "NetFusion", "Hoeginson", "BadGuy", "PRA3 Team"};
+        author = "Clib Team";
+        authors[] = {"joko // Jonas", "NetFusion", "BadGuy"};
         authorUrl = "";
         version = VERSION;
         versionStr = QUOTE(VERSION);

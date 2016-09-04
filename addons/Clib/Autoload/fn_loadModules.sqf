@@ -36,13 +36,13 @@ if (hasInterface) then {
     };
 
     waitUntil {!isNull player};
-    CLib_Player = player;
+    Clib_Player = player;
     waitUntil {GVAR(playerUID) = getPlayerUID player; (GVAR(playerUID) != "")};
 };
 GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);
 
-// If the machine has PRA3 running and is the Server exit to the server LoadModules
-if (isClass (configFile >> "CfgPatches" >> "PRA3_Server") && isServer) exitWith { [FUNC(loadModulesServer), _this] call FUNC(directCall) };
+// If the machine has Clib running and is the Server exit to the server LoadModules
+if (isClass (configFile >> "CfgPatches" >> "Clib") && isServer) exitWith { [FUNC(loadModulesServer), _this] call FUNC(directCall) };
 
 // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
 [QGVAR(loadModules)] call bis_fnc_startLoadingScreen;
@@ -67,10 +67,10 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
             _x setVariable [_functionVarName, _functionCode];
         } else {
             if !((_x getVariable _functionVarName) isEqualTo _functionCode) then {
-                private _log = format ["[PRA3: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
+                private _log = format ["[Clib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
 
                 LOG(_log);
-                GVAR(sendlogfile) = [_log, "PRA3_SecurityLog"];
+                GVAR(sendlogfile) = [_log, "Clib_SecurityLog"];
                 publicVariableServer QGVAR(sendlogfile);
                 ["Warning Function %1 is corrupted on your Client, Please restart your Client.", _functionVarName] call BIS_fnc_errorMsg;
                 [] spawn {

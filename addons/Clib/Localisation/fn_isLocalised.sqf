@@ -13,7 +13,7 @@
     Returns:
     is Localised <Bool>
 */
-params [["_locaName", "STR_PRA3_ERROR"]];
+params [["_locaName", "STR_Clib_ERROR"]];
 private _temp = LVAR(ClientNamespace) getVariable _locaName;
 
 !isNil "_temp";

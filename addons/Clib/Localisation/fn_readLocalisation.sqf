@@ -13,5 +13,5 @@
     Returns:
     Localisted Text <String>
 */
-params [["_locaName", "STR_PRA3_ERROR"]];
+params [["_locaName", "STR_Clib_ERROR"]];
 [LVAR(ClientNamespace), _locaName, "Error"] call CFUNC(getVariable);

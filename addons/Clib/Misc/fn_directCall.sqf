@@ -14,12 +14,12 @@
     Returns:
     Return of the Function <Any>
 */
-params [["_PRA3_code", {}, [{}]], ["_PRA3_arguments", []]];
-private "_PRA_return";
+params [["_Clib_code", {}, [{}]], ["_Clib_arguments", []]];
 if !(canSuspend) exitWith {
-    _PRA3_arguments call _PRA3_code;
+    _Clib_arguments call _Clib_code;
 };
+private "_Clib_return";
 isNil {
-    _PRA_return = _PRA3_arguments call _PRA3_code
+    _Clib_return = _Clib_arguments call _Clib_code
 };
-if !(isNil "_PRA_return") then {_PRA_return};
+if !(isNil "_Clib_return") then {_Clib_return};

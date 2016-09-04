@@ -1,4 +1,4 @@
-#define PREFIX CLib
+#define PREFIX Clib
 #define PATH x
 #define MOD Clib
 

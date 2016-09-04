@@ -1,7 +1,7 @@
-class CLib_Localisation {
+class Clib_Localisation {
 
     supportedLanguages[] = {"English", "German", "Spanish", "French", "Polish", "Czech", "Italian", "Hungarian", "Portuguese", "Russian"};
-    class STR_CLib_TestTranslation {
+    class STR_Clib_TestTranslation {
         English = "Test English";
         German = "Test German";
         Spanish = "Test Spanish";
@@ -13,7 +13,7 @@ class CLib_Localisation {
         Portuguese = "Test Portuguese";
         Russian = "Test Russian";
     };
-    class STR_CLib_Error {
+    class STR_Clib_Error {
         English = "Error";
     };
 };

@@ -12,5 +12,5 @@
     Returns:
     None
 */
-_this call compile preprocessFileLineNumbers "pr\PRA3\addons\PRA3_Server\initFunctions.sqf";
+_this call compile preprocessFileLineNumbers "x\Clib\addons\Clib\initFunctions.sqf";
 //_this call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";

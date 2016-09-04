@@ -16,7 +16,7 @@
 */
 params [["_functionPath", "", [""]], ["_functionVarName", "", [""]]];
 
-#ifdef PRA3_DEBUGFULL
+#ifdef DEBUGFULL
     private _debug = "private _fnc_scriptMap = if (isNil '_fnc_scriptMap') then {[_fnc_scriptName]} else {_fnc_scriptMap + [_fnc_scriptName]};";
 #else
     private _debug = "";

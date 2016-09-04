@@ -21,6 +21,7 @@ EPREP(Events,serverEvent)
 EPREP(Events,clientInitEvents)
 EPREP(Events,serverInitEvents)
 EPREP(Events,hcInitEvents)
+EPREP(Events,fn_addIgnoredEventLog)
 
 // Localization
 EPREP(Localisation,initLocalisation)

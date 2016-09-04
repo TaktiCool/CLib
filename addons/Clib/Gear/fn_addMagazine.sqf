@@ -18,6 +18,6 @@ params ["_className", "_count"];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
-        CLib_Player addMagazine _className;
+        Clib_Player addMagazine _className;
     };
 };

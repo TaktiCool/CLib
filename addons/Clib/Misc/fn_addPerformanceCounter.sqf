@@ -24,7 +24,7 @@ if (_enable) then {
     private _oldTime = missionNamespace getVariable [_variableName, -99999];
     private _newTime = diag_tickTime;
     private _diff = (_newTime - _oldTime)*1000;
-    diag_log format ["[PRA3: Performance Counter] %1: Started %2 s; Ended %3 s; Run time %4 ms;", _name, _oldTime, _newTime, _diff];
-    systemChat format ["[PRA3: Performance Counter] %1: Started %2 s; Ended %3 s; Run time %4 ms;", _name, _oldTime, _newTime, _diff];
+    diag_log format ["[Clib: Performance Counter] %1: Started %2 s; Ended %3 s; Run time %4 ms;", _name, _oldTime, _newTime, _diff];
+    systemChat format ["[Clib: Performance Counter] %1: Started %2 s; Ended %3 s; Run time %4 ms;", _name, _oldTime, _newTime, _diff];
     missionNamespace setVariable [_variableName, nil];
 };

@@ -41,6 +41,9 @@
 #define PX(X) ((X)/PYN*safeZoneH/(4/3))
 #define PY(Y) ((Y)/PYN*safeZoneH)
 
+// QPREFIX
+#define QPREFIX QUOTE(PREFIX)
+
 // CFG Function Macro for Easy Module Including
 #define FUNCTIONSCONFIG(moduleName) class DOUBLE(PREFIX,moduleName) { \
     class moduleName { \
@@ -62,5 +65,5 @@
     #define PERFORMANCECOUNTER_END(var1) /* Performance Counter disabled */
 #endif
 
-#define LOCVAR(var) TRIPLE(STR_PRA3,MODULE,var)
+#define LOCVAR(var) TRIPLE(DOUBLE(STR,PREFIX),MODULE,var)
 #define LOC(var) var call CFUNC(readLocalization);

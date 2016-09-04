@@ -17,7 +17,7 @@
 
 // Transfers entry function from server to all clients.
 if (isServer) then {
-    GVAR(useFunctionCompression) = getNumber(missionConfigFile >> "PRA3" >> "useCompressedFunction") isEqualTo 1;
+    GVAR(useFunctionCompression) = getNumber(missionConfigFile >> QPREFIX >> "useCompressedFunction") isEqualTo 1;
 
     publicVariable QGVAR(useFunctionCompression);
 

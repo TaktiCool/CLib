@@ -25,17 +25,17 @@ _object setVariable [_varName, _value];
 if (!isMultiplayer) exitWith {};
 
 // If we are on embargo, exit
-if (_object isEqualTo (_object getVariable [format ["PRA3_onEmbargo_%1", _varName], objNull])) exitWith {};
+if (_object isEqualTo (_object getVariable [format ["Clib_onEmbargo_%1", _varName], objNull])) exitWith {};
 
 // Publish Now and set last update time:
 _object setVariable [_varName, _value, true];
-_object setVariable [format ["PRA3_onEmbargo_%1", _varName], _object];
+_object setVariable [format ["Clib_onEmbargo_%1", _varName], _object];
 
 [{
     params ["_object", "_varName", "_value"];
     if (isNull _object) exitWith {};
 
-    _object setVariable [format ["PRA3_onEmbargo_%1", _varName], nil]; //Remove Embargo
+    _object setVariable [format ["Clib_onEmbargo_%1", _varName], nil]; //Remove Embargo
     private _curValue = _object getVariable _varName;
 
     //If value at start of embargo doesn't equal current, then broadcast and start new embargo

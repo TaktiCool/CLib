@@ -18,10 +18,10 @@
 #ifdef isDev
     params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
 
-    // dont Log pra3_respawnui_updatecameratarget or drawmapgraphics to reduce Späm
-    if !(toLower(_eventName) in ["pra3_respawnui_updatecameratarget", "drawmapgraphics"]) then {
+    // dont Log Clib_respawnui_updatecameratarget or drawmapgraphics to reduce Späm
+    if !(toLower(_eventName) in GVAR(ignoredLogEventNames_0)) then {
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
-        if (toLower(_eventName) in ["eventadded", "cursortargetchanged", "playerinventorychanged"]) then {
+        if (toLower(_eventName) in GVAR(ignoredLogEventNames_1)) then {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName)
         } else {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName + ":" + str _args)
@@ -31,7 +31,7 @@
     params [["_eventName", "", [""]], ["_args", []]];
 #endif
 
-_eventName = format ["PRA3_Event_%1", _eventName];
+_eventName = format ["Clib_Event_%1", _eventName];
 private _eventArray = GVAR(EventNamespace) getVariable _eventName;
 if !(isNil "_eventArray") then {
     {

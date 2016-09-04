@@ -14,6 +14,8 @@
     None
 */
 
+"drawmapgraphics" call CFUNC(addIgnoredEventLog);
+
 // Array of Map Controls
 with uiNamespace do {
     GVAR(MapGraphicsMapControls) = [];

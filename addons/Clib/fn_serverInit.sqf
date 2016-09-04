@@ -18,7 +18,7 @@
 DFUNC(log) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);
-    "PRA3_server" callExtension (format ["logging:%1:", _file] + _log);
+    "Clib_server" callExtension (format ["logging:%1:", _file] + _log);
 };
 
 QGVAR(sendlogfile) addPublicVariableEventHandler {
