@@ -1,6 +1,3 @@
-// Base Includes
-#include "modInfo.hpp"
-
 // Check Debug settings
 #ifdef DEBUGFULL
     #define isDev

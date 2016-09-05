@@ -1,4 +1,4 @@
-#include "\x\Clib\addons\Clib\macros.hpp"
+#include "\x\Clib\addons\Clib\Clib_Macros.hpp"
 
 #define SMSVAR(var) QEGVAR(StateMachine_State,var)
 #define SMVAR(var) QEGVAR(StateMachine_Var,var)

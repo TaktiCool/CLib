@@ -24,7 +24,9 @@ class cfgFunctions {
     //init = "x\Clib\addons\Clib\init.sqf";
     class Clib {
         class Clib_Core {
-            file = ;
+            file = QUOTE(\PATH\PREFIX\addons\MOD);
+            class preInit: baseFNC {};
+            class preStart: baseFNC {};
         };
     };
 };
