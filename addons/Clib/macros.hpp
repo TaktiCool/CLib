@@ -21,8 +21,8 @@
 #define GVAR(var) EGVAR(MODULE,var)
 #define QGVAR(var) QUOTE(GVAR(var))
 
-#define CGVAR(var1) EGVAR(Core,var1)
-#define QCGVAR(var1) QEGVAR(Core,var1)
+#define CGVAR(var) DOUBLE(Clib,var)
+#define QCGVAR(var) QUOTE(CGVAR(var))
 
 #define UIVAR(var1) QEGVAR(UI,var1)
 
@@ -76,8 +76,8 @@
 
 #define FUNC(var) EFUNC(MODULE,var)
 
-#define CFUNC(var) EFUNC(Core,var)
-#define QCFUNC(var) QUOTE(EDFUNC(Core,var))
+#define CFUNC(var) TRIPLE(Clib,fnc,var)
+#define QCFUNC(var) QUOTE(CFUNC(var))
 
 #define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);
 #define EPREP(folder,fncName) [QUOTE(FFNCPATH(folder,fncName)), QFUNC(fncName)] call CFUNC(compile);

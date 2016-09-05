@@ -35,7 +35,7 @@ if (isNil "_stateData") exitWith {
 };
 
 _stateData params ["_code", "_args"];
-/* TODO: this would require changes in the Event system.
+/* TODO this would require changes in the Event system.
 if (_code isEqualType "") then {
     private _nextState = [_code, _args] call CFUNC(localEvent);
 } else {

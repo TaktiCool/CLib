@@ -12,7 +12,7 @@ private _itemCheatsEnabled = getNumber (_currentItem >> "cheatsEnabled");
 if (_itemExt == "") then {_itemExt = ".sqf"};
 private _itemPath = if (_itemPathItem != "") then {
     if (_tagName == "BIS" && _pathAccess == 0) then {
-        //--- Disable rewriting of global BIS functions from outside (ToDo: Make it dynamic, so anyone can protect their functions)
+        //--- Disable rewriting of global BIS functions from outside (TODO Make it dynamic, so anyone can protect their functions)
         private _itemPathItemA3 = (tolower _itemPathItem) find "a3";
         private _itemPathSlash = (tolower _itemPathItem) find "\";
         if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {_itemPathItem = "";};
