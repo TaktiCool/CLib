@@ -1,4 +1,4 @@
-class Clib_Localisation {
+class CfgClibLocalisation {
 
     supportedLanguages[] = {"English", "German", "Spanish", "French", "Polish", "Czech", "Italian", "Hungarian", "Portuguese", "Russian"};
     class STR_Clib_TestTranslation {

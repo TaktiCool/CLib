@@ -870,6 +870,9 @@ class CfgPatches {
     };
 };
 
-#include "cfgDependencies.hpp"
 #include "cfgFunctions.hpp"
-#include "cfgLocalisation.hpp"
+
+
+#include "CfgClibDependencies.hpp"
+#include "CfgClibModules.hpp"
+#include "CfgClibLocalisation.hpp"

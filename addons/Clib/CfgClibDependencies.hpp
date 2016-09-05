@@ -1,4 +1,4 @@
-class Clib_Dependencies {
+class CfgClibDependencies {
     class DOUBLE(Clib,Core) {
         require[] = {};
     };

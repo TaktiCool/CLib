@@ -16,7 +16,7 @@ private _tempRequires = [];
     _tempName pushBack (configName _x);
     _tempRequires pushBack (getArray (_x >> "require"));
     nil
-} count ("true" configClasses (configFile >> "Clib_Dependencies"));
+} count ("true" configClasses (configFile >> "CfgClibDependencies"));
 GVAR(Dependencies) = [_tempName,_tempRequires];
 
 // The autoloader uses this array to get all function names.

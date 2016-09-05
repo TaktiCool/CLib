@@ -14,7 +14,7 @@
     Returns:
     None
 */
-params [["_functionPath", "", [""]], ["_functionVarName", "", [""]]];
+params [["_functionPath", "", [""]], ["_functionVarName", "", [""]], ["_mod", "Clib"]];
 
 #ifdef DEBUGFULL
     private _debug = "private _fnc_scriptMap = if (isNil '_fnc_scriptMap') then {[_fnc_scriptName]} else {_fnc_scriptMap + [_fnc_scriptName]};";
@@ -58,7 +58,7 @@ scopeName _fnc_scriptName + '_Main';\
     nil
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
-GVAR(functionCache) pushBack _functionVarName;
+GVAR(functionCache) pushBackUnique _functionVarName;
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
 #ifdef disableCompression

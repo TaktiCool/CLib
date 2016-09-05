@@ -7,6 +7,20 @@ if (hasInterface) then {
 };
 
 if (hasInterface) then {
+
+    // functions for Disable User Input
+    DFUNC(onButtonClickEndStr) = {
+        closeDialog 0;
+        failMission 'LOSER';
+        [false] call FUNC(disableUserInput);
+    } call FUNC(codeToString);
+
+    DFUNC(onButtonClickRespawnStr) = {
+        closeDialog 0;
+        forceRespawn Clib_Player;
+        [false] call FUNC(disableUserInput);
+    } call FUNC(codeToString);
+
     // this fix a issue that Static Guns and Cars dont have right Damage on Lower LODs what mean you can not hit a Unit in a Static gun.
     // this fix the issue until BI fix this issue and prevent False Reports
     GVAR(staticVehicleFix) = [];
