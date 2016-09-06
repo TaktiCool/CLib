@@ -74,7 +74,8 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                 publicVariableServer QGVAR(sendlogfile);
                 ["Warning Function %1 is corrupted on your Client, Please restart your Client.", _functionVarName] call BIS_fnc_errorMsg;
                 [] spawn {
-                    sleep 10;
+                    endLoadingScreen;
+                    disableUserInput false;
                     endMission "LOSER";
                 };
             };
