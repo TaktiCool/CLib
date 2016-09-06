@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Project Reality ArmA 3 - Core\fn_compile.sqf
+    Comunity Lib - Clib
 
     Author: joko // Jonas
 

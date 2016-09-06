@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Project Reality ArmA 3
+    Comunity Lib - Clib
 
     Author: commy2 and CAA-Picard and PabstMirror and joko // Jonas Ported from ACE3
     Description:

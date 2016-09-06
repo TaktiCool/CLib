@@ -21,11 +21,18 @@ class cfgFunctions {
 
     createShortcuts = 1;
 
-    //init = "x\Clib\addons\Clib\init.sqf";
+    //init = "pr\Clib\addons\Clib\init.sqf";
     class Clib {
-        class Clib_Core {
-            file = QUOTE(\PATH\PREFIX\addons\MOD);
-            class preInit: baseFNC {};
+        class Clib {
+            file = "\pr\Clib\addons\Clib\";
+            class readAllModulesAndFunctions: baseFNC {};
+            class checkAllFunctionCompression: baseFNC {};
+            class checkCompression: baseFNC {};
+            class compile: baseFNC {};
+            class compressString: baseFNC {};
+            class decompressString: baseFNC {};
+            class stripSqf: baseFNC {};
+            class preInit: basePreFNC {};
             class preStart: baseFNC {};
         };
     };
