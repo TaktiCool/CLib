@@ -13,7 +13,15 @@
     Returns:
     None
 */
-#define UPDATEMODULEPATHANDPREFIX private _modulePrefix = format ["%1_%2", _modulePrefix, _moduleName]; private _modulePath = format ["%1\%2", _modPath, _moduleName]
+if !(isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWith {
+    {
+        _x params ["_folderPath", "_api", "_onlyServer", "_priority"];
+        [_folderPath, _x, _modName, _priority] call CFUNC(compile);
+        nil
+    } count parsingNamespace getVariable QGVAR(allFunctionNamesCached);
+};
+
+GVAR(allFunctionNamesCached) = [];
 
 private _fnc_getLastPartent = {
     private _parents = [_this, true] call BIS_fnc_returnParents;
@@ -60,6 +68,9 @@ private _fnc_readFunction = {
 
     private _folderPath = format ["%1\%2.sqf", _modulePath];
     [_folderPath, _functionName, _modName] call CFUNC(compile);
+
+    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName, _priority]];
+    GVAR(allFunctionNamesCached) pushBackUnique _functionName;
 };
 
 
@@ -75,3 +86,4 @@ private _fnc_readFunction = {
     } count configProperties [_x, "isClass _x", true];
     nil
 } count configProperties [configFile >> "CfgClibModules", "isClass _x", true];
+parsingNamespace setVariable [QGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
