@@ -1,3 +1,4 @@
+#include "Clib_Macros.hpp"
 class CfgPatches {
     class PREFIX {
         units[] = {};
@@ -873,6 +874,6 @@ class CfgPatches {
 #include "cfgFunctions.hpp"
 
 
-#include "CfgClibDependencies.hpp"
-#include "CfgClibModules.hpp"
 #include "CfgClibLocalisation.hpp"
+
+#include "CfgClibModules.hpp"
