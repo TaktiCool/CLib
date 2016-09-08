@@ -1,6 +1,10 @@
-#define FNC(F) class F
-#define APIFNC(f) class f {api = 1;}
-#define MODULE(F) class F
+#define FNC(f) class f:ClibBaseFunction
+#define APIFNC(f) class f:ClibBaseFunction {api = 1;}
+#define MODULE(m) class m: ClibBaseModule
+
+class ClibBaseFunction;
+class ClibBaseModule;
+
 
 class CfgClibModules {
     /*
@@ -36,7 +40,7 @@ class CfgClibModules {
         path = "\pr\Clib\addons\Clib\";
 
         MODULE(3dGraphics) {
-            APIFNC();
+            //APIFNC();
         };
         MODULE(Autoload) {
 
