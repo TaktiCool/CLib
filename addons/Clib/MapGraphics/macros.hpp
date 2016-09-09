@@ -1,3 +1,4 @@
+#define MODULE MapGraphics
 #include "\pr\Clib\addons\Clib\Clib_Macros.hpp"
 
 #define MAPICON_STATE 0

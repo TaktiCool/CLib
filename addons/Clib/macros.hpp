@@ -76,7 +76,8 @@
 
 #define FUNC(var) EFUNC(MODULE,var)
 
-#define QCFUNC(var) QUOTE(TRIPLE(Clib,fnc,var))
+#define DCFUNC(var) TRIPLE(Clib,fnc,var)
+#define QCFUNC(var) QUOTE(DCFUNC(var))
 
 #ifdef isDev
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg; DUMP(QCFUNC(var) + " Dont Exist")}])
@@ -84,7 +85,7 @@
     #define CFUNC(var) TRIPLE(Clib,fnc,var)
 #endif
 
-#define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);
-#define EPREP(folder,fncName) [QUOTE(FFNCPATH(folder,fncName)), QFUNC(fncName)] call CFUNC(compile);
+// #define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);
+// #define EPREP(folder,fncName) [QUOTE(FFNCPATH(folder,fncName)), QFUNC(fncName)] call CFUNC(compile);
 
 #include "supportMacros.hpp"

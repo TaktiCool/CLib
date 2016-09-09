@@ -1,6 +1,6 @@
 #include "Clib_Macros.hpp"
 class CfgPatches {
-    class PREFIX {
+    class Clib {
         units[] = {};
         weapons[] = {};
         requiredVersion = 1.56;

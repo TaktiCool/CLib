@@ -24,7 +24,7 @@ class cfgFunctions {
     //init = "pr\Clib\addons\Clib\init.sqf";
     class Clib {
         class Clib {
-            file = "\pr\Clib\addons\Clib\";
+            file = "\pr\Clib\addons\Clib\Compile";
             class readAllModulesAndFunctions: baseFNC {};
             class checkAllFunctionCompression: baseFNC {};
             class checkCompression: baseFNC {};
@@ -33,7 +33,7 @@ class cfgFunctions {
             class decompressString: baseFNC {};
             class stripSqf: baseFNC {};
             class preInit: basePreFNC {};
-            class preStart: baseFNC {};
+            class preStart: basePreStartFNC {};
         };
     };
 };

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    LZW String Compression
+    this function read all Modules and functions and build the base of Clib and other modules that build on it
 
     Parameter(s):
     None
@@ -13,6 +13,8 @@
     Returns:
     None
 */
+
+#ifndef isDev
 if !(isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWith {
     {
         _x params ["_folderPath", "_api", "_onlyServer", "_priority"];
@@ -20,6 +22,7 @@ if !(isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWit
         nil
     } count parsingNamespace getVariable QGVAR(allFunctionNamesCached);
 };
+#endif
 
 GVAR(allFunctionNamesCached) = [];
 
@@ -47,10 +50,14 @@ private _fnc_callNextState = {
 
 private _fnc_readModule = {
     params ["_configPath"];
+
+    DUMP("Module Found: " + _moduleName)
     {
         private _subModuleName = configName _x;
+
         private _modulePath = format ["%1\%2", _modulePath, _subModuleName];
-        _x call _fnc_callNextState
+        DUMP("SubModule Found: " + _subModuleName + " in Path: " + _modulePath)
+        _x call _fnc_callNextState;
         nil
     } count configProperties [_configPath, "isClass _x", true];
 };
@@ -71,12 +78,16 @@ private _fnc_readFunction = {
 
     parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName, _priority]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
+    DUMP("Function Found: " + _functionName + " in Path: " + _folderPath)
 };
 
-
+DUMP("start Clib Module Search")
+diag_log "-----------------------------------------------------------";
 {
+
     private _modName = configName _x;
     private _modPath = getText (_x >> "path");
+    DUMP("Mod Found: " + _modName + " in Path: " + _modPath)
     {
         private _moduleName = configName _x;
         private _modulePrefix = format ["%1_%2", _modName, _moduleName];
@@ -87,3 +98,5 @@ private _fnc_readFunction = {
     nil
 } count configProperties [configFile >> "CfgClibModules", "isClass _x", true];
 parsingNamespace setVariable [QGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
+DUMP("End Clib Module Search")
+diag_log "-----------------------------------------------------------";

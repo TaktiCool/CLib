@@ -1,4 +1,4 @@
-#include "preInit.sqf"
+#include "fn_preStart.sqf"
 GVAR(VersionInfo) = [getText (configFile >> "CfgPatches" >> QPREFIX >> "versionStr")];
 publicVariable QGVAR(VersionInfo);
 
