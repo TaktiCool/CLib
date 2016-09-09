@@ -40,8 +40,8 @@ class CfgClibModules {
     class Clib {
         path = "\pr\Clib\addons\Clib";
 
-        MODULE(N3dGraphics) {
-            FNC(N3dGraphicsPosition);
+        MODULE(3dGraphics) {
+            FNC(3dGraphicsPosition);
             FNC(add3dGraphics);
             FNC(build3dGraphicsCache);
             FNC(clientInit3dGraphics);
