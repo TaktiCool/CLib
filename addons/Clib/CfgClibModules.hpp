@@ -179,7 +179,7 @@ class CfgClibModules {
             FNC(addStatemachineState);
             FNC(copyStatemachine);
             FNC(createStatemachine);
-            FNC(createStatemachine);
+            FNC(createStatemachineFromConfig);
             FNC(getVariableStatemachine);
             FNC(initStatemachine);
             FNC(setVariableStatemachine);
