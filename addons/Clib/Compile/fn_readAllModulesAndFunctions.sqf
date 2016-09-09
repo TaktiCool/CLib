@@ -17,7 +17,8 @@
 #ifndef isDev
 if !(isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWith {
     {
-        _x params ["_folderPath", "_api", "_onlyServer", "_priority"];
+        private _data = parsingNamespace getVariable _x + "_data";
+        _data params ["_folderPath", "_api", "_onlyServer", "_priority"];
         [_folderPath, _x, _modName, _priority] call CFUNC(compile);
         nil
     } count parsingNamespace getVariable QGVAR(allFunctionNamesCached);
