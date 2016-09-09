@@ -26,7 +26,7 @@ GVAR(mutexCaches) = call CFUNC(createNamespace);
     // Its time to execute the cached functions.
     {
         _x params ["_code", "_args"];
-        
+
         if (_code isEqualType "") then {
             _code = missionNamespace getVariable [_code, {}];
         };

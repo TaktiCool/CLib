@@ -65,10 +65,15 @@ private _fnc_readModule = {
 private _fnc_readFunction = {
     params ["_configPath"];
 
+    private _name = configName _configPath;
+
     private _api = getNumber (_configPath >> "api") isEqualTo 1;
     private _onlyServer = getNumber (_configPath >> "onlyServer") isEqualTo 1;
 
-    private _name = configName _configPath;
+    if ((toLower(_name) find "_fnc_serverinit" < 0)) then {
+        _onlyServer = true;
+    };
+
     private _priority = getNumber (_configPath >> "priority");
 
     private _functionName = format [(["%1_%2_fnc_%3","%1_fnc_%3"] select _api), _modName, _moduleName, _name];

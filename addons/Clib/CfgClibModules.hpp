@@ -127,28 +127,69 @@ class CfgClibModules {
             FNC(unregisterMapControl);
         };
         MODULE(Misc) {
-            //FNC();
+            FNC(addPerformanceCounter);
+            FNC(blurScreen);
+            FNC(cachedCall);
+            FNC(codeToString);
+            FNC(createPPEffects);
+            FNC(deleteAtEntry);
+            FNC(directCall);
+            FNC(disableUserInput);
+            FNC(findSavePosition);
+            FNC(fixFloating);
+            FNC(fixPosition);
+            FNC(getFOV);
+            FNC(gearNearUnits);
+            FNC(groupPlayers);
+            FNC(init);
+            FNC(name);
+            FNC(sanitizeString);
+            FNC(serverInit);
+            FNC(setVariablePublic);
         };
         MODULE(Mutex) {
-
+            FNC(clientInitMutex);
+            FNC(mutex);
+            FNC(serverInitMutex);
         };
         MODULE(Namespaces) {
-
-        };
-        MODULE(Notification) {
-
+            FNC(allVariables);
+            FNC(createNamespace);
+            FNC(deleteNamespace);
+            FNC(getLogicGroup);
+            FNC(getVariable);
+            FNC(setVar);
+            FNC(setVariable);
         };
         MODULE(PerFrame) {
-
+            FNC(addPerframeHandler);
+            FNC(execNextFrame);
+            FNC(initPerFrameHandler);
+            FNC(removePerframeHandler);
+            FNC(wait);
+            FNC(waitUnil);
         };
         MODULE(RemoteExecution) {
-
+            FNC(execute);
+            FNC(handleIncomeData);
+            FNC(remoteExec);
+            FNC(serverInitRemoteExec);
         };
         MODULE(Statemachine) {
-
+            FNC(addStatemachineState);
+            FNC(copyStatemachine);
+            FNC(createStatemachine);
+            FNC(createStatemachine);
+            FNC(getVariableStatemachine);
+            FNC(initStatemachine);
+            FNC(setVariableStatemachine);
+            FNC(startStatemachine);
+            FNC(stepStatemachine);
         };
         MODULE(StatusEffects) {
-
+            FNC(addStatusEffectType);
+            FNC(initStatusEffects);
+            FNC(setStatusEffect);
         };
     };
 };
