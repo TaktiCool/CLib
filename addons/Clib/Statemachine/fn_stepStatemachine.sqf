@@ -55,7 +55,7 @@ private _nextStateName = if (_nextState isEqualType "") then {
 };
 /*
 if (_nextStateName in EGVAR(Statemachine,exitStateNames)) exitWith {
-    [_stateMachine] call FUNC(killStatemachine);
+    [_stateMachine] call CFUNC(killStatemachine);
     _nextStateName
 };
 */

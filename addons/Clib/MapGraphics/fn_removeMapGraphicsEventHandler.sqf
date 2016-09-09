@@ -21,7 +21,7 @@ params [["_uid", "", [""]], ["_event", "", [""]], ["_id", 0, [0]]];
 _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
 private _namespace = missionNamespace getVariable _eventNameSpace;
 
-private _eventArray = [_namespace, _uid, []] call FUNC(getVariable);
+private _eventArray = [_namespace, _uid, []] call CFUNC(getVariable);
 if (count _eventArray >= _id) exitWith {};
 _eventArray set [_id, nil];
 

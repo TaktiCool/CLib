@@ -17,5 +17,5 @@
 // To ensure that the briefing is done during briefings we trigger an event if the mission starts.
 [{
     // If time is greater than zero trigger the event and remove the OEF EH to ensure that the event is only triggered once.
-    "missionStarted" call FUNC(localEvent);
-}, {(time > 0)}] call FUNC(waitUntil);
+    "missionStarted" call CFUNC(localEvent);
+}, {(time > 0)}] call CFUNC(waitUntil);

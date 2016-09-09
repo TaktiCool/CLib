@@ -17,7 +17,7 @@
 params [["_event", "EventError", [""]], ["_args", []]];
 
 if (isServer) then {
-    [_event, _args] call FUNC(localEvent);
+    [_event, _args] call CFUNC(localEvent);
 } else {
     #ifdef isDev
         [_event, _args, "2"] remoteExecCall [QFUNC(localEvent), 2];

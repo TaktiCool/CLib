@@ -17,7 +17,7 @@
     -
 
     Example:
-    true call FUNC(loop);
+    true call CFUNC(loop);
 */
 (_this select 0) params ["_lastTarget"];
 if (isNull _lastTarget) exitWith {};

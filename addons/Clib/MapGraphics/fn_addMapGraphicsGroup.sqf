@@ -149,9 +149,9 @@ if (_stateNum == -1) then {
 };
 
 // save the data
-private _currentIcon = [GVAR(MapGraphicsGroup), _groupName, [_layer, 0, 0, [],[],[]]] call FUNC(getVariable);
+private _currentIcon = [GVAR(MapGraphicsGroup), _groupName, [_layer, 0, 0, [],[],[]]] call CFUNC(getVariable);
 _currentIcon set [_stateNum + 3, _completeGroupData];
 _currentIcon set [1, diag_tickTime];
-[GVAR(MapGraphicsGroup), _groupName, _currentIcon] call FUNC(setVariable);
+[GVAR(MapGraphicsGroup), _groupName, _currentIcon] call CFUNC(setVariable);
 // increment map graphics cache
 GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;

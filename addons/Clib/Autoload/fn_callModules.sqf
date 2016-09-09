@@ -14,7 +14,7 @@
     None
 
     Example:
-    call FUNC(callModules);
+    call CFUNC(callModules);
 */
 private _init = [];
 private _serverInit = [];

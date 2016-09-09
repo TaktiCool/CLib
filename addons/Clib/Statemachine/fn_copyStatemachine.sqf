@@ -15,7 +15,7 @@
 */
 params [["_stateMachine", locationNull, [locationNull]]];
 
-private _stateMachineNew = call FUNC(createStatemachine);
+private _stateMachineNew = call CFUNC(createStatemachine);
 private _allVar = [_stateMachine, QGVAR(allStatemachineVariables)] call CFUNC(allVariables);
 private _allStates = [_stateMachine, QGVAR(allStatemachineStates)] call CFUNC(allVariables);
 

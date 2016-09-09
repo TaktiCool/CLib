@@ -61,7 +61,7 @@ if (_iconProgress isEqualType "") then {
 
 
 if (_target isEqualType "" && {_target == "VanillaAction"}) then {
-	[_title, {_this call FUNC(holdActionCallback);true;},
+	[_title, {_this call CFUNC(holdActionCallback);true;},
 	[_title,
 	_hint,
 	_iconIdle,
@@ -75,13 +75,13 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
 	_arguments,
 	_priority,
 	_removeCompleted,
-	_showUnconscious]] call FUNC(overrideAction);
+	_showUnconscious]] call CFUNC(overrideAction);
 } else {
 
 	_title = format["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>",_title,_keyName];
 	_condShow = compile format ["if (call %1) then {[""%2"", %3, ""%4""] call " + QCFUNC(IdleAnimation) + "; true;} else {false};", _condShow, _title, _iconIdle, _hint];
 	diag_log _condShow;
-	[_title, _target, 0, _condShow, FUNC(holdActionCallback), ["arguments", [
+	[_title, _target, 0, _condShow, CFUNC(holdActionCallback), ["arguments", [
 		_title,
 		_hint,
 		_iconIdle,

@@ -17,7 +17,7 @@
 if !(hasInterface) exitWith {};
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorTargetChanged", QFUNC(loop)] call FUNC(addEventhandler);
+["cursorTargetChanged", QFUNC(loop)] call CFUNC(addEventhandler);
 ["playerChanged", {
     params ["_data", "_params"];
     _data params ["_currentPlayer", "_oldPlayer"];
@@ -31,7 +31,7 @@ GVAR(PlayerInteraction_Actions) = [];
         _x set [0, _id];
         nil
     } count GVAR(PlayerInteraction_Actions);
-}] call FUNC(addEventhandler);
+}] call CFUNC(addEventhandler);
 
 GVAR(InGameUIEventHandler) = call CFUNC(createNamespace);
 GVAR(DisablePrevAction) = false;

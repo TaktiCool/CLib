@@ -26,37 +26,37 @@ GVAR(groupUnits) = [];
     private _data = missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player];
     // If the player changed we trigger an event and update the global variable.
     if (Clib_Player != _data && !(isNull _data)) then {
-        ["playerChanged", [_data, Clib_Player]] call FUNC(localEvent);
+        ["playerChanged", [_data, Clib_Player]] call CFUNC(localEvent);
         Clib_Player = _data;
     };
 
     _data = Clib_Player call CFUNC(getAllGear);
     if !(_data isEqualTo GVAR(oldGear)) then {
-        "playerInventoryChanged" call FUNC(localEvent);
+        "playerInventoryChanged" call CFUNC(localEvent);
         GVAR(oldGear) = _data;
     };
 
     _data = visibleMap;
     if (!(_data isEqualTo GVAR(OldVisibleMap))) then {
-        ["visibleMapChanged", [_data, GVAR(OldVisibleMap)]] call FUNC(localEvent);
+        ["visibleMapChanged", [_data, GVAR(OldVisibleMap)]] call CFUNC(localEvent);
         GVAR(OldVisibleMap) = _data;
     };
 
     _data = playerSide;
     if (!(_data isEqualTo GVAR(OldPLayerSide))) then {
-        ["playerSideChanged", [_data, GVAR(OldPLayerSide)]] call FUNC(localEvent);
+        ["playerSideChanged", [_data, GVAR(OldPLayerSide)]] call CFUNC(localEvent);
         GVAR(OldPLayerSide) = _data;
     };
 
     _data = cursorTarget;
     if (!(_data isEqualTo GVAR(oldCursorTarget))) then {
-        ["cursorTargetChanged", _data] call FUNC(localEvent);
+        ["cursorTargetChanged", _data] call CFUNC(localEvent);
         GVAR(oldCursorTarget) = _data;
     };
 
     _data = units Clib_Player;
     if !(GVAR(groupUnits) isEqualTo _data) then {
-        ["groupUnitsChanged", _data] call FUNC(localEvent);
+        ["groupUnitsChanged", _data] call CFUNC(localEvent);
         GVAR(groupUnits) = _data;
     };
 }] call CFUNC(addPerFrameHandler);
@@ -65,10 +65,10 @@ GVAR(groupUnits) = [];
 // To ensure that the ingame display is available and prevent unnecessary draw3D calls during briefings we trigger an event if the mission starts.
 [{
     // If ingame display is available trigger the event and remove the OEF EH to ensure that the event is only triggered once.
-    "missionStarted" call FUNC(localEvent);
+    "missionStarted" call CFUNC(localEvent);
 
-    ["playerJoined", Clib_Player] call FUNC(globalEvent);
-}, {!(isNull (findDisplay 46))}] call FUNC(waitUntil);
+    ["playerJoined", Clib_Player] call CFUNC(globalEvent);
+}, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
 
 // EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
 ["eventAdded", {
@@ -81,7 +81,7 @@ GVAR(groupUnits) = [];
         };
         [nil, _args] call _function;
     };
-}] call FUNC(addEventHandler);
+}] call CFUNC(addEventHandler);
 
 // Build a dynamic event system to use it in modules.
 {
@@ -101,7 +101,7 @@ GVAR(groupUnits) = [];
         // If the value changed trigger the event and update the value in out variable.
         _currentValue = call _code;
         if (!(_oldValue isEqualTo _currentValue)) then {
-            [_name + "Changed", [_currentValue, _oldValue]] call FUNC(localEvent);
+            [_name + "Changed", [_currentValue, _oldValue]] call CFUNC(localEvent);
             GVAR(EventNamespace) setVariable [_name, _currentValue];
         };
     }, 0, [_x, _code]] call CFUNC(addPerFrameHandler);
@@ -141,7 +141,7 @@ GVAR(groupUnits) = [];
 
         // Bind a new one and update the index in the params.
         _params set [2, _currentPlayer addEventHandler [_name, _code]];
-    }, [_x, _code, _index]] call FUNC(addEventHandler);
+    }, [_x, _code, _index]] call CFUNC(addEventHandler);
     nil
 } count [
     "InventoryOpened",

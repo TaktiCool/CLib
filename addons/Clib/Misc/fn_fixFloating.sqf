@@ -18,13 +18,13 @@ params ["_object"];
 
 // setHitPointDamage requires local object
 if (!local _object) exitWith {
-    ["fixFloating", _object, _object] call FUNC(targeEvent);
+    ["fixFloating", _object, _object] call CFUNC(targeEvent);
 };
 //Ignore mans
 if (_object isKindOf "CAManBase") exitWith {};
 
 //We need to manually set allowDamage to true for setHitIndex to function
-["blockDamage", [_object, false]] call FUNC(localEvent);
+["blockDamage", [_object, false]] call CFUNC(localEvent);
 
 // save and restore hitpoints, see below why
 private _hitPointDamages = getAllHitPointsDamage _object;

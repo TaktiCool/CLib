@@ -25,7 +25,7 @@ private _cache = [];
 
 if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
     GVAR(MapGraphicsCacheVersion) = GVAR(MapGraphicsCacheBuildFlag);
-    call FUNC(buildMapGraphicsCache);
+    call CFUNC(buildMapGraphicsCache);
 };
 // iterate through all mapGraphic objects
 {

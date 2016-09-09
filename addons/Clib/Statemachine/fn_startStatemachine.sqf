@@ -22,7 +22,7 @@ if !(isNil "_firstState") then {
 };
 
 [{
-    private _ret = _this call FUNC(stepStatemachine);
+    private _ret = _this call CFUNC(stepStatemachine);
     if (_ret in EGVAR(Statemachine,exitStateNames)) then {
         (_this select 1) call CFUNC(removePerFrameHandler);
     };

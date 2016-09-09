@@ -19,7 +19,7 @@ params [["_event", "EventError", [""]], ["_target", objNull, ["", objNull, 0, []
 
 // exit if the Unit is Local
 if (_target isEqualType objNull && {local _target}) exitWith {
-    [_event, _args] call FUNC(localEvent);
+    [_event, _args] call CFUNC(localEvent);
 };
 
 // exit if the target is a string

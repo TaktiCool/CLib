@@ -40,6 +40,6 @@ _object setVariable [format ["Clib_onEmbargo_%1", _varName], _object];
 
     //If value at start of embargo doesn't equal current, then broadcast and start new embargo
     if (!(_value isEqualTo _curValue)) then {
-        [_object, _varName, _curValue] call FUNC(setVariablePublic);
+        [_object, _varName, _curValue] call CFUNC(setVariablePublic);
     };
-}, _delay, _this] call FUNC(wait);
+}, _delay, _this] call CFUNC(wait);

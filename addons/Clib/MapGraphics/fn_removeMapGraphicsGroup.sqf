@@ -16,7 +16,7 @@
 */
 params ["_groupName"];
 
-[GVAR(MapGraphicsGroup), _groupName, nil] call FUNC(setVariable);
+[GVAR(MapGraphicsGroup), _groupName, nil] call CFUNC(setVariable);
 
 // increment map graphics cache
 GVAR(MapGraphicsCacheRebuildFlag) = GVAR(MapGraphicsCacheRebuildFlag) + 1;

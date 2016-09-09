@@ -46,7 +46,7 @@ DFUNC(checkNextMutexClient) = {
 
         // If the client is currently executing reset the lock
         if (_currentClient == _owner) then {
-            _x call FUNC(checkNextMutexClient);
+            _x call CFUNC(checkNextMutexClient);
         };
 
         nil
@@ -68,7 +68,7 @@ DFUNC(checkNextMutexClient) = {
 
     if (_currentClient == 0) then {
         // Tell the client that he can start and remove him from the queue
-        _mutexId call FUNC(checkNextMutexClient);
+        _mutexId call CFUNC(checkNextMutexClient);
     };
 }] call CFUNC(addEventHandler);
 
@@ -79,5 +79,5 @@ DFUNC(checkNextMutexClient) = {
     _mutex params ["_currentClient", "_clientQueue"];
     [GVAR(mutexes), _mutexId, [0, _clientQueue], QGVAR(mutexesCache)] call CFUNC(setVariable);
     // Tell the client that he can start and remove him from the queue
-    _mutexId call FUNC(checkNextMutexClient);
+    _mutexId call CFUNC(checkNextMutexClient);
 }] call CFUNC(addEventHandler);

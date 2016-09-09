@@ -22,9 +22,9 @@ with uiNamespace do {
 
 if (_exit) exitWith {nil};
 
-private _drawEHId = _map ctrlAddEventHandler ["Draw", FUNC(drawMapGraphics)];
-private _mmEHId = _map ctrlAddEventHandler ["MouseMoving", FUNC(mapGraphicsMouseMoving)];
-private _mcEHId = _map ctrlAddEventHandler ["MouseButtonClick", FUNC(mapGraphicsMouseButtonClick)];
+private _drawEHId = _map ctrlAddEventHandler ["Draw", CFUNC(drawMapGraphics)];
+private _mmEHId = _map ctrlAddEventHandler ["MouseMoving", CFUNC(mapGraphicsMouseMoving)];
+private _mcEHId = _map ctrlAddEventHandler ["MouseButtonClick", CFUNC(mapGraphicsMouseButtonClick)];
 
 _map setVariable [QGVAR(DrawEHId), _drawEHId];
 _map setVariable [QGVAR(MouseMovingEHId), _mmEHId];

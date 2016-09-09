@@ -15,6 +15,6 @@
 */
 
 QGVAR(remoteExecCode) addPublicVariableEventHandler {
-    (_this select 1) call FUNC(execute);
+    (_this select 1) call CFUNC(execute);
 };
 GVAR(useRemoteFallback) = getNumber (missionConfigFile >> "useRemoteExecFallback") isEqualTo 1;

@@ -42,7 +42,7 @@ if (hasInterface) then {
 GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);
 
 // If the machine has Clib running and is the Server exit to the server LoadModules
-if (isClass (configFile >> "CfgPatches" >> "Clib") && isServer) exitWith { [FUNC(loadModulesServer), _this] call FUNC(directCall) };
+if (isClass (configFile >> "CfgPatches" >> "Clib") && isServer) exitWith { [CFUNC(loadModulesServer), _this] call CFUNC(directCall) };
 
 // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
 [QGVAR(loadModules)] call bis_fnc_startLoadingScreen;
@@ -95,7 +95,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
         DUMP("All Function Recieved, now call then")
 
         // Call all modules.
-        call FUNC(callModules);
+        call CFUNC(callModules);
     };
 };
 

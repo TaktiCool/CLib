@@ -16,4 +16,4 @@
 
 params ["_u1"];
 
-[[_u1] call FUNC(getAllGear), magazinesAmmoFull _u1]
+[[_u1] call CFUNC(getAllGear), magazinesAmmoFull _u1]

@@ -14,7 +14,7 @@
     None
 
     Example:
-    ["Module1", "Module2"] call FUNC(loadModulesServer);
+    ["Module1", "Module2"] call CFUNC(loadModulesServer);
 */
 
 
@@ -89,7 +89,7 @@ if (isServer) then {
 };
 
 // Call all required function on the server.
-call FUNC(callModules);
+call CFUNC(callModules);
 
 // We need split up this to be sure that callModules is Done
 if (isServer) then {

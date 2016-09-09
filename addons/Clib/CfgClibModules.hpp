@@ -1,7 +1,7 @@
-#define FNC(f) class f : ClibBaseFunction {}
-#define DFNC(f) class f : ClibBaseFunction
-#define APIFNC(f) class f : ClibBaseFunction {api = 1;}
-#define MODULE(m) class m : ClibBaseModule
+#define DFNC(f) class f
+#define FNC(f) DFNC(f) {}
+#define APIFNC(f) DFNC(f) {api = 1;}
+#define MODULE(m) class m
 
 class ClibBaseFunction;
 class ClibBaseModule;
@@ -41,155 +41,155 @@ class CfgClibModules {
         path = "\pr\Clib\addons\Clib";
 
         MODULE(3dGraphics) {
-            FNC(3dGraphicsPosition);
-            FNC(add3dGraphics);
-            FNC(build3dGraphicsCache);
+            AFNC(3dGraphicsPosition);
+            AFNC(add3dGraphics);
+            AFNC(build3dGraphicsCache);
             FNC(clientInit3dGraphics);
-            FNC(draw3dGraphics);
-            FNC(remove3dGraphics);
+            AFNC(draw3dGraphics);
+            AFNC(remove3dGraphics);
         };
         MODULE(Autoload) {
-            FNC(autoloadEntryPoint);
-            FNC(callModules);
-            FNC(loadModules);
-            FNC(sendFunctions);
-            FNC(sendFunctionsLoop);
+            AFNC(autoloadEntryPoint);
+            AFNC(callModules);
+            AFNC(loadModules);
+            AFNC(sendFunctions);
+            AFNC(sendFunctionsLoop);
         };
         MODULE(ConfigCaching) {
-            FNC(configProperties);
+            AFNC(configProperties);
             FNC(initConfigCaching);
-            FNC(returnParents);
+            AFNC(returnParents);
         };
         MODULE(Events) {
-            FNC(addEventHandler);
-            FNC(addIgnoredEventLog);
+            AFNC(addEventHandler);
+            AFNC(addIgnoredEventLog);
             FNC(clientInitEvents);
-            FNC(globalEvent);
+            AFNC(globalEvent);
             FNC(hcInitEvents);
             FNC(initEvents);
-            FNC(localEvent);
-            FNC(removeEventhandler);
-            FNC(serverEvent);
+            AFNC(localEvent);
+            AFNC(removeEventhandler);
+            AFNC(serverEvent);
             FNC(servetInitEvents);
-            FNC(targetEvent);
+            AFNC(targetEvent);
         };
         MODULE(extensionFramework) {
-            FNC(callExtension);
+            AFNC(callExtension);
             FNC(init);
-            FNC(remoteCallExtension);
-            FNC(splitOutputString);
+            AFNC(remoteCallExtension);
+            AFNC(splitOutputString);
         };
         MODULE(Gear) {
-            FNC(addContainer);
-            FNC(addItem);
-            FNC(addMagazine);
-            FNC(addWeapon);
-            FNC(copyGear);
-            FNC(getAllGear);
-            FNC(restoreGear);
-            FNC(saveGear);
+            AFNC(addContainer);
+            AFNC(addItem);
+            AFNC(addMagazine);
+            AFNC(addWeapon);
+            AFNC(copyGear);
+            AFNC(getAllGear);
+            AFNC(restoreGear);
+            AFNC(saveGear);
         };
         MODULE(Interaction) {
-            FNC(addAction);
-            FNC(addCanInteractWith);
-            FNC(addHoldAction);
-            FNC(canInteractWith);
+            AFNC(addAction);
+            AFNC(addCanInteractWith);
+            AFNC(addHoldAction);
+            AFNC(canInteractWith);
             FNC(clientInitCanInteractWith);
             FNC(clientInitInteraction);
-            FNC(holdActionCallback);
-            FNC(inRange);
-            FNC(loop);
-            FNC(overrideAction);
+            AFNC(holdActionCallback);
+            AFNC(inRange);
+            AFNC(loop);
+            AFNC(overrideAction);
         };
         MODULE(lnbData) {
             FNC(initlnbData);
-            FNC(lnbLoad);
-            FNC(lnb);
+            AFNC(lnbLoad);
+            AFNC(lnbSave);
         };
         MODULE(Localisation) {
             FNC(initLocalisation);
-            FNC(isLocalised);
-            FNC(readLocalisation);
+            AFNC(isLocalised);
+            AFNC(readLocalisation);
         };
         MODULE(MapGraphics) {
-            FNC(addMapGraphicsEventHandler);
-            FNC(addMapGraphicsGroup);
-            FNC(buildMapGraphicsCache);
+            AFNC(addMapGraphicsEventHandler);
+            AFNC(addMapGraphicsGroup);
+            AFNC(buildMapGraphicsCache);
             FNC(clientInitMapGraphics);
-            FNC(drawMapGraphics);
-            FNC(mapGraphicsMouseButtionClick);
-            FNC(mapGraphicsMouseMoving);
-            FNC(mapGraphicsPosition);
-            FNC(removeMapGraphicsEventhandler);
-            FNC(removeMapGraphicsGroup);
-            FNC(TriggerMapGraphicsEvent);
-            FNC(registerMapControl);
-            FNC(unregisterMapControl);
+            AFNC(drawMapGraphics);
+            AFNC(mapGraphicsMouseButtionClick);
+            AFNC(mapGraphicsMouseMoving);
+            AFNC(mapGraphicsPosition);
+            AFNC(removeMapGraphicsEventhandler);
+            AFNC(removeMapGraphicsGroup);
+            AFNC(TriggerMapGraphicsEvent);
+            AFNC(registerMapControl);
+            AFNC(unregisterMapControl);
         };
         MODULE(Misc) {
-            FNC(addPerformanceCounter);
-            FNC(blurScreen);
-            FNC(cachedCall);
-            FNC(codeToString);
-            FNC(createPPEffects);
-            FNC(deleteAtEntry);
-            FNC(directCall);
-            FNC(disableUserInput);
-            FNC(findSavePosition);
-            FNC(fixFloating);
-            FNC(fixPosition);
-            FNC(getFOV);
-            FNC(gearNearUnits);
-            FNC(groupPlayers);
+            AFNC(addPerformanceCounter);
+            AFNC(blurScreen);
+            AFNC(cachedCall);
+            AFNC(codeToString);
+            AFNC(createPPEffects);
+            AFNC(deleteAtEntry);
+            AFNC(directCall);
+            AFNC(disableUserInput);
+            AFNC(findSavePosition);
+            AFNC(fixFloating);
+            AFNC(fixPosition);
+            AFNC(getFOV);
+            AFNC(gearNearUnits);
+            AFNC(groupPlayers);
             FNC(init);
-            FNC(name);
-            FNC(sanitizeString);
+            AFNC(name);
+            AFNC(sanitizeString);
             FNC(serverInit);
-            FNC(setVariablePublic);
+            AFNC(setVariablePublic);
         };
         MODULE(Mutex) {
             FNC(clientInitMutex);
-            FNC(mutex);
+            AFNC(mutex);
             FNC(serverInitMutex);
         };
         MODULE(Namespaces) {
-            FNC(allVariables);
-            FNC(createNamespace);
-            FNC(deleteNamespace);
-            FNC(getLogicGroup);
-            FNC(getVariable);
-            FNC(setVar);
-            FNC(setVariable);
+            AFNC(allVariables);
+            AFNC(createNamespace);
+            AFNC(deleteNamespace);
+            AFNC(getLogicGroup);
+            AFNC(getVariable);
+            AFNC(setVar);
+            AFNC(setVariable);
         };
         MODULE(PerFrame) {
-            FNC(addPerframeHandler);
-            FNC(execNextFrame);
+            AFNC(addPerframeHandler);
+            AFNC(execNextFrame);
             FNC(initPerFrameHandler);
-            FNC(removePerframeHandler);
-            FNC(wait);
-            FNC(waitUnil);
+            AFNC(removePerframeHandler);
+            AFNC(wait);
+            AFNC(waitUnil);
         };
         MODULE(RemoteExecution) {
-            FNC(execute);
-            FNC(handleIncomeData);
-            FNC(remoteExec);
-            FNC(serverInitRemoteExec);
+            AFNC(execute);
+            AFNC(handleIncomeData);
+            AFNC(remoteExec);
+            AFNC(serverInitRemoteExec);
         };
         MODULE(Statemachine) {
-            FNC(addStatemachineState);
-            FNC(copyStatemachine);
-            FNC(createStatemachine);
-            FNC(createStatemachineFromConfig);
-            FNC(getVariableStatemachine);
+            AFNC(addStatemachineState);
+            AFNC(copyStatemachine);
+            AFNC(createStatemachine);
+            AFNC(createStatemachineFromConfig);
+            AFNC(getVariableStatemachine);
             FNC(initStatemachine);
-            FNC(setVariableStatemachine);
-            FNC(startStatemachine);
-            FNC(stepStatemachine);
+            AFNC(setVariableStatemachine);
+            AFNC(startStatemachine);
+            AFNC(stepStatemachine);
         };
         MODULE(StatusEffects) {
-            FNC(addStatusEffectType);
+            AFNC(addStatusEffectType);
             FNC(initStatusEffects);
-            FNC(setStatusEffect);
+            AFNC(setStatusEffect);
         };
     };
 };

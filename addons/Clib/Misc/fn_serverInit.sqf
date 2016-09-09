@@ -22,5 +22,5 @@ DFUNC(log) = {
 };
 
 QGVAR(sendlogfile) addPublicVariableEventHandler {
-    (_this select 1) call FUNC(log);
+    (_this select 1) call CFUNC(log);
 };

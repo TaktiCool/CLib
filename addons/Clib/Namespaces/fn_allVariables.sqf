@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Return allVariables that have been set with FUNC(setVariable) of a namespace
+    Return allVariables that have been set with CFUNC(setVariable) of a namespace
 
     Parameter(s):
     0: Namespace <Namespace>

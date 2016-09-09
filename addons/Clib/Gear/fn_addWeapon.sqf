@@ -18,6 +18,6 @@
 params ["_className", "_magazine", "_count"];
 
 if (_className != "") then {
-    [_magazine, _count] call FUNC(addMagazine);
+    [_magazine, _count] call CFUNC(addMagazine);
     Clib_Player addWeapon _className;
 };

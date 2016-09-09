@@ -16,5 +16,5 @@
 
 params ["_id"];
 
-[GVAR(3dGraphicsNamespace), _id, nil] call FUNC(setVariable);
+[GVAR(3dGraphicsNamespace), _id, nil] call CFUNC(setVariable);
 GVAR(3dGraphicsCacheBuildFlag) = GVAR(3dGraphicsCacheBuildFlag) + 1;

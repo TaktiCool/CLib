@@ -88,13 +88,13 @@ private _argName = "";
 
 
 // Convert Condition to String
-_condition = _condition call FUNC(codeToString);
+_condition = _condition call CFUNC(codeToString);
 
 _condition = "[_target, _this, " + str _ignoredCanInteractConditions + "] call "+ QCFUNC(canInteractWith) + " && " + _condition;
 
 _condition = if (_distance > 0 && !(_onObject isEqualTo Clib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
 
-_callback = _callback call FUNC(codeToString);
+_callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QFUNC(directCall)]);
 
 if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};

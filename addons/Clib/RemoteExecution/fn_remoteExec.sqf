@@ -46,7 +46,7 @@ if (_target isEqualType objNull && {local _target} ) exitWith {
 
 // if it is the server we need to call the handleIncomeData directly else send it via publicVaraibleServer
 if (isServer) then {
-    [_target, _args, _function] call FUNC(handleIncomeData);
+    [_target, _args, _function] call CFUNC(handleIncomeData);
 } else {
     GVAR(remoteServerData) = [_target, _args, _target];
     publicVariableServer QGVAR(remoteServerData);

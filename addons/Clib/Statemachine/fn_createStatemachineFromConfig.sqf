@@ -15,7 +15,7 @@
 */
 params ["_configPath"];
 
-private _stateMachine = call FUNC(createStatemachine);
+private _stateMachine = call CFUNC(createStatemachine);
 
 private _entryPoint = getText(_configPath >> "entryPoint");
 if (_entryPoint != "") then {
@@ -25,7 +25,7 @@ if (_entryPoint != "") then {
 {
     private _code = getText(_x >> "stateCode");
     private _name = configName _x;
-    [_stateMachine, _name, compile _code] call FUNC(addStatemachineState);
+    [_stateMachine, _name, compile _code] call CFUNC(addStatemachineState);
     nil
 } count ([_configPath, "isClass _x", true] call CFUNC(configProperties));
 

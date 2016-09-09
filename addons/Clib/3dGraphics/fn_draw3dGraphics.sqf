@@ -24,7 +24,7 @@ private _cameraPosition = positionCameraToWorld [0, 0, 0];
 
 if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
     GVAR(3dGraphicsCacheVersion) = GVAR(3dGraphicsCacheBuildFlag);
-    call FUNC(build3dGraphicsCache);
+    call CFUNC(build3dGraphicsCache);
 };
 
 {

@@ -19,7 +19,7 @@ if (_state) then {
     if (!isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
 
     // end TFAR and ACRE2 radio transmissions
-    // call FUNC(endRadioTransmission);
+    // call CFUNC(endRadioTransmission);
 
     // Close map
     if (visibleMap) then {
