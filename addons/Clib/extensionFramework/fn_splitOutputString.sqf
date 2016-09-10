@@ -18,10 +18,10 @@ params ["_mainStr"];
 private _strAr = [];
 private _counter = 0;
 if !(_mainStr isEqualType "") then {
-	_mainStr = str _mainStr;
+    _mainStr = str _mainStr;
 };
 while {_counter <= (count _mainStr)} do {
-	_strAr pushback (_mainStr select [_counter, __MAXOUTPUTSIZE]);
-	_counter = _counter + __MAXOUTPUTSIZE;
+    _strAr pushback (_mainStr select [_counter, __MAXOUTPUTSIZE]);
+    _counter = _counter + __MAXOUTPUTSIZE;
 };
 _strAr

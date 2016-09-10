@@ -61,14 +61,14 @@ inGameUISetEventHandler ["Action", _inGameUiEventHandler call CFUNC(codeToString
 
 GVAR(HoldActionIdleBackground)= [];
 for "_i" from 0 to 11 do {
-	private _alpha = (sin((_i/11) * 360) * 0.25) + 0.75;
-	private _color = [1,1,1,_alpha] call bis_fnc_colorRGBAtoHTML;
+    private _alpha = (sin((_i/11) * 360) * 0.25) + 0.75;
+    private _color = [1,1,1,_alpha] call bis_fnc_colorRGBAtoHTML;
 
-	GVAR(HoldActionIdleBackground) pushBack (format["<img size='3' shadow='0' color='%1' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/>",_color]);
+    GVAR(HoldActionIdleBackground) pushBack (format["<img size='3' shadow='0' color='%1' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/>",_color]);
 };
 
 DFUNC(IdleAnimation) = {
     if (GVAR(HoldActionStartTime)>=0) exitWith {};
-	params ["_title", "_iconIdle", "_hint"];
-	_target setUserActionText [_actionID,_title, GVAR(HoldActionIdleBackground) select floor ((diag_tickTime / 0.065) % 12), format["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
+    params ["_title", "_iconIdle", "_hint"];
+    _target setUserActionText [_actionID,_title, GVAR(HoldActionIdleBackground) select floor ((diag_tickTime / 0.065) % 12), format["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
 };
