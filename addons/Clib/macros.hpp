@@ -56,7 +56,7 @@
 #define QFUNC(var) QUOTE(DFUNC(var))
 
 #ifdef isDev
-    #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
+    #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
 #endif
 
 #ifdef ENABLEFUNCTIONTRACE
@@ -80,7 +80,7 @@
 #define QCFUNC(var) QUOTE(DCFUNC(var))
 
 #ifdef isDev
-    #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg; DUMP(QCFUNC(var) + " Dont Exist")}])
+    #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
 #else
     #define CFUNC(var) TRIPLE(Clib,fnc,var)
 #endif

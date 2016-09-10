@@ -17,10 +17,10 @@
 
 // Transfers entry function from server to all clients.
 if (isServer) then {
-    GVAR(useFunctionCompression) = getNumber(missionConfigFile >> QPREFIX >> "useCompressedFunction") isEqualTo 1;
+    GVAR(useFunctionCompression) = getNumber(missionConfigFile >> "useCompressedFunction") isEqualTo 1;
 
     publicVariable QGVAR(useFunctionCompression);
 
-    publicVariable QFUNC(decompressString);
-    publicVariable QFUNC(loadModules);
+    publicVariable QCFUNC(decompressString);
+    publicVariable QCFUNC(loadModules);
 };

@@ -41,9 +41,6 @@ EPREP(ConfigCaching,returnParents)
 EPREP(ConfigCaching,configProperties)
 EPREP(ConfigCaching,initConfigCaching)
 
-//Entity Variables
-EPREP(EntityVariables,initEntityVariables)
-
 // Gear
 EPREP(Gear,addContainer)
 EPREP(Gear,copyGear)
@@ -113,20 +110,6 @@ EPREP(Namespaces,allVariables)
 EPREP(Namespaces,setVar)
 
 EPREP(Namespaces,getLogicGroup)
-
-// Notification System
-EPREP(Notification,clientInitNotification)
-EPREP(Notification,displayNotification)
-EPREP(Notification,handleNotificationQueue)
-
-// Respawn
-EPREP(Respawn,respawn)
-EPREP(Respawn,respawnNewSide)
-
-// Settings
-EPREP(Settings,initSettings)
-EPREP(Settings,loadSettings)
-EPREP(Settings,getSetting)
 
 // StatusEffects
 EPREP(StatusEffects,initStatusEffects)

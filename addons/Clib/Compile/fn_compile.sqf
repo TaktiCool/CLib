@@ -14,12 +14,14 @@
     Returns:
     None
 */
-params [["_functionPath", "", [""]], ["_functionVarName", "", [""]], ["_mod", "Clib"]];
+params [["_functionPath", "", [""]], ["_functionVarName", "", [""]]];
+
+DUMP("Compile Function: " + _functionVarName + " from Path: " + _functionPath)
 
 #ifdef DEBUGFULL
-    private _debug = "private _fnc_scriptMap = if (isNil '_fnc_scriptMap') then {[_fnc_scriptName]} else {_fnc_scriptMap + [_fnc_scriptName]};";
+    #define DEBUGHEADER "private _fnc_scriptMap = if (isNil '_fnc_scriptMap') then {[_fnc_scriptName]} else {_fnc_scriptMap + [_fnc_scriptName]};"
 #else
-    private _debug = "";
+    #define DEBUGHEADER ""
 #endif
 
 #define SCRIPTHEADER "\
@@ -35,22 +37,20 @@ scopeName _fnc_scriptName + '_Main';\
 \
 "
 
-#ifndef isDev
-    private _cachedFunction = parsingNamespace getVariable _functionVarName;
-    private _fncCode = if (isNil "_cachedFunction") then {
+#ifdef isDev
+    private _header = format [SCRIPTHEADER, _functionVarName, DEBUGHEADER];
+    private _funcString = _header + preprocessFileLineNumbers _functionPath;
+
+    private _fncCode = compile _funcString;
+#else
+    private _fncCode = parsingNamespace getVariable _functionVarName;
+    if (isNil "_cachedFunction") then {
         private _header = format [SCRIPTHEADER, _functionVarName, _debug];
         private _funcString = _header + preprocessFileLineNumbers _functionPath;
         _funcString = _funcString call CFUNC(stripSqf);
 
-        compileFinal _funcString;
-    } else {
-        _cachedFunction
+        _fncCode = compileFinal _funcString;
     };
-#else
-    private _header = format [SCRIPTHEADER, _functionVarName, _debug];
-    private _funcString = _header + preprocessFileLineNumbers _functionPath;
-
-    private _fncCode = compile _funcString;
 #endif
 
 {
@@ -58,7 +58,7 @@ scopeName _fnc_scriptName + '_Main';\
     nil
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
-GVAR(functionCache) pushBackUnique _functionVarName;
+CGVAR(functionCache) pushBackUnique _functionVarName;
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
 #ifdef disableCompression

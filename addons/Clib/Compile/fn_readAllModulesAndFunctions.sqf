@@ -14,16 +14,6 @@
     None
 */
 
-#ifndef isDev
-if !(isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWith {
-    {
-        private _data = parsingNamespace getVariable _x + "_data";
-        _data params ["_folderPath", "_api", "_onlyServer", "_priority"];
-        [_folderPath, _x, _modName, _priority] call CFUNC(compile);
-        nil
-    } count parsingNamespace getVariable QGVAR(allFunctionNamesCached);
-};
-#endif
 
 GVAR(allFunctionNamesCached) = [];
 
@@ -62,6 +52,7 @@ private _fnc_callNextState = {
     if (_childs isEqualTo []) then {
         _configPath call _fnc_readFunction;
     } else {
+        DUMP("SubModule Found: " + configName _configPath)
         _configPath call _fnc_readModule;
     };
 };
@@ -71,7 +62,7 @@ private _fnc_readModule = {
     if (isNil "_childs") then {
          private _childs = configProperties [_configPath, "isClass _x", true];
     };
-    DUMP("Module Found: " + configName _configPath)
+
     {
         if ((inheritsFrom _x) isEqualTo "ClibBaseModule") then {
             private _subModuleName = configName _x;
@@ -94,20 +85,19 @@ private _fnc_readFunction = {
         _onlyServer = true;
     };
 
-    private _priority = getNumber (_configPath >> "priority");
+    private _priority = getArray (_configPath >> "priority");
 
     private _functionName = format [(["%1_%2_fnc_%3","%1_fnc_%3"] select _api), _modName, _moduleName, _name];
 
     private _folderPath = format ["%1\fn_%2.sqf", _modulePath, _name];
-    [_folderPath, _functionName, _modName] call CFUNC(compile);
 
-    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName, _priority]];
+    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath)
 };
 
-DUMP("start Clib Module Search")
-diag_log "-----------------------------------------------------------";
+
+DUMP("--------------------------Start Clib Module Search---------------------------------");
 {
     private _modName = configName _x;
     private _modPath = getText (_x >> "path");
@@ -117,11 +107,11 @@ diag_log "-----------------------------------------------------------";
         private _moduleName = configName _x;
         private _modulePrefix = format ["%1_%2", _modName, _moduleName];
         private _modulePath = format ["%1\%2", _modPath, _moduleName];
+        DUMP("Module Found: " + configName _x)
         _x call _fnc_readModule;
         nil
     } count configProperties [_x, "isClass _x", true];
     nil
 } count configProperties [configFile >> "CfgClibModules", "isClass _x", true];
 parsingNamespace setVariable [QGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
-DUMP("End Clib Module Search")
-diag_log "-----------------------------------------------------------";
+DUMP("--------------------------End Clib Module Search---------------------------------");

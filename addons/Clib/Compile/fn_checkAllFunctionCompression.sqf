@@ -25,4 +25,4 @@
         };
     } forEach AllCompressionTypes;
     nil
-} count GVAR(functionCache);
+} count CGVAR(functionCache);

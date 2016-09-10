@@ -40,26 +40,15 @@ class CfgClibModules {
     class Clib {
         path = "\pr\Clib\addons\Clib";
 
-        MODULE(3dGraphics) {
-            APIFNC(3dGraphicsPosition);
-            APIFNC(add3dGraphics);
-            APIFNC(build3dGraphicsCache);
-            FNC(clientInit);
-            APIFNC(draw3dGraphics);
-            APIFNC(remove3dGraphics);
-        };
-        MODULE(Autoload) {
-            APIFNC(autoloadEntryPoint);
-            APIFNC(callModules);
-            APIFNC(loadModules);
-            APIFNC(sendFunctions);
-            APIFNC(sendFunctionsLoop);
-        };
-        MODULE(ConfigCaching) {
-            APIFNC(configProperties);
+        MODULE(PerFrame) {
+            APIFNC(addPerframeHandler);
+            APIFNC(execNextFrame);
             FNC(init);
-            APIFNC(returnParents);
+            APIFNC(removePerframeHandler);
+            APIFNC(wait);
+            APIFNC(waitUnil);
         };
+
         MODULE(Events) {
             APIFNC(addEventHandler);
             APIFNC(addIgnoredEventLog);
@@ -73,6 +62,36 @@ class CfgClibModules {
             FNC(servetInit);
             APIFNC(targetEvent);
         };
+
+        MODULE(Localisation) {
+            FNC(initLocalisation);
+            APIFNC(isLocalised);
+            APIFNC(readLocalisation);
+        };
+
+        MODULE(Autoload) {
+            APIFNC(autoloadEntryPoint);
+            APIFNC(callModules);
+            APIFNC(loadModules);
+            APIFNC(sendFunctions);
+            APIFNC(sendFunctionsLoop);
+        };
+
+        MODULE(ConfigCaching) {
+            APIFNC(configProperties);
+            FNC(init);
+            APIFNC(returnParents);
+        };
+
+        MODULE(3dGraphics) {
+            APIFNC(3dGraphicsPosition);
+            APIFNC(add3dGraphics);
+            APIFNC(build3dGraphicsCache);
+            FNC(clientInit);
+            APIFNC(draw3dGraphics);
+            APIFNC(remove3dGraphics);
+        };
+
         MODULE(extensionFramework) {
             APIFNC(callExtension);
             FNC(init);
@@ -106,11 +125,7 @@ class CfgClibModules {
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
-        MODULE(Localisation) {
-            FNC(initLocalisation);
-            APIFNC(isLocalised);
-            APIFNC(readLocalisation);
-        };
+
         MODULE(MapGraphics) {
             APIFNC(addMapGraphicsEventHandler);
             APIFNC(addMapGraphicsGroup);
@@ -160,14 +175,6 @@ class CfgClibModules {
             APIFNC(getVariable);
             APIFNC(setVar);
             APIFNC(setVariable);
-        };
-        MODULE(PerFrame) {
-            APIFNC(addPerframeHandler);
-            APIFNC(execNextFrame);
-            FNC(init);
-            APIFNC(removePerframeHandler);
-            APIFNC(wait);
-            APIFNC(waitUnil);
         };
         MODULE(RemoteExecution) {
             APIFNC(execute);

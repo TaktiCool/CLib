@@ -56,7 +56,7 @@ private _prefixLength = (count QPREFIX) + 1;
         GVAR(requiredFunctions) pushBack _x;
     };
     nil
-} count GVAR(functionCache);
+} count CGVAR(functionCache);
 
 // EH for client registration. Starts transmission of function code.
 if (isServer) then {

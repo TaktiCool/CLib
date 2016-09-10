@@ -25,6 +25,7 @@ class cfgFunctions {
     class Clib {
         class Clib {
             file = "\pr\Clib\addons\Clib\Compile";
+            class compileAllFunctions: baseFNC {};
             class readAllModulesAndFunctions: baseFNC {};
             class checkAllFunctionCompression: baseFNC {};
             class checkCompression: baseFNC {};
