@@ -8,7 +8,7 @@ namespace Clib
 {
     public class DllEntry
     {
-        private static Dictionary<string, Action> voidActions = new Dictionary<string, Action>();
+        private static Dictionary<string, Delegate> voidActions = new Dictionary<string, Delegate>();
         private static Dictionary<string, Func<string, string>> dataActions = new Dictionary<string, Func<string, string>>();
 
         public static string startTime;
@@ -40,11 +40,12 @@ namespace Clib
                     }
                     break;
                 default:
-                    if (voidActions.ContainsKey(input))
+                    string[] inputSplited = input.Split(new char[] { ':' }, 2);
+                    if (voidActions.ContainsKey(inputSplited[0]))
                     {
-                        voidActions[input]();
+                        voidActions[inputSplited[0]]();
                     }
-                    else if (dataActions.ContainsKey(input))
+                    else if (dataActions.ContainsKey(inputSplited[0]))
                     {
                         string tempData = dataActions[input](fromGameData);
                         if (tempData != "")
@@ -72,6 +73,5 @@ namespace Clib
             }
             return stringArray;
         }
-
     }
 }

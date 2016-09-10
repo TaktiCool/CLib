@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Project Reality ArmA 3
 
     Author: NetFusion
 
@@ -23,16 +23,18 @@ DFUNC(checkNextMutexClient) = {
     _mutex params ["_currentClient", "_clientQueue"];
 
     if (!(_clientQueue isEqualTo [])) then {
+        // Next client in queue
         _currentClient = _clientQueue deleteAt 0;
         [GVAR(mutexes), _mutexId, [_currentClient, _clientQueue], QGVAR(mutexesCache)] call CFUNC(setVariable);
         [QGVAR(mutexLock), _currentClient, _mutexId] call CFUNC(targetEvent);
+    } else {
+        // Reset current client because no next client available
+        [GVAR(mutexes), _mutexId, [0, []], QGVAR(mutexesCache)] call CFUNC(setVariable);
     };
 };
 
 // Handle disconnect of client
 [QGVAR(mutex), "onPlayerDisconnected", {
-    params ["_id", "_name", "_uid", "_owner", "_jip"];
-
     {
         private _mutex = [GVAR(mutexes), _x, [0, []]] call CFUNC(getVariable);
         _mutex params ["_currentClient", "_clientQueue"];
@@ -46,7 +48,7 @@ DFUNC(checkNextMutexClient) = {
 
         // If the client is currently executing reset the lock
         if (_currentClient == _owner) then {
-            _x call CFUNC(checkNextMutexClient);
+            _x call FUNC(checkNextMutexClient);
         };
 
         nil
@@ -68,7 +70,7 @@ DFUNC(checkNextMutexClient) = {
 
     if (_currentClient == 0) then {
         // Tell the client that he can start and remove him from the queue
-        _mutexId call CFUNC(checkNextMutexClient);
+        _mutexId call FUNC(checkNextMutexClient);
     };
 }] call CFUNC(addEventHandler);
 
@@ -77,7 +79,6 @@ DFUNC(checkNextMutexClient) = {
 
     private _mutex = [GVAR(mutexes), _mutexId, [0, []]] call CFUNC(getVariable);
     _mutex params ["_currentClient", "_clientQueue"];
-    [GVAR(mutexes), _mutexId, [0, _clientQueue], QGVAR(mutexesCache)] call CFUNC(setVariable);
     // Tell the client that he can start and remove him from the queue
-    _mutexId call CFUNC(checkNextMutexClient);
+    _mutexId call FUNC(checkNextMutexClient);
 }] call CFUNC(addEventHandler);

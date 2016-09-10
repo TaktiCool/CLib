@@ -36,3 +36,16 @@ if (isServer) then {
     };
     [_return, _funcArgs] call _function;
 }] call CFUNC(addEventhandler);
+
+if (isServer) then {
+    // add Eventhandler for Remote Logging
+    DFUNC(log) = {
+        params [["_log", "", [""]], ["_file", "", [""]]];
+        _file = _file call CFUNC(sanitizeString);
+        "Clib" callExtension (format ["logging:%1:", _file] + _log); TODO
+    };
+
+    QGVAR(sendlogfile) addPublicVariableEventHandler {
+        (_this select 1) call FUNC(log);
+    };
+};

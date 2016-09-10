@@ -44,7 +44,7 @@ class CfgClibModules {
             APIFNC(3dGraphicsPosition);
             APIFNC(add3dGraphics);
             APIFNC(build3dGraphicsCache);
-            FNC(clientInit3dGraphics);
+            FNC(clientInit);
             APIFNC(draw3dGraphics);
             APIFNC(remove3dGraphics);
         };
@@ -57,20 +57,20 @@ class CfgClibModules {
         };
         MODULE(ConfigCaching) {
             APIFNC(configProperties);
-            FNC(initConfigCaching);
+            FNC(init);
             APIFNC(returnParents);
         };
         MODULE(Events) {
             APIFNC(addEventHandler);
             APIFNC(addIgnoredEventLog);
-            FNC(clientInitEvents);
+            FNC(clientInit);
             APIFNC(globalEvent);
-            FNC(hcInitEvents);
-            FNC(initEvents);
+            FNC(hcInit);
+            FNC(init);
             APIFNC(localEvent);
             APIFNC(removeEventhandler);
             APIFNC(serverEvent);
-            FNC(servetInitEvents);
+            FNC(servetInit);
             APIFNC(targetEvent);
         };
         MODULE(extensionFramework) {
@@ -115,7 +115,7 @@ class CfgClibModules {
             APIFNC(addMapGraphicsEventHandler);
             APIFNC(addMapGraphicsGroup);
             APIFNC(buildMapGraphicsCache);
-            FNC(clientInitMapGraphics);
+            FNC(clientInit);
             APIFNC(drawMapGraphics);
             APIFNC(mapGraphicsMouseButtionClick);
             APIFNC(mapGraphicsMouseMoving);
@@ -148,9 +148,9 @@ class CfgClibModules {
             APIFNC(setVariablePublic);
         };
         MODULE(Mutex) {
-            FNC(clientInitMutex);
+            FNC(clientInit);
             APIFNC(mutex);
-            FNC(serverInitMutex);
+            FNC(serverInit);
         };
         MODULE(Namespaces) {
             APIFNC(allVariables);
@@ -164,7 +164,7 @@ class CfgClibModules {
         MODULE(PerFrame) {
             APIFNC(addPerframeHandler);
             APIFNC(execNextFrame);
-            FNC(initPerFrameHandler);
+            FNC(init);
             APIFNC(removePerframeHandler);
             APIFNC(wait);
             APIFNC(waitUnil);
@@ -173,7 +173,7 @@ class CfgClibModules {
             APIFNC(execute);
             APIFNC(handleIncomeData);
             APIFNC(remoteExec);
-            APIFNC(serverInitRemoteExec);
+            APIFNC(serverInit);
         };
         MODULE(Statemachine) {
             APIFNC(addStatemachineState);
@@ -181,14 +181,14 @@ class CfgClibModules {
             APIFNC(createStatemachine);
             APIFNC(createStatemachineFromConfig);
             APIFNC(getVariableStatemachine);
-            FNC(initStatemachine);
+            FNC(init);
             APIFNC(setVariableStatemachine);
             APIFNC(startStatemachine);
             APIFNC(stepStatemachine);
         };
         MODULE(StatusEffects) {
             APIFNC(addStatusEffectType);
-            FNC(initStatusEffects);
+            FNC(init);
             APIFNC(setStatusEffect);
         };
     };
