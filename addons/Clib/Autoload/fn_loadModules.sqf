@@ -8,7 +8,7 @@
     Entry point for module loading. Must be called within mission script for client and server. Start transfer of functions.
 
     Parameter(s):
-    ARRAY - the names of the requested modules
+    the names of the requested modules <ARRAY>
 
     Returns:
     None
@@ -20,19 +20,21 @@ if (hasInterface) then {
 
     // Skip Briefing. we need to do this because else the player can get stucked in the briefing screen with the server have allready triggered the mission started Event.
     // yes i also dont like this BUT at this point PFH and other Eventhandler are not Initialized and PFH dont trigger in the briefing Screen
-    [] spawn {
+    call {
         if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
         if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
 
-        waitUntil {
-            if (getClientState == "BRIEFING READ") exitWith {true};
-            if (!isNull findDisplay 53) exitWith {
-                ctrlActivate (findDisplay 53 displayCtrl 1);
-                findDisplay 53 closeDisplay 1;
-                true
-            };
-            false
-        };
+            private _d = (getNumber (configfile >> "RscDisplayServerGetReady" >> "idd"));
+            waitUntil {
+                if (getClientState == "BRIEFING READ") exitWith {true};
+                if (!isNull findDisplay _d) exitWith {
+                    ctrlActivate (findDisplay _d displayCtrl 1);
+                    findDisplay _d closeDisplay 1;
+                    true
+                };
+                false
+           };
+
     };
 
     waitUntil {!isNull player};
@@ -42,7 +44,14 @@ if (hasInterface) then {
 GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);
 
 // If the machine has Clib running and is the Server exit to the server LoadModules
-if (isClass (configFile >> "CfgPatches" >> "Clib") && isServer) exitWith { [CFUNC(loadModulesServer), _this] call CFUNC(directCall) };
+if (isClass (configFile >> "CfgPatches" >> "Clib") && isServer) exitWith {
+    if (isArray (missionConfigFile >> "Clib_Modules")) then {
+        [CFUNC(loadModulesServer), getArray (missionConfigFile >> "Clib_Modules")] call CFUNC(directCall);
+    } else {
+        [CFUNC(loadModulesServer), _this] call CFUNC(directCall);
+    };
+
+};
 
 // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
 [QGVAR(loadModules)] call bis_fnc_startLoadingScreen;

@@ -13,7 +13,7 @@
     Returns:
     Stichted Extension Return <String>
 */
-__MAXOUTPUTSIZE 7000
+#define __MAXOUTPUTSIZE 7000
 params ["_mainStr"];
 private _strAr = [];
 private _counter = 0;

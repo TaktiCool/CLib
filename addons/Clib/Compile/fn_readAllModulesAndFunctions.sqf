@@ -91,7 +91,7 @@ private _fnc_readFunction = {
 
     private _folderPath = format ["%1\fn_%2.sqf", _modulePath, _name];
 
-    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName]];
+    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName, _moduleName]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath)
 };

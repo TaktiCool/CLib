@@ -46,7 +46,7 @@ class CfgClibModules {
             FNC(init);
             APIFNC(removePerframeHandler);
             APIFNC(wait);
-            APIFNC(waitUnil);
+            APIFNC(waitUntil);
         };
 
         MODULE(Events) {

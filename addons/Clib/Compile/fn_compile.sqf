@@ -16,8 +16,6 @@
 */
 params [["_functionPath", "", [""]], ["_functionVarName", "", [""]]];
 
-DUMP("Compile Function: " + _functionVarName + " from Path: " + _functionPath)
-
 #ifdef DEBUGFULL
     #define DEBUGHEADER "private _fnc_scriptMap = if (isNil '_fnc_scriptMap') then {[_fnc_scriptName]} else {_fnc_scriptMap + [_fnc_scriptName]};"
 #else
@@ -64,7 +62,7 @@ CGVAR(functionCache) pushBackUnique _functionVarName;
 #ifdef disableCompression
     #define useCompression false
 #else
-    #define useCompression isNil {parsingNamespace getVariable (_functionVarName + "_Compressed")
+    #define useCompression isNil {parsingNamespace getVariable (_functionVarName + "_Compressed")}
 #endif
 if (useCompression) then {
     #ifdef isDev
