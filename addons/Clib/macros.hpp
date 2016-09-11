@@ -21,7 +21,7 @@
 #define GVAR(var) EGVAR(MODULE,var)
 #define QGVAR(var) QUOTE(GVAR(var))
 
-#define CGVAR(var) DOUBLE(Clib,var)
+#define CGVAR(var) DOUBLE(CLib,var)
 #define QCGVAR(var) QUOTE(CGVAR(var))
 
 #define UIVAR(var1) QEGVAR(UI,var1)
@@ -76,13 +76,13 @@
 
 #define FUNC(var) EFUNC(MODULE,var)
 
-#define DCFUNC(var) TRIPLE(Clib,fnc,var)
+#define DCFUNC(var) TRIPLE(CLib,fnc,var)
 #define QCFUNC(var) QUOTE(DCFUNC(var))
 
 #ifdef isDev
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
 #else
-    #define CFUNC(var) TRIPLE(Clib,fnc,var)
+    #define CFUNC(var) TRIPLE(CLib,fnc,var)
 #endif
 
 // #define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);

@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -18,6 +18,6 @@ params ["_className", "_count"];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
-        Clib_Player addMagazine _className;
+        CLib_Player addMagazine _className;
     };
 };

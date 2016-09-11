@@ -1,6 +1,6 @@
-#define PREFIX Clib
+#define PREFIX CLib
 #define PATH pr
-#define MOD Clib
+#define MOD CLib
 
 #define MAJOR 0
 #define MINOR 1

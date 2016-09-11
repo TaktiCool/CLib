@@ -1,10 +1,10 @@
-#include "Clib_Macros.hpp"
+#include "CLib_Macros.hpp"
 class CfgPatches {
-    class Clib {
+    class CLib {
         units[] = {};
         weapons[] = {};
         requiredVersion = 1.56;
-        author = "Clib Team";
+        author = "CLib Team";
         authors[] = {"joko // Jonas", "NetFusion", "BadGuy"};
         authorUrl = "";
         version = VERSION;
@@ -874,6 +874,6 @@ class CfgPatches {
 #include "cfgFunctions.hpp"
 
 
-#include "CfgClibLocalisation.hpp"
+#include "CfgCLibLocalisation.hpp"
 
-#include "CfgClibModules.hpp"
+#include "CfgCLibModules.hpp"

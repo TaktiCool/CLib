@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -17,7 +17,7 @@
 params [["_eventName", "", [""]], ["_id", -1, [-1]]];
 
 DUMP("Eventhandler Removed: "+ _eventName)
-_event = format ["Clib_Event_%1", _eventName];
+_event = format ["CLib_Event_%1", _eventName];
 private _eventArray = [GVAR(EventNamespace), _event, []] call CFUNC(getVariable);
 if (count _eventArray >= _id) then {
     _eventArray set [_id, nil];

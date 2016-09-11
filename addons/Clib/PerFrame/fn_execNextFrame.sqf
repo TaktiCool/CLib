@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: esteldunedain ported by joko // Jonas
 

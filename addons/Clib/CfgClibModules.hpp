@@ -3,13 +3,14 @@
 #define APIFNC(f) DFNC(f) {api = 1;}
 #define MODULE(m) class m
 
-class ClibBaseFunction;
-class ClibBaseModule;
+class CLibBaseFunction;
+class CLibBaseModule;
 
 
-class CfgClibModules {
+class CfgCLibModules {
     /*
     class PRA3 {
+        dependency[] = {};
         path = "\pr\PRA3\addons\PRA3_Server"; // TODO add Simplifyed Macro for this
         class Module1 {
             dependency[] = {}; // the Module that is Required for using this Module
@@ -37,8 +38,8 @@ class CfgClibModules {
         };
     };
     */
-    class Clib {
-        path = "\pr\Clib\addons\Clib";
+    class CLib {
+        path = "\pr\CLib\addons\CLib";
 
         MODULE(PerFrame) {
             APIFNC(addPerframeHandler);

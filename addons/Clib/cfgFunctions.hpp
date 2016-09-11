@@ -21,10 +21,10 @@ class cfgFunctions {
 
     createShortcuts = 1;
 
-    //init = "pr\Clib\addons\Clib\init.sqf";
-    class Clib {
-        class Clib {
-            file = "\pr\Clib\addons\Clib\Compile";
+    //init = "pr\CLib\addons\CLib\init.sqf";
+    class CLib {
+        class CLib {
+            file = "\pr\CLib\addons\CLib\Compile";
             class compileAllFunctions: baseFNC {};
             class readAllModulesAndFunctions: baseFNC {};
             class checkAllFunctionCompression: baseFNC {};

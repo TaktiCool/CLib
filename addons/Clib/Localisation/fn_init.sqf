@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -23,7 +23,7 @@
 if (isServer) then {
     LVAR(ServerNamespace) = false call CFUNC(createNamespace);
 
-    LVAR(supportedLanguages) = getArray(configFile >> "CfgClibLocalisation" >> "supportedLanguages");
+    LVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages");
 
     {
         {
@@ -34,7 +34,7 @@ if (isServer) then {
             } forEach LVAR(supportedLanguages);
             [LVAR(ServerNamespace), configName _x, _allLocalisations, QLVAR(allLocalisations)] call CFUNC(setVariable);
             nil
-        } count configProperties [_x >> "CfgClibLocalisation", "isClass _x", true];
+        } count configProperties [_x >> "CfgCLibLocalisation", "isClass _x", true];
         nil
     } count [configFile, campaignConfigFile, missionConfigFile];
 
@@ -63,7 +63,7 @@ if (isServer) then {
 if (hasInterface) then {
     LVAR(ClientNamespace) = false call CFUNC(createNamespace);
 
-    [QLVAR(registerPlayer), [language, Clib_Player]] call CFUNC(serverEvent);
+    [QLVAR(registerPlayer), [language, CLib_Player]] call CFUNC(serverEvent);
 
     [QLVAR(receive), {
         params ["_localisationData"];

@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -42,7 +42,7 @@ if (isServer) then {
     DFUNC(log) = {
         params [["_log", "", [""]], ["_file", "", [""]]];
         _file = _file call CFUNC(sanitizeString);
-        "Clib" callExtension (format ["logging:%1:", _file] + _log); TODO
+        "CLib" callExtension (format ["logging:%1:", _file] + _log); TODO
     };
 
     QGVAR(sendlogfile) addPublicVariableEventHandler {

@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -18,7 +18,7 @@
 #ifdef isDev
     params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
 
-    // dont Log Clib_respawnui_updatecameratarget or drawmapgraphics to reduce Späm
+    // dont Log CLib_respawnui_updatecameratarget or drawmapgraphics to reduce Späm
     if !(toLower(_eventName) in GVAR(ignoredLogEventNames_0)) then {
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
         if (toLower(_eventName) in GVAR(ignoredLogEventNames_1)) then {
@@ -31,7 +31,7 @@
     params [["_eventName", "", [""]], ["_args", []]];
 #endif
 
-_eventName = format ["Clib_Event_%1", _eventName];
+_eventName = format ["CLib_Event_%1", _eventName];
 private _eventArray = GVAR(EventNamespace) getVariable _eventName;
 if !(isNil "_eventArray") then {
     {

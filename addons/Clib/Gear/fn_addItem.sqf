@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -18,8 +18,8 @@ params ["_className", ["_count", 1]];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
-        if (Clib_Player canAdd _className) then {
-            Clib_Player addItem _className;
+        if (CLib_Player canAdd _className) then {
+            CLib_Player addItem _className;
         } else {
             hint format ["Item %1 can't added because Gear is Full", _className];
         };

@@ -7,8 +7,8 @@
     <ProjectGuid>{DF5BB917-A9B8-4574-B402-62E8CD738367}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Clib</RootNamespace>
-    <AssemblyName>Clib</AssemblyName>
+    <RootNamespace>CLib</RootNamespace>
+    <AssemblyName>CLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

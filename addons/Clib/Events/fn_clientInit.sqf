@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: NetFusion
 
@@ -15,8 +15,8 @@
 */
 
 // This is needed to provide a player object for zeus controlled units. Important to ensure that player is not null here (which is done in autoload).
-Clib_Player = player;
-GVAR(oldGear) = Clib_Player call CFUNC(getAllGear);
+CLib_Player = player;
+GVAR(oldGear) = CLib_Player call CFUNC(getAllGear);
 GVAR(oldVisibleMap) = false;
 GVAR(oldPLayerSide) = playerSide;
 GVAR(oldCursorTarget) = objNull;
@@ -25,12 +25,12 @@ GVAR(groupUnits) = [];
     // There is no command to get the current player but BI has an variable in mission namespace we can use.
     private _data = missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player];
     // If the player changed we trigger an event and update the global variable.
-    if (Clib_Player != _data && !(isNull _data)) then {
-        ["playerChanged", [_data, Clib_Player]] call CFUNC(localEvent);
-        Clib_Player = _data;
+    if (CLib_Player != _data && !(isNull _data)) then {
+        ["playerChanged", [_data, CLib_Player]] call CFUNC(localEvent);
+        CLib_Player = _data;
     };
 
-    _data = Clib_Player call CFUNC(getAllGear);
+    _data = CLib_Player call CFUNC(getAllGear);
     if !(_data isEqualTo GVAR(oldGear)) then {
         "playerInventoryChanged" call CFUNC(localEvent);
         GVAR(oldGear) = _data;
@@ -54,7 +54,7 @@ GVAR(groupUnits) = [];
         GVAR(oldCursorTarget) = _data;
     };
 
-    _data = units Clib_Player;
+    _data = units CLib_Player;
     if !(GVAR(groupUnits) isEqualTo _data) then {
         ["groupUnitsChanged", _data] call CFUNC(localEvent);
         GVAR(groupUnits) = _data;
@@ -67,7 +67,7 @@ GVAR(groupUnits) = [];
     // If ingame display is available trigger the event and remove the OEF EH to ensure that the event is only triggered once.
     "missionStarted" call CFUNC(localEvent);
 
-    ["playerJoined", Clib_Player] call CFUNC(globalEvent);
+    ["playerJoined", CLib_Player] call CFUNC(globalEvent);
 }, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
 
 // EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
@@ -85,7 +85,7 @@ GVAR(groupUnits) = [];
 
 // Build a dynamic event system to use it in modules.
 {
-    private _code = compile format ["%1 Clib_Player", _x];
+    private _code = compile format ["%1 CLib_Player", _x];
 
     // Build a name for the variable where we store the data. Fill it with the initial value.
     GVAR(EventNamespace) setVariable [_x, call _code];
@@ -125,7 +125,7 @@ GVAR(groupUnits) = [];
     private _code = compile format ["[""%1"", _this] call %2", _x, QFUNC(localEvent)];
 
     // Bind it to the current player and store the index to delete it.
-    private _index = Clib_Player addEventHandler [_x, _code];
+    private _index = CLib_Player addEventHandler [_x, _code];
 
     // If the player changes remove the old EH and bind a new one.
     ["playerChanged", {
@@ -154,7 +154,7 @@ GVAR(groupUnits) = [];
 ["vehicleChanged", {
     (_this select 0) params ["_newVehicle"];
 
-    if (_newVehicle == Clib_Player) then {
-        unAssignVehicle Clib_Player;
+    if (_newVehicle == CLib_Player) then {
+        unAssignVehicle CLib_Player;
     };
 }] call CFUNC(addEventHandler);

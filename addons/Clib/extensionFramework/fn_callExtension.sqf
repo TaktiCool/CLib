@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -19,21 +19,21 @@ params [["_action", "Error", [""]], ["_data", "", [""]]];
 
 private _splitOutput = _data call CFUNC(splitOutputString);
 
-"Clib" callExtension "frameworkClear";
+"CLib" callExtension "frameworkClear";
 
 {
-    "Clib" callExtension _x;
+    "CLib" callExtension _x;
     nil
 } count _splitOutput;
 
-"Clib" callExtension _action;
+"CLib" callExtension _action;
 
 private _finalReturn = "";
 // endless Loop to prevent running in the max 10k rounds that every other loop in arma can run
 private _fnc_fetchOutput = {
-    private _return = "Clib" callExtension "frameworkImport";
+    private _return = "CLib" callExtension "frameworkImport";
     if (_return isEqualTo "Done") then {
-        "Clib" callExtension "frameworkClear";
+        "CLib" callExtension "frameworkClear";
         _finalReturn
     } else {
         _finalReturn = _finalReturn + _return;

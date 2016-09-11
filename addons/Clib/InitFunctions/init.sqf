@@ -1,5 +1,5 @@
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -12,5 +12,5 @@
     Returns:
     None
 */
-_this call compile preprocessFileLineNumbers "x\Clib\addons\Clib\initFunctions.sqf";
+_this call compile preprocessFileLineNumbers "x\CLib\addons\CLib\initFunctions.sqf";
 //_this call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";

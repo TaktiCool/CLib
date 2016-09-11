@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -12,7 +12,7 @@
     1: Raduis <Number>
 
     Remarks:
-    the cache can be rest with the Event Clib_clearUnits
+    the cache can be rest with the Event CLib_clearUnits
 
     Returns:
     All Near units <Array<Object>>
@@ -35,7 +35,7 @@ params ["_postion", "_radius"];
         nil
     } count _vehicles;
 
-    [_return, Clib_Player] call CFUNC(deleteAtEntry);
+    [_return, CLib_Player] call CFUNC(deleteAtEntry);
 
     _return
 }, [_postion, _radius], 2, QGVAR(clearNearUnits)] call CFUNC(cachedCall);

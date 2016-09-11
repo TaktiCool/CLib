@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -19,5 +19,5 @@ params ["_className", "_magazine", "_count"];
 
 if (_className != "") then {
     [_magazine, _count] call CFUNC(addMagazine);
-    Clib_Player addWeapon _className;
+    CLib_Player addWeapon _className;
 };

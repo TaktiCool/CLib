@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: NetFusion
 
@@ -38,23 +38,23 @@ if (hasInterface) then {
     };
 
     waitUntil {!isNull player};
-    Clib_Player = player;
+    CLib_Player = player;
     waitUntil {GVAR(playerUID) = getPlayerUID player; (GVAR(playerUID) != "")};
 };
 GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);
 
-// If the machine has Clib running and is the Server exit to the server LoadModules
-if (isClass (configFile >> "CfgPatches" >> "Clib")) exitWith {
-    // clients are not allowed to load Clib localy its Only a Server mod
+// If the machine has CLib running and is the Server exit to the server LoadModules
+if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
+    // clients are not allowed to load CLib localy its Only a Server mod
     if (!isServer) exitWith {
-        LOG("Clib is a Server Mod Dont Load it on a Client")
+        LOG("CLib is a Server Mod Dont Load it on a Client")
         endLoadingScreen;
         disableUserInput false;
         endMission "LOSER";
     };
 
-    if (isArray (missionConfigFile >> "Clib_Modules")) then {
-        [CFUNC(loadModulesServer), getArray (missionConfigFile >> "Clib_Modules")] call CFUNC(directCall);
+    if (isArray (missionConfigFile >> "CLib_Modules")) then {
+        [CFUNC(loadModulesServer), getArray (missionConfigFile >> "CLib_Modules")] call CFUNC(directCall);
     } else {
         [CFUNC(loadModulesServer), _this] call CFUNC(directCall);
     };
@@ -84,10 +84,10 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
             _x setVariable [_functionVarName, _functionCode];
         } else {
             if !((_x getVariable _functionVarName) isEqualTo _functionCode) then {
-                private _log = format ["[Clib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
+                private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
 
                 LOG(_log);
-                GVAR(sendlogfile) = [_log, "Clib_SecurityLog"];
+                GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                 publicVariableServer QGVAR(sendlogfile);
                 ["Warning Function %1 is corrupted on your Client, Please restart your Client.", _functionVarName] call BIS_fnc_errorMsg;
                 GVAR(unregisterClient) = player;

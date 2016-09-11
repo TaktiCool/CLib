@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Clib
+namespace CLib
 {
     class Misc
     {
@@ -10,13 +10,13 @@ namespace Clib
         {
             string[] inputParts = input.Split(new char[] { ':' }, 2);
 
-            string path = Environment.CurrentDirectory + "\\Clib_Logs\\" + DllEntry.startTime.Replace("-", "");
+            string path = Environment.CurrentDirectory + "\\CLib_Logs\\" + DllEntry.startTime.Replace("-", "");
             if (!File.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
             // TODO let the user define the File format
-            StreamWriter file = new System.IO.StreamWriter(path + string.Format("\\Clib_{0}_{1}.{2}", DllEntry.startTime, inputParts[0], "log"), true);
+            StreamWriter file = new System.IO.StreamWriter(path + string.Format("\\CLib_{0}_{1}.{2}", DllEntry.startTime, inputParts[0], "log"), true);
             file.WriteLine(currentDate("[{3}:{4}:{5}]") + inputParts[1]);
             file.Close();
             return "";

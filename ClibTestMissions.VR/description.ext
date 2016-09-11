@@ -12,8 +12,8 @@ enableDebugConsole = 2;
 
 disabledAI = 1;
 author = "NetFusion, BadGuy, joko // Jonas";
-onLoadName = "Clib Test Mission";
-onLoadMission = "Clib Test Mission";
+onLoadName = "CLib Test Mission";
+onLoadMission = "CLib Test Mission";
 
 // skipLobby = 1;
 
@@ -22,13 +22,13 @@ respawnDelay = 3;
 respawnDialog = 0;
 
 
-// Clib Mission Config Entrys
-class CfgClibLocalisation {
-    class STR_Clib_TestMission {
+// CLib Mission Config Entrys
+class CfgCLibLocalisation {
+    class STR_CLib_TestMission {
         English = "Test Mission";
     };
 };
 
-Clib_useFallbackRemoteExecution = 0;
-Clib_useCompressedFunction = 0;
-Clib_Modules[] = {"PerFrame", "Events", "Localisation", "Autoload", "ConfigCaching", "3dGraphics", "extensionFramework", "Gear", "Interaction", "lnbData", "MapGraphics", "Misc", "Mutex", "Namespaces", "RemoteExecution", "Statemachine", "StatusEffects"};
+CLib_useFallbackRemoteExecution = 0;
+CLib_useCompressedFunction = 0;
+CLib_Modules[] = {"PerFrame", "Events", "Localisation", "Autoload", "ConfigCaching", "3dGraphics", "extensionFramework", "Gear", "Interaction", "lnbData", "MapGraphics", "Misc", "Mutex", "Namespaces", "RemoteExecution", "Statemachine", "StatusEffects"};

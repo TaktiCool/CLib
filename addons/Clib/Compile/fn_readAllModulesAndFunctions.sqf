@@ -1,11 +1,11 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
     Description:
-    this function read all Modules and functions and build the base of Clib and other modules that build on it
+    this function read all Modules and functions and build the base of CLib and other modules that build on it
 
     Parameter(s):
     None
@@ -33,10 +33,10 @@ private _fnc_callNextState = {
     params ["_configPath"];
 
     switch (_configPath call _fnc_returnRoot) do {
-        case ("clibbasefunction"): {
+        case ("CLibbasefunction"): {
             _configPath call _fnc_readFunction;
         };
-        case ("clibbasemodule"): {
+        case ("CLibbasemodule"): {
             _configPath call _fnc_readModule;
         };
         default {
@@ -95,7 +95,7 @@ private _fnc_readFunction = {
 };
 
 
-DUMP("--------------------------Start Clib Module Search---------------------------------");
+DUMP("--------------------------Start CLib Module Search---------------------------------");
 {
     private _modName = configName _x;
     private _modPath = getText (_x >> "path");
@@ -110,6 +110,6 @@ DUMP("--------------------------Start Clib Module Search------------------------
         nil
     } count configProperties [_x, "isClass _x", true];
     nil
-} count configProperties [configFile >> "CfgClibModules", "isClass _x", true];
+} count configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
 parsingNamespace setVariable [QGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
-DUMP("--------------------------End Clib Module Search---------------------------------");
+DUMP("--------------------------End CLib Module Search---------------------------------");

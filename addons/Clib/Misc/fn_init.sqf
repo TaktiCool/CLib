@@ -3,7 +3,7 @@ GVAR(allCustomNamespaces) = [];
 
 GVAR(cachedCall) = call CFUNC(createNamespace);
 if (hasInterface) then {
-    Clib_Player setVariable [QGVAR(playerName), profileName, true];
+    CLib_Player setVariable [QGVAR(playerName), profileName, true];
 };
 
 if (hasInterface) then {
@@ -17,7 +17,7 @@ if (hasInterface) then {
 
     DFUNC(onButtonClickRespawnStr) = {
         closeDialog 0;
-        forceRespawn Clib_Player;
+        forceRespawn CLib_Player;
         [false] call CFUNC(disableUserInput);
     } call CFUNC(codeToString);
 
@@ -38,4 +38,4 @@ if (hasInterface) then {
     }] call CFUNC(addEventhandler);
 };
 
-diag_log format ["[Clib - Version]: Server Version %1", GVAR(VersionInfo)];
+diag_log format ["[CLib - Version]: Server Version %1", GVAR(VersionInfo)];

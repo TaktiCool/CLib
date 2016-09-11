@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -14,12 +14,12 @@
     Returns:
     Return of the Function <Any>
 */
-params [["_Clib_code", {}, [{}]], ["_Clib_arguments", []]];
+params [["_CLib_code", {}, [{}]], ["_CLib_arguments", []]];
 if !(canSuspend) exitWith {
-    _Clib_arguments call _Clib_code;
+    _CLib_arguments call _CLib_code;
 };
-private "_Clib_return";
+private "_CLib_return";
 isNil {
-    _Clib_return = _Clib_arguments call _Clib_code
+    _CLib_return = _CLib_arguments call _CLib_code
 };
-if !(isNil "_Clib_return") then {_Clib_return};
+if !(isNil "_CLib_return") then {_CLib_return};

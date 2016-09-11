@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: BadGuy
 
@@ -17,5 +17,5 @@ GVAR(StatusEffectsNamespace) = call EFUNC(Core,createNamespace);
 
 ["forceWalk", {
     params ["_allParameters"];
-    Clib_Player forceWalk (true in _allParameters);
+    CLib_Player forceWalk (true in _allParameters);
 }] call CFUNC(addStatusEffectType)

@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: NetFusion
 
@@ -109,7 +109,7 @@ if (didJip) then {
                 if (_persistent isEqualType false && {_persistent}) then {
                     [_event, _args] call CFUNC(localEvent);
                 } else {
-                    if (_persistent isEqualTo (getPlayerUID Clib_Player)) then {
+                    if (_persistent isEqualTo (getPlayerUID CLib_Player)) then {
                         [_event, _args] call CFUNC(localEvent);
                     };
                 };
@@ -117,5 +117,5 @@ if (didJip) then {
             nil
         } count (_this select 1);
     };
-    ["loadJIPQueue", Clib_Player] call CFUNC(serverEvent);
+    ["loadJIPQueue", CLib_Player] call CFUNC(serverEvent);
 };

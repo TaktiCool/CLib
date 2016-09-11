@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - Clib
+    Comunity Lib - CLib
 
     Author: joko // Jonas
 
@@ -13,5 +13,5 @@
     Returns:
     Localisted Text <String>
 */
-params [["_locaName", "STR_Clib_ERROR"]];
+params [["_locaName", "STR_CLib_ERROR"]];
 [LVAR(ClientNamespace), _locaName, "Error"] call CFUNC(getVariable);
