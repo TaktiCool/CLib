@@ -20,3 +20,15 @@ onLoadMission = "Clib Test Mission";
 respawn = 3;
 respawnDelay = 3;
 respawnDialog = 0;
+
+
+// Clib Mission Config Entrys
+class CfgClibLocalisation {
+    class STR_Clib_TestMission {
+        English = "Test Mission";
+    };
+};
+
+Clib_useFallbackRemoteExecution = 0;
+Clib_useCompressedFunction = 0;
+Clib_Modules[] = {"PerFrame", "Events", "Localisation", "Autoload", "ConfigCaching", "3dGraphics", "extensionFramework", "Gear", "Interaction", "lnbData", "MapGraphics", "Misc", "Mutex", "Namespaces", "RemoteExecution", "Statemachine", "StatusEffects"};

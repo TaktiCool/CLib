@@ -44,7 +44,15 @@ if (hasInterface) then {
 GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);
 
 // If the machine has Clib running and is the Server exit to the server LoadModules
-if (isClass (configFile >> "CfgPatches" >> "Clib") && isServer) exitWith {
+if (isClass (configFile >> "CfgPatches" >> "Clib")) exitWith {
+    // clients are not allowed to load Clib localy its Only a Server mod
+    if (!isServer) exitWith {
+        LOG("Clib is a Server Mod Dont Load it on a Client")
+        endLoadingScreen;
+        disableUserInput false;
+        endMission "LOSER";
+    };
+
     if (isArray (missionConfigFile >> "Clib_Modules")) then {
         [CFUNC(loadModulesServer), getArray (missionConfigFile >> "Clib_Modules")] call CFUNC(directCall);
     } else {
