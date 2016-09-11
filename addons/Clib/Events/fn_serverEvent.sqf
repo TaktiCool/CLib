@@ -21,7 +21,9 @@ if (isServer) then {
 } else {
     #ifdef isDev
         [_event, _args, "2"] remoteExecCall [QFUNC(localEvent), 2];
+        // [[_event, _args, "2"], QFUNC(localEvent), 2] call CFUNC(remoteExec);
     #else
         [_event, _args] remoteExecCall [QFUNC(localEvent), 2];
+        // [[_event, _args], QFUNC(localEvent), 2] call CFUNC(remoteExec);
     #endif
 };

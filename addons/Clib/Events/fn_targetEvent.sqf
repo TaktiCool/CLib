@@ -49,13 +49,17 @@ if (_target isEqualType "") exitWith {
     if (count _targets != 0) then {
         #ifdef isDev
             [_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})] remoteExecCall [QFUNC(localEvent), _targets];
+            // [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QFUNC(localEvent), _targets] call CFUNC(remoteExec);
         #else
             [_event, _args] remoteExecCall [QFUNC(localEvent), _targets];
+            // [[_event, _args], QFUNC(localEvent), _targets] call CFUNC(remoteExec);
         #endif
     };
 };
 #ifdef isDev
     [_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})] remoteExecCall [QFUNC(localEvent), _target];
+    // [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QFUNC(localEvent), _target] call CFUNC(remoteExec);
 #else
     [_event, _args] remoteExecCall [QFUNC(localEvent), _target];
+    // [[_event, _args], QFUNC(localEvent), _target] call CFUNC(remoteExec);
 #endif

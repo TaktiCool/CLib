@@ -17,9 +17,11 @@
 
 // Transfers entry function from server to all clients.
 if (isServer) then {
+    GVAR(useRemoteFallback) = (getNumber (missionConfigFile >> "PRA3" >> "useFallbackRemoteExecution") isEqualTo 1);
     GVAR(useFunctionCompression) = getNumber(missionConfigFile >> "useCompressedFunction") isEqualTo 1;
 
     publicVariable QGVAR(useFunctionCompression);
+    publicVariable QGVAR(useRemoteFallback);
 
     publicVariable QCFUNC(decompressString);
     publicVariable QCFUNC(loadModules);

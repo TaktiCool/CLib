@@ -11,14 +11,14 @@
     0: Arguments for the function/command <Any>
     1: Function/Command that get executed on the remote Clients <String>
     2: Target to what the Event should get sendet <Number, Side, Object, Group, Array of Prev named Types>
-
+    3:
     Returns:
     None
 */
-params ["_args", ["_function", "", [""]], ["_target", 0, [0, sideUnknown, objNull, grpNull, []]]];
+params ["_args", ["_function", "", [""]], ["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_forceUseFallBack", false]];
 
 // exit with Vanilla Method if it is not disabled
-if !(GVAR(useRemoteFallback)) exitWith {
+if !(GVAR(useRemoteFallback) || _forceUseFallBack) exitWith {
     _args remoteExecCall [_function, _target];
 };
 
