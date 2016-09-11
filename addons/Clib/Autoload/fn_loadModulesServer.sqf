@@ -60,6 +60,17 @@ if (isServer) then {
         };
 
     };
+
+    QGVAR(unregisterClient) addPublicVariableEventHandler {
+        private _clientID = owner (_this select 1);
+        {
+            if ((_x select 0) == _clientID) then {
+                GVAR(SendFunctionsUnitCache) set [_forEachIndex, objNull];
+            };
+        } forEach GVAR(SendFunctionsUnitCache);
+
+        GVAR(SendFunctionsUnitCache) = GVAR(SendFunctionsUnitCache) - [];
+    };
 };
 
 // Call all required function on the server.

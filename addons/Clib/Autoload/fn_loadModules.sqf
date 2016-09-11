@@ -90,11 +90,11 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                 GVAR(sendlogfile) = [_log, "Clib_SecurityLog"];
                 publicVariableServer QGVAR(sendlogfile);
                 ["Warning Function %1 is corrupted on your Client, Please restart your Client.", _functionVarName] call BIS_fnc_errorMsg;
-                [] spawn {
-                    endLoadingScreen;
-                    disableUserInput false;
-                    endMission "LOSER";
-                };
+                GVAR(unregisterClient) = player;
+                publicVariableServer QGVAR(unregisterClient);
+                endLoadingScreen;
+                disableUserInput false;
+                endMission "LOSER";
             };
         };
         nil
