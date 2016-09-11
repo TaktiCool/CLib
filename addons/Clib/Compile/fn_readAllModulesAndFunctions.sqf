@@ -53,6 +53,8 @@ private _fnc_callNextState = {
         _configPath call _fnc_readFunction;
     } else {
         DUMP("SubModule Found: " + configName _configPath)
+        private _subModuleName = configName _configPath;
+        private _modulePath = format ["%1\%2", _modulePath, _subModuleName];
         _configPath call _fnc_readModule;
     };
 };
@@ -64,10 +66,6 @@ private _fnc_readModule = {
     };
 
     {
-        if ((inheritsFrom _x) isEqualTo "ClibBaseModule") then {
-            private _subModuleName = configName _x;
-            private _modulePath = format ["%1\%2", _modulePath, _subModuleName];
-        };
         _x call _fnc_callNextState;
         nil
     } count _childs;
