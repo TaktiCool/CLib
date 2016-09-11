@@ -98,6 +98,7 @@ class CfgClibModules {
             APIFNC(remoteCallExtension);
             APIFNC(splitOutputString);
         };
+
         MODULE(Gear) {
             APIFNC(addContainer);
             APIFNC(addItem);
@@ -108,6 +109,7 @@ class CfgClibModules {
             APIFNC(restoreGear);
             APIFNC(saveGear);
         };
+
         MODULE(Interaction) {
             APIFNC(addAction);
             APIFNC(addCanInteractWith);
@@ -120,6 +122,7 @@ class CfgClibModules {
             APIFNC(loop);
             APIFNC(overrideAction);
         };
+
         MODULE(lnbData) {
             FNC(initlnbData);
             APIFNC(lnbLoad);
@@ -141,6 +144,7 @@ class CfgClibModules {
             APIFNC(registerMapControl);
             APIFNC(unregisterMapControl);
         };
+
         MODULE(Misc) {
             APIFNC(addPerformanceCounter);
             APIFNC(blurScreen);
@@ -162,11 +166,13 @@ class CfgClibModules {
             FNC(serverInit);
             APIFNC(setVariablePublic);
         };
+
         MODULE(Mutex) {
             FNC(clientInit);
             APIFNC(mutex);
             FNC(serverInit);
         };
+
         MODULE(Namespaces) {
             APIFNC(allVariables);
             APIFNC(createNamespace);
@@ -176,12 +182,14 @@ class CfgClibModules {
             APIFNC(setVar);
             APIFNC(setVariable);
         };
+
         MODULE(RemoteExecution) {
             APIFNC(execute);
             APIFNC(handleIncomeData);
             APIFNC(remoteExec);
             APIFNC(serverInit);
         };
+
         MODULE(Statemachine) {
             APIFNC(addStatemachineState);
             APIFNC(copyStatemachine);
@@ -193,6 +201,7 @@ class CfgClibModules {
             APIFNC(startStatemachine);
             APIFNC(stepStatemachine);
         };
+
         MODULE(StatusEffects) {
             APIFNC(addStatusEffectType);
             FNC(init);
