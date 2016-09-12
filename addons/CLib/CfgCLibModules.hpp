@@ -67,7 +67,7 @@ class CfgCLibModules {
         };
 
         MODULE(Localisation) {
-            dependency[] = {"Events", "Namespaces"};
+            dependency[] = {"Events"};
             FNC(initLocalisation);
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
@@ -90,6 +90,7 @@ class CfgCLibModules {
         };
 
         MODULE(3dGraphics) {
+            dependency[] = {"Events"};
             APIFNC(3dGraphicsPosition);
             APIFNC(add3dGraphics);
             APIFNC(build3dGraphicsCache);
@@ -140,7 +141,7 @@ class CfgCLibModules {
         };
 
         MODULE(MapGraphics) {
-            dependency[] = {"Namespaces", "PerFrame"};
+            dependency[] = {"Events"};
             APIFNC(addMapGraphicsEventHandler);
             APIFNC(addMapGraphicsGroup);
             APIFNC(buildMapGraphicsCache);
@@ -205,7 +206,7 @@ class CfgCLibModules {
         };
 
         MODULE(Statemachine) {
-            dependency[] = {"Namespaces", "PerFrame", "Events"};
+            dependency[] = {"Events"};
             APIFNC(addStatemachineState);
             APIFNC(copyStatemachine);
             APIFNC(createStatemachine);
@@ -218,7 +219,7 @@ class CfgCLibModules {
         };
 
         MODULE(StatusEffects) {
-            dependency[] = {"Namespaces", "PerFrame", "Events"};
+            dependency[] = {"Events"};
             APIFNC(addStatusEffectType);
             FNC(init);
             APIFNC(setStatusEffect);
