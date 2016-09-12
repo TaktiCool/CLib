@@ -42,6 +42,7 @@ class CfgCLibModules {
         path = "\pr\CLib\addons\CLib";
 
         MODULE(PerFrame) {
+            dependency[] = {"Namespaces"};
             APIFNC(addPerframeHandler);
             APIFNC(execNextFrame);
             FNC(init);
@@ -51,6 +52,7 @@ class CfgCLibModules {
         };
 
         MODULE(Events) {
+            dependency[] = {"PerFrame", "Namespaces", "RemoteExecution"};
             APIFNC(addEventHandler);
             APIFNC(addIgnoredEventLog);
             FNC(clientInit);
@@ -65,12 +67,14 @@ class CfgCLibModules {
         };
 
         MODULE(Localisation) {
+            dependency[] = {"Events", "Namespaces"};
             FNC(initLocalisation);
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
         };
 
         MODULE(Autoload) {
+            dependency[] = {"PerFrame"};
             APIFNC(autoloadEntryPoint);
             APIFNC(callModules);
             APIFNC(loadModules);
@@ -79,6 +83,7 @@ class CfgCLibModules {
         };
 
         MODULE(ConfigCaching) {
+            dependency[] = {"Namespaces"};
             APIFNC(configProperties);
             FNC(init);
             APIFNC(returnParents);
@@ -94,6 +99,7 @@ class CfgCLibModules {
         };
 
         MODULE(extensionFramework) {
+            dependency[] = {};
             APIFNC(callExtension);
             FNC(init);
             APIFNC(remoteCallExtension);
@@ -101,6 +107,7 @@ class CfgCLibModules {
         };
 
         MODULE(Gear) {
+            dependency[] = {};
             APIFNC(addContainer);
             APIFNC(addItem);
             APIFNC(addMagazine);
@@ -112,6 +119,7 @@ class CfgCLibModules {
         };
 
         MODULE(Interaction) {
+            dependency[] = {"Namespaces", "PerFrame"};
             APIFNC(addAction);
             APIFNC(addCanInteractWith);
             APIFNC(addHoldAction);
@@ -125,12 +133,14 @@ class CfgCLibModules {
         };
 
         MODULE(lnbData) {
+            dependency[] = {"Namespaces", "PerFrame"};
             FNC(initlnbData);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
 
         MODULE(MapGraphics) {
+            dependency[] = {"Namespaces", "PerFrame"};
             APIFNC(addMapGraphicsEventHandler);
             APIFNC(addMapGraphicsGroup);
             APIFNC(buildMapGraphicsCache);
@@ -147,6 +157,7 @@ class CfgCLibModules {
         };
 
         MODULE(Misc) {
+            dependency[] = {"Namespaces", "PerFrame", "Events"};
             APIFNC(addPerformanceCounter);
             APIFNC(blurScreen);
             APIFNC(cachedCall);
@@ -169,6 +180,7 @@ class CfgCLibModules {
         };
 
         MODULE(Mutex) {
+            dependency[] = {"Namespaces", "PerFrame", "Events"};
             FNC(clientInit);
             APIFNC(mutex);
             FNC(serverInit);
@@ -185,6 +197,7 @@ class CfgCLibModules {
         };
 
         MODULE(RemoteExecution) {
+            dependency[] = {};
             APIFNC(execute);
             APIFNC(handleIncomeData);
             APIFNC(remoteExec);
@@ -192,6 +205,7 @@ class CfgCLibModules {
         };
 
         MODULE(Statemachine) {
+            dependency[] = {"Namespaces", "PerFrame", "Events"};
             APIFNC(addStatemachineState);
             APIFNC(copyStatemachine);
             APIFNC(createStatemachine);
@@ -204,6 +218,7 @@ class CfgCLibModules {
         };
 
         MODULE(StatusEffects) {
+            dependency[] = {"Namespaces", "PerFrame", "Events"};
             APIFNC(addStatusEffectType);
             FNC(init);
             APIFNC(setStatusEffect);
