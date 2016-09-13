@@ -62,13 +62,13 @@ class CfgCLibModules {
             APIFNC(localEvent);
             APIFNC(removeEventhandler);
             APIFNC(serverEvent);
-            FNC(servetInit);
+            FNC(serverInit);
             APIFNC(targetEvent);
         };
 
         MODULE(Localisation) {
             dependency[] = {"Events"};
-            FNC(initLocalisation);
+            FNC(init);
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
         };
@@ -135,7 +135,7 @@ class CfgCLibModules {
 
         MODULE(lnbData) {
             dependency[] = {"Namespaces", "PerFrame"};
-            FNC(initlnbData);
+            FNC(init);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };

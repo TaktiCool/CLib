@@ -13,7 +13,7 @@
     Returns:
     None
 */
-GVAR(EventNamespace) = call EFUNC(Core,createNamespace);
+GVAR(EventNamespace) = call CFUNC(createNamespace);
 
 ["hideObject", {
     (_this select 0) params ["_object", "_value"];

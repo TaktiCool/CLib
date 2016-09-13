@@ -5,6 +5,10 @@
     #define ENABLEFUNCTIONTRACE
 #endif
 
+#ifdef isDev
+    #define disableCompression
+#endif
+
 // Predefines for easy Macro work
 #define DOUBLE(var1,var2) var1##_##var2
 #define TRIPLE(var1,var2,var3) DOUBLE(var1,DOUBLE(var2,var3))
