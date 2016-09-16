@@ -190,5 +190,12 @@ class CfgCLibModules {
             FNC(init);
             APIFNC(setStatusEffect);
         };
+        MODULE(AnimFramework) {
+            dependency[] = {"Events"};
+            APIFNC(doAnimation);
+            APIFNC(getDeathAnimation);
+            APIFNC(getDefaultAnimation);
+            FNC(init);
+        }
     };
 };

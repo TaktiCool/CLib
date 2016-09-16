@@ -68,10 +68,6 @@ GVAR(EventNamespace) = call CFUNC(createNamespace);
     };
     _group selectLeader _unit;
 }] call CFUNC(addEventHandler);
-["switchMove", {
-    (_this select 0) params ["_unit", "_move"];
-    _unit switchmove _move;
-}] call CFUNC(addEventHandler);
 ["setVectorDirAndUp", {
     (_this select 0) params ["_obj", "_pos"];
     _obj setVectorDirAndUp _pos;
