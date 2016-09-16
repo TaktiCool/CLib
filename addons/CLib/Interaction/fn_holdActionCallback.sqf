@@ -131,7 +131,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         (_display displayCtrl 6001) ctrlCommit 0;
 
         if (_id isEqualType 123) then {
-            DUMP(_iconIdle);
             _target setUserActionText [_id,_title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconProgress)]];
         };
         _handle call CFUNC(removePerFrameHandler);
