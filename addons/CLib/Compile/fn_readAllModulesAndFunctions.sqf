@@ -15,8 +15,10 @@
 */
 
 
+#ifndef isDev
+    if (isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWith {};
+#endif
 GVAR(allFunctionNamesCached) = [];
-
 /* inheritsFrom Version
 private _fnc_returnRoot = {
     params ["_configPath"];
@@ -83,13 +85,13 @@ private _fnc_readFunction = {
         _onlyServer = true;
     };
 
-    private _priority = getArray (_configPath >> "priority");
+    private _dependency = getArray (_configPath >> "dependency");
 
     private _functionName = format [(["%1_%2_fnc_%3","%1_fnc_%3"] select _api), _modName, _moduleName, _name];
 
     private _folderPath = format ["%1\fn_%2.sqf", _modulePath, _name];
 
-    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _priority, _modName, _moduleName]];
+    parsingNamespace setVariable [_functionName + "_data", [_folderPath, _api, _onlyServer, _dependency, _modName, _moduleName]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath)
 };
