@@ -19,27 +19,27 @@
         6: arguments <Array>
 
 
-	[cursorTarget, "TestHold", "", "", {true}, {true}, {StartTime = time;}, {(time - StartTime)/10},{hint "COMPLETED";},{hint "INTERRUPTED"}] call CFUNC(addHoldAction)
+    [cursorTarget, "TestHold", "", "", {true}, {true}, {StartTime = time;}, {(time - StartTime)/10},{hint "COMPLETED";},{hint "INTERRUPTED"}] call CFUNC(addHoldAction)
     Returns:
     0: Return <Type>
 */
 params
 [
-	["_target",objNull,[objNull,"",[]]],
-	["_title","MISSING TITLE",[""]],
-	["_iconIdle","MISSING ICON",["",{}]],
-	["_iconProgress","MISSING ICON",["",{}]],
-	["_condShow",{true},[{}]],
-	["_condProgress",{true},[{}]],
-	["_codeStart",{},[{}]],
-	["_codeProgress",{},[{}]],
-	["_codeCompleted",{},[{}]],
-	["_codeInterrupted",{},[{}]],
-	["_arguments",[],[[]]],
-	["_priority",1000,[123]],
-	["_removeCompleted",true,[true]],
-	["_showUnconscious",false,[true]],
-	["_ignoredCanInteractConditions",[],[[]]]
+    ["_target",objNull,[objNull,"",[]]],
+    ["_title","MISSING TITLE",[""]],
+    ["_iconIdle","MISSING ICON",["",{}]],
+    ["_iconProgress","MISSING ICON",["",{}]],
+    ["_condShow",{true},[{}]],
+    ["_condProgress",{true},[{}]],
+    ["_codeStart",{},[{}]],
+    ["_codeProgress",{},[{}]],
+    ["_codeCompleted",{},[{}]],
+    ["_codeInterrupted",{},[{}]],
+    ["_arguments",[],[[]]],
+    ["_priority",1000,[123]],
+    ["_removeCompleted",true,[true]],
+    ["_showUnconscious",false,[true]],
+    ["_ignoredCanInteractConditions",[],[[]]]
 ];
 
 //preprocess data
@@ -51,51 +51,51 @@ _hint = format["<t font='RobotoCondensedBold'>%1</t>",_hint];
 
 
 if (_iconIdle isEqualType "") then {
-	_iconIdle = compile format ["""%1""", _iconIdle];
+    _iconIdle = compile format ["""%1""", _iconIdle];
 };
 
 if (_iconProgress isEqualType "") then {
-	_iconProgress = compile format ["""%1""", _iconProgress];
+    _iconProgress = compile format ["""%1""", _iconProgress];
 };
 
 
 
 if (_target isEqualType "" && {_target == "VanillaAction"}) then {
-	[_title, {_this call CFUNC(holdActionCallback);true;},
-	[_title,
-	_hint,
-	_iconIdle,
-	_iconProgress,
-	_condShow,
-	_condProgress,
-	_codeStart,
-	_codeProgress,
-	_codeCompleted,
-	_codeInterrupted,
-	_arguments,
-	_priority,
-	_removeCompleted,
-	_showUnconscious]] call CFUNC(overrideAction);
+    [_title, {_this call CFUNC(holdActionCallback);true;},
+    [_title,
+    _hint,
+    _iconIdle,
+    _iconProgress,
+    _condShow,
+    _condProgress,
+    _codeStart,
+    _codeProgress,
+    _codeCompleted,
+    _codeInterrupted,
+    _arguments,
+    _priority,
+    _removeCompleted,
+    _showUnconscious]] call CFUNC(overrideAction);
 } else {
 
-	_title = format["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>",_title,_keyName];
-	_condShow = compile format ["if (call %1) then {[""%2"", %3, ""%4""] call " + QCFUNC(IdleAnimation) + "; true;} else {false};", _condShow, _title, _iconIdle, _hint];
-	diag_log _condShow;
-	[_title, _target, 0, _condShow, CFUNC(holdActionCallback), ["arguments", [
-		_title,
-		_hint,
-		_iconIdle,
-		_iconProgress,
-		_condShow,
-		_condProgress,
-		_codeStart,
-		_codeProgress,
-		_codeCompleted,
-		_codeInterrupted,
-		_arguments,
-		_priority,
-		_removeCompleted,
-		_showUnconscious,
-		_ignoredCanInteractConditions
-		], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
-	};
+    _title = format["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>",_title,_keyName];
+    _condShow = compile format ["if (call %1) then {[""%2"", %3, ""%4""] call " + QCFUNC(IdleAnimation) + "; true;} else {false};", _condShow, _title, _iconIdle, _hint];
+    diag_log _condShow;
+    [_title, _target, 0, _condShow, CFUNC(holdActionCallback), ["arguments", [
+        _title,
+        _hint,
+        _iconIdle,
+        _iconProgress,
+        _condShow,
+        _condProgress,
+        _codeStart,
+        _codeProgress,
+        _codeCompleted,
+        _codeInterrupted,
+        _arguments,
+        _priority,
+        _removeCompleted,
+        _showUnconscious,
+        _ignoredCanInteractConditions
+        ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
+    };
