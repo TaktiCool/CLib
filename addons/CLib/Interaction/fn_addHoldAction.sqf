@@ -98,4 +98,4 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _showUnconscious,
         _ignoredCanInteractConditions
         ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
-};
+    };
