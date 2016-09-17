@@ -90,9 +90,14 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         };
 
         if (_id isEqualType 123) then {
-            _target setUserActionText [_id,_title,
-                format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", _progressIconPath],
-                format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconProgress)]];
+            private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
+            (_display displayCtrl 6000) ctrlSetPosition [0, 0.55, 1, 0.5];
+            (_display displayCtrl 6001) ctrlSetPosition [0, 0.55, 1, 0.5];
+            (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];
+            (_display displayCtrl 6001) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", call _iconProgress];
+            (_display displayCtrl 6000) ctrlCommit 0;
+            (_display displayCtrl 6001) ctrlCommit 0;
+            _target setUserActionText [_id,_title,"",""];
         } else {
             private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
             (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3.5' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];
@@ -119,16 +124,14 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         GVAR(DisableNextAction) = false;
         GVAR(HoldActionStartTime) = -1;
 
+        private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
+        (_display displayCtrl 6001) ctrlSetStructuredText parseText "";
+        (_display displayCtrl 6000) ctrlSetStructuredText parseText "";
+        (_display displayCtrl 6000) ctrlCommit 0;
+        (_display displayCtrl 6001) ctrlCommit 0;
+
         if (_id isEqualType 123) then {
-            DUMP(_iconIdle);
             _target setUserActionText [_id,_title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconProgress)]];
-        } else {
-            //([UIVAR(HoldAction)] call BIS_fnc_rscLayer) cutFadeOut 0;
-            private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
-            (_display displayCtrl 6001) ctrlSetStructuredText parseText "";
-            (_display displayCtrl 6000) ctrlSetStructuredText parseText "";
-            (_display displayCtrl 6000) ctrlCommit 0;
-            (_display displayCtrl 6001) ctrlCommit 0;
         };
         _handle call CFUNC(removePerFrameHandler);
     };
