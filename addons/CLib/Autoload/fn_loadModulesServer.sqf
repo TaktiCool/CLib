@@ -24,9 +24,9 @@ GVAR(requiredFunctions) = [];
 LOG("Loaded Modules: " + str _this)
 
 {
-    private _functionModuleName = (parsingNamespace getVariable (_x + "_data")) select 4;
+    private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
     // Push the function name on the array if its in the requested module list.
-    if (_functionModuleName in _this) then {
+    if (_fullFunctionModuleName in _this) then {
         GVAR(requiredFunctions) pushBack _x;
     };
     nil

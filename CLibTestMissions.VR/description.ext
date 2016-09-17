@@ -31,4 +31,4 @@ class CfgCLibLocalisation {
 
 CLib_useFallbackRemoteExecution = 0;
 CLib_useCompressedFunction = 0;
-CLib_Modules[] = {"PerFrame", "Events", "Localisation", "Autoload", "ConfigCaching", "3dGraphics", "extensionFramework", "Gear", "Interaction", "lnbData", "MapGraphics", "Misc", "Mutex", "Namespaces", "RemoteExecution", "Statemachine", "StatusEffects"};
+CLib_Modules[] = {"CLib/PerFrame", "CLib/Events", "CLib/Localisation", "CLib/Autoload", "CLib/ConfigCaching", "CLib/3dGraphics", "CLib/extensionFramework", "CLib/Gear", "CLib/Interaction", "CLib/lnbData", "CLib/MapGraphics", "CLib/Misc", "CLib/Mutex", "CLib/Namespaces", "CLib/RemoteExecution", "CLib/Statemachine", "CLib/StatusEffects"};

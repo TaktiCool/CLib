@@ -30,14 +30,6 @@ class cfgFunctions {
     class CLib {
         class CLib {
             file = "\pr\CLib\addons\CLib\Compile";
-            class compileAllFunctions: CLib_baseFNC {};
-            class readAllModulesAndFunctions: CLib_baseFNC {};
-            class checkAllFunctionCompression: CLib_baseFNC {};
-            class checkCompression: CLib_baseFNC {};
-            class compile: CLib_baseFNC {};
-            class compressString: CLib_baseFNC {};
-            class decompressString: CLib_baseFNC {};
-            class stripSqf: CLib_baseFNC {};
             class preInit: CLib_basePreFNC {};
             class preStart: CLib_basePreStartFNC {};
         };

@@ -8,7 +8,7 @@ class CfgCLibModules {
         path = "\pr\CLib\addons\CLib";
 
         MODULE(PerFrame) {
-            dependency[] = {"Namespaces"};
+            dependency[] = {"CLib/Namespaces"};
             APIFNC(addPerframeHandler);
             APIFNC(execNextFrame);
             FNC(init);
@@ -18,7 +18,7 @@ class CfgCLibModules {
         };
 
         MODULE(Events) {
-            dependency[] = {"PerFrame", "Namespaces", "RemoteExecution"};
+            dependency[] = {"CLib/PerFrame", "CLib/Namespaces", "CLib/RemoteExecution"};
             APIFNC(addEventHandler);
             APIFNC(addIgnoredEventLog);
             FNC(clientInit);
@@ -33,14 +33,14 @@ class CfgCLibModules {
         };
 
         MODULE(Localisation) {
-            dependency[] = {"Events"};
+            dependency[] = {"CLib/Events"};
             FNC(init);
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
         };
 
         MODULE(Autoload) {
-            dependency[] = {"PerFrame"};
+            dependency[] = {"CLib/PerFrame"};
             APIFNC(autoloadEntryPoint);
             APIFNC(callModules);
             APIFNC(loadModules);
@@ -49,14 +49,14 @@ class CfgCLibModules {
         };
 
         MODULE(ConfigCaching) {
-            dependency[] = {"Namespaces"};
+            dependency[] = {"CLib/Namespaces"};
             APIFNC(configProperties);
             FNC(init);
             APIFNC(returnParents);
         };
 
         MODULE(3dGraphics) {
-            dependency[] = {"Events"};
+            dependency[] = {"CLib/Events"};
             APIFNC(3dGraphicsPosition);
             APIFNC(add3dGraphics);
             APIFNC(build3dGraphicsCache);
@@ -86,7 +86,7 @@ class CfgCLibModules {
         };
 
         MODULE(Interaction) {
-            dependency[] = {"Namespaces", "PerFrame"};
+            dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
             APIFNC(addAction);
             APIFNC(addCanInteractWith);
             APIFNC(addHoldAction);
@@ -100,20 +100,20 @@ class CfgCLibModules {
         };
 
         MODULE(lnbData) {
-            dependency[] = {"Namespaces", "PerFrame"};
+            dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
             FNC(init);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
 
         MODULE(MapGraphics) {
-            dependency[] = {"Events"};
+            dependency[] = {"CLib/Events"};
             APIFNC(addMapGraphicsEventHandler);
             APIFNC(addMapGraphicsGroup);
             APIFNC(buildMapGraphicsCache);
             FNC(clientInit);
             APIFNC(drawMapGraphics);
-            APIFNC(mapGraphicsMouseButtionClick);
+            APIFNC(mapGraphicsMouseButtonClick);
             APIFNC(mapGraphicsMouseMoving);
             APIFNC(mapGraphicsPosition);
             APIFNC(removeMapGraphicsEventhandler);
@@ -124,12 +124,12 @@ class CfgCLibModules {
         };
 
         MODULE(Misc) {
-            dependency[] = {"Namespaces", "PerFrame", "Events"};
+            dependency[] = {"CLib/Namespaces", "CLib/PerFrame", "CLib/Events"};
             APIFNC(addPerformanceCounter);
             APIFNC(blurScreen);
             APIFNC(cachedCall);
             APIFNC(codeToString);
-            APIFNC(createPPEffects);
+            APIFNC(createPPEffect);
             APIFNC(deleteAtEntry);
             APIFNC(directCall);
             APIFNC(disableUserInput);
@@ -137,7 +137,7 @@ class CfgCLibModules {
             APIFNC(fixFloating);
             APIFNC(fixPosition);
             APIFNC(getFOV);
-            APIFNC(gearNearUnits);
+            APIFNC(getNearUnits);
             APIFNC(groupPlayers);
             FNC(init);
             APIFNC(name);
@@ -147,7 +147,7 @@ class CfgCLibModules {
         };
 
         MODULE(Mutex) {
-            dependency[] = {"Namespaces", "PerFrame", "Events"};
+            dependency[] = {"CLib/Namespaces", "CLib/PerFrame", "CLib/Events"};
             FNC(clientInit);
             APIFNC(mutex);
             FNC(serverInit);
@@ -172,7 +172,7 @@ class CfgCLibModules {
         };
 
         MODULE(Statemachine) {
-            dependency[] = {"Events"};
+            dependency[] = {"CLib/Events"};
             APIFNC(addStatemachineState);
             APIFNC(copyStatemachine);
             APIFNC(createStatemachine);
@@ -185,17 +185,18 @@ class CfgCLibModules {
         };
 
         MODULE(StatusEffects) {
-            dependency[] = {"Events"};
+            dependency[] = {"CLib/Events"};
             APIFNC(addStatusEffectType);
             FNC(init);
             APIFNC(setStatusEffect);
         };
+
         MODULE(AnimFramework) {
-            dependency[] = {"Events"};
+            dependency[] = {"CLib/Events"};
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
             FNC(init);
-        }
+        };
     };
 };

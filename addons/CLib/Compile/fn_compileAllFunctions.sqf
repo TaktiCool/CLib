@@ -14,9 +14,7 @@
     None
 */
 {
-    private _data = parsingNamespace getVariable _x + "_data";
-    _data params ["_folderPath", "", "", "", "_modName"];
-    diag_log isNil "CLib_fnc_compile";
-    [_folderPath, _x] call CLib_fnc_compile;
+    (parsingNamespace getVariable (_x + "_data")) params ["_folderPath"];
+    [_folderPath, _x] call CFUNC(compile);
     nil
 } count (parsingNamespace getVariable QGVAR(allFunctionNamesCached));
