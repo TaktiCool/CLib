@@ -143,6 +143,7 @@ class CfgCLibModules {
             APIFNC(name);
             APIFNC(sanitizeString);
             FNC(serverInit);
+            FNC(dumpPerformanceInformation);
             APIFNC(setVariablePublic);
         };
 
@@ -197,6 +198,11 @@ class CfgCLibModules {
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
             FNC(init);
+        };
+        MODULE(Settings) {
+            APIFNC(getSetting);
+            FNC(init);
+            APIFNC(loadSettings);
         };
     };
 };
