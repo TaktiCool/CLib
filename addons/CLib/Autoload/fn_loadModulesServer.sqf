@@ -16,17 +16,30 @@
     Example:
     ["Module1", "Module2"] call CFUNC(loadModulesServer);
 */
-
-
 // Find all functions which are part of the requested modules and store them in an array.
+GVAR(requiredModules) = [];
 GVAR(requiredFunctions) = [];
+
+private _fnc_addRequiredModule = {
+    params ["_moduleName"];
+    GVAR(requiredModules) pushBackUnique _moduleName;
+    private _dependencies = parsingNamespace getVariable [format [QGVAR(%1_dependency), _moduleName], []];
+    {
+        [_x] call _fnc_addRequiredModule;
+    } count _dependencies;
+    nil
+};
+
+{
+    [_x] call _fnc_addRequiredModule;
+} count _this;
 
 LOG("Loaded Modules: " + str _this)
 
 {
     private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
     // Push the function name on the array if its in the requested module list.
-    if (_fullFunctionModuleName in _this) then {
+    if (_fullFunctionModuleName in GVAR(requiredModules)) then {
         GVAR(requiredFunctions) pushBack _x;
     };
     nil

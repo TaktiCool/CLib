@@ -19,7 +19,10 @@ private _modulesToSort = +GVAR(allModuleNamesCached);
 private _i = 0;
 while {!(_modulesToSort isEqualTo [])} do {
     private _moduleName = _modulesToSort select _i;
-    private _dependencies = parsingNamespace getVariable [format [QGVAR(%1_dependency), _moduleName], []];
+    private _dependencies = parsingNamespace getVariable [format [QGVAR(%1_dependency), _moduleName], nil];
+    if (isNil "_dependencies") then {
+        LOG("Missing module: " + _moduleName)
+    };
 
     if (_dependencies isEqualTo []) then {
         _sortedModuleNames pushBack _moduleName;
