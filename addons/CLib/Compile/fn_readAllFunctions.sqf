@@ -18,8 +18,32 @@
 #endif
 GVAR(allFunctionNamesCached) = [];
 
+private _fnc_checkNext = {
+    params ["_modPath", "_modName", "_moduleName", "_config"];
+    private _children = configProperties [_config, "isClass _x", true];
+    if (_children isEqualTo []) then {
+        [_modPath, _modName, _moduleName, _config] call _fnc_readFunction;
+    } else {
+        [_modPath, _modName, _moduleName, _config, _children] call _fnc_readSubModule
+    };
+};
+
+private _fnc_readSubModule = {
+    params ["_modPath", "_modName", "_moduleName", "_config", "_children"];
+    DUMP("SubModule Found: " + configName _x)
+    private _subModuleName = configName _x;
+    {
+        private _moduleName = +_moduleName;
+        _moduleName pushBack _subModuleName;
+        [_modPath, _modName, _moduleName, _x] call _fnc_checkNext;
+        nil
+    } count _children;
+};
+
 private _fnc_readFunction = {
     params ["_modPath", "_modName", "_moduleName", "_config"];
+
+    _moduleName = _moduleName joinString "\";
 
     private _name = configName _config;
     private _api = getNumber (_config >> "api") isEqualTo 1;
@@ -43,17 +67,7 @@ DUMP("--------------------------Start CLib Function Search----------------------
     private _modPath = getText (configFile >> "CfgCLibModules" >> _modName >> "path");
 
     {
-        private _children = configProperties [_x, "isClass _x", true];
-        if (_children isEqualTo []) then {
-            [_modPath, _modName, _moduleName, _x] call _fnc_readFunction;
-        } else {
-            DUMP("SubModule Found: " + configName _x)
-            {
-                [_modPath, _modName, _moduleName, _x] call _fnc_readFunction;
-                nil
-            } count _children;
-        };
-
+        [_modPath, _modName, [_moduleName], _x] call _fnc_checkNext;
         nil
     } count (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
 
