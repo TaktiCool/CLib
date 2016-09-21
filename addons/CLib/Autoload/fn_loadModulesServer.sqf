@@ -32,6 +32,7 @@ private _fnc_addRequiredModule = {
 
 {
     [_x] call _fnc_addRequiredModule;
+    nil
 } count _this;
 
 LOG("Loaded Modules: " + str _this)
