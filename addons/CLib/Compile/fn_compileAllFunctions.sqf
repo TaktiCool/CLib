@@ -17,4 +17,4 @@
     (parsingNamespace getVariable (_x + "_data")) params ["_folderPath"];
     [_folderPath, _x] call CFUNC(compile);
     nil
-} count (parsingNamespace getVariable QGVAR(allFunctionNamesCached));
+} count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));

@@ -25,4 +25,4 @@
         };
     } forEach AllCompressionTypes;
     nil
-} count CGVAR(functionCache);
+} count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));

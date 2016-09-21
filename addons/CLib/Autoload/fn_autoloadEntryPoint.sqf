@@ -17,11 +17,11 @@
 
 // Transfers entry function from server to all clients.
 if (isServer) then {
-    GVAR(useRemoteFallback) = getNumber(missionConfigFile >> (QPREFIX + "_useFallbackRemoteExecution")) isEqualTo 1;
-    GVAR(useFunctionCompression) = getNumber(missionConfigFile >> (QPREFIX + "_useCompressedFunction")) isEqualTo 1;
+    CGVAR(useRemoteFallback) = getNumber(missionConfigFile >> (QPREFIX + "_useFallbackRemoteExecution")) isEqualTo 1;
+    CGVAR(useFunctionCompression) = getNumber(missionConfigFile >> (QPREFIX + "_useCompressedFunction")) isEqualTo 1;
 
-    publicVariable QGVAR(useFunctionCompression);
-    publicVariable QGVAR(useRemoteFallback);
+    publicVariable QCGVAR(useFunctionCompression);
+    publicVariable QCGVAR(useRemoteFallback);
 
     publicVariable QCFUNC(decompressString);
     publicVariable QCFUNC(loadModules);

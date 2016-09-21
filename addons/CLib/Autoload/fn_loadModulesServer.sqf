@@ -30,7 +30,7 @@ LOG("Loaded Modules: " + str _this)
         GVAR(requiredFunctions) pushBack _x;
     };
     nil
-} count CGVAR(functionCache);
+} count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
 
 // EH for client registration. Starts transmission of function code.
 if (isServer) then {

@@ -13,9 +13,6 @@
     Returns:
     None
 */
-#ifndef isDev
-    if (isNil {parsingNamespace getVariable QGVAR(allFunctionNamesCached)}) exitWith {};
-#endif
 GVAR(allFunctionNamesCached) = [];
 
 private _fnc_checkNext = {
@@ -73,5 +70,5 @@ DUMP("--------------------------Start CLib Function Search----------------------
 
     nil
 } count GVAR(allModuleNamesCached);
-parsingNamespace setVariable [QGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
+parsingNamespace setVariable [QCGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
 DUMP("--------------------------End CLib Function Search---------------------------------");
