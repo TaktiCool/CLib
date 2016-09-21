@@ -8,7 +8,7 @@
     Entry point for module loading. Must be called within mission script for client and server. Start transfer of functions.
 
     Parameter(s):
-    the names of the requested modules <ARRAY>
+    the names of the requested modules <ARRAY> ()
 
     Returns:
     None
@@ -36,12 +36,11 @@ if (hasInterface) then {
            };
 
     };
-
     waitUntil {!isNull player};
     CLib_Player = player;
     waitUntil {GVAR(playerUID) = getPlayerUID player; (GVAR(playerUID) != "")};
+    waitUntil {!isNil QCFUNC(decompressString)};
 };
-GVAR(allowFunctionsLog) = (getNumber (missionConfigFile >> "allowFunctionsLog") isEqualTo 1);
 
 // If the machine has CLib running and is the Server exit to the server LoadModules
 if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
@@ -53,10 +52,10 @@ if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
         endMission "LOSER";
     };
 
-    if (isArray (missionConfigFile >> "CLib_Modules")) then {
-        [CFUNC(loadModulesServer), getArray (missionConfigFile >> "CLib_Modules")] call CFUNC(directCall);
-    } else {
+    if (_this isEqualType [] && {count _this != 0}) then {
         [CFUNC(loadModulesServer), _this] call CFUNC(directCall);
+    } else {
+        [CFUNC(loadModulesServer), getArray (missionConfigFile >> (QPREFIX + "_Modules"))] call CFUNC(directCall);
     };
 
 };

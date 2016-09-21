@@ -17,6 +17,10 @@ class CLib_basePreStartFNC: CLib_baseFNC {
     preStart = 1;
 };
 
+class CLib_basePostFNC: CLib_baseFNC {
+    postInit = 1;
+};
+
 class CLib_basePreInitStartFNC: CLib_baseFNC {
     preStart = 1;
     preInit = 1;
@@ -32,6 +36,7 @@ class cfgFunctions {
             file = "\pr\CLib\addons\CLib\Compile";
             class preInit: CLib_basePreFNC {};
             class preStart: CLib_basePreStartFNC {};
+            class postInit: CLib_basePostFNC {};
         };
     };
 };
