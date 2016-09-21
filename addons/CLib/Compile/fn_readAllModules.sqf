@@ -23,7 +23,12 @@ DUMP("--------------------------Start CLib Module Search------------------------
     {
         private _moduleName = configName _x;
         private _fullModuleName = format ["%1/%2", _modName, _moduleName];
-        parsingNamespace setVariable [format [QGVAR(%1_dependency), _fullModuleName], getArray (_x >> "dependency")];
+        private _dependency = getArray (_x >> "dependency");
+        parsingNamespace setVariable [format [QGVAR(%1_dependency), _fullModuleName], _dependency];
+        {
+            GVAR(allModuleNamesCached) pushBackUnique _x;
+            nil
+        } count _dependency;
         GVAR(allModuleNamesCached) pushBackUnique _fullModuleName;
 
         DUMP("Module Found: " + _moduleName)
