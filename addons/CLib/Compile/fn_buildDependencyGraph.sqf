@@ -44,7 +44,7 @@ while {!(_modulesToSort isEqualTo [])} do {
         if (_dependenciesLoaded) then {
             _sortedModuleNames pushBack _moduleName;
             _modulesToSort deleteAt _i;
-            _i = _i % (count _modulesToSort);
+            _i = _i % ((count _modulesToSort) max 1);
         } else {
             _i = (_i + 1) % (count _modulesToSort);
             DUMP("_i2: " + str _i)
