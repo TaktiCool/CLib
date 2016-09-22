@@ -36,6 +36,9 @@ class cfgFunctions {
             file = "\pr\CLib\addons\CLib\Compile";
             class preInit: CLib_basePreFNC {};
             class preStart: CLib_basePreStartFNC {};
+        };
+        class CLib_Autoload {
+            file = "\pr\CLib\addons\CLib\Autoload";
             class postInit: CLib_basePostFNC {};
         };
     };

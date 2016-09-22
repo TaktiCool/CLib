@@ -69,6 +69,6 @@ DUMP("--------------------------Start CLib Function Search----------------------
     } count (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
 
     nil
-} count GVAR(allModuleNamesCached);
+} count (parsingNamespace getVariable QGVAR(allModuleNamesCached));
 parsingNamespace setVariable [QCGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
 DUMP("--------------------------End CLib Function Search---------------------------------");

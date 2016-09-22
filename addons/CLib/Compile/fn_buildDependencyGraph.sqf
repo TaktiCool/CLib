@@ -14,14 +14,19 @@
     None
 */
 private _sortedModuleNames = [];
-private _modulesToSort = +GVAR(allModuleNamesCached);
+private _modulesToSort = +(parsingNamespace getVariable QGVAR(allModuleNamesCached));
 
 private _i = 0;
+DUMP("Modules To Sort: " + str _modulesToSort)
 while {!(_modulesToSort isEqualTo [])} do {
+
     private _moduleName = _modulesToSort select _i;
+    private _str = format ["_i: %1 ModuleName: %2", _i, _moduleName];
+    DUMP(_str)
     private _dependencies = parsingNamespace getVariable [format [QGVAR(%1_dependency), _moduleName], nil];
     if (isNil "_dependencies") then {
-        LOG("Missing module: " + _moduleName)
+        private _str = format ["Missing module: %1", _moduleName];
+        LOG(_str)
     };
 
     if (_dependencies isEqualTo []) then {
@@ -41,8 +46,9 @@ while {!(_modulesToSort isEqualTo [])} do {
             _modulesToSort deleteAt _i;
         } else {
             _i = (_i + 1) % (count _modulesToSort);
+            DUMP("_i2: " + str _i)
         };
     };
 };
 
-GVAR(allModuleNamesCached) = _sortedModuleNames;
+parsingNamespace setVariable [QGVAR(allModuleNamesCached), _sortedModuleNames];

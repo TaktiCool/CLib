@@ -6,7 +6,10 @@
 #endif
 
 #ifdef isDev
-    #define disableCompression
+    // #define disableCompression
+#endif
+#ifdef DEBUGFULL
+    #undef disableCompression
 #endif
 
 // Predefines for easy Macro work
