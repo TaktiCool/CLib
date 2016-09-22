@@ -873,7 +873,8 @@ class CfgPatches {
 
 #include "cfgFunctions.hpp"
 
-
 #include "CfgCLibLocalisation.hpp"
 
 #include "CfgCLibModules.hpp"
+
+#include "\pr\CLib\addons\CLib\SimpleObjectFramework\CfgCLibSimpleObject.hpp"

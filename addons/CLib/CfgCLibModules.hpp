@@ -204,5 +204,12 @@ class CfgCLibModules {
             FNC(init);
             APIFNC(loadSettings);
         };
+
+        MODULE(SimpleObjectFramework) {
+            dependency[] = {"CLib/Namespaces"};
+            APIFNC(createSimpleObjectComp);
+            FNC(init);
+            APIFNC(readSimpleObjectComp);
+        };
     };
 };
