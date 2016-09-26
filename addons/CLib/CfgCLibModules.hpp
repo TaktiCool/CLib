@@ -18,7 +18,7 @@ class CfgCLibModules {
         };
 
         MODULE(Events) {
-            dependency[] = {"CLib/PerFrame", "CLib/Namespaces", "CLib/RemoteExecution"};
+            dependency[] = {"CLib/PerFrame", "CLib/Namespaces", "CLib/RemoteExecution"/*, "CLib/TestFail"*/};
             APIFNC(addEventHandler);
             APIFNC(addIgnoredEventLog);
             FNC(clientInit);

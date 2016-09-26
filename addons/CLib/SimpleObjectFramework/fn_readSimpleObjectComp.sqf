@@ -43,9 +43,14 @@ private _fnc_readSimpleObjectClass = {
             private _phase = getNumber (_x >> "phase");
             private _speed = switch (getText (_x >> "speedType")) do {
                 case ("BOOL"): { ((getNumber (_x >> "speed")) isEqualTo 1) };
-                default { getNumber (_x >> "speed") };
+                default { if (isNumber (_x >> "speed")) then {getNumber (_x >> "speed")}; };
             };
-            _animateArray pushBack [configName _x, _phase, _speed];
+            if (isNil "_speed") then {
+                _animateArray pushBack [configName _x, _phase];
+            } else {
+                _animateArray pushBack [configName _x, _phase, _speed];
+            };
+
             nil
         } count (configProperties [_config >> "animate", "isClass _x", true]);
     };

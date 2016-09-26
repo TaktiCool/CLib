@@ -21,13 +21,9 @@ DUMP("Modules To Sort: " + str _modulesToSort)
 while {!(_modulesToSort isEqualTo [])} do {
 
     private _moduleName = _modulesToSort select _i;
-    private _str = format ["_i: %1 ModuleName: %2", _i, _moduleName];
-    DUMP(_str)
-    private _dependencies = parsingNamespace getVariable [format [QGVAR(%1_dependency), _moduleName], nil];
-    if (isNil "_dependencies") then {
-        private _str = format ["Missing module: %1", _moduleName];
-        LOG(_str)
-    };
+    DUMP("ModuleName: " + str _moduleName)
+    private _dependencies = parsingNamespace getVariable (format [QGVAR(%1_dependency), _moduleName]);
+
 
     if (_dependencies isEqualTo []) then {
         _sortedModuleNames pushBack _moduleName;
@@ -35,6 +31,10 @@ while {!(_modulesToSort isEqualTo [])} do {
     } else {
         private _dependenciesLoaded = true;
         {
+            if (!(_x in _modulesToSort || {!_x in _sortedModuleNames})) then {
+                private _str = format ["Missing Dependency in Module: %1, %2",_moduleName, _x];
+                LOG(_str)
+            };
             if (!(_x in _sortedModuleNames)) exitWith {
                 _dependenciesLoaded = false;
             };
@@ -47,7 +47,6 @@ while {!(_modulesToSort isEqualTo [])} do {
             _i = _i % ((count _modulesToSort) max 1);
         } else {
             _i = (_i + 1) % (count _modulesToSort);
-            DUMP("_i2: " + str _i)
         };
     };
 };
