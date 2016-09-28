@@ -23,7 +23,7 @@ if (isNil QGVAR(PFHSendFunctions)) exitWith {
                 // Extract the code out of the function.
                 private _functionName = _functionCache deleteAt 0;
 
-                [_functionName, _clientID, _index + _i] call CFUNC(sendFunctions);
+                [_functionName, _clientID, _index + _i] call FUNC(sendFunctions);
             };
 
             if (_functionCache isEqualTo []) then {

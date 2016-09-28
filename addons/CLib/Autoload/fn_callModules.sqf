@@ -95,7 +95,7 @@ if (!hasInterface && !isServer) then {
     } count _this;
 
     [{
-        [QGVAR(loadModules)] call bis_fnc_endLoadingScreen;
+        [QCGVAR(loadModules)] call bis_fnc_endLoadingScreen;
         disableUserInput false;
     }] call CFUNC(execNextFrame);
 

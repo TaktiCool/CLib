@@ -14,7 +14,7 @@
     None
 */
 private _allModulesNames = [];
-DUMP("--------------------------Start CLib Module Search---------------------------------");
+DUMP("--------------------------Start CLib Module Search---------------------------------")
 {
     private _modName = configName _x;
     DUMP("Mod Found: " + _modName)
@@ -22,7 +22,7 @@ DUMP("--------------------------Start CLib Module Search------------------------
     {
         private _moduleName = configName _x;
         private _fullModuleName = format ["%1/%2", _modName, _moduleName];
-        parsingNamespace setVariable [format [QGVAR(%1_dependency), _fullModuleName], getArray (_x >> "dependency")];
+        parsingNamespace setVariable [format [QCGVAR(%1_dependency), _fullModuleName], getArray (_x >> "dependency")];
         _allModulesNames pushBackUnique _fullModuleName;
 
         DUMP("Module Found: " + _moduleName)
@@ -34,4 +34,4 @@ DUMP("--------------------------Start CLib Module Search------------------------
 } count configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
 DUMP("allModuleNamesCached: " + str _allModulesNames)
 parsingNamespace setVariable [QGVAR(allModuleNamesCached), _allModulesNames];
-DUMP("--------------------------End CLib Module Search---------------------------------");
+DUMP("--------------------------End CLib Module Search---------------------------------")

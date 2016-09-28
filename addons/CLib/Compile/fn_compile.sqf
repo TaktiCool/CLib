@@ -32,7 +32,6 @@ private _fnc_scriptName = '%1';\
 scriptName _fnc_scriptName;\
 scopeName _fnc_scriptName + '_Main';\
 %2\
-\
 "
 
 #ifdef isDev
@@ -43,13 +42,15 @@ scopeName _fnc_scriptName + '_Main';\
 #else
     private _fncCode = parsingNamespace getVariable _functionVarName;
     if (isNil "_cachedFunction") then {
-        private _header = format [SCRIPTHEADER, _functionVarName, _debug];
+        private _header = format [SCRIPTHEADER, _functionVarName, DEBUGHEADER];
         private _funcString = _header + preprocessFileLineNumbers _functionPath;
         _funcString = _funcString call CFUNC(stripSqf);
 
         _fncCode = compileFinal _funcString;
     };
 #endif
+
+DUMP("Compile Function: " + _functionVarName)
 
 {
     _x setVariable [_functionVarName, _fncCode];
@@ -63,36 +64,24 @@ scopeName _fnc_scriptName + '_Main';\
     #define useCompression isNil {parsingNamespace getVariable (_functionVarName + "_Compressed")}
 #endif
 
+#ifdef isDev
+    #define compressionTestStage1 private _str = format ["Compress Functions: %1 %2 %3", _functionVarName, str ((count _compressedString / count _funcString) * 100), "%"];DUMP(_str)
+#else
+    #define compressionTestStage1 /* disabled */
+#endif
+#ifdef DEBUGFULL
+    #define compressionTestStage2 private _var = _compressedString call CFUNC(decompressString); DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _funcString)))
+#else
+    #define compressionTestStage2 /* disabled */
+#endif
+
 if (useCompression) then {
 
-    #define defaultCompression
+    private _compressedString = _funcString call CFUNC(compressString);
+    parsingNamespace setVariable [_functionVarName + "_Compressed", _compressedString];
 
-    #ifdef isDev
-        #undef defaultCompression
-        #define compressionTestStage1
-    #endif
-    #ifdef DEBUGFULL
-        #define compressionTestStage2
-    #endif
+    compressionTestStage1
+    compressionTestStage2
 
-    // stage one check how much Compression we get
-    #ifdef compressionTestStage1
-        private _compressedString = _funcString call CFUNC(compressString);
-        parsingNamespace setVariable [_functionVarName + "_Compressed", _compressedString];
-
-        private _str = format ["Compress Functions: %1 %2 %3", _functionVarName, str ((count _compressedString / count _funcString) * 100), "%"];
-        DUMP(_str)
-    #endif
-
-    // stage 2 Checks if the function is Damaged
-    #ifdef compressionTestStage2
-        private _var = _compressedString call CFUNC(decompressString);
-        DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _funcString)))
-    #else
-
-    // default only compresses
-    #ifdef defaultCompression
-        parsingNamespace setVariable [_functionVarName + "_Compressed", _funcString call CFUNC(compressString)];
-    #endif
 };
 nil

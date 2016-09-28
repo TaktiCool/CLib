@@ -22,12 +22,14 @@ GVAR(requiredFunctions) = [];
 private _requiredModules = [];
 private _fnc_addRequiredModule = {
     params ["_moduleName"];
-    _requiredModules pushBackUnique _moduleName;
-    private _dependencies = parsingNamespace getVariable [format [QGVAR(%1_dependency), _moduleName], []];
-    {
-        [_x] call _fnc_addRequiredModule;
-    } count _dependencies;
-    nil
+    private _i = _requiredModules pushBackUnique _moduleName;
+    if (_i != -1) then {
+        private _dependencies = parsingNamespace getVariable [format [QCGVAR(%1_dependency), _moduleName], []];
+        {
+            [_x] call _fnc_addRequiredModule;
+            nil
+        } count _dependencies;
+    };
 };
 
 {
@@ -50,7 +52,10 @@ LOG("Loaded Modules: " + str _this)
 if (isServer) then {
 
     // required Function that the Client needed
-    GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {(toLower(_x) find "_fnc_serverinit" < 0)};
+    GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {
+        (toLower(_x) find "_fnc_serverinit" < 0) &&
+        {!((parsingNamespace getVariable (_x + "_data")) select 2)}
+    };
 
     // Count requiredFunctions array and filter serverinit they dont need to sendet
     GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
@@ -88,9 +93,9 @@ if (isServer) then {
 };
 
 // Call all required function on the server.
-call CFUNC(callModules);
+call FUNC(callModules);
 
 // We need split up this to be sure that callModules is Done
 if (isServer) then {
-    call CFUNC(sendFunctionsLoop);
+    call FUNC(sendFunctionsLoop);
 };

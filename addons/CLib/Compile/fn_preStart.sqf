@@ -17,10 +17,16 @@ CLib_fnc_compileAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CL
 CLib_fnc_buildDependencyGraph = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Compile\fn_buildDependencyGraph.sqf";
 CLib_playerUID = "";
 
+#ifndef isDev
 if (isNil {parsingNamespace getVariable QCGVAR(allFunctionNamesCached)}) then {
     call CFUNC(readAllModules);
     call CFUNC(buildDependencyGraph);
     call CFUNC(readAllFunctions);
 };
+#else
+call CFUNC(readAllModules);
+call CFUNC(buildDependencyGraph);
+call CFUNC(readAllFunctions);
+#endif
 call CFUNC(compileAllFunctions);
 LOG("Reading and Compiling all Function and Modules Required: " + str ((diag_tickTime - _startTime) * 1000) + " ms")

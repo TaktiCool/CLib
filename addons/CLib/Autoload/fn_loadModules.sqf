@@ -40,6 +40,10 @@ if (hasInterface) then {
     CLib_Player = player;
     waitUntil {GVAR(playerUID) = getPlayerUID player; (GVAR(playerUID) != "")};
     waitUntil {!isNil QCFUNC(decompressString)};
+
+    // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
+    [QCGVAR(loadModules)] call bis_fnc_startLoadingScreen;
+    disableUserInput true;
 };
 
 // If the machine has CLib running and is the Server exit to the server LoadModules
@@ -52,17 +56,13 @@ if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
         endMission "LOSER";
     };
 
-    if (_this isEqualType [] && {count _this != 0}) then {
-        [CFUNC(loadModulesServer), _this] call CFUNC(directCall);
+    if (!(isNil "_this") && {_this isEqualType []} && {count _this != 0}) then {
+        [FUNC(loadModulesServer), _this] call CFUNC(directCall);
     } else {
-        [CFUNC(loadModulesServer), getArray (missionConfigFile >> (QPREFIX + "_Modules"))] call CFUNC(directCall);
+        [FUNC(loadModulesServer), getArray (missionConfigFile >> (QPREFIX + "_Modules"))] call CFUNC(directCall);
     };
 
 };
-
-// Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
-[QGVAR(loadModules)] call bis_fnc_startLoadingScreen;
-disableUserInput true;
 
 // Bind EH on client to compile the received function code. Collect all functions names to determine which need to be called later in an array.
 GVAR(requiredFunctions) = [];
@@ -111,7 +111,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
         DUMP("All Function Recieved, now call then")
 
         // Call all modules.
-        call CFUNC(callModules);
+        call FUNC(callModules);
     };
 };
 

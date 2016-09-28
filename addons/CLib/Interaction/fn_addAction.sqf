@@ -103,7 +103,7 @@ if (_onObject isEqualType "") then {_onObject = [_onObject];};
 if (_onObject isEqualType []) then {
     {
         GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded];
-        DUMP("addAction to " + str _x);
+        DUMP("addAction to " + str _x)
         false
     } count _onObject;
 };
@@ -117,5 +117,5 @@ if (_onObject isEqualType objNull) then {
     } else {
         GVAR(Interaction_Actions) pushBackUnique [_onObject, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded];
     };
-    DUMP("addAction to " + str _onObject);
+    DUMP("addAction to " + str _onObject)
 };

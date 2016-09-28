@@ -4,4 +4,4 @@ CGVAR(VersionInfo) = [getText (configFile >> "CfgPatches" >> QPREFIX >> "version
 publicVariable QCGVAR(VersionInfo);
 
 // We call the autoloader here. This starts the mod work.
-call CFUNC(autoloadEntryPoint);
+call EFUNC(Autoload,autoloadEntryPoint);

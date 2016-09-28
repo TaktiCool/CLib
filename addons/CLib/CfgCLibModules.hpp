@@ -41,11 +41,12 @@ class CfgCLibModules {
 
         MODULE(Autoload) {
             dependency[] = {"CLib/PerFrame"};
-            APIFNC(autoloadEntryPoint);
-            APIFNC(callModules);
+            FNC(autoloadEntryPoint);
+            FNC(callModules);
             APIFNC(loadModules);
-            APIFNC(sendFunctions);
-            APIFNC(sendFunctionsLoop);
+            FNC(loadModulesServer);
+            FNC(sendFunctions);
+            FNC(sendFunctionsLoop);
         };
 
         MODULE(ConfigCaching) {

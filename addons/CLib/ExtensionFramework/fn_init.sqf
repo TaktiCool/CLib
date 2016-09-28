@@ -42,7 +42,7 @@ if (isServer) then {
     DFUNC(log) = {
         params [["_log", "", [""]], ["_file", "", [""]]];
         _file = _file call CFUNC(sanitizeString);
-        "CLib" callExtension (format ["logging:%1:", _file] + _log); TODO
+        "CLib" callExtension (format ["logging:%1:", _file] + _log); // TODO
     };
 
     QGVAR(sendlogfile) addPublicVariableEventHandler {
