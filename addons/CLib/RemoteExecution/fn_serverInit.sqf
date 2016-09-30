@@ -15,5 +15,5 @@
 */
 
 QGVAR(remoteServerData) addPublicVariableEventHandler {
-    (_this select 1) call CFUNC(handleIncomeData);
+    (_this select 1) call FUNC(handleIncomeData);
 };

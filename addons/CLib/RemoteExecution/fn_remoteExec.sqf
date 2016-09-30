@@ -25,7 +25,7 @@ if !(GVAR(useRemoteFallback) || _forceUseFallBack) exitWith {
 // exit if the Target is only server
 if (_target isEqualTo 2) exitWith {
     if (isServer) then {
-         [_args, _function] call CFUNC(execute);
+        [_function, _args] call FUNC(execute);
     } else {
         GVAR(remoteExecCode) = [_args, _function];
         publicVariableServer  QGVAR(remoteExecCode);
@@ -34,19 +34,19 @@ if (_target isEqualTo 2) exitWith {
 
 // exit if the Target is Everyone and send it via PublicVariable to all Clients
 if (_target isEqualTo 0) exitWith {
-    [_args, _function] call FUNC(execute);
+    [_function, _args] call FUNC(execute);
     GVAR(remoteExecCode) = [_args, _function];
     publicVariable QGVAR(remoteExecCode);
 };
 
 // exit if the Object is Local
 if (_target isEqualType objNull && {local _target} ) exitWith {
-    [_args, _function] call FUNC(execute);
+    [_function, _args] call FUNC(execute);
 };
 
 // if it is the server we need to call the handleIncomeData directly else send it via publicVaraibleServer
 if (isServer) then {
-    [_target, _args, _function] call CFUNC(handleIncomeData);
+    [_target, _args, _function] call FUNC(handleIncomeData);
 } else {
     GVAR(remoteServerData) = [_target, _args, _target];
     publicVariableServer QGVAR(remoteServerData);

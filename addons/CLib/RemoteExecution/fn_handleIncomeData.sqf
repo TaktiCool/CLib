@@ -64,11 +64,11 @@ if !(_targets isEqualTo []) then {
     // make Targets Uniqe
     _targets = _targets arrayIntersect _targets;
 
-    GVAR(remoteExecCode) = [_args, _function];
+    GVAR(remoteExecCode) = [_function, _args];
 
     {
         if (_x == 2) then {
-            [_args, _function] call FUNC(execute);
+            [_function, _args] call FUNC(execute);
         } else {
             _x publicVariableClient QGVAR(remoteExecCode);
         };

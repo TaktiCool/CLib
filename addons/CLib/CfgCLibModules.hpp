@@ -174,6 +174,7 @@ class CfgCLibModules {
 
         MODULE(RemoteExecution) {
             FNC(execute);
+            FNC(init);
             FNC(handleIncomeData);
             APIFNC(remoteExec);
             FNC(serverInit);
