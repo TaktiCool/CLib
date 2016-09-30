@@ -15,7 +15,7 @@
 */
 
 // Storage for mutex functions
-GVAR(mutexCaches) = call CFUNC(createNamespace);
+GVAR(mutexCaches) = false call CFUNC(createNamespace);
 
 // EH which fires on server response
 [QGVAR(mutexLock), {

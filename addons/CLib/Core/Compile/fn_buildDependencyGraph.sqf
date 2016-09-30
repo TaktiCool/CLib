@@ -28,16 +28,20 @@ while {!(_modulesToSort isEqualTo [])} do {
     if (_dependencies isEqualTo []) then {
         _sortedModuleNames pushBack _moduleName;
         _modulesToSort deleteAt _i;
+        _i = _i mod ((count _modulesToSort) max 1);
     } else {
         private _dependenciesLoaded = true;
         {
-            if !(_x in _sortedModuleNames) exitWith {
+            if !(_x in _sortedModuleNames) then {
                 if !(_x in _modulesToSort) then {
                     private _str = format ["Missing Dependency in Module: %1, %2",_moduleName, _x];
                     LOG(_str)
+                    _dependenciesLoaded = true;
+                } else {
+                    _dependenciesLoaded = false;
                 };
-                _dependenciesLoaded = false;
             };
+            if (!_dependenciesLoaded) exitWith {};
             nil
         } count _dependencies;
 

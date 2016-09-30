@@ -14,7 +14,7 @@
     None
 */
 // Queue of clients who requested mutex executing
-GVAR(mutexes) = call CFUNC(createNamespace); // Entries are [currentClient, clientQueue, currentMutexTime]
+GVAR(mutexes) = false call CFUNC(createNamespace); // Entries are [currentClient, clientQueue, currentMutexTime]
 
 DFUNC(checkNextMutexClient) = {
     params ["_mutexId"];
@@ -61,7 +61,7 @@ DFUNC(checkNextMutexClient) = {
 // EH which fired if some client requests mutex executing
 [QGVAR(mutexRequest), {
     (_this select 0) params ["_clientObject", "_mutexId"];
-
+    
     private _mutex = [GVAR(mutexes), _mutexId, [0, [], 0]] call CFUNC(getVariable);
     _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 

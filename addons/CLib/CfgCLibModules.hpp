@@ -58,7 +58,7 @@ class CfgCLibModules {
         };
 
         MODULE(Events) {
-            dependency[] = {"CLib/PerFrame", "CLib/Namespaces", "CLib/RemoteExecution"/*, "CLib/TestFail"*/};
+            dependency[] = {"CLib/PerFrame", "CLib/Namespaces", "CLib/RemoteExecution"};
             APIFNC(addEventHandler);
             APIFNC(addIgnoredEventLog);
             FNC(clientInit);
@@ -147,6 +147,7 @@ class CfgCLibModules {
             APIFNC(mapGraphicsMouseButtonClick);
             APIFNC(mapGraphicsMouseMoving);
             APIFNC(mapGraphicsPosition);
+            APIFNC(nearestMapGraphicsGroup);
             APIFNC(removeMapGraphicsEventhandler);
             APIFNC(removeMapGraphicsGroup);
             APIFNC(TriggerMapGraphicsEvent);

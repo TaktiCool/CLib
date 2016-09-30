@@ -95,7 +95,7 @@ _condition = "[_target, _this, " + str _ignoredCanInteractConditions + "] call "
 _condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
 
 _callback = _callback call CFUNC(codeToString);
-_callback = compile (format ["[{%1}, _this] call %2;", _callback, QFUNC(directCall)]);
+_callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);
 
 if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};
 if (_onObject isEqualType "") then {_onObject = [_onObject];};
