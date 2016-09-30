@@ -13,7 +13,20 @@
     Returns:
     None
 */
-GVAR(EventNamespace) = call CFUNC(createNamespace);
+GVAR(EventNamespace) = false call CFUNC(createNamespace);
+
+GVAR(ignoredLogEventNames_0) = [];
+GVAR(ignoredLogEventNames_1) = [];
+
+{
+    _x call CFUNC(addIgnoredEventLog);
+    nil
+} count [
+    ["drawmapgraphics", 0],
+    ["eventadded", 1],
+    ["cursortargetchanged", 1],
+    ["playerinventorychanged", 1]
+];
 
 ["hideObject", {
     (_this select 0) params ["_object", "_value"];

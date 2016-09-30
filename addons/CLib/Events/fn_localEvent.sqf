@@ -18,8 +18,8 @@
 #ifdef isDev
     params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
 
-    // dont Log CLib_respawnui_updatecameratarget or drawmapgraphics to reduce Späm
-    if !(toLower(_eventName) in GVAR(ignoredLogEventNames_0)) then {
+    // dont Log to reduce Spam
+    if (!(toLower(_eventName) in GVAR(ignoredLogEventNames_0))) then {
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
         if (toLower(_eventName) in GVAR(ignoredLogEventNames_1)) then {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName)
