@@ -68,7 +68,7 @@ if !(_targets isEqualTo []) then {
 
     {
         if (_x == 2) then {
-            [_args, _function] call CFUNC(execute);
+            [_args, _function] call FUNC(execute);
         } else {
             _x publicVariableClient QGVAR(remoteExecCode);
         };

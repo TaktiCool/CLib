@@ -173,10 +173,10 @@ class CfgCLibModules {
         };
 
         MODULE(RemoteExecution) {
-            APIFNC(execute);
-            APIFNC(handleIncomeData);
+            FNC(execute);
+            FNC(handleIncomeData);
             APIFNC(remoteExec);
-            APIFNC(serverInit);
+            FNC(serverInit);
         };
 
         MODULE(Statemachine) {

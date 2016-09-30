@@ -34,14 +34,14 @@ if (_target isEqualTo 2) exitWith {
 
 // exit if the Target is Everyone and send it via PublicVariable to all Clients
 if (_target isEqualTo 0) exitWith {
-    [_args, _function] call CFUNC(execute);
+    [_args, _function] call FUNC(execute);
     GVAR(remoteExecCode) = [_args, _function];
     publicVariable QGVAR(remoteExecCode);
 };
 
 // exit if the Object is Local
 if (_target isEqualType objNull && {local _target} ) exitWith {
-    [_args, _function] call CFUNC(execute);
+    [_args, _function] call FUNC(execute);
 };
 
 // if it is the server we need to call the handleIncomeData directly else send it via publicVaraibleServer
