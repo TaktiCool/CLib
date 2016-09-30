@@ -50,6 +50,7 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
 
     if (GVAR(sortWaitArray)) then {
         GVAR(waitArray) sort true;
+        GVAR(sortWaitArray) = false;
     };
 
     private _delete = false;

@@ -24,66 +24,44 @@ private _hcInit = [];
 
 // Cycle through all available functions and determine whether to call them or not.
 {
-    // Client only functions.
-    if (toLower(_x) find "_fnc_clientinit" > 0) then {
-        _clientInit pushBack _x;
-    };
-    // Server only functions.
-    if (toLower(_x) find "_fnc_serverinit" > 0) then {
-        _serverInit pushBack _x;
-    };
-    // HC only functions.
-    if (toLower(_x) find "_fnc_hcinit" > 0) then {
-        _hcInit pushBack _x;
-    };
-    // Functions for both.
-    if (toLower(_x) find "_fnc_init" > 0) then {
-        _init pushBack _x;
-    };
-    if (toLower(_x) find "_fnc_postinit" > 0) then {
-        _postInit pushBack _x;
+    call {
+        private _name = toLower _x;
+        // Client only functions.
+        if (_name find "_fnc_clientinit" > 0) exitWith {
+            _clientInit pushBack _x;
+        };
+        // Server only functions.
+        if (_name find "_fnc_serverinit" > 0) exitWith {
+            _serverInit pushBack _x;
+        };
+        // HC only functions.
+        if (_name find "_fnc_hcinit" > 0) exitWith {
+            _hcInit pushBack _x;
+        };
+        // Functions for both.
+        if (_name find "_fnc_init" > 0) exitWith {
+            _init pushBack _x;
+        };
+        if (_name find "_fnc_postinit" > 0) exitWith {
+            _postInit pushBack _x;
+        };
     };
     DUMP("Read requiredFunctions: " + _x)
     nil
 } count GVAR(requiredFunctions);
 
 {
-    private _time = diag_tickTime;
-    _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
-    _time = diag_tickTime - _time;
-    LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
+    if (_x select 1) then {
+        {
+            private _time = diag_tickTime;
+            _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
+            _time = diag_tickTime - _time;
+            LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
+            nil
+        } count (_x select 0);
+    };
     nil
-} count _init;
-
-if (isServer) then {
-    {
-        private _time = diag_tickTime;
-        _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
-        _time = diag_tickTime - _time;
-        LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
-        nil
-    } count _serverInit;
-};
-
-if (hasInterface) then {
-    {
-        private _time = diag_tickTime;
-        _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
-        _time = diag_tickTime - _time;
-        LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
-        nil
-    } count _clientInit;
-};
-
-if (!hasInterface && !isServer) then {
-    {
-        private _time = diag_tickTime;
-        _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
-        _time = diag_tickTime - _time;
-        LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
-        nil
-    } count _hcInit;
-};
+} count [[_init, true], [_serverInit, isServer], [_clientInit, hasInterface], [_hcInit, !hasInterface && !isServer]];
 
 [{
     {
@@ -100,6 +78,9 @@ if (!hasInterface && !isServer) then {
     }] call CFUNC(execNextFrame);
 
 }, _postInit] call CFUNC(execNextFrame);
+
+
+
 
 if (didJip) then {
     QGVAR(jipQueue) addPublicVariableEventHandler {

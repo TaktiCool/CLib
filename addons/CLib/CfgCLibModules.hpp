@@ -7,6 +7,46 @@ class CfgCLibModules {
     class CLib {
         path = "\pr\CLib\addons\CLib";
 
+        MODULE(Core) {
+            dependency[] = {"CLib/Events"};
+            MODULE(Autoload) {
+                FNC(autoloadEntryPoint);
+                FNC(callModules);
+                APIFNC(loadModules);
+                FNC(loadModulesServer);
+                FNC(sendFunctions);
+                FNC(sendFunctionsLoop);
+            };
+
+            MODULE(Misc) {
+                APIFNC(addPerformanceCounter);
+                APIFNC(blurScreen);
+                APIFNC(cachedCall);
+                APIFNC(codeToString);
+                APIFNC(createPPEffect);
+                APIFNC(deleteAtEntry);
+                APIFNC(directCall);
+                APIFNC(disableUserInput);
+                // APIFNC(dumpPerformanceInformation); // FIXME
+                APIFNC(fileExist);
+                APIFNC(findSavePosition);
+                APIFNC(fixFloating);
+                APIFNC(fixPosition);
+                APIFNC(getFOV);
+                APIFNC(getNearUnits);
+                APIFNC(groupPlayers);
+                FNC(init);
+                APIFNC(name);
+                APIFNC(sanitizeString);
+                FNC(serverInit);
+                FNC(dumpPerformanceInformation);
+                APIFNC(setVariablePublic);
+            };
+            MODULE(MissionModuleLoader) {
+                FNC(postInit);
+            };
+        };
+
         MODULE(PerFrame) {
             dependency[] = {"CLib/Namespaces"};
             APIFNC(addPerframeHandler);
@@ -37,16 +77,6 @@ class CfgCLibModules {
             FNC(init);
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
-        };
-
-        MODULE(Autoload) {
-            dependency[] = {"CLib/PerFrame"};
-            FNC(autoloadEntryPoint);
-            FNC(callModules);
-            APIFNC(loadModules);
-            FNC(loadModulesServer);
-            FNC(sendFunctions);
-            FNC(sendFunctionsLoop);
         };
 
         MODULE(ConfigCaching) {
@@ -87,7 +117,7 @@ class CfgCLibModules {
         };
 
         MODULE(Interaction) {
-            dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
+            dependency[] = {"CLib/Events"};
             APIFNC(addAction);
             APIFNC(addCanInteractWith);
             APIFNC(addHoldAction);
@@ -124,32 +154,8 @@ class CfgCLibModules {
             APIFNC(unregisterMapControl);
         };
 
-        MODULE(Misc) {
-            dependency[] = {"CLib/Namespaces", "CLib/PerFrame", "CLib/Events"};
-            APIFNC(addPerformanceCounter);
-            APIFNC(blurScreen);
-            APIFNC(cachedCall);
-            APIFNC(codeToString);
-            APIFNC(createPPEffect);
-            APIFNC(deleteAtEntry);
-            APIFNC(directCall);
-            APIFNC(disableUserInput);
-            APIFNC(findSavePosition);
-            APIFNC(fixFloating);
-            APIFNC(fixPosition);
-            APIFNC(getFOV);
-            APIFNC(getNearUnits);
-            APIFNC(groupPlayers);
-            FNC(init);
-            APIFNC(name);
-            APIFNC(sanitizeString);
-            FNC(serverInit);
-            FNC(dumpPerformanceInformation);
-            APIFNC(setVariablePublic);
-        };
-
         MODULE(Mutex) {
-            dependency[] = {"CLib/Namespaces", "CLib/PerFrame", "CLib/Events"};
+            dependency[] = {"CLib/Events"};
             FNC(clientInit);
             APIFNC(mutex);
             FNC(serverInit);
@@ -166,7 +172,6 @@ class CfgCLibModules {
         };
 
         MODULE(RemoteExecution) {
-            dependency[] = {};
             APIFNC(execute);
             APIFNC(handleIncomeData);
             APIFNC(remoteExec);
@@ -200,7 +205,9 @@ class CfgCLibModules {
             APIFNC(getDefaultAnimation);
             FNC(init);
         };
+
         MODULE(Settings) {
+            dependency[] = {"CLib/Namespaces"};
             APIFNC(getSetting);
             FNC(init);
             APIFNC(loadSettings);

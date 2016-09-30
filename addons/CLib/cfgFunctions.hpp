@@ -33,12 +33,9 @@ class cfgFunctions {
     //init = "pr\CLib\addons\CLib\init.sqf";
     class CLib {
         class CLib {
-            file = "\pr\CLib\addons\CLib\Compile";
+            file = "\pr\CLib\addons\CLib\Core";
             class preInit: CLib_basePreFNC {};
             class preStart: CLib_basePreStartFNC {};
-        };
-        class CLib_Autoload {
-            file = "\pr\CLib\addons\CLib\Autoload";
             class postInit: CLib_basePostFNC {};
         };
     };
