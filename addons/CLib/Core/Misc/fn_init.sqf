@@ -38,4 +38,4 @@ if (hasInterface) then {
     }] call CFUNC(addEventhandler);
 };
 
-diag_log format ["[CLib - Version]: Server Version %1", GVAR(VersionInfo)];
+diag_log format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
