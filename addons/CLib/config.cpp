@@ -877,4 +877,4 @@ class CfgPatches {
 
 #include "CfgCLibModules.hpp"
 
-#include "\pr\CLib\addons\CLib\SimpleObjectFramework\CfgCLibSimpleObject.hpp"
+#include "SimpleObjectFramework\CfgCLibSimpleObject.hpp"
