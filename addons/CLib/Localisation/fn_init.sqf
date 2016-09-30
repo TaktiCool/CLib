@@ -52,10 +52,11 @@ if (isServer) then {
             _sendVariable pushBack [_x, _var];
             nil
         } count ([LVAR(ServerNamespace), QLVAR(allLocalisations)] call CFUNC(allVariables));
-
+        /*
         if (useCompression) then {
             _sendVariable = [(str _sendVariable), "LZW"] call CFUNC(compressString);
         };
+        */
         [QLVAR(receive), _player, _sendVariable] call CFUNC(targetEvent);
     }] call CFUNC(addEventhandler);
 };
