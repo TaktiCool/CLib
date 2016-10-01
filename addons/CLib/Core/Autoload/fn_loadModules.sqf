@@ -46,6 +46,14 @@ if (hasInterface) then {
     disableUserInput true;
 };
 
+private _cfg = missionConfigFile >> (QPREFIX + "_Modules");
+
+if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
+    endLoadingScreen;
+    disableUserInput false;
+    LOG("No CLib Modules will get Loaded in the mission")
+};
+
 // If the machine has CLib running and is the Server exit to the server LoadModules
 if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
@@ -56,12 +64,11 @@ if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
         endMission "LOSER";
     };
 
-    if (!(isNil "_this") && {_this isEqualType []} && {count _this != 0}) then {
+    if (!(isNil "_this") && {!(_this isEqualTo [])}) then {
         [FUNC(loadModulesServer), _this] call CFUNC(directCall);
     } else {
-        [FUNC(loadModulesServer), getArray (missionConfigFile >> (QPREFIX + "_Modules"))] call CFUNC(directCall);
+        [FUNC(loadModulesServer), getArray _cfg] call CFUNC(directCall);
     };
-
 };
 
 // Bind EH on client to compile the received function code. Collect all functions names to determine which need to be called later in an array.

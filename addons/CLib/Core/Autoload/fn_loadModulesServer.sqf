@@ -68,7 +68,7 @@ if (isServer) then {
         // send all Functions if mission Started was not triggered jet
         if (isNil QGVAR(missionStartedTriggered)) exitWith {
             {
-                [_x, _clientID, _forEachIndex] call CFUNC(sendFunctions);
+                [_x, _clientID, _forEachIndex] call FUNC(sendFunctions);
             } forEach GVAR(RequiredFncClient);
         };
 
