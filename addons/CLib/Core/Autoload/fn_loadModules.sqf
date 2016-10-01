@@ -79,11 +79,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
     // Compile the function code and assign it.
 
     _functionCode = _functionCode call CFUNC(decompressString);
-    #ifdef isDev
-        _functionCode = compile _functionCode;
-    #else
-        _functionCode = compileFinal _functionCode;
-    #endif
+    _functionCode = cmp _functionCode;
 
     {
         if (isNil {(_x getVariable _functionVarName)}) then {

@@ -45,7 +45,7 @@ private _fnc_readFunction = {
     private _name = configName _config;
     private _api = (getNumber (_config >> "api") isEqualTo 1);
     private _onlyServer = (getNumber (_config >> "onlyServer") isEqualTo 1);
-    if ((toLower _name) find "_fnc_serverinit" < 0) then {
+    if (((toLower _name) find "serverinit") > -1) then {
         _onlyServer = true;
     };
 
@@ -54,7 +54,7 @@ private _fnc_readFunction = {
 
     parsingNamespace setVariable [_functionName + "_data", [_folderPath, format ["%1/%2", _modName, _moduleName], _onlyServer]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
-    DUMP("Function Found: " + _functionName + " in Path: " + _folderPath)
+    DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer)
 };
 
 

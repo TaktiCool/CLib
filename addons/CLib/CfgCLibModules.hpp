@@ -9,6 +9,9 @@ class CfgCLibModules {
 
         MODULE(Core) {
             dependency[] = {"CLib/Events"};
+
+            FNC(init);
+
             MODULE(Autoload) {
                 FNC(autoloadEntryPoint);
                 FNC(callModules);
@@ -35,13 +38,13 @@ class CfgCLibModules {
                 APIFNC(getFOV);
                 APIFNC(getNearUnits);
                 APIFNC(groupPlayers);
-                FNC(init);
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 FNC(serverInit);
                 FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
             };
+
             MODULE(MissionModuleLoader) {
                 FNC(postInit);
             };

@@ -17,7 +17,7 @@
 #ifdef disableCompression
     #define useCompression false
 #else
-    #define useCompression GVAR(useFunctionCompression)
+    #define useCompression CGVAR(useFunctionCompression)
 #endif
 
 

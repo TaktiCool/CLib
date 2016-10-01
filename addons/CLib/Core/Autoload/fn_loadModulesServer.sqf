@@ -49,53 +49,45 @@ LOG("Loaded Modules: " + str _this)
 } count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
 
 // EH for client registration. Starts transmission of function code.
-if (isServer) then {
+// required Function that the Client needed
+GVAR(RequiredFncClient) = GVAR(requiredFunctions) select { !((parsingNamespace getVariable (_x + "_data")) select 2) };
 
-    // required Function that the Client needed
-    GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {
-        (toLower(_x) find "_fnc_serverinit" < 0) &&
-        {!((parsingNamespace getVariable (_x + "_data")) select 2)}
-    };
+// Count requiredFunctions array and filter serverinit they dont need to sendet
+GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
 
-    // Count requiredFunctions array and filter serverinit they dont need to sendet
-    GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
+QGVAR(registerClient) addPublicVariableEventHandler {
 
-    QGVAR(registerClient) addPublicVariableEventHandler {
+    // Determine client id by provided object (usually the player object).
+    private _clientID = owner (_this select 1);
 
-        // Determine client id by provided object (usually the player object).
-        private _clientID = owner (_this select 1);
+    DUMP("Player Joined: " + str _clientID)
 
-        // send all Functions if mission Started was not triggered jet
-        if (isNil QGVAR(missionStartedTriggered)) exitWith {
-            {
-                [_x, _clientID, _forEachIndex] call FUNC(sendFunctions);
-            } forEach GVAR(RequiredFncClient);
-        };
-
-        if (isNil QGVAR(SendFunctionsUnitCache)) then {
-            GVAR(SendFunctionsUnitCache) = [[_clientID, +GVAR(RequiredFncClient), 0]];
-        } else {
-            GVAR(SendFunctionsUnitCache) pushBack [_clientID, +GVAR(RequiredFncClient), 0];
-        };
-
-    };
-
-    QGVAR(unregisterClient) addPublicVariableEventHandler {
-        private _clientID = owner (_this select 1);
+    // send all Functions if mission Started was not triggered jet
+    if (isNil QGVAR(missionStartedTriggered)) exitWith {
         {
-            if ((_x select 0) == _clientID) then {
-                GVAR(SendFunctionsUnitCache) set [_forEachIndex, objNull];
-            };
-        } forEach GVAR(SendFunctionsUnitCache);
+            [_x, _clientID, _forEachIndex] call FUNC(sendFunctions);
+        } forEach GVAR(RequiredFncClient);
+    };
 
-        GVAR(SendFunctionsUnitCache) = GVAR(SendFunctionsUnitCache) - [];
+    if (isNil QGVAR(SendFunctionsUnitCache)) then {
+        GVAR(SendFunctionsUnitCache) = [[_clientID, +GVAR(RequiredFncClient), 0]];
+    } else {
+        GVAR(SendFunctionsUnitCache) pushBack [_clientID, +GVAR(RequiredFncClient), 0];
     };
 };
 
+QGVAR(unregisterClient) addPublicVariableEventHandler {
+    private _clientID = owner (_this select 1);
+    {
+        if ((_x select 0) == _clientID) then {
+            GVAR(SendFunctionsUnitCache) set [_forEachIndex, objNull];
+        };
+    } forEach GVAR(SendFunctionsUnitCache);
+
+    GVAR(SendFunctionsUnitCache) = GVAR(SendFunctionsUnitCache) - [objNull];
+};
 // Call all required function on the server.
 call FUNC(callModules);
 
 // We need split up this to be sure that callModules is Done
-if (isServer) then {
-    call FUNC(sendFunctionsLoop);
-};
+call FUNC(sendFunctionsLoop);
