@@ -18,8 +18,8 @@
     Function Return <Any>
 */
 params ["_function", "_args"];
-if (!isNil _function) then {
-    _args call (missionNamespace getVariable _function);
+if (!isNil _function && {!((currentNamespace getVariable _function) isEqualType {})}) then {
+    _args call (currentNamespace getVariable _function);
 } else {
-    call compile format ["(_args select 0) %1 (_args select 1)", _function];
+    LOG("ERROR: Unknown Function: " + _function)
 };

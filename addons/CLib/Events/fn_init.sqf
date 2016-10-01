@@ -109,21 +109,22 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _unit moveInTurret [_vehicle, _turretPath];
 }] call CFUNC(addEventHandler);
+["missionStarted", {
+    GVAR(entities) = [];
+    [{
 
-GVAR(entities) = [];
-[{
+        private _entities = ((entities "") - allUnits) + allUnits;
 
-    private _entities = ((entities "") - allUnits) + allUnits;
+        if !(_entities isEqualTo GVAR(entities)) then {
+            {
+                if !(_x getVariable [QGVAR(isProcessed), false] || _x isKindOf "Animal" || _x isKindOf "Logic") then {
+                    ["entityCreated", _x] call CFUNC(localEvent);
+                    _x setVariable [QGVAR(isProcessed), true];
+                };
+                nil
+            } count (_entities - GVAR(entities));
 
-    if !(_entities isEqualTo GVAR(entities)) then {
-        {
-            if !(_x getVariable [QGVAR(isProcessed), false] || _x isKindOf "Animal" || _x isKindOf "Logic") then {
-                ["entityCreated", _x] call CFUNC(localEvent);
-                _x setVariable [QGVAR(isProcessed), true];
-            };
-            nil
-        } count (_entities - GVAR(entities));
-
-        GVAR(entities) = _entities;
-    };
-}, 0.1, []] call CFUNC(addPerFrameHandler);
+            GVAR(entities) = _entities;
+        };
+    }, 0.1, []] call CFUNC(addPerFrameHandler);
+}] call CFUNC(addEventHandler);
