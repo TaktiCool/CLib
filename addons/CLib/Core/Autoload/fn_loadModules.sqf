@@ -42,7 +42,7 @@ if (hasInterface) then {
     waitUntil {!isNil QCFUNC(decompressString)};
 
     // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
-    [QCGVAR(loadModules)] call bis_fnc_startLoadingScreen;
+    // [QCGVAR(loadModules)] call bis_fnc_startLoadingScreen;
     disableUserInput true;
 };
 

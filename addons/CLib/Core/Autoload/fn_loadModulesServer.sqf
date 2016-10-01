@@ -60,8 +60,6 @@ QGVAR(registerClient) addPublicVariableEventHandler {
     // Determine client id by provided object (usually the player object).
     private _clientID = owner (_this select 1);
 
-    DUMP("Player Joined: " + str _clientID)
-
     // send all Functions if mission Started was not triggered jet
     if (isNil QGVAR(missionStartedTriggered)) exitWith {
         {

@@ -18,8 +18,8 @@
     Function Return <Any>
 */
 params ["_function", "_args"];
-if (!isNil _function && {!((currentNamespace getVariable _function) isEqualType {})}) then {
-    _args call (currentNamespace getVariable _function);
-} else {
+if (isNil {currentNamespace getVariable _function} && {((currentNamespace getVariable _function) isEqualType {})}) then {
     LOG("ERROR: Unknown Function: " + _function)
+} else {
+    _args call (currentNamespace getVariable _function);
 };
