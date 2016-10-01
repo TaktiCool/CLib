@@ -38,7 +38,7 @@ if (hasInterface) then {
     };
     waitUntil {!isNull player};
     CLib_Player = player;
-    waitUntil {GVAR(playerUID) = getPlayerUID player; (GVAR(playerUID) != "")};
+    waitUntil {CGVAR(playerUID) = getPlayerUID player; (CGVAR(playerUID) != "")};
     waitUntil {!isNil QCFUNC(decompressString)};
 
     // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
