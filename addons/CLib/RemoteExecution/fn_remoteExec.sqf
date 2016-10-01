@@ -27,15 +27,15 @@ if (_target isEqualTo 2) exitWith {
     if (isServer) then {
         [_function, _args] call FUNC(execute);
     } else {
-        GVAR(remoteExecCode) = [_args, _function];
-        publicVariableServer  QGVAR(remoteExecCode);
+        GVAR(remoteExecCode) = [_function, _args];
+        publicVariableServer QGVAR(remoteExecCode);
     };
 };
 
 // exit if the Target is Everyone and send it via PublicVariable to all Clients
 if (_target isEqualTo 0) exitWith {
     [_function, _args] call FUNC(execute);
-    GVAR(remoteExecCode) = [_args, _function];
+    GVAR(remoteExecCode) = [_function, _args];
     publicVariable QGVAR(remoteExecCode);
 };
 
