@@ -74,10 +74,13 @@ if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
 GVAR(requiredFunctions) = [];
 QGVAR(receiveFunction) addPublicVariableEventHandler {
     (_this select 1) params ["_functionVarName", "_functionCode", "_progress"];
-    DUMP("Function Recieved: " + _functionVarName)
-    // Compile the function code and assign it.
 
-    _functionCode = _functionCode call CFUNC(decompressString);
+    DUMP("Function Recieved: " + _functionVarName)
+
+    // Compile the function code and assign it.
+    if (CGVAR(useFunctionCompression)) then {
+        _functionCode = _functionCode call CFUNC(decompressString);
+    };
     _functionCode = cmp _functionCode;
 
     {
