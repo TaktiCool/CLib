@@ -32,6 +32,7 @@ class CfgCLibModules {
                 APIFNC(disableUserInput);
                 // APIFNC(dumpPerformanceInformation); // FIXME
                 APIFNC(fileExist);
+                APIFNC(flatConfigPath);
                 APIFNC(findSavePosition);
                 APIFNC(fixFloating);
                 APIFNC(fixPosition);
@@ -109,6 +110,9 @@ class CfgCLibModules {
 
         MODULE(Gear) {
             dependency[] = {};
+            APIFNC(loadLoadout);
+            APIFNC(applyLoadout);
+            FNC(init);
             APIFNC(addContainer);
             APIFNC(addItem);
             APIFNC(addMagazine);
