@@ -56,7 +56,7 @@ private _hcInit = [];
             private _time = diag_tickTime;
             _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
             _time = diag_tickTime - _time;
-            LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
+            LOG("Server Module Call: " + _x + " (" + str(_time*1000) +" ms)")
             nil
         } count (_x select 0);
     };
@@ -68,7 +68,7 @@ private _hcInit = [];
         private _time = diag_tickTime;
         _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
         _time = diag_tickTime - _time;
-        LOG("Call: " + _x + " (" + str(_time*1000) +" ms)")
+        LOG("Server Module Call: " + _x + " (" + str(_time*1000) +" ms)")
         nil
     } count _this;
 
@@ -78,8 +78,6 @@ private _hcInit = [];
     }] call CFUNC(execNextFrame);
 
 }, _postInit] call CFUNC(execNextFrame);
-
-
 
 
 if (didJip) then {

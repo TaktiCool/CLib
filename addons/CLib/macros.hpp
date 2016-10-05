@@ -8,6 +8,7 @@
 #ifdef isDev
     #define disableCompression
 #endif
+
 #ifdef DEBUGFULL
     #undef disableCompression
 #endif
