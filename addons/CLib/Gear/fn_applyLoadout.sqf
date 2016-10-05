@@ -30,14 +30,11 @@ private _fnc_do = {
     };
 };
 
-removeAllItems _unit;
-removeAllAssignedItems _unit;
-
 private ["_items", "_item", "_i"];
 
 // Remove Actions
 ["removeAllWeapons", { if (_item isEqualTo 1) then { removeAllWeapons _unit; }; }] call _fnc_do;
-["removeAllItems", { if ((_item isEqualTo 1) then { removeAllItems _unit; }; }] call _fnc_do;
+["removeAllItems", { if (_item isEqualTo 1) then { removeAllItems _unit; }; }] call _fnc_do;
 ["removeAllAssingedItems", { if (_item isEqualTo 1) then { removeAllAssignedItems _unit; }; }] call _fnc_do;
 
 
