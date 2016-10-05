@@ -65,5 +65,12 @@
     #define PERFORMANCECOUNTER_END(var1) /* Performance Counter disabled */
 #endif
 
-#define LOCVAR(var) TRIPLE(DOUBLE(STR,PREFIX),MODULE,var)
-#define LOC(var) var call CFUNC(readLocalization);
+#define ELSTRING(var1,var2) TRIPLE(DOUBLE(STR,PREFIX),var1,var2)
+#define LSTRING(var) ELSTRING(MODULE,var)
+
+#define QLSTRING(var) QUOTE(LSTRING(var))
+#define QELSTRING(var1,var2) QUOTE(ELSTRING(var1,var2))
+
+#define LOC(var) var call CFUNC(readLocalisation)
+
+#define MLOC(var) LOC(QLSTRING(var))
