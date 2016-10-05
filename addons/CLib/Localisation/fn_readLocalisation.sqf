@@ -14,4 +14,13 @@
     Localisted Text <String>
 */
 params [["_locaName", "STR_CLib_ERROR"]];
-[LVAR(ClientNamespace), _locaName, "Error"] call CFUNC(getVariable);
+
+#ifdef isDev
+    private _text = [GVAR(ClientNamespace), _locaName, "Error"] call CFUNC(getVariable);
+    if (_text isEqualTo "Error") then {
+        LOG("Error Localisation not Found: " + _locaName)
+    };
+    _text
+#else
+    [GVAR(ClientNamespace), _locaName, "Error"] call CFUNC(getVariable);
+#endif

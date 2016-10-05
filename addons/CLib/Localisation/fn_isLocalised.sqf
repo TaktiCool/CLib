@@ -14,6 +14,6 @@
     is Localised <Bool>
 */
 params [["_locaName", "STR_CLib_ERROR"]];
-private _temp = LVAR(ClientNamespace) getVariable _locaName;
+private _temp = GVAR(ClientNamespace) getVariable _locaName;
 
 !isNil "_temp";
