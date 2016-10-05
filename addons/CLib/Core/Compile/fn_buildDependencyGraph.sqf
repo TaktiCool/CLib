@@ -20,7 +20,7 @@ private _i = 0;
 DUMP("Modules To Sort: " + str _modulesToSort)
 while {!(_modulesToSort isEqualTo [])} do {
     private _moduleName = _modulesToSort select _i;
-    DUMP("_i: " + str _i)
+    // DUMP("_i: " + str _i)
     DUMP("ModuleName: " + str _moduleName)
     private _dependencies = parsingNamespace getVariable (format [QCGVAR(%1_dependency), _moduleName]);
 
