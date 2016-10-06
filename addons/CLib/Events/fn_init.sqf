@@ -109,22 +109,37 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _unit moveInTurret [_vehicle, _turretPath];
 }] call CFUNC(addEventHandler);
+
 ["missionStarted", {
-    GVAR(entities) = [];
-    [{
 
-        private _entities = ((entities "") - allUnits) + allUnits;
+    GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
-        if !(_entities isEqualTo GVAR(entities)) then {
-            {
-                if !(_x getVariable [QGVAR(isProcessed), false] || _x isKindOf "Animal" || _x isKindOf "Logic") then {
-                    ["entityCreated", _x] call CFUNC(localEvent);
-                    _x setVariable [QGVAR(isProcessed), true];
-                };
-                nil
-            } count (_entities - GVAR(entities));
+    [GVAR(entityCreatedSM), "init", {
+        GVAR(entitiesCached) = [];
+        GVAR(entities) = [];
+        "fillEntitiesCheck";
+    }] call CFUNC(addStatemachineState);
 
-            GVAR(entities) = _entities;
+    [GVAR(entityCreatedSM), "fillEntitiesCheck", {
+        GVAR(entities) = (((entities "") - allUnits) + allUnits) - GVAR(entitiesCached);
+        GVAR(lastFilledEntities) = diag_frameNo + 15;
+        GVAR(entitiesCached) append GVAR(entities);
+        ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
+    }] call CFUNC(addStatemachineState);
+
+    [GVAR(entityCreatedSM), "checkObject", {
+        private _obj = GVAR(entities) deleteAt 0;
+        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
+            ["entityCreated", _obj] call CFUNC(localEvent);
+            _obj setVariable [QGVAR(isProcessed), true];
         };
-    }, 0.1, []] call CFUNC(addPerFrameHandler);
+        ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
+    }] call CFUNC(addStatemachineState);
+
+    [GVAR(entityCreatedSM), "wait", {
+        ["wait", "fillEntitiesCheck"] select (diag_frameNo - (GVAR(lastFilledEntities)) >= 0); // only Fill every min 6 Frames the Cache for checking
+    }] call CFUNC(addStatemachineState);
+
+    [GVAR(entityCreatedSM)] call CFUNC(startStatemachine);
+
 }] call CFUNC(addEventHandler);
