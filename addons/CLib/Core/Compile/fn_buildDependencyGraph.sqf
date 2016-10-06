@@ -55,4 +55,5 @@ while {!(_modulesToSort isEqualTo [])} do {
     };
 };
 
+DUMP("Sorted Modules: " + str _sortedModuleNames)
 parsingNamespace setVariable [QGVAR(allModuleNamesCached), _sortedModuleNames];

@@ -19,7 +19,7 @@
 // Find all functions which are part of the requested modules and store them in an array.
 GVAR(requiredFunctions) = [];
 
-private _requiredModules = [];
+private _requiredModules = ["clib"];
 private _fnc_addRequiredModule = {
     params ["_moduleName"];
     private _i = _requiredModules pushBackUnique _moduleName;
@@ -37,13 +37,16 @@ private _fnc_addRequiredModule = {
     nil
 } count _this;
 
+_requiredModules = _requiredModules apply { toLower _x; };
+
 LOG("Loaded Modules: " + str _this)
 
 {
     private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
+    private _fullFunctionModName = (parsingNamespace getVariable (_x + "_data")) select 3;
     // Push the function name on the array if its in the requested module list.
-    if (_fullFunctionModuleName in _requiredModules) then {
-        GVAR(requiredFunctions) pushBack _x;
+    if (_fullFunctionModuleName in _requiredModules || _fullFunctionModName in _requiredModules) then {
+        GVAR(requiredFunctions) pushBackUnique _x;
     };
     nil
 } count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));

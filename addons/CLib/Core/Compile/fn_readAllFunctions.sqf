@@ -52,7 +52,7 @@ private _fnc_readFunction = {
     private _functionName = format [(["%1_%2_fnc_%3", "%1_fnc_%3"] select _api), _modName, _moduleName, _name];
     private _folderPath = format ["%1\%2\fn_%3.sqf", _modPath, _modulePath, _name];
 
-    parsingNamespace setVariable [_functionName + "_data", [_folderPath, format ["%1/%2", _modName, _moduleName], _onlyServer]];
+    parsingNamespace setVariable [_functionName + "_data", [_folderPath, format ["%1/%2", _modName, _moduleName], _onlyServer, _modName]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer)
 };
