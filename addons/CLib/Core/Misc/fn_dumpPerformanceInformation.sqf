@@ -28,7 +28,7 @@ private ["_var", "_unit", "_fnc_outputText", "_text"];
 private _fnc_outputText = {
     if (count (_this select 0) > 1000) exitWith {};
     diag_log text (_this select 0);
-    GVAR(sendlogfile) = [(_this select 0), "PERFORMACE_DUMP_" + getPlayerUID Clib_Player];
+    GVAR(sendlogfile) = [(_this select 0), "PERFORMACE_DUMP_" + getPlayerUID CLib_Player];
     publicVariableServer QGVAR(sendlogfile);
 };
 
@@ -62,8 +62,8 @@ _text = format ["
 ------Player------
 typeOf = %1
 animationState = %2",
-if (isNull CLib_Player) then {"null"} else {typeOf Clib_Player},
-if (isNull Clib_Player) then {"null"} else {animationState Clib_Player}];
+if (isNull CLib_Player) then {"null"} else {typeOf CLib_Player},
+if (isNull CLib_Player) then {"null"} else {animationState CLib_Player}];
 [_text] call _fnc_outputText;
 
 
