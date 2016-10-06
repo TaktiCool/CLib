@@ -122,11 +122,12 @@ GVAR(groupUnits) = [];
 // Import the vanilla events in the event system and provide a permanent zeus compatible player.
 {
     // The event has the same name and data as the vanilla version.
-    private _code = compile format ["[""%1"", _this] call %2", _x, QFUNC(localEvent)];
+    private _code = compile format ["[""%1"", _this] call %2", _x, QCFUNC(localEvent)];
 
     // Bind it to the current player and store the index to delete it.
     private _index = CLib_Player addEventHandler [_x, _code];
-
+    DUMP("Eventhandler Added: " +
+    _x)
     // If the player changes remove the old EH and bind a new one.
     ["playerChanged", {
         params ["_data", "_params"];
@@ -138,7 +139,7 @@ GVAR(groupUnits) = [];
 
         // Some EH get rebound automatically on death. To prevent double EH we remove EH from new player first.
         _currentPlayer removeEventHandler [_name, _index];
-
+        DUMP("Eventhandler Added To New Player: " + _name)
         // Bind a new one and update the index in the params.
         _params set [2, _currentPlayer addEventHandler [_name, _code]];
     }, [_x, _code, _index]] call CFUNC(addEventHandler);
