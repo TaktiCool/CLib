@@ -30,7 +30,7 @@ private _fnc_compileMissionFunction = {
     };\
     private _fnc_scriptName = '%1';\
     scriptName _fnc_scriptName;\
-    scopeName _fnc_scriptName + '_Main';\
+    scopeName (_fnc_scriptName + '_Main');\
     %2\
     "
 
