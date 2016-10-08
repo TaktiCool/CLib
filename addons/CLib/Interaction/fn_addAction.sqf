@@ -11,14 +11,14 @@
     0: the title of the action. <String, Code>
     1: the object (type) which the action should be added to. <Object, Array, String>
     2: the distance in which the action is visible. <Number>
-    3: the condition which is evaluated on every frame (if play is in range) to determine whether the action is visible. <String, Cde>
+    3: the condition which is evaluated on every frame (if player is in range) to determine whether the action is visible. <String, Code>
     4: the callback which gets called when the action is activated. <Code>
     5: the arguments which get passed to the callback. <Array> (Default: [])
 
     0: the title of the action. <String, Code>
     1: the object (type) which the action should be added to. <Object, Array, String>
     2: the distance in which the action is visible. <Number>
-    3: the condition which is evaluated on every frame (if play is in range) to determine whether the action is visible. <String, Cde>
+    3: the condition which is evaluated on every frame (if player is in range) to determine whether the action is visible. <String, Code>
     4: the callback which gets called when the action is activated. <Code>
     5: optional named parameters e.g. ["parameterName", parameterValue, ...] <Array>
         Available parameter:
