@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Trigger Event on a Traget
+    Trigger Event on a Target
 
     Parameter(s):
     0: Event Name <String>
