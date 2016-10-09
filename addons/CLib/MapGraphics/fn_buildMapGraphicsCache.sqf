@@ -1,13 +1,18 @@
 #include "macros.hpp"
 /*
     Comunity Lib - CLib
+
     Author: BadGuy
+
     Description:
     Updates the MapGraphicsCache
+
     Parameter(s):
-    -
+    None
+
     Returns:
-    -
+    None
+
 */
 params ['_map'];
 private _cache = [];

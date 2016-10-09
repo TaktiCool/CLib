@@ -10,9 +10,6 @@
     Parameter(s):
     0: Map <Control>
 
-    Remarks:
-    None
-
     Returns:
     None
 */
