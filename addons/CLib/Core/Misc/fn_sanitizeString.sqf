@@ -10,7 +10,7 @@
     Parameter(s):
     0: The string to sanitize <String>
     
-    //TODO: improve
+    //TODO improve
 
     Returns:
     0: The sanitized string <String>
