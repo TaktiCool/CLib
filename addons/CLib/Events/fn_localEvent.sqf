@@ -37,7 +37,7 @@ if !(isNil "_eventArray") then {
         if !(isNil "_x") then {
             _x params ["_eventFunctions", "_data"];
             if (_eventFunctions isEqualType "") then {
-                _eventFunctions = parsingNamespace getVariable [_eventFunctions, {}];
+                _eventFunctions = parsingNamespace getVariable [_eventFunctions, {LOG("ERROR: Function call Over Eventhandler Dont Exist: " + _eventFunctions)}];
             };
             [_args, _data] call _eventFunctions;
         };
