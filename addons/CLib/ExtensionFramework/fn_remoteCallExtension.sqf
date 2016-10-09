@@ -18,4 +18,4 @@
     Returns:
     None
 */
-["extensionRequest", [_this, PRA3_Player]] call CFUNC(serverEvent);
+["extensionRequest", [_this, CLib_Player]] call CFUNC(serverEvent);
