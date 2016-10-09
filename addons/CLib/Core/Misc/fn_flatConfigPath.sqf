@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    this function fix a issue where the if you str a config and dont append the complet file Path
+    This function fixes an issue occuring when using str on a config without appending the complete file path
 
     Parameter(s):
     0: Argument <Type>
