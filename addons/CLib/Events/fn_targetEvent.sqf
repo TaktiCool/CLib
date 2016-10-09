@@ -5,11 +5,11 @@
     Author: joko // Jonas
 
     Description:
-    Trigger Event on a Traget
+    Trigger Event on a Target
 
     Parameter(s):
     0: Event Name <String>
-    1: Traget <Object, Number, String, Array>
+    1: Target <Object, Number, String, Array>
     2: Arguments <Any> (default: nil)
 
     Returns:
