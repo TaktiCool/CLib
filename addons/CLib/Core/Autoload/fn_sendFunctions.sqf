@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Appends a unit to the SendFunctions queue if the mission is already triggered otherwise it simply pushes the functions
+    Build a recieveFunctionVariable and transfers it to the client
 
     Parameter(s):
     0: Client UID <Number>
