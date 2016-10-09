@@ -31,6 +31,7 @@ class CfgCLibModules {
                 APIFNC(directCall);
                 APIFNC(disableUserInput);
                 // APIFNC(dumpPerformanceInformation); // FIXME
+                APIFNC(getPos);
                 APIFNC(fileExist);
                 APIFNC(flatConfigPath);
                 APIFNC(findSavePosition);
