@@ -5,17 +5,17 @@
     Author: joko // Jonas
 
     Description:
-    get All Near Units even in Vehicles
+    Gets all near units - even in vehicles
 
     Parameter(s):
     0: Postion <Position, Object>
-    1: Raduis <Number>
+    1: Radius <Number>
 
     Remarks:
-    the cache can be rest with the Event CLib_clearUnits
+    The cache can be reset with the Event CLib_clearUnits
 
     Returns:
-    All Near units <Array<Object>>
+    All near units <Array<Object>>
 */
 params ["_postion", "_radius"];
 [format [QGVAR(nearUnits_%1), _radius], {
