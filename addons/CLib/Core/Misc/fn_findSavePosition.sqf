@@ -5,13 +5,13 @@
     Author: joko // Jonas
 
     Description:
-    this Function is a Fail Save Wraper Function for findEmptyPosition
-    Find a Save Postion for a Unit, this function everytime return a Position
+    This function is a failsave wrapper function for findEmptyPosition.
+    Finds a save postion for a unit - this function always returns a Position
 
     Parameter(s):
-    0: Postion <Array>
+    0: Position <Array>
     1: Radius <Number>
-    2: minimal Radui <Number> (Default: 0)
+    2: Minimal Radius <Number> (Default: 0)
     2: Vehicle Class <String> (Default: Nil)
 
     Returns:
