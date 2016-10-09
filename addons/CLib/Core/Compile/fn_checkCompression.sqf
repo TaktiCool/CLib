@@ -5,13 +5,13 @@
     Author: joko // Jonas
 
     Description:
-    Check if all Compression work right
+    Checks if all compression types work properly
 
     Parameter(s):
     0: UnCompressed String <String>
 
     Returns:
-    fail Compression <Array< LZ77, LZW>>
+    Failed compression <Array< LZ77, LZW>>
 */
 params ["_string"];
 
