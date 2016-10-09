@@ -5,10 +5,10 @@
     Author: joko // Jonas
 
     Description:
-    Call Funcion Directly and change the Env
+    Calls a funcion directly and changes the Env
 
     Parameter(s):
-    0: Code or Function that called <Code>
+    0: Code or Function that gets called <Code>
     1: Arguments <Any>
 
     Returns:
