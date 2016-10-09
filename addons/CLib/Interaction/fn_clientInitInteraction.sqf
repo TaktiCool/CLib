@@ -17,7 +17,7 @@
 if !(hasInterface) exitWith {};
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorTargetChanged", QFUNC(loop)] call CFUNC(addEventhandler);
+["cursorTargetChanged", QCFUNC(loop)] call CFUNC(addEventhandler);
 ["playerChanged", {
     params ["_data", "_params"];
     _data params ["_currentPlayer", "_oldPlayer"];
