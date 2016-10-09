@@ -5,15 +5,15 @@
     Author: joko // Jonas
 
     Description:
-    Delete a entry out of a Array
+    Deletes an entry out of an array
 
     Parameter(s):
-    0: Array Reference <Array>
-    1: Entry to Delete <Any>
-    2: delete Every Entry <Bool>(default: false)
+    0: Array reference <Array>
+    1: Entry to delete <Any>
+    2: Delete every entry <Bool>(default: false)
 
     Remarks:
-    This function work with the Reference!
+    This function works with the given reference!
 
     Returns:
     Deleted Index <Array<Numbers>>
