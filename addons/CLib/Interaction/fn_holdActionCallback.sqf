@@ -40,6 +40,7 @@ GVAR(HoldActionStartTime) = diag_tickTime;
 
 [_target, _caller, _id, _arguments] call _codeStart;
 
+
 if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
     private _display = findDisplay 46;
     private _ctrl = _display ctrlCreate ["RscStructuredText", 6000];
@@ -76,7 +77,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         "_showUnconscious"
     ];
     private _ret = !((inputAction "Action" < 0.5 && {inputAction "ActionContext" < 0.5}) || !(call _condProgress));
-
+    private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
 
     if (_ret) then {
         _ret = [_target, _caller, _id, _arguments] call _codeProgress;
@@ -90,16 +91,17 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         };
 
         if (_id isEqualType 123) then {
-            private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
-            (_display displayCtrl 6000) ctrlSetPosition [0, 0.55, 1, 0.5];
-            (_display displayCtrl 6001) ctrlSetPosition [0, 0.55, 1, 0.5];
+
+            (_display displayCtrl 6000) ctrlSetPosition [0, 0.54, 1, 0.5];
+            (_display displayCtrl 6001) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];
             (_display displayCtrl 6001) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", call _iconProgress];
             (_display displayCtrl 6000) ctrlCommit 0;
             (_display displayCtrl 6001) ctrlCommit 0;
             _target setUserActionText [_id,_title,"",""];
         } else {
-            private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
+            (_display displayCtrl 6000) ctrlSetPosition [0, 0.509, 1, 0.5];
+            (_display displayCtrl 6001) ctrlSetPosition [0, 0.509, 1, 0.5];
             (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3.5' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];
             (_display displayCtrl 6001) ctrlSetStructuredText parseText format ["<t align='center'><img size='3.5' shadow='0' color='#ffffffff' image='%1'/></t>", call _iconProgress];
             (_display displayCtrl 6000) ctrlCommit 0;
@@ -124,7 +126,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         GVAR(DisableNextAction) = false;
         GVAR(HoldActionStartTime) = -1;
 
-        private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
         (_display displayCtrl 6001) ctrlSetStructuredText parseText "";
         (_display displayCtrl 6000) ctrlSetStructuredText parseText "";
         (_display displayCtrl 6000) ctrlCommit 0;
