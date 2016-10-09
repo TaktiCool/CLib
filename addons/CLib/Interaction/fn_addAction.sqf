@@ -96,7 +96,9 @@ _condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_t
 
 _callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);
-
+if (_text call CFUNC(isLocalised)) then {
+    _text = _text call CFUNC(readLocalisation);
+};
 if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};
 if (_onObject isEqualType "") then {_onObject = [_onObject];};
 
