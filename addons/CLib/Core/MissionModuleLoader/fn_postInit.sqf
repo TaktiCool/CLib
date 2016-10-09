@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    load and Compile all Function from the Mission Modules
+    Loads and compiles all functions from the mission modules
 
     Parameter(s):
     None
