@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Append Unit to SendFunctions Queue if the mission is allready Trigger else it just pushes the functions
+    Appends a unit to the SendFunctions queue if the mission is already triggered otherwise it simply pushes the functions
 
     Parameter(s):
     0: Client UID <Number>
@@ -31,7 +31,7 @@ private _functionCode = if (useCompression) then {
     _code call CFUNC(codeToString);
 };
 
-// Transfer the function name, code and progress to the client.
+// Transfers the function name, code and progress to the client.
 GVAR(receiveFunction) = [_functionName, _functionCode, _index / GVAR(countRequiredFnc)];
 
 
