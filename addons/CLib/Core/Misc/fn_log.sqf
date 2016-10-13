@@ -5,13 +5,18 @@
     Author: joko // Jonas
 
     Description:
-    Description
+    Write Log
 
     Parameter(s):
-    0: Argument <Type>
+    0: Type of Logging <String>
+    1: Mod Name <String>
+    2: Module Name <String>
+    3: Log <Any>
+    4: File Path <String>
+    5: Line <Number>
 
     Returns:
-    0: Return <Type>
+    None
 */
 params ["_name", "_modName", "_module", "_var", "_file", "_line"];
 
