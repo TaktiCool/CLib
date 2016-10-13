@@ -36,13 +36,7 @@
 
 // Logging/Dumping macros
 #ifdef isDev
-    #define DUMP(var) \
-        diag_log format ["(%1) [%4 DUMP - %2]: %3", diag_frameNo, #MODULE, var, QUOTE(PREFIX)];\
-        systemChat format ["(%1) [%4 DUMP - %2]: %3", diag_frameNo, #MODULE, var, QUOTE(PREFIX)];\
-        if (hasInterface) then {\
-            CGVAR(sendlogfile) = [format ["(%1) [%4 DUMP - %2]: %3", diag_frameNo, #MODULE, var, QUOTE(PREFIX)], format ["%1_%2", profileName, CGVAR(playerUID)]];\
-            publicVariableServer QCGVAR(sendlogfile);\
-        };
+    #define DUMP(var) ["DUMP" ,QUOTE(PREFIX), QUOTE(MODULE), var, __FILE__, __LINE__] call CLib_fnc_log;
 #else
     #define DUMP(var) /* disabled */
 #endif
@@ -50,7 +44,7 @@
 #ifdef isDev
     #define LOG(var) DUMP(var)
 #else
-    #define LOG(var) diag_log format ["(%1) [%4 LOG - %2]: %3", diag_frameNo, #MODULE, var, QUOTE(PREFIX)];
+    #define LOG(var) ["LOG" ,QUOTE(PREFIX), QUOTE(MODULE), var, __FILE__, __LINE__] call CLib_fnc_log;
 #endif
 
 

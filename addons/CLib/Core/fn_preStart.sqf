@@ -9,6 +9,7 @@ CLib_fnc_readAllModules = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Co
 CLib_fnc_readAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_readAllFunctions.sqf";
 CLib_fnc_compileAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_compileAllFunctions.sqf";
 CLib_fnc_buildDependencyGraph = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_buildDependencyGraph.sqf";
+CLib_fnc_log = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Misc\fn_log.sqf";
 CLib_playerUID = "";
 
 #ifndef isDev
