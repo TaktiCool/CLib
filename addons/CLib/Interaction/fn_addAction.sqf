@@ -96,9 +96,6 @@ _condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_t
 
 _callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);
-if (_text isEqualType "" && {_text call CFUNC(isLocalised)}) then {
-    _text = _text call CFUNC(readLocalisation);
-};
 if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};
 if (_onObject isEqualType "") then {_onObject = [_onObject];};
 
@@ -112,7 +109,13 @@ if (_onObject isEqualType []) then {
 
 if (_onObject isEqualType objNull) then {
     if (_onObject isEqualTo CLib_Player) then {
-        private _argArray = [_onObject call _text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+        if (_text isEqualType {}) then {
+            _text = call _text;
+        };
+        if (_text call CFUNC(isLocalised)) then {
+            _text = _text call CFUNC(readLocalisation);
+        };
+        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
         private _id = _onObject addAction _argArray;
         [_id, _onObject, _argArray] call _onActionAdded;
         GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded];

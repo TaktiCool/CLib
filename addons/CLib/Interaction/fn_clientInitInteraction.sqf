@@ -25,7 +25,7 @@ GVAR(PlayerInteraction_Actions) = [];
     {
         _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded"];
         _oldPlayer removeAction _id;
-        private _argArray = [_currentPlayer call _text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
         _id = _currentPlayer addAction _argArray;
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
