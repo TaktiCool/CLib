@@ -64,7 +64,7 @@ QGVAR(registerClient) addPublicVariableEventHandler {
     private _clientID = owner (_this select 1);
 
     // send all Functions if mission Started was not triggered jet
-    if (isNil QGVAR(missionStartedTriggered) && time < 20) exitWith {
+    if (time < 100) exitWith {
         {
             [_x, _clientID, _forEachIndex] call FUNC(sendFunctions);
         } forEach GVAR(RequiredFncClient);
