@@ -41,7 +41,7 @@ if (_objActions isEqualTo GVAR(Interaction_Actions)) exitWith {};
                 private _id = _lastTarget addAction _argArray;
                 [_id, _lastTarget, _argArray] call _onActionAdded;
                 _objActions pushBackUnique _x;
-                DUMP("add Real Action to Object " + str _lastTarget)
+                DUMP("add Real Action to Object " + str _lastTarget + " " + str _text)
             };
         };
 
@@ -51,7 +51,7 @@ if (_objActions isEqualTo GVAR(Interaction_Actions)) exitWith {};
                 private _id = _lastTarget addAction _argArray;
                 [_id, _lastTarget, _argArray] call _onActionAdded;
                 _objActions pushBackUnique _x;
-                DUMP("add Real Action to Object " + str _lastTarget)
+                DUMP("add Real Action to Object " + str _lastTarget + " " + str _text)
             };
         };
     };

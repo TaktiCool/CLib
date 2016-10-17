@@ -29,6 +29,7 @@ GVAR(PlayerInteraction_Actions) = [];
         _id = _currentPlayer addAction _argArray;
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
+        DUMP("add Real Action to Object Player " + str _text)
         nil
     } count GVAR(PlayerInteraction_Actions);
 }] call CFUNC(addEventhandler);
