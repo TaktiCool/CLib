@@ -20,9 +20,10 @@ if (_object isKindOf "CAManBase") exitWith {CLib_Player distance _object < _dist
 
 private _playerPos = eyePos CLib_Player;
 private _viewDirection = eyeDirection CLib_Player;
+private _viewDirectionMagnitude = vectorMagnitude _viewDirection;
 
-if ((vectorMagnitude _viewDirection) == 0) exitWith {false};
+if (_viewDirectionMagnitude == 0) exitWith {false};
 
-private _direction = _viewDirection vectorMultiply (_distance / (vectorMagnitude _viewDirection));
+private _direction = _viewDirection vectorMultiply (_distance / _viewDirectionMagnitude);
 
 _object in lineIntersectsWith [_playerPos, _playerPos vectorAdd _direction] || CLib_Player distance _object < _distance
