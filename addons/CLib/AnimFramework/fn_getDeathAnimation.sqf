@@ -37,9 +37,10 @@ if (isNull (objectParent _unit)) then {
             _return = _x;
             breakTo "loopExit";
         };
-    } forEach _interpolateTo
+    } forEach _interpolateTo;
 } else {
     _return = getText (_unitActions >> "die");
 };
 
 if (_return == "") then { _return = "Unconscious"; };
+_return;
