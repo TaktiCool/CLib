@@ -24,7 +24,11 @@ if (_anim == "") then {
 private _case = ["playMove", "playMoveNow"] select (_priority min 1);
 
 // Execute on all machines. PlayMove and PlayMoveNow are bugged: They have no global effects when executed on remote machines inside vehicles.
-[_case, [_unit, _anim]] call ([CFUNC(targetEvent), CFUNC(globalEvent)] select (isNull (objectParent _unit)));
+if (isNull (objectParent _unit)) then {
+    [_case, _unit, [_unit, _anim]] call CFUNC(targetEvent);
+} else {
+    [_case, [_unit, _anim]] call CFUNC(globalEvent);
+};
 
 if (_priority >= 2 && {animationState _unit != _animation}) then {
     ["switchMove", [_unit, _anim]] call CFUNC(globalEvent);
