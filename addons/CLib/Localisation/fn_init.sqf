@@ -21,59 +21,50 @@
 #endif
 
 if (isServer) then {
-    GVAR(ServerNamespace) = false call CFUNC(createNamespace);
-
+    GVAR(ServerNamespace) = true call CFUNC(createNamespace);
     GVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages");
-
     {
         {
-            private _currentConfig = _x;
-            private _allLocalisations = [];
+            private _tagName = configName _x;
             {
-                _allLocalisations set [_forEachIndex, getText (_currentConfig >> (["English", _x] select (isText (_currentConfig >> _x))))];
-            } forEach GVAR(supportedLanguages);
-            [GVAR(ServerNamespace), configName _x, _allLocalisations, QGVAR(allLocalisations)] call CFUNC(setVariable);
+                private _currentConfig = _x;
+                private _allLocalisations = [];
+                {
+                    private _text = getText (_currentConfig >> (["English", _x] select (isText (_currentConfig >> _x))));
+                    /* TODO Fix Compression
+                    if (useCompression) then {
+                        _text = [_text] call CFUNC(compressString);
+                    };
+                    */
+                    _allLocalisations set [_forEachIndex, _text];
+                } forEach GVAR(supportedLanguages);
+                [GVAR(ServerNamespace), format ["STR_%1_%2", _tagName, configName _x], _allLocalisations, QGVAR(allLocalisations), true] call CFUNC(setVariable);
+                nil
+            } count configProperties [_x, "isClass _x", true];
             nil
         } count configProperties [_x >> "CfgCLibLocalisation", "isClass _x", true];
         nil
     } count [configFile, campaignConfigFile, missionConfigFile];
-
-
-    [QGVAR(registerPlayer), {
-        (_this select 0) params ["_language", "_player"];
-        private _sendVariable = [];
-        private _index = GVAR(supportedLanguages) find _language;
-        if (_index == -1) then {
-            _index = GVAR(supportedLanguages) find "English";
-        };
-
-        {
-            private _var = (GVAR(ServerNamespace) getVariable _x) select _index;
-            _sendVariable pushBack [_x, _var];
-            nil
-        } count ([GVAR(ServerNamespace), QGVAR(allLocalisations)] call CFUNC(allVariables));
-        /*
-        if (useCompression) then {
-            _sendVariable = [(str _sendVariable), "LZW"] call CFUNC(compressString);
-        };
-        */
-        [QGVAR(receive), owner _player, _sendVariable] call CFUNC(targetEvent);
-    }] call CFUNC(addEventhandler);
+    publicVariable QGVAR(ServerNamespace);
+    publicVariable QGVAR(supportedLanguages);
 };
 
 if (hasInterface) then {
     GVAR(ClientNamespace) = false call CFUNC(createNamespace);
 
-    [QGVAR(registerPlayer), [language, CLib_Player]] call CFUNC(serverEvent);
-
-    [QGVAR(receive), {
-        params ["_localisationData"];
-        if (_localisationData isEqualTo "") then {
-            _localisationData = _localisationData call CFUNC(decompressString);
+    private _index = GVAR(supportedLanguages) find language;
+    if (_index == -1) then {
+        _index = GVAR(supportedLanguages) find "English";
+    };
+    {
+        private _var = (GVAR(ServerNamespace) getVariable _x) select _index;
+        /* TODO Fix Compression
+        if (useCompression) then {
+            _var = _var call CFUNC(decompressString);
         };
-        {
-            [GVAR(ClientNamespace), _x select 0, _x select 1, QGVAR(all)] call CFUNC(setVariable);
-            nil
-        } count _localisationData;
-    }] call CFUNC(addEventhandler);
+        */
+        DUMP("L10N Varfound: " + _x + " Content: " + _var)
+        [GVAR(ClientNamespace), _x, _var, QGVAR(all)] call CFUNC(setVariable);
+        nil
+    } count ([GVAR(ServerNamespace), QGVAR(allLocalisations)] call CFUNC(allVariables));
 };
