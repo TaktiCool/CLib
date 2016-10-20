@@ -83,6 +83,7 @@ class CfgCLibModules {
             FNC(init);
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
+            APIFNC(formatLocalisation);
         };
 
         MODULE(ConfigCaching) {
