@@ -40,6 +40,7 @@ class CfgCLibModules {
                 APIFNC(getFOV);
                 APIFNC(getNearUnits);
                 APIFNC(groupPlayers);
+                APIFNC(initVoiceDetection);
                 APIFNC(log);
                 APIFNC(name);
                 APIFNC(sanitizeString);
