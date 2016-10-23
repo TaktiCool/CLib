@@ -9,9 +9,10 @@
 
 // dont release with this setting enabled
 // #define DEBUGFULL // enable all Debug Methods
-#define isDev // enable better logging
+// #define isDev // enable better logging
 // #define ENABLEPERFORMANCECOUNTER // enable Performance counter for Function calls
 // #define ENABLEFUNCTIONTRACE // enable SQF based Function Tracer (Later Maybe Replace with ChromeTrace Repalced)
+#define disableCompression
 // Base Includes
 #include "macros.hpp"
 #include "InternalMacros.hpp"
