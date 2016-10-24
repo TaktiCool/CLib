@@ -110,6 +110,14 @@ GVAR(ignoredLogEventNames_1) = [];
     _unit moveInTurret [_vehicle, _turretPath];
 }] call CFUNC(addEventHandler);
 
+["setMimic", {
+    (_this select 0) params ["_unit", "_mimic"];
+    if !(toLower(_mimic) in ["neutral","dead","danger","hurt","aware","safe","combat"]) then {
+        _mimic = "neutral";
+    };
+    _unit setMimic _mimic;
+}] call CFUNC(addEventhandler);
+
 ["missionStarted", {
 
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);

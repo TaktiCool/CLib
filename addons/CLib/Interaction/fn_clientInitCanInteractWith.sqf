@@ -33,3 +33,31 @@
 ["isNotOnMap", {
     !visibleMap
 }] call CFUNC(addCanInteractWith);
+
+["isNotReloading", {
+    !GVAR(reloadMutex)
+}] call CFUNC(addCanInteractWith);
+
+GVAR(reloadMutex) = false;
+(findDisplay 46) displayAddEventHandler ["keyDown", {
+    if ((_this select 0) in actionKeys "ReloadMagazine") then {
+        private _weapon = currentWeapon CLib_Player;
+
+        if (_weapon != "") exitWith {};
+        private _isLauncher = _weapon isKindOf ["Launcher", configFile >> "CfgWeapons"];
+
+        private _duration = getNumber (configfile >> (["CfgGesturesMale", "CfgMovesMaleSdr"] select _isLauncher) >> "States" >> _gesture >> "speed");
+
+        if (_duration != 0) then {
+            _duration = if (_duration < 0) then { abs _duration } else { 1 / _duration };
+        } else {
+            _duration = 3;
+        };
+        GVAR(reloadMutex) = true;
+        if (!GVAR(reloadMutex)) then {
+            [{
+                GVAR(reloadMutex) = false;
+            }, _duration] call CFUNC(wait);
+        };
+    };
+}];
