@@ -43,7 +43,7 @@ GVAR(reloadMutex) = false;
     if ((_this select 0) in actionKeys "ReloadMagazine") then {
         private _weapon = currentWeapon CLib_Player;
 
-        if (_weapon != "") exitWith {};
+        if (_weapon isEqualTo "") exitWith {};
         private _isLauncher = _weapon isKindOf ["Launcher", configFile >> "CfgWeapons"];
 
         private _duration = getNumber (configfile >> (["CfgGesturesMale", "CfgMovesMaleSdr"] select _isLauncher) >> "States" >> _gesture >> "speed");
