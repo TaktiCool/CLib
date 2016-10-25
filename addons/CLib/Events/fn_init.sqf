@@ -112,10 +112,15 @@ GVAR(ignoredLogEventNames_1) = [];
 
 ["setMimic", {
     (_this select 0) params ["_unit", "_mimic"];
-    if !(toLower(_mimic) in ["neutral","dead","danger","hurt","aware","safe","combat"]) then {
+    if !(toLower(_mimic) in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
         _mimic = "neutral";
     };
     _unit setMimic _mimic;
+}] call CFUNC(addEventhandler);
+
+["setVehicleVarName", {
+    (_this select 0) params ["_vehicle", "_name"];
+    _vehicle setVehicleVarName _name;
 }] call CFUNC(addEventhandler);
 
 ["missionStarted", {
