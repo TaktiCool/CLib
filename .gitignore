@@ -41,10 +41,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-extensions/Clib/bin/*
-extensions/Clib/obj/*
-extensions/packages/*
+serverExtension/PRA3_server/bin/*
+serverExtension/PRA3_server/obj/*
+serverExtension/packages/*
 *.exp
 
 # ArmA Files
 *.pbo
+
+# IDEA files
+.idea/
