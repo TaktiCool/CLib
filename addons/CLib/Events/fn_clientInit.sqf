@@ -147,8 +147,8 @@ GVAR(groupUnits) = [];
 } count [
     "InventoryOpened",
     "Killed",
-    "Respawn"/*,
-    "AnimStateChanged"*/
+    "Respawn",
+    "AnimStateChanged"
 ];
 
 // Fix an Arma bug
