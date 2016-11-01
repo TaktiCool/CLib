@@ -15,7 +15,7 @@
     Returns:
     All SimpleObjects <Array<Objects>>
 */
-params ["_input", "_pos", "_rot"];
+params ["_input", "_pos", "_dir"];
 
 switch (typeName _input) do {
     case ("STRING"): {
@@ -34,17 +34,30 @@ switch (typeName _input) do {
     };
 };
 
+_input params ["_alignOnSurface", "_objects"];
+
 if (isNil "_input" || {_input isEqualTo []}) exitWith {
     LOG("ERROR SimpleObjectComp Dont exist: " + _input)
     []
 };
 
+private _originObj = "#particlesource" createVehicleLocal _pos;
+private _ovUp = [[0,0,1], surfaceNormal _pos] select _alignOnSurface;
+
+_originObj setDir _dir;
+_originObj setVectorUp _ovUp;
+
+
 private _return = [];
 {
-    _x params ["_path", "_posOffset", "_rotOffset", "_hideSelectionArray", "_animateArray"];
+    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray"];
 
-    private _obj = createSimpleObject [_path, _pos vectorAdd _posOffset];
+
+
+    private _obj = createSimpleObject [_path, _originObj modelToWorldVisual _posOffset];
     // TODO Rotation
+    _obj setDir (_dirOffset+_dir);
+    _obj setVectorUp (_upOffset vectorAdd _ovUp);
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {
@@ -60,8 +73,9 @@ private _return = [];
     };
     _return pushBack _obj;
     nil
-} count _input;
+} count _objects;
 
+deleteVehicle _originObj;
 
 _return;
 /* return

@@ -27,10 +27,11 @@ private _fnc_readSimpleObjectClass = {
 
     private _path = getText (_config >> "path");
     private _offset = getArray (_config >> "offset");
-    private _rot = getArray (_config >> "rotation");
+    private _dir = getNumber (_config >> "dir");
+    private _up = getArray (_config >> "upVector");
 
-    if (_rot isEqualTo []) then {
-        _rot = [0, 0, 0];
+    if (_up isEqualTo []) then {
+        _up = [0, 0, 0];
     };
     if (_offset isEqualTo []) then {
         _offset = [0, 0, 0];
@@ -69,11 +70,13 @@ private _fnc_readSimpleObjectClass = {
         _hideSelectionArray = false;
     };
 
-    [_path, _offset, _rot, _hideSelectionArray, _animateArray]
+    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray]
 };
 
 private _return = [];
 private _childs = configProperties [_config, "isClass _x", true];
+private _alignOnSurface = getNumber (_config >> "alignOnSurface");
+
 if (_childs isEqualTo []) then {
     _return pushBack (_config call _fnc_readSimpleObjectClass);
 } else {
@@ -82,6 +85,7 @@ if (_childs isEqualTo []) then {
         nil
     } count _childs;
 };
+ _return = [_alignOnSurface, _return]
 
 GVAR(namespace) setVariable [_name, _return];
 _return;
