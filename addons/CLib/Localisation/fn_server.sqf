@@ -15,7 +15,7 @@
 */
 GVAR(ServerNamespace) = true call CFUNC(createNamespace);
 GVAR(supportedLanguages) = [];
-// GVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages");
+// GVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages"); // disabled this so we have a Dynamic Supported languages
 
 private _fnc_languageIndex = {
     private _return = GVAR(supportedLanguages) find _this;
@@ -28,11 +28,10 @@ private _fnc_languageIndex = {
 private _fnc_setLanguageKey = {
     params ["_name", "_index", "_data"];
 
-    DUMP("Name: " + str _name + " Index: " + str _index + " Data: " + str _data)
     _index = _index call _fnc_languageIndex;
 
     private _locName = format ["STR_%1", _name];
-    private _var = GVAR(ServerNamespace) getVariable [_name, []];
+    private _var = GVAR(ServerNamespace) getVariable [_locName, []];
     /* TODO Fix Compression
     if (useCompression) then {
         _data = _data call CFUNC(compressString);
