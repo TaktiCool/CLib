@@ -82,6 +82,8 @@ class CfgCLibModules {
         MODULE(Localisation) {
             dependency[] = {"CLib/Events"};
             FNC(init);
+            FNC(client);
+            FNC(server) { serverOnly = 1; };
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
             APIFNC(formatLocalisation);

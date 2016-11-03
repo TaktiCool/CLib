@@ -1,6 +1,6 @@
 class CfgCLibLocalisation {
 
-    supportedLanguages[] = {"English", "German", "Spanish", "French", "Polish", "Czech", "Italian", "Hungarian", "Portuguese", "Russian", "Japanese"};
+    supportedLanguages[] = {"English", "German", "Spanish", "French", "Polish", "Czech", "Italian", "Hungarian", "Portuguese", "Russian", "Japanese", "Korean"};
     class CLib {
         class TestTranslation {
             English = "Test English";
@@ -14,6 +14,7 @@ class CfgCLibLocalisation {
             Portuguese = "Test Portuguese";
             Russian = "Test Russian";
             Japanese = "Test Japanese";
+            Korean = "Test Korean";
         };
         class Error {
             English = "Error";
