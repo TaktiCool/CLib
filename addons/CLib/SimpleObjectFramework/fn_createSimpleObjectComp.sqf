@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 
@@ -57,7 +57,7 @@ private _return = [];
     private _obj = createSimpleObject [_path, _originObj modelToWorldVisual _posOffset];
     // TODO Rotation
     _obj setDir (_dirOffset+_dir);
-    _obj setVectorUp (_upOffset vectorAdd _ovUp);
+    _obj setVectorUp (_originObj modelToWorldVisual _ovUp);
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {

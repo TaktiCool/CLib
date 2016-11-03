@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 
@@ -85,7 +85,7 @@ if (_childs isEqualTo []) then {
         nil
     } count _childs;
 };
- _return = [_alignOnSurface, _return]
+_return = [_alignOnSurface, _return];
 
 GVAR(namespace) setVariable [_name, _return];
 _return;
