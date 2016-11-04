@@ -168,6 +168,13 @@ private ["_items", "_item", "_i"];
     } count _item;
 }] call _fnc_do;
 
+["unitTrait", {
+    {
+        _unit setUnitTrait _x;
+        nil
+    } count _item;
+}] call _fnc_do;
+
 for "_i" from 0 to (count _loadoutVars) step 2 do {
     private _name = _loadoutVars select _i;
     private _value = _loadoutVars select (_i + 1);
