@@ -27,11 +27,14 @@ private _fnc_readSimpleObjectClass = {
 
     private _path = getText (_config >> "path");
     private _offset = getArray (_config >> "offset");
-    private _dir = getNumber (_config >> "dir");
+    private _dir = getArray (_config >> "dirVector");
     private _up = getArray (_config >> "upVector");
 
     if (_up isEqualTo []) then {
         _up = [0, 0, 0];
+    };
+    if (_dir isEqualTo []) then {
+        _dir = [0, 0, 0];
     };
     if (_offset isEqualTo []) then {
         _offset = [0, 0, 0];
@@ -81,7 +84,7 @@ if (_childs isEqualTo []) then {
     _return pushBack (_config call _fnc_readSimpleObjectClass);
 } else {
     {
-        _return pushBack (_config call _fnc_readSimpleObjectClass);
+        _return pushBack (_x call _fnc_readSimpleObjectClass);
         nil
     } count _childs;
 };

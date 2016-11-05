@@ -41,23 +41,18 @@ if (isNil "_input" || {_input isEqualTo []}) exitWith {
     []
 };
 
-private _originObj = "#particlesource" createVehicleLocal _pos;
+private _originObj = "Land_HelipadEmpty_F" createVehicleLocal _pos;
 private _ovUp = [[0,0,1], surfaceNormal _pos] select _alignOnSurface;
 
-_originObj setDir _dir;
-_originObj setVectorUp _ovUp;
-
+_originObj setVectorDirAndUp [_dir, _ovUp];
 
 private _return = [];
 {
     _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray"];
 
-
-
     private _obj = createSimpleObject [_path, _originObj modelToWorldVisual _posOffset];
     // TODO Rotation
-    _obj setDir (_dirOffset+_dir);
-    _obj setVectorUp (_originObj modelToWorldVisual _ovUp);
+    _obj setVectorDirAndUp [(_originObj modelToWorldVisual _dirOffset), (_originObj modelToWorldVisual _upOffset)];
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {
