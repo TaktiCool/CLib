@@ -30,6 +30,7 @@ class CfgCLibLoadoutsClassBase {
     itemsBackpack[] = {};
     linkedItems[] = {};
     script[] = {};
+    unitTrait[] = {};
 
     removeAllWeapons = 1;
     removeAllItems = 1;
