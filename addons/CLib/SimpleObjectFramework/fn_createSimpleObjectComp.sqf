@@ -46,13 +46,23 @@ private _ovUp = [[0,0,1], surfaceNormal _pos] select _alignOnSurface;
 
 _originObj setVectorDirAndUp [_dir, _ovUp];
 
+private _originPos = _originObj modelToWorldVisual [0,0,0];
+
 private _return = [];
 {
     _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray"];
 
-    private _obj = createSimpleObject [_path, _originObj modelToWorldVisual _posOffset];
-    // TODO Rotation
-    _obj setVectorDirAndUp [(_originObj modelToWorldVisual _dirOffset), (_originObj modelToWorldVisual _upOffset)];
+    private _obj = objNull;
+    private _isClass = isClass (configFile >> "CfgVehicles" >> _path);
+
+    if (_isClass) then {
+        _obj = _path createVehicle (_originObj modelToWorldVisual _posOffset);
+    } else {
+
+        _obj = createSimpleObject [_path, _originObj modelToWorldVisual _posOffset];
+    };
+
+    _obj setVectorDirAndUp [(_originObj modelToWorldVisual _dirOffset) vectorDiff _originPos,  (_originObj modelToWorldVisual _upOffset) vectorDiff _originPos];
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {
@@ -65,6 +75,9 @@ private _return = [];
             _obj animate _x;
             nil
         } count _animateArray;
+    };
+    if (_isClass) then {
+        _obj enableSimulation false;
     };
     _return pushBack _obj;
     nil

@@ -17,7 +17,7 @@
 private _objects = get3DENSelected "object";
 private _meanPos = [0,0,0];
 private _numPos = {
-    _meanPos = _meanPos vectorAdd getPosATL _x;
+    _meanPos = _meanPos vectorAdd getPosWorld _x;
     true;
 } count _objects;
 
@@ -28,7 +28,7 @@ private _k = 0;
 {
     _output = format ["%1class item%2 {", _output, _k] + toString [10];
     private _path = getModelInfo _x select 1;
-    private _pos = (getPosATL _x) vectorDiff _meanPos;
+    private _pos = (getPosWorld _x) vectorDiff _meanPos;
     private _dir = vectorDir _x;
     private _up = vectorUp _x;
     _output = format ["%1     path = ""%2"";", _output, _path] + toString [10];

@@ -21,6 +21,6 @@ if (isServer) then {
             nil
         } count (configProperties [_x >> "CfgCLibSimpleObject", "isClass _x", true]);
         nil
-    } count [missionConfigFile, campaignConfigFile, configFile];
+    } count [configFile, campaignConfigFile, missionConfigFile];
     publicVariable QGVAR(namespace);
 };
