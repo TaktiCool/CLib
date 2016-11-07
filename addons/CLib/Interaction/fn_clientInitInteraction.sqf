@@ -15,13 +15,16 @@
 */
 
 if !(hasInterface) exitWith {};
+
+GVAR(currentActionID) = -1;
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorTargetChanged", QCFUNC(loop)] call CFUNC(addEventhandler);
+["cursorTargetChanged", QFUNC(onCursorTargetChanged)] call CFUNC(addEventhandler);
 ["playerChanged", {
     params ["_data", "_params"];
     _data params ["_currentPlayer", "_oldPlayer"];
-
+    // Posible Fix for Double Squad Menu Entry
+    if (_currentPlayer isEqualTo _oldPlayer) exitWith {};
     {
         _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded"];
         _oldPlayer removeAction _id;
@@ -37,7 +40,7 @@ GVAR(PlayerInteraction_Actions) = [];
 // fix issue that Action dont get readded after setRespawnTime respawn, because Variables get copyed from the old Unit via Engine command
 ["MPRespawn", {
     (_this select 0) params ["_newUnit"];
-    _newUnit setVariable [QGVAR(Interaction_Actions), []];
+    _newUnit setVariable [QGVAR(ActionIDs), []];
 }] call CFUNC(addEventhandler);
 
 GVAR(InGameUIEventHandler) = call CFUNC(createNamespace);
