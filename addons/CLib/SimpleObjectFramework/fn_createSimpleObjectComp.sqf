@@ -40,13 +40,24 @@ if (isNil "_input" || {_input isEqualTo []}) exitWith {
     LOG("ERROR SimpleObjectComp Dont exist: " + _input)
     []
 };
+private _intersections = lineIntersectsSurfaces [
+	AGLtoASL _pos,
+	AGLtoASL _pos vectorAdd [0,0,-100]
+];
 
-private _originObj = "Land_HelipadEmpty_F" createVehicleLocal _pos;
-private _ovUp = [[0,0,1], surfaceNormal _pos] select _alignOnSurface;
+private _normalVector = (_intersections select 0) select 1;
+private _posVectorASL = (_intersections select 0) select 0;
+
+private _originObj = "Land_HelipadEmpty_F" createVehicleLocal ASLtoAGL _posVectorASL;
+
+private _xVector = _dir vectorCrossProduct _normalVector;
+_dir = _normalVector vectorCrossProduct _xVector;
+private _ovUp = [[0,0,1], _normalVector] select _alignOnSurface;
 
 _originObj setVectorDirAndUp [_dir, _ovUp];
 
-private _originPos = _originObj modelToWorldVisual [0,0,0];
+private _originPosAGL = _originObj modelToWorld [0,0,0];
+private _originPosASL = AGLToASL _originPosAGL;
 
 private _return = [];
 {
@@ -56,13 +67,14 @@ private _return = [];
     private _isClass = isClass (configFile >> "CfgVehicles" >> _path);
 
     if (_isClass) then {
-        _obj = _path createVehicle (_originObj modelToWorldVisual _posOffset);
+        _obj = _path createVehicle (_originObj modelToWorld _posOffset);
+        _obj setPosASL AGLtoASL (_originObj modelToWorld _posOffset);
     } else {
 
-        _obj = createSimpleObject [_path, _originObj modelToWorldVisual _posOffset];
+        _obj = createSimpleObject [_path, AGLtoASL (_originObj modelToWorld _posOffset)];
     };
 
-    _obj setVectorDirAndUp [(_originObj modelToWorldVisual _dirOffset) vectorDiff _originPos,  (_originObj modelToWorldVisual _upOffset) vectorDiff _originPos];
+    _obj setVectorDirAndUp [AGLtoASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL,  AGLtoASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {
