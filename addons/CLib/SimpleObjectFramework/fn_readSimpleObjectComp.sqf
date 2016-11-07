@@ -90,7 +90,7 @@ if (_childs isEqualTo []) then {
 };
 _return = [_alignOnSurface, _return];
 
-GVAR(namespace) setVariable [_name, _return];
+GVAR(namespace) setVariable [_name, _return, true];
 _return;
 
 /* return
