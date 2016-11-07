@@ -15,9 +15,11 @@
 */
 
 if !(hasInterface) exitWith {};
+
+GVAR(currentActionID) = -1;
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorTargetChanged", QCFUNC(loop)] call CFUNC(addEventhandler);
+["cursorTargetChanged", QFUNC(onCursorTargetChanged)] call CFUNC(addEventhandler);
 ["playerChanged", {
     params ["_data", "_params"];
     _data params ["_currentPlayer", "_oldPlayer"];
@@ -37,7 +39,7 @@ GVAR(PlayerInteraction_Actions) = [];
 // fix issue that Action dont get readded after setRespawnTime respawn, because Variables get copyed from the old Unit via Engine command
 ["MPRespawn", {
     (_this select 0) params ["_newUnit"];
-    _newUnit setVariable [QGVAR(Interaction_Actions), []];
+    _newUnit setVariable [QGVAR(ActionIDs), -1];
 }] call CFUNC(addEventhandler);
 
 GVAR(InGameUIEventHandler) = call CFUNC(createNamespace);
