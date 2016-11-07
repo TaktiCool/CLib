@@ -44,7 +44,7 @@ switch (true) do {
         LOG("No VON Mod Detected")
         [{
             private _new = (!(isNull findDisplay 55));
-            if (!((CLib_player getVariable [QGVAR(isSpeakingInGame), false]) isEqualTo _new)) then {
+            if !((CLib_player getVariable [QGVAR(isUsingVoice), false]) isEqualTo _new) then {
                 ACE_player setVariable [QGVAR(isUsingVoice), _new, true];
             };
         }, 0.2] call CFUNC(addPerFrameHandler);
