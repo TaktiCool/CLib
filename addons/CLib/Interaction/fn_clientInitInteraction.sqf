@@ -23,7 +23,8 @@ GVAR(PlayerInteraction_Actions) = [];
 ["playerChanged", {
     params ["_data", "_params"];
     _data params ["_currentPlayer", "_oldPlayer"];
-
+    // Posible Fix for Double Squad Menu Entry
+    if (_currentPlayer isEqualTo _oldPlayer) exitWith {};
     {
         _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded"];
         _oldPlayer removeAction _id;
