@@ -15,7 +15,7 @@
     Returns:
     All SimpleObjects <Array<Objects>>
 */
-params ["_input", "_pos", "_dir"];
+params ["_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
 
 switch (typeName _input) do {
     case ("STRING"): {
@@ -42,13 +42,16 @@ if (isNil "_input" || {_input isEqualTo []}) exitWith {
 };
 private _intersections = lineIntersectsSurfaces [
 	AGLtoASL _pos,
-	AGLtoASL _pos vectorAdd [0,0,-100]
+	AGLtoASL _pos vectorAdd [0,0,-100],
+    _ignoreObj1,
+    _ignoreObj2
 ];
 
 private _normalVector = (_intersections select 0) select 1;
 private _posVectorASL = (_intersections select 0) select 0;
 
 private _originObj = "Land_HelipadEmpty_F" createVehicleLocal ASLtoAGL _posVectorASL;
+_originObj setPosASL _posVectorASL;
 
 private _xVector = _dir vectorCrossProduct _normalVector;
 _dir = _normalVector vectorCrossProduct _xVector;
