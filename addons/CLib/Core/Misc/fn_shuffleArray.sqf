@@ -2,10 +2,11 @@
 /*
     Community Lib - CLib
 
-    Author: joko // Jonas
+    Author: joko // Jonas, NetFusion
 
     Description:
-    Returns a Shuffled arry
+    Returns a shuffled array.
+    See https://en.wikipedia.org/wiki/Fisher-Yates_shuffle for details.
 
     Parameter(s):
     <Array>
@@ -14,23 +15,21 @@
     <Array>
 */
 
-if (_this isEqualType []) exitWith {_this};
+// Create a copy to prevent modifying the original array.
+private _returnArray = +_this;
 
-private _currentIndex = (count _this) - 1
-private _temporaryValue = objNull;
-private _randomIndex = -1;
+// Cycle through all elements of the array...
+{
+    // Pick a random element...
+    private _randomIndex = floor random _forEachIndex;
 
-// While there remain elements to shuffle...
-while {0 !== _currentIndex} do {
+    // If the chosen element differs we replace it.
+    if (_randomIndex != _forEachIndex) then {
+        _returnArray set [_forEachIndex, _returnArray select _randomIndex];
+    };
 
-    // Pick a remaining element...
-    _randomIndex = floor(random 99999 * _currentIndex);
-    _currentIndex = _currentIndex - 1;
+    // Place the current element at the free position.
+    _returnArray set [_randomIndex, _this select _forEachIndex];
+} forEach _this;
 
-    // And swap it with the current element.
-    _temporaryValue = _this select _currentIndex;
-    _this set [_currentIndex, _this select _randomIndex];
-    _this set [_temporaryValue, _randomIndex];
-};
-
-_this;
+_returnArray
