@@ -45,6 +45,7 @@ class CfgCLibModules {
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 FNC(serverInit);
+                APIFNC(shuffleArray);
                 FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
             };
