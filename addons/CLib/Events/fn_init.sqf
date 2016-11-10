@@ -127,6 +127,18 @@ GVAR(ignoredLogEventNames_1) = [];
 
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
+    DFUNC(entityCreated) = {
+        params ["_obj"];
+        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
+            ["entityCreated", _obj] call CFUNC(localEvent);
+            _obj setVariable [QGVAR(isProcessed), true];
+        };
+    };
+    ["cursorTargetChanged", {
+        (_this select 0) params ["_obj"];
+        _obj call FUNC(entityCreated);
+    }] call CFUNC(addEventhandler);
+
     [GVAR(entityCreatedSM), "init", {
         GVAR(entitiesCached) = [];
         GVAR(entities) = [];
@@ -142,10 +154,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entities) deleteAt 0;
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
-            ["entityCreated", _obj] call CFUNC(localEvent);
-            _obj setVariable [QGVAR(isProcessed), true];
-        };
+        _obj call FUNC(entityCreated);
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
