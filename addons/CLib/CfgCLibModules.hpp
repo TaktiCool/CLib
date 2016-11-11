@@ -140,7 +140,7 @@ class CfgCLibModules {
             FNC(clientInitInteraction);
             APIFNC(holdActionCallback);
             APIFNC(inRange);
-            FNC(onCursorTargetChanged);
+            FNC(onCursorObjectChanged);
             APIFNC(overrideAction);
         };
 
