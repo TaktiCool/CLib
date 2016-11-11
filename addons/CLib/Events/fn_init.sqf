@@ -25,6 +25,7 @@ GVAR(ignoredLogEventNames_1) = [];
     ["drawmapgraphics", 0],
     ["eventadded", 1],
     ["cursortargetchanged", 1],
+    ["cursorobjectchanged", 1],
     ["playerinventorychanged", 1]
 ];
 
@@ -134,8 +135,9 @@ GVAR(ignoredLogEventNames_1) = [];
             _obj setVariable [QGVAR(isProcessed), true];
         };
     };
-    ["cursorTargetChanged", {
+    ["cursorObjectChanged", {
         (_this select 0) params ["_obj"];
+        if (isNull _obj) exitWith {};
         _obj call FUNC(entityCreated);
     }] call CFUNC(addEventhandler);
 
@@ -149,6 +151,7 @@ GVAR(ignoredLogEventNames_1) = [];
         GVAR(entities) = (((entities "") - allUnits) + allUnits) - GVAR(entitiesCached);
         GVAR(lastFilledEntities) = diag_frameNo + 15;
         GVAR(entitiesCached) append GVAR(entities);
+        GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
