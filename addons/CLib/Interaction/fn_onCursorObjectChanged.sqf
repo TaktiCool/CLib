@@ -15,7 +15,7 @@
 */
 
 (_this select 0) params ["_target"];
-if (isNull _target) exitWith {};
+if (isNull _target || !(simulationEnabled _target)) exitWith {};
 
 private _actionIDs = _target getVariable [QGVAR(ActionIDs), []];
 private _currentID = _actionIDs param [(count _actionIDs) - 1, -999];
