@@ -45,6 +45,7 @@ class CfgCLibModules {
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 FNC(serverInit);
+                APIFNC(shuffleArray);
                 FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
             };
@@ -139,7 +140,7 @@ class CfgCLibModules {
             FNC(clientInitInteraction);
             APIFNC(holdActionCallback);
             APIFNC(inRange);
-            FNC(onCursorTargetChanged);
+            FNC(onCursorObjectChanged);
             APIFNC(overrideAction);
         };
 

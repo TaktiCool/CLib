@@ -15,10 +15,10 @@
 */
 
 (_this select 0) params ["_target"];
-if (isNull _target) exitWith {};
+if (isNull _target || !(simulationEnabled _target)) exitWith {};
 
 private _actionIDs = _target getVariable [QGVAR(ActionIDs), []];
-private _currentID = _actionIDs param [(count _actionIDs), -999];
+private _currentID = _actionIDs param [(count _actionIDs) - 1, -999];
 if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
 {
     _x params ["_onObject", "_text", "_condition", "_code", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded", "_actionID"];

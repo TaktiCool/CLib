@@ -25,6 +25,7 @@ GVAR(ignoredLogEventNames_1) = [];
     ["drawmapgraphics", 0],
     ["eventadded", 1],
     ["cursortargetchanged", 1],
+    ["cursorobjectchanged", 1],
     ["playerinventorychanged", 1]
 ];
 
@@ -127,6 +128,19 @@ GVAR(ignoredLogEventNames_1) = [];
 
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
+    DFUNC(entityCreated) = {
+        params ["_obj"];
+        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
+            ["entityCreated", _obj] call CFUNC(localEvent);
+            _obj setVariable [QGVAR(isProcessed), true];
+        };
+    };
+    ["cursorObjectChanged", {
+        (_this select 0) params ["_obj"];
+        if (isNull _obj) exitWith {};
+        _obj call FUNC(entityCreated);
+    }] call CFUNC(addEventhandler);
+
     [GVAR(entityCreatedSM), "init", {
         GVAR(entitiesCached) = [];
         GVAR(entities) = [];
@@ -137,15 +151,13 @@ GVAR(ignoredLogEventNames_1) = [];
         GVAR(entities) = (((entities "") - allUnits) + allUnits) - GVAR(entitiesCached);
         GVAR(lastFilledEntities) = diag_frameNo + 15;
         GVAR(entitiesCached) append GVAR(entities);
+        GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entities) deleteAt 0;
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
-            ["entityCreated", _obj] call CFUNC(localEvent);
-            _obj setVariable [QGVAR(isProcessed), true];
-        };
+        _obj call FUNC(entityCreated);
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 

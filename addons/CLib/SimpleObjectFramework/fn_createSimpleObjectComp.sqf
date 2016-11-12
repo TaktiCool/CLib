@@ -92,7 +92,7 @@ private _return = [];
         } count _animateArray;
     };
     if (_isClass) then {
-        _obj enableSimulation false;
+        ["enableSimulation", [_obj, false]] call CFUNC(serverEvent);
     };
     _return pushBack _obj;
     nil
