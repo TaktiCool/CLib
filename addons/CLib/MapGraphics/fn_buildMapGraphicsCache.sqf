@@ -26,7 +26,8 @@ private _cache = [];
         if (_graphicsData isEqualTo []) then {
             _graphicsData = _graphicsGroup select 3;
         };
-        private _cData = _graphicsData apply { [_layer, _timestamp, _graphicsGroupId] + _x};
+        private _counter = 0;
+        private _cData = _graphicsData apply {_counter = _counter + 1; [_layer, _timestamp, _graphicsGroupId, _counter] + _x};
         _cache append _cData;
     };
 

@@ -26,8 +26,8 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
 };
 // iterate through all mapGraphic objects
 {
-    _x params ["_layer","_timestamp","_groupId"];
-    private _iconData = _x select [3, count _x - 3];
+    _x params ["_layer","_timestamp","_groupId", "_itemNumber"];
+    private _iconData = _x select [4, count _x - 4];
 
     switch (_iconData select 0) do {
         case ("ICON"): {
