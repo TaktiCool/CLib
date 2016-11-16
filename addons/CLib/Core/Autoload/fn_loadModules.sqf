@@ -22,7 +22,6 @@ call {
     if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
 
     private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isDedicated)) >> "idd");
-    DUMP(_displayIdd)
     waitUntil {
         if (getClientState == "BRIEFING READ") exitWith {true};
 
@@ -31,7 +30,6 @@ call {
         if (!isNull _display) exitWith {
             ctrlActivate (_display displayCtrl 1);
             _display closeDisplay 1;
-            DUMP("SKIPPED BRIEFING")
             true
         };
         false
