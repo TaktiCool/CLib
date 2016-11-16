@@ -8,36 +8,40 @@
     Entry point for module loading. Must be called within mission script for client and server. Start transfer of functions.
 
     Parameter(s):
-    the names of the requested modules <ARRAY> ()
+    The names of the requested modules <ARRAY> (optional)
 
     Returns:
     None
-
 */
 
 // The client waits for the player to be available. This makes sure the player variable is initialized in every script later.
 if (hasInterface) then {
-
-    // Skip Briefing. we need to do this because else the player can get stucked in the briefing screen with the server have allready triggered the mission started Event.
-    // yes i also dont like this BUT at this point PFH and other Eventhandler are not Initialized and PFH dont trigger in the briefing Screen
+    // Skip the briefing by pressing the continue button on behalf of the user
+    // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
     call {
         if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
         if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
 
-            private _d = (getNumber (configfile >> "RscDisplayServerGetReady" >> "idd"));
-            waitUntil {
-                if (getClientState == "BRIEFING READ") exitWith {true};
-                if (!isNull findDisplay _d) exitWith {
-                    ctrlActivate (findDisplay _d displayCtrl 1);
-                    findDisplay _d closeDisplay 1;
-                    true
-                };
-                false
+        private _displayIdd = getNumber (configFile >> "RscDisplayClientGetReady" >> "idd");
+        waitUntil {
+            if (getClientState == "BRIEFING READ") exitWith {true};
+
+            disableSerialization;
+            private _display = findDisplay _displayIdd;
+            if (!isNull _display) exitWith {
+                ctrlActivate (_display displayCtrl 1);
+                _display closeDisplay 1;
+                true
             };
+            false
+        };
     };
+
+    // Briefing is over
     waitUntil {!isNull player};
     CLib_Player = player;
-    waitUntil {CGVAR(playerUID) = getPlayerUID player; (CGVAR(playerUID) != "")};
+    waitUntil {getPlayerUID player != ""};
+    CGVAR(playerUID) = getPlayerUID player;
     waitUntil {!isNil QCFUNC(decompressString)};
 
     // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
@@ -46,15 +50,14 @@ if (hasInterface) then {
 };
 
 private _cfg = missionConfigFile >> (QPREFIX + "_Modules");
-
 if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
     endLoadingScreen;
     disableUserInput false;
-    LOG("No CLib Modules will get Loaded in the mission")
+    LOG("No CLib Modules loaded in the mission")
 };
 
 // If the machine has CLib running and is the Server exit to the server LoadModules
-if (isClass (configFile >> "CfgPatches" >> "CLib")) exitWith {
+if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
     if (!isServer) exitWith {
         LOG("CLib is a Server Mod Dont Load it on a Client")
