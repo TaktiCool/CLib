@@ -14,29 +14,32 @@
     None
 */
 
+// Skip the briefing by pressing the continue button on behalf of the user
+// http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
+
+call {
+    if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
+    if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
+
+    private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isDedicated)) >> "idd");
+    DUMP(_displayIdd)
+    waitUntil {
+        if (getClientState == "BRIEFING READ") exitWith {true};
+
+        disableSerialization;
+        private _display = findDisplay _displayIdd;
+        if (!isNull _display) exitWith {
+            ctrlActivate (_display displayCtrl 1);
+            _display closeDisplay 1;
+            DUMP("SKIPPED BRIEFING")
+            true
+        };
+        false
+    };
+};
+
 // The client waits for the player to be available. This makes sure the player variable is initialized in every script later.
 if (hasInterface) then {
-    // Skip the briefing by pressing the continue button on behalf of the user
-    // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
-//    call {
-//        if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
-//        if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
-//
-//        private _displayIdd = getNumber (configFile >> "RscDisplayClientGetReady" >> "idd");
-//        waitUntil {
-//            if (getClientState == "BRIEFING READ") exitWith {true};
-//
-//            disableSerialization;
-//            private _display = findDisplay _displayIdd;
-//            if (!isNull _display) exitWith {
-//                ctrlActivate (_display displayCtrl 1);
-//                _display closeDisplay 1;
-//                true
-//            };
-//            false
-//        };
-//    };
-
     // Briefing is over
     waitUntil {!isNull player};
     CLib_Player = player;
@@ -47,30 +50,6 @@ if (hasInterface) then {
     // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
     [QCGVAR(loadModules)] call bis_fnc_startLoadingScreen;
     disableUserInput true;
-};
-
-// The server skips the briefing because he is the first one there
-if (isServer) then {
-    call {
-        if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
-        if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
-
-        private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isDedicated)) >> "idd");
-        DUMP(_displayIdd)
-        waitUntil {
-            if (getClientState == "BRIEFING READ") exitWith {true};
-
-            disableSerialization;
-            private _display = findDisplay _displayIdd;
-            if (!isNull _display) exitWith {
-                ctrlActivate (_display displayCtrl 1);
-                _display closeDisplay 1;
-                DUMP("SKIPPED BRIEFING")
-                true
-            };
-            false
-        };
-    };
 };
 
 private _cfg = missionConfigFile >> (QPREFIX + "_Modules");
