@@ -17,11 +17,11 @@
 // Skip the briefing by pressing the continue button on behalf of the user
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
-[] spawn {
+0 spawn {
     if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
     if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
 
-    private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isDedicated)) >> "idd");
+    private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isServer)) >> "idd");
     waitUntil {
         if (getClientState == "BRIEFING READ") exitWith {true};
 
