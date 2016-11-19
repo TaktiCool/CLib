@@ -135,6 +135,7 @@ GVAR(ignoredLogEventNames_1) = [];
             _obj setVariable [QGVAR(isProcessed), true];
         };
     };
+
     ["cursorObjectChanged", {
         (_this select 0) params ["_obj"];
         if (isNull _obj) exitWith {};
@@ -157,7 +158,9 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entities) deleteAt 0;
-        _obj call FUNC(entityCreated);
+        if !(isNull _obj) then {
+            _obj call FUNC(entityCreated);
+        };
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
