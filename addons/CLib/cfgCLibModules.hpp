@@ -111,8 +111,7 @@ class CfgCLibModules {
             dependency[] = {};
             APIFNC(callExtension);
             FNC(init);
-            APIFNC(remoteCallExtension);
-            APIFNC(splitOutputString);
+            FNC(serverInit);
         };
 
         MODULE(Gear) {

@@ -45,6 +45,8 @@ extensions/Clib/bin/*
 extensions/Clib/obj/*
 extensions/packages/*
 *.exp
+*.pdb
+*.lib
 
 # ArmA Files
 *.pbo
