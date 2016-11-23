@@ -41,8 +41,8 @@ if (isNil "_input" || {_input isEqualTo []}) exitWith {
     []
 };
 private _intersections = lineIntersectsSurfaces [
-	AGLtoASL _pos,
-	AGLtoASL _pos vectorAdd [0,0,-100],
+    AGLtoASL _pos,
+    AGLtoASL _pos vectorAdd [0,0,-100],
     _ignoreObj1,
     _ignoreObj2
 ];
