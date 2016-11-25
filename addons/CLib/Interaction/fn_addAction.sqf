@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: NetFusion edit By Joko
 
@@ -86,7 +86,7 @@ private _argName = "";
 } count _dynamicArguments;
 
 
-
+GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
 _condition = _condition call CFUNC(codeToString);
 
@@ -101,7 +101,7 @@ if (_onObject isEqualType "") then {_onObject = [_onObject];};
 
 if (_onObject isEqualType []) then {
     {
-        GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded];
+        GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
         false
     } count _onObject;
 };
@@ -117,9 +117,9 @@ if (_onObject isEqualType objNull) then {
         private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
         private _id = _onObject addAction _argArray;
         [_id, _onObject, _argArray] call _onActionAdded;
-        GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded];
+        GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
     } else {
-        GVAR(Interaction_Actions) pushBackUnique [_onObject, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded];
+        GVAR(Interaction_Actions) pushBackUnique [_onObject, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
     };
     DUMP("addAction to " + str _onObject)
 };

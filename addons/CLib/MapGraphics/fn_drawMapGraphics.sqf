@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: BadGuy
 
@@ -26,8 +26,8 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
 };
 // iterate through all mapGraphic objects
 {
-    _x params ["_layer","_timestamp","_groupId"];
-    private _iconData = _x select [3, count _x - 3];
+    _x params ["_layer","_timestamp","_groupId", "_itemNumber"];
+    private _iconData = _x select [4, count _x - 4];
 
     switch (_iconData select 0) do {
         case ("ICON"): {
@@ -45,7 +45,7 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             };
 
             _map drawIcon [_texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align];
-            _cache pushBack [_groupId, _position, _width*6*_mapscale, _height*6*_mapscale, _angle, true];
+            _cache pushBack [_groupId, _position, _width*3*_mapscale*worldSize/(4096), _height*3*_mapscale*worldSize/(4096), _angle, true];
         };
         case ("RECTANGLE"): {
             _iconData params ["_type","_position", "_width", "_height", "_angle", "_lineColor", "_fillColor", "_code"];

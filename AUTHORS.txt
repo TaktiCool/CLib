@@ -1,4 +1,4 @@
-# ACE3 CONTRIBUTOR LIST
+# CLib CONTRIBUTOR LIST
 #
 # Feel free to add yourself to this when creating a pull
 # request, preferably including an email address.

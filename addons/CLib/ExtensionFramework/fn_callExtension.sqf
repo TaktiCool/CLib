@@ -1,43 +1,31 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 
     Description:
-    call Extension Direct and return the Value
+    Call extension from the Client to the Server
+    After the server Finish the call the extension and getting the result the server transfer the Retunred value to the client
+    and calling on the Client the attached Function
 
     Parameter(s):
-    0: Action <String>
-    1: Data <String> (default: "")
+    0: Extension name <String>
+    0: Action name <String>
+    2: Data <Any> (optional)
+    3: Callback <Code> (optional)
+    3: Arguments <Any> (optional)
 
     Returns:
-    Stichted Extension Return <String>
+    None
 */
 
-params [["_action", "Error", [""]], ["_data", "", [""]]];
+params ["_extensionName", "_actionName", ["_data", []], ["_callback", {}], ["_args", []]];
 
-private _splitOutput = _data call CFUNC(splitOutputString);
-
-"CLib" callExtension "frameworkClear";
-
-{
-    "CLib" callExtension _x;
-    nil
-} count _splitOutput;
-
-"CLib" callExtension _action;
-
-private _finalReturn = "";
-// endless Loop to prevent running in the max 10k rounds that every other loop in arma can run
-private _fnc_fetchOutput = {
-    private _return = "CLib" callExtension "frameworkImport";
-    if (_return isEqualTo "Done") then {
-        "CLib" callExtension "frameworkClear";
-        _finalReturn
-    } else {
-        _finalReturn = _finalReturn + _return;
-        call _fnc_fetchOutput;
-    };
+private _id = GVAR(taskIds) find objNull;
+if (_id == -1) then {
+    _id = count GVAR(taskIds);
 };
-call _fnc_fetchOutput;
+GVAR(taskIds) set [_id, [_callback, _args]];
+
+[QGVAR(extensionRequest), [_extensionName, _actionName, _data, CLib_Player, _id]] call CFUNC(serverEvent);

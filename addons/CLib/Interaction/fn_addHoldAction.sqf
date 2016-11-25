@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: BadGuy
 
@@ -96,28 +96,28 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _showUnconscious,
         _ignoredCanInteractConditions
         ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "onActionAdded", {
-			params ["_id", "_target", "_argArray"];
-			_argArray params ["","","_args"];
-			_args params
-	        [
-				"_title",
-				"_hint",
-				"_iconIdle",
-				"_iconProgress",
-				"_condShow",
-				"_condProgress",
-				"_codeStart",
-				"_codeProgress",
-				"_codeCompleted",
-				"_codeInterrupted",
-				"_arguments",
-				"_priority",
-				"_removeCompleted",
-				"_showUnconscious",
-				"_ignoredCanInteractConditions"
-	        ];
+            params ["_id", "_target", "_argArray"];
+            _argArray params ["","","_args"];
+            _args params
+            [
+                "_title",
+                "_hint",
+                "_iconIdle",
+                "_iconProgress",
+                "_condShow",
+                "_condProgress",
+                "_codeStart",
+                "_codeProgress",
+                "_codeCompleted",
+                "_codeInterrupted",
+                "_arguments",
+                "_priority",
+                "_removeCompleted",
+                "_showUnconscious",
+                "_ignoredCanInteractConditions"
+            ];
 
             _target setUserActionText [_id,_title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconIdle)]];
 
-		}, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
+        }, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
 };

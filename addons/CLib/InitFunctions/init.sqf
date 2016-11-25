@@ -1,5 +1,5 @@
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 

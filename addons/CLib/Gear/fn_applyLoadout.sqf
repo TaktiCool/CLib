@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 
@@ -164,6 +164,13 @@ private ["_items", "_item", "_i"];
 ["script", {
     {
         [_unit,_loadout] call compile _x;
+        nil
+    } count _item;
+}] call _fnc_do;
+
+["unitTrait", {
+    {
+        _unit setUnitTrait _x;
         nil
     } count _item;
 }] call _fnc_do;

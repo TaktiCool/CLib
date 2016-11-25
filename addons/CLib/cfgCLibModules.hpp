@@ -45,6 +45,7 @@ class CfgCLibModules {
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 FNC(serverInit);
+                APIFNC(shuffleArray);
                 FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
             };
@@ -82,6 +83,8 @@ class CfgCLibModules {
         MODULE(Localisation) {
             dependency[] = {"CLib/Events"};
             FNC(init);
+            FNC(client);
+            FNC(server) { serverOnly = 1; };
             APIFNC(isLocalised);
             APIFNC(readLocalisation);
             APIFNC(formatLocalisation);
@@ -108,8 +111,7 @@ class CfgCLibModules {
             dependency[] = {};
             APIFNC(callExtension);
             FNC(init);
-            APIFNC(remoteCallExtension);
-            APIFNC(splitOutputString);
+            FNC(serverInit);
         };
 
         MODULE(Gear) {
@@ -137,7 +139,7 @@ class CfgCLibModules {
             FNC(clientInitInteraction);
             APIFNC(holdActionCallback);
             APIFNC(inRange);
-            APIFNC(loop);
+            FNC(onCursorObjectChanged);
             APIFNC(overrideAction);
         };
 
@@ -231,6 +233,10 @@ class CfgCLibModules {
             APIFNC(createSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);
+            FNC(exportSimpleObjectComp) {
+                api = 1;
+                serverOnly = 1;
+            };
         };
     };
 };

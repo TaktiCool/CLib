@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: NetFusion
 
@@ -19,6 +19,7 @@ CLib_Player = player;
 GVAR(oldGear) = CLib_Player call CFUNC(getAllGear);
 GVAR(oldVisibleMap) = false;
 GVAR(oldPLayerSide) = playerSide;
+GVAR(oldCursorObject) = objNull;
 GVAR(oldCursorTarget) = objNull;
 GVAR(groupUnits) = [];
 [{
@@ -52,6 +53,12 @@ GVAR(groupUnits) = [];
     if (!(_data isEqualTo GVAR(oldCursorTarget))) then {
         ["cursorTargetChanged", _data] call CFUNC(localEvent);
         GVAR(oldCursorTarget) = _data;
+    };
+
+    _data = cursorObject;
+    if (!(_data isEqualTo GVAR(oldCursorObject))) then {
+        ["cursorObjectChanged", _data] call CFUNC(localEvent);
+        GVAR(oldCursorObject) = _data;
     };
 
     _data = units CLib_Player;
@@ -147,8 +154,8 @@ GVAR(groupUnits) = [];
 } count [
     "InventoryOpened",
     "Killed",
-    "Respawn"/*,
-    "AnimStateChanged"*/
+    "Respawn",
+    "AnimStateChanged"
 ];
 
 // Fix an Arma bug

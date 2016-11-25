@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 
@@ -15,7 +15,7 @@
     Returns:
     All SimpleObjects <Array<Objects>>
 */
-params ["_input", "_pos", "_rot"];
+params ["_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
 
 switch (typeName _input) do {
     case ("STRING"): {
@@ -34,17 +34,50 @@ switch (typeName _input) do {
     };
 };
 
+_input params ["_alignOnSurface", "_objects"];
+
 if (isNil "_input" || {_input isEqualTo []}) exitWith {
     LOG("ERROR SimpleObjectComp Dont exist: " + _input)
     []
 };
+private _intersections = lineIntersectsSurfaces [
+    AGLtoASL _pos,
+    AGLtoASL _pos vectorAdd [0,0,-100],
+    _ignoreObj1,
+    _ignoreObj2
+];
+
+private _normalVector = (_intersections select 0) select 1;
+private _posVectorASL = (_intersections select 0) select 0;
+
+private _originObj = "Land_HelipadEmpty_F" createVehicleLocal ASLtoAGL _posVectorASL;
+_originObj setPosASL _posVectorASL;
+
+private _xVector = _dir vectorCrossProduct _normalVector;
+_dir = _normalVector vectorCrossProduct _xVector;
+private _ovUp = [[0,0,1], _normalVector] select _alignOnSurface;
+
+_originObj setVectorDirAndUp [_dir, _ovUp];
+
+private _originPosAGL = _originObj modelToWorld [0,0,0];
+private _originPosASL = AGLToASL _originPosAGL;
 
 private _return = [];
 {
-    _x params ["_path", "_posOffset", "_rotOffset", "_hideSelectionArray", "_animateArray"];
+    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray"];
 
-    private _obj = createSimpleObject [_path, _pos vectorAdd _posOffset];
-    // TODO Rotation
+    private _obj = objNull;
+    private _isClass = isClass (configFile >> "CfgVehicles" >> _path);
+
+    if (_isClass) then {
+        _obj = _path createVehicle (_originObj modelToWorld _posOffset);
+        _obj setPosASL AGLtoASL (_originObj modelToWorld _posOffset);
+    } else {
+
+        _obj = createSimpleObject [_path, AGLtoASL (_originObj modelToWorld _posOffset)];
+    };
+
+    _obj setVectorDirAndUp [AGLtoASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL,  AGLtoASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {
@@ -58,10 +91,14 @@ private _return = [];
             nil
         } count _animateArray;
     };
+    if (_isClass) then {
+        ["enableSimulation", [_obj, false]] call CFUNC(serverEvent);
+    };
     _return pushBack _obj;
     nil
-} count _input;
+} count _objects;
 
+deleteVehicle _originObj;
 
 _return;
 /* return
