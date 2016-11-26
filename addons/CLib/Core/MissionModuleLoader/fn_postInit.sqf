@@ -48,7 +48,7 @@ private _fnc_compileMissionFunction = {
 private _allMissionModules = [];
 
 private _config = missionConfigFile >> "CfgCLibMissionModules";
-
+if !(isClass _config) exitWith {};
 private _functionTag = getText (_config >> "tag");
 
 // Read Module Loop
