@@ -41,8 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-extensions/Clib/bin/*
-extensions/Clib/obj/*
+extensions/CLib/bin/*
+extensions/CLib/obj/*
 extensions/packages/*
 *.exp
 *.pdb
@@ -53,3 +53,4 @@ extensions/packages/*
 
 # IDEA files
 .idea/
+*.iml

@@ -47,7 +47,7 @@ private _fnc_compileMissionFunction = {
 
 private _allMissionModules = [];
 
-private _config = missionConfigFile >> "CfgClibMissionModules";
+private _config = missionConfigFile >> "CfgCLibMissionModules";
 
 private _functionTag = getText (_config >> "tag");
 
