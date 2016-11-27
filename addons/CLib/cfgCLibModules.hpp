@@ -230,7 +230,7 @@ class CfgCLibModules {
         };
 
         MODULE(SimpleObjectFramework) {
-            dependency[] = {"CLib/Namespaces"};
+            dependency[] = {"CLib/Namespaces", "CLib/Events"};
             APIFNC(createSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);

@@ -28,8 +28,14 @@ if (isServer) then {
 ["InventoryOpened", {
     (_this select 0) params ["", "_container", ["_subContainer", objNull]];
     if (_container getVariable [QGVAR(isSimpleObject), false] || _subContainer getVariable [QGVAR(isSimpleObject), false]) exitWith {
-        CLib_Player action ["Gear", CLib_Player];
+        [{
+            (findDisplay 602) closeDisplay 0;
+            [{
+                Clib_Player action ["Gear", objNull];
+            }, 1] call CFUNC(wait);
+        }, {
+            !isNull (findDisplay 602)
+        }] call CFUNC(waitUntil);
         _CLib_EventReturn = true;
     };
-    _CLib_EventReturn = false;
 }] call CFUNC(addEventhandler);
