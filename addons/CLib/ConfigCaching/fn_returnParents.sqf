@@ -5,14 +5,14 @@
     Author: joko // Jonas
 
     Description:
-    Return all Parents of a ConfigClass and Cache them in a Namespace
+    Returns all parents of a ConfigClass and caches them in a namespace
 
     Parameter(s):
     0: ConfigPath <ConfigPath>
-    1: return Names <Bool>
+    1: Return names <Bool>
 
     Returns:
-    all Partent Classes <Array<ConfigPath>>
+    All Parent Classes <Array<ConfigPath>>
 */
 private _ret = GVAR(configCache) getVariable format [QGVAR(returnParents_%1), _this];
 if (isNil "_ret") then {

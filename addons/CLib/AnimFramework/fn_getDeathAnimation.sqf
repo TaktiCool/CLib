@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    get the Death Animation for a Unit
+    Gets the death animation for a unit
 
     Parameter(s):
     0: Unit <Object>
@@ -22,7 +22,7 @@ private _animState = animationState _unit;
 
 private _unitAnimCfg = configFile >> "CfgMovesMaleSdr" >> "States" >> _animState;
 
-// exit if death unit is allready in death Anim
+// exit if dead unit is already in the death Anim
 if (getNumber (_unitAnimCfg >> "terminal") isEqualTo 1) exitWith {_animState};
 
 private _unitActions = configFile >> "CfgMovesBasic" >> "Actions" >> getText (_unitAnimCfg >> "actions");

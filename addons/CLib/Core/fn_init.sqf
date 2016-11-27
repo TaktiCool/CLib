@@ -8,7 +8,7 @@ if (hasInterface) then {
 
 if (hasInterface) then {
 
-    // functions for Disable User Input
+    // functions for disabling user input
     DFUNC(onButtonClickEndStr) = {
         closeDialog 0;
         failMission 'LOSER';
@@ -21,8 +21,8 @@ if (hasInterface) then {
         [false] call CFUNC(disableUserInput);
     } call CFUNC(codeToString);
 
-    // this fix a issue that Static Guns and Cars dont have right Damage on Lower LODs what mean you can not hit a Unit in a Static gun.
-    // this fix the issue until BI fix this issue and prevent False Reports
+    // this fixes an issue that static guns and cars don't have proper damage on lower LODs meaning that you can't hit a unit in a static gun.
+    // this fixes the issue until BI fixes this issue and prevents false reports
     GVAR(staticVehicleFix) = [];
     ["entityCreated", {
         params ["_args"];
