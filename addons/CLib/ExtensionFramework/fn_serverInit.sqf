@@ -22,14 +22,15 @@ GVAR(tasks) = call CFUNC(createNamespace);
     if (!(_data isEqualType "")) then {
         _data = str _data;
     };
-
-    private _parameterString = format [">%1|%2", _extensionName, _actionName];
+    DUMP(_data)
+    private _parameterString = format [">%1%2%3", _extensionName, toString [30], _actionName];
+    DUMP(_parameterString)
     if (_data != "") then {
-        _parameterString = format ["%1|%2", _parameterString, _data select [0, 7000 - (count _parameterString)]];
+        _parameterString = format ["%1%2%3", _parameterString, toString [30], _data select [0, 7000 - (count _parameterString)]];
         _data = _data select [7000 - (count _parameterString), count _data];
     };
     private _taskId = "CLib" callExtension _parameterString;
-
+    DUMP(_taskId)
 //    private _position = 0;
 //    while {_position <= count _data} do {
 //        "CLib" callExtension (_data select [_position, 7000]);
@@ -41,5 +42,18 @@ GVAR(tasks) = call CFUNC(createNamespace);
 
 [{
     private _result = "CLib" callExtension "<";
-    private _taskIds = _result splitString "|";
+    if (_result == "") exitWith {};
+
+    private _results = _result splitString (toString [29]);
+    {
+        (_x splitString (toString [30])) params ["_taskId", "_result"];
+        DUMP(_x)
+        DUMP(_taskId)
+        DUMP(_result)
+        DUMP(allVariables GVAR(tasks))
+        ([GVAR(tasks), _taskId, [objNull, 0]] call CFUNC(getVariable)) params ["_sender", "_senderId"];
+
+        [QGVAR(extensionResult), _sender, [_senderId, _result]] call CFUNC(targetEvent);
+        nil
+    } count _results;
 }] call CFUNC(addPerFrameHandler);
