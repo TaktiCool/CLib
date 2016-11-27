@@ -14,15 +14,24 @@
     None
 */
 GVAR(waitArray) = [];
+GVAR(sortWaitArray) = false;
+
 GVAR(waitUntilArray) = [];
+
 GVAR(perFrameHandlerArray) = [];
 GVAR(PFHhandles) = [];
+
+GVAR(skipFrameArray) = [];
+GVAR(sortSkipFrameArray) = false
+
 GVAR(nextFrameBufferA) = [];
 GVAR(nextFrameBufferB) = [];
 GVAR(nextFrameNo) = diag_frameno;
+
 CGVAR(deltaTime) = diag_tickTime - (diag_tickTime/10000);
 GVAR(lastFrameTime) = diag_tickTime;
-GVAR(sortWaitArray) = false;
+
+
 GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
     if (getClientState == "GAME FINISHED") exitWith {
         removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
@@ -55,14 +64,6 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
 
     private _delete = false;
 
-    /*
-    // Code Ported from ACE changed by joko // Jonas
-    while {!(GVAR(waitArray) isEqualTo []) && {GVAR(waitArray) select 0 select 0 <= time}} do {
-        private _entry = GVAR(waitArray) deleteAt 0;
-        (_entry select 2) call (_entry select 1);
-    };
-    */
-
     {
         if (_x select 0 >= time) exitWith {};
         (_x select 2) call (_x select 1);
@@ -72,11 +73,11 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
 
     if (_delete) then {
         GVAR(waitArray) = GVAR(waitArray) - [objNull];
+        _delete = false;
     };
 
-    _delete = false;
 
-     {
+    {
         if ((_x select 2) call (_x select 1)) then {
             (_x select 2) call (_x select 0);
             _delete = true;
@@ -87,6 +88,25 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
 
     if (_delete) then {
         GVAR(waitUntilArray) = GVAR(waitUntilArray) - [objNull];
+        _delete = false;
+    };
+
+    if (GVAR(sortSkipFrameArray)) then {
+        GVAR(skipFrameArray) sort true;
+        GVAR(sortSkipFrameArray) = false;
+    };
+
+    {
+        if (_x select 0 >= diag_frameNo) exitWith {};
+        (_x select 2) call (_x select 1);
+        _delete = true;
+        GVAR(skipFrameArray) set [_forEachIndex, objNull];
+        nil
+    } forEach GVAR(skipFrameArray);
+
+    if (_delete) then {
+        GVAR(skipFrameArray) = GVAR(skipFrameArray) - [objNull];
+        _delete = false;
     };
 
     //Handle the execNextFrame array:

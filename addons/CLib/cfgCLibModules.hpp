@@ -61,6 +61,7 @@ class CfgCLibModules {
             APIFNC(execNextFrame);
             FNC(init);
             APIFNC(removePerframeHandler);
+            APIFNC(skipFrames);
             APIFNC(wait);
             APIFNC(waitUntil);
         };

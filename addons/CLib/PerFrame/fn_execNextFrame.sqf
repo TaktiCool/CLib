@@ -22,3 +22,7 @@ if (diag_frameno == GVAR(nextFrameNo)) then {
     GVAR(nextFrameBufferA) pushBack [_params, _func];
 };
 Nil
+
+
+// Experimental need performance testing
+// [_func, 1, _params] call CFUNC(skipFrames);
