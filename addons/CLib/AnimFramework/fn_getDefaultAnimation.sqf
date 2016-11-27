@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    get the Default Animation for a Unit
+    Gets the default animation for a unit
 
     Parameter(s):
     0: Unit <Object>
@@ -18,7 +18,7 @@
 params ["_unit"];
 private _animState = toLower (animationState _unit);
 
-// stance are broken for some Animations
+// stances are broken for some Animations
 private _stance = switch (_animState select [4, 4]) do {
     case ("ppne"): { "pne" };
     case ("pknl"): { "knl" };

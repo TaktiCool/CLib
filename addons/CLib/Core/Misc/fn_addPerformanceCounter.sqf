@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    [Description]
+    Starts or stops the performance counter with the given name (depending on the toggle value)
 
     Parameter(s):
     0: Name of Counter <String>

@@ -5,13 +5,13 @@
     Author: joko // Jonas
 
     Description:
-    Convert Code to String used for some Eventhandler
+    Converts the given code to a string which is needed for some EventHandler
 
     Parameter(s):
-    Code to Convert <Code>
+    Code to convert <Code>
 
     Returns:
-    Code in String <String>
+    Code as String <String>
 */
 params ["_code"];
 if (_code isEqualType "") exitWith {_code};
