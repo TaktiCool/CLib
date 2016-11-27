@@ -22,7 +22,7 @@ GVAR(perFrameHandlerArray) = [];
 GVAR(PFHhandles) = [];
 
 GVAR(skipFrameArray) = [];
-GVAR(sortSkipFrameArray) = false
+GVAR(sortSkipFrameArray) = false;
 
 GVAR(nextFrameBufferA) = [];
 GVAR(nextFrameBufferB) = [];
