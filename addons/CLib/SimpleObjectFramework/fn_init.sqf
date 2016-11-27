@@ -24,3 +24,12 @@ if (isServer) then {
     } count [configFile, campaignConfigFile, missionConfigFile];
     publicVariable QGVAR(namespace);
 };
+
+["InventoryOpened", {
+    (_this select 0) params ["", "_container", ["_subContainer", objNull]];
+    if (_container getVariable [QGVAR(isSimpleObject), false] || _subContainer getVariable [QGVAR(isSimpleObject), false]) exitWith {
+        CLib_Player action ["Gear", CLib_Player];
+        _CLib_EventReturn = true;
+    };
+    _CLib_EventReturn = false;
+}] call CFUNC(addEventhandler);

@@ -12,7 +12,7 @@
     1: Arguments <Any> (default: nil)
 
     Returns:
-    None
+    Return of Last set on _CLib_EventReturn <Any>
 */
 
 #ifdef isDev
@@ -32,6 +32,7 @@
 #endif
 
 private _eventArray = GVAR(EventNamespace) getVariable _eventName;
+private _CLib_EventReturn = nil;
 if !(isNil "_eventArray") then {
     {
         if !(isNil "_x") then {
@@ -44,4 +45,8 @@ if !(isNil "_eventArray") then {
         nil
     } count _eventArray;
 };
-nil
+if (isNil "_CLib_EventReturn") then {
+    nil
+} else {
+    _CLib_EventReturn
+};

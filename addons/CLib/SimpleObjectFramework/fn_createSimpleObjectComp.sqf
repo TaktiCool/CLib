@@ -72,11 +72,17 @@ private _return = [];
     if (_isClass) then {
         _obj = _path createVehicle (_originObj modelToWorld _posOffset);
         _obj setPosASL AGLtoASL (_originObj modelToWorld _posOffset);
+
+        // fix issue that if you spawn a Vehicle with a Inventory the Items are still there
+        clearWeaponCargoGlobal _obj;
+        clearMagazineCargoGlobal _obj;
+        clearItemCargoGlobal _obj;
+        clearBackpackCargoGlobal _obj;
     } else {
 
         _obj = createSimpleObject [_path, AGLtoASL (_originObj modelToWorld _posOffset)];
     };
-
+    _obj setVariable [QGVAR(isSimpleObject), true, true];
     _obj setVectorDirAndUp [AGLtoASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL,  AGLtoASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
