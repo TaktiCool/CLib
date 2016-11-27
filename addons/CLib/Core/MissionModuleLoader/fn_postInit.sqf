@@ -22,17 +22,7 @@ private _fnc_compileMissionFunction = {
         #define DEBUGHEADER ""
     #endif
 
-    #define SCRIPTHEADER "\
-    private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {\
-        '%1'\
-    } else {\
-        _fnc_scriptName\
-    };\
-    private _fnc_scriptName = '%1';\
-    scriptName _fnc_scriptName;\
-    scopeName (_fnc_scriptName + '_Main');\
-    %2\
-    "
+    #define SCRIPTHEADER "private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {'%1'} else {_fnc_scriptName};private _fnc_scriptName = '%1';scriptName _fnc_scriptName;scopeName (_fnc_scriptName + '_Main');%2"
 
     private _header = format [SCRIPTHEADER, _functionVarName, DEBUGHEADER];
     private _funcString = _header + preprocessFileLineNumbers _functionPath;
@@ -48,7 +38,7 @@ private _fnc_compileMissionFunction = {
 private _allMissionModules = [];
 
 private _config = missionConfigFile >> "CfgCLibMissionModules";
-
+if !(isClass _config) exitWith {};
 private _functionTag = getText (_config >> "tag");
 
 // Read Module Loop
