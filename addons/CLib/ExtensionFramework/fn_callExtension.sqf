@@ -24,8 +24,9 @@ params ["_extensionName", "_actionName", ["_data", []], ["_callback", {}], ["_ar
 
 private _id = GVAR(taskIds) find objNull;
 if (_id == -1) then {
-    _id = count GVAR(taskIds);
+    _id = GVAR(taskIds) pushBack [_callback, _args];
+} else {
+    GVAR(taskIds) set [_id, [_callback, _args]];
 };
-GVAR(taskIds) set [_id, [_callback, _args]];
 
 [QGVAR(extensionRequest), [_extensionName, _actionName, _data, CLib_Player, _id]] call CFUNC(serverEvent);

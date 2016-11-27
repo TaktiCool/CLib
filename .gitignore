@@ -41,9 +41,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-extensions/CLib/bin/*
-extensions/CLib/obj/*
-extensions/packages/*
+extensions/CLib/CLib/bin/*
+extensions/CLib/CLib/obj/*
+extensions/CLib/packages/*
 *.exp
 *.pdb
 *.lib

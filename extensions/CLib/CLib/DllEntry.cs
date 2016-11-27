@@ -10,7 +10,7 @@ namespace CLib
     public class DllEntry
     {
         public static Debugger Debugger;
-        private static List<Guid> tasks = new List<Guid>();
+        private static Dictionary<Guid, string> taskResults = new Dictionary<Guid, string>();
 
         static DllEntry()
         {
@@ -29,7 +29,9 @@ namespace CLib
             {
                 try
                 {
-                    string[] parameter = input.Substring(1).Split(new char[] { '|' }, 3);
+                    DllEntry.Debugger.Log(input);
+                    string[] parameter = input.Substring(1).Split(new char[] { '\u001E' }, 3);
+                    DllEntry.Debugger.Log(parameter[0]);
                     if (parameter.Length < 2)
                         return;
                     output.Append(DllEntry.Execute(parameter[0], parameter[1]));
@@ -44,12 +46,15 @@ namespace CLib
             {
                 try
                 {
-                    if (DllEntry.tasks.Count == 0)
+                    if (DllEntry.taskResults.Count == 0)
                         return;
 
-                    Guid id = DllEntry.tasks[0];
-                    DllEntry.tasks.RemoveAt(0);
-                    output.Append(id);
+                    foreach (Guid key in DllEntry.taskResults.Keys)
+                    {
+                        output.Append(key.ToString() + '\u001E' + DllEntry.taskResults[key] + '\u001E');
+                        DllEntry.Debugger.Log("Task result: " + key);
+                    }
+                    DllEntry.taskResults.Clear();
                 }
                 catch (Exception e)
                 {
@@ -57,14 +62,15 @@ namespace CLib
                 }
             }
 
-            outputSize--;
+            outputSize -= output.Length + 1;
         }
 
         private static string Execute(string extension, string action)
         {
             Guid id = Guid.NewGuid();
 
-            DllEntry.tasks.Add(id);
+            DllEntry.Debugger.Log("Execute task: " + id);
+            DllEntry.taskResults.Add(id, "resultString");
 
             return id.ToString();
         }
