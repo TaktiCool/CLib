@@ -2,7 +2,7 @@
 /*
     Community Lib - CLib
 
-    Author: joko // Jonas
+    Author: joko // Jonas, NetFusion
 
     Description:
     Init Some Events for Extension Framework
@@ -14,44 +14,37 @@
     None
 */
 
-GVAR(tasks) = call CFUNC(createNamespace);
-GVAR(groupSeperator) = toString [29];
-GVAR(recordSeperator) = toString [30];
+GVAR(tasks) = [];
+GVAR(pendingTasks) = 0;
+
+// Communication control
+GVAR(SOH) = toString [1];
+GVAR(STX) = toString [2];
+GVAR(ETX) = toString [3];
+GVAR(EOT) = toString [4];
+GVAR(ENQ) = toString [5];
+GVAR(ACK) = toString [6];
+
+// Information separators
+GVAR(RS) = toString [30];
+GVAR(US) = toString [31];
 
 [QGVAR(extensionRequest), {
-    (_this select 0) params ["_extensionName", "_actionName", "_data", "_sender", "_senderId"];
+    (_this select 0) params ["_extensionName", "_actionName", "_data", "_sender", "_clientTaskId"];
 
-    if (!(_data isEqualType "")) then {
-        _data = str _data;
-    };
-    _data = _data + GVAR(groupSeperator);
-
-    private _parameterString = format [">%1%2%3", _extensionName, GVAR(recordSeperator), _actionName];
-    private _dataPosition = 0;
-    if (_data != "") then {
-        _parameterString = format ["%1%2%3", _parameterString, GVAR(recordSeperator), _data select [0, 7000 - (count _parameterString)]];
-        _dataPosition = 7000 - (count _parameterString);
-    };
-    private _taskId = "CLib" callExtension _parameterString;
-
-    while {_dataPosition <= count _data} do {
-        "CLib" callExtension (">" + (_data select [_dataPosition, 7000]));
-        _dataPosition = _dataPosition + 7000;
+    // Assign the sender details to the task id to return the result when its there
+    private _taskId = GVAR(tasks) find objNull;
+    if (_taskId == -1) then {
+        _taskId = GVAR(tasks) pushBack [_sender, _clientTaskId];
+    } else {
+        GVAR(tasks) set [_taskId, [_sender, _clientTaskId]];
     };
 
-    GVAR(tasks) setVariable [_taskId, [_sender, _senderId]];
+    private _result = [_taskId, _extensionName, _actionName, _data] call FUNC(extensionRequest);
+
+    if (!(isNil "_result")) then {
+        GVAR(tasks) set [_taskId, objNull];
+
+        [QGVAR(extensionResult), _sender, [_clientTaskId, _result]] call CFUNC(targetEvent);
+    };
 }] call CFUNC(addEventHandler);
-
-[{
-    private _result = "CLib" callExtension "<";
-    if (_result == "") exitWith {};
-
-    private _results = _result splitString GVAR(groupSeperator);
-    {
-        (_x splitString GVAR(recordSeperator)) params ["_taskId", "_result"];
-        ([GVAR(tasks), _taskId, [objNull, 0]] call CFUNC(getVariable)) params ["_sender", "_senderId"];
-
-        [QGVAR(extensionResult), _sender, [_senderId, _result]] call CFUNC(targetEvent);
-        nil
-    } count _results;
-}] call CFUNC(addPerFrameHandler);

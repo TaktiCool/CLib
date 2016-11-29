@@ -13,7 +13,7 @@
     Returns:
 
 */
-params ["_configPath", ["_seperator", "/", [""]]];
+params ["_configPath", ["_separator", "/", [""]]];
 
 private _return = [];
 
@@ -38,4 +38,4 @@ private _hierarchy = configHierarchy (_configPath);
     nil
 } count _hierarchy;
 
-_return joinString _seperator;
+_return joinString _separator;

@@ -17,13 +17,11 @@
 GVAR(taskIds) = [];
 
 [QGVAR(extensionResult), {
-    DUMP(_this)
     (_this select 0) params ["_id", "_result"];
-    DUMP(_id)
-    DUMP(_result)
-    (GVAR(taskIds) select _id) params ["_callback", "_args"];
-    DUMP(_callback)
-    DUMP(_args)
+    private _taskId = GVAR(taskIds) param [_id, objNull];
+    if (_taskId isEqualType objNull) exitWith {};
+
+    _taskId params ["_callback", "_args"];
     GVAR(taskIds) set [_id, objNull];
 
     [_result, _args] call _callback;

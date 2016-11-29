@@ -109,8 +109,10 @@ class CfgCLibModules {
         };
 
         MODULE(extensionFramework) {
-            dependency[] = {};
+            dependency[] = {"CLib/Events", "CLib/PerFrame"};
             APIFNC(callExtension);
+            FNC(extensionRequest) { serverOnly = 1; };
+            FNC(extensionFetch) { serverOnly = 1; };
             FNC(init);
             FNC(serverInit);
         };
