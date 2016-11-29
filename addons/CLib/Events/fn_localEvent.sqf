@@ -48,5 +48,6 @@ if !(isNil "_eventArray") then {
 if (isNil "_CLib_EventReturn") then {
     nil
 } else {
+    DUMP("Event " + _eventName + " Returned: " + str _CLib_EventReturn)
     _CLib_EventReturn
 };
