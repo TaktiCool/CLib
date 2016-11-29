@@ -13,7 +13,7 @@
     Returns:
     None
 */
-if{ ((getNumber (missionConfigFile >> (QPREFIX + "_useExperimentalAutoload"))) isEqualTo 1) then {
+if ((getNumber (missionConfigFile >> (QPREFIX + "_useExperimentalAutoload"))) isEqualTo 1) then {
 
     [QGVAR(onPlayerConnected), "onPlayerConnected", {
         [] remoteExec [QCFUNC(loadModules), _owner];
