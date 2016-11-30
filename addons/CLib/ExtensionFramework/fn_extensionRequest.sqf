@@ -46,7 +46,7 @@ while {_dataPosition <= count _data && _result == GVAR(ACK)} do {
 };
 DUMP(_result select [0, 1])
 // Start the result fetcher if we did not get a result yet
-if (_result == GVAR(ACK)) exitWith {
+if (_taskId >= 0 && _result == GVAR(ACK)) exitWith {
     GVAR(pendingTasks) = GVAR(pendingTasks) + 1;
     if (GVAR(pendingTasks) == 1) then {
         [{
@@ -69,7 +69,7 @@ if (_result == GVAR(ACK)) exitWith {
 };
 
 // Parse the result if there is one
-if ((_result select [0, 1]) == GVAR(STX)) exitWith {
+if (_taskId == -1 && (_result select [0, 1]) == GVAR(STX)) exitWith {
     // Fetch and parse all chunks of data
     private _result = _result call FUNC(extensionFetch);
 

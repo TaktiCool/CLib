@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArmaRequest.cs" />
+    <Compile Include="ControlCharacter.cs" />
     <Compile Include="Debugger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +56,7 @@
       <DependentUpon>Debugger.cs</DependentUpon>
     </Compile>
     <Compile Include="DllEntry.cs" />
+    <Compile Include="FunctionLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
