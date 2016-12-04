@@ -65,7 +65,7 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
     private _delete = false;
 
     {
-        if (_x select 0 >= time) exitWith {};
+        if (_x select 0 > time) exitWith {};
         (_x select 2) call (_x select 1);
         _delete = true;
         GVAR(waitArray) set [_forEachIndex, objNull];
