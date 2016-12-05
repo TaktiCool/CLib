@@ -64,24 +64,11 @@ private _originPosASL = AGLToASL _originPosAGL;
 
 private _return = [];
 {
-    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray"];
+    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray", "_setObjectTextureArray"];
 
     private _obj = objNull;
-    private _isClass = isClass (configFile >> "CfgVehicles" >> _path);
 
-    if (_isClass) then {
-        _obj = _path createVehicle (_originObj modelToWorld _posOffset);
-        _obj setPosASL AGLtoASL (_originObj modelToWorld _posOffset);
-
-        // fix issue that if you spawn a Vehicle with a Inventory the Items are still there
-        clearWeaponCargoGlobal _obj;
-        clearMagazineCargoGlobal _obj;
-        clearItemCargoGlobal _obj;
-        clearBackpackCargoGlobal _obj;
-    } else {
-
-        _obj = createSimpleObject [_path, AGLtoASL (_originObj modelToWorld _posOffset)];
-    };
+    _obj = createSimpleObject [_path, AGLtoASL (_originObj modelToWorld _posOffset)];
     _obj setVariable [QGVAR(isSimpleObject), true, true];
     _obj setVectorDirAndUp [AGLtoASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL,  AGLtoASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
@@ -97,8 +84,17 @@ private _return = [];
             nil
         } count _animateArray;
     };
-    if (_isClass) then {
-        ["enableSimulation", [_obj, false]] call CFUNC(serverEvent);
+
+    if (_setObjectTextureArray isEqualType [] && {!(_setObjectTextureArray isEqualTo [])}) then {
+        {
+            _x params ["_type", "_id", "_path"];
+            if (_type isEqualTo 1) then {
+                _obj setObjectMaterialGlobal [_id, _path];
+            } else {
+                _obj setObjectTextureGlobal [_id, _path];
+            };
+            nil
+        } count _setObjectTextureArray;
     };
     _return pushBack _obj;
     nil
