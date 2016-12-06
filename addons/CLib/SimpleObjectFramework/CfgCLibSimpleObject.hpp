@@ -87,4 +87,30 @@ class CfgCLibSimpleObject {
             };
         };
     };
+    class testSimpleObject_Multiple_WithAll {
+        class Item1 {
+            path = "a3\armor_f_beta\apc_tracked_01\APC_Tracked_01_aa_F.p3d";
+            offset[] = {1, 1, 1};
+            dirVector[] = {0, 1, 0}; // Direction Vector
+            upVector[] = {0, 0, 1}; // Up Vector
+            class animate {
+                class animName {
+                    phase = 1;
+                    speedType = "BOOL"; // BOOL or NUMBER default is NUMBER
+                    speed = 1; // if this is Bool this get Maxed to 1
+                };
+            };
+            class hideSelection {
+                test123Selection = 1;
+                test1234Selection = 0;
+            };
+            class setTexture {
+                class texture1 {
+                    isMaterial = 0; // defined if setObjectTexture or setObjectMaterial get used
+                    texture = "";
+                    id = 0;
+                };
+            };
+        };
+    };
 };

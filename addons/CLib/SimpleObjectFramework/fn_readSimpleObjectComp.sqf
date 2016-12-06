@@ -73,11 +73,23 @@ private _fnc_readSimpleObjectClass = {
         _hideSelectionArray = false;
     };
 
-    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray]
+    private _setObjectTextureArray = [];
+    if (isClass (_config >> "setTexture")) then {
+        {
+            _setObjectTextureArray pushBack [getNumber (_x >> "isMaterial"), getNumber (_x >> "id"), getText (_x >> "texture")];
+            nil
+        } count (configProperties [_x >> "setTexture", "true", true]);
+    };
+    if (_setObjectTextureArray isEqualTo []) then {
+        _setObjectTextureArray = false;
+    };
+
+    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray, _setObjectTextureArray]
 };
 
 private _return = [];
 private _childs = configProperties [_config, "isClass _x", true];
+_childs = _childs select {!((configName _x) in ["animate", "hideSelection", "setTexture"])};
 private _alignOnSurface = getNumber (_config >> "alignOnSurface");
 
 if (_childs isEqualTo []) then {
@@ -98,7 +110,8 @@ _return;
     [
         "PATH",
         [offset],
-        [rotation],
+        [dir],
+        [up],
         [ // this array can be replace with a Simple FALSE what mean that this gets ignored
             ["hideSelectionName1", true],
             ["hideSelectionName2", fase]
@@ -107,6 +120,9 @@ _return;
             [
                 ["AnimName", phase, speed]
             ]
+        ],
+        [ // this array can be replace with a Simple FALSE what mean that this gets ignored
+            [id, Texture]
         ]
     ]
 ]
