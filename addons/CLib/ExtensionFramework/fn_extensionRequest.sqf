@@ -54,13 +54,14 @@ if (_taskId >= 0 && _result == GVAR(ACK)) exitWith {
 
             // Ask for data from the extension
             private _result = "CLib" callExtension GVAR(ENQ);
+            private _x = (_result select [0, 1]);
             if ((_result select [0, 1]) != GVAR(SOH)) exitWith {};
 
             // Fetch and parse all chunks of data
             private _results = _result call FUNC(extensionFetch);
 
             // Check if we need to listen for more results
-            if (GVAR(pendingTasks) == 0) then {
+            if (true) then { // || GVAR(pendingTasks) == 0
                 _id call CFUNC(removePerFrameHandler);
             };
         }] call CFUNC(addPerFrameHandler);

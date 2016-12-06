@@ -42,8 +42,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 extensions/CLib/.vs
-extensions/CLib/CLib/bin
-extensions/CLib/CLib/obj
+extensions/CLib/*/bin
+extensions/CLib/*/obj
 extensions/CLib/packages
 *.exp
 *.pdb

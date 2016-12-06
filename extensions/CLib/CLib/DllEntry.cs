@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Management;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CLib
@@ -16,17 +19,31 @@ namespace CLib
 
         private static string _inputBuffer;
         private static StringBuilder _outputBuffer;
+        private static Dictionary<string, string> availableExtensions = new Dictionary<string, string>();
         private static readonly Dictionary<int, Task<string>> Tasks = new Dictionary<int, Task<string>>();
 
         static DllEntry()
         {
             Debugger = new Debugger();
             Debugger.Show();
+            Debugger.Log("Extension framework initializing");
+
+            try
+            {
+                DetectExtensions();
+            }
+            catch (Exception e)
+            {
+                Debugger.Log(e);
+            }
+            
+
             Debugger.Log("Extension framework initialized");
         }
 
         [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
-        public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
+        public static void RVExtension(StringBuilder output, int outputSize,
+            [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             switch (input)
             {
@@ -49,25 +66,32 @@ namespace CLib
                 default:
                     switch (input[0])
                     {
-                        case (char)ControlCharacter.ACK:
+                        case ControlCharacter.ACK:
                             output.Append(_outputBuffer);
                             break;
-                        case (char)ControlCharacter.ENQ:
+                        case ControlCharacter.ENQ:
                             try
                             {
                                 if (Tasks.Count == 0)
                                     break;
 
-                                foreach (var taskId in Tasks.Keys)
+                                var completedTasksIndices = new List<int>();
+                                foreach (var taskEntry in Tasks)
                                 {
-                                    var task = Tasks[taskId];
-                                    if (!task.IsCompleted)
-                                        break;
+                                    if (!taskEntry.Value.IsCompleted)
+                                        continue;
 
-                                    output.Append(taskId.ToString() + ControlCharacter.US + task.Result + ControlCharacter.RS);
-                                    Debugger.Log("Task result: " + taskId);
-                                    Tasks.Remove(taskId);
+                                    output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    Debugger.Log("Task result: " + taskEntry.Key);
+                                    completedTasksIndices.Add(taskEntry.Key);
                                 }
+
+                                foreach (var index in completedTasksIndices)
+                                {
+                                    Tasks.Remove(index);
+                                }
+
+                                output.Append(ControlCharacter.EOT);
                             }
                             catch (Exception e)
                             {
@@ -79,10 +103,10 @@ namespace CLib
                             {
                                 _inputBuffer += input;
 
-                                if (_inputBuffer[_inputBuffer.Length - 1] == (char)ControlCharacter.ETX)
+                                if (_inputBuffer[_inputBuffer.Length - 1] == ControlCharacter.ETX)
                                     output.Append(ExecuteRequest(ArmaRequest.Parse(_inputBuffer)));
                                 else
-                                    output.Append((char)ControlCharacter.ACK);
+                                    output.Append(ControlCharacter.ACK);
                             }
                             catch (Exception e)
                             {
@@ -100,17 +124,15 @@ namespace CLib
             outputSize -= output.Length + 1;
         }
 
+        private delegate string CLibFuncDelegate(string input);
         private static string ExecuteRequest(ArmaRequest request)
         {
             _inputBuffer = "";
 
-            var extensionPath = Path.Combine(Environment.CurrentDirectory, request.ExtensionName) + ".dll";
+            if (!availableExtensions.ContainsKey(request.ExtensionName))
+                throw new ArgumentException("Extension is not valid: " + Environment.CurrentDirectory);
 
-            extensionPath = Path.GetFullPath(string.Join("", extensionPath.Split(Path.GetInvalidPathChars())));
-            if (!extensionPath.StartsWith(Environment.CurrentDirectory))
-                throw new ArgumentException("Extension has to be in " + Environment.CurrentDirectory);
-
-            var function = FunctionLoader.LoadFunction<Func<string, string>>(extensionPath, request.ActionName);
+            var function = FunctionLoader.LoadFunction<CLibFuncDelegate>(availableExtensions[request.ExtensionName], request.ActionName);
 
             if (request.TaskId == -1)
             {
@@ -119,8 +141,48 @@ namespace CLib
             else
             {
                 var task = Task.Run(() => function(request.Data));
+                if (Tasks.ContainsKey(request.TaskId))
+                    Tasks.Remove(request.TaskId);
                 Tasks.Add(request.TaskId, task);
-                return ((char)ControlCharacter.ACK).ToString();
+                return (ControlCharacter.ACK).ToString();
+            }
+        }
+
+        private static void DetectExtensions()
+        {
+            var startParameters = Environment.GetCommandLineArgs();
+            foreach (var startParameter in startParameters)
+            {
+                var match = Regex.Match(startParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
+                if (!match.Success)
+                    continue;
+
+                foreach (var path in match.Groups[1].Value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var fullPath = path;
+                    if (!Path.IsPathRooted(fullPath))
+                        fullPath = Path.Combine(Environment.CurrentDirectory, path);
+
+                    var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
+                    foreach (var extensionPath in extensionPaths)
+                    {
+                        try
+                        {
+                            var exports = FunctionLoader.ExportTable(extensionPath);
+                            if (!exports.Contains("_RVExtension@12"))
+                                continue;
+
+                            var filename = Path.GetFileNameWithoutExtension(extensionPath);
+                            if (filename != null)
+                                availableExtensions.Add(filename, extensionPath);
+                        }
+                        catch (Exception e)
+                        {
+                            Debugger.Log(e);
+                            continue;
+                        }
+                    }
+                }
             }
         }
 

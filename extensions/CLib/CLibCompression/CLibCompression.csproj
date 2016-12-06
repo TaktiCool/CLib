@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3B6CA58C-9DB3-4256-8A10-BC7101D1EE8A}</ProjectGuid>
+    <ProjectGuid>{C780B540-D5AA-4C4E-A89B-E50D5DBF76A4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CLib</RootNamespace>
-    <AssemblyName>CLib</AssemblyName>
+    <RootNamespace>CLibCompression</RootNamespace>
+    <AssemblyName>CLibCompression</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,9 +37,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,16 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArmaRequest.cs" />
-    <Compile Include="ControlCharacter.cs" />
-    <Compile Include="Debugger.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debugger.Designer.cs">
-      <DependentUpon>Debugger.cs</DependentUpon>
-    </Compile>
     <Compile Include="DllEntry.cs" />
-    <Compile Include="FunctionLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
