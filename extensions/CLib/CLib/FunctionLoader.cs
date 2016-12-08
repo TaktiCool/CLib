@@ -106,11 +106,10 @@ namespace CLib
                 var exportTable =
                     Marshal.PtrToStructure<IMAGE_EXPORT_DIRECTORY>(hModule + exportTabledataDirectory.VirtualAddress);
 
-                var addressOfNames = Marshal.ReadInt32(hModule + exportTable.AddressOfNames);
                 var names = new List<string>();
                 for (var i = 0; i < exportTable.NumberOfNames; i++)
                 {
-                    var name = Marshal.PtrToStringAnsi(hModule + addressOfNames + (i*4));
+                    var name = Marshal.PtrToStringAnsi(hModule + Marshal.ReadInt32(hModule + exportTable.AddressOfNames + (i*4)));
                     if (name == null)
                         continue;
 
