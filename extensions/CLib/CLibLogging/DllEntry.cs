@@ -28,7 +28,7 @@ namespace CLibLogging
 		{
 			string[] inputParts = input.Split(new char[] { ':' }, 2);
 
-			string path = Environment.CurrentDirectory + "\\PRA3_Logs\\" + startTime.ToString().Replace("-", "");
+			string path = Environment.CurrentDirectory + "\\CLib_Logs\\" + startTime.ToString().Replace("-", "");
 			if (!File.Exists(path))
 			{
 				Directory.CreateDirectory(path);
