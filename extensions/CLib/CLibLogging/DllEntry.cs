@@ -13,17 +13,17 @@ namespace CLibLogging
 		{
 			startTime = currentDate("{0}-{1}-{2}_{3}-{4}-{5}");
 		}
-		[DllExport("_CLibExtension@4", CallingConvention = CallingConvention.Winapi)]
-		public static string CLibExtension(string input)
-		{
-			return input;
-		}
 
 		[DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
 		public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
 		{
+			if (input.ToLower() == "version")
+			{
+				output.Append("0.2");
+			}
 		}
 
+		[DllExport("_CLibExtension@4", CallingConvention = CallingConvention.Winapi)]
 		public static string log(string input)
 		{
 			string[] inputParts = input.Split(new char[] { ':' }, 2);

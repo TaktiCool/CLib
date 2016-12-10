@@ -48,3 +48,14 @@ GVAR(US) = toString [31];
         [QGVAR(extensionResult), _sender, [_clientTaskId, _result]] call CFUNC(targetEvent);
     };
 }] call CFUNC(addEventHandler);
+
+
+DFUNC(log) = {
+    params [["_log", "", [""]], ["_file", "", [""]]];
+    _file = _file call CFUNC(sanitizeString);
+    ["CLibLogging", "log", _file + ":" + _log] call CFUNC(callExtension);
+};
+
+QCGVAR(sendlogfile) addPublicVariableEventHandler {
+    (_this select 1) call FUNC(log);
+};
