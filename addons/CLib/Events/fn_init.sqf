@@ -149,7 +149,7 @@ GVAR(ignoredLogEventNames_1) = [];
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "fillEntitiesCheck", {
-        GVAR(entities) = (((entities "") - allUnits) + allUnits) - GVAR(entitiesCached);
+        GVAR(entities) = (entities [[], [], true, false]) - GVAR(entitiesCached);
         GVAR(lastFilledEntities) = diag_frameNo + 15;
         GVAR(entitiesCached) append GVAR(entities);
         GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
