@@ -241,5 +241,9 @@ class CfgCLibModules {
                 serverOnly = 1;
             };
         };
+        MODULE(GarbageCollector) {
+            dependency[] = {"CLib/Statemachine", "CLib/Events"};
+            FNC(serverInit);
+        };
     };
 };

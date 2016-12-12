@@ -23,7 +23,7 @@ namespace CLibLogging
 			}
 		}
 
-		[DllExport("_CLibExtension@4", CallingConvention = CallingConvention.Winapi)]
+		[DllExport("_CLiblog@4", CallingConvention = CallingConvention.Winapi)]
 		public static string log(string input)
 		{
 			string[] inputParts = input.Split(new char[] { ':' }, 2);

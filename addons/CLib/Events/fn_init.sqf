@@ -26,7 +26,9 @@ GVAR(ignoredLogEventNames_1) = [];
     ["eventadded", 1],
     ["cursortargetchanged", 1],
     ["cursorobjectchanged", 1],
-    ["playerinventorychanged", 1]
+    ["playerinventorychanged", 1],
+    [QEGVAR(ExtensionFramework,extensionRequest), 0],
+    [QEGVAR(ExtensionFramework,extensionResult), 0]
 ];
 
 ["hideObject", {
