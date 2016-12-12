@@ -80,6 +80,10 @@ class CLib {
             itemsBackpack[] = {};
             linkedItems[] = {};
             script[] = {};
+            removeAllWeapons = 1;
+            removeAllItems = 1;
+            removeAllAssingedItems = 1;
+
         };
 
         class Weapon_MX : BaseCollection {
