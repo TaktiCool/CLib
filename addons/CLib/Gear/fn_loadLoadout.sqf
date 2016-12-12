@@ -20,7 +20,7 @@ params [["_cfg", "", ["", configNull]]];
 if (_cfg isEqualType "") then {
     _cfg = (configFile >> "CfgCLibLoadouts" >> _class);
     if (isClass _cfg) exitWith {};
-    _cfg = (missionConfigFile >> "CfgCLibLoadouts" >> _class);
+    _cfg = (missionConfigFile >> "CfgCLibLoadouts" >> "CLib" >> _class);
 };
 
 if !(isNil {GVAR(loadoutsNamespace) getVariable format [QGVAR(Loadout_%1), configName _cfg]}) exitWith {

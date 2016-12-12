@@ -21,88 +21,88 @@ respawn = 3;
 respawnDelay = 3;
 respawnDialog = 0;
 
-// CLib Mission Config Entrys
-class CfgCLibLocalisation {
-    class STR_CLib_TestMission {
-        English = "Test Mission";
-    };
-};
-
-CLib_useExperimentalAutoload = 0;
-
-CLib_useFallbackRemoteExecution = 0;
-CLib_useCompressedFunction = 0;
-CLib_Modules[] = {"CLib"};
-
-CLib_IgnoredAddons[] = {"CLib"};
-
-class CfgCLibMissionModules {
-    tag = "Test";
-    class testModule {
-        class clientInit;
-        class hcInit;
-        class init;
-        class serverInit;
-        class testFnc;
-    };
-};
-
-class CfgCLibLoadouts {
-
-    class BaseCollection {
-        uniform[] = {};
-        vest[] = {};
-        headgear[] = {};
-        goggle[] = {};
-        backpack[] = {};
-        primaryWeapon[] = {};
-        primaryWeaponOptic[] = {};
-        primaryWeaponMuzzle[] = {};
-        primaryWeaponBarrel[] = {};
-        primaryWeaponResting[] = {};
-        primaryWeaponLoadedMagazine[] = {};
-        secondaryWeapon[] = {};
-        secondaryWeaponOptic[] = {};
-        secondaryWeaponMuzzle[] = {};
-        secondaryWeaponBarrel[] = {};
-        secondaryWeaponResting[] = {};
-        secondaryWeaponLoadedMagazine[] = {};
-        handgun[] = {};
-        handgunOptic[] = {};
-        handgunMuzzle[] = {};
-        handgunBarrel[] = {};
-        handgunResting[] = {};
-        handgunLoadedMagazine[] = {};
-        binocular[] = {};
-        magazines[] = {};
-        items[] = {};
-        itemsUniform[] = {};
-        itemsVest[] = {};
-        itemsBackpack[] = {};
-        linkedItems[] = {};
-        script[] = {};
+class CLib {
+    // CLib Mission Config Entrys
+    class CfgCLibLocalisation {
+        class STR_CLib_TestMission {
+            English = "Test Mission";
+        };
     };
 
-    class Weapon_MX : BaseCollection {
-        primaryWeapon[] = {"arifle_MX_F"};
-        primaryWeaponOptic[] = {"optic_Aco"};
-        primaryWeaponLoadedMagazine[] = {"30Rnd_65x39_caseless_mag"};
-        primaryWeaponBarrel[] = {"acc_pointer_IR"};
-        magazines[] = {{"30Rnd_65x39_caseless_mag_Tracer",3},{"30Rnd_65x39_caseless_mag",6}};
-    };
+    useExperimentalAutoload = 0;
 
-    class Rifleman : BaseCollection {
-        uniform[] = {"U_B_CombatUniform_mcam"};
-        vest[] = {"V_PlateCarrierL_CTRG"};
-        headgear[] = {"H_HelmetB_camo"};
-        goggle[] = {"G_Combat"};
-        backpack[] = {"B_AssaultPack_mcamo"};
-        handgun[] = {"hgun_P07_F"};
-        magazines[] = {{"16Rnd_9x21_Mag",2}};
-        itemsBackpack[] = {{"FirstAidKit",3}};
-        linkedItems[] = {"ItemWatch","ItemCompass","ItemMap","NVGoggles"};
-        class PrimaryWeaponClass : Weapon_MX { // Some Collections added to Rifleman Collection
-          primaryWeaponOptic[] = {}; // Change optic to iron sight for this collection
+    useFallbackRemoteExecution = 0;
+    useCompressedFunction = 0;
+    Modules[] = {"CLib"};
+    IgnoredAddons[] = {"CLib"};
+
+    class CfgCLibMissionModules {
+        tag = "Test";
+        class testModule {
+            class clientInit;
+            class hcInit;
+            class init;
+            class serverInit;
+            class testFnc;
+        };
+    };
+    class CfgCLibLoadouts {
+
+        class BaseCollection {
+            uniform[] = {};
+            vest[] = {};
+            headgear[] = {};
+            goggle[] = {};
+            backpack[] = {};
+            primaryWeapon[] = {};
+            primaryWeaponOptic[] = {};
+            primaryWeaponMuzzle[] = {};
+            primaryWeaponBarrel[] = {};
+            primaryWeaponResting[] = {};
+            primaryWeaponLoadedMagazine[] = {};
+            secondaryWeapon[] = {};
+            secondaryWeaponOptic[] = {};
+            secondaryWeaponMuzzle[] = {};
+            secondaryWeaponBarrel[] = {};
+            secondaryWeaponResting[] = {};
+            secondaryWeaponLoadedMagazine[] = {};
+            handgun[] = {};
+            handgunOptic[] = {};
+            handgunMuzzle[] = {};
+            handgunBarrel[] = {};
+            handgunResting[] = {};
+            handgunLoadedMagazine[] = {};
+            binocular[] = {};
+            magazines[] = {};
+            items[] = {};
+            itemsUniform[] = {};
+            itemsVest[] = {};
+            itemsBackpack[] = {};
+            linkedItems[] = {};
+            script[] = {};
+        };
+
+        class Weapon_MX : BaseCollection {
+            primaryWeapon[] = {"arifle_MX_F"};
+            primaryWeaponOptic[] = {"optic_Aco"};
+            primaryWeaponLoadedMagazine[] = {"30Rnd_65x39_caseless_mag"};
+            primaryWeaponBarrel[] = {"acc_pointer_IR"};
+            magazines[] = {{"30Rnd_65x39_caseless_mag_Tracer",3},{"30Rnd_65x39_caseless_mag",6}};
+        };
+
+        class Rifleman : BaseCollection {
+            uniform[] = {"U_B_CombatUniform_mcam"};
+            vest[] = {"V_PlateCarrierL_CTRG"};
+            headgear[] = {"H_HelmetB_camo"};
+            goggle[] = {"G_Combat"};
+            backpack[] = {"B_AssaultPack_mcamo"};
+            handgun[] = {"hgun_P07_F"};
+            magazines[] = {{"16Rnd_9x21_Mag",2}};
+            itemsBackpack[] = {{"FirstAidKit",3}};
+            linkedItems[] = {"ItemWatch","ItemCompass","ItemMap","NVGoggles"};
+            class PrimaryWeaponClass : Weapon_MX { // Some Collections added to Rifleman Collection
+              primaryWeaponOptic[] = {}; // Change optic to iron sight for this collection
+            };
         };
     };
 };

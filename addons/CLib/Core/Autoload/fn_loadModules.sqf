@@ -50,7 +50,7 @@ if (hasInterface) then {
     disableUserInput true;
 };
 
-private _cfg = missionConfigFile >> (QPREFIX + "_Modules");
+private _cfg = missionConfigFile >> QPREFIX >> "Modules";
 if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
     endLoadingScreen;
     disableUserInput false;
