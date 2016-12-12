@@ -14,15 +14,13 @@
     Returns:
     None
 */
-params [["_func",{}], ["_params", []]];
 
-if (diag_frameno == GVAR(nextFrameNo)) then {
-    GVAR(nextFrameBufferB) pushBack [_params, _func];
-} else {
-    GVAR(nextFrameBufferA) pushBack [_params, _func];
-};
-Nil
-
-
-// Experimental need performance testing
-// [_func, 1, _params] call CFUNC(skipFrames);
+[{
+    params [["_func",{}], ["_params", []]];
+    if (diag_frameno == GVAR(nextFrameNo)) then {
+        GVAR(nextFrameBufferB) pushBack [_params, _func];
+    } else {
+        GVAR(nextFrameBufferA) pushBack [_params, _func];
+    };
+    Nil
+}, _this] call CFUNC(directCall);

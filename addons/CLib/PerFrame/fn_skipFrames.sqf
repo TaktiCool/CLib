@@ -16,6 +16,8 @@
     Returns:
     None
 */
-params [["_code", {}], ["_frames", 0], ["_args", []]];
-GVAR(skipFrameArray) pushBack [_frames + diag_frameNo, _code, _args];
-GVAR(sortSkipFrameArray) = true;
+[{
+    params [["_code", {}], ["_frames", 0], ["_args", []]];
+    GVAR(skipFrameArray) pushBack [_frames + diag_frameNo, _code, _args];
+    GVAR(sortSkipFrameArray) = true;
+}, _this] call CFUNC(directCall);
