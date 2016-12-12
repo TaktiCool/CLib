@@ -80,9 +80,9 @@ class CLib {
             itemsBackpack[] = {};
             linkedItems[] = {};
             script[] = {};
-            removeAllWeapons = 1;
-            removeAllItems = 1;
-            removeAllAssingedItems = 1;
+            removeAllWeapons = 0;
+            removeAllItems = 0;
+            removeAllAssingedItems = 0;
 
         };
 
