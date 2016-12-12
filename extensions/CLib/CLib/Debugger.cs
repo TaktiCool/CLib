@@ -19,13 +19,21 @@ namespace CLib
 
         public void Log(object obj)
         {
+            if (this.rtb_log.InvokeRequired)
+            {
+                this.rtb_log.Invoke(new Action(delegate {
+                    this.Log(obj);
+                }));
+                return;
+            }
+
             this.rtb_log.AppendText(obj.ToString() + "\n");
         }
 
         private void rtb_log_TextChanged(object sender, EventArgs e)
         {
-            this.rtb_log.SelectionStart = this.rtb_log.Text.Length;
-            this.rtb_log.ScrollToCaret();
+            //this.rtb_log.SelectionStart = this.rtb_log.Text.Length;
+            //this.rtb_log.ScrollToCaret();
         }
     }
 }

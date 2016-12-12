@@ -12,9 +12,10 @@ namespace CLibCompression
         {
         }
 
-        [DllExport("_CLibExtension@4", CallingConvention = CallingConvention.Winapi)]
-        public static string CLibExtension(string input)
+        [DllExport("_CLibExtension@8", CallingConvention = CallingConvention.Winapi)]
+        public static string CLibExtension(Action<string> logFunc, string input)
         {
+            logFunc(input);
             return input;
         }
     }

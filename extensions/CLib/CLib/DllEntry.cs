@@ -120,11 +120,10 @@ namespace CLib
             if (output.Length > outputSize - 1)
                 _outputBuffer = output.Remove(outputSize - 1, output.Length);
 
-            Debugger.Log(output);
             outputSize -= output.Length + 1;
         }
 
-        private delegate string CLibFuncDelegate(string input);
+        private delegate string CLibFuncDelegate(Action<string> logFunc, string input);
         private static string ExecuteRequest(ArmaRequest request)
         {
             _inputBuffer = "";
@@ -136,11 +135,11 @@ namespace CLib
 
             if (request.TaskId == -1)
             {
-                return ControlCharacter.STX + function(request.Data) + ControlCharacter.EOT;
+                return ControlCharacter.STX + function(Debugger.Log, request.Data) + ControlCharacter.EOT;
             }
             else
             {
-                var task = Task.Run(() => function(request.Data));
+                var task = Task.Run(() => function(Debugger.Log, request.Data));
                 if (Tasks.ContainsKey(request.TaskId))
                     Tasks.Remove(request.TaskId);
                 Tasks.Add(request.TaskId, task);
@@ -174,11 +173,11 @@ namespace CLib
                                 continue;
 
                             var filename = Path.GetFileNameWithoutExtension(extensionPath);
-                            if (filename != null)
-                            {
-                                availableExtensions.Add(filename, extensionPath);
-                                Debugger.Log(filename);
-                            }
+                            if (filename == null)
+                                continue;
+
+                            availableExtensions.Add(filename, extensionPath);
+                            Debugger.Log(filename);
                         }
                         catch (Exception e)
                         {

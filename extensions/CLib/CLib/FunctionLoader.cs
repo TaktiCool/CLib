@@ -141,8 +141,6 @@ namespace CLib
             if (hModule == IntPtr.Zero)
                 throw new ArgumentException("Dll not found: " + dllPath + " error code: " + GetLastError());
 
-            DllEntry.Debugger.Log(functionName);
-            DllEntry.Debugger.Log(functionName.Length);
             var functionAddress = GetProcAddress(hModule, functionName);
             if (functionAddress == IntPtr.Zero)
                 throw new ArgumentException("Function not found: " + functionName + " error code: " + GetLastError());
