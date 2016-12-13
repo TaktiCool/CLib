@@ -35,7 +35,9 @@ namespace CLibLogging
             }
             // TODO let the user define the File format
             StreamWriter file = new System.IO.StreamWriter(path + string.Format("\\CLibLog_{0}_{1}.{2}", startTime, inputParts[0], "log"), true);
-            file.WriteLine(currentDate("[{3}:{4}:{5}]") + inputParts[1]);
+            string log = currentDate("[{3}:{4}:{5}]") + inputParts[1];
+            logFunc(log);
+            file.WriteLine(log);
             file.Close();
             return "";
             
