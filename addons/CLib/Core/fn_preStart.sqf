@@ -2,13 +2,17 @@
 
 private _startTime = diag_tickTime;
 CLib_fnc_compile = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_compile.sqf";
-CLib_fnc_compressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_compressString.sqf";
-CLib_fnc_decompressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_decompressString.sqf";
 CLib_fnc_stripSqf = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_stripSqf.sqf";
 CLib_fnc_readAllModules = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_readAllModules.sqf";
 CLib_fnc_readAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_readAllFunctions.sqf";
 CLib_fnc_compileAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_compileAllFunctions.sqf";
 CLib_fnc_buildDependencyGraph = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_buildDependencyGraph.sqf";
+
+CLib_fnc_compressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_compressString.sqf";
+CLib_fnc_decompressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_decompressString.sqf";
+CLib_fnc_ordToBytes = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_ordToBytes.sqf";
+CLib_fnc_bytesToOrd = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_bytesToOrd.sqf";
+
 CLib_fnc_log = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Misc\fn_log.sqf";
 CLib_playerUID = "";
 
