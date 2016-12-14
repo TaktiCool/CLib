@@ -65,8 +65,8 @@ switch (_compression) do {
     case "LZSS": {
         // 18/5 would be optimal but may take a lot more time, 11/4 is faster but not that efficient
         #define WINDOWSIZE 2048
-        #define MINMATCHLENGTH 3
-        #define MAXMATCHLENGTH 18
+        #define MINMATCHLENGTH 2
+        #define MAXMATCHLENGTH 17
 
         private _inputLength = count _rawInput;
         private _writeCache = [];
@@ -91,7 +91,7 @@ switch (_compression) do {
             while {_windowPosition <= _searchSteps} do { // TODO kmp optimization
                 if (_char == (_rawInput select (_inputPosition - _windowPosition))) then {
                     _currentMatchLength = 1;
-                    while {(_rawInput select (_inputPosition - ((_windowPosition - _currentMatchLength) % _searchSteps))) == (_rawInput select (_inputPosition + _currentMatchLength)) && _currentMatchLength < MAXMATCHLENGTH} do {
+                    while {(_rawInput select (_inputPosition - _searchSteps + ((_searchSteps - _windowPosition + _currentMatchLength) % _searchSteps))) == (_rawInput select (_inputPosition + _currentMatchLength)) && _currentMatchLength < MAXMATCHLENGTH} do {
                         _currentMatchLength = _currentMatchLength + 1;
                     };
 
@@ -106,10 +106,10 @@ switch (_compression) do {
 
             _symbolsWritten = _symbolsWritten + 1;
 
-            if (_bestMatchLength >= MINMATCHLENGTH) then {
+            if (_bestMatchLength > MINMATCHLENGTH) then {
                 _inputPosition = _inputPosition + _bestMatchLength;
                 _encodeFlag = _encodeFlag + (2 ^ _symbolsWritten);
-                _writeCache append [((floor (_bestMatchOffset / 16)) ^ 2) + 1, ((_bestMatchOffset % 16) * 16) + (_bestMatchLength - MINMATCHLENGTH)];
+                _writeCache append [((floor (_bestMatchOffset / 16)) * 2) + 1, ((_bestMatchOffset % 16) * 16) + (_bestMatchLength - MINMATCHLENGTH)];
             } else {
                 _inputPosition = _inputPosition + 1;
                 _writeCache pushBack _char;

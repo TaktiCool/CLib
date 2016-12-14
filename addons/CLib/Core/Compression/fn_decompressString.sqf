@@ -24,10 +24,11 @@ private _type = (_rawInput deleteAt 0) - 1;
 switch (_type) do {
     case 0: { //LZ77
         DUMP(_rawInput)
-        #define MINMATCHLENGTH 3
+        #define WINDOWSIZE 2048
+        #define MINMATCHLENGTH 2
 
         private _inputLength = count _rawInput;
-        private _outputLength = 0;
+        private _outputPosition = MINMATCHLENGTH;
         private _symbolsRead = 0;
         private _encodeFlag = 0;
 
@@ -43,12 +44,21 @@ switch (_type) do {
             } else {
                 if (_encodeFlag % 2 == 1) then {
                     _inputPosition = _inputPosition + 1;
-                    private _byteValue = ((floor (_char / 2)) * 256) + (_rawInput select (_inputPosition - 1));
-                    private _length = _byteValue % 16;
-                    _rawOutput append (_rawOutput select [_outputLength - (floor (_byteValue / 16)), _length + MINMATCHLENGTH]);
-                    _outputLength = _outputLength + _length;
+                    private _byteValue = ((floor (_char / 2)) * 256) + (_rawInput select _inputPosition);
+                    private _offset = floor (_byteValue / 16);
+                    private _length = (_byteValue % 16) + MINMATCHLENGTH;
+                    if (_offset >= _length) then {
+                        _rawOutput append (_rawOutput select [_outputPosition - _offset + 1, _length]);
+                    } else {
+                        private _searchSteps = WINDOWSIZE min _outputPosition;
+                        _rawOutput append (_rawOutput select [_outputPosition - _offset, _offset]);
+                        for "_i" from _offset to _length step _searchSteps do {
+                            _rawOutput append (_rawOutput select [_outputPosition - _searchSteps, _searchSteps min (_length - _i)]);
+                        };
+                    };
+                    _outputPosition = _outputPosition + _length;
                 } else {
-                    _outputLength = _rawOutput pushBack _char;
+                    _outputPosition = _rawOutput pushBack _char;
                 };
                 _encodeFlag = floor (_encodeFlag / 2);
             };
