@@ -54,14 +54,14 @@ private _cfg = missionConfigFile >> QPREFIX >> "Modules";
 if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
     endLoadingScreen;
     disableUserInput false;
-    LOG("No CLib Modules loaded in the mission")
+    diag_log "No CLib Modules loaded in the mission";
 };
 
 // If the machine has CLib running and is the Server exit to the server LoadModules
 if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
     if (!isServer) exitWith {
-        LOG("CLib is a Server Mod Dont Load it on a Client")
+        diag_log "CLib is a server mod - do not load it on a client";
         endLoadingScreen;
         disableUserInput false;
         endMission "LOSER";
