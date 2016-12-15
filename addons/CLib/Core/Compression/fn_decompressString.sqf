@@ -51,7 +51,7 @@ switch (_type) do {
                         _rawOutput append (_rawOutput select [_outputPosition - _offset + 1, _length]);
                     } else {
                         private _searchSteps = WINDOWSIZE min _outputPosition;
-                        _rawOutput append (_rawOutput select [_outputPosition - _offset, _offset]);
+                        _rawOutput append (_rawOutput select [_outputPosition - _offset + 1, _offset]);
                         for "_i" from _offset to _length step _searchSteps do {
                             _rawOutput append (_rawOutput select [_outputPosition - _searchSteps, _searchSteps min (_length - _i)]);
                         };
@@ -109,4 +109,5 @@ switch (_type) do {
     };
 };
 DUMP(_rawOutput)
+TestVar = _rawOutput;
 toString _rawOutput
