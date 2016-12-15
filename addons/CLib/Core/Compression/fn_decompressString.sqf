@@ -49,7 +49,7 @@ switch (_type) do {
                     if (_offset >= _length) then {
                         _rawOutput append (_rawOutput select [_outputPosition - _offset + 1, _length]);
                     } else {
-                        private _searchSteps = WINDOWSIZE min _outputPosition;
+                        private _searchSteps = (WINDOWSIZE - 1) min _outputPosition;
                         _rawOutput append (_rawOutput select [_outputPosition - _offset + 1, _offset]);
                         for "_i" from _offset to _length step _searchSteps do {
                             _rawOutput append (_rawOutput select [_outputPosition - _searchSteps, _searchSteps min (_length - _i)]);
