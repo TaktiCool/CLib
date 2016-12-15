@@ -108,6 +108,5 @@ switch (_type) do {
         _rawOutput = _rawInput;
     };
 };
-DUMP(_rawOutput)
-TestVar = _rawOutput;
+
 toString _rawOutput
