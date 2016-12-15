@@ -26,3 +26,4 @@
     } forEach AllCompressionTypes;
     nil
 } count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
+LOG("Done with all Checks")

@@ -22,7 +22,7 @@ private _rawOutput = [];
 private _type = (_rawInput deleteAt 0) - 1;
 
 switch (_type) do {
-    case 0: { //LZ77
+    case 0: { //LZSS
         DUMP(_rawInput)
         #define WINDOWSIZE 2048
         #define MINMATCHLENGTH 2
