@@ -53,7 +53,7 @@ GVAR(US) = toString [31];
 DFUNC(log) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);
-    [-1, "CLibLogging", "_CLiblog@8", _file + ":" + _log] call FUNC(extensionRequest);
+    //[-1, "CLibLogging", "_CLiblog@8", _file + ":" + _log] call FUNC(extensionRequest);
 };
 
 QCGVAR(sendlogfile) addPublicVariableEventHandler {

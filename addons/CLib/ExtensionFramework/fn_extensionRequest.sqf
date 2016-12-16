@@ -44,7 +44,7 @@ while {_dataPosition <= count _data && _result == GVAR(ACK)} do {
     _result = "CLib" callExtension (_data select [_dataPosition, TRANSMISSIONSIZE]);
     _dataPosition = _dataPosition + TRANSMISSIONSIZE;
 };
-DUMP(_result select [0, 1])
+
 // Start the result fetcher if we did not get a result yet
 if (_taskId >= 0 && _result == GVAR(ACK)) exitWith {
     GVAR(pendingTasks) = GVAR(pendingTasks) + 1;
@@ -76,3 +76,5 @@ if (_taskId == -1 && (_result select [0, 1]) == GVAR(STX)) exitWith {
 
     _result
 };
+
+DUMP(_result)

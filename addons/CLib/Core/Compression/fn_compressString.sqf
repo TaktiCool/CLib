@@ -19,6 +19,7 @@ params ["_input", ["_compression", "LZSS"]];
 private _type = ["LZSS", "LZW"] find _compression;
 
 private _rawInput = toArray _input;
+private _output = "";
 private _rawOutput = [_type + 1];
 
 switch (_compression) do {
@@ -61,8 +62,14 @@ switch (_compression) do {
         if (!(_lastSequence isEqualTo [])) then {
             _rawOutput pushBack _lastSequenceIndex;
         };
+
+        _output = toString _rawOutput;
     };
     case "LZSS": {
+        if (true) exitWith {
+            _output = [-1, "CLibCompression", "_Compress@4", _string] call EGVAR(ExtensionFramework,extensionRequest);
+        };
+
         // 18/5 would be optimal but may take a lot more time, 11/4 is faster but not that efficient
         #define WINDOWSIZE 2048
         #define MINMATCHLENGTH 2
@@ -131,11 +138,13 @@ switch (_compression) do {
             _rawOutput pushBack _encodeFlag;
             _rawOutput append _writeCache;
         };
+
+        _output = toString _rawOutput;
     };
     default { // No compression
         LOG("String not compressed!")
-        _rawOutput = _rawInput;
+        _output = _input;
     };
 };
 
-toString _rawOutput
+_output

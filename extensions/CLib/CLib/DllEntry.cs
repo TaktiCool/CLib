@@ -18,7 +18,7 @@ namespace CLib
         public static Debugger Debugger;
 
         private static string _inputBuffer;
-        private static StringBuilder _outputBuffer;
+        private static string _outputBuffer;
         private static Dictionary<string, string> availableExtensions = new Dictionary<string, string>();
         private static readonly Dictionary<int, Task<string>> Tasks = new Dictionary<int, Task<string>>();
 
@@ -118,12 +118,15 @@ namespace CLib
             }
 
             if (output.Length > outputSize - 1)
-                _outputBuffer = output.Remove(outputSize - 1, output.Length);
+            {
+                _outputBuffer = output.ToString().Substring(outputSize - 1);
+                output.Remove(outputSize - 1, output.Length - outputSize + 1);
+            }
 
             outputSize -= output.Length + 1;
         }
 
-        private delegate string CLibFuncDelegate(Action<string> logFunc, string input);
+        private delegate string CLibFuncDelegate(string input);
         private static string ExecuteRequest(ArmaRequest request)
         {
             _inputBuffer = "";
@@ -135,11 +138,11 @@ namespace CLib
 
             if (request.TaskId == -1)
             {
-                return ControlCharacter.STX + function(Debugger.Log, request.Data) + ControlCharacter.EOT;
+                return ControlCharacter.STX + function(request.Data) + ControlCharacter.EOT;
             }
             else
             {
-                var task = Task.Run(() => function(Debugger.Log, request.Data));
+                var task = Task.Run(() => function(request.Data));
                 if (Tasks.ContainsKey(request.TaskId))
                     Tasks.Remove(request.TaskId);
                 Tasks.Add(request.TaskId, task);
