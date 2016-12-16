@@ -10,17 +10,9 @@ namespace CLibCompression
 {
     public class DllEntry
     {
-        public static Debugger Debugger;
-
         private const int WindowSize = 1 << 11;
         private const int MinMatchLength = 2;
         private const uint MaxMatchLength = (1 << 4) - MinMatchLength;
-
-        static DllEntry()
-        {
-            Debugger = new Debugger();
-            Debugger.Show();
-        }
 
         [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
@@ -109,7 +101,7 @@ namespace CLibCompression
 
             if (writeBuffer.Count > 0)
             {
-                output.Append(encodeFlag);
+                output.Append((char)encodeFlag);
                 output.Append(writeBuffer.ToArray());
             }
 

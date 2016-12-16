@@ -67,7 +67,7 @@ switch (_compression) do {
     };
     case "LZSS": {
         if (true) exitWith {
-            _output = [-1, "CLibCompression", "_Compress@4", _string] call EGVAR(ExtensionFramework,extensionRequest);
+            _output = [-1, "CLibCompression", "_Compress@4", _input] call EFUNC(ExtensionFramework,extensionRequest);
         };
 
         // 18/5 would be optimal but may take a lot more time, 11/4 is faster but not that efficient
