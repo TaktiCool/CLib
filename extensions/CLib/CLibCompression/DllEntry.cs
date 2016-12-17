@@ -42,8 +42,6 @@ namespace CLibCompression
             int symbolsWritten = 0;
             int encodeFlag = 1;
 
-            output.Append((char)1);
-
             output.Append(input.Substring(0, MinMatchLength));
 
             for (int inputPosition = MinMatchLength; inputPosition < input.Length; inputPosition++)

@@ -21,6 +21,21 @@ class CfgCLibModules {
                 FNC(sendFunctionsLoop);
             };
 
+            MODULE(Compression) {
+                FNC(checkAllFunctionCompression) { serverOnly = 1; };
+                FNC(checkCompression) { serverOnly = 1; };
+                FNC(compressString) { serverOnly = 1; };
+                FNC(decompressString) { serverOnly = 1; };
+            };
+
+            MODULE(ExtensionFramework) {
+                APIFNC(callExtension);
+                FNC(extensionRequest) { serverOnly = 1; };
+                FNC(extensionFetch) { serverOnly = 1; };
+                FNC(initExtensionFramework);
+                FNC(serverInitExtensionFramework);
+            };
+
             MODULE(Misc) {
                 APIFNC(addPerformanceCounter);
                 APIFNC(blurScreen);
@@ -53,6 +68,7 @@ class CfgCLibModules {
             MODULE(MissionModuleLoader) {
                 FNC(postInit);
             };
+
         };
 
         MODULE(PerFrame) {
@@ -106,15 +122,6 @@ class CfgCLibModules {
             FNC(clientInit);
             APIFNC(draw3dGraphics);
             APIFNC(remove3dGraphics);
-        };
-
-        MODULE(extensionFramework) {
-            dependency[] = {"CLib/Events", "CLib/PerFrame"};
-            APIFNC(callExtension);
-            FNC(extensionRequest) { serverOnly = 1; };
-            FNC(extensionFetch) { serverOnly = 1; };
-            FNC(init);
-            FNC(serverInit);
         };
 
         MODULE(Gear) {

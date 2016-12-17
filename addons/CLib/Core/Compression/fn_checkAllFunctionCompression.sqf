@@ -13,17 +13,16 @@
     Returns:
     None
 */
+
 {
     private _fncName = _x;
     private _originalFunction = (parsingNamespace getVariable _fncName) call CFUNC(codeToString);
-    _return = _originalFunction call CFUNC(checkCompression);
-    {
-        if (_return select _forEachIndex) then {
-            LOG("Compression Check ERROR: " + _fncName + " " + _x + " compression dont work correct")
-        } else {
-            LOG("Compression Check: " + _fncName + " " + _x + " passed Test")
-        };
-    } forEach AllCompressionTypes;
+
+    if (_originalFunction call CFUNC(checkCompression)) then {
+        LOG("Compression Check ERROR: " + _fncName + " " + _x + " compression does not work correct")
+    } else {
+        LOG("Compression Check: " + _fncName + " " + _x + " passed Test")
+    };
     nil
 } count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
 LOG("Done with all Checks")
