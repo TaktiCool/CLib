@@ -8,6 +8,9 @@ CLib_fnc_readAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\
 CLib_fnc_compileAllFunctions = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_compileAllFunctions.sqf";
 CLib_fnc_buildDependencyGraph = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compile\fn_buildDependencyGraph.sqf";
 
+CLib_ExtensionFramework_fnc_extensionRequest = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\ExtensionFramework\fn_extensionRequest.sqf";
+CLib_ExtensionFramework_fnc_extensionFetch = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\ExtensionFramework\fn_extensionFetch.sqf";
+
 CLib_fnc_compressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_compressString.sqf";
 CLib_fnc_decompressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_decompressString.sqf";
 CLib_fnc_ordToBytes = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_ordToBytes.sqf";

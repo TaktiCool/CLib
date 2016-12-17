@@ -19,6 +19,18 @@
 
 #define TRANSMISSIONSIZE 7000
 
+// Communication control
+GVAR(SOH) = toString [1];
+GVAR(STX) = toString [2];
+GVAR(ETX) = toString [3];
+GVAR(EOT) = toString [4];
+GVAR(ENQ) = toString [5];
+GVAR(ACK) = toString [6];
+
+// Information separators
+GVAR(RS) = toString [30];
+GVAR(US) = toString [31];
+
 params ["_taskId", "_extensionName", "_actionName", "_data"];
 
 // Make sure data is a string
