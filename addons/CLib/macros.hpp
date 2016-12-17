@@ -68,7 +68,7 @@
     #undef EFUNC
     #define EFUNC(var1,var2) {\
         DUMP("Function " + QEFUNC(var1,var2) + " called with " + str (_this));\
-        private _tempRet = _this call EDFUNC(var1,var2);\
+        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
         if (!isNil "_tempRet") then {\
             _tempRet\
         }\

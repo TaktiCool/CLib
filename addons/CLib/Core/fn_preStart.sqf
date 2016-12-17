@@ -13,10 +13,8 @@ CLib_fnc_decompressString = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\
 CLib_fnc_ordToBytes = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_ordToBytes.sqf";
 CLib_fnc_bytesToOrd = cmp preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_bytesToOrd.sqf";
 
-#ifdef isDev
 CLib_fnc_checkCompression = compile preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_checkCompression.sqf";
 CLib_fnc_checkAllFunctionCompression = compile preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_checkAllFunctionCompression.sqf";
-#endif
 
 CLib_fnc_log = compile preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Misc\fn_log.sqf";
 publicVariable "CLib_fnc_log";
