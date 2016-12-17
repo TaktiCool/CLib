@@ -41,7 +41,7 @@ GVAR(pendingTasks) = 0;
 DFUNC(serverLog) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);
-    //[-1, "CLibLogging", "_CLiblog@8", _file + ":" + _log] call FUNC(extensionRequest);
+    [-1, "CLibLogging", "_CLiblog@4", _file + ":" + _log] call FUNC(extensionRequest);
 };
 
 QCGVAR(sendlogfile) addPublicVariableEventHandler {
