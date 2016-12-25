@@ -17,7 +17,6 @@ CLib_fnc_checkCompression = compile preprocessFileLineNumbers "\pr\CLib\addons\C
 CLib_fnc_checkAllFunctionCompression = compile preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Compression\fn_checkAllFunctionCompression.sqf";
 
 CLib_fnc_log = compile preprocessFileLineNumbers "\pr\CLib\addons\CLib\Core\Misc\fn_log.sqf";
-publicVariable "CLib_fnc_log";
 
 CLib_playerUID = "";
 

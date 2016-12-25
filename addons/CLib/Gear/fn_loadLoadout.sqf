@@ -36,7 +36,7 @@ private _loadoutVars = [];
 private _fnc_assignValue = {
     params ["_name", "_value"];
     _name = toLower _name;
-    if (_name in GVAR(defaultLoadoutValues)) then {
+    // if (_name in GVAR(defaultLoadoutValues)) then {
         if (_name in _loadout) then {
             private _i = _loadout find _name;
             private _v2 = _loadout select (_i + 1);
@@ -45,6 +45,7 @@ private _fnc_assignValue = {
         } else {
             _loadout append [_name, _value];
         };
+    /*
     } else {
         if (_name in _loadoutVars) then {
             private _i = _loadoutVars find _name;
@@ -55,6 +56,7 @@ private _fnc_assignValue = {
             _loadoutVars append [_name, _value];
         };
     };
+    */
 
 };
 

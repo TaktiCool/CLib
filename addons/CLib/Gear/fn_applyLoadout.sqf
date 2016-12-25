@@ -37,9 +37,9 @@ private _fnc_do = {
 };
 
 // Remove Actions
-["removeAllWeapons", { if (_item isEqualTo 1) then { removeAllWeapons _unit; }; }, false] call _fnc_do;
-["removeAllItems", { if (_item isEqualTo 1) then { removeAllItems _unit; }; }, false] call _fnc_do;
-["removeAllAssingedItems", { if (_item isEqualTo 1) then { removeAllAssignedItems _unit; }; }, false] call _fnc_do;
+["removeAllWeapons", { if (_item isEqualTo 1) then { removeAllWeapons _unit; }; }, true] call _fnc_do;
+["removeAllItems", { if (_item isEqualTo 1) then { removeAllItems _unit; }; }, true] call _fnc_do;
+["removeAllAssingedItems", { if (_item isEqualTo 1) then { removeAllAssignedItems _unit; }; }, true] call _fnc_do;
 
 
 // Uniform
@@ -194,7 +194,7 @@ private _fnc_do = {
         nil
     } count _item;
 }, false] call _fnc_do;
-
+/*
 if !(_loadoutVars isEqualTo []) then {
     for "_i" from 0 to (count _loadoutVars) step 2 do {
         private _name = _loadoutVars select _i;
@@ -203,3 +203,4 @@ if !(_loadoutVars isEqualTo []) then {
         _unit setVariable [_name, _value, true];
     };
 };
+*/
