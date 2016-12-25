@@ -4,16 +4,17 @@ GVAR(loadoutsNamespace) = false call CFUNC(createNamespace);
 
 if (isServer) then {
     GVAR(defaultLoadoutValues) = configProperties [configFile >> "CfgCLibLoadoutsClassBase", "true", true];
+    GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLower (configName _x)};
     publicVariable QGVAR(defaultLoadoutValues);
 };
 
 {
     {
-        _x call CFUNC(loadLoadout);
+        (configName _x) call CFUNC(loadLoadout);
         nil
     } count configProperties [_x >> "CfgCLibLoadouts", "isClass _x", true];
     nil
-} count [configFile, missionConfigFile];
+} count [missionConfigFile >> "CLib", configFile];
 
 ["registerClientToServerForLoadout", {
     (_this select 0) params ["_unit", "_knownLoadouts"];
@@ -30,7 +31,7 @@ if (isServer) then {
 
 
 ["registerServerConfigLoadout", {
-    (_this select 0) params ["_data"];
+    params ["_data"];
     {
         [GVAR(loadoutsNamespace), _x select 0, _x select 1, QGVAR(allLoadouts)] call CFUNC(setVariable);
         nil
@@ -39,5 +40,5 @@ if (isServer) then {
 }] call CFUNC(addEventhandler);
 
 if (isMultiplayer) then {
-    ["registerClientToServerForLoadout", ([GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables))] call CFUNC(serverEvent);
+    // ["registerClientToServerForLoadout", ([GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables))] call CFUNC(serverEvent);
 };

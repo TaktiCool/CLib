@@ -20,20 +20,22 @@ params [["_cfg", "", ["", configNull]]];
 if (_cfg isEqualType "") then {
     _cfg = (configFile >> "CfgCLibLoadouts" >> _class);
     if (isClass _cfg) exitWith {};
-    _cfg = (missionConfigFile >> "CfgCLibLoadouts" >> "CLib" >> _class);
-};
-
-if !(isNil {GVAR(loadoutsNamespace) getVariable format [QGVAR(Loadout_%1), configName _cfg]}) exitWith {
-    GVAR(loadoutsNamespace) getVariable format [QGVAR(Loadout_%1), configName _cfg];
+    _cfg = (missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _class);
 };
 
 if (!isClass _cfg) exitWith {};
+
+private _varName = format [QGVAR(Loadout_%1), configName _cfg];
+// if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
+//     GVAR(loadoutsNamespace) getVariable _varName;
+// };
 
 private _loadout = [];
 private _loadoutVars = [];
 
 private _fnc_assignValue = {
     params ["_name", "_value"];
+    _name = toLower _name;
     if (_name in GVAR(defaultLoadoutValues)) then {
         if (_name in _loadout) then {
             private _i = _loadout find _name;
@@ -88,7 +90,6 @@ private _fnc_readData = {
 };
 
 _cfg call _fnc_readClass;
-
-[GVAR(loadoutsNamespace), format [QGVAR(Loadout_%1), configName _cfg], [_loadout, _loadoutVars], QGVAR(allLoadouts)] call CFUNC(setVariable);
-
-[_loadout, _loadoutVars]
+private _return = [_loadout, _loadoutVars];
+// [GVAR(loadoutsNamespace), _varName, _return, QGVAR(allLoadouts)] call CFUNC(setVariable);
+_return
