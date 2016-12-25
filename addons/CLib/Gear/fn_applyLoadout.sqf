@@ -21,60 +21,55 @@ private _loadoutArray = _class call CFUNC(loadLoadout);
 private _loadout = _loadoutArray select 0;
 private _loadoutVars = _loadoutArray select 1;
 
-
-diag_log [_class, _loadoutVars];
-
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
-    private _i = _loadout find _find;
+
+    private _i = _loadout find toLower(_find);
     if (_i != -1) then {
         private _item = if (_isRandom) then {
             selectRandom (_loadout select (_i + 1));
         } else {
             _loadout select (_i + 1);
         };
+        if (isNil "_item") exitWith {};
         call _do;
     };
 };
 
 // Remove Actions
-["removeAllWeapons", { if (_item isEqualTo 1) then { removeAllWeapons _unit; }; }] call _fnc_do;
-["removeAllItems", { if (_item isEqualTo 1) then { removeAllItems _unit; }; }] call _fnc_do;
-["removeAllAssingedItems", { if (_item isEqualTo 1) then { removeAllAssignedItems _unit; }; }] call _fnc_do;
+["removeAllWeapons", { if (_item isEqualTo 1) then { removeAllWeapons _unit; }; }, false] call _fnc_do;
+["removeAllItems", { if (_item isEqualTo 1) then { removeAllItems _unit; }; }, false] call _fnc_do;
+["removeAllAssingedItems", { if (_item isEqualTo 1) then { removeAllAssignedItems _unit; }; }, false] call _fnc_do;
 
 
 // Uniform
 ["uniform", {
-    if (_item != "") then {
-        [_unit, _item, 0] call CFUNC(addContainer);
-    };
+    [_unit, _item, 0] call CFUNC(addContainer);
 }, true] call _fnc_do;
 
 // Vest
 ["vest", {
-    if (_item != "") then {
-        [_unit, _item, 1] call CFUNC(addContainer);
-    };
+    [_unit, _item, 1] call CFUNC(addContainer);
 }, true] call _fnc_do;
 
 // Backpack
 ["backpack", {
-    if (_item != "") then {
-        [_unit, _item, 3] call CFUNC(addContainer);
-    };
+    [_unit, _item, 2] call CFUNC(addContainer);
 }, true] call _fnc_do;
 
 // Headgear
 ["headgear", {
     if (_item != "") then {
-        removeHeadgear _unit; _unit addHeadgear _item;
+        removeHeadgear _unit;
+        _unit addHeadgear _item;
     };
 }, true] call _fnc_do;
 
 // Goggles
 ["goggle", {
     if (_item != "") then {
-        removeGoggles _unit; _unit addGoggles _item;
+        removeGoggles _unit;
+        _unit addGoggles _item;
     };
 }, true] call _fnc_do;
 
