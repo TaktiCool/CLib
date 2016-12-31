@@ -14,6 +14,14 @@
     Returns:
     None
 */
+
+if (isNil QGVAR(defaultLoadoutValues)) exitWith {
+    [{
+        _this call CFUNC(applyLoadout);
+    }, {
+        !isNil QGVAR(defaultLoadoutValues)
+    }, _this] call CFUNC(waitUntil);
+};
 params [["_unit", player , [objNull]], ["_class", "", ["", configNull, []]]];
 
 private _loadoutArray = _class call CFUNC(loadLoadout);
@@ -194,7 +202,7 @@ private _fnc_do = {
         nil
     } count _item;
 }, false] call _fnc_do;
-/*
+
 if !(_loadoutVars isEqualTo []) then {
     for "_i" from 0 to (count _loadoutVars) step 2 do {
         private _name = _loadoutVars select _i;
@@ -203,4 +211,3 @@ if !(_loadoutVars isEqualTo []) then {
         _unit setVariable [_name, _value, true];
     };
 };
-*/
