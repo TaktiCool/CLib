@@ -5,10 +5,6 @@
     #define ENABLEFUNCTIONTRACE
 #endif
 
-#ifdef isDev
-    #define disableCompression
-#endif
-
 #ifdef DEBUGFULL
     #undef disableCompression
 #endif
@@ -34,18 +30,21 @@
 
 #define UIVAR(var1) QEGVAR(UI,var1)
 
+#define SYSLOGGING(var1,var2) if (isNil "CLib_fnc_log") then {\
+    private _CLib_loggingVar = format ["(%1) [%2 %3 - %4]: %5 %6:%7", diag_frameNo, QUOTE(PREFIX), var1, QUOTE(MODULE), var2, __FILE__, __LINE__];\
+    diag_log _CLib_loggingVar;\
+} else {\
+    [var1 ,QUOTE(PREFIX), QUOTE(MODULE), var2, __FILE__, __LINE__] call CLib_fnc_log;\
+};
+
 // Logging/Dumping macros
 #ifdef isDev
-    #define DUMP(var) ["DUMP" ,QUOTE(PREFIX), QUOTE(MODULE), var, __FILE__, __LINE__] call CLib_fnc_log;
+    #define DUMP(var) SYSLOGGING("DUMP", var)
 #else
     #define DUMP(var) /* disabled */
 #endif
 
-#ifdef isDev
-    #define LOG(var) DUMP(var)
-#else
-    #define LOG(var) ["LOG" ,QUOTE(PREFIX), QUOTE(MODULE), var, __FILE__, __LINE__] call CLib_fnc_log;
-#endif
+#define LOG(var) SYSLOGGING("Log", var)
 
 
 // Function macros
@@ -65,7 +64,7 @@
     #undef EFUNC
     #define EFUNC(var1,var2) {\
         DUMP("Function " + QEFUNC(var1,var2) + " called with " + str (_this));\
-        private _tempRet = _this call EDFUNC(var1,var2);\
+        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
         if (!isNil "_tempRet") then {\
             _tempRet\
         }\

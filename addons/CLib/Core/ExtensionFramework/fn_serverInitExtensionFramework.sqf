@@ -17,18 +17,6 @@
 GVAR(tasks) = [];
 GVAR(pendingTasks) = 0;
 
-// Communication control
-GVAR(SOH) = toString [1];
-GVAR(STX) = toString [2];
-GVAR(ETX) = toString [3];
-GVAR(EOT) = toString [4];
-GVAR(ENQ) = toString [5];
-GVAR(ACK) = toString [6];
-
-// Information separators
-GVAR(RS) = toString [30];
-GVAR(US) = toString [31];
-
 [QGVAR(extensionRequest), {
     (_this select 0) params ["_extensionName", "_actionName", "_data", "_sender", "_clientTaskId"];
 
@@ -50,12 +38,12 @@ GVAR(US) = toString [31];
 }] call CFUNC(addEventHandler);
 
 
-DFUNC(log) = {
+DFUNC(serverLog) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);
-    [-1, "CLibLogging", "_CLiblog@8", _file + ":" + _log] call FUNC(extensionRequest);
+    [-1, "CLibLogging", "_CLiblog@4", _file + ":" + _log] call FUNC(extensionRequest);
 };
 
 QCGVAR(sendlogfile) addPublicVariableEventHandler {
-    (_this select 1) call FUNC(log);
+    (_this select 1) call FUNC(serverLog);
 };

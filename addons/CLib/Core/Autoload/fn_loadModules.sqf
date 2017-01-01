@@ -61,7 +61,7 @@ if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
 if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
     if (!isServer) exitWith {
-        diag_log "CLib is a Server Mod Dont Load it on a Client";
+        diag_log "CLib is a server mod - do not load it on a client";
         endLoadingScreen;
         disableUserInput false;
         endMission "LOSER";

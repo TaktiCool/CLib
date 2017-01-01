@@ -30,7 +30,7 @@ private _str = format [_formatStr, diag_frameNo, _modName, _name, _module, _var,
 diag_log _str;
 #ifdef isDev
     systemChat _str;
-    if (hasInterface) then {
+    if (hasInterface && !isServer) then {
         CGVAR(sendlogfile) = [_str, format ["%1_%2", profileName, CGVAR(playerUID)]];
         publicVariableServer QCGVAR(sendlogfile);
     };

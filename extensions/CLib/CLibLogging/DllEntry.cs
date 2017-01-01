@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
@@ -23,8 +23,8 @@ namespace CLibLogging
             }
         }
 
-        [DllExport("_CLiblog@8", CallingConvention = CallingConvention.Winapi)]
-        public static string log(Action<string> logFunc, string input)
+        [DllExport("_CLiblog@4", CallingConvention = CallingConvention.Winapi)]
+        public static string log(string input)
         {
             string[] inputParts = input.Split(new char[] { ':' }, 2);
 
@@ -36,7 +36,6 @@ namespace CLibLogging
             // TODO let the user define the File format
             StreamWriter file = new System.IO.StreamWriter(path + string.Format("\\CLibLog_{0}_{1}.{2}", startTime, inputParts[0], "log"), true);
             string log = currentDate("[{3}:{4}:{5}]") + inputParts[1];
-            logFunc(log);
             file.WriteLine(log);
             file.Close();
             return "";
