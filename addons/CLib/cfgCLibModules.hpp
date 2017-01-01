@@ -112,6 +112,8 @@ class CfgCLibModules {
             APIFNC(configProperties);
             FNC(init);
             APIFNC(returnParents);
+            APIFNC(arrayToPath);
+            APIFNC(getDataCached);
         };
 
         MODULE(3dGraphics) {

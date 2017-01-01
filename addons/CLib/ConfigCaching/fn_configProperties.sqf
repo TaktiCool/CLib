@@ -11,7 +11,7 @@
     configProperties Arguments
 
     Returns:
-    configProperties Arguments
+    configProperties Return
 */
 private _ret = GVAR(configCache) getVariable format [QGVAR(configProperties_%1), _this];
 if (isNil "_ret") then {
