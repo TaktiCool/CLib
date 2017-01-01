@@ -126,9 +126,13 @@ class CfgCLibModules {
 
         MODULE(Gear) {
             dependency[] = {};
-            APIFNC(loadLoadout);
-            APIFNC(applyLoadout);
-            FNC(init);
+            MODULE(Loadout) {
+                APIFNC(getAllLoadouts);
+                APIFNC(getLoadoutDetails);
+                APIFNC(loadLoadout);
+                APIFNC(applyLoadout);
+                FNC(init);
+            };
             APIFNC(addContainer);
             APIFNC(addItem);
             APIFNC(addMagazine);

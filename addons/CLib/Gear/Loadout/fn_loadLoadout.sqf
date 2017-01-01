@@ -17,6 +17,17 @@
 
 params [["_cfg", "", ["", configNull]]];
 
+private _loadoutName = _cfg;
+if (_cfg isEqualType "") then {
+    _loadoutName = configName _cfg;
+};
+
+private _varName = format [QGVAR(Loadout_%1), _loadoutName];
+
+if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
+    GVAR(loadoutsNamespace) getVariable _varName;
+};
+
 if (_cfg isEqualType "") then {
     _cfg = (configFile >> "CfgCLibLoadouts" >> _class);
     if (isClass _cfg) exitWith {};
@@ -25,10 +36,6 @@ if (_cfg isEqualType "") then {
 
 if (!isClass _cfg) exitWith {};
 
-private _varName = format [QGVAR(Loadout_%1), configName _cfg];
-if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
-    GVAR(loadoutsNamespace) getVariable _varName;
-};
 
 private _loadout = [];
 private _loadoutVars = [];
