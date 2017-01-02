@@ -8,13 +8,15 @@
     Caches Values from configProperties
 
     Parameter(s):
-    configProperties Arguments
+    0: Config Path <Config, Array<String>>
+    1: Default Return if config Entry dont exist <String, Number, Array> (Default: "")
+    2: Force Type of Default Value <Bool> (Default: false)
 
     Returns:
-    configProperties Arguments
+    Config Value <Sring, Number, Array>
 */
 
-params [["_path", configNull, [configNull, []]], ["_default", "", [[], "", 0]], ["_forceDefaultType", true, [true]]];
+params [["_path", configNull, [configNull, []]], ["_default", "", [[], "", 0]], ["_forceDefaultType", false, [true]]];
 // convert Array Config Path to Config Path
 if (_path isEqualType []) then {
     _path = _path call CFUNC(arrayToPath);
