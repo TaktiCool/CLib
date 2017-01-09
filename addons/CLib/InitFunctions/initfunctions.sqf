@@ -19,7 +19,7 @@ diag_log ("initFunctions.sqf Loaded: " + str(diag_tickTime));
 private _fnc_scriptName = if (isNil "_fnc_scriptName") then {"Functions Init"} else {_fnc_scriptName};
 
 //--- Check version, has to match config version
-if (getNumber (configfile >> "CfgFunctions" >> "Version") != VERSION) exitwith {
+if (getNumber (configfile >> "CfgFunctions" >> "Version") != VERSION) exitWith {
     // Save exit if version Number is Not Equal use BI version
     call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";
 };
@@ -112,9 +112,9 @@ private _fncCompile = {
             };
             _debugMessage = "Log: [Functions]%1 | %2";
             if (_fncFinal) then {
-                compileFinal (format [_header,_fncVar,_debugMessage] + preprocessfilelinenumbers _fncPath);
+                compileFinal (format [_header,_fncVar,_debugMessage] + preprocessFileLineNumbers _fncPath);
             } else {
-                compile (format [_header,_fncVar,_debugMessage] + preprocessfilelinenumbers _fncPath);
+                compile (format [_header,_fncVar,_debugMessage] + preprocessFileLineNumbers _fncPath);
             };
         };
 
@@ -145,7 +145,7 @@ if (isNil "_this") then {_this = [];};
 if !(_this isEqualType []) then {_this = [_this];};
 private _recompile = if (count _this > 0) then {_this select 0} else {0};
 
-if (_recompile isEqualType "") exitwith {
+if (_recompile isEqualType "") exitWith {
 
     //--- Recompile specific function
     private _fncuiNamespace = true;
@@ -161,14 +161,14 @@ if (_recompile isEqualType "") exitwith {
         if (_fncuiNamespace) then {uiNamespace setVariable _var;};
         missionNamespace setVariable _var;
         if (isNil "_functions_listRecompile") then {
-            textlogformat ["Log: [Functions]: %1 recompiled with meta %2",_recompile,_fncMeta];
+            textLogFormat ["Log: [Functions]: %1 recompiled with meta %2",_recompile,_fncMeta];
         };
     } else {
         private _fncError = uiNamespace getVariable "bis_fnc_error";
         if !(isNil "_fncError") then {
             ["%1 is not a function.",_recompile] call _fncError;
         } else {
-            textlogformat ["Log: [Functions]: ERROR: %1 is not a function.",_recompile];
+            textLogFormat ["Log: [Functions]: ERROR: %1 is not a function.",_recompile];
         };
     };
 };
@@ -265,7 +265,7 @@ private _compileFinal =
     !cheatsEnabled
     &&
     //--- Editor mission
-    ((uiNamespace getVariable ["gui_displays",[]]) find (finddisplay 26) != 1)
+    ((uiNamespace getVariable ["gui_displays",[]]) find (findDisplay 26) != 1)
     &&
     //--- Manual toggle
     getNumber (missionconfigfile >> "allowFunctionsRecompile") == 0;
@@ -292,7 +292,7 @@ private _compileFinal =
             //--- Initialize tag
             private _tag = configName _currentTag;
             private _tagName = getText (_currentTag >> "tag");
-            if (_tagName == "") then {_tagName = configName _currentTag};
+            if (_tagName == "") then {_tagName = configName _currentTag;};
             _itemPathTag = getText (_currentTag >> "file");
 
             {
