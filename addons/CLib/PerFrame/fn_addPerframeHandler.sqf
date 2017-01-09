@@ -18,19 +18,21 @@
     Returns:
     None
 */
-[{
-    params [["_function", {}, [{},""]], ["_delay", 0, [0]], ["_args", []]];
 
-    if (_function isEqualTo {}) exitWith {-1};
+EXEC_ONLY_UNSCHEDULED
 
-    if (count GVAR(PFHhandles) >= 999999) exitWith {
-        diag_log _function;
-        -1
-    };
+params [["_function", {}, [{},""]], ["_delay", 0, [0]], ["_args", []]];
 
-    private _handle = GVAR(PFHhandles) pushBack count GVAR(perFrameHandlerArray);
+if (_function isEqualTo {}) exitWith {-1};
 
-    GVAR(perFrameHandlerArray) pushBack [_function, _delay, time, time, _args, _handle];
+if (count GVAR(PFHhandles) >= 999999) exitWith {
+    diag_log _function;
+    -1
+};
 
-    _handle
-}, _this] call CFUNC(directCall);
+private _handle = GVAR(PFHhandles) pushBack count GVAR(perFrameHandlerArray);
+
+GVAR(perFrameHandlerArray) pushBack [_function, _delay, time, time, _args, _handle];
+
+_handle
+

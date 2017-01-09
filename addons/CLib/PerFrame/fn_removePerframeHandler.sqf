@@ -13,16 +13,17 @@
     Returns:
     None
 */
-[{
-    params [["_handle", -1, [0]]];
 
-    if (_handle < 0 || {_handle >= count GVAR(PFHhandles)}) exitWith {};
+EXEC_ONLY_UNSCHEDULED
 
-    GVAR(perFrameHandlerArray) deleteAt (GVAR(PFHhandles) select _handle);
-    GVAR(PFHhandles) set [_handle, nil];
+params [["_handle", -1, [0]]];
 
-    {
-        _x params ["", "", "", "", "", "_handle"];
-        GVAR(PFHhandles) set [_handle, _forEachIndex];
-    } forEach GVAR(perFrameHandlerArray);
-}, _this] call CFUNC(directCall);
+if (_handle < 0 || {_handle >= count GVAR(PFHhandles)}) exitWith {};
+
+GVAR(perFrameHandlerArray) deleteAt (GVAR(PFHhandles) select _handle);
+GVAR(PFHhandles) set [_handle, nil];
+
+{
+    _x params ["", "", "", "", "", "_handle"];
+    GVAR(PFHhandles) set [_handle, _forEachIndex];
+} forEach GVAR(perFrameHandlerArray);

@@ -14,6 +14,9 @@
     Returns:
     <Any>
 */
+
+EXEC_ONLY_UNSCHEDULED
+
 params [["_code", {}], ["_args", []], ["_mutexId", "main"]];
 
 private _mutexCache = [GVAR(mutexCaches), _mutexId, []] call CFUNC(getVariable);

@@ -17,6 +17,9 @@
     Returns:
     Function Return <Any>
 */
+
+EXEC_ONLY_UNSCHEDULED
+
 params ["_function", "_args"];
 if (isNil {currentNamespace getVariable _function} && {((currentNamespace getVariable _function) isEqualType {})}) then {
     LOG("ERROR: Unknown Function: " + _function)

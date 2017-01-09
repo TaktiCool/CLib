@@ -15,6 +15,7 @@
     Returns:
     Current Status Effect <Any>
 */
+EXEC_ONLY_UNSCHEDULED
 params ["_id", "_reason", "_parameter"];
 
 private _allParameters = [GVAR(StatusEffectsNamespace), "Parameter_" + _id, []] call CFUNC(getVariable);

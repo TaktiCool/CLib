@@ -20,6 +20,8 @@
     None
 */
 
+EXEC_ONLY_UNSCHEDULED
+
 params ["_extensionName", "_actionName", ["_data", []], ["_callback", {}], ["_args", []]];
 
 private _id = GVAR(taskIds) find objNull;

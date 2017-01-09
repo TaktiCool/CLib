@@ -11,10 +11,14 @@
     0: Arguments for the function/command <Any>
     1: Function/Command that get executed on the remote Clients <String>
     2: Target to what the Event should get sendet <Number, Side, Object, Group, Array of Prev named Types>
-    3:
+    3: Forced to use Fallback Version <Bool>
+
     Returns:
     None
 */
+
+EXEC_ONLY_UNSCHEDULED
+
 params ["_args", ["_function", "", [""]], ["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_forceUseFallBack", false]];
 
 // exit with Vanilla Method if it is not disabled

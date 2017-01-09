@@ -14,16 +14,17 @@
     Returns:
     None
 */
+
+EXEC_ONLY_UNSCHEDULED
+
 params [["_event", "EventError", [""]], ["_args", []]];
 
 if (isServer) then {
     [_event, _args] call CFUNC(localEvent);
 } else {
     #ifdef isDev
-        // [_event, _args, "2"] remoteExecCall [QCFUNC(localEvent), 2];
         [[_event, _args, "2"], QCFUNC(localEvent), 2, true] call CFUNC(remoteExec);
     #else
-        // [_event, _args] remoteExecCall [QCFUNC(localEvent), 2];
         [[_event, _args], QCFUNC(localEvent), 2, true] call CFUNC(remoteExec);
     #endif
 };

@@ -13,6 +13,7 @@
     Returns:
     None
 */
+EXEC_ONLY_UNSCHEDULED
 params ["_state"];
 
 if (_state) then {

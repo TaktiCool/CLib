@@ -17,6 +17,8 @@
     None or <String>
 */
 
+EXEC_ONLY_UNSCHEDULED
+
 #define TRANSMISSIONSIZE 7000
 
 params ["_taskId", "_extensionName", "_actionName", "_data"];

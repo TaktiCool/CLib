@@ -15,6 +15,9 @@
     Returns:
     the ID of the Current Eventhandler <Number>
 */
+
+EXEC_ONLY_UNSCHEDULED
+
 params [["_event", "", [""]], ["_function", {}, [{}, ""]], ["_args", []]];
 
 // add This so we get can get sure some events that only gets triggered once get right

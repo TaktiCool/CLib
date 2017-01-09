@@ -14,6 +14,8 @@
     None
 */
 
+EXEC_ONLY_UNSCHEDULED
+
 params ["_result"];
 
 // If there is more data acknowledge and collect more

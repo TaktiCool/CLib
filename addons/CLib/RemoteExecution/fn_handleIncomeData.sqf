@@ -15,7 +15,10 @@
     Returns:
     None
 */
-params ["_args", ["_function", "", [""]], ["_target", 0, [0, sideUnknown, objNull, grpNull, []]]];
+
+EXEC_ONLY_UNSCHEDULED
+
+params [["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_function", "", [""]], "_args"];
 
 // target must be a Array
 if !(_target isEqualType []) then {
@@ -61,7 +64,7 @@ private _targets = [];
 
 // exit with no targets are applyed
 if !(_targets isEqualTo []) then {
-    // make Targets Uniqe
+    // make Targets Unique
     _targets = _targets arrayIntersect _targets;
 
     GVAR(remoteExecCode) = [_function, _args];
