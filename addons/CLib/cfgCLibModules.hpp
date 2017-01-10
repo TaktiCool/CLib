@@ -7,6 +7,33 @@ class CfgCLibModules {
     class CLib {
         path = "\pr\CLib\addons\CLib";
 
+        MODULE(3dGraphics) {
+            dependency[] = {"CLib/Events"};
+            APIFNC(3dGraphicsPosition);
+            APIFNC(add3dGraphics);
+            APIFNC(build3dGraphicsCache);
+            FNC(clientInit);
+            APIFNC(draw3dGraphics);
+            APIFNC(remove3dGraphics);
+        };
+
+        MODULE(AnimFramework) {
+            dependency[] = {"CLib/Events"};
+            APIFNC(doAnimation);
+            APIFNC(getDeathAnimation);
+            APIFNC(getDefaultAnimation);
+            FNC(init);
+        };
+
+        MODULE(ConfigCaching) {
+            dependency[] = {"CLib/Namespaces"};
+            APIFNC(configProperties);
+            FNC(init);
+            APIFNC(returnParents);
+            APIFNC(arrayToPath);
+            APIFNC(getDataCached);
+        };
+
         MODULE(Core) {
             dependency[] = {"CLib/Events"};
 
@@ -71,17 +98,6 @@ class CfgCLibModules {
 
         };
 
-        MODULE(PerFrame) {
-            dependency[] = {"CLib/Namespaces"};
-            APIFNC(addPerframeHandler);
-            APIFNC(execNextFrame);
-            FNC(init);
-            APIFNC(removePerframeHandler);
-            APIFNC(skipFrames);
-            APIFNC(wait);
-            APIFNC(waitUntil);
-        };
-
         MODULE(Events) {
             dependency[] = {"CLib/PerFrame", "CLib/Namespaces", "CLib/RemoteExecution"};
             APIFNC(addEventHandler);
@@ -97,33 +113,9 @@ class CfgCLibModules {
             APIFNC(targetEvent);
         };
 
-        MODULE(Localisation) {
-            dependency[] = {"CLib/Events"};
-            FNC(init);
-            FNC(client);
-            FNC(server) { serverOnly = 1; };
-            APIFNC(isLocalised);
-            APIFNC(readLocalisation);
-            APIFNC(formatLocalisation);
-        };
-
-        MODULE(ConfigCaching) {
-            dependency[] = {"CLib/Namespaces"};
-            APIFNC(configProperties);
-            FNC(init);
-            APIFNC(returnParents);
-            APIFNC(arrayToPath);
-            APIFNC(getDataCached);
-        };
-
-        MODULE(3dGraphics) {
-            dependency[] = {"CLib/Events"};
-            APIFNC(3dGraphicsPosition);
-            APIFNC(add3dGraphics);
-            APIFNC(build3dGraphicsCache);
-            FNC(clientInit);
-            APIFNC(draw3dGraphics);
-            APIFNC(remove3dGraphics);
+        MODULE(GarbageCollector) {
+            dependency[] = {"CLib/Statemachine", "CLib/Events"};
+            FNC(serverInit);
         };
 
         MODULE(Gear) {
@@ -166,6 +158,16 @@ class CfgCLibModules {
             APIFNC(lnbSave);
         };
 
+        MODULE(Localisation) {
+            dependency[] = {"CLib/Events"};
+            FNC(init);
+            FNC(client);
+            FNC(server) { serverOnly = 1; };
+            APIFNC(isLocalised);
+            APIFNC(readLocalisation);
+            APIFNC(formatLocalisation);
+        };
+
         MODULE(MapGraphics) {
             dependency[] = {"CLib/Events"};
             APIFNC(addMapGraphicsEventHandler);
@@ -201,12 +203,46 @@ class CfgCLibModules {
             APIFNC(setVariable);
         };
 
+        MODULE(PerformanceInfo) {
+            dependency[] = {"CLib/Events"};
+            FNC(clientInit);
+        };
+
+        MODULE(PerFrame) {
+            dependency[] = {"CLib/Namespaces"};
+            APIFNC(addPerframeHandler);
+            APIFNC(execNextFrame);
+            FNC(init);
+            APIFNC(removePerframeHandler);
+            APIFNC(skipFrames);
+            APIFNC(wait);
+            APIFNC(waitUntil);
+        };
+
         MODULE(RemoteExecution) {
             FNC(execute);
             FNC(init);
             FNC(handleIncomeData);
             APIFNC(remoteExec);
             FNC(serverInit);
+        };
+
+        MODULE(Settings) {
+            dependency[] = {"CLib/Namespaces"};
+            APIFNC(getSetting);
+            FNC(init);
+            APIFNC(loadSettings);
+        };
+
+        MODULE(SimpleObjectFramework) {
+            dependency[] = {"CLib/Namespaces", "CLib/Events"};
+            APIFNC(createSimpleObjectComp);
+            FNC(init);
+            APIFNC(readSimpleObjectComp);
+            FNC(exportSimpleObjectComp) {
+                api = 1;
+                serverOnly = 1;
+            };
         };
 
         MODULE(Statemachine) {
@@ -227,36 +263,6 @@ class CfgCLibModules {
             APIFNC(addStatusEffectType);
             FNC(init);
             APIFNC(setStatusEffect);
-        };
-
-        MODULE(AnimFramework) {
-            dependency[] = {"CLib/Events"};
-            APIFNC(doAnimation);
-            APIFNC(getDeathAnimation);
-            APIFNC(getDefaultAnimation);
-            FNC(init);
-        };
-
-        MODULE(Settings) {
-            dependency[] = {"CLib/Namespaces"};
-            APIFNC(getSetting);
-            FNC(init);
-            APIFNC(loadSettings);
-        };
-
-        MODULE(SimpleObjectFramework) {
-            dependency[] = {"CLib/Namespaces", "CLib/Events"};
-            APIFNC(createSimpleObjectComp);
-            FNC(init);
-            APIFNC(readSimpleObjectComp);
-            FNC(exportSimpleObjectComp) {
-                api = 1;
-                serverOnly = 1;
-            };
-        };
-        MODULE(GarbageCollector) {
-            dependency[] = {"CLib/Statemachine", "CLib/Events"};
-            FNC(serverInit);
         };
     };
 };
