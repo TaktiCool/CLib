@@ -25,7 +25,7 @@ private _ret = GVAR(configCache) getVariable format [QGVAR(getCachedData_%1), _p
 if (isNil "_ret") then {
     _ret = _default;
     if (_forceDefaultType) then {
-        switch (typeName _default) {
+        switch (typeName _default) do {
             case "NUMBER": {
                 if (isNumber _path) then {
                     _ret = getNumber _path;
@@ -43,7 +43,7 @@ if (isNil "_ret") then {
             };
         };
     } else {
-        switch (true) {
+        switch (true) do {
             case (isNumber _path): {
                 _ret = getNumber _path;
             };
