@@ -14,46 +14,44 @@
     Returns:
     None
 */
-params [["_functionPath", "", [""]], ["_functionVarName", "", [""]]];
+
+params [["_functionPath", "", [""]], ["_functionName", "", [""]]];
+
+private _header = format ["\
+private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {
+    '%1'
+} else {
+    _fnc_scriptName
+};
+
+private _fnc_scriptName = '%1';
+scriptName _fnc_scriptName;
+scopeName (_fnc_scriptName + '_Main');
+", _functionName];
 
 #ifdef DEBUGFULL
-    #define DEBUGHEADER "private _fnc_scriptMap = if (isNil '_fnc_scriptMap') then {[_fnc_scriptName]} else {_fnc_scriptMap + [_fnc_scriptName]};"
-#else
-    #define DEBUGHEADER ""
+_header = _header + "\
+if (isNil '_fnc_scriptMap') then {\
+    _fnc_scriptMap = [_fnc_scriptName];
+} else {
+    _fnc_scriptMap pushBack _fnc_scriptName;
+};
+";
 #endif
 
-#define SCRIPTHEADER "\
-private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {\
-    '%1'\
-} else {\
-    _fnc_scriptName\
-};\
-private _fnc_scriptName = '%1';\
-scriptName _fnc_scriptName;\
-scopeName (_fnc_scriptName + '_Main');\
-%2\
-"
-
 #ifdef isDev
-    private _header = format [SCRIPTHEADER, _functionVarName, DEBUGHEADER];
-    private _funcString = _header + preprocessFileLineNumbers _functionPath;
-
-    private _fncCode = compile _funcString;
+    private _functionCode = compile (_header + (preprocessFileLineNumbers _functionPath));
 #else
-    private _fncCode = parsingNamespace getVariable _functionVarName;
-    if (isNil "_cachedFunction") then {
-        private _header = format [SCRIPTHEADER, _functionVarName, DEBUGHEADER];
-        private _funcString = _header + preprocessFileLineNumbers _functionPath;
-        _funcString = _funcString call CFUNC(stripSqf);
-
-        _fncCode = compileFinal _funcString;
+    private _functionCode = parsingNamespace getVariable _functionName;
+    if (isNil "_functionCode") then {
+        _functionCode = compileFinal ((_header + (preprocessFileLineNumbers _functionPath)) call CFUNC(stripSqf));
     };
 #endif
 
-DUMP("Compile Function: " + _functionVarName)
+DUMP("Compile Function: " + _functionName);
 
 {
-    _x setVariable [_functionVarName, _fncCode];
+    _x setVariable [_functionName, _functionCode];
     nil
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
@@ -61,11 +59,11 @@ DUMP("Compile Function: " + _functionVarName)
 #ifdef disableCompression
     #define useCompression false
 #else
-    #define useCompression isNil {parsingNamespace getVariable (_functionVarName + "_Compressed")}
+    #define useCompression isNil {parsingNamespace getVariable (_functionName + "_Compressed")}
 #endif
 
 #ifdef isDev
-    #define compressionTestStage1 private _str = format ["Compress Functions: %1 %2 %3", _functionVarName, str ((count _compressedString / count _funcString) * 100), "%"];DUMP(_str)
+    #define compressionTestStage1 private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _funcString) * 100), "%"];DUMP(_str)
 #else
     #define compressionTestStage1 /* disabled */
 #endif
@@ -78,10 +76,9 @@ DUMP("Compile Function: " + _functionVarName)
 if (useCompression) then {
 
     private _compressedString = _funcString call CFUNC(compressString);
-    parsingNamespace setVariable [_functionVarName + "_Compressed", _compressedString];
+    parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
 
     compressionTestStage1
     compressionTestStage2
-
 };
 nil

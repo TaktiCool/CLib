@@ -21,3 +21,4 @@ EXEC_ONLY_UNSCHEDULED
 params [["_code", {}], ["_time", 0], ["_args", []]];
 GVAR(waitArray) pushBack [_time + time, _code, _args];
 GVAR(sortWaitArray) = true;
+nil

@@ -1,5 +1,5 @@
 #define PREFIX CLib
-#define PATH pr
+#define PATH tc
 #define MOD CLib
 
 #define MAJOR 0

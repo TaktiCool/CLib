@@ -155,3 +155,4 @@ _currentIcon set [1, diag_tickTime];
 [GVAR(MapGraphicsGroup), _groupName, _currentIcon] call CFUNC(setVariable);
 // increment map graphics cache
 GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
+nil

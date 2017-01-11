@@ -5,7 +5,7 @@
 
 class CfgCLibModules {
     class CLib {
-        path = "\pr\CLib\addons\CLib";
+        path = "\tc\CLib\addons\CLib";
 
         MODULE(3dGraphics) {
             dependency[] = {"CLib/Events"};

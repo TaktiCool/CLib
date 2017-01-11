@@ -30,10 +30,10 @@ class cfgFunctions {
 
     createShortcuts = 1;
 
-    //init = "pr\CLib\addons\CLib\init.sqf";
+    //init = "tc\CLib\addons\CLib\init.sqf";
     class CLib {
         class CLib {
-            file = "\pr\CLib\addons\CLib\Core";
+            file = "\tc\CLib\addons\CLib\Core";
             class preInit: CLib_basePreFNC {};
             class preStart: CLib_basePreStartFNC {};
             class postInit: CLib_basePostFNC {};
