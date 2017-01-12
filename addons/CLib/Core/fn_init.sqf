@@ -1,4 +1,19 @@
 #include "macros.hpp"
+/*
+    Community Lib - CLib
+
+    Author: joko // Jonas
+
+    Description:
+    Init
+
+    Parameter(s):
+    None
+
+    Returns:
+    None
+*/
+
 GVAR(allCustomNamespaces) = [];
 
 GVAR(cachedCall) = call CFUNC(createNamespace);
