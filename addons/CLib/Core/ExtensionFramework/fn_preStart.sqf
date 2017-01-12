@@ -1,4 +1,18 @@
 #include "macros.hpp"
+/*
+    Community Lib - CLib
+
+    Author: NetFusion
+
+    Description:
+    PreStart
+
+    Parameter(s):
+    None
+
+    Returns:
+    None
+*/
 
 // Communication control
 GVAR(SOH) = toString [1];

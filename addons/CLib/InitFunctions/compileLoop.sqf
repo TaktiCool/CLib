@@ -1,3 +1,19 @@
+#include "macros.hpp"
+/*
+    Community Lib - CLib
+
+    Author: ?
+
+    Description:
+    -
+
+    Parameter(s):
+    None
+
+    Returns:
+    None
+*/
+
 private _currentItem = _x;
 
 //--- Read function

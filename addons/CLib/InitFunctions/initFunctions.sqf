@@ -1,6 +1,7 @@
-
+#include "macros.hpp"
 /*
-    File: init.sqf
+    Community Lib - CLib
+
     Author: Karel Moricky, optimised headers by Killzone_Kid
 
     Description:

@@ -1,4 +1,7 @@
+#include "macros.hpp"
 /*
+    Community Lib - CLib
+
     Author: NetFusion
 
     Description:

@@ -1,4 +1,18 @@
 #include "macros.hpp"
+/*
+    Community Lib - CLib
+
+    Author: joko // Jonas
+
+    Description:
+    PreStart
+
+    Parameter(s):
+    None
+
+    Returns:
+    None
+*/
 
 private _startTime = diag_tickTime;
 CLib_fnc_compile = cmp preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compile\fn_compile.sqf";

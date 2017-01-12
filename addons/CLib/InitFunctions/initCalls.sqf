@@ -1,3 +1,18 @@
+#include "macros.hpp"
+/*
+    Community Lib - CLib
+
+    Author: ?
+
+    Description:
+    -
+
+    Parameter(s):
+    None
+
+    Returns:
+    None
+*/
 
 diag_log ("Call Functions: " + str(diag_tickTime));
 diag_log ("Recompile: " + str(_recompile));

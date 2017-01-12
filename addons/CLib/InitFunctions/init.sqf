@@ -1,3 +1,4 @@
+#include "macros.hpp"
 /*
     Community Lib - CLib
 
