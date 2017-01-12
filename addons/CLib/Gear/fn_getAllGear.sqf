@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: bux578, commy2 Ported by joko // Jonas
+    Author: bux578, commy2
+    Ported by: joko // Jonas
 
     Description:
     Returns an array containing all items of a given unit

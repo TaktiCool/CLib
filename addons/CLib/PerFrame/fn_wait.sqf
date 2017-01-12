@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: EstelDudleDain edit by joko // Jonas
+    Author: EstelDudleDain
+    Edit by: joko // Jonas
 
     Description:
     wait a time and execute script

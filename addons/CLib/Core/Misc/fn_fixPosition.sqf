@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: commy2 Ported by joko // Jonas
+    Author: commy2
+    Ported by: joko // Jonas
 
     Description:
     Fixes position of an object. E.g. moves object above ground and adjusts to terrain slope. Requires local object.

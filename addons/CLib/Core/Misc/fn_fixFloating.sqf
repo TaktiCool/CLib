@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: commy2 Ported by joko // Jonas
+    Author: commy2
+    Ported by: joko // Jonas
 
     Description:
     Attempt to fix floating physx with disabled damage after setPosXXX commands.

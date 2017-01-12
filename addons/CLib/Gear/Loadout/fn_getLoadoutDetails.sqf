@@ -1,7 +1,9 @@
 #include "macros.hpp"
 /*
     Community Lib - CLib
+
     Author: joko // Jonas
+
     Description:
     get Loadout details
     

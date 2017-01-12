@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: esteldunedain ported by joko // Jonas
+    Author: esteldunedain
+    Ported by: joko // Jonas
 
     Description:
     Execture a Code on the Next Frame

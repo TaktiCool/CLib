@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: Global ported by joko // Jonas
+    Author: Global
+    Ported by: joko // Jonas
 
     Description:
     Blur the Screen

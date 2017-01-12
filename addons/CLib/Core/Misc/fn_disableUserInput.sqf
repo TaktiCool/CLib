@@ -2,7 +2,8 @@
 /*
     Community Lib - CLib
 
-    Author: commy2 ported joko // Jonas
+    Author: commy2
+    Ported by: joko // Jonas
 
     Description:
     Disables key input. ESC can still be pressed to open the menu.

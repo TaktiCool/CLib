@@ -3,6 +3,7 @@
     Community Lib - CLib
 
     Author: commy2 and CAA-Picard and PabstMirror and joko // Jonas Ported from ACE3
+
     Description:
     Publish a variable, but wait a certain amount of time before allowing it to be published it again.
 
