@@ -2,7 +2,7 @@
 /*
     Community Lib - CLib
 
-    Author: NetFusion edit By Joko
+    Author: NetFusion, joko // Jonas
 
     Description:
     Add an action to an object or type(s) of object(s).

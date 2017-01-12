@@ -2,8 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: Global
-    Ported by: joko // Jonas
+    Author: joko // Jonas
+
+    Original author: Glowbal
+    https://github.com/acemod/ACE3/blob/845dca9ea529888e3cfddb36e809a88396f6aa07/addons/common/functions/fnc_blurScreen.sqf
 
     Description:
     Blur the Screen

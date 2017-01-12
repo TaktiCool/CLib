@@ -2,7 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: ?
+    Author: joko // Jonas
+
+    Original author: Karel Moricky, Killzone_Kid
+    a3\functions_f\initFunctions.sqf
 
     Description:
     -

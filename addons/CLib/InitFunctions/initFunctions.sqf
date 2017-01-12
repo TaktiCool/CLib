@@ -2,7 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: Karel Moricky, optimised headers by Killzone_Kid
+    Author: joko // Jonas
+
+    Original author: Karel Moricky, Killzone_Kid
+    a3\functions_f\initFunctions.sqf
 
     Description:
     Function library initialization.

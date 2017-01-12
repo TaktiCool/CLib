@@ -2,8 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: commy2
-    Ported by: joko // Jonas
+    Author: joko // Jonas
+
+    Original author: commy2
+    https://github.com/acemod/ACE3/blob/3d5ea74c7ec44dde291765f632df0004cfe101a9/addons/common/functions/fnc_disableUserInput.sqf
 
     Description:
     Disables key input. ESC can still be pressed to open the menu.

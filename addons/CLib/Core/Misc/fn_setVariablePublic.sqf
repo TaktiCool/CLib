@@ -2,7 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: commy2 and CAA-Picard and PabstMirror and joko // Jonas Ported from ACE3
+    Author: joko // Jonas
+
+    Original author: commy2, joko // Jonas
+    https://github.com/acemod/ACE3/blob/49d4f233d974fd5cc394415b18878ae50963fc98/addons/common/functions/fnc_setVariablePublic.sqf
 
     Description:
     Publish a variable, but wait a certain amount of time before allowing it to be published it again.

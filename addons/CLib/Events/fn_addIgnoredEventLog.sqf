@@ -2,7 +2,7 @@
 /*
     Community Lib - CLib
 
-    Author: Author
+    Author: joko // Jonas
 
     Description:
     Add Event that dont get Logged

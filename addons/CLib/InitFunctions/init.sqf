@@ -13,5 +13,6 @@
     Returns:
     None
 */
-_this call compile preprocessFileLineNumbers "x\CLib\addons\CLib\initFunctions.sqf";
+
+_this call compile preprocessFileLineNumbers "tc\CLib\addons\CLib\initFunctions.sqf";
 //_this call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";

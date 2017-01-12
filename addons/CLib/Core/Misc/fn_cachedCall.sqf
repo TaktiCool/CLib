@@ -2,7 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: esteldunedain, Jaynus, joko // Jonas
+    Author: joko // Jonas
+
+    Original author: esteldunedain, Jaynus
+    https://github.com/acemod/ACE3/blob/05d30c55732b95cfe38d145c738f3fdc227aec18/addons/common/functions/fnc_cachedCall.sqf
 
     Description:
     Calls the given function and caches the result for a period of time

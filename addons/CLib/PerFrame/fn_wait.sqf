@@ -2,8 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: EstelDudleDain
-    Edit by: joko // Jonas
+    Author: joko // Jonas
+
+    Original author: esteldunedain
+    https://github.com/CBATeam/CBA_A3/blob/efa4ee3b13cc6cbf8919656ca847047c12d057e0/addons/common/fnc_waitAndExecute.sqf
 
     Description:
     wait a time and execute script

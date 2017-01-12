@@ -2,8 +2,10 @@
 /*
     Community Lib - CLib
 
-    Author: bux578, commy2
-    Ported by: joko // Jonas
+    Author: joko // Jonas
+
+    Original author: bux578, commy2
+    https://github.com/acemod/ACE3/blob/c117a79431a1a7f13474878285e9ff3d4407d68e/addons/common/functions/fnc_getAllGear.sqf
 
     Description:
     Returns an array containing all items of a given unit
