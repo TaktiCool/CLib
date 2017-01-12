@@ -75,4 +75,4 @@
 
 #define MLOC(var) LOC(QLSTRING(var))
 
-#define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith {[currentNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall); LOG("WARNING: " + _fnc_scriptName + " was called un SCHEDULED Enviroment")};
+#define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith {[currentNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall); LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment")};
