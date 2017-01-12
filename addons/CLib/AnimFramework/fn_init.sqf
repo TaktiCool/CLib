@@ -1,7 +1,22 @@
 #include "macros.hpp"
+/*
+    Community Lib - CLib
+
+    Author: joko // Jonas
+
+    Description:
+    -
+
+    Parameter(s):
+    None
+
+    Returns:
+    None
+*/
+
 ["switchMove", {
     (_this select 0) params ["_unit", "_move"];
-    _unit switchmove _move;
+    _unit switchMove _move;
 }] call CFUNC(addEventHandler);
 
 ["playMove", {
