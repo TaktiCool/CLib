@@ -5,10 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Add State to Statemachine.
-
-    Reminder:
-    Every State should return the Next State that should be executed.
+    Add State to Statemachine. Every State should return the Next State that should be executed.
 
     Parameter(s):
     0: Statemachine Object <Location>

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Check wether a unit can interact with a target
+    Check whether a unit can interact with a target
 
     Parameter(s):
     0: Unit <Object>

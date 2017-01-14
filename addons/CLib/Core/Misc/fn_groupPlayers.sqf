@@ -7,9 +7,6 @@
     Description:
     Gets all players of a group. Compareable to units command.
 
-    Remark:
-    None
-
     Parameter(s):
     0: group or unit
 

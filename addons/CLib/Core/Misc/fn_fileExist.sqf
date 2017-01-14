@@ -5,10 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Check if the Given file Exists
-
-    Remarks:
-    Very Dirty Solution, every file type need to be added at allowedHTMLLoadExtensions on the Server.cfg
+    Very dirty solution to check if a file exists. Every file type need to be added at allowedHTMLLoadExtensions in the server config file.
 
     Parameter(s):
     0: File Path with Filename <String>

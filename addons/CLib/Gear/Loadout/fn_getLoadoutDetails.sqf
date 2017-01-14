@@ -6,7 +6,7 @@
 
     Description:
     Returns loadout details
-    
+
     Parameter(s):
     0: LoadoutName <String, Config>
     1: Requested details <Array>

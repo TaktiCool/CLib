@@ -9,7 +9,7 @@
 
     Description:
     Attempt to fix floating physx with disabled damage after setPosXXX commands.
-    Handles the "fixFloating" event
+    Handles the fixFloating event
 
     Parameter(s):
     0: PhysX object <Object>
