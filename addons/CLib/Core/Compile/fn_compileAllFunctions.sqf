@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    this function compile all Functions
+    Compiles all functions
 
     Parameter(s):
     None
@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 {
     (parsingNamespace getVariable (_x + "_data")) params ["_folderPath"];
     [_folderPath, _x] call CFUNC(compile);

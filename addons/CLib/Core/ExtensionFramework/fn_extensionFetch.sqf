@@ -5,7 +5,8 @@
     Author: NetFusion
 
     Description:
-    Fetch data from extension. Data transmission according to RFC20 (https://tools.ietf.org/pdf/rfc20.pdf)
+    Fetch data from extension. Data transmission according to RFC20.
+    See https://tools.ietf.org/pdf/rfc20.pdf for details.
 
     Parameter(s):
     0: Result <String>

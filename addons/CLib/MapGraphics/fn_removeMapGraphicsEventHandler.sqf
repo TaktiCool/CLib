@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Remove a Map Icon Draw Event
+    Removes a MapGraphics draw event
 
     Parameter(s):
     0: Group Name <String>

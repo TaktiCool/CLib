@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    [Description]
+    -
 
     Parameter(s):
     0: Event ID <String>

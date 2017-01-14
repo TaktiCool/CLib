@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    add a Perframe eventhandler
+    Adds a PerFrame eventhandler
 
     Parameter(s):
     0: Function that get called <Code, String>

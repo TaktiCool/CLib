@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    creates the PFH for Publishing Functions
+    Creates the PFH for transmitting functions
 
     Parameter(s):
     None

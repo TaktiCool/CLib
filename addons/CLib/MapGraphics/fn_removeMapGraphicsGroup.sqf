@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Remove a new Group to the MapGraphics-System
+    Remove a group from the MapGraphics system
 
     Parameter(s):
     0: Group Name <STRING>

@@ -8,7 +8,7 @@
     https://github.com/CBATeam/CBA_A3/blob/efa4ee3b13cc6cbf8919656ca847047c12d057e0/addons/common/fnc_waitAndExecute.sqf
 
     Description:
-    wait a time and execute script
+    Waits a time and executes a script
 
     Parameter(s):
     0: Code that get Executed if the Conditon is True <Code>

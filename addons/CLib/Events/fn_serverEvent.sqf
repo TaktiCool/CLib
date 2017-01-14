@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    trigger a event on the Server
+    Trigger an event on the server
 
     Parameter(s):
     0: Event Name <String>

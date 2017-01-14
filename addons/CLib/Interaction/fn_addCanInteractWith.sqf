@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Add a Can Interact With Condition
+    Add a canInteractWith condition
 
     Parameter(s):
     0: Type <String>
@@ -14,6 +14,7 @@
     Returns:
     None
 */
+
 if (isNil QGVAR(canInteractWithTypes)) exitWith {
     GVAR(canInteractWithTypes) = [_this];
 };

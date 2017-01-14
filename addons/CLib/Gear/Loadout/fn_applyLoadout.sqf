@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    apply the Loadout to a Unit
+    Applys a loadout to a unit
 
     Parameter(s):
     0: Unit that get the Loadout <Object>

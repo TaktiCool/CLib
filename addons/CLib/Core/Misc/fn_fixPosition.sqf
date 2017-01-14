@@ -8,7 +8,7 @@
     https://github.com/acemod/ACE3/blob/3d5ea74c7ec44dde291765f632df0004cfe101a9/addons/common/functions/fnc_fixPosition.sqf
 
     Description:
-    Fixes position of an object. E.g. moves object above ground and adjusts to terrain slope. Requires local object.
+    Fixes position of an object. Moves object above ground and adjusts to terrain slope. Requires local object.
 
     Parameter(s):
     0: Object <Object>
@@ -16,6 +16,7 @@
     Returns:
     None
 */
+
 params ["_object"];
 
 // setVectorUp requires local object

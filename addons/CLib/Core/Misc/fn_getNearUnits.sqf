@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Gets all near units - even in vehicles
+    Gets all near units. Includes units in vehicles.
 
     Parameter(s):
     0: Postion <Position, Object>

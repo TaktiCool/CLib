@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    check if a String is Localised
+    Checks if a string is localized
 
     Parameter(s):
     0: Localisation Name <String>

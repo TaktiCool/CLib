@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Return allVariables that have been set with CFUNC(setVariable) of a namespace
+    Returns all variables that have been set on a namespace with our setVariable function
 
     Parameter(s):
     0: Namespace <Namespace>
@@ -14,6 +14,7 @@
     Returns:
     All variable names <Array>
 */
+
 params ["_namespace", ["_cacheName", QGVAR(allVariableCache)]];
 
 [_namespace, _cacheName, []] call CFUNC(getVariable);

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    init for PFH
+    Init for PFH
 
     Parameter(s):
     None

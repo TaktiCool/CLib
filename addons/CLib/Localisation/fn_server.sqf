@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Init Calls/Functions that Only need to be Executed on the Server
+    Server init for localization
 
     Parameter(s):
     None

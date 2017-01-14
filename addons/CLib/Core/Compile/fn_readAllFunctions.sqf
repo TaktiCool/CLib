@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    this function read all Modules and functions and build the base of CLib and other modules that build on it
+    Reads all functions and builds the base of CLib and other modules that build on it
 
     Parameter(s):
     None

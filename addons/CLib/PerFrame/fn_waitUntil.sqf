@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    waitUntil a Condition is Done
+    Waits until a condition is true
 
     Parameter(s):
     0: Code that get Executed if the Conditon is True <Code>

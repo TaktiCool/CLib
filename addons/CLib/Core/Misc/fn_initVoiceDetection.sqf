@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    create function that Check if player is Speaking
+    Create functions that checks if player is speaking
 
     Parameter(s):
     None
@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 if (isServer) then {
     addMissionEventHandler ["HandleDisconnect", {
         params ["_player"];
@@ -20,7 +21,7 @@ if (isServer) then {
     }];
 };
 
-if !(hasInterface) exitWith {};
+if (!hasInterface) exitWith {};
 
 ["playerChanged", {
     (_this select 0) params ["", "_oldUnit"];

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    [Description]
+    Init of the interact restriction system
 
     Parameter(s):
     0: Argument Name <TYPE>

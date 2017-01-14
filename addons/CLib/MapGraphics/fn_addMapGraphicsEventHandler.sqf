@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    add a Eventhandler to a Map Icon Draw
+    Adds an eventhandler to a MapGraphics draw
 
     Parameter(s):
     0: Icon Id <String>
@@ -16,6 +16,7 @@
     Returns:
     ID of the Event <Number>
 */
+
 params [["_uid", "", [""]], ["_eventName", "", [""]], ["_code", {}, ["", {}]], ["_args", []]];
 
 // build Namespace Variablename
