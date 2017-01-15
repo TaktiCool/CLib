@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Init Calls/Functions that Only need to be Executed on the Client
+    Client init for localization
 
     Parameter(s):
     None
@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(ClientNamespace) = false call CFUNC(createNamespace);
 
 private _englishIndex = GVAR(supportedLanguages) find "English";

@@ -6,7 +6,7 @@
 
     Description:
     This function is a failsave wrapper function for findEmptyPosition.
-    Finds a save postion for a unit - this function always returns a Position
+    Finds a save postion for a unit. This function always returns a position.
 
     Parameter(s):
     0: Position <Array>

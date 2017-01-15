@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Handles Mouse Moving/Clicking event
+    Handles mouse moving event
 
     Parameter(s):
     0: control <Control>

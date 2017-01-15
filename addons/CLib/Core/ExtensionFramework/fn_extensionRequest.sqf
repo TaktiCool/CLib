@@ -5,7 +5,8 @@
     Author: NetFusion
 
     Description:
-    Communication interface to the extension. Data transmission according to RFC20 (https://tools.ietf.org/pdf/rfc20.pdf)
+    Communication interface to the extension. Data transmission according to RFC20.
+    See https://tools.ietf.org/pdf/rfc20.pdf for details.
 
     Parameter(s):
     0: Task ID <Number>

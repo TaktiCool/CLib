@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    init for Events
+    Init for events
 
     Parameter(s):
     None

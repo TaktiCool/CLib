@@ -5,9 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Call extension from the Client to the Server
-    After the server Finish the call the extension and getting the result the server transfer the Retunred value to the client
-    and calling on the Client the attached Function
+    Call extension on the server. When the server finished the return value gets passed to the callback as a parameter.
 
     Parameter(s):
     0: Extension name <String>

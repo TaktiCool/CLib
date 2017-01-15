@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    getPos Wrapper if you dont are sure if you get a object Array or string
+    Wrapper for getPos if you are not sure if you get an object array or string
 
     Parameter(s):
     0: Position Data <String, Object, Array>

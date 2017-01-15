@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    call for Interaction System that only get called if the Cursortarget Changes
+    Call for interaction system that gets called when the cursortarget changes
 
     Parameter(s):
     cursortargetChanged Event Return

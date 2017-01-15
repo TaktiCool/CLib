@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Adds a new Group to the MapGraphics-System
+    Adds a new group to the MapGraphics system
 
     Parameter(s):
     0: Group Name <STRING>

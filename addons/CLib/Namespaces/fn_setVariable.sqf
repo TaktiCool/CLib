@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Set variable on a namespace/logic/object and save the name to get it back from CFUNC(allVariables)
+    Sets a variable on a namespace and saves the name of the variable
 
     Parameter(s):
     0: Namespace to set variable on <Namespace>

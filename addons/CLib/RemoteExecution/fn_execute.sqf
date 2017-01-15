@@ -7,9 +7,6 @@
     Description:
     Execute RemoteExecCommands
 
-    Remarks:
-    Internal Function
-
     Parameter(s):
     0: Function or Command that get Executed <String>
     1: Arguments that passes to the Event;

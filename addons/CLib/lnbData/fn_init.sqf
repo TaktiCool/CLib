@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    init for ListBox Data
+    Init for ListBox data
 
     Parameter(s):
     None

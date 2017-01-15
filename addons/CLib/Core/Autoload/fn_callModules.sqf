@@ -5,7 +5,7 @@
     Author: NetFusion
 
     Description:
-    Calls all init functions of all required modules for server and client. This should be called after modules are loaded (functions transferred).
+    Calls all init functions of all required modules for server and client. This should be called after modules are loaded and functions transferred.
 
     Parameter(s):
     None

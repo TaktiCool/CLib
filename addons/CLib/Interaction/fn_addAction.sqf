@@ -5,7 +5,7 @@
     Author: NetFusion, joko // Jonas
 
     Description:
-    Add an action to an object or type(s) of object(s).
+    Add an action to an object or types of objects
 
     Parameter(s):
     0: the title of the action. <String, Code>
