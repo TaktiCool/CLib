@@ -7,3 +7,10 @@ python:
 - '3.4'
 script:
 - python3 tools/sqf_validator.py
+notifications:
+  slack:
+    urls:
+      - secure: $webhook
+    on_success: change
+    on_failure: always
+    on_start: never
