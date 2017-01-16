@@ -40,11 +40,13 @@ if (isNil '_fnc_scriptMap') then {\
 #endif
 
 #ifdef isDev
-    private _functionCode = compile (_header + (preprocessFileLineNumbers _functionPath));
+    private _functionString = _header + preprocessFileLineNumbers _functionPath;
+    private _functionCode = compile _functionString;
 #else
     private _functionCode = parsingNamespace getVariable _functionName;
     if (isNil "_functionCode") then {
-        _functionCode = compileFinal ((_header + (preprocessFileLineNumbers _functionPath)) call CFUNC(stripSqf));
+        private _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
+        _functionCode = compileFinal _functionString;
     };
 #endif
 
@@ -63,16 +65,16 @@ DUMP("Compile Function: " + _functionName);
 #endif
 
 if (useCompression) then {
-    private _compressedString = _funcString call CFUNC(compressString);
+    private _compressedString = _functionString call CFUNC(compressString);
     parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
 
 #ifdef isDev
-    private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _funcString) * 100), "%"];
+    private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
     DUMP(_str);
 #endif
 #ifdef DEBUGFULL
     private _var = _compressedString call CFUNC(decompressString);
-    DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _funcString)));
+    DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
 #endif
 };
 nil
