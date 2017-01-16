@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Management;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,11 +13,10 @@ namespace CLib
 {
     public class DllEntry
     {
-        public static Debugger Debugger;
-
         private static string _inputBuffer;
         private static string _outputBuffer;
-        private static Dictionary<string, string> availableExtensions = new Dictionary<string, string>();
+        private static readonly Debugger Debugger;
+        private static readonly Dictionary<string, string> AvailableExtensions = new Dictionary<string, string>();
         private static readonly Dictionary<int, Task<string>> Tasks = new Dictionary<int, Task<string>>();
 
         static DllEntry()
@@ -131,10 +128,10 @@ namespace CLib
         {
             _inputBuffer = "";
 
-            if (!availableExtensions.ContainsKey(request.ExtensionName))
+            if (!AvailableExtensions.ContainsKey(request.ExtensionName))
                 throw new ArgumentException("Extension is not valid: " + Environment.CurrentDirectory);
 
-            var function = FunctionLoader.LoadFunction<CLibFuncDelegate>(availableExtensions[request.ExtensionName], request.ActionName);
+            var function = FunctionLoader.LoadFunction<CLibFuncDelegate>(AvailableExtensions[request.ExtensionName], request.ActionName);
 
             if (request.TaskId == -1)
             {
@@ -154,20 +151,20 @@ namespace CLib
         {
             Debugger.Log("Extensions Found:");
             var startParameters = Environment.GetCommandLineArgs();
-            foreach (var startParameter in startParameters)
+            foreach (string startParameter in startParameters)
             {
                 var match = Regex.Match(startParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
                 if (!match.Success)
                     continue;
 
-                foreach (var path in match.Groups[1].Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string path in match.Groups[1].Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    var fullPath = path;
+                    string fullPath = path;
                     if (!Path.IsPathRooted(fullPath))
                         fullPath = Path.Combine(Environment.CurrentDirectory, path);
 
                     var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
-                    foreach (var extensionPath in extensionPaths)
+                    foreach (string extensionPath in extensionPaths)
                     {
                         try
                         {
@@ -175,25 +172,24 @@ namespace CLib
                             if (!exports.Contains("_RVExtension@12"))
                                 continue;
 
-                            var filename = Path.GetFileNameWithoutExtension(extensionPath);
+                            string filename = Path.GetFileNameWithoutExtension(extensionPath);
                             if (filename == null)
                                 continue;
 
-                            if (availableExtensions.ContainsKey(filename))
+                            if (AvailableExtensions.ContainsKey(filename))
                             {
-                                Debugger.Log($"Duplicate:{filename} at: {extensionPath}");
+                                Debugger.Log($"Duplicate: {filename} at: {extensionPath}");
                             }
                             else
                             {
-                                availableExtensions.Add(filename, extensionPath);
-                                Debugger.Log($"Added:{filename} at: {extensionPath}");
+                                AvailableExtensions.Add(filename, extensionPath);
+                                Debugger.Log($"Added: {filename} at: {extensionPath}");
                             }
                             
                         }
                         catch (Exception e)
                         {
                             Debugger.Log(e);
-                            continue;
                         }
                     }
                 }
