@@ -179,8 +179,16 @@ namespace CLib
                             if (filename == null)
                                 continue;
 
-                            availableExtensions.Add(filename, extensionPath);
-                            Debugger.Log(filename);
+                            if (availableExtensions.ContainsKey(filename))
+                            {
+                                Debugger.Log($"Duplicate:{filename} at: {extensionPath}");
+                            }
+                            else
+                            {
+                                availableExtensions.Add(filename, extensionPath);
+                                Debugger.Log($"Added:{filename} at: {extensionPath}");
+                            }
+                            
                         }
                         catch (Exception e)
                         {
