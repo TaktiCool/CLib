@@ -22,7 +22,7 @@ params [["_code", {}], ["_args", []], ["_mutexId", "main"]];
 private _mutexCache = [GVAR(mutexCaches), _mutexId, []] call CFUNC(getVariable);
 
 // Cache the function and args
-private _index = _mutexCache pushBackUnique [_code, _args];
+private _index = _mutexCache pushBackUnique {_code, _args];
 
 // Exit if there was an duplicate detected
 if (_index == -1) exitWith {};
