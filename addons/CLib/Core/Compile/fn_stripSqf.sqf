@@ -25,7 +25,7 @@ private _braces = toArray "(){}[]""'";
 private _allSpecialChar = _whiteSpaces + _operator + _braces;
 private _operatorAndBraces = _operator + _braces;
 private _token = [];
-private _outStr = '';
+private _outStr = "";
 
 {
     if (_sqString || _dqString || _inPreProcessor) then {
