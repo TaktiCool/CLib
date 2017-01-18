@@ -8,7 +8,7 @@
     Converts a array of string to a config path
 
     Parameter(s):
-    ConfigPaths <Array>
+    0: ConfigPaths <Array>
 
     Returns:
     Config Path <Config>
