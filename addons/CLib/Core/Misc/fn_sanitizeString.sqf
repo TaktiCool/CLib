@@ -19,7 +19,7 @@ params [["_string", "", [""]]];
 private ["_array", "_symbols"];
 
 _array = [];
-_symbols = toArray '"\/*?<>|:';
+_symbols = toArray "\/*""?<>|:";
 
 {
     if !(_x in _symbols) then {
