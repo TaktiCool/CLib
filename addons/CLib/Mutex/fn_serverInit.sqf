@@ -41,7 +41,7 @@ DFUNC(checkNextMutexClient) = {
         _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 
         // Clean the queue
-        private _index =_clientQueue find _owner;
+        private _index = _clientQueue find _owner;
         if (_index != -1) then {
             _clientQueue deleteAt _index;
             [GVAR(mutexes), _x, [_currentClient, _clientQueue, _currentMutexTime], QGVAR(mutexesCache)] call CFUNC(setVariable);
