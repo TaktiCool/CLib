@@ -60,7 +60,7 @@ private _outStr = "";
                 };
             } else {
                 if (_token isEqualTo [] && _lastC>0 && !(_lastC in _operatorAndBraces)) then {
-                    _outStr = _outStr + ' ';
+                    _outStr = _outStr + " ";
                 };
                 _lastC = _x;
                 _token pushBack _x;
