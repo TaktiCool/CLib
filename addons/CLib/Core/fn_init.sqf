@@ -26,7 +26,7 @@ if (hasInterface) then {
     // functions for disabling user input
     DFUNC(onButtonClickEndStr) = {
         closeDialog 0;
-        failMission 'LOSER';
+        failMission "LOSER";
         [false] call CFUNC(disableUserInput);
     } call CFUNC(codeToString);
 
