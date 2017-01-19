@@ -8,15 +8,16 @@
     Callback function for the Hold Action
 
     Parameter(s):
-    0: Argument <Type>
+    0: Target <Object>
+    1: Caller <Object>
+    2: Action arguments <Array>
 
     Returns:
-    0: Return <Type>
+    None
 */
 
 params ["_target", "_caller", "_id", "_actionArguments"];
-_actionArguments params
-[
+_actionArguments params [
     "_title",
     "_hint",
     "_iconIdle",
@@ -41,7 +42,7 @@ GVAR(HoldActionStartTime) = diag_tickTime;
 [_target, _caller, _id, _arguments] call _codeStart;
 
 
-if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
+if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     private _display = findDisplay 46;
     private _ctrl = _display ctrlCreate ["RscStructuredText", 6000];
     _ctrl ctrlSetPosition [0, 0.509, 1, 0.5];
@@ -59,8 +60,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
 [{
     params ["_args", "_handle"];
     _args params ["_target", "_caller", "_id", "_actionArguments"];
-    _actionArguments params
-    [
+    _actionArguments params [
         "_title",
         "_hint",
         "_iconIdle",
@@ -77,7 +77,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         "_showUnconscious"
     ];
     private _ret = !((inputAction "Action" < 0.5 && {inputAction "ActionContext" < 0.5}) || !(call _condProgress));
-    private _display = uiNamespace getVariable [UIVAR(HoldAction),displayNull];
+    private _display = uiNamespace getVariable [UIVAR(HoldAction), displayNull];
 
     if (_ret) then {
         _ret = [_target, _caller, _id, _arguments] call _codeProgress;
@@ -85,7 +85,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
 
     if (_ret isEqualType 0) then {
         _ret = (_ret min 1) max 0;
-        private _progressIconPath = format ["\A3\Ui_f\data\IGUI\Cfg\HoldActions\progress\progress_%1_ca.paa", floor (_ret*24)];
+        private _progressIconPath = format ["\A3\Ui_f\data\IGUI\Cfg\HoldActions\progress\progress_%1_ca.paa", floor (_ret * 24)];
         if (diag_tickTime - GVAR(HoldActionStartTime) <= 0.15) then {
             _progressIconPath = format ["\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_%1_ca.paa", floor ((diag_tickTime - GVAR(HoldActionStartTime)) / 0.05)];
         };
@@ -98,7 +98,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
             (_display displayCtrl 6001) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", call _iconProgress];
             (_display displayCtrl 6000) ctrlCommit 0;
             (_display displayCtrl 6001) ctrlCommit 0;
-            _target setUserActionText [_id,_title,"",""];
+            _target setUserActionText [_id, _title, "", ""];
         } else {
             (_display displayCtrl 6000) ctrlSetPosition [0, 0.509, 1, 0.5];
             (_display displayCtrl 6001) ctrlSetPosition [0, 0.509, 1, 0.5];
@@ -132,7 +132,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction),displayNull])) then {
         (_display displayCtrl 6001) ctrlCommit 0;
 
         if (_id isEqualType 123) then {
-            _target setUserActionText [_id,_title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconProgress)]];
+            _target setUserActionText [_id, _title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconProgress)]];
         };
         _handle call CFUNC(removePerFrameHandler);
     };

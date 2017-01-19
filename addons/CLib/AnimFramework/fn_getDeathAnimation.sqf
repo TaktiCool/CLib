@@ -42,5 +42,7 @@ if (isNull (objectParent _unit)) then {
     _return = getText (_unitActions >> "die");
 };
 
-if (_return == "") then { _return = "Unconscious"; };
+if (_return == "") then {
+    _return = "Unconscious";
+};
 _return;

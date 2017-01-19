@@ -33,7 +33,7 @@ private _fnc_setLanguageKey = {
     private _locName = format ["STR_%1", _name];
     private _var = GVAR(ServerNamespace) getVariable [_locName, []];
     /* TODO Fix Compression
-    if (useCompression) then {
+    if (USECOMPRESSION) then {
         _data = _data call CFUNC(compressString);
     };
     */
@@ -58,7 +58,7 @@ private _fnc_readLocalisationClass = {
         [_config, _name] call _fnc_readLocalisation;
     } else {
         {
-            [_x, _name + "_" + configName _x ] call _fnc_readLocalisationClass;
+            [_x, _name + "_" + configName _x] call _fnc_readLocalisationClass;
             nil
         } count _childs;
     };

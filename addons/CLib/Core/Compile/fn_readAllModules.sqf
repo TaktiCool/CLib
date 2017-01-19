@@ -14,26 +14,26 @@
     None
 */
 private _allModulesNames = [];
-DUMP("--------------------------Start CLib Module Search---------------------------------")
+DUMP("--------------------------Start CLib Module Search---------------------------------");
 private _allMods = configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
-_allMods = _allMods apply { toLower (configName _x); };
+_allMods = _allMods apply {toLower (configName _x)};
 parsingNamespace setVariable [QGVAR(allModsNamesCached), _allMods];
 {
     private _modName = _x;
-    DUMP("Mod Found: " + _modName)
+    DUMP("Mod Found: " + _modName);
     private _modModules = configProperties [configFile >> "CfgCLibModules" >> _modName, "isClass _x", true];
-    _modModules = _modModules apply { toLower (configName _x); };
-    private _modDependency = (getArray (configFile >> "CfgCLibModules" >>_modName >> "dependency")) apply { toLower _x; };
+    _modModules = _modModules apply {toLower (configName _x)};
+    private _modDependency = (getArray (configFile >> "CfgCLibModules" >> _modName >> "dependency")) apply {toLower _x};
     parsingNamespace setVariable [format [QCGVAR(%1_ModModules), _modName], _modModules];
     {
         private _moduleName = _x;
         private _fullModuleName = format ["%1/%2", _modName, _moduleName];
-        private _dependency = (getArray (configFile >> "CfgCLibModules" >>_modName >> _moduleName >> "dependency")) apply { toLower _x; };
+        private _dependency = (getArray (configFile >> "CfgCLibModules" >> _modName >> _moduleName >> "dependency")) apply {toLower _x};
         _dependency append _modDependency;
         parsingNamespace setVariable [format [QCGVAR(%1_dependency), _fullModuleName], _dependency];
         _allModulesNames pushBackUnique _fullModuleName;
 
-        DUMP("Module Found: " + _moduleName)
+        DUMP("Module Found: " + _moduleName);
 
         nil
     } count _modModules;
@@ -53,7 +53,7 @@ parsingNamespace setVariable [QGVAR(allModsNamesCached), _allMods];
                 nil
             } count _modModules;
             _dependency = _dependency - [_x];
-            DUMP("Update Module Dependency with Mod: " + _x + " " + str _dependency)
+            DUMP("Update Module Dependency with Mod: " + _x + " " + str _dependency);
         };
         nil
     } count _allMods;
@@ -62,5 +62,5 @@ parsingNamespace setVariable [QGVAR(allModsNamesCached), _allMods];
 } count _allModulesNames;
 
 parsingNamespace setVariable [QGVAR(allModuleNamesCached), _allModulesNames];
-DUMP("allModuleNamesCached: " + str _allModulesNames)
-DUMP("--------------------------End CLib Module Search---------------------------------")
+DUMP("allModuleNamesCached: " + str _allModulesNames);
+DUMP("--------------------------End CLib Module Search---------------------------------");

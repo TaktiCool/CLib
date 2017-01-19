@@ -21,14 +21,14 @@
 params ["_name", "_modName", "_module", "_var", "_file", "_line"];
 
 
-#ifdef isDev
+#ifdef ISDEV
     private _formatStr = "(%1) [%2 %3 - %4]: %5 %6:%7";
 #else
     private _formatStr = "(%1) [%2 %3 - %4]: %5";
 #endif
 private _str = format [_formatStr, diag_frameNo, _modName, _name, _module, _var, _file, _line];
 diag_log _str;
-#ifdef isDev
+#ifdef ISDEV
     systemChat _str;
     if (hasInterface && !isServer) then {
         CGVAR(sendlogfile) = [_str, format ["%1_%2", profileName, CGVAR(playerUID)]];

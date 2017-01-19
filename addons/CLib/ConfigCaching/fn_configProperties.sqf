@@ -5,14 +5,17 @@
     Author: joko // Jonas
 
     Description:
-    Caches Values from configProperties
+    Caches values from config properties
 
     Parameter(s):
-    configProperties Arguments
+    0: Config <Config>
+    1: Condition <String>
+    2: Inherit <Bool>
 
     Returns:
     configProperties Return
 */
+
 private _ret = GVAR(configCache) getVariable format [QGVAR(configProperties_%1), _this];
 if (isNil "_ret") then {
     _ret = configProperties _this;

@@ -30,7 +30,7 @@ if (_retPos isEqualTo []) exitWith {
     if (_haveType) then {
         [_pos, _radius + 10, _minRaduis] call (missionNamespace getVariable [_fnc_scriptName, {}]);
     } else {
-        [_pos, _radius + 10, _minRaduis,_type] call (missionNamespace getVariable [_fnc_scriptName, {}]);
+        [_pos, _radius + 10, _minRaduis, _type] call (missionNamespace getVariable [_fnc_scriptName, {}]);
     };
 };
 

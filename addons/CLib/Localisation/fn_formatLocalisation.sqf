@@ -8,7 +8,10 @@
     Localisation format Wrapper
 
     Parameter(s):
-    Format Arguments https://community.bistudio.com/wiki/format
+    0: FormatString <String>
+    1: Var1 <Any>
+    2: Var2 <Any>
+    ...
 
     Returns:
     Formated and Localised String

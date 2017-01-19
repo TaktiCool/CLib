@@ -30,19 +30,19 @@ if (!hasInterface) exitWith {};
 private _cfg = configFile >> "CfgPatches";
 switch (true) do {
     case (isClass (_cfg >> "acre_api")): {
-        LOG("ACRE Detected.")
+        LOG("ACRE Detected.");
         DCFUNC(isSpeaking) = {
-            [_unit] call acre_api_fnc_isSpeaking;
+            [_unit] call ACRE_api_fnc_isSpeaking;
         };
     };
     case (isClass (_cfg >> "task_force_radio")): {
-        LOG("TFAR Detected.")
+        LOG("TFAR Detected.");
         DCFUNC(isSpeaking) = {
             _unit getVariable ["tf_isSpeaking", false];
         };
     };
     default {
-        LOG("No VON Mod Detected")
+        LOG("No VON Mod Detected");
         [{
             private _new = (!(isNull findDisplay 55));
             if !((CLib_player getVariable [QGVAR(isUsingVoice), false]) isEqualTo _new) then {
@@ -50,7 +50,7 @@ switch (true) do {
             };
         }, 0.2] call CFUNC(addPerFrameHandler);
 
-        DCFUNC(isSpeaking) ={
+        DCFUNC(isSpeaking) = {
             params ["_unit"];
             (_unit getVariable [QGVAR(isUsingVoice), false])
         };

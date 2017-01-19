@@ -15,7 +15,7 @@
 */
 
 private _objects = get3DENSelected "object";
-private _meanPos = [0,0,0];
+private _meanPos = [0, 0, 0];
 private _numPos = {
     _meanPos = _meanPos vectorAdd getPosWorld _x;
     true;

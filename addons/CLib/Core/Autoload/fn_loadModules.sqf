@@ -46,7 +46,7 @@ if (hasInterface) then {
     waitUntil {!isNil QCFUNC(decompressString)};
 
     // Start the loading screen on the client to prevent a drawing lag while loading. Disable input too to prevent unintended movement after spawn.
-    [QCGVAR(loadModules)] call bis_fnc_startLoadingScreen;
+    [QCGVAR(loadModules)] call BIS_fnc_startLoadingScreen;
     disableUserInput true;
 };
 
@@ -79,16 +79,16 @@ GVAR(requiredFunctions) = [];
 QGVAR(receiveFunction) addPublicVariableEventHandler {
     (_this select 1) params ["_functionVarName", "_functionCode", "_progress"];
 
-    DUMP("Function Recieved: " + _functionVarName)
+    DUMP("Function Recieved: " + _functionVarName);
 
     // Compile the function code and assign it.
     if (CGVAR(useFunctionCompression)) then {
         _functionCode = _functionCode call CFUNC(decompressString);
     };
-    _functionCode = cmp _functionCode;
+    _functionCode = CMP _functionCode;
 
     {
-        #ifdef isDev
+        #ifdef ISDEV
             _x setVariable [_functionVarName, _functionCode];
         #else
             if (isNil {(_x getVariable _functionVarName)}) then {
@@ -113,15 +113,15 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
     } count [missionNamespace, uiNamespace, parsingNamespace];
 
     // Update the loading screen with the progress.
-    _progress call bis_fnc_progressloadingscreen;
-    DUMP("LoadModules Progress: " + str _progress)
+    _progress call BIS_fnc_progressloadingscreen;
+    DUMP("LoadModules Progress: " + str _progress);
 
     // Store the function name.
     GVAR(requiredFunctions) pushBackUnique _functionVarName;
 
     // If the progress is 1 the last function code is received.
     if (_progress >= 1) then {
-        DUMP("All Function Recieved, now call then")
+        DUMP("All Function Recieved, now call then");
 
         // Call all modules.
         call FUNC(callModules);

@@ -33,7 +33,7 @@ private _fnc_outputText = {
 };
 
 _text = format [
-"------CLib Debug------
+    "------CLib Debug------
 time = %1
 ServerTime =%2
 ------Performance------
@@ -44,26 +44,27 @@ count PerframeHandler = %6 (AllTime %7)
 count diag_activeSQFScripts = %8
 count diag_activeSQSScripts = %9
 count diag_activeMissionFSMs = %10",
-time,
-serverTime,
-diag_fps,
-count GVAR(waitArray),
-count GVAR(waitUntilArray),
-count GVAR(perFrameHandlerArray),
-{!(isNil "_x")} count GVAR(PFHhandles),
-count diag_activeSQFScripts,
-count diag_activeSQSScripts,
-count diag_activeMissionFSMs
+    time,
+    serverTime,
+    diag_fps,
+    count GVAR(waitArray),
+    count GVAR(waitUntilArray),
+    count GVAR(perFrameHandlerArray),
+    {!(isNil "_x")} count GVAR(PFHhandles),
+    count diag_activeSQFScripts,
+    count diag_activeSQSScripts,
+    count diag_activeMissionFSMs
 ];
 [_text] call _fnc_outputText;
 
 
-_text = format ["
-------Player------
+_text = format [
+    "------Player------
 typeOf = %1
 animationState = %2",
-if (isNull CLib_Player) then {"null"} else {typeOf CLib_Player},
-if (isNull CLib_Player) then {"null"} else {animationState CLib_Player}];
+    if (isNull CLib_Player) then {"null"} else {typeOf CLib_Player},
+    if (isNull CLib_Player) then {"null"} else {animationState CLib_Player}
+];
 [_text] call _fnc_outputText;
 
 
@@ -71,7 +72,11 @@ _text = format ["
 ------CLib Variables------"];
 [_text] call _fnc_outputText;
 
-private _searchSpaces = [missionNamespace, parsingNamespace, uiNamespace /*dont work in Multiplayer*/];
+private _searchSpaces = [
+    missionNamespace,
+    parsingNamespace,
+    uiNamespace // Dont work in Multiplayer
+];
 _searchSpaces append GVAR(allCustomNamespaces);
 
 _searchSpaces append allMissionObjects "";
@@ -100,7 +105,7 @@ private _temp = [];
             false
         };
     } count (allVariables _space);
-    _text = format ["%1 have %2 Varialbe", _space , _count];
+    _text = format ["%1 have %2 Varialbe", _space, _count];
     [_text] call _fnc_outputText;
 } count _searchSpaces;
 {

@@ -13,4 +13,5 @@
     Returns:
     None
 */
+
 GVAR(configCache) = call CFUNC(createNamespace);

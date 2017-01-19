@@ -17,11 +17,11 @@ private _sortedModuleNames = [];
 private _modulesToSort = +(parsingNamespace getVariable QGVAR(allModuleNamesCached));
 
 private _i = 0;
-DUMP("Modules To Sort: " + str _modulesToSort)
+DUMP("Modules To Sort: " + str _modulesToSort);
 while {!(_modulesToSort isEqualTo [])} do {
     private _moduleName = _modulesToSort select _i;
     // DUMP("_i: " + str _i)
-    DUMP("ModuleName: " + str _moduleName)
+    DUMP("ModuleName: " + str _moduleName);
     private _dependencies = parsingNamespace getVariable (format [QCGVAR(%1_dependency), _moduleName]);
 
 
@@ -34,8 +34,8 @@ while {!(_modulesToSort isEqualTo [])} do {
         {
             if !(_x in _sortedModuleNames) then {
                 if !(_x in _modulesToSort) then {
-                    private _str = format ["Missing Dependency in Module: %1, %2",_moduleName, _x];
-                    LOG(_str)
+                    private _str = format ["Missing Dependency in Module: %1, %2", _moduleName, _x];
+                    LOG(_str);
                     _dependenciesLoaded = true;
                 } else {
                     _dependenciesLoaded = false;
@@ -55,5 +55,5 @@ while {!(_modulesToSort isEqualTo [])} do {
     };
 };
 
-DUMP("Sorted Modules: " + str _sortedModuleNames)
+DUMP("Sorted Modules: " + str _sortedModuleNames);
 parsingNamespace setVariable [QGVAR(allModuleNamesCached), _sortedModuleNames];

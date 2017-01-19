@@ -32,7 +32,7 @@ GVAR(PlayerInteraction_Actions) = [];
         _id = _currentPlayer addAction _argArray;
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
-        DUMP("add Real Action to Object Player " + str _text)
+        DUMP("add Real Action to Object Player " + str _text);
         nil
     } count GVAR(PlayerInteraction_Actions);
 }] call CFUNC(addEventhandler);
@@ -55,7 +55,7 @@ private _inGameUiEventHandler = {
         true
     } else {
         private _ehData = [GVAR(InGameUIEventHandler), format ["%1_%2", _eventName, _id], []] call CFUNC(getVariable);
-        _ehData params [["_code",{}], ["_args",[]]];
+        _ehData params [["_code", {}], ["_args", []]];
         [_target, _caller, _id, _args] call _code;
     };
 };
@@ -64,16 +64,16 @@ inGameUISetEventHandler ["PrevAction", _inGameUiEventHandler call CFUNC(codeToSt
 inGameUISetEventHandler ["NextAction", _inGameUiEventHandler call CFUNC(codeToString)];
 inGameUISetEventHandler ["Action", _inGameUiEventHandler call CFUNC(codeToString)];
 
-GVAR(HoldActionIdleBackground)= [];
+GVAR(HoldActionIdleBackground) = [];
 for "_i" from 0 to 11 do {
-    private _alpha = (sin((_i/11) * 360) * 0.25) + 0.75;
-    private _color = [1,1,1,_alpha] call bis_fnc_colorRGBAtoHTML;
+    private _alpha = (sin ((_i / 11) * 360) * 0.25) + 0.75;
+    private _color = [1, 1, 1, _alpha] call BIS_fnc_colorRGBAtoHTML;
 
-    GVAR(HoldActionIdleBackground) pushBack (format["<img size='3' shadow='0' color='%1' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/>",_color]);
+    GVAR(HoldActionIdleBackground) pushBack (format ["<img size='3' shadow='0' color='%1' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/>", _color]);
 };
 
 DFUNC(IdleAnimation) = {
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
     params ["_title", "_iconIdle", "_hint"];
-    _target setUserActionText [_actionID,_title, GVAR(HoldActionIdleBackground) select floor ((diag_tickTime / 0.065) % 12), format["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
+    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((diag_tickTime / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
 };

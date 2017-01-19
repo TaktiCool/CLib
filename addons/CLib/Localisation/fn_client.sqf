@@ -28,11 +28,11 @@ if (_index == -1) then {
         _var = _data select _englishIndex;
     };
     /* TODO Fix Compression
-    if (useCompression) then {
+    if (USECOMPRESSION) then {
         _var = _var call CFUNC(decompressString);
     };
     */
-    DUMP("L10N Varfound: " + str _x + " Content: " + str _var)
+    DUMP("L10N Varfound: " + str _x + " Content: " + str _var);
     GVAR(ClientNamespace) setVariable [_x, _var];
     nil
 } count ([GVAR(ServerNamespace), QGVAR(allLocalisations)] call CFUNC(allVariables));

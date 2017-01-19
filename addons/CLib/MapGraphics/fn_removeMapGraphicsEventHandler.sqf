@@ -8,9 +8,9 @@
     Removes a MapGraphics draw event
 
     Parameter(s):
-    0: Group Name <String>
-    1: Event Name <String>
-    2: Event ID (optional) <Number>
+    0: Group name <String>
+    1: Event name <String>
+    2: Event ID <Number> (Default: -1)
 
     Returns:
     None

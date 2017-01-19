@@ -30,7 +30,7 @@ switch (typeName _this) do {
         taskDestination _this;
     };
     default {
-        LOG("unkown Type in GetPos with: " + (typeName _this))
-        [0,0,0]
+        LOG("unkown Type in GetPos with: " + (typeName _this));
+        [0, 0, 0]
     };
 };

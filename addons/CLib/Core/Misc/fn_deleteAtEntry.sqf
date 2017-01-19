@@ -23,7 +23,10 @@ params ["_array", "_entry", ["_deleteAll", false]];
 private "_index";
 private _return = [];
 if (_deleteAll) then {
-    while {_index = _array find _entry; _index != -1} do {
+    while {
+        _index = _array find _entry;
+        _index != -1
+    } do {
         _array deleteAt _index;
         _return pushBack _index;
     };

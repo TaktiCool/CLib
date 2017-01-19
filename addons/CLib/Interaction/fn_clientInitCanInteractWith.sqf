@@ -8,10 +8,10 @@
     Init of the interact restriction system
 
     Parameter(s):
-    0: Argument Name <TYPE>
+    None
 
     Returns:
-    0: Return Name <TYPE>
+    None
 */
 // [CLib_Player, CLib_Player,["inNotVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]] call CLib_fnc_canInteractWith;
 
@@ -19,7 +19,7 @@
 // ["isNotInVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]
 
 ["isNotInVehicle", {
-    vehicle _caller == _caller && vehicle _target == _target
+    (isNull objectParent _caller) && (isNull objectParent _target)
 }] call CFUNC(addCanInteractWith);
 
 ["isNotSwimming", {
@@ -48,15 +48,15 @@ GVAR(reloadMutex) = false;
                 private _weapon = currentWeapon CLib_Player;
 
                 if (_weapon isEqualTo "") exitWith {};
-                private _anim  = getText (configfile >> "CfgWeapons" >> _weapon >> "reloadAction");
+                private _anim = getText (configFile >> "CfgWeapons" >> _weapon >> "reloadAction");
                 if (_anim == "") exitWith {}; //Ignore weapons with no reload gesture (binoculars)
 
                 private _isLauncher = _weapon isKindOf ["Launcher", configFile >> "CfgWeapons"];
 
-                private _duration = getNumber (configfile >> (["CfgGesturesMale", "CfgMovesMaleSdr"] select _isLauncher) >> "States" >> _anim >> "speed");
+                private _duration = getNumber (configFile >> (["CfgGesturesMale", "CfgMovesMaleSdr"] select _isLauncher) >> "States" >> _anim >> "speed");
 
                 if (_duration != 0) then {
-                    _duration = if (_duration < 0) then { abs _duration } else { 1 / _duration };
+                    _duration = if (_duration < 0) then {abs _duration} else {1 / _duration};
                 } else {
                     _duration = 3;
                 };

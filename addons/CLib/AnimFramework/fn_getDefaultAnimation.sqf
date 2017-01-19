@@ -20,9 +20,9 @@ private _animState = toLower (animationState _unit);
 
 // stances are broken for some Animations
 private _stance = switch (_animState select [4, 4]) do {
-    case ("ppne"): { "pne" };
-    case ("pknl"): { "knl" };
-    case ("perc"): { "erc" };
+    case ("ppne"): {"pne"};
+    case ("pknl"): {"knl"};
+    case ("perc"): {"erc"};
     default {
         ["erc", "knl", "pne"] select (["STAND", "CROUCH", "PRONE"] find stance _unit) max 0
     };

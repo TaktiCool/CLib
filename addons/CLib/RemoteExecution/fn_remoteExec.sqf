@@ -44,7 +44,7 @@ if (_target isEqualTo 0) exitWith {
 };
 
 // exit if the Object is Local
-if (_target isEqualType objNull && {local _target} ) exitWith {
+if (_target isEqualType objNull && {local _target}) exitWith {
     [_function, _args] call FUNC(execute);
 };
 
