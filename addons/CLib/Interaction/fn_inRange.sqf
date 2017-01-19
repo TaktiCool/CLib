@@ -21,7 +21,7 @@ params ["_object", "_distance"];
 
 if (_object isKindOf "CAManBase") exitWith {CLib_Player distance _object < _distance};
 
-private _playerPos = eyePos CGVAR(Player);
+private _playerPos = eyePos CLib_Player;
 private _viewDirection = eyeDirection CLib_Player;
 private _viewDirectionMagnitude = vectorMagnitude _viewDirection;
 
