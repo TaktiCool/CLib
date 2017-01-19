@@ -2,9 +2,8 @@ branches:
   only:
   - master
   - release
-
-language: node_js
-node_js:
-  - "node"
+language: python
+python:
+- '3.4'
 script:
-  - node tools/sqf_validator.js
+- python3 tools/sqf_validator.py
