@@ -44,4 +44,4 @@ files.forEach(file => {
 
 console.log('Validating finished with ' + errors + ' errors.');
 
-return errors;
+process.exit(errors);
