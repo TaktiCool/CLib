@@ -139,6 +139,10 @@ class Parser {
 
         this.parsePrimaryExpression();
 
+        if (this.tokens.length > 2 && this.peek().type == 'newline' && this.lookahead(2).type == 'operator' && ['&&', '||'].indexOf(this.lookahead(2).value) > -1) {
+            this.expect('newline');
+        }
+
         if (this.peek().type == 'space' && this.lookahead(1).type != 'lineComment') {
             this.expect('space');
             this.parseOperator();
