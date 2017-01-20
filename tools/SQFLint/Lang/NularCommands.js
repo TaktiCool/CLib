@@ -12,6 +12,7 @@
 module.exports = [
     'allCurators',
     'allDead',
+    'allDeadMen',
     'allGroups',
     'allPlayers',
     'allUnits',
