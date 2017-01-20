@@ -30,6 +30,7 @@ class Parser {
         this.content = content;
 
         this.requireSemicolon = true;
+        this.inWhile = false;
 
         this.nularCommands = require('./Lang/NularCommands');
         this.unaryCommands = require('./Lang/UnaryCommands');
@@ -210,12 +211,14 @@ class Parser {
     }
 
     parseOperator() {
-        if (this.peek().type == 'macro')
+        if (this.peek().type == 'macro') {
             return this.expect('macro');
-        if (this.peek().type == 'command')
+        } else if (this.peek().type == 'command') {
+            if (this.peek().value == 'while') this.inWhile = true;
             return this.expect('command');
-        if (this.peek().type == 'operator')
+        } else if (this.peek().type == 'operator') {
             return this.expect('operator');
+        }
 
         this.error('Unexpected token as operator: {0}', this.peek().type);
     }
@@ -270,6 +273,7 @@ class Parser {
                 break;
             case 'space':
                 this.expect('space');
+                if (this.inWhile) return;
                 this.expect('lineComment');
                 if (this.peek().type == 'outdent') return; // Handled by parseCode
                 this.expect('newline');
@@ -303,10 +307,11 @@ class Parser {
                 this.expect('indent');
             }
 
-            this.parseCode('closingBracket', indented);
+            this.parseCode('closingBracket', indented, this.inWhile);
         }
 
         this.expect('closingBracket');
+        if (this.inWhile) this.inWhile = false;
     }
 }
 
