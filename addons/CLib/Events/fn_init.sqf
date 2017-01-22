@@ -152,7 +152,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "fillEntitiesCheck", {
         GVAR(entities) = (entities [[], [], true, false]);
-        GVAR(entities) append allMissionObjects "";
+        GVAR(entities) append allMissionObjects "All";
         GVAR(entities) = GVAR(entities) - GVAR(entitiesCached);
         GVAR(entities) arrayIntersect GVAR(entities);
         GVAR(lastFilledEntities) = diag_frameNo + 15;
