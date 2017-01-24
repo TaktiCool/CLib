@@ -1,12 +1,12 @@
 // Check Debug settings
 #ifdef DEBUGFULL
-    #define isDev
+    #define ISDEV
     #define ENABLEPERFORMANCECOUNTER
     #define ENABLEFUNCTIONTRACE
 #endif
 
 #ifdef DEBUGFULL
-    #undef disableCompression
+    #undef DISABLECOMPRESSION
 #endif
 
 // Predefines for easy Macro work
@@ -38,7 +38,7 @@
 };
 
 // Logging/Dumping macros
-#ifdef isDev
+#ifdef ISDEV
     #define DUMP(var) SYSLOGGING("DUMP", var)
 #else
     #define DUMP(var) /* disabled */
@@ -56,7 +56,7 @@
 
 #define QFUNC(var) QUOTE(DFUNC(var))
 
-#ifdef isDev
+#ifdef ISDEV
     #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
 #endif
 
@@ -80,7 +80,7 @@
 #define DCFUNC(var) TRIPLE(CLib,fnc,var)
 #define QCFUNC(var) QUOTE(DCFUNC(var))
 
-#ifdef isDev
+#ifdef ISDEV
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
 #else
     #define CFUNC(var) TRIPLE(CLib,fnc,var)

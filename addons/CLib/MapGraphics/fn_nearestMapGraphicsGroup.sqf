@@ -8,9 +8,9 @@
     Get nearest Group from MapGraphicsGeometryCache
 
     Parameter(s):
-    0: map <Control>
-    1: x Position <Number>
-    2: y Position <Number>
+    0: Map <Control>
+    1: Map x position <Number>
+    2: Map y position <Number>
 
     Returns:
     Group <String>

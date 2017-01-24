@@ -17,15 +17,15 @@
     -
 */
 
-#define pos [-2000,-2000,-2000]
+#define POS [-2000,-2000,-2000]
 
 params [["_isGlobal", false]];
 
 private _ret = if (_isGlobal isEqualType true && {_isGlobal}) then {
     private _grp = call CFUNC(getLogicGroup);
-    _grp createUnit ["Logic", pos, [], 0, "NONE"];
+    _grp createUnit ["Logic", POS, [], 0, "NONE"];
 } else {
-    createLocation ["fakeTown", pos, 0, 0];
+    createLocation ["fakeTown", POS, 0, 0];
 };
 
 

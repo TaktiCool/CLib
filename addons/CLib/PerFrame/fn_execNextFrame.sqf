@@ -20,8 +20,8 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params [["_func",{}], ["_params", []]];
-if (diag_frameno == GVAR(nextFrameNo)) then {
+params [["_func", {}], ["_params", []]];
+if (diag_frameNo == GVAR(nextFrameNo)) then {
     GVAR(nextFrameBufferB) pushBack [_params, _func];
 } else {
     GVAR(nextFrameBufferA) pushBack [_params, _func];

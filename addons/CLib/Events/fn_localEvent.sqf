@@ -8,8 +8,8 @@
     Trigger Event on a Traget
 
     Parameter(s):
-    0: Event Name <String>
-    1: Arguments <Any> (default: nil)
+    0: Event name <String>
+    1: Arguments <Any> (Default: nil)
 
     Returns:
     Return of Last set on _CLib_EventReturn <Any>
@@ -17,13 +17,13 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-#ifdef isDev
+#ifdef ISDEV
     params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
 
     // dont Log to reduce Spam
-    if (!(toLower(_eventName) in GVAR(ignoredLogEventNames_0))) then {
+    if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
-        if (toLower(_eventName) in GVAR(ignoredLogEventNames_1)) then {
+        if (toLower _eventName in GVAR(ignoredLogEventNames_1)) then {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName)
         } else {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName + ":" + str _args)
@@ -50,6 +50,6 @@ if !(isNil "_eventArray") then {
 if (isNil "_CLib_EventReturn") then {
     nil
 } else {
-    DUMP("Event " + _eventName + " Returned: " + str _CLib_EventReturn)
+    DUMP("Event " + _eventName + " Returned: " + str _CLib_EventReturn);
     _CLib_EventReturn
 };

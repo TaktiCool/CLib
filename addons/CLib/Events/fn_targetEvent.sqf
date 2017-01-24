@@ -10,7 +10,7 @@
     Parameter(s):
     0: Event Name <String>
     1: Target <Object, Number, String, Array>
-    2: Arguments <Any> (default: nil)
+    2: Arguments <Any> (Default: nil)
 
     Returns:
     None
@@ -49,14 +49,14 @@ if (_target isEqualType "") exitWith {
         };
     };
     if (count _targets != 0) then {
-        #ifdef isDev
+        #ifdef ISDEV
             [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QCFUNC(localEvent), _targets] call CFUNC(remoteExec);
         #else
             [[_event, _args], QCFUNC(localEvent), _targets] call CFUNC(remoteExec);
         #endif
     };
 };
-#ifdef isDev
+#ifdef ISDEV
     [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QCFUNC(localEvent), _target] call CFUNC(remoteExec);
 #else
     [[_event, _args], QCFUNC(localEvent), _target] call CFUNC(remoteExec);

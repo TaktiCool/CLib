@@ -22,7 +22,7 @@ if (isNil QGVAR(defaultLoadoutValues)) exitWith {
         !isNil QGVAR(defaultLoadoutValues)
     }, _this] call CFUNC(waitUntil);
 };
-params [["_unit", player , [objNull]], ["_class", "", ["", configNull, []]]];
+params [["_unit", player, [objNull]], ["_class", "", ["", configNull, []]]];
 
 private _loadoutArray = _class call CFUNC(loadLoadout);
 
@@ -32,7 +32,7 @@ private _loadoutVars = _loadoutArray select 1;
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _i = _loadout find toLower(_find);
+    private _i = _loadout find toLower _find;
     if (_i != -1) then {
         private _item = if (_isRandom) then {
             selectRandom (_loadout select (_i + 1));
@@ -45,10 +45,15 @@ private _fnc_do = {
 };
 
 // Remove Actions
-["removeAllWeapons", { if (_item isEqualTo 1) then { removeAllWeapons _unit; }; }, true] call _fnc_do;
-["removeAllItems", { if (_item isEqualTo 1) then { removeAllItems _unit; }; }, true] call _fnc_do;
-["removeAllAssingedItems", { if (_item isEqualTo 1) then { removeAllAssignedItems _unit; }; }, true] call _fnc_do;
-
+["removeAllWeapons", {
+    if (_item isEqualTo 1) then {removeAllWeapons _unit};
+}, true] call _fnc_do;
+["removeAllItems", {
+    if (_item isEqualTo 1) then {removeAllItems _unit};
+}, true] call _fnc_do;
+["removeAllAssingedItems", {
+    if (_item isEqualTo 1) then {removeAllAssignedItems _unit};
+}, true] call _fnc_do;
 
 // Uniform
 ["uniform", {
@@ -83,27 +88,27 @@ private _fnc_do = {
 
 // Weapons
 {
-    [_x, { _unit addWeapon _item; }, true] call _fnc_do;
+    [_x, {_unit addWeapon _item}, true] call _fnc_do;
     nil
-} count ["primaryWeapon","secondaryWeapon","handgun","binocular"];
+} count ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
 
 // Primary Weapon Items
 {
-    [_x, { _unit addPrimaryWeaponItem _item; }, true] call _fnc_do;
+    [_x, {_unit addPrimaryWeaponItem _item}, true] call _fnc_do;
     nil
-} count ["primaryWeaponOptic","primaryWeaponMuzzle","primaryWeaponBarrel","primaryWeaponResting","primaryWeaponLoadedMagazine"];
+} count ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
 
 // Secondary Weapon Items
 {
-    [_x, { _unit addSecondaryWeaponItem _item; }, true] call _fnc_do;
+    [_x, {_unit addSecondaryWeaponItem _item}, true] call _fnc_do;
     nil
-} count ["secondaryWeaponOptic","secondaryWeaponMuzzle","secondaryWeaponBarrel","secondaryWeaponResting","secondaryWeaponLoadedMagazine"];
+} count ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
 
 // Handgun Items
 {
-    [_x, { _unit addHandgunItem _item; }, true] call _fnc_do;
+    [_x, {_unit addHandgunItem _item}, true] call _fnc_do;
     nil
-} count ["handgunOptic","handgunMuzzle","handgunBarrel","handgunResting","handgunLoadedMagazine"];
+} count ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
 
 // Items to Uniform
 ["itemsUniform", {
@@ -191,7 +196,7 @@ private _fnc_do = {
 // Scripts
 ["script", {
     {
-        [_unit,_loadout] call compile _x;
+        [_unit, _loadout] call compile _x;
         nil
     } count _item;
 }, false] call _fnc_do;

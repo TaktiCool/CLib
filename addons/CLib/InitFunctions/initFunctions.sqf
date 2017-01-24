@@ -11,19 +11,19 @@
     Function library initialization.
 
     Parameter(s):
-    _this select 0: 'Function manager' logic
+    0: Function to compile with optional header type <String, Array>
 
     Returns:
     Nothing
 */
 
 #define VERSION    3.0
-diag_log ("initFunctions.sqf Loaded: " + str(diag_tickTime));
+diag_log ("initFunctions.sqf Loaded: " + str diag_tickTime);
 //--- Fake header
 private _fnc_scriptName = if (isNil "_fnc_scriptName") then {"Functions Init"} else {_fnc_scriptName};
 
 //--- Check version, has to match config version
-if (getNumber (configfile >> "CfgFunctions" >> "Version") != VERSION) exitWith {
+if (getNumber (configFile >> "CfgFunctions" >> "Version") != VERSION) exitWith {
     // Save exit if version Number is Not Equal use BI version
     call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";
 };
@@ -64,7 +64,7 @@ private _headerSystem = "
 private _headerNone = "";
 
 //--- Compose headers based on current debug mode
-private _debug = uiNamespace getVariable ["bis_fnc_initFunctions_debugMode",0];
+private _debug = uiNamespace getVariable ["bis_fnc_initFunctions_debugMode", 0];
 private _headerDefault = switch _debug do {
 
     //--- 0 - Debug mode off
@@ -87,7 +87,7 @@ private _headerDefault = switch _debug do {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //--- Compile function
 private _fncCompile = {
-    private ["_header","_debugMessage"];
+    private ["_header", "_debugMessage"];
     params ["_fncVar", "_fncMeta", "_fncHeader", "_fncFinal"];
 
     _fncMeta params ["_fncPath", "_fncExt"];
@@ -116,15 +116,15 @@ private _fncCompile = {
             };
             _debugMessage = "Log: [Functions]%1 | %2";
             if (_fncFinal) then {
-                compileFinal (format [_header,_fncVar,_debugMessage] + preprocessFileLineNumbers _fncPath);
+                compileFinal (format [_header, _fncVar, _debugMessage] + preprocessFileLineNumbers _fncPath);
             } else {
-                compile (format [_header,_fncVar,_debugMessage] + preprocessFileLineNumbers _fncPath);
+                compile (format [_header, _fncVar, _debugMessage] + preprocessFileLineNumbers _fncPath);
             };
         };
 
         //--- FSM
         case ".fsm": {
-            compileFinal format ["%1_fsm = _this execfsm '%2'; %1_fsm",_fncVar,_fncPath];
+            compileFinal format ["%1_fsm = _this execfsm '%2'; %1_fsm", _fncVar, _fncPath];
         };
 
         default {0}
@@ -145,8 +145,8 @@ private _fncCompile = {
 ******************************************************************************************************/
 
 //--- Compile only selected
-if (isNil "_this") then {_this = [];};
-if !(_this isEqualType []) then {_this = [_this];};
+if (isNil "_this") then {_this = []};
+if !(_this isEqualType []) then {_this = [_this]};
 private _recompile = if (count _this > 0) then {_this select 0} else {0};
 
 if (_recompile isEqualType "") exitWith {
@@ -161,18 +161,18 @@ if (_recompile isEqualType "") exitWith {
     if !(isNil "_fnc") then {
         private _fncMeta = _recompile call (uiNamespace getVariable "bis_fnc_functionMeta");
         private _headerType = if (count _this > 1) then {_this select 1} else {0};
-        private _var = [_recompile,[_recompile,_fncMeta,_headerType,false] call _fncCompile];
-        if (_fncuiNamespace) then {uiNamespace setVariable _var;};
+        private _var = [_recompile, [_recompile, _fncMeta, _headerType, false] call _fncCompile];
+        if (_fncuiNamespace) then {uiNamespace setVariable _var};
         missionNamespace setVariable _var;
         if (isNil "_functions_listRecompile") then {
-            textLogFormat ["Log: [Functions]: %1 recompiled with meta %2",_recompile,_fncMeta];
+            textLogFormat ["Log: [Functions]: %1 recompiled with meta %2", _recompile, _fncMeta];
         };
     } else {
         private _fncError = uiNamespace getVariable "bis_fnc_error";
         if !(isNil "_fncError") then {
-            ["%1 is not a function.",_recompile] call _fncError;
+            ["%1 is not a function.", _recompile] call _fncError;
         } else {
-            textLogFormat ["Log: [Functions]: ERROR: %1 is not a function.",_recompile];
+            textLogFormat ["Log: [Functions]: ERROR: %1 is not a function.", _recompile];
         };
     };
 };
@@ -196,10 +196,10 @@ RscDisplayLoading_progressMission = nil;
 
 //--- Get existing lists (create new ones when they doesn't exist)
 private _functions_listPreStart = [];
-private _functions_list = call (uiNamespace getVariable ["bis_functions_list",{[]}]);
-private _functions_listPreInit = [call (uiNamespace getVariable ["bis_functions_listPreInit",{[]}]),[]];
-private _functions_listPostInit = [call (uiNamespace getVariable ["bis_functions_listPostInit",{[]}]),[]];
-private _functions_listRecompile = call (uiNamespace getVariable ["bis_functions_listRecompile",{[]}]);
+private _functions_list = call (uiNamespace getVariable ["bis_functions_list", {[]}]);
+private _functions_listPreInit = [call (uiNamespace getVariable ["bis_functions_listPreInit", {[]}]), []];
+private _functions_listPostInit = [call (uiNamespace getVariable ["bis_functions_listPostInit", {[]}]), []];
+private _functions_listRecompile = call (uiNamespace getVariable ["bis_functions_listRecompile", {[]}]);
 
 //--- When not forced, recompile only mission if uiNamespace functions exists
 if !(_recompile isEqualType 1) then {
@@ -207,36 +207,36 @@ if !(_recompile isEqualType 1) then {
 };
 
 //--- When autodetect, recognize what recompile type is required
-if (_recompile == 0 && !isNil {uiNamespace getVariable "bis_fnc_init"}) then {_recompile = 3;};
-if (_recompile == 3 && !isNil {missionNamespace getVariable "bis_fnc_init"}) then {_recompile = 4;};
+if (_recompile == 0 && !isNil {uiNamespace getVariable "bis_fnc_init"}) then {_recompile = 3};
+if (_recompile == 3 && !isNil {missionNamespace getVariable "bis_fnc_init"}) then {_recompile = 4};
 
-private _file = getText (configfile >> "cfgFunctions" >> "file");
+private _file = getText (configFile >> "cfgFunctions" >> "file");
 private _cfgSettings = [
-    [    configfile,        _file,        0    ],    //--- 0
-    [    campaignconfigfile,    "functions",    1    ],    //--- 1
-    [    missionconfigfile,    "functions",    1    ]    //--- 2
+    [configFile, _file, 0], //--- 0
+    [campaignConfigFile, "functions", 1], //--- 1
+    [missionConfigFile, "functions", 1] //--- 2
 ];
 
 private _listConfigs = switch _recompile do {
     case 0: {
-        [0,1,2];
+        [0, 1, 2];
     };
     case 1: {
         _functions_list = [];
-        uiNamespace setVariable ["bis_functions_list",_functions_list];
-        _functions_listPreInit = [[],[]];
-        uiNamespace setVariable ["bis_functions_listPreInit",_functions_listPreInit];
-        _functions_listPostInit = [[],[]];
-        uiNamespace setVariable ["bis_functions_listPostInit",_functions_listPostInit];
+        uiNamespace setVariable ["bis_functions_list", _functions_list];
+        _functions_listPreInit = [[], []];
+        uiNamespace setVariable ["bis_functions_listPreInit", _functions_listPreInit];
+        _functions_listPostInit = [[], []];
+        uiNamespace setVariable ["bis_functions_listPostInit", _functions_listPostInit];
         _functions_listRecompile = [];
-        uiNamespace setVariable ["bis_functions_listRecompile",_functions_listRecompile];
-        [0,1,2];
+        uiNamespace setVariable ["bis_functions_listRecompile", _functions_listRecompile];
+        [0, 1, 2];
     };
     case 2: {
         [0];
     };
     case 3: {
-        [1,2];
+        [1, 2];
     };
     case 4: {
         [1,2];
@@ -264,16 +264,7 @@ private _listConfigs = switch _recompile do {
 ******************************************************************************************************/
 
 //--- Allow recompile in dev version, in the editor and when description.ext contains 'allowFunctionsRecompile = 1;'
-private _compileFinal =
-    //--- Dev version
-    !cheatsEnabled
-    &&
-    //--- Editor mission
-    ((uiNamespace getVariable ["gui_displays",[]]) find (findDisplay 26) != 1)
-    &&
-    //--- Manual toggle
-    getNumber (missionconfigfile >> "allowFunctionsRecompile") == 0;
-
+private _compileFinal = !cheatsEnabled && ((uiNamespace getVariable ["gui_displays",[]]) find (findDisplay 26) != 1) && getNumber (missionConfigFile >> "allowFunctionsRecompile") == 0;
 {
     private _cfg = _cfgSettings select _x;
     _cfg params ["_pathConfig", "_pathFile", "_pathAccess"];
@@ -285,7 +276,7 @@ private _compileFinal =
         private _requiredAddons = getArray (_currentTag >> "requiredAddons");
         private _requiredAddonsMet = true;
         {
-            if !(isClass (configfile >> "CfgPatches" >> _x)) exitWith {
+            if !(isClass (configFile >> "CfgPatches" >> _x)) exitWith {
                 _requiredAddonsMet = false;
             };
             nil
@@ -296,7 +287,7 @@ private _compileFinal =
             //--- Initialize tag
             private _tag = configName _currentTag;
             private _tagName = getText (_currentTag >> "tag");
-            if (_tagName == "") then {_tagName = configName _currentTag;};
+            if (_tagName == "") then {_tagName = configName _currentTag};
             _itemPathTag = getText (_currentTag >> "file");
 
             {
@@ -307,7 +298,7 @@ private _compileFinal =
 
                 {
                     // extern File to keep the file more clean
-                    #include "compileLoop.sqf";
+                    #include "compileLoop.sqf"
                     nil
                 } count (configProperties [_currentCategory,"isClass _x"]);
                 nil
@@ -319,10 +310,10 @@ private _compileFinal =
 } count _listConfigs;
 
 //--- Save the lists
-uiNamespace setVariable ["BIS_functions_list",compileFinal str (_functions_list)];
-uiNamespace setVariable ["BIS_functions_listPreInit",compileFinal str (_functions_listPreInit select 0)];
-uiNamespace setVariable ["BIS_functions_listPostInit",compileFinal str (_functions_listPostInit select 0)];
-uiNamespace setVariable ["BIS_functions_listRecompile",compileFinal str (_functions_listRecompile)];
+uiNamespace setVariable ["BIS_functions_list", compileFinal str (_functions_list)];
+uiNamespace setVariable ["BIS_functions_listPreInit", compileFinal str (_functions_listPreInit select 0)];
+uiNamespace setVariable ["BIS_functions_listPostInit", compileFinal str (_functions_listPostInit select 0)];
+uiNamespace setVariable ["BIS_functions_listRecompile", compileFinal str (_functions_listRecompile)];
 
 
 /******************************************************************************************************
@@ -359,7 +350,7 @@ if (_recompile in [4]) then {
 
 //--- Only mission variables
 if (_recompile in [1]) then {
-    "Functions recompiled" call bis_fnc_log;
+    "Functions recompiled" call BIS_fnc_log;
 };
 
 //--- Log the info about selected recompile type
@@ -370,4 +361,4 @@ private _recompileNames = [
     "Mission/Campaign Only"
 ];
 ["Initialized: %1.",_recompileNames select _recompile] call (uiNamespace getVariable "bis_fnc_logFormat");
-diag_log ("initFunctions.sqf Done: " + str(diag_tickTime));
+diag_log ("initFunctions.sqf Done: " + str diag_tickTime);

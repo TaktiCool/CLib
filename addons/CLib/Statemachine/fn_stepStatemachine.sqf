@@ -18,19 +18,19 @@ params ["_stateMachine"];
 private _currentState = _stateMachine getVariable SMSVAR(nextStateData);
 // check if current state exist in Namespace.
 if (isNil "_currentState") exitWith {
-    LOG("Error Next State is Nil")
+    LOG("Error Next State is Nil");
     "exit"
 };
 
 private _stateData = if (_currentState isEqualType "") then {
-    _stateMachine getVariable format[SMSVAR(%1), _currentState];
+    _stateMachine getVariable format [SMSVAR(%1), _currentState];
 } else {
-    _stateMachine getVariable format[SMSVAR(%1), (_currentState select 0)];
+    _stateMachine getVariable format [SMSVAR(%1), (_currentState select 0)];
 };
 
 // check if state data exist.
 if (isNil "_stateData") exitWith {
-    LOG("Error Next State is Unknown: " + _currentState)
+    LOG("Error Next State is Unknown: " + _currentState);
     "exit"
 };
 

@@ -8,9 +8,9 @@
     Trigger a event on every machine
 
     Parameter(s):
-    0: Event Name <String>
+    0: Event name <String>
     1: Arguments <Any>
-    2: is Persistent <String, Number>
+    2: Persistent <String, Number>
 
     Returns:
     None
@@ -19,7 +19,7 @@
 EXEC_ONLY_UNSCHEDULED
 
 params [["_event", "EventError", [""]], ["_args", []], "_persistent"];
-#ifdef isDev
+#ifdef ISDEV
     [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QCFUNC(localEvent), 0, true] call CFUNC(remoteExec);
 #else
     [[_event, _args], QCFUNC(localEvent), 0, true] call CFUNC(remoteExec);

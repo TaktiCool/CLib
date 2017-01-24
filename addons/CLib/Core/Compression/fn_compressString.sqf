@@ -92,4 +92,4 @@ if (!(_writeCache isEqualTo [])) then {
     _rawOutput append _writeCache;
 };
 
-toString _rawOutput;
+toString _rawOutput

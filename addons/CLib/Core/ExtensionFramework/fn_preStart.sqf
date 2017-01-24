@@ -26,5 +26,5 @@ GVAR(ACK) = toString [6];
 GVAR(RS) = toString [30];
 GVAR(US) = toString [31];
 
-CLib_Core_fnc_extensionRequest = cmp preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionRequest.sqf";
-CLib_Core_fnc_extensionFetch = cmp preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionFetch.sqf";
+CLib_Core_fnc_extensionRequest = CMP preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionRequest.sqf";
+CLib_Core_fnc_extensionFetch = CMP preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionFetch.sqf";

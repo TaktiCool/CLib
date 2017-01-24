@@ -32,9 +32,9 @@ if (_itemExt == "") then {_itemExt = ".sqf"};
 private _itemPath = if (_itemPathItem != "") then {
     if (_tagName == "BIS" && _pathAccess == 0) then {
         //--- Disable rewriting of global BIS functions from outside (TODO Make it dynamic, so anyone can protect their functions)
-        private _itemPathItemA3 = (tolower _itemPathItem) find "a3";
-        private _itemPathSlash = (tolower _itemPathItem) find "\";
-        if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {_itemPathItem = "";};
+        private _itemPathItemA3 = (toLower _itemPathItem) find "a3";
+        private _itemPathSlash = (toLower _itemPathItem) find "\";
+        if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {_itemPathItem = ""};
     };
     _itemPathItem
 } else {
@@ -51,11 +51,11 @@ private _itemHeader = getNumber (_currentItem >> "headerType");
 //--- Compile function
 if (_itemPath == "") then {_itemPath = _pathFile + _categoryName + "\fn_" + _itemName + _itemExt};
 private _itemVar = _tagName + "_fnc_" + _itemName;
-private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile> 0, _tag, _categoryName, _itemName];
+private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile > 0, _tag, _categoryName, _itemName];
 private _itemCompile = if (_itemCheatsEnabled == 0 || (_itemCheatsEnabled > 0 && cheatsEnabled)) then {
     [_itemVar, _itemMeta, _itemHeader, _compileFinal] call _fncCompile;
 } else {
-    compilefinal "false" //--- Function not available in retail version
+    compileFinal "false" //--- Function not available in retail version
 };
 
 //--- Register function
@@ -69,7 +69,7 @@ if (_itemCompile isEqualType {}) then {
             _x setVariable [_itemVar + "_meta", compileFinal str _itemMeta];
             nil
         } count _namespaces;
-        if (_pathAccess == 0) then {_functions_list pushBack _itemVar;};
+        if (_pathAccess == 0) then {_functions_list pushBack _itemVar};
     };
 
     //--- Add to list of functions executed upon mission start

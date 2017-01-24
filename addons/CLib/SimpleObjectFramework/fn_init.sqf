@@ -31,7 +31,7 @@ if (isServer) then {
         [{
             (findDisplay 602) closeDisplay 0;
             [{
-                Clib_Player action ["Gear", objNull];
+                CLib_Player action ["Gear", objNull];
             }, 1] call CFUNC(wait);
         }, {
             !isNull (findDisplay 602)

@@ -30,7 +30,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 
 
 [GVAR(statemachine), "init", {
-    DUMP("Init")
+    DUMP("Init");
 
     private _configPath = (configFile >> QPREFIX >> "GarbageCollector" >> "GarbageCollectorTime");
     if (isNumber _configPath) then {
@@ -45,7 +45,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillGrenades", {
-    DUMP("Fill Grenades")
+    DUMP("Fill Grenades");
     // Cycle through all units to detect near shells and enqueue them for removal.
     {
         // Cycle through all near shells.
@@ -60,7 +60,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillObjects", {
-    DUMP("Fill Objects")
+    DUMP("Fill Objects");
     {
         _x call DFUNC(pushbackInQueue);
         nil
@@ -69,11 +69,11 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "checkObject", {
-    DUMP("Check Object")
+    DUMP("Check Object");
     (GVAR(objectStorage) select 0) params ["_object", "_enqueueTime"];
 
     // If the time has not passed exit. This assumes all following object are pushed after the current one.
-    if (isNull _object) exitWith {GVAR(objectStorage) deleteAt 0;};
+    if (isNull _object) exitWith {GVAR(objectStorage) deleteAt 0};
     if (_enqueueTime > time) exitWith {};
     if !(_object getVariable [QCGVAR(noClean), false]) then {
 
@@ -95,7 +95,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
             params ["_object", "_height", "_position"];
 
             // Get the current position and subtract some value from the z axis.
-            _position set [2,  (_position select 2) - 0.02];
+            _position set [2, (_position select 2) - 0.02];
 
             // Apply the position change.
             _object setPos _position;
@@ -109,7 +109,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "checkGroups", {
-    DUMP("Check all Groups")
+    DUMP("Check all Groups");
     // Remove empty groups.
     {
         if !(_x getVariable [QCGVAR(noClean), false]) then {

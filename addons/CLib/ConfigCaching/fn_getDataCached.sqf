@@ -5,12 +5,12 @@
     Author: joko // Jonas
 
     Description:
-    Caches Values from configProperties
+    Caches values from config properties
 
     Parameter(s):
-    0: Config Path <Config, Array<String>>
-    1: Default Return if config Entry dont exist <String, Number, Array> (Default: "")
-    2: Force Type of Default Value <Bool> (Default: false)
+    0: Config path <Config, Array>
+    1: Default return <String, Number, Array> (Default: "")
+    2: Force return type <Bool> (Default: false)
 
     Returns:
     Config Value <Sring, Number, Array>
