@@ -271,9 +271,9 @@ class Parser {
                 break;
             case 'space':
                 this.expect('space');
-                this.expect('lineComment');
+                if (this.peek().type == 'lineComment') this.expect('lineComment');
+                if (this.peek().type == 'newline') this.expect('newline');
                 if (this.peek().type == 'outdent') return; // Handled by parseCode
-                this.expect('newline');
                 break;
             case 'newline':
                 this.expect('newline');

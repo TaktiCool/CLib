@@ -22,16 +22,8 @@ const readFilesSync = (dir, filter) => {
 
 console.log('Validating SQF...');
 
-// Allow running from root directory as well as from inside the tools directory
-let rootDir = 'addons';
-try {
-    fs.accessSync('addons');
-} catch (e) {
-    rootDir = '../addons';
-}
-
 let errors = 0;
-const files = readFilesSync(rootDir, /\.sqf$/);
+const files = readFilesSync('../addons', /\.sqf$/);
 files.forEach(file => {
     const content = fs.readFileSync(file, 'utf8');
     const tokens = Lexer.lex(content, file);
