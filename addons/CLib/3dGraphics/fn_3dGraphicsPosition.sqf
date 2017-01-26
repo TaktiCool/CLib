@@ -8,7 +8,7 @@
     Converts a 3dGraphicsPosition into PositionAGL
 
     Parameter(s):
-    0: 3d GraphicsPosition <3dGraphicsPosition>
+    0: 3dGraphicsPosition <Array>
 
     Returns:
     0: Position AGL <PositionAGL>
@@ -17,7 +17,7 @@
 params ["_positionIn"];
 
 if (_positionIn isEqualType objNull) exitWith {
-    _positionIn modelToWorldVisual [0,0,0]; // Return
+    _positionIn modelToWorldVisual [0, 0, 0]; // Return
 };
 
 
@@ -31,4 +31,4 @@ if (_positionIn isEqualType []) then {
         _ret = (_refPos modelToWorldVisual ((_refPos selectionPosition _refPosSelection) vectorAdd _refPosOffset)) vectorAdd _offset;
     };
 };
-_ret;
+_ret

@@ -134,10 +134,14 @@ class Parser {
     }
 
     parseBinaryExpression() {
-        if (this.peek().type == 'operator' && this.peek().value == '+') // Create copy of array
+        if (this.peek().type == 'operator' && ['+', '-'].indexOf(this.peek().value) > -1) // Create copy of array or negate expression
             this.expect('operator');
 
         this.parsePrimaryExpression();
+
+        if (this.tokens.length > 2 && this.peek().type == 'newline' && this.lookahead(2).type == 'operator' && ['&&', '||'].indexOf(this.lookahead(2).value) > -1) {
+            this.expect('newline');
+        }
 
         if (this.peek().type == 'space' && this.lookahead(1).type != 'lineComment') {
             this.expect('space');
@@ -206,12 +210,13 @@ class Parser {
     }
 
     parseOperator() {
-        if (this.peek().type == 'macro')
+        if (this.peek().type == 'macro') {
             return this.expect('macro');
-        if (this.peek().type == 'command')
+        } else if (this.peek().type == 'command') {
             return this.expect('command');
-        if (this.peek().type == 'operator')
+        } else if (this.peek().type == 'operator') {
             return this.expect('operator');
+        }
 
         this.error('Unexpected token as operator: {0}', this.peek().type);
     }
@@ -266,9 +271,9 @@ class Parser {
                 break;
             case 'space':
                 this.expect('space');
-                this.expect('lineComment');
+                if (this.peek().type == 'lineComment') this.expect('lineComment');
+                if (this.peek().type == 'newline') this.expect('newline');
                 if (this.peek().type == 'outdent') return; // Handled by parseCode
-                this.expect('newline');
                 break;
             case 'newline':
                 this.expect('newline');

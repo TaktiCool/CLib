@@ -36,8 +36,8 @@ if (_state) then {
     //inGameUISetEventHandler ["NextAction", "true"];
     //inGameUISetEventHandler ["Action", "true"];
 
-    GVAR(disableUserInputScrollWheelEventHandler) = (findDisplay 46) displayAddEventHandler ["MouseZChanged", {true;}];
-    GVAR(disableUserInputMouseButtonEventHandler) = (findDisplay 46) displayAddEventHandler ["MouseButtonDown", {true;}];
+    GVAR(disableUserInputScrollWheelEventHandler) = (findDisplay 46) displayAddEventHandler ["MouseZChanged", {true}];
+    GVAR(disableUserInputMouseButtonEventHandler) = (findDisplay 46) displayAddEventHandler ["MouseButtonDown", {true}];
     GVAR(disableUserInputKeyEventHandler) = (findDisplay 46) displayAddEventHandler ["KeyDown", {
         params ["", "_key"];
 
@@ -60,7 +60,10 @@ if (_state) then {
 
             _ctrl = _dlg displayctrl ([104, 1010] select isMultiplayer);
             _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickRespawnStr)];
-            _ctrl ctrlEnable (call {private _config = missionConfigFile >> "respawnButton"; !isNumber _config || {getNumber _config == 1}});
+            _ctrl ctrlEnable call {
+                private _config = missionConfigFile >> "respawnButton";
+                !isNumber _config || {getNumber _config == 1}
+            };
             _ctrl ctrlSetText "RESPAWN";
             _ctrl ctrlSetTooltip "Respawn.";
         };
@@ -85,9 +88,9 @@ if (_state) then {
 
 } else {
     if !(isNil QGVAR(disableUserInputKeyEventHandler)) then {
-        (findDisplay 46) displayRemoveEventHandler ["KeyDown",GVAR(disableUserInputKeyEventHandler)];
-        (findDisplay 46) displayRemoveEventHandler ["MouseButtonDown",GVAR(disableUserInputMouseButtonEventHandler)];
-        (findDisplay 46) displayRemoveEventHandler ["MouseZChanged",GVAR(disableUserInputScrollWheelEventHandler)];
+        (findDisplay 46) displayRemoveEventHandler ["KeyDown", GVAR(disableUserInputKeyEventHandler)];
+        (findDisplay 46) displayRemoveEventHandler ["MouseButtonDown", GVAR(disableUserInputMouseButtonEventHandler)];
+        (findDisplay 46) displayRemoveEventHandler ["MouseZChanged", GVAR(disableUserInputScrollWheelEventHandler)];
     };
     GVAR(disableUserInputKeyEventHandler) = nil;
     GVAR(disableUserInputMouseButtonEventHandler) = nil;

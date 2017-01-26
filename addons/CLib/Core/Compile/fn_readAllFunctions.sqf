@@ -21,13 +21,13 @@ private _fnc_checkNext = {
     if (_children isEqualTo []) then {
         [_modPath, _modName, _moduleName, _modulePath, _config] call _fnc_readFunction;
     } else {
-        [_modPath, _modName, _moduleName, _modulePath,_config, _children] call _fnc_readSubModule
+        [_modPath, _modName, _moduleName, _modulePath, _config, _children] call _fnc_readSubModule
     };
 };
 
 private _fnc_readSubModule = {
     params ["_modPath", "_modName", "_moduleName", "_modulePath", "_config", "_children"];
-    DUMP("SubModule Found: " + configName _x)
+    DUMP("SubModule Found: " + configName _x);
     private _subModuleName = configName _x;
     {
         private _modulePath = +_modulePath;
@@ -54,11 +54,11 @@ private _fnc_readFunction = {
 
     parsingNamespace setVariable [_functionName + "_data", [_folderPath, format ["%1/%2", _modName, _moduleName], _onlyServer, _modName]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
-    DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer)
+    DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer);
 };
 
 
-DUMP("--------------------------Start CLib Function Search---------------------------------")
+DUMP("--------------------------Start CLib Function Search---------------------------------");
 {
     (_x splitString "/") params ["_modName", "_moduleName"];
     private _modPath = getText (configFile >> "CfgCLibModules" >> _modName >> "path");
@@ -71,4 +71,4 @@ DUMP("--------------------------Start CLib Function Search----------------------
     nil
 } count (parsingNamespace getVariable QGVAR(allModuleNamesCached));
 parsingNamespace setVariable [QCGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
-DUMP("--------------------------End CLib Function Search---------------------------------")
+DUMP("--------------------------End CLib Function Search---------------------------------");

@@ -81,8 +81,8 @@ GVAR(groupUnits) = [];
 ["eventAdded", {
     params ["_arguments", "_data"];
     _arguments params ["_event", "_function", "_args"];
-    if ((!(isNil QGVAR(missionStartedTriggered)) || !(isNull (findDisplay 46)))&& {_event isEqualTo "missionStarted"}) then {
-        LOG("Mission Started Event get Added After Mission Started")
+    if ((!(isNil QGVAR(missionStartedTriggered)) || !(isNull (findDisplay 46))) && {_event isEqualTo "missionStarted"}) then {
+        LOG("Mission Started Event get Added After Mission Started");
         if (_function isEqualType "") then {
             _function = parsingNamespace getVariable [_function, {}];
         };
@@ -133,8 +133,7 @@ GVAR(groupUnits) = [];
 
     // Bind it to the current player and store the index to delete it.
     private _index = CLib_Player addEventHandler [_x, _code];
-    DUMP("Eventhandler Added: " +
-    _x)
+    DUMP("Eventhandler Added: " + _x);
     // If the player changes remove the old EH and bind a new one.
     ["playerChanged", {
         params ["_data", "_params"];
@@ -146,7 +145,7 @@ GVAR(groupUnits) = [];
 
         // Some EH get rebound automatically on death. To prevent double EH we remove EH from new player first.
         _currentPlayer removeEventHandler [_name, _index];
-        DUMP("Eventhandler Added To New Player: " + _name)
+        DUMP("Eventhandler Added To New Player: " + _name);
         // Bind a new one and update the index in the params.
         _params set [2, _currentPlayer addEventHandler [_name, _code]];
     }, [_x, _code, _index]] call CFUNC(addEventHandler);
@@ -163,6 +162,6 @@ GVAR(groupUnits) = [];
     (_this select 0) params ["_newVehicle"];
 
     if (_newVehicle == CLib_Player) then {
-        unAssignVehicle CLib_Player;
+        unassignVehicle CLib_Player;
     };
 }] call CFUNC(addEventHandler);

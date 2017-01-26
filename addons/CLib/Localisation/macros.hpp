@@ -1,8 +1,8 @@
 #define MODULE Localisation
 #include "\tc\CLib\addons\CLib\CLib_Macros.hpp"
 
-#ifdef disableCompression
-    #define useCompression false
+#ifdef DISABLECOMPRESSION
+    #define USECOMPRESSION false
 #else
-    #define useCompression GVAR(useFunctionCompression)
+    #define USECOMPRESSION GVAR(useFunctionCompression)
 #endif

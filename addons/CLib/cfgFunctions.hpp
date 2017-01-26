@@ -2,7 +2,7 @@ class CLib_baseFNC {
     preInit = 0;
     postInit = 0;
     preStart = 0;
-    #ifdef isDev
+    #ifdef ISDEV
         recompile = 1;
     #else
         recompile = 0;

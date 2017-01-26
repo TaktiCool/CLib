@@ -46,8 +46,12 @@ private _fnc_readSimpleObjectClass = {
         {
             private _phase = getNumber (_x >> "phase");
             private _speed = switch (getText (_x >> "speedType")) do {
-                case ("BOOL"): { ((getNumber (_x >> "speed")) isEqualTo 1) };
-                default { if (isNumber (_x >> "speed")) then {getNumber (_x >> "speed")}; };
+                case ("BOOL"): {
+                    (getNumber (_x >> "speed")) isEqualTo 1
+                };
+                default {
+                    if (isNumber (_x >> "speed")) then {getNumber (_x >> "speed")};
+                };
             };
             if (isNil "_speed") then {
                 _animateArray pushBack [configName _x, _phase];

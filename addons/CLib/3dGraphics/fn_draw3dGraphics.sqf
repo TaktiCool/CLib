@@ -17,7 +17,7 @@
 // Dont Render 3d Icons if a UI is Open.
 if (!isNull (findDisplay 49) || dialog) exitWith {};
 
-PERFORMANCECOUNTER_START(3dGraphics)
+PERFORMANCECOUNTER_START(3dGraphics);
 
 private _fov = (call CFUNC(getFOV)) * 3;
 private _cameraPosition = positionCameraToWorld [0, 0, 0];
@@ -39,7 +39,7 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
                 };
             };
             case ("LINE"): {
-                _x params ["_type","_start", "_end", "_lineColor", "_code"];
+                _x params ["_type", "_start", "_end", "_lineColor", "_code"];
                 private _isVisible = call _code;
                 if (_isVisible) then {
                     _start = [_start] call CFUNC(3dGraphicsPosition);

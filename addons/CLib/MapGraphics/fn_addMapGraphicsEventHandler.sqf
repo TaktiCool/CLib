@@ -9,10 +9,10 @@
 
     Parameter(s):
     0: Icon Id <String>
-    1: Icon Event Name <String>
-    2: Code that get Executed on this Event <Code or String>
-    3: Arugments that get return in the Event <Any>
-    
+    1: Event name <String>
+    2: Code that gets executed on event <Code, String>
+    3: Arguments passed to the event <Any>
+
     Returns:
     ID of the Event <Number>
 */

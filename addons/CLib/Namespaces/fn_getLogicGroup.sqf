@@ -17,7 +17,7 @@
 private _grp = missionNamespace getVariable QGVAR(logicGroup);
 if (isNil "_grp") then {
     _grp = createGroup (createCenter sideLogic);
-    missionNamespace setVariable [QGVAR(logicGroup),_grp,true];
+    missionNamespace setVariable [QGVAR(logicGroup), _grp, true];
 };
 
 _grp;

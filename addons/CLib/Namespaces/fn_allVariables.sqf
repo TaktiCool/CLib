@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Namespace <Namespace>
-    1: Cache name <String> (default: QGVAR(allVariableCache))
+    1: Cache name <String> (Default: QGVAR(allVariableCache))
 
     Returns:
     All variable names <Array>

@@ -9,8 +9,8 @@
 
     Parameter(s):
     0: Unit <Object>
-    1: Container Classname <String>
-    2: Type Of Classname <Number>(Default: generated out of Config)
+    1: Container classname <String>
+    2: Type of classname <Number> (Default: -1)
 
     Returns:
     None
@@ -33,7 +33,7 @@ if (_containerNumber == -1) then {
 switch (_containerNumber) do {
     case 0: {
         _uniformName = uniform _unit;
-        if(_containerClassName == _uniformName && _containerClassName != "") then {
+        if (_containerClassName == _uniformName && _containerClassName != "") then {
             _uniform = uniformContainer _unit;
             clearItemCargoGlobal _uniform;
             clearMagazineCargoGlobal _uniform;
@@ -48,7 +48,7 @@ switch (_containerNumber) do {
     };
     case 1: {
         _vestName = vest _unit;
-        if(_containerClassName == _vestName && _containerClassName != "") then {
+        if (_containerClassName == _vestName && _containerClassName != "") then {
             _vest = vestContainer _unit;
             clearItemCargoGlobal _vest;
             clearMagazineCargoGlobal _vest;
@@ -63,7 +63,7 @@ switch (_containerNumber) do {
     };
     case 2: {
         _backpackName = backpack _unit;
-        if(_containerClassName == _backpackName && _containerClassName != "") then {
+        if (_containerClassName == _backpackName && _containerClassName != "") then {
             _backpack = backpackContainer _unit;
             clearItemCargoGlobal _backpack;
             clearMagazineCargoGlobal _backpack;
@@ -71,9 +71,9 @@ switch (_containerNumber) do {
         } else {
             removeBackpack _unit;
 
-             if (_containerClassName != "") then {
-                 _unit addBackpack _containerClassName;
-             };
+            if (_containerClassName != "") then {
+                _unit addBackpack _containerClassName;
+            };
         };
     };
 };

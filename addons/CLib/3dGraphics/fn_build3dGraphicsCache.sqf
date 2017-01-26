@@ -8,11 +8,12 @@
     Updates the 3dGraphicsCache
 
     Parameter(s):
-    -
+    None
 
     Returns:
     -
 */
+
 private _cache = [];
 
 {

@@ -26,8 +26,8 @@ params ["_postion", "_radius"];
     };
 
     private _vehicles = _nearObjects select {
-        _x isKindOf "Car" || _x isKindOf "Air" || _x isKindOf "Motorcycle" ||
-        _x isKindOf "StaticWeapon" || _x isKindOf "Tank" || _x isKindOf "Ship"
+        _x isKindOf "Car" || _x isKindOf "Air" || _x isKindOf "Motorcycle"
+         || _x isKindOf "StaticWeapon" || _x isKindOf "Tank" || _x isKindOf "Ship"
     };
 
     {

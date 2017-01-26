@@ -37,9 +37,9 @@ private _fnc_addRequiredModule = {
     nil
 } count _this;
 
-_requiredModules = _requiredModules apply { toLower _x; };
+_requiredModules = _requiredModules apply {toLower _x};
 
-LOG("Loaded Modules: " + str _this)
+LOG("Loaded Modules: " + str _this);
 
 {
     private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
@@ -53,7 +53,7 @@ LOG("Loaded Modules: " + str _this)
 
 // EH for client registration. Starts transmission of function code.
 // required Function that the Client needed
-GVAR(RequiredFncClient) = GVAR(requiredFunctions) select { !((parsingNamespace getVariable (_x + "_data")) select 2) };
+GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {!((parsingNamespace getVariable (_x + "_data")) select 2)};
 
 // Count requiredFunctions array and filter serverinit they dont need to sendet
 GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;

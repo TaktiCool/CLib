@@ -8,15 +8,14 @@
     Handles mouse moving event
 
     Parameter(s):
-    0: control <Control>
+    0: Control <Control>
     1: Mouse x position <Number>
     2: Mouse y position <Number>
-    2: mouseOver <???> // Don't know, look at arma wiki
 
     Returns:
     None
 */
-params ["_control", "_xPos", "_yPos", "_mouseOver"];
+params ["_control", "_xPos", "_yPos"];
 
 private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGroup);
 {

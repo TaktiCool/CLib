@@ -44,13 +44,13 @@ private _functionTag = getText (_config >> "tag");
 // Read Module Loop
 {
     private _moduleName = configName _x;
-    DUMP("Read Mission Module: " + _moduleName)
+    DUMP("Read Mission Module: " + _moduleName);
     // Read Functions Loop
     {
         private _name = configName _x;
         private _fncName = format ["%1_%2_fnc_%3", _functionTag, _moduleName, _name];
         private _filePath = format ["CLibModules\%1\fn_%2.sqf", _moduleName, _name];
-        DUMP("Read Mission Module: " + _moduleName)
+        DUMP("Read Mission Module: " + _moduleName);
         _allMissionModules pushBackUnique _fncName;
         [_filePath, _fncName] call _fnc_compileMissionFunction;
         nil
@@ -84,7 +84,7 @@ private _hcInit = [];
             _init pushBack _x;
         };
     };
-    DUMP("Read Mission Function: " + _x)
+    DUMP("Read Mission Function: " + _x);
     nil
 } count _allMissionModules;
 
@@ -94,7 +94,7 @@ private _hcInit = [];
             private _time = diag_tickTime;
             _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
             _time = diag_tickTime - _time;
-            LOG("Mission Module Call: " + _x + " (" + str (_time * 1000) + " ms)")
+            LOG("Mission Module Call: " + _x + " (" + str (_time * 1000) + " ms)");
             nil
         } count (_x select 0);
     };

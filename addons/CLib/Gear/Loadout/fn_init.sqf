@@ -31,7 +31,7 @@ if (isServer) then {
             };
             nil
         } count [GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables);
-        ["registerServerConfigLoadout", _id , _data] call CFUNC(targetEvent);
+        ["registerServerConfigLoadout", _id, _data] call CFUNC(targetEvent);
     }] call CFUNC(addEventhandler);
 };
 

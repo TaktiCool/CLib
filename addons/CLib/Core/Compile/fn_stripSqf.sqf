@@ -13,7 +13,8 @@
     Returns:
     0: output <String>
 */
-params [["_inputStr",""]];
+
+params [["_inputStr", ""]];
 
 private _sqString = false;
 private _dqString = false;
@@ -59,7 +60,7 @@ private _outStr = "";
                     _lastC = _x;
                 };
             } else {
-                if (_token isEqualTo [] && _lastC>0 && !(_lastC in _operatorAndBraces)) then {
+                if (_token isEqualTo [] && _lastC > 0 && !(_lastC in _operatorAndBraces)) then {
                     _outStr = _outStr + " ";
                 };
                 _lastC = _x;

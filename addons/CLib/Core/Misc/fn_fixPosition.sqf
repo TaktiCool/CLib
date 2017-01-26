@@ -29,7 +29,7 @@ if ((getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "simulation")) 
     private _posAbove = (getPos _object) select 2;
 
     if (_posAbove > 0.1) then {
-        private _newPosASL = (getPosASL _object) vectorDiff [0,0,_posAbove];
+        private _newPosASL = (getPosASL _object) vectorDiff [0, 0, _posAbove];
         _object setPosASL _newPosASL;
     };
 };

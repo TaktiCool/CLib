@@ -8,7 +8,8 @@
     Call for interaction system that gets called when the cursortarget changes
 
     Parameter(s):
-    cursortargetChanged Event Return
+    0: Current cursor object <Object>
+    1: Previous cursor object <Object>
 
     Returns:
     None

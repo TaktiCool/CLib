@@ -8,10 +8,10 @@
     Adds a new group to the MapGraphics system
 
     Parameter(s):
-    0: Group Name <STRING>
-    1: Group Data <ARRAY>
-    2: Group Layer <NUMBER>
-    3: State <STRING>
+    0: Group Name <String>
+    1: Group Data <Array>
+    2: Group Layer <Number>
+    3: State <String>
 
     Remarks:
     Group Data is defined as <ARRAY> of GraphicsElements of following Structure:
@@ -62,7 +62,7 @@
     Returns:
     None
 */
-params ["_groupName", "_groupData", ["_state","normal"], ["_layer",0]];
+params ["_groupName", "_groupData", ["_state", "normal"], ["_layer", 0]];
 
 // Compete the data for the map graphics cache
 private _completeGroupData = [];
@@ -72,42 +72,42 @@ private _completeGroupData = [];
     switch (_class) do {
         case ("ICON"): {
             _attributes params [
-                ["_texture",""],
-                ["_color",[0, 0, 0, 1]],
+                ["_texture", ""],
+                ["_color", [0, 0, 0, 1]],
                 ["_position", objNull, [[], objNull]],
                 ["_width", 25],
                 ["_height", 25],
-                ["_angle", 0,[0,objNull]],
-                ["_text",""],
+                ["_angle", 0, [0, objNull]],
+                ["_text", ""],
                 ["_shadow", 0],
                 ["_textSize", 0.08],
                 ["_font", "PuristaMedium"],
-                ["_align","right"],
-                ["_code",{}]
+                ["_align", "right"],
+                ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _code];
         };
         case ("RECTANGLE"): {
             _attributes params [
                 ["_position", objNull, [[], objNull]],
-                ["_width", 25,[0,[]]],
-                ["_height", 25,[0,[]]],
-                ["_angle", 0,[0,objNull]],
-                ["_lineColor",[0, 0, 0, 1]],
-                ["_fillColor",[0, 0, 0, 1]],
-                ["_code",{}]
+                ["_width", 25, [0, []]],
+                ["_height", 25, [0, []]],
+                ["_angle", 0, [0, objNull]],
+                ["_lineColor", [0, 0, 0, 1]],
+                ["_fillColor", [0, 0, 0, 1]],
+                ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code];
         };
         case ("ELLIPSE"): {
             _attributes params [
                 ["_position", objNull, [[], objNull]],
-                ["_width", 25,[0,[]]],
-                ["_height", 25,[0,[]]],
-                ["_angle", 0,[0,objNull]],
-                ["_lineColor",[0, 0, 0, 1]],
-                ["_fillColor",[0, 0, 0, 1]],
-                ["_code",{}]
+                ["_width", 25, [0, []]],
+                ["_height", 25, [0, []]],
+                ["_angle", 0, [0, objNull]],
+                ["_lineColor", [0, 0, 0, 1]],
+                ["_fillColor", [0, 0, 0, 1]],
+                ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code];
         };
@@ -115,8 +115,8 @@ private _completeGroupData = [];
             _attributes params [
                 ["_position1", objNull, [[], objNull]],
                 ["_position2", objNull, [[], objNull]],
-                ["_color",[0, 0, 0, 1]],
-                ["_code",{}]
+                ["_color", [0, 0, 0, 1]],
+                ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _position1, _position2, _color, _code];
         };
@@ -124,16 +124,16 @@ private _completeGroupData = [];
             _attributes params [
                 ["_position1", objNull, [[], objNull]],
                 ["_position2", objNull, [[], objNull]],
-                ["_color",[0, 0, 0, 1]],
-                ["_code",{}]
+                ["_color", [0, 0, 0, 1]],
+                ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _position1, _position2, _color, _code];
         };
         case ("POLYGON"): {
             _attributes params [
                 ["_polygon", []],
-                ["_color",[0, 0, 0, 1]],
-                ["_code",{}]
+                ["_color", [0, 0, 0, 1]],
+                ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _polygon, _color, _code];
         };
@@ -149,7 +149,7 @@ if (_stateNum == -1) then {
 };
 
 // save the data
-private _currentIcon = [GVAR(MapGraphicsGroup), _groupName, [_layer, 0, 0, [],[],[]]] call CFUNC(getVariable);
+private _currentIcon = [GVAR(MapGraphicsGroup), _groupName, [_layer, 0, 0, [], [], []]] call CFUNC(getVariable);
 _currentIcon set [_stateNum + 3, _completeGroupData];
 _currentIcon set [1, diag_tickTime];
 [GVAR(MapGraphicsGroup), _groupName, _currentIcon] call CFUNC(setVariable);

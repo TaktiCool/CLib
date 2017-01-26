@@ -8,8 +8,8 @@
     Converts a Position from MapGraphicsPosition into a position
 
     Parameter(s):
-    0: position <MapGraphicsPosition>
-    1: map <Control>
+    0: Position <Array, Object>
+    1: Map <Control>
 
     Returns:
     0: position <Position>
@@ -26,7 +26,7 @@ if (_position isEqualType [] && {(_position select 1) isEqualType []}) then {
         _pos = getPosVisual _pos;
     };
     _pos = _map ctrlMapWorldToScreen _pos;
-    _pos = [(_pos select 0) + (_offset select 0)/640, (_pos select 1) + (_offset select 1)/480];
+    _pos = [(_pos select 0) + (_offset select 0) / 640, (_pos select 1) + (_offset select 1) / 480];
     _pos = _map ctrlMapScreenToWorld _pos;
     _position = _pos;
 };
