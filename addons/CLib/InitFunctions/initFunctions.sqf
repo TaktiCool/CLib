@@ -17,7 +17,7 @@
     Nothing
 */
 
-#define VERSION    3.0
+#define VERSION 3.0
 diag_log ("initFunctions.sqf Loaded: " + str diag_tickTime);
 //--- Fake header
 private _fnc_scriptName = if (isNil "_fnc_scriptName") then {"Functions Init"} else {_fnc_scriptName};
@@ -335,17 +335,17 @@ uiNamespace setVariable ["BIS_functions_listRecompile", compileFinal str (_funct
 #include "initCalls.sqf"
 
 //--- Not mission
-if (_recompile in [0,1,2]) then {
+if (_recompile in [0, 1, 2]) then {
 
     //--- uiNamespace init
-    uiNamespace setVariable ["bis_fnc_init",true]
+    uiNamespace setVariable ["bis_fnc_init", true]
 };
 
 //--- Only mission variables
 if (_recompile in [4]) then {
 
     //--- MissionNameSpace init
-    missionNamespace setVariable ["bis_fnc_init",true];
+    missionNamespace setVariable ["bis_fnc_init", true];
 };
 
 //--- Only mission variables
@@ -360,5 +360,5 @@ private _recompileNames = [
     "Core Only",
     "Mission/Campaign Only"
 ];
-["Initialized: %1.",_recompileNames select _recompile] call (uiNamespace getVariable "bis_fnc_logFormat");
+["Initialized: %1.", _recompileNames select _recompile] call (uiNamespace getVariable "bis_fnc_logFormat");
 diag_log ("initFunctions.sqf Done: " + str diag_tickTime);
