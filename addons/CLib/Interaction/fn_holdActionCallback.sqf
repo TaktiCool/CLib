@@ -51,7 +51,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     _ctrl = _display ctrlCreate ["RscStructuredText", 6001];
     _ctrl ctrlSetPosition [0, 0.509, 1, 0.5];
     _ctrl ctrlSetFont "PuristaMedium";
-    uiNamespace setVariable [UIVAR(HoldAction), _display]
+    uiNamespace setVariable [UIVAR(HoldAction), _display];
     //([UIVAR(HoldAction)] call BIS_fnc_rscLayer) cutRsc [UIVAR(HoldAction),"PLAIN",0];
 };
 
