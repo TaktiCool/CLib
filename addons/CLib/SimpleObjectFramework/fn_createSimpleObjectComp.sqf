@@ -17,20 +17,19 @@
 */
 params ["_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
 
-switch (typeName _input) do {
-    case ("STRING"): {
-        _input = GVAR(namespace) getVariable _input;
+_input = switch (typeName _input) do {
+    case "STRING": {
+        GVAR(namespace) getVariable _input
     };
-    case ("CONFIG"): {
-        if !(isServer) then {
+    case "CONFIG": {
+        if (!isServer) then {
             LOG("Error: you Try to Load a Config form a Client that is Not the Server");
         };
-        private _inputNew = GVAR(namespace) getVariable (configName _input);
         if (isNil "_input" || {_input isEqualTo []}) then {
-            _input = _input call CFUNC(readSimpleObjectComp);
+            _input call CFUNC(readSimpleObjectComp)
         } else {
-            _input = _inputNew;
-        };
+            GVAR(namespace) getVariable (configName _input)
+        }
     };
 };
 
@@ -55,11 +54,11 @@ _originObj setPosASL _posVectorASL;
 
 private _xVector = _dir vectorCrossProduct _normalVector;
 _dir = _normalVector vectorCrossProduct _xVector;
-private _ovUp = [[0,0,1], _normalVector] select _alignOnSurface;
+private _ovUp = [[0, 0, 1], _normalVector] select _alignOnSurface;
 
 _originObj setVectorDirAndUp [_dir, _ovUp];
 
-private _originPosAGL = _originObj modelToWorld [0,0,0];
+private _originPosAGL = _originObj modelToWorld [0, 0, 0];
 private _originPosASL = AGLToASL _originPosAGL;
 
 private _return = [];

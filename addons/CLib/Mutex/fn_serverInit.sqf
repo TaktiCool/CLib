@@ -61,7 +61,7 @@ DFUNC(checkNextMutexClient) = {
 // EH which fired if some client requests mutex executing
 [QGVAR(mutexRequest), {
     (_this select 0) params ["_clientObject", "_mutexId"];
-    
+
     private _mutex = [GVAR(mutexes), _mutexId, [0, [], 0]] call CFUNC(getVariable);
     _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 

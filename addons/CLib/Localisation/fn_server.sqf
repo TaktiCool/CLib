@@ -18,11 +18,11 @@ GVAR(supportedLanguages) = [];
 // GVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages"); // disabled this so we have a Dynamic Supported languages
 
 private _fnc_languageIndex = {
-    private _return = GVAR(supportedLanguages) find _this;
-    if (_return == -1) then {
-        _return = GVAR(supportedLanguages) pushBackUnique _this
+    private _index = GVAR(supportedLanguages) find _this;
+    if (_index == -1) exitWith {
+        GVAR(supportedLanguages) pushBackUnique _this
     };
-    _return
+    _index
 };
 
 private _fnc_setLanguageKey = {
