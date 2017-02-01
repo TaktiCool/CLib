@@ -49,11 +49,9 @@
 
 // Function macros
 #define EDFUNC(var1,var2) TRIPLE(PREFIX,var1,DOUBLE(fnc,var2))
-
 #define DFUNC(var) EDFUNC(MODULE,var)
 
 #define QEFUNC(var1,var2) QUOTE(EDFUNC(var1,var2))
-
 #define QFUNC(var) QUOTE(DFUNC(var))
 
 #ifdef ISDEV
@@ -77,16 +75,38 @@
 
 #define FUNC(var) EFUNC(MODULE,var)
 
+// CLib function macros
 #define DCFUNC(var) TRIPLE(CLib,fnc,var)
 #define QCFUNC(var) QUOTE(DCFUNC(var))
 
 #ifdef ISDEV
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
 #else
-    #define CFUNC(var) TRIPLE(CLib,fnc,var)
+    #define CFUNC(var) DCFUNC(var)
 #endif
 
 // #define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);
 // #define EPREP(folder,fncName) [QUOTE(FFNCPATH(folder,fncName)), QFUNC(fncName)] call CFUNC(compile);
 
 #include "supportMacros.hpp"
+
+#ifdef ISDEV
+    #undef EFUNC
+    #define EFUNC(var1,var2) {\
+        private _startTime = diag_tickTime;\
+        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
+        if (!isNil "_tempRet") then {\
+            _tempRet\
+        }\
+    }
+    #undef CFUNC
+    #define CFUNC(var) {\
+        private _startTime = diag_tickTime;\
+        private _tempRet = _this call (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}]);\
+        if (!isNil "_tempRet") then {\
+            _tempRet\
+        }\
+    }
+#endif
+
+//[-2, "CLibPerformanceInfo", "_LogCall@4", [diag_tickTime, diag_frameNo, diag_fps, diag_fpsMin, diag_tickTime - _startTime, QCFUNC(var)] joinString ":"] call CLib_Core_fnc_extensionRequest;\

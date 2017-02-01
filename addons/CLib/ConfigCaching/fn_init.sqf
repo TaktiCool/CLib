@@ -15,3 +15,4 @@
 */
 
 GVAR(configCache) = call CFUNC(createNamespace);
+nil

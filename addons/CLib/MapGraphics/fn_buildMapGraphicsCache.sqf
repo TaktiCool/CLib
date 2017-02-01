@@ -40,3 +40,4 @@ private _cache = [];
 _cache sort true;
 
 GVAR(MapGraphicsCache) = _cache;
+nil

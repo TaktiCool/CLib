@@ -23,8 +23,6 @@ if !(local _unit) exitWith {
     [_unit] remoteExecCall [_fnc_scriptName, _unit];
 };
 
-private ["_var", "_unit", "_fnc_outputText", "_text"];
-
 private _fnc_outputText = {
     if (count (_this select 0) > 1000) exitWith {};
     diag_log text (_this select 0);
@@ -32,7 +30,7 @@ private _fnc_outputText = {
     publicVariableServer QGVAR(sendlogfile);
 };
 
-_text = format [
+private _text = format [
     "------CLib Debug------
 time = %1
 ServerTime =%2

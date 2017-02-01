@@ -102,3 +102,4 @@ if (_state) then {
     //inGameUISetEventHandler ["NextAction", ""];
     //inGameUISetEventHandler ["Action", ""];
 };
+nil

@@ -32,3 +32,4 @@ if (_id == -1) then {
 };
 
 GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
+nil

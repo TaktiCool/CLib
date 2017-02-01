@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibCompression", "CLibComp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibLogging", "CLibLogging\CLibLogging.csproj", "{6EC8493C-6803-487C-8061-0F8C4D33A7E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibPerformanceInfo", "CLibPerformanceInfo\CLibPerformanceInfo.csproj", "{A1B503B6-8558-467D-97D4-B840951E27EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{6EC8493C-6803-487C-8061-0F8C4D33A7E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EC8493C-6803-487C-8061-0F8C4D33A7E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EC8493C-6803-487C-8061-0F8C4D33A7E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B503B6-8558-467D-97D4-B840951E27EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B503B6-8558-467D-97D4-B840951E27EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B503B6-8558-467D-97D4-B840951E27EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B503B6-8558-467D-97D4-B840951E27EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

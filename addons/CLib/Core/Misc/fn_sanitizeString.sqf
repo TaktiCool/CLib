@@ -15,11 +15,11 @@
     Returns:
     0: The sanitized string <String>
 */
-params [["_string", "", [""]]];
-private ["_array", "_symbols"];
 
-_array = [];
-_symbols = toArray "\/*""?<>|:";
+params [["_string", "", [""]]];
+
+private _array = [];
+private _symbols = toArray "\/*""?<>|:";
 
 {
     if !(_x in _symbols) then {

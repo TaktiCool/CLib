@@ -18,21 +18,24 @@
     Returns:
     Deleted Index <Array<Numbers>>
 */
+
 EXEC_ONLY_UNSCHEDULED
+
 params ["_array", "_entry", ["_deleteAll", false]];
-private "_index";
-private _return = [];
-if (_deleteAll) then {
+
+if (_deleteAll) exitWith {
+    private _index = 0;
+    private _return = [];
     while {_index = _array find _entry; _index != -1} do {
         _array deleteAt _index;
         _return pushBack _index;
     };
+    _return
 } else {
-    _index = _array find _entry;
-    if (_index != -1) then {
+    private _index = _array find _entry;
+    if (_index != -1) exitWith {
         _array deleteAt _index;
-
+        [_index]
     };
-    _return pushBack _index;
-};
-_return
+    []
+}

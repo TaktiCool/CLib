@@ -20,3 +20,4 @@ params ["_groupName"];
 
 // increment map graphics cache
 GVAR(MapGraphicsCacheRebuildFlag) = GVAR(MapGraphicsCacheRebuildFlag) + 1;
+nil

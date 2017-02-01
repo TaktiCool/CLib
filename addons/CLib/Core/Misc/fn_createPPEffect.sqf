@@ -16,13 +16,10 @@
     A handle for the created effect <Number>
 */
 
-
-private "_effect";
-
 params ["_type", "_layer", "_default"];
 
 // Create the effect and apply the initial parameters.
-_effect = ppEffectCreate [_type, _layer];
+private _effect = ppEffectCreate [_type, _layer];
 _effect ppEffectForceInNVG true;
 _effect ppEffectAdjust _default;
 _effect ppEffectCommit 0;

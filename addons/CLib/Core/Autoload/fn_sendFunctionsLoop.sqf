@@ -14,7 +14,7 @@
     None
 */
 
-if (isNil QGVAR(PFHSendFunctions)) exitWith {
+if (isNil QGVAR(PFHSendFunctions)) then {
     GVAR(PFHSendFunctions) = [{
         private _delete = false;
         {
@@ -41,3 +41,4 @@ if (isNil QGVAR(PFHSendFunctions)) exitWith {
         };
     }] call CFUNC(addPerFrameHandler);
 };
+nil

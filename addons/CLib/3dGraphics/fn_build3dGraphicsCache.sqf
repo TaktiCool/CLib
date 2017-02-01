@@ -22,3 +22,4 @@ private _cache = [];
 } count ([GVAR(3dGraphicsNamespace)] call CFUNC(allVariables));
 
 GVAR(3dGraphicsCache) = +_cache;
+nil

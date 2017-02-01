@@ -21,10 +21,10 @@
 params ["_name", ["_state", 0]];
 #ifndef DEBUGFULL
     switch (_state) do {
-        case (0): {
+        case 0: {
             GVAR(ignoredLogEventNames_0) pushBackUnique toLower _name;
         };
-        case (1): {
+        case 1: {
             GVAR(ignoredLogEventNames_1) pushBackUnique toLower _name;
         };
     };

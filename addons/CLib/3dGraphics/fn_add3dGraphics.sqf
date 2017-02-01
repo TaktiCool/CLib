@@ -81,3 +81,4 @@ private _completeGraphicsData = [];
 
 [GVAR(3dGraphicsNamespace), _id, _completeGraphicsData] call CFUNC(setVariable);
 GVAR(3dGraphicsCacheBuildFlag) = GVAR(3dGraphicsCacheBuildFlag) + 1;
+nil
