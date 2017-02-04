@@ -65,19 +65,16 @@ DUMP("Compile Function: " + _functionName);
 #endif
 
 if (USECOMPRESSION) then {
-    private _compressedString = _functionString call CFUNC(compressString);
-    DUMP(count _functionString);
-    DUMP(_compressedString);
-    DUMP(CFUNC(compressString));
-    parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
+    private _compressedCode = _functionCode call CFUNC(compressString);
+    parsingNamespace setVariable [_functionName + "_Compressed", _compressedCode];
 
     #ifdef ISDEV
-        private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
+        private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedCode / count _functionCode) * 100), "%"];
         DUMP(_str);
     #endif
     #ifndef DEBUGFULL
-        private _var = _compressedString call CFUNC(decompressString);
-        DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
+        private _var = _compressedCode call CFUNC(decompressString);
+        DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionCode)));
     #endif
 };
 nil
