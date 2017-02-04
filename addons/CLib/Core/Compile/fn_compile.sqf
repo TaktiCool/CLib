@@ -74,7 +74,9 @@ if (USECOMPRESSION) then {
     #endif
     #ifndef DEBUGFULL
         private _var = _compressedString call CFUNC(decompressString);
-        DUMP(count _var);
+        DUMP(count _compressedString);
+        DUMP(CFUNC(decompressString));
+        DUMP(_var);
         DUMP(_var isEqualTo _functionString);
         DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
     #endif
