@@ -38,7 +38,7 @@
 };
 
 // Logging/Dumping macros
-#ifndef ISDEV
+#ifdef ISDEV
     #define DUMP(var) SYSLOGGING("DUMP", var)
 #else
     #define DUMP(var) /* disabled */
