@@ -12,7 +12,7 @@
 // #define ISDEV // enable better logging
 // #define ENABLEPERFORMANCECOUNTER // enable Performance counter for Function calls
 // #define ENABLEFUNCTIONTRACE // enable SQF based Function Tracer (Later Maybe Replace with ChromeTrace Repalced)
-// #define DISABLECOMPRESSION
+#define DISABLECOMPRESSION
 // Base Includes
 #include "macros.hpp"
 #include "InternalMacros.hpp"
