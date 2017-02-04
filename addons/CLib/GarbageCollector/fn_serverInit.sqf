@@ -14,11 +14,11 @@
     None
 */
 
-if (getNumber (configFile >> QPREFIX >> "GarbageCollector" >> "EnableGarbageCollector") isEqualTo 0) exitWith {};
+if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarbageCollector") isEqualTo 0) exitWith {};
 
 DFUNC(pushbackInQueue) = {
     params ["_object"];
-    if !(_object getVariable [QCGVAR(noClean), false]) then {
+    if (!(_object getVariable [QCGVAR(noClean), false])) then {
         if (!(_object getVariable [QGVAR(queued), false])) then {
             _object setVariable [QGVAR(queued), true];
             GVAR(objectStorage) pushBack [_object, time + GVAR(waitTime)];
@@ -28,20 +28,19 @@ DFUNC(pushbackInQueue) = {
 
 GVAR(statemachine) = call CFUNC(createStatemachine);
 
-
 [GVAR(statemachine), "init", {
     DUMP("Init");
 
-    private _configPath = (configFile >> QPREFIX >> "GarbageCollector" >> "GarbageCollectorTime");
-    if (isNumber _configPath) then {
-        GVAR(waitTime) = getNumber _configPath
+    private _configPath = (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "GarbageCollectorTime");
+    GVAR(waitTime) = if (isNumber _configPath) then {
+        getNumber _configPath
     } else {
-        GVAR(waitTime) = 120;
+        120
     };
 
     GVAR(objectStorage) = [];
     GVAR(lastFilledTime) = time;
-    "fillGrenades";
+    "fillGrenades"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillGrenades", {
@@ -56,7 +55,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
         } count (getPos _x nearObjects ["GrenadeHand", 100]);
         nil
     } count allUnits;
-    "fillObjects";
+    "fillObjects"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillObjects", {
@@ -64,8 +63,8 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     {
         _x call DFUNC(pushbackInQueue);
         nil
-    } count allMissionObjects ("WeaponHolder") + allMissionObjects ("GroundWeaponHolder") + allMissionObjects ("WeaponHolderSimulated") + allDead;
-    "checkObject";
+    } count (allMissionObjects "WeaponHolder") + (allMissionObjects "GroundWeaponHolder") + (allMissionObjects "WeaponHolderSimulated") + allDead;
+    "checkObject"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "checkObject", {
