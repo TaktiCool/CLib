@@ -72,7 +72,7 @@ if (USECOMPRESSION) then {
         private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
         DUMP(_str);
     #endif
-    #ifdef DEBUGFULL
+    #ifndef DEBUGFULL
         private _var = _compressedString call CFUNC(decompressString);
         DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
     #endif
