@@ -42,7 +42,7 @@ class CfgCLibModules {
             MODULE(Autoload) {
                 FNC(autoloadEntryPoint) { serverOnly = 1; };
                 FNC(callModules);
-                APIFNC(loadModules) { serverOnly = 1; };
+                FNC(loadModules) { api = 1; serverOnly = 1; };
                 FNC(loadModulesServer) { serverOnly = 1; };
                 FNC(sendFunctions) { serverOnly = 1; };
                 FNC(sendFunctionsLoop) { serverOnly = 1; };
