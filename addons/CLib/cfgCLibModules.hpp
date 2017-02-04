@@ -40,12 +40,12 @@ class CfgCLibModules {
             FNC(init);
 
             MODULE(Autoload) {
-                FNC(autoloadEntryPoint);
+                FNC(autoloadEntryPoint) { serverOnly = 1; };;
                 FNC(callModules);
-                APIFNC(loadModules);
-                FNC(loadModulesServer);
-                FNC(sendFunctions);
-                FNC(sendFunctionsLoop);
+                APIFNC(loadModules) { serverOnly = 1; };
+                FNC(loadModulesServer) { serverOnly = 1; };
+                FNC(sendFunctions) { serverOnly = 1; };;
+                FNC(sendFunctionsLoop) { serverOnly = 1; };;
             };
 
             MODULE(Compression) {

@@ -96,11 +96,12 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
             } else {
                 if !((_x getVariable _functionVarName) isEqualTo _functionCode) then {
                     private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
-
                     LOG(_log);
+
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
-                    ["Warning Function %1 is corrupted on your Client, Please restart your Client.", _functionVarName] call BIS_fnc_errorMsg;
+
+                    ["Warning function %1 is corrupted on your client, please restart your client.", _functionVarName] call BIS_fnc_errorMsg;
                     GVAR(unregisterClient) = player;
                     publicVariableServer QGVAR(unregisterClient);
                     endLoadingScreen;
