@@ -66,6 +66,9 @@ DUMP("Compile Function: " + _functionName);
 
 if (USECOMPRESSION) then {
     private _compressedString = _functionString call CFUNC(compressString);
+    DUMP(count _functionString);
+    DUMP(_compressedString);
+    DUMP(CFUNC(compressString));
     parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
 
     #ifdef ISDEV
@@ -74,10 +77,6 @@ if (USECOMPRESSION) then {
     #endif
     #ifndef DEBUGFULL
         private _var = _compressedString call CFUNC(decompressString);
-        DUMP(count _compressedString);
-        DUMP(CFUNC(decompressString));
-        DUMP(_var);
-        DUMP(_var isEqualTo _functionString);
         DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
     #endif
 };
