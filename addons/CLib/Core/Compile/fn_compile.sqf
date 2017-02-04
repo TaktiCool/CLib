@@ -43,9 +43,10 @@ scopeName (_fnc_scriptName + '_Main');
     private _functionString = _header + preprocessFileLineNumbers _functionPath;
     private _functionCode = compile _functionString;
 #else
+    private _functionString = "";
     private _functionCode = parsingNamespace getVariable _functionName;
     if (isNil "_functionCode") then {
-        private _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
+        _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
         _functionCode = compileFinal _functionString;
     };
 #endif
@@ -58,23 +59,17 @@ DUMP("Compile Function: " + _functionName);
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
-#ifdef DISABLECOMPRESSION
-    #define USECOMPRESSION false
-#else
-    #define USECOMPRESSION isNil {parsingNamespace getVariable (_functionName + "_Compressed")}
-#endif
-
-if (USECOMPRESSION) then {
-    private _compressedCode = _functionCode call CFUNC(compressString);
-    parsingNamespace setVariable [_functionName + "_Compressed", _compressedCode];
+if (USE_COMPRESSION(isNil {parsingNamespace getVariable (_functionName + "_Compressed")})) then {
+    private _compressedString = _functionString call CFUNC(compressString);
+    parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
 
     #ifdef ISDEV
-        private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedCode / count _functionCode) * 100), "%"];
+        private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
         DUMP(_str);
     #endif
     #ifndef DEBUGFULL
-        private _var = _compressedCode call CFUNC(decompressString);
-        DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionCode)));
+        private _var = _compressedString call CFUNC(decompressString);
+        DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
     #endif
 };
 nil
