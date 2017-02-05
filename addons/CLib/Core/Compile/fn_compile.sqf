@@ -43,9 +43,10 @@ scopeName (_fnc_scriptName + '_Main');
     private _functionString = _header + preprocessFileLineNumbers _functionPath;
     private _functionCode = compile _functionString;
 #else
+    private "_functionString";
     private _functionCode = parsingNamespace getVariable _functionName;
     if (isNil "_functionCode") then {
-        private _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
+        _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
         _functionCode = compileFinal _functionString;
     };
 #endif
@@ -58,13 +59,10 @@ DUMP("Compile Function: " + _functionName);
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
-#ifdef DISABLECOMPRESSION
-    #define USECOMPRESSION false
-#else
-    #define USECOMPRESSION isNil {parsingNamespace getVariable (_functionName + "_Compressed")}
-#endif
-
-if (USECOMPRESSION) then {
+if (USE_COMPRESSION(isNil {parsingNamespace getVariable (_functionName + "_Compressed")})) then {
+    if (isNil "_functionString") then {
+        _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
+    };
     private _compressedString = _functionString call CFUNC(compressString);
     parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
 

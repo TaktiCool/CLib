@@ -310,7 +310,7 @@ class Lexer {
     }
 
     isTokenNumber() {
-        const token = this.scan(/^(-?\d+(\.|e)?\d*)(?![a-z])/, 'number');
+        const token = this.scan(/^(-?((\d+(\.|e)?\d*)|(0x[0-9A-F]+)))(?![a-z])/, 'number');
         if (token) {
             this.tokens.push(token);
             this.incrementColumn(token.value.length);

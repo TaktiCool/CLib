@@ -44,7 +44,7 @@ private _fnc_readFunction = {
 
     private _name = configName _config;
     private _api = (getNumber (_config >> "api") isEqualTo 1);
-    private _onlyServer = (getNumber (_config >> "onlyServer") isEqualTo 1);
+    private _onlyServer = (getNumber (_config >> "serverOnly") isEqualTo 1);
     if (((toLower _name) find "serverinit") > -1) then {
         _onlyServer = true;
     };
