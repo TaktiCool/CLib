@@ -31,88 +31,89 @@ GVAR(ignoredLogEventNames_1) = [];
     [QEGVAR(ExtensionFramework,extensionResult), 0]
 ];
 
+// Events for serveronly commands
 ["hideObject", {
     (_this select 0) params ["_object", "_value"];
+    if (!isServer) exitWith {
+        LOG("HideObject has to be a server event");
+    };
     _object hideObjectGlobal _value;
 }] call CFUNC(addEventhandler);
 ["enableSimulation", {
     (_this select 0) params ["_object", "_value"];
+    if (!isServer) exitWith {
+        LOG("EnableSimulation has to be a server event");
+    };
     _object enableSimulationGlobal _value;
 }] call CFUNC(addEventhandler);
-["forceWalk", {
-    (_this select 0) params ["_object", "_value"];
-    _object forceWalk _value;
-}] call CFUNC(addEventHandler);
-["blockSprint", {
-    (_this select 0) params ["_object", "_value"];
-    _object allowSprint !_value;
-}] call CFUNC(addEventHandler);
+
+// Events for commands with local args
 ["fixFloating", {
     (_this select 0) params ["_object"];
-    [_object] call CFUNC(fixFloating);
+    if (!local _object) exitWith {
+        LOG("FixFloating has to be a target event");
+    };
+    _object call CFUNC(fixFloating);
 }] call CFUNC(addEventHandler);
-["fixFloating", {
-    (_this select 0) params ["_object"];
-    [_object] call CFUNC(fixFloating);
+["setVectorUp", {
+    (_this select 0) params ["_object", "_vector"];
+    if (!local _object) exitWith {
+        LOG("SetVectorUp has to be a target event");
+    };
+    _object setVectorUp _vector;
 }] call CFUNC(addEventHandler);
-["fixPosition", {
-    (_this select 0) params ["_object"];
-    [_object] call CFUNC(fixPosition);
+["allowDamage", {
+    (_this select 0) params ["_object", "_allow"];
+    if (!local _object) exitWith {
+        LOG("AllowDamage has to be a target event");
+    };
+    _object allowDamage _allow;
 }] call CFUNC(addEventHandler);
-["setCaptive", {
-    (_this select 0) params ["_object", "_value"];
-    _object setCaptive _value;
+["setFuel", {
+    (_this select 0) params ["_vehicle", "_value"];
+    if (!local _vehicle) exitWith {
+        LOG("SetFuel has to be a target event");
+    };
+    _vehicle setFuel _value;
 }] call CFUNC(addEventHandler);
-["blockDamage", {
-    (_this select 0) params ["_object", "_value"];
-    _object allowDamage !_value;
+["removeMagazineTurret", {
+    (_this select 0) params ["_vehicle", "_args"];
+    if (!local _vehicle) exitWith {
+        LOG("RemoveMagazineTurret has to be a target event");
+    };
+    _vehicle removeMagazineTurret _args;
 }] call CFUNC(addEventHandler);
+["addMagazineTurret", {
+    (_this select 0) params ["_vehicle", "_args"];
+    if (!local _vehicle) exitWith {
+        LOG("AddMagazineTurret has to be a target event");
+    };
+    _vehicle addMagazineTurret _args;
+}] call CFUNC(addEventHandler);
+
+// Events for commands with owner ids
 ["deleteGroup", {
     (_this select 0) params ["_group"];
-
-    if (isServer && !(isNull _group) && !(local _group)) exitWith {
+    if (isServer && (!isNull _group) && (!local _group)) exitWith {
         ["deleteGroup", groupOwner _group, _group] call CFUNC(targetEvent);
     };
-
+    if (!local _group) exitWith {
+        LOG("DeleteGroup has to be a server event");
+    };
     deleteGroup _group;
 }] call CFUNC(addEventHandler);
 ["selectLeader", {
     (_this select 0) params ["_group", "_unit"];
-
-    if (isServer && !(isNull _group) && !(local _group)) exitWith {
+    if (isServer && (!isNull _group) && (!local _group)) exitWith {
         ["selectLeader", groupOwner _group, [_group, _unit]] call CFUNC(targetEvent);
+    };
+    if (!local _group) exitWith {
+        LOG("SelectLeader has to be a server event");
     };
     _group selectLeader _unit;
 }] call CFUNC(addEventHandler);
-["setVectorDirAndUp", {
-    (_this select 0) params ["_obj", "_pos"];
-    _obj setVectorDirAndUp _pos;
-}] call CFUNC(addEventHandler);
-["missionStarted", {
-    GVAR(missionStartedTriggered) = true;
-}] call CFUNC(addEventHandler);
-["moveInCargo", {
-    (_this select 0) params ["_vehicle", "_unit"];
-    if (!(local _vehicle) && !(isNull _vehicle)) exitWith {
-        ["moveInCargo", _vehicle, [_vehicle, _unit]] call CFUNC(targetEvent);
-    };
-    _unit moveInCargo _vehicle;
-}] call CFUNC(addEventHandler);
-["moveInDriver", {
-    (_this select 0) params ["_vehicle", "_unit"];
-    if (!(local _vehicle) && !(isNull _vehicle)) exitWith {
-        ["moveInDriver", _vehicle, [_vehicle, _unit]] call CFUNC(targetEvent);
-    };
-    _unit moveInDriver _vehicle;
-}] call CFUNC(addEventHandler);
-["moveInTurret", {
-    (_this select 0) params ["_vehicle", "_unit", "_turretPath"];
-    if (!(local _vehicle) && !(isNull _vehicle)) exitWith {
-        ["moveInTurret", _vehicle, [_vehicle, _unit, _turretPath]] call CFUNC(targetEvent);
-    };
-    _unit moveInTurret [_vehicle, _turretPath];
-}] call CFUNC(addEventHandler);
 
+// Events for commands with local effect
 ["setMimic", {
     (_this select 0) params ["_unit", "_mimic"];
     if !(toLower _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
@@ -120,13 +121,13 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _unit setMimic _mimic;
 }] call CFUNC(addEventhandler);
-
 ["setVehicleVarName", {
     (_this select 0) params ["_vehicle", "_name"];
     _vehicle setVehicleVarName _name;
 }] call CFUNC(addEventhandler);
 
 ["missionStarted", {
+    GVAR(missionStartedTriggered) = true;
 
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
