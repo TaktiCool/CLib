@@ -18,6 +18,7 @@ module.exports = [
     'AGLToASL',
     'alive',
     'allControls',
+    'magazinesAllTurrets',
     'allMissionObjects',
     'allVariables',
     'assignedGunner',
