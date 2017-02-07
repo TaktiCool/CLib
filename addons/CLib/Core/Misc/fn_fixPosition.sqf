@@ -19,30 +19,21 @@
 
 params ["_object"];
 
-// setVectorUp requires local object
-if (!local _object) exitWith {
-    ["fixPosition", _object] call CFUNC(targetEvent);
-};
-
+private _position = getPosATL _object;
 if ((getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "simulation")) == "house") then {
-    //Houses don't have gravity/physics, so make sure they are not floating
-    private _posAbove = (getPos _object) select 2;
-
-    if (_posAbove > 0.1) then {
-        private _newPosASL = (getPosASL _object) vectorDiff [0, 0, _posAbove];
-        _object setPosASL _newPosASL;
+    // Houses don't have gravity/physics, so make sure they are not floating
+    if (_position select 2 > 0) then {
+        _object setVehiclePosition [_position, [], 0, "CAN_COLLIDE"];
     };
 };
 
-private _position = getPos _object;
-
 // don't place the object below the ground
-if (_position select 2 < -0.1) then {
-    _position set [2, -0.1];
-    _object setPos _position;
+if (_position select 2 < 0) then {
+    _object setVehiclePosition [_position, [], 0, "CAN_COLLIDE"];
 };
 
 // adjust position to sloped terrain, if placed on ground
-if (getPosATL _object select 2 == _position select 2) then {
-    _object setVectorUp surfaceNormal _position;
+_position = getPosATL _object;
+if (abs (_position select 2) < 0.1) then {
+    ["setVectorUp", _object, [_object, surfaceNormal _position]] call CFUNC(targetEvent);
 };
