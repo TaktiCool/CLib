@@ -51,42 +51,64 @@ GVAR(ignoredLogEventNames_1) = [];
 ["fixFloating", {
     (_this select 0) params ["_object"];
     if (!local _object) exitWith {
-        LOG("FixFloating has to be a target event");
+        LOG("FixFloating event has wrong locality");
+        ["fixFloating", _object, _this select 0] call CFUNC(targetEvent);
     };
     _object call CFUNC(fixFloating);
+}] call CFUNC(addEventHandler);
+["playMove", {
+    (_this select 0) params ["_unit", "_move"];
+    if (!local _unit) exitWith {
+        LOG("PlayMove event has wrong locality");
+        ["playMove", _unit, _this select 0] call CFUNC(targetEvent);
+    };
+    _unit playMove _move;
+}] call CFUNC(addEventHandler);
+["playMoveNow", {
+    (_this select 0) params ["_unit", "_move"];
+    if (!local _unit) exitWith {
+        LOG("PlayMoveNow event has wrong locality");
+        ["playMoveNow", _unit, _this select 0] call CFUNC(targetEvent);
+    };
+    _unit playMoveNow _move;
 }] call CFUNC(addEventHandler);
 ["setVectorUp", {
     (_this select 0) params ["_object", "_vector"];
     if (!local _object) exitWith {
-        LOG("SetVectorUp has to be a target event");
+        LOG("SetVectorUp event has wrong locality");
+        ["setVectorUp", _object, _this select 0] call CFUNC(targetEvent);
     };
     _object setVectorUp _vector;
 }] call CFUNC(addEventHandler);
 ["allowDamage", {
     (_this select 0) params ["_object", "_allow"];
     if (!local _object) exitWith {
-        LOG("AllowDamage has to be a target event");
+        LOG("AllowDamage event has wrong locality");
+        ["allowDamage", _object, _this select 0] call CFUNC(targetEvent);
     };
     _object allowDamage _allow;
 }] call CFUNC(addEventHandler);
 ["setFuel", {
     (_this select 0) params ["_vehicle", "_value"];
     if (!local _vehicle) exitWith {
-        LOG("SetFuel has to be a target event");
+        LOG("SetFuel event has wrong locality");
+        ["setFuel", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
     _vehicle setFuel _value;
 }] call CFUNC(addEventHandler);
 ["removeMagazineTurret", {
     (_this select 0) params ["_vehicle", "_args"];
     if (!local _vehicle) exitWith {
-        LOG("RemoveMagazineTurret has to be a target event");
+        LOG("RemoveMagazineTurret event has wrong locality");
+        ["removeMagazineTurret", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
     _vehicle removeMagazineTurret _args;
 }] call CFUNC(addEventHandler);
 ["addMagazineTurret", {
     (_this select 0) params ["_vehicle", "_args"];
     if (!local _vehicle) exitWith {
-        LOG("AddMagazineTurret has to be a target event");
+        LOG("AddMagazineTurret event has wrong locality");
+        ["addMagazineTurret", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
     _vehicle addMagazineTurret _args;
 }] call CFUNC(addEventHandler);
@@ -98,7 +120,8 @@ GVAR(ignoredLogEventNames_1) = [];
         ["deleteGroup", groupOwner _group, _group] call CFUNC(targetEvent);
     };
     if (!local _group) exitWith {
-        LOG("DeleteGroup has to be a server event");
+        LOG("DeleteGroup event has wrong locality");
+        ["deleteGroup", _this select 0] call CFUNC(serverEvent);
     };
     deleteGroup _group;
 }] call CFUNC(addEventHandler);
@@ -108,12 +131,17 @@ GVAR(ignoredLogEventNames_1) = [];
         ["selectLeader", groupOwner _group, [_group, _unit]] call CFUNC(targetEvent);
     };
     if (!local _group) exitWith {
-        LOG("SelectLeader has to be a server event");
+        LOG("SelectLeader event has wrong locality");
+        ["selectLeader", _this select 0] call CFUNC(serverEvent);
     };
     _group selectLeader _unit;
 }] call CFUNC(addEventHandler);
 
 // Events for commands with local effect
+["switchMove", {
+    (_this select 0) params ["_unit", "_move"];
+    _unit switchMove _move;
+}] call CFUNC(addEventHandler);
 ["setMimic", {
     (_this select 0) params ["_unit", "_mimic"];
     if !(toLower _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
