@@ -34,12 +34,12 @@
     private _missingClient = _namesClient - _addonsIntersect;
 
     {
-        LOG("Missing ClientSide Mod: " + _x)
+        LOG("Missing ClientSide Mod: " + _x);
         nil
     } count _missingClient;
 
     {
-        LOG("Addons is Missing on Server: " + _x)
+        LOG("Addons is Missing on Server: " + _x);
         nil
     } count _missingServer;
 
