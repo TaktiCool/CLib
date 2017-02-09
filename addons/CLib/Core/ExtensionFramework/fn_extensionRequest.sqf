@@ -28,8 +28,10 @@ params ["_taskId", "_extensionName", "_actionName", "_data"];
 if (!(_data isEqualType "")) then {
     _data = str _data;
 };
+
 // Append the end-of-text symbol cause data may be transmitted splitted
 _data = _data + GVAR(ETX);
+private _dataCount = count _data;
 
 // Build the header (header should not be more than 7000 characters by definition)
 private _header = format ["%1%2%3%4%5%6%7", GVAR(SOH), _taskId, GVAR(US), _extensionName, GVAR(US), _actionName, GVAR(STX)];
@@ -37,15 +39,29 @@ private _headerLength = count _header;
 
 // Fill the rest with data
 private _dataPosition = TRANSMISSIONSIZE - _headerLength;
-private _parameterString = format ["%1%2", _header, _data select [0, _dataPosition]];
+
+// Create first chunk of data
+private _dataChunk = _data select [0, _dataPosition];
+while {_dataChunk select [_dataPosition - 1, 1] == GVAR(RC)} do {
+    _dataPosition = _dataPosition - 1;
+};
+_dataChunk = _dataChunk select [0, _dataPosition];
+
+private _parameterString = format ["%1%2", _header, _dataChunk];
 
 // Transmit to extension
 private _result = "CLib" callExtension _parameterString;
 
 // Tranmit the remaining data in chunks of TRANSMISSIONSIZE
-while {_dataPosition <= count _data && _result == GVAR(ACK)} do {
-    _result = "CLib" callExtension (_data select [_dataPosition, TRANSMISSIONSIZE]);
-    _dataPosition = _dataPosition + TRANSMISSIONSIZE;
+while {_dataPosition <= _dataCount && _result == GVAR(ACK)} do {
+    private _chunkSize = TRANSMISSIONSIZE;
+    _dataChunk = _data select [_dataPosition, _chunkSize];
+    while {_dataChunk select [_chunkSize - 1, 1] == GVAR(RC)} do {
+        _chunkSize = _chunkSize - 1;
+    };
+    _dataChunk = _dataChunk select [0, _chunkSize];
+    _result = "CLib" callExtension _dataChunk;
+    _dataPosition = _dataPosition + _chunkSize;
 };
 
 // Start the result fetcher if we did not get a result yet
@@ -57,14 +73,13 @@ if (_taskId >= 0 && _result == GVAR(ACK)) exitWith {
 
             // Ask for data from the extension
             private _result = "CLib" callExtension GVAR(ENQ);
-            private _x = (_result select [0, 1]);
             if ((_result select [0, 1]) != GVAR(SOH)) exitWith {};
 
             // Fetch and parse all chunks of data
             private _results = _result call FUNC(extensionFetch);
 
             // Check if we need to listen for more results
-            if (true) then { // || GVAR(pendingTasks) == 0
+            if (GVAR(pendingTasks) == 0) then {
                 _id call CFUNC(removePerFrameHandler);
             };
         }] call CFUNC(addPerFrameHandler);

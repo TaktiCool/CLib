@@ -69,8 +69,8 @@ if (_state) then {
         };
 
         if (_key in actionKeys "CuratorInterface" && {getAssignedCuratorLogic player in allCurators}) exitWith {
-            false;
             //openCuratorInterface;
+            false
         };
 
         if (_key in (actionKeys "ShowMap" + actionKeys "PushToTalk" + actionKeys "PushToTalkAll" + actionKeys "PushToTalkCommand" + actionKeys "PushToTalkDirect" + actionKeys "PushToTalkGroup" + actionKeys "PushToTalkSide" + actionKeys "PushToTalkVehicle")) exitWith {
@@ -83,9 +83,8 @@ if (_state) then {
             };
         };
 
-        true;
+        true
     }];
-
 } else {
     if !(isNil QGVAR(disableUserInputKeyEventHandler)) then {
         (findDisplay 46) displayRemoveEventHandler ["KeyDown", GVAR(disableUserInputKeyEventHandler)];

@@ -22,7 +22,6 @@ class CfgCLibModules {
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
-            FNC(init);
         };
 
         MODULE(ConfigCaching) {
@@ -40,12 +39,12 @@ class CfgCLibModules {
             FNC(init);
 
             MODULE(Autoload) {
-                FNC(autoloadEntryPoint);
+                FNC(autoloadEntryPoint) { serverOnly = 1; };
                 FNC(callModules);
-                APIFNC(loadModules);
-                FNC(loadModulesServer);
-                FNC(sendFunctions);
-                FNC(sendFunctionsLoop);
+                FNC(loadModules) { api = 1; serverOnly = 1; };
+                FNC(loadModulesServer) { serverOnly = 1; };
+                FNC(sendFunctions) { serverOnly = 1; };
+                FNC(sendFunctionsLoop) { serverOnly = 1; };
             };
 
             MODULE(Compression) {

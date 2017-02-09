@@ -7,6 +7,6 @@ language: node_js
 node_js:
   - "node"
 before_script:
-  - cd tools
+  - cd tools/SQFLint
 script:
-  - node sqf_validator.js
+  - node travis

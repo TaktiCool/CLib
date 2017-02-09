@@ -19,30 +19,17 @@
 params ["_unit"];
 
 private _animState = animationState _unit;
-
 private _unitAnimCfg = configFile >> "CfgMovesMaleSdr" >> "States" >> _animState;
 
 // exit if dead unit is already in the death Anim
 if (getNumber (_unitAnimCfg >> "terminal") isEqualTo 1) exitWith {_animState};
 
-private _unitActions = configFile >> "CfgMovesBasic" >> "Actions" >> getText (_unitAnimCfg >> "actions");
-
-private _return = "";
-if (isNull (objectParent _unit)) then {
+if (isNull objectParent _unit) exitWith {
     private _interpolateTo = getArray (_unitAnimCfg >> "interpolateTo");
-
-    scopeName "loopExit";
-    {
-        if ((_forEachIndex mod 2) == 0) then {
-            _return = _x;
-            breakTo "loopExit";
-        };
-    } forEach _interpolateTo;
+    if (!(_interpolateTo isEqualTo [])) exitWith {
+        _interpolateTo select 0
+    };
+    "Unconscious"
 } else {
-    _return = getText (_unitActions >> "die");
-};
-
-if (_return == "") then {
-    _return = "Unconscious";
-};
-_return;
+    getText (configFile >> "CfgMovesBasic" >> "Actions" >> getText (_unitAnimCfg >> "actions") >> "die")
+}

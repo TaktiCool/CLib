@@ -27,7 +27,7 @@ _result = _result select [0, count _result - 1];
 
 // Parse the data
 if (_result select [0, 1] == GVAR(STX)) exitWith {
-    _result select [1, count _result - 1]
+    _result select [1]
 };
 
 if (_result select [0, 1] == GVAR(SOH)) exitWith {

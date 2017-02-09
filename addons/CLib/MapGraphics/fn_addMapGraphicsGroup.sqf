@@ -143,10 +143,7 @@ private _completeGroupData = [];
 } count _groupData;
 
 // select the correct state
-private _stateNum = ["normal", "hover", "selected"] find _state;
-if (_stateNum == -1) then {
-    _stateNum = 0;
-};
+private _stateNum = 0 max (["normal", "hover", "selected"] find _state);
 
 // save the data
 private _currentIcon = [GVAR(MapGraphicsGroup), _groupName, [_layer, 0, 0, [], [], []]] call CFUNC(getVariable);

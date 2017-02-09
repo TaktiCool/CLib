@@ -31,6 +31,9 @@ private _targets = [];
 {
     private _var = _x;
     switch (typeName _var) do {
+        /* currently not supported in RemoteExecution fallback
+        case ("STRING");
+        */
         case ("SIDE"): {
             // if _var is Side get all Units From on side and apply the Owner on it
             _targets append ((allUnits select {_x == _var}) apply {owner _x});
@@ -55,9 +58,6 @@ private _targets = [];
             // if _var is Gruop get all Units from group with netID
             _targets append ((units _x) apply {owner _x});
         };
-        /* currently not supported in RemoteExecution fallback
-        case ("STRING");
-        */
     };
     nil
 } count _target;

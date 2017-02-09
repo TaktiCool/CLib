@@ -20,25 +20,22 @@ private _i = 0;
 DUMP("Modules To Sort: " + str _modulesToSort);
 while {!(_modulesToSort isEqualTo [])} do {
     private _moduleName = _modulesToSort select _i;
-    // DUMP("_i: " + str _i)
-    DUMP("ModuleName: " + str _moduleName);
     private _dependencies = parsingNamespace getVariable (format [QCGVAR(%1_dependency), _moduleName]);
 
-
-    if (_dependencies isEqualTo []) then {
+    _i = if (_dependencies isEqualTo []) then {
         _sortedModuleNames pushBack _moduleName;
         _modulesToSort deleteAt _i;
-        _i = _i mod ((count _modulesToSort) max 1);
+        _i mod ((count _modulesToSort) max 1)
     } else {
         private _dependenciesLoaded = true;
         {
             if !(_x in _sortedModuleNames) then {
-                if !(_x in _modulesToSort) then {
+                _dependenciesLoaded = if (!(_x in _modulesToSort)) then {
                     private _str = format ["Missing Dependency in Module: %1, %2", _moduleName, _x];
                     LOG(_str);
-                    _dependenciesLoaded = true;
+                    true
                 } else {
-                    _dependenciesLoaded = false;
+                    false
                 };
             };
             if (!_dependenciesLoaded) exitWith {};
@@ -48,9 +45,9 @@ while {!(_modulesToSort isEqualTo [])} do {
         if (_dependenciesLoaded) then {
             _sortedModuleNames pushBack _moduleName;
             _modulesToSort deleteAt _i;
-            _i = _i mod ((count _modulesToSort) max 1);
+            _i mod ((count _modulesToSort) max 1)
         } else {
-            _i = (_i + 1) mod (count _modulesToSort);
+            (_i + 1) mod (count _modulesToSort)
         };
     };
 };
