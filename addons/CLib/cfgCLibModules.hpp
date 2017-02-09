@@ -66,6 +66,8 @@ class CfgCLibModules {
             MODULE(Misc) {
                 APIFNC(addPerformanceCounter);
                 APIFNC(blurScreen);
+                FNC(clearAddons);
+                FNC(clientInitModCheck);
                 APIFNC(cachedCall);
                 APIFNC(codeToString);
                 APIFNC(createPPEffect);
@@ -80,6 +82,7 @@ class CfgCLibModules {
                 APIFNC(fixFloating);
                 APIFNC(fixPosition);
                 APIFNC(getFOV);
+                FNC(getAllAddons);
                 APIFNC(getNearUnits);
                 APIFNC(groupPlayers);
                 APIFNC(initVoiceDetection);
@@ -87,6 +90,7 @@ class CfgCLibModules {
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 FNC(serverInit);
+                FNC(serverInitModCheck);
                 APIFNC(shuffleArray);
                 FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
