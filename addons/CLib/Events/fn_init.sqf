@@ -116,10 +116,11 @@ GVAR(ignoredLogEventNames_1) = [];
 // Events for commands with owner ids
 ["deleteGroup", {
     (_this select 0) params ["_group"];
-    if (isServer && (!isNull _group) && (!local _group)) exitWith {
-        ["deleteGroup", groupOwner _group, _group] call CFUNC(targetEvent);
-    };
+    if (isNull _group) exitWith {};
     if (!local _group) exitWith {
+        if (isServer) exitWith {
+            ["deleteGroup", groupOwner _group, _group] call CFUNC(targetEvent);
+        };
         LOG("DeleteGroup event has wrong locality");
         ["deleteGroup", _this select 0] call CFUNC(serverEvent);
     };
@@ -127,10 +128,11 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["selectLeader", {
     (_this select 0) params ["_group", "_unit"];
-    if (isServer && (!isNull _group) && (!local _group)) exitWith {
-        ["selectLeader", groupOwner _group, [_group, _unit]] call CFUNC(targetEvent);
-    };
+    if (isNull _group) exitWith {};
     if (!local _group) exitWith {
+        if (isServer) exitWith {
+            ["selectLeader", groupOwner _group, [_group, _unit]] call CFUNC(targetEvent);
+        };
         LOG("SelectLeader event has wrong locality");
         ["selectLeader", _this select 0] call CFUNC(serverEvent);
     };
