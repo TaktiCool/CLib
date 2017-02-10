@@ -18,8 +18,8 @@ if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarb
 
 DFUNC(pushbackInQueue) = {
     params ["_object"];
-    if (!(_object getVariable [QCGVAR(noClean), false])) then {
-        if (!(_object getVariable [QGVAR(queued), false])) then {
+    if !(_object getVariable [QCGVAR(noClean), false]) then {
+        if !(_object getVariable [QGVAR(queued), false]) then {
             _object setVariable [QGVAR(queued), true];
             GVAR(objectStorage) pushBack [_object, time + GVAR(waitTime)];
         };
@@ -74,8 +74,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     // If the time has not passed exit. This assumes all following object are pushed after the current one.
     if (isNull _object) exitWith {GVAR(objectStorage) deleteAt 0};
     if (_enqueueTime > time) exitWith {};
-    if (!(_object getVariable [QCGVAR(noClean), false])) then {
-
+    if !(_object getVariable [QCGVAR(noClean), false]) then {
         // Remove the object from the storage.
         GVAR(objectStorage) deleteAt 0;
         // Disable collision with the surface.
@@ -111,7 +110,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     DUMP("Check all Groups");
     // Remove empty groups.
     {
-        if (!(_x getVariable [QCGVAR(noClean), false])) then {
+        if !(_x getVariable [QCGVAR(noClean), false]) then {
             if ((units _x) isEqualTo []) then {
                 ["deleteGroup", groupOwner _x, _x] call CFUNC(targetEvent);
             };

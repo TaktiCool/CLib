@@ -17,6 +17,7 @@
     Example:
     [object, 10] call JK_Core_fnc_inRange;
 */
+
 params ["_object", "_distance"];
 
 if (_object isKindOf "CAManBase") exitWith {CLib_Player distance _object < _distance};

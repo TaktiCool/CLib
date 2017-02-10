@@ -66,7 +66,6 @@ private _headerNone = "";
 //--- Compose headers based on current debug mode
 private _debug = uiNamespace getVariable ["bis_fnc_initFunctions_debugMode", 0];
 private _headerDefault = switch _debug do {
-
     //--- 0 - Debug mode off
     default {
         _headerNoDebug
@@ -92,11 +91,9 @@ private _fncCompile = {
     _fncMeta params ["_fncPath", "_fncExt"];
 
     switch _fncExt do {
-
         //--- SQF
         case ".sqf": {
             _header = switch (_fncHeader) do {
-
                 //--- No header (used in low-level functions, like 'fired' event handlers for every weapon)
                 case -1: {
                     _headerNone
@@ -145,13 +142,12 @@ private _fncCompile = {
 if (isNil "_this") then {
     _this = []
 };
-if (!(_this isEqualType [])) then {
+if !(_this isEqualType []) then {
     _this = [_this]
 };
 private _recompile = if (count _this > 0) then {_this select 0} else {0};
 
 if (_recompile isEqualType "") exitWith {
-
     //--- Recompile specific function
     private _fncuiNamespace = true;
     private _fnc = uiNamespace getVariable _recompile;
@@ -159,7 +155,7 @@ if (_recompile isEqualType "") exitWith {
         _fnc = missionNamespace getVariable _recompile;
         _fncuiNamespace = false;
     };
-    if (!isNil "_fnc") then {
+    if !(isNil "_fnc") then {
         private _fncMeta = _recompile call (uiNamespace getVariable "bis_fnc_functionMeta");
         private _headerType = if (count _this > 1) then {_this select 1} else {0};
         private _var = [_recompile, [_recompile, _fncMeta, _headerType, false] call _fncCompile];
@@ -170,7 +166,7 @@ if (_recompile isEqualType "") exitWith {
         };
     } else {
         private _fncError = uiNamespace getVariable "bis_fnc_error";
-        if (!isNil "_fncError") then {
+        if !(isNil "_fncError") then {
             ["%1 is not a function.", _recompile] call _fncError;
         } else {
             textLogFormat ["Log: [Functions]: ERROR: %1 is not a function.", _recompile];
@@ -202,7 +198,7 @@ private _functions_listPostInit = [call (uiNamespace getVariable ["bis_functions
 private _functions_listRecompile = call (uiNamespace getVariable ["bis_functions_listRecompile", {[]}]);
 
 //--- When not forced, recompile only mission if uiNamespace functions exists
-if (!(_recompile isEqualType 1)) then {
+if !(_recompile isEqualType 1) then {
     _recompile = if (count _functions_list > 0) then {3} else {0};
 };
 
@@ -279,14 +275,13 @@ private _compileFinal = !cheatsEnabled && ((uiNamespace getVariable ["gui_displa
         private _requiredAddons = getArray (_currentTag >> "requiredAddons");
         private _requiredAddonsMet = true;
         {
-            if (!isClass (configFile >> "CfgPatches" >> _x)) exitWith {
+            if !(isClass (configFile >> "CfgPatches" >> _x)) exitWith {
                 _requiredAddonsMet = false;
             };
             nil
         } count _requiredAddons;
 
         if (_requiredAddonsMet) then {
-
             //--- Initialize tag
             private _tag = configName _currentTag;
             private _tagName = getText (_currentTag >> "tag");
@@ -296,7 +291,6 @@ private _compileFinal = !cheatsEnabled && ((uiNamespace getVariable ["gui_displa
             _itemPathTag = getText (_currentTag >> "file");
 
             {
-
                 private _currentCategory = _x;
                 private _categoryName = configName _currentCategory;
                 private _itemPathCat = getText (_currentCategory >> "file");
@@ -340,14 +334,12 @@ uiNamespace setVariable ["BIS_functions_listRecompile", compileFinal str (_funct
 
 //--- Not mission
 if (_recompile in [0, 1, 2]) then {
-
     //--- uiNamespace init
     uiNamespace setVariable ["bis_fnc_init", true]
 };
 
 //--- Only mission variables
 if (_recompile in [4]) then {
-
     //--- MissionNameSpace init
     missionNamespace setVariable ["bis_fnc_init", true];
 };

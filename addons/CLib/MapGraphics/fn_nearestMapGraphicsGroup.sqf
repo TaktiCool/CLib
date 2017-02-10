@@ -15,6 +15,7 @@
     Returns:
     Group <String>
 */
+
 params ["_map", "_xPos", "_yPos"];
 
 private _mousePosition = [_xPos, _yPos];

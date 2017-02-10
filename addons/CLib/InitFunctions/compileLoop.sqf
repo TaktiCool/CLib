@@ -66,7 +66,7 @@ private _itemCompile = if (_itemCheatsEnabled == 0 || (_itemCheatsEnabled > 0 &&
 
 //--- Register function
 if (_itemCompile isEqualType {}) then {
-    if (!(_itemVar in _functions_list)) then {
+    if !(_itemVar in _functions_list) then {
         private _namespaces = if (_pathAccess == 0) then {[uiNamespace]} else {[missionNamespace]};
         {
             //---- Save function
@@ -95,7 +95,7 @@ if (_itemCompile isEqualType {}) then {
         } else {
             private _errorFnc = uiNamespace getVariable "bis_fnc_error";
             private _errorText = "%1 is a mission / campaign function and cannot contain 'preStart = 1;' param";
-            if (!isNil "_errorFnc") then {
+            if !(isNil "_errorFnc") then {
                 [_errorText, _itemVar] call _errorFnc;
             } else {
                 diag_log format ["Log: [Functions]: " + _errorText, _itemVar];
@@ -110,7 +110,7 @@ if (_itemCompile isEqualType {}) then {
         } else {
             private _errorFnc = uiNamespace getVariable "bis_fnc_error";
             private _errorText = "Redundant use of 'recompile = 1;' in %1 - mission / campaign functions are recompiled on start by default.";
-            if (!isNil {_errorFnc}) then {
+            if !(isNil "_errorFnc") then {
                 [_errorText, _itemVar] call _errorFnc;
             } else {
                 diag_log format ["Log: [Functions]: " + _errorText, _itemVar];

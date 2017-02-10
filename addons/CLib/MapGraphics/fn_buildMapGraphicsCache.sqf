@@ -14,13 +14,14 @@
     None
 
 */
+
 params ["_map"];
 private _cache = [];
 
 {
     private _graphicsGroupId = _x;
     private _graphicsGroup = GVAR(MapGraphicsGroup) getVariable _graphicsGroupId;
-    if (!isNil "_graphicsGroup") then {
+    if !(isNil "_graphicsGroup") then {
         _graphicsGroup params ["_layer", "_timestamp", "_state"];
         private _graphicsData = _graphicsGroup select (3 + _state);
         if (_graphicsData isEqualTo []) then {

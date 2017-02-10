@@ -21,7 +21,7 @@
 params ["_object"];
 
 // Ensure locality and ignore men
-if (!local _object || _object isKindOf "CAManBase") exitWith {};
+if (_object isKindOf "CAManBase" || !local _object) exitWith {};
 
 // We need to manually set allowDamage to true for setHitIndex to function
 _object allowDamage true;

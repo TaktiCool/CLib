@@ -13,6 +13,7 @@
     Returns:
 
 */
+
 params ["_configPath", ["_separator", "/", [""]]];
 
 private _return = [];

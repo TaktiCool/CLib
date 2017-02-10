@@ -62,6 +62,7 @@
     Returns:
     None
 */
+
 params ["_groupName", "_groupData", ["_state", "normal"], ["_layer", 0]];
 
 // Compete the data for the map graphics cache

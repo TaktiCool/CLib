@@ -14,6 +14,7 @@
     Returns:
     is Removed <Bool>
 */
+
 params [["_eventName", "", [""]], ["_id", -1, [-1]]];
 
 DUMP("Eventhandler Removed: "+ _eventName);

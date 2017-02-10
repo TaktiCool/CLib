@@ -17,9 +17,10 @@
     Returns:
     None
 */
+
 params ["_unit"];
 
-if (!local _unit) exitWith {
+if !(local _unit) exitWith {
     [_unit] remoteExecCall [_fnc_scriptName, _unit];
 };
 
@@ -85,7 +86,7 @@ private _temp = [];
     _count = {
         if (_x find QPREFIX != -1) then {
             private _var = _space getVariable _x;
-            if (!(_var isEqualType {})) then {
+            if !(_var isEqualType {}) then {
                 if (_var isEqualType []) then {
                     if ((count _var) < 5) then {
                         _text = format ["%1;%2: %3", _space, _x, _var];

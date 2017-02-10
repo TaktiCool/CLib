@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 // Queue of clients who requested mutex executing
 GVAR(mutexes) = false call CFUNC(createNamespace); // Entries are [currentClient, clientQueue, currentMutexTime]
 
@@ -22,7 +23,7 @@ DFUNC(checkNextMutexClient) = {
     private _mutex = [GVAR(mutexes), _mutexId, [0, [], 0]] call CFUNC(getVariable);
     _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 
-    if (!(_clientQueue isEqualTo [])) then {
+    if !(_clientQueue isEqualTo []) then {
         // Next client in queue
         _currentMutexTime = time;
         _currentClient = _clientQueue deleteAt 0;
@@ -96,7 +97,7 @@ GVAR(TimeOutSM) = call CFUNC(createStatemachine);
     private _mutexId = _mutexIds deleteAt 0;
     private _mutex = [GVAR(mutexes), _mutexId, [0, [], 0]] call CFUNC(getVariable);
     _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
-    if (!(_clientQueue isEqualTo []) && (time - _currentMutexTime) > 3) then {
+    if (time - _currentMutexTime > 3 && !(_clientQueue isEqualTo [])) then {
         _mutexId call FUNC(checkNextMutexClient);
     };
     [["checkMutex", _mutexIds], "init"] select (_mutexIds isEqualTo []);

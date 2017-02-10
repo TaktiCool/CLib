@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(allFunctionNamesCached) = [];
 
 private _fnc_checkNext = {

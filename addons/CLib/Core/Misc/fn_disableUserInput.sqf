@@ -16,11 +16,12 @@
     Returns:
     None
 */
+
 EXEC_ONLY_UNSCHEDULED
 params ["_state"];
 
 if (_state) then {
-    if (!isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
+    if !(isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
 
     // end TFAR and ACRE2 radio transmissions
     // call CFUNC(endRadioTransmission);

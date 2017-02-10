@@ -14,6 +14,7 @@
     Returns:
     Array With all Informations <Array>
 */
+
 params [["_name", "", ["", configNull]], ["_request", [], [[], ""]]];
 
 private _loadout = _name call call CFUNC(loadLoadout);

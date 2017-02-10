@@ -32,37 +32,37 @@ GVAR(groupUnits) = [];
     };
 
     _data = CLib_Player call CFUNC(getAllGear);
-    if (!(_data isEqualTo GVAR(oldGear))) then {
+    if !(_data isEqualTo GVAR(oldGear)) then {
         "playerInventoryChanged" call CFUNC(localEvent);
         GVAR(oldGear) = _data;
     };
 
     _data = visibleMap;
-    if (!(_data isEqualTo GVAR(OldVisibleMap))) then {
+    if !(_data isEqualTo GVAR(OldVisibleMap)) then {
         ["visibleMapChanged", [_data, GVAR(OldVisibleMap)]] call CFUNC(localEvent);
         GVAR(OldVisibleMap) = _data;
     };
 
     _data = playerSide;
-    if (!(_data isEqualTo GVAR(OldPLayerSide))) then {
+    if !(_data isEqualTo GVAR(OldPLayerSide)) then {
         ["playerSideChanged", [_data, GVAR(OldPLayerSide)]] call CFUNC(localEvent);
         GVAR(OldPLayerSide) = _data;
     };
 
     _data = cursorTarget;
-    if (!(_data isEqualTo GVAR(oldCursorTarget))) then {
+    if !(_data isEqualTo GVAR(oldCursorTarget)) then {
         ["cursorTargetChanged", _data] call CFUNC(localEvent);
         GVAR(oldCursorTarget) = _data;
     };
 
     _data = cursorObject;
-    if (!(_data isEqualTo GVAR(oldCursorObject))) then {
+    if !(_data isEqualTo GVAR(oldCursorObject)) then {
         ["cursorObjectChanged", _data] call CFUNC(localEvent);
         GVAR(oldCursorObject) = _data;
     };
 
     _data = units CLib_Player;
-    if (!(GVAR(groupUnits) isEqualTo _data)) then {
+    if !(GVAR(groupUnits) isEqualTo _data) then {
         ["groupUnitsChanged", _data] call CFUNC(localEvent);
         GVAR(groupUnits) = _data;
     };
@@ -80,7 +80,7 @@ GVAR(groupUnits) = [];
 ["eventAdded", {
     params ["_arguments", "_data"];
     _arguments params ["_event", "_function", "_args"];
-    if ((!(isNil QGVAR(missionStartedTriggered)) || !(isNull (findDisplay 46))) && {_event isEqualTo "missionStarted"}) then {
+    if (!(isNil QGVAR(missionStartedTriggered) && isNull findDisplay 46) && {_event isEqualTo "missionStarted"}) then {
         LOG("Mission Started Event get Added After Mission Started");
         if (_function isEqualType "") then {
             _function = parsingNamespace getVariable [_function, {}];

@@ -14,12 +14,13 @@
     Returns:
     Return of the Function <Any>
 */
+
 params [["_CLib_code", {}, [{}]], ["_CLib_arguments", []]];
-if (!canSuspend) exitWith {
+if !(canSuspend) exitWith {
     _CLib_arguments call _CLib_code;
 };
 private "_CLib_return";
 isNil {
     _CLib_return = _CLib_arguments call _CLib_code
 };
-if (!isNil "_CLib_return") then {_CLib_return};
+if !(isNil "_CLib_return") then {_CLib_return};

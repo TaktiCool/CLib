@@ -20,12 +20,13 @@
     Returns:
     0: Return Name <TYPE>
 */
+
 params ["_uid", "_fnc", "_args", "_duration", "_event"];
 if (([GVAR(cachedCall), _uid, [-9999999]] call CFUNC(getVariable)) select 0 < time) then {
     GVAR(cachedCall) setVariable [_uid, [time + _duration, _args call _fnc]];
 
     // Does the cache need to be cleared on an event?
-    if (!isNil "_event") then {
+    if !(isNil "_event") then {
         private _varName = format [QGVAR(clearCache_%1), _event];
         private _cacheList = GVAR(cachedCall) getVariable _varName;
 

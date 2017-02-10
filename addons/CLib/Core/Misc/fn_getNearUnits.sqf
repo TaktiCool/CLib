@@ -17,6 +17,7 @@
     Returns:
     All near units <Array<Object>>
 */
+
 params ["_postion", "_radius"];
 [format [QGVAR(nearUnits_%1), _radius], {
     private _nearObjects = _postion nearObjects _radius;
@@ -27,7 +28,7 @@ params ["_postion", "_radius"];
 
     private _vehicles = _nearObjects select {
         _x isKindOf "Car" || _x isKindOf "Air" || _x isKindOf "Motorcycle"
-        || _x isKindOf "StaticWeapon" || _x isKindOf "Tank" || _x isKindOf "Ship"
+         || _x isKindOf "StaticWeapon" || _x isKindOf "Tank" || _x isKindOf "Ship"
     };
 
     {

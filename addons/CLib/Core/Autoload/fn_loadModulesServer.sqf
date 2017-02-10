@@ -16,6 +16,7 @@
     Example:
     ["Module1", "Module2"] call CFUNC(loadModulesServer);
 */
+
 // Find all functions which are part of the requested modules and store them in an array.
 GVAR(requiredFunctions) = [];
 
@@ -59,7 +60,6 @@ GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {!((parsingNamespace ge
 GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
 
 QGVAR(registerClient) addPublicVariableEventHandler {
-
     // Determine client id by provided object (usually the player object).
     private _clientID = owner (_this select 1);
 

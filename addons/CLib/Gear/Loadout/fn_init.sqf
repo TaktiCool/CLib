@@ -25,7 +25,7 @@ if (isServer) then {
         private _id = owner _unit;
         private _data = [];
         {
-            if (!(_x in _knownLoadouts)) then {
+            if !(_x in _knownLoadouts) then {
                 _data pushBack [_x, (GVAR(loadoutsNamespace) getVariable _x)];
             };
             nil
@@ -46,7 +46,6 @@ if (isServer) then {
     if (isMultiplayer) then {
         ["registerClientToServerForLoadout", ([GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables))] call CFUNC(serverEvent);
     };
-
 }, {
     !isNil QGVAR(defaultLoadoutValues)
 }] call CFUNC(waitUntil);
@@ -57,6 +56,5 @@ if (isServer) then {
         [GVAR(loadoutsNamespace), _x select 0, _x select 1, QGVAR(allLoadouts)] call CFUNC(setVariable);
         nil
     } count _data;
-
 }] call CFUNC(addEventhandler);
 

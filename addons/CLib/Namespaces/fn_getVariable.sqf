@@ -15,9 +15,10 @@
     Returns:
     Variable <Any>
 */
+
 params ["_namespace", "_varName", "_default"];
 
-if (!(_namespace isEqualType locationNull)) exitWith {
+if !(_namespace isEqualType locationNull) exitWith {
     _namespace getVariable [_varName, _default];
 };
 

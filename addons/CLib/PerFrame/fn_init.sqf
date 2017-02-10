@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(waitArray) = [];
 GVAR(sortWaitArray) = false;
 

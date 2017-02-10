@@ -20,6 +20,7 @@
     Returns:
     None
 */
+
 params ["_namespace", "_varName", "_varContent", ["_cacheName", QGVAR(allVariableCache)], ["_global", false, [false]]];
 
 private _cache = [_namespace, _cacheName, []] call CFUNC(getVariable);

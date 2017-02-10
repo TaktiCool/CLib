@@ -13,6 +13,7 @@
     Returns:
     File exist? <Bool>
 */
+
 params [["_file", "", [""]]];
 private _ctrl = (findDisplay 0) ctrlCreate ["RscHTML", -1];
 _ctrl htmlLoad _file;

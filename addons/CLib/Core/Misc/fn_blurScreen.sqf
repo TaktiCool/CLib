@@ -18,7 +18,7 @@
     None
 */
 
-if (!hasInterface) exitWith {};
+if !(hasInterface) exitWith {};
 
 params ["_id", ["_show", false], ["_commitTime", 0.5]];
 
@@ -45,7 +45,7 @@ if (_show) then {
 
     if (GVAR(SHOW_BLUR_SCREEN_COLLECTION) isEqualTo []) then {
         // hide blur
-        if (!isNil QGVAR(MENU_ppHandle_GUI_BLUR_SCREEN)) then {
+        if !(isNil QGVAR(MENU_ppHandle_GUI_BLUR_SCREEN)) then {
             ppEffectDestroy GVAR(MENU_ppHandle_GUI_BLUR_SCREEN);
             GVAR(MENU_ppHandle_GUI_BLUR_SCREEN) = nil;
         };

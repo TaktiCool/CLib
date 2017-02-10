@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 params ["_map"];
 private _exit = false;
 // make sure that the control not already have a draw function

@@ -15,6 +15,7 @@
     Returns:
     All SimpleObjects <Array<Objects>>
 */
+
 params ["_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
 
 _input = switch (typeName _input) do {
@@ -22,7 +23,7 @@ _input = switch (typeName _input) do {
         GVAR(namespace) getVariable _input
     };
     case "CONFIG": {
-        if (!isServer) then {
+        if !(isServer) then {
             LOG("Error: you Try to Load a Config form a Client that is Not the Server");
         };
         if (isNil "_input" || {_input isEqualTo []}) then {

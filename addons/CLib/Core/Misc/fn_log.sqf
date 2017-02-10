@@ -18,6 +18,7 @@
     Returns:
     None
 */
+
 params ["_name", "_modName", "_module", "_var", "_file", "_line"];
 
 #ifdef ISDEV

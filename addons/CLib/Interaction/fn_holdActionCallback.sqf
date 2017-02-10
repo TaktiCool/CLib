@@ -88,7 +88,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
         };
 
         if (_id isEqualType 123) then {
-
             (_display displayCtrl 6000) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6001) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];

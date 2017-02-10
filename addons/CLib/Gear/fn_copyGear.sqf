@@ -79,7 +79,7 @@ _magazinesAmmoFull = magazinesAmmoFull _u1;
                 _backpackItems deleteAt _ind;
             };
         };
-        if (!isNull _container) then {
+        if !(isNull _container) then {
             _container addMagazineAmmoCargo [_magazine, 1, _count];
         };
     };

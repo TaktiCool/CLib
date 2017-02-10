@@ -48,7 +48,6 @@ if (_recompile == 2) then {
 
 //--- Mission only
 if (_recompile == 3) then {
-
     //--- Switch to mission loading bar
     RscDisplayLoading_progressMission = true;
 
@@ -66,7 +65,7 @@ if (_recompile == 3) then {
     };
     (group BIS_functions_mainscope) setGroupID [localize "str_dn_modules"]; //--- Name the group for curator
 
-    if (!isNil "BIS_functions_mainscope") then {
+    if !(isNil "BIS_functions_mainscope") then {
         private ["_test", "_test2"];
         _test = BIS_functions_mainscope setPos (getPos BIS_functions_mainscope);
         _test2 = BIS_functions_mainscope playMove "";
@@ -114,7 +113,7 @@ if (_recompile == 3) then {
         0.20 call BIS_fnc_progressloadingscreen;
 
         //--- After JIP, units cannot be initialized during the loading screen
-        if (!isServer) then {
+        if !(isServer) then {
             endLoadingScreen;
             waitUntil {!isNull cameraOn && {getClientState != "MISSION RECEIVED" && {getClientState != "GAME LOADED"}}};
 
@@ -140,7 +139,7 @@ if (_recompile == 3) then {
             };
 
             //--- Run mission scripts
-            if (!isDedicated) then {
+            if !(isDedicated) then {
                 [player, didJIP] call compile preprocessFileLineNumbers "initPlayerLocal.sqf";
                 [[[player, didJIP], "initPlayerServer.sqf"], "bis_fnc_execvm", false, false] call BIS_fnc_mp;
                 "initPlayerLocal.sqf" call BIS_fnc_logFormat;
@@ -167,7 +166,7 @@ if (_recompile == 3) then {
         //--- MissionNamespace init
         missionNamespace setVariable ["bis_fnc_init", true];
 
-        if (!isServer) then {
+        if !(isServer) then {
             ["bis_fnc_initFunctions"] call BIS_fnc_endLoadingScreen;
         };
     };

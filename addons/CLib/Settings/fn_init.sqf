@@ -13,4 +13,5 @@
     Returns:
     None
 */
+
 GVAR(settingsNamespace) = call CFUNC(createNamespace);

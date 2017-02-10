@@ -15,6 +15,7 @@
     Returns:
     0: The sanitized string <String>
 */
+
 params [["_string", "", [""]]];
 private ["_array", "_symbols"];
 
@@ -22,7 +23,7 @@ _array = [];
 _symbols = toArray "\/*""?<>|:";
 
 {
-    if (!(_x in _symbols)) then {
+    if !(_x in _symbols) then {
         _array pushBack _x;
     };
     nil

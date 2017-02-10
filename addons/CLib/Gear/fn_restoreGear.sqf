@@ -14,6 +14,7 @@
     Returns:
     None
 */
+
 params ["_gear", "_u2"];
 _gear params ["_allGear", "_magazinesAmmoFull"];
 
@@ -91,7 +92,7 @@ _assignedItems = _assignedItems - [_binocular];
                 _backpackItems deleteAt _ind;
             };
         };
-        if (!isNull _container) then {
+        if !(isNull _container) then {
             _container addMagazineAmmoCargo [_magazine, 1, _count];
         };
     };

@@ -15,9 +15,10 @@
     Returns:
     Index of the Statemachine PFH <Number>
 */
+
 params ["_stateMachine", "_firstState", ["_tickeTime", 0]];
 
-if (!isNil "_firstState") then {
+if !(isNil "_firstState") then {
     _stateMachine setVariable [SMSVAR(nextStateData), _firstState];
 };
 

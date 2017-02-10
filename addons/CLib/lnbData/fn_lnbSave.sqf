@@ -15,6 +15,7 @@
     Returns:
     None
 */
+
 params ["_control", "_rowAndColumn", "_data"];
 
 private _index = GVAR(lnbDataControlCache) pushBack _control;

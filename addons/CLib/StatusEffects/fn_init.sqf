@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(StatusEffectsNamespace) = call CFUNC(createNamespace);
 
 ["forceWalk", {

@@ -13,6 +13,7 @@
     Returns:
     Name of the unit <String>
 */
+
 params ["_unit"];
 
 if (isNull _unit) exitWith {"objNull"};

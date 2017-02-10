@@ -13,9 +13,10 @@
     Returns:
     None
 */
+
 params ["_prefix", "_config"];
 
-if (!isClass _config) exitWith {};
+if !(isClass _config) exitWith {};
 
 {
     GVAR(settingsNamespace) setVariable [format ["%1_%2", _prefix, configName _x], switch (true) do {

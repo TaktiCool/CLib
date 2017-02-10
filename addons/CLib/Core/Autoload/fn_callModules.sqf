@@ -16,6 +16,7 @@
     Example:
     call CFUNC(callModules);
 */
+
 private _init = [];
 private _serverInit = [];
 private _postInit = [];
@@ -76,7 +77,6 @@ private _hcInit = [];
         [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
         disableUserInput false;
     }] call CFUNC(execNextFrame);
-
 }, _postInit] call CFUNC(execNextFrame);
 
 if (didJIP) then {

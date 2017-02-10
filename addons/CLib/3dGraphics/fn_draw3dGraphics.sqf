@@ -15,7 +15,7 @@
 */
 
 // Dont Render 3d Icons if a UI is Open.
-if (!isNull (findDisplay 49) || dialog) exitWith {};
+if (dialog || !isNull findDisplay 49) exitWith {};
 
 PERFORMANCECOUNTER_START(3dGraphics);
 
@@ -28,7 +28,7 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
 };
 
 {
-    if (!isNil "_x") then {
+    if !(isNil "_x") then {
         switch (_x select 0) do {
             case ("ICON"): {
                 _x params ["_type", "_texture", "_color", "_position", "_width", "_height", "_angle", "_text", "_shadow", "_textSize", "_font", "_align", "_drawSideArrows", "_code"];

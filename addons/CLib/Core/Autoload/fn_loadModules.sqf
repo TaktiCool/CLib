@@ -18,7 +18,7 @@
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
 0 spawn {
-    if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
+    if !(isNumber (missionConfigFile >> "briefing")) exitWith {};
     if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
 
     private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isServer)) >> "idd");
@@ -27,7 +27,7 @@
 
         disableSerialization;
         private _display = findDisplay _displayIdd;
-        if (!isNull _display) exitWith {
+        if !(isNull _display) exitWith {
             ctrlActivate (_display displayCtrl 1);
             _display closeDisplay 1;
             true
@@ -51,7 +51,7 @@ if (hasInterface) then {
 };
 
 private _cfg = missionConfigFile >> QPREFIX >> "Modules";
-if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
+if ((isNil "_this" || {_this isEqualTo []}) && !isArray _cfg) exitWith {
     endLoadingScreen;
     disableUserInput false;
     diag_log "No CLib Modules loaded in the mission";
@@ -60,14 +60,14 @@ if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
 // If the machine has CLib running and is the Server exit to the server LoadModules
 if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
-    if (!isServer) exitWith {
+    if !(isServer) exitWith {
         diag_log "CLib is a server mod - do not load it on a client";
         endLoadingScreen;
         disableUserInput false;
         endMission "LOSER";
     };
 
-    if (!(isNil "_this") && {!(_this isEqualTo [])}) then {
+    if (!isNil "_this" && {!(_this isEqualTo [])}) then {
         [FUNC(loadModulesServer), _this] call CFUNC(directCall);
     } else {
         [FUNC(loadModulesServer), getArray _cfg] call CFUNC(directCall);

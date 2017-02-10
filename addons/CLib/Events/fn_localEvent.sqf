@@ -21,7 +21,7 @@ EXEC_ONLY_UNSCHEDULED
     params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
 
     // dont Log to reduce Spam
-    if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
+    if !(toLower _eventName in GVAR(ignoredLogEventNames_0)) then {
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
         if (toLower _eventName in GVAR(ignoredLogEventNames_1)) then {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName)
@@ -35,9 +35,9 @@ EXEC_ONLY_UNSCHEDULED
 
 private _eventArray = GVAR(EventNamespace) getVariable _eventName;
 private _CLib_EventReturn = nil;
-if (!isNil "_eventArray") then {
+if !(isNil "_eventArray") then {
     {
-        if (!isNil "_x") then {
+        if !(isNil "_x") then {
             _x params ["_eventFunctions", "_data"];
             if (_eventFunctions isEqualType "") then {
                 _eventFunctions = parsingNamespace getVariable [_eventFunctions, {LOG("ERROR: Function call Over Eventhandler Dont Exist: " + _eventFunctions)}];

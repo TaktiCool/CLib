@@ -15,6 +15,7 @@
     Returns:
     None
 */
+
 params ["_unit", "_anim", ["_priority", 0]];
 
 if (_anim == "") then {
