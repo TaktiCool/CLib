@@ -13,5 +13,5 @@
     Returns:
     <ARRAY> (Array of strings)
 */
-params [["_path",""]];
-GVAR(allSettings) getVariable ["CLASSES:"+_path, []];
+params [["_path", ""]];
+GVAR(allSettings) getVariable ["CLASSES:" + _path, []];

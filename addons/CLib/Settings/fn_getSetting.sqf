@@ -14,5 +14,5 @@
     Returns:
     <SCALAR|STRING|ARRAY> (Depends on the Setting)
 */
-params [["_path",""], ["_defaultValue", nil]];
+params [["_path", ""], ["_defaultValue", nil]];
 (GVAR(allSettings) getVariable [_path, [_defaultValue]]) select 0;
