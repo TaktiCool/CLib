@@ -50,8 +50,6 @@ if (_state) then {
                 (_dlg displayCtrl _index) ctrlEnable false;
             };
 
-
-
             private _ctrl = _dlg displayctrl 103;
             _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickEndStr)];
             _ctrl ctrlEnable true;
@@ -86,7 +84,7 @@ if (_state) then {
         true
     }];
 } else {
-    if !(isNil QGVAR(disableUserInputKeyEventHandler)) then {
+    if (!isNil QGVAR(disableUserInputKeyEventHandler)) then {
         (findDisplay 46) displayRemoveEventHandler ["KeyDown", GVAR(disableUserInputKeyEventHandler)];
         (findDisplay 46) displayRemoveEventHandler ["MouseButtonDown", GVAR(disableUserInputMouseButtonEventHandler)];
         (findDisplay 46) displayRemoveEventHandler ["MouseZChanged", GVAR(disableUserInputScrollWheelEventHandler)];

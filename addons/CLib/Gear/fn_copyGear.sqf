@@ -27,7 +27,6 @@ removeGoggles _u2;
 [_u2, backpack _u1] call CFUNC(addContainer);
 _u2 addHeadgear headgear _u1;
 
-
 _uniformItems = uniformItems _u1;
 _vestItems = vestItems _u1;
 _backpackItems = backpackItems _u1;

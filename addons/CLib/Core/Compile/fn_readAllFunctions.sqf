@@ -57,7 +57,6 @@ private _fnc_readFunction = {
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer);
 };
 
-
 DUMP("--------------------------Start CLib Function Search---------------------------------");
 {
     (_x splitString "/") params ["_modName", "_moduleName"];

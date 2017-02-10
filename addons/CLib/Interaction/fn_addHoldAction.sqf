@@ -48,7 +48,6 @@ private _keyNameColored = format ["<t color='#ffae00'>%1</t>", _keyName];
 private _hint = format [localize "STR_A3_HoldKeyTo", _keyNameColored, _title];
 _hint = format ["<t font='RobotoCondensedBold'>%1</t>", _hint];
 
-
 if (_iconIdle isEqualType "") then {
     _iconIdle = compile format ["""%1""", _iconIdle];
 };

@@ -101,8 +101,6 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             _map drawPolygon [_temp, _lineColor];
         };
     };
-
-
     nil
 } count GVAR(MapGraphicsCache);
 

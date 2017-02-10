@@ -94,7 +94,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
             if (isNil {(_x getVariable _functionVarName)}) then {
                 _x setVariable [_functionVarName, _functionCode];
             } else {
-                if !((_x getVariable _functionVarName) isEqualTo _functionCode) then {
+                if (!((_x getVariable _functionVarName) isEqualTo _functionCode)) then {
                     private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
                     LOG(_log);
 

@@ -17,7 +17,6 @@ params ["_configPath"];
 
 private _stateMachine = call CFUNC(createStatemachine);
 
-
 {
     private _code = getText (_x >> "stateCode");
     private _name = configName _x;

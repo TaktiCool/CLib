@@ -22,7 +22,7 @@ EXEC_ONLY_UNSCHEDULED
 params ["_args", ["_function", "", [""]], ["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_forceUseFallBack", false]];
 
 // exit with Vanilla Method if it is not disabled
-if !(GVAR(useRemoteFallback) || _forceUseFallBack) exitWith {
+if (!GVAR(useRemoteFallback) && !_forceUseFallBack) exitWith {
     _args remoteExecCall [_function, _target];
 };
 

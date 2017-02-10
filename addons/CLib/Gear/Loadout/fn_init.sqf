@@ -16,7 +16,6 @@
 
 GVAR(loadoutsNamespace) = false call CFUNC(createNamespace);
 
-
 if (isServer) then {
     GVAR(defaultLoadoutValues) = configProperties [configFile >> "CfgCLibLoadoutsClassBase", "true", true];
     GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLower (configName _x)};
@@ -26,7 +25,7 @@ if (isServer) then {
         private _id = owner _unit;
         private _data = [];
         {
-            if !(_x in _knownLoadouts) then {
+            if (!(_x in _knownLoadouts)) then {
                 _data pushBack [_x, (GVAR(loadoutsNamespace) getVariable _x)];
             };
             nil
@@ -51,7 +50,6 @@ if (isServer) then {
 }, {
     !isNil QGVAR(defaultLoadoutValues)
 }] call CFUNC(waitUntil);
-
 
 ["registerServerConfigLoadout", {
     params ["_data"];

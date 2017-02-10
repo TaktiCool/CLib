@@ -146,7 +146,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["setMimic", {
     (_this select 0) params ["_unit", "_mimic"];
-    if !(toLower _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
+    if (!toLower _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
         _mimic = "neutral";
     };
     _unit setMimic _mimic;
@@ -163,7 +163,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     DFUNC(entityCreated) = {
         params ["_obj"];
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
+        if (!(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic")) then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
         };
@@ -194,7 +194,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entities) deleteAt 0;
-        if !(isNull _obj) then {
+        if (!isNull _obj) then {
             _obj call FUNC(entityCreated);
         };
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);

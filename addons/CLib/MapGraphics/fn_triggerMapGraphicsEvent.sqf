@@ -27,7 +27,7 @@ private _eventArray = _namespace getVariable _uid;
 if (isNil "_eventArray") exitWith {};
 
 {
-    if !(isNil "_x") then {
+    if (!isNil "_x") then {
         _x params ["_code", "_data"];
         if (_code isEqualType "") then {
             _code = parsingNamespace getVariable [_code, {}];

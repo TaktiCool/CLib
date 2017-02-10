@@ -168,7 +168,6 @@ private _fnc_do = {
     } count _item;
 }, false] call _fnc_do;
 
-
 // Items
 ["items", {
     {
@@ -183,7 +182,6 @@ private _fnc_do = {
         nil
     } count _item;
 }, false] call _fnc_do;
-
 
 // Linked Items
 ["linkedItems", {
@@ -208,7 +206,7 @@ private _fnc_do = {
     } count _item;
 }, false] call _fnc_do;
 
-if !(_loadoutVars isEqualTo []) then {
+if (!(_loadoutVars isEqualTo [])) then {
     for "_i" from 0 to (count _loadoutVars) step 2 do {
         private _name = _loadoutVars select _i;
         private _value = _loadoutVars select (_i + 1);

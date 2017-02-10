@@ -79,7 +79,6 @@ private _hcInit = [];
 
 }, _postInit] call CFUNC(execNextFrame);
 
-
 if (didJIP) then {
     QGVAR(jipQueue) addPublicVariableEventHandler {
         {

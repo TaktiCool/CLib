@@ -14,7 +14,7 @@
     None
 */
 
-if !(hasInterface) exitWith {};
+if (!hasInterface) exitWith {};
 
 GVAR(currentActionID) = -1;
 GVAR(Interaction_Actions) = [];

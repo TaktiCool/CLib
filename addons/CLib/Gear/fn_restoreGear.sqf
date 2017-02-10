@@ -43,14 +43,11 @@ removeGoggles _u2;
 [_u2, _backpack] call CFUNC(addContainer);
 _u2 addHeadgear _headgear;
 
-
 _primaryWeapon = [_primaryWeapon] call BIS_fnc_baseWeapon;
 _secondaryWeapon = [_secondaryWeapon] call BIS_fnc_baseWeapon;
 _handgun = [_handgun] call BIS_fnc_baseWeapon;
 
-
 _assignedItems = _assignedItems - [_binocular];
-
 
 {
     _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];

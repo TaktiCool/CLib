@@ -32,7 +32,7 @@ if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
         _text = _text call CFUNC(readLocalisation);
     };
 
-    if !(_actionID in _actionIDs) then {
+    if (!(_actionID in _actionIDs)) then {
         if (_onObject isEqualType "") then {
             if (_target isKindOf _onObject) then {
                 private _argArray = [_text, _code, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];

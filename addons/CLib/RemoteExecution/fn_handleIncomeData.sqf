@@ -21,12 +21,11 @@ EXEC_ONLY_UNSCHEDULED
 params [["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_function", "", [""]], "_args"];
 
 // target must be a Array
-if !(_target isEqualType []) then {
+if (!(_target isEqualType [])) then {
     _target = [_target];
 };
 
 private _targets = [];
-
 
 {
     private _var = _x;
@@ -63,7 +62,7 @@ private _targets = [];
 } count _target;
 
 // exit with no targets are applyed
-if !(_targets isEqualTo []) then {
+if (!(_targets isEqualTo [])) then {
     // make Targets Unique
     _targets = _targets arrayIntersect _targets;
 

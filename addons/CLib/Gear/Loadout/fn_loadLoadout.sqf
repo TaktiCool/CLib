@@ -24,7 +24,7 @@ if (_cfg isEqualType "") then {
 
 private _varName = format [QGVAR(Loadout_%1), _loadoutName];
 
-if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
+if (!isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
     GVAR(loadoutsNamespace) getVariable _varName;
 };
 
@@ -35,7 +35,6 @@ if (_cfg isEqualType "") then {
 };
 
 if (!isClass _cfg) exitWith {};
-
 
 private _loadout = [];
 private _loadoutVars = [];
@@ -90,7 +89,7 @@ private _fnc_readData = {
             [configName _config, [getNumber _config]]
         };
     };
-    if !(isNil "_value") then {
+    if (!isNil "_value") then {
         _value call _fnc_assignValue;
     };
 };

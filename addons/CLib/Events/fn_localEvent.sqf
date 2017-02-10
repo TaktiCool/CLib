@@ -35,9 +35,9 @@ EXEC_ONLY_UNSCHEDULED
 
 private _eventArray = GVAR(EventNamespace) getVariable _eventName;
 private _CLib_EventReturn = nil;
-if !(isNil "_eventArray") then {
+if (!isNil "_eventArray") then {
     {
-        if !(isNil "_x") then {
+        if (!isNil "_x") then {
             _x params ["_eventFunctions", "_data"];
             if (_eventFunctions isEqualType "") then {
                 _eventFunctions = parsingNamespace getVariable [_eventFunctions, {LOG("ERROR: Function call Over Eventhandler Dont Exist: " + _eventFunctions)}];

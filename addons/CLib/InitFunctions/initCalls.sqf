@@ -70,8 +70,12 @@ if (_recompile == 3) then {
         private ["_test", "_test2"];
         _test = BIS_functions_mainscope setPos (getPos BIS_functions_mainscope);
         _test2 = BIS_functions_mainscope playMove "";
-        if (isNil "_test") then {_test = false};
-        if (isNil "_test2") then {_test2 = false};
+        if (isNil "_test") then {
+            _test = false
+        };
+        if (isNil "_test2") then {
+            _test2 = false
+        };
         if (_test || _test2) then {0 call (compile (preprocessFileLineNumbers "a3\functions_f\misc\fn_initCounter.sqf"))};
     };
 
@@ -110,7 +114,7 @@ if (_recompile == 3) then {
         0.20 call BIS_fnc_progressloadingscreen;
 
         //--- After JIP, units cannot be initialized during the loading screen
-        if !(isServer) then {
+        if (!isServer) then {
             endLoadingScreen;
             waitUntil {!isNull cameraOn && {getClientState != "MISSION RECEIVED" && {getClientState != "GAME LOADED"}}};
 
@@ -136,7 +140,7 @@ if (_recompile == 3) then {
             };
 
             //--- Run mission scripts
-            if !(isDedicated) then {
+            if (!isDedicated) then {
                 [player, didJIP] call compile preprocessFileLineNumbers "initPlayerLocal.sqf";
                 [[[player, didJIP], "initPlayerServer.sqf"], "bis_fnc_execvm", false, false] call BIS_fnc_mp;
                 "initPlayerLocal.sqf" call BIS_fnc_logFormat;
@@ -163,7 +167,7 @@ if (_recompile == 3) then {
         //--- MissionNamespace init
         missionNamespace setVariable ["bis_fnc_init", true];
 
-        if !(isServer) then {
+        if (!isServer) then {
             ["bis_fnc_initFunctions"] call BIS_fnc_endLoadingScreen;
         };
     };

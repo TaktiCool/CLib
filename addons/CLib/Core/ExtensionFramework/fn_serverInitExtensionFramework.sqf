@@ -35,7 +35,6 @@ GVAR(pendingTasks) = 0;
     };
 }] call CFUNC(addEventHandler);
 
-
 DFUNC(serverLog) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);

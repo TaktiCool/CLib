@@ -20,7 +20,6 @@
 */
 params ["_name", "_modName", "_module", "_var", "_file", "_line"];
 
-
 #ifdef ISDEV
     private _formatStr = "(%1) [%2 %3 - %4]: %5 %6:%7";
 #else

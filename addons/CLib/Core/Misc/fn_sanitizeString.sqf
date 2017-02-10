@@ -22,7 +22,7 @@ _array = [];
 _symbols = toArray "\/*""?<>|:";
 
 {
-    if !(_x in _symbols) then {
+    if (!(_x in _symbols)) then {
         _array pushBack _x;
     };
     nil

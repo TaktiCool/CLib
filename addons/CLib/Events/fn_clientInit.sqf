@@ -32,7 +32,7 @@ GVAR(groupUnits) = [];
     };
 
     _data = CLib_Player call CFUNC(getAllGear);
-    if !(_data isEqualTo GVAR(oldGear)) then {
+    if (!(_data isEqualTo GVAR(oldGear))) then {
         "playerInventoryChanged" call CFUNC(localEvent);
         GVAR(oldGear) = _data;
     };
@@ -62,12 +62,11 @@ GVAR(groupUnits) = [];
     };
 
     _data = units CLib_Player;
-    if !(GVAR(groupUnits) isEqualTo _data) then {
+    if (!(GVAR(groupUnits) isEqualTo _data)) then {
         ["groupUnitsChanged", _data] call CFUNC(localEvent);
         GVAR(groupUnits) = _data;
     };
 }] call CFUNC(addPerFrameHandler);
-
 
 // To ensure that the ingame display is available and prevent unnecessary draw3D calls during briefings we trigger an event if the mission starts.
 [{
