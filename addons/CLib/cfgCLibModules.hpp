@@ -232,6 +232,9 @@ class CfgCLibModules {
             FNC(clientInit);
             FNC(init);
             APIFNC(getSettingOld);
+            APIFNC(getSetting);
+            APIFNC(getSettings);
+            APIFNC(getSettingSubClasses);
             APIFNC(loadSettings);
             APIFNC(registerSettings);
         };

@@ -8,24 +8,26 @@
     Registers config class (from configFile) to settings framework
 
     Parameter(s):
-    0: Array of config path (Array of strings)
+    0: Array with config path <Array>
 
     Returns:
     None
 */
 params ["_basePath"];
 //params ["_configClass"];
-_configClass = configFile;
-{
-    _configClass = (_configClass >> _x);
-    nil;
-} count _basePath;
 
-//private _basePath = (configHierarchy _configClass) apply {configName _x};
-//_basePath deleteAt 0;
+private _configClasses = [configFile, missionConfigFile] apply {
+    private _temp = _x;
+    {
+        _temp = (_temp >> _x);
+        nil;
+    } count _basePath;
+    _temp
+};
+
 private _prefix = _basePath joinString "/";
-private _subClasses = [];
-private _settings = [];
+private _subClasses = GVAR(allSettings) getVariable ["classes:" + _prefix, []];
+private _settings = GVAR(allSettings) getVariable ["settings:" + _prefix, []];
 
 private _fnc_getValue = {
     if (isText _this) exitWith {
@@ -40,60 +42,48 @@ private _fnc_getValue = {
     nil;
 };
 
-private _fnc_getSettingParameters = {
-    params ["_baseConfig", "_path"];
-    _config = _baseConfig;
-    {
-        _config = (_config >> _x);
-        nil;
-    } count _path;
-
-    private _description = nil;
-    private _force = "";
-    private _value = nil;
-    private _isSetting = false;
-
-    if (isClass _config) then {
-        if (isText (_config >> "value") || isNumber (_config >> "value") || isArray (_config >> "value")) then {
-            _force = getText (_config >> "force");
-            _value = (_config >> "value") call _fnc_getValue;
-            _description = getText (_config >> "description");
-            _isSetting = true;
-        } else {
-            if (_baseConfig == configFile) then {
-                [_path] call CFUNC(registerSettings);
-            };
-        };
-    } else {
-        if (isText _config || isNumber _config || isArray _config) then {
-            _value = _config call _fnc_getValue;
-            _isSetting = true;
-        };
-    };
-    [_isSetting, _value, _force, _description];
-};
 
 {
-    private _name = configName _x;
-    private _path = _basePath + [_name];
+    {
+        private _name = configName _x;
+        private _path = _basePath + [_name];
+        private _pathString = (_path joinString "/");
 
-    ([configFile, _path] call _fnc_getSettingParameters) params ["_isSetting", "_value", "_force", "_description"];
+        (GVAR(allSettings) getVariable [_pathString, [nil, 0, 0, ""]]) params ["_value", "_force", "_isClient", "_description"];
 
-    if (_isSetting) then {
-        if (toLower _force in ["","mission"]) then {
-            ([missionConfigFile, _path] call _fnc_getSettingParameters) params ["_isValid", "_newValue"];
-            if (_isValid) then {
-                _value = _newValue;
+        if (_force == 0) then {
+            if (isClass _x) then {
+                if (isText (_x >> "value") || isNumber (_x >> "value") || isArray (_x >> "value")) then {
+                    if (isNumber (_x >> "force")) then {
+                        _force = getNumber (_x >> "force");
+                    };
+                    if (isNumber (_x >> "value")) then {
+                        _isClient = getNumber (_x >> "isClient");
+                    };
+                    if (isText (_x >> "description")) then {
+                        _description = getText (_x >> "description");
+                    };
+                    _value = (_x >> "value") call _fnc_getValue;
+                } else {
+                    [_path] call CFUNC(registerSettings);
+                };
+            } else {
+                if (isText _x || isNumber _x || isArray _x) then {
+                    _value = _x call _fnc_getValue;
+                };
             };
         };
-        _settings pushBack _name;
-        private _pathString = (_path joinString "/");
-        GVAR(allSettings) setVariable [_pathString, [_value, _force, _description], true];
-    } else {
-        _subClasses pushBack _name;
-    };
-    true;
-} count configProperties [_configClass, "true", true];
+
+        if (!isNil "_value") then {
+            _settings pushBackUnique _name;
+            GVAR(allSettings) setVariable [_pathString, [_value, _force, _isClient, _description], true];
+        } else {
+            _subClasses pushBackUnique _name;
+        };
+        nil;
+    } count configProperties [_x, "true", true];
+    nil;
+} count _configClasses;
 
 GVAR(allSettings) setVariable ["classes:" + _prefix, _subClasses, true];
 GVAR(allSettings) setVariable ["settings:" + _prefix, _settings, true];
