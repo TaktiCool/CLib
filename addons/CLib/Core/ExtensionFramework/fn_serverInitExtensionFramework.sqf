@@ -29,10 +29,8 @@ GVAR(pendingTasks) = 0;
     };
 
     private _result = [_taskId, _extensionName, _actionName, _data] call FUNC(extensionRequest);
-
-    if (!(isNil "_result")) then {
+    if (!isNil "_result") then {
         GVAR(tasks) set [_taskId, objNull];
-
         [QGVAR(extensionResult), _sender, [_clientTaskId, _result]] call CFUNC(targetEvent);
     };
 }] call CFUNC(addEventHandler);
