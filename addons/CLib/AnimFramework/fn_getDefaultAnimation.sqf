@@ -15,6 +15,7 @@
 
     TODO Cache config Reads
 */
+
 params ["_unit"];
 private _animState = toLower (animationState _unit);
 

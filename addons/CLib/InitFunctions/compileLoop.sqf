@@ -28,13 +28,17 @@ private _itemPostInit = getNumber (_currentItem >> "postInit");
 private _itemPreStart = getNumber (_currentItem >> "preStart");
 private _itemRecompile = getNumber (_currentItem >> "recompile");
 private _itemCheatsEnabled = getNumber (_currentItem >> "cheatsEnabled");
-if (_itemExt == "") then {_itemExt = ".sqf"};
+if (_itemExt == "") then {
+    _itemExt = ".sqf"
+};
 private _itemPath = if (_itemPathItem != "") then {
     if (_tagName == "BIS" && _pathAccess == 0) then {
         //--- Disable rewriting of global BIS functions from outside (TODO Make it dynamic, so anyone can protect their functions)
         private _itemPathItemA3 = (toLower _itemPathItem) find "a3";
         private _itemPathSlash = (toLower _itemPathItem) find "\";
-        if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {_itemPathItem = ""};
+        if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {
+            _itemPathItem = ""
+        };
     };
     _itemPathItem
 } else {
@@ -49,7 +53,9 @@ if (_itemPath == "") then {
 private _itemHeader = getNumber (_currentItem >> "headerType");
 
 //--- Compile function
-if (_itemPath == "") then {_itemPath = _pathFile + _categoryName + "\fn_" + _itemName + _itemExt};
+if (_itemPath == "") then {
+    _itemPath = _pathFile + _categoryName + "\fn_" + _itemName + _itemExt
+};
 private _itemVar = _tagName + "_fnc_" + _itemName;
 private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile > 0, _tag, _categoryName, _itemName];
 private _itemCompile = if (_itemCheatsEnabled == 0 || (_itemCheatsEnabled > 0 && cheatsEnabled)) then {
@@ -90,7 +96,7 @@ if (_itemCompile isEqualType {}) then {
             private _errorFnc = uiNamespace getVariable "bis_fnc_error";
             private _errorText = "%1 is a mission / campaign function and cannot contain 'preStart = 1;' param";
             if !(isNil "_errorFnc") then {
-                [_errorText,_itemVar] call _errorFnc;
+                [_errorText, _itemVar] call _errorFnc;
             } else {
                 diag_log format ["Log: [Functions]: " + _errorText, _itemVar];
             };
@@ -104,8 +110,8 @@ if (_itemCompile isEqualType {}) then {
         } else {
             private _errorFnc = uiNamespace getVariable "bis_fnc_error";
             private _errorText = "Redundant use of 'recompile = 1;' in %1 - mission / campaign functions are recompiled on start by default.";
-            if !(isNil {_errorFnc}) then {
-                [_errorText,_itemVar] call _errorFnc;
+            if !(isNil "_errorFnc") then {
+                [_errorText, _itemVar] call _errorFnc;
             } else {
                 diag_log format ["Log: [Functions]: " + _errorText, _itemVar];
             };

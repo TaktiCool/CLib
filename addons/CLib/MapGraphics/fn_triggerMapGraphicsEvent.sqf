@@ -15,6 +15,7 @@
     Returns:
     None
 */
+
 params [["_uid", "", [""]], ["_eventName", "", [""]], ["_args", []]];
 
 _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];

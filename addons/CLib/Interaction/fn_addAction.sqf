@@ -79,7 +79,6 @@ private _argName = "";
     nil
 } count _dynamicArguments;
 
-
 GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
 _condition = _condition call CFUNC(codeToString);
@@ -90,8 +89,12 @@ _condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_t
 
 _callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);
-if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};
-if (_onObject isEqualType "") then {_onObject = [_onObject]};
+if (_text isEqualType "") then {
+    _text = compile ("format [""" + _text + """]")
+};
+if (_onObject isEqualType "") then {
+    _onObject = [_onObject]
+};
 
 if (_onObject isEqualType []) then {
     {

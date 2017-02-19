@@ -34,8 +34,7 @@ if (_cfg isEqualType "") then {
     _cfg = (missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _class);
 };
 
-if (!isClass _cfg) exitWith {};
-
+if !(isClass _cfg) exitWith {};
 
 private _loadout = [];
 private _loadoutVars = [];

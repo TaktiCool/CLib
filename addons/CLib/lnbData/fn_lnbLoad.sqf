@@ -14,6 +14,7 @@
     Returns:
     Variable from lnbData <Any>
 */
+
 params ["_control", "_rowAndColumn"];
 
 private _index = _control lnbValue _rowAndColumn;

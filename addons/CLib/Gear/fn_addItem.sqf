@@ -14,6 +14,7 @@
     Returns:
     None
 */
+
 params ["_className", ["_count", 1]];
 
 if (_className != "" && _count > 0) then {

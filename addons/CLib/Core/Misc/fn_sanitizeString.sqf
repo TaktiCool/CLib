@@ -15,6 +15,7 @@
     Returns:
     0: The sanitized string <String>
 */
+
 params [["_string", "", [""]]];
 private ["_array", "_symbols"];
 

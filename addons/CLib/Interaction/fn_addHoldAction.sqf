@@ -23,6 +23,7 @@
     Returns:
     0: Return <Type>
 */
+
 params [
     ["_target", objNull, [objNull, "", []]],
     ["_title", "MISSING TITLE", [""]],
@@ -47,7 +48,6 @@ private _keyName = _keyNameRaw select [1, count _keyNameRaw - 2];
 private _keyNameColored = format ["<t color='#ffae00'>%1</t>", _keyName];
 private _hint = format [localize "STR_A3_HoldKeyTo", _keyNameColored, _title];
 _hint = format ["<t font='RobotoCondensedBold'>%1</t>", _hint];
-
 
 if (_iconIdle isEqualType "") then {
     _iconIdle = compile format ["""%1""", _iconIdle];
@@ -78,7 +78,6 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _showUnconscious
     ]] call CFUNC(overrideAction);
 } else {
-
     _title = format ["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>", _title, _keyName];
     _condShow = compile format ["if (_this call %1) then {[""%2"", %3, ""%4""] call " + QFUNC(IdleAnimation) + "; true;} else {false};", _condShow, _title, _iconIdle, _hint];
     [_title, _target, 0, _condShow, CFUNC(holdActionCallback), ["arguments", [
@@ -118,7 +117,11 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
             "_ignoredCanInteractConditions"
         ];
 
-        _target setUserActionText [_id, _title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconIdle)]];
-
+        _target setUserActionText [
+            _id,
+            _title,
+            "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint,
+            format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", call _iconIdle]
+        ];
     }, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
 };

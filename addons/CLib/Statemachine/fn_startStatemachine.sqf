@@ -15,6 +15,7 @@
     Returns:
     Index of the Statemachine PFH <Number>
 */
+
 params ["_stateMachine", "_firstState", ["_tickeTime", 0]];
 
 if !(isNil "_firstState") then {

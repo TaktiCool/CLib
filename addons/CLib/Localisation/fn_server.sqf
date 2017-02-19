@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(ServerNamespace) = true call CFUNC(createNamespace);
 GVAR(supportedLanguages) = [];
 // GVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages"); // disabled this so we have a Dynamic Supported languages

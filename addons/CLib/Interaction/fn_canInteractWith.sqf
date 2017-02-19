@@ -14,6 +14,7 @@
     Returns:
     <Bool> can InterActWith
 */
+
 params [["_caller", objNull, [objNull]], ["_target", objNull, [objNull]], ["_ignoredTypes", [], [[]]]];
 [format [QGVAR(canInteractWith_%1_%2_%3), _caller, _target, _ignoredTypes], {
     scopeName "canInteractWithScope";

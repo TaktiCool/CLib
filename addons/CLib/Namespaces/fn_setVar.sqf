@@ -19,6 +19,7 @@
     Returns:
     None
 */
+
 params ["_namespace", "_varName", "_varContent", ["_global", false, [false]]];
 if (_namespace isEqualType locationNull) then {
     _namespace setVariable [_varName, _varContent];

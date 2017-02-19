@@ -17,6 +17,7 @@
     Returns:
     None
 */
+
 params ["_unit"];
 
 if !(local _unit) exitWith {
@@ -57,7 +58,6 @@ count diag_activeMissionFSMs = %10",
 ];
 [_text] call _fnc_outputText;
 
-
 _text = format [
     "------Player------
 typeOf = %1
@@ -66,7 +66,6 @@ animationState = %2",
     if (isNull CLib_Player) then {"null"} else {animationState CLib_Player}
 ];
 [_text] call _fnc_outputText;
-
 
 _text = format ["
 ------CLib Variables------"];

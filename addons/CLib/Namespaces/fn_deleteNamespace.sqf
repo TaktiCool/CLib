@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 params [["_namespace", locationNull, [locationNull]]];
 
 GVAR(allCustomNamespaces) deleteAt (GVAR(allCustomNamespaces) find _namespace);

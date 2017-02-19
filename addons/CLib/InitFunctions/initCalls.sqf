@@ -48,7 +48,6 @@ if (_recompile == 2) then {
 
 //--- Mission only
 if (_recompile == 3) then {
-
     //--- Switch to mission loading bar
     RscDisplayLoading_progressMission = true;
 
@@ -66,12 +65,16 @@ if (_recompile == 3) then {
     };
     (group BIS_functions_mainscope) setGroupID [localize "str_dn_modules"]; //--- Name the group for curator
 
-    if (!isNil "BIS_functions_mainscope") then {
+    if !(isNil "BIS_functions_mainscope") then {
         private ["_test", "_test2"];
         _test = BIS_functions_mainscope setPos (getPos BIS_functions_mainscope);
         _test2 = BIS_functions_mainscope playMove "";
-        if (isNil "_test") then {_test = false};
-        if (isNil "_test2") then {_test2 = false};
+        if (isNil "_test") then {
+            _test = false
+        };
+        if (isNil "_test2") then {
+            _test2 = false
+        };
         if (_test || _test2) then {0 call (compile (preprocessFileLineNumbers "a3\functions_f\misc\fn_initCounter.sqf"))};
     };
 

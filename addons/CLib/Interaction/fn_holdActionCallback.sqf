@@ -41,7 +41,6 @@ GVAR(HoldActionStartTime) = diag_tickTime;
 
 [_target, _caller, _id, _arguments] call _codeStart;
 
-
 if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     private _display = findDisplay 46;
     private _ctrl = _display ctrlCreate ["RscStructuredText", 6000];
@@ -54,8 +53,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     uiNamespace setVariable [UIVAR(HoldAction), _display];
     //([UIVAR(HoldAction)] call BIS_fnc_rscLayer) cutRsc [UIVAR(HoldAction),"PLAIN",0];
 };
-
-
 
 [{
     params ["_args", "_handle"];
@@ -91,7 +88,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
         };
 
         if (_id isEqualType 123) then {
-
             (_display displayCtrl 6000) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6001) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];
@@ -107,8 +103,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
             (_display displayCtrl 6000) ctrlCommit 0;
             (_display displayCtrl 6001) ctrlCommit 0;
         };
-
-
 
         if (_ret >= 1) then {
             _ret = true;

@@ -21,7 +21,7 @@ EXEC_ONLY_UNSCHEDULED
     params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
 
     // dont Log to reduce Spam
-    if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
+    if !(toLower _eventName in GVAR(ignoredLogEventNames_0)) then {
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
         if (toLower _eventName in GVAR(ignoredLogEventNames_1)) then {
             DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName)

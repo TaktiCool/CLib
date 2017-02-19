@@ -18,6 +18,7 @@
     Returns:
     Deleted Index <Array<Numbers>>
 */
+
 EXEC_ONLY_UNSCHEDULED
 params ["_array", "_entry", ["_deleteAll", false]];
 private "_index";
@@ -31,7 +32,6 @@ if (_deleteAll) then {
     _index = _array find _entry;
     if (_index != -1) then {
         _array deleteAt _index;
-
     };
     _return pushBack _index;
 };

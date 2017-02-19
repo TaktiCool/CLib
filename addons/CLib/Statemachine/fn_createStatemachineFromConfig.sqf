@@ -13,10 +13,10 @@
     Returns:
     0: Statemachine Object <Location>
 */
+
 params ["_configPath"];
 
 private _stateMachine = call CFUNC(createStatemachine);
-
 
 {
     private _code = getText (_x >> "stateCode");

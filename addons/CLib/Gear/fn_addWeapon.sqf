@@ -15,6 +15,7 @@
     Returns:
     None
 */
+
 params ["_className", "_magazine", "_count"];
 
 if (_className != "") then {

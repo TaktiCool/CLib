@@ -17,6 +17,7 @@
     Returns:
     SimpleObjectStructure <Array>
 */
+
 params [["_config", configNull, [configNull]], "_name"];
 if (isNil "_name" || {_name isEqualTo ""}) then {
     _name = configName _config;

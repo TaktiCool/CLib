@@ -26,7 +26,7 @@ if (getNumber (_unitAnimCfg >> "terminal") isEqualTo 1) exitWith {_animState};
 
 if (isNull objectParent _unit) exitWith {
     private _interpolateTo = getArray (_unitAnimCfg >> "interpolateTo");
-    if (!(_interpolateTo isEqualTo [])) exitWith {
+    if !(_interpolateTo isEqualTo []) exitWith {
         _interpolateTo select 0
     };
     "Unconscious"

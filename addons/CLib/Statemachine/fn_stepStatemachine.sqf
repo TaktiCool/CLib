@@ -13,6 +13,7 @@
     Returns:
     Next Statename <String>
 */
+
 params ["_stateMachine"];
 
 private _currentState = _stateMachine getVariable SMSVAR(nextStateData);

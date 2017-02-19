@@ -21,7 +21,7 @@ if (isServer) then {
     }];
 };
 
-if (!hasInterface) exitWith {};
+if !(hasInterface) exitWith {};
 
 ["playerChanged", {
     (_this select 0) params ["", "_oldUnit"];
@@ -44,7 +44,7 @@ switch (true) do {
     default {
         LOG("No VON Mod Detected");
         [{
-            private _new = (!(isNull findDisplay 55));
+            private _new = !isNull findDisplay 55;
             if !((CLib_player getVariable [QGVAR(isUsingVoice), false]) isEqualTo _new) then {
                 CLib_player setVariable [QGVAR(isUsingVoice), _new, true];
             };

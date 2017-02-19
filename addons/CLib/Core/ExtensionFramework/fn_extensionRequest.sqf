@@ -25,7 +25,7 @@ EXEC_ONLY_UNSCHEDULED
 params ["_taskId", "_extensionName", "_actionName", "_data"];
 
 // Make sure data is a string
-if (!(_data isEqualType "")) then {
+if !(_data isEqualType "") then {
     _data = str _data;
 };
 

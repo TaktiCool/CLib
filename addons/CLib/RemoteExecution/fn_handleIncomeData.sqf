@@ -27,7 +27,6 @@ if !(_target isEqualType []) then {
 
 private _targets = [];
 
-
 {
     private _var = _x;
     switch (typeName _var) do {

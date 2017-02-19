@@ -14,6 +14,7 @@
     Returns:
     Return of the Function <Any>
 */
+
 params [["_CLib_code", {}, [{}]], ["_CLib_arguments", []]];
 if !(canSuspend) exitWith {
     _CLib_arguments call _CLib_code;

@@ -13,6 +13,7 @@
     Returns:
     Statemachine Object <Location>
 */
+
 params [["_stateMachine", locationNull, [locationNull]]];
 
 private _stateMachineNew = call CFUNC(createStatemachine);

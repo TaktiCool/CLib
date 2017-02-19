@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(lnbDataControlCache) = [];
 GVAR(lnbDataDataCache) = false call CFUNC(createNamespace);
 

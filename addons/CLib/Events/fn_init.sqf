@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(EventNamespace) = false call CFUNC(createNamespace);
 
 GVAR(ignoredLogEventNames_0) = [];
@@ -34,14 +35,14 @@ GVAR(ignoredLogEventNames_1) = [];
 // Events for serveronly commands
 ["hideObject", {
     (_this select 0) params ["_object", "_value"];
-    if (!isServer) exitWith {
+    if !(isServer) exitWith {
         LOG("HideObject has to be a server event");
     };
     _object hideObjectGlobal _value;
 }] call CFUNC(addEventhandler);
 ["enableSimulation", {
     (_this select 0) params ["_object", "_value"];
-    if (!isServer) exitWith {
+    if !(isServer) exitWith {
         LOG("EnableSimulation has to be a server event");
     };
     _object enableSimulationGlobal _value;
@@ -50,7 +51,7 @@ GVAR(ignoredLogEventNames_1) = [];
 // Events for commands with local args
 ["fixFloating", {
     (_this select 0) params ["_object"];
-    if (!local _object) exitWith {
+    if !(local _object) exitWith {
         LOG("FixFloating event has wrong locality");
         ["fixFloating", _object, _this select 0] call CFUNC(targetEvent);
     };
@@ -58,7 +59,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["playMove", {
     (_this select 0) params ["_unit", "_move"];
-    if (!local _unit) exitWith {
+    if !(local _unit) exitWith {
         LOG("PlayMove event has wrong locality");
         ["playMove", _unit, _this select 0] call CFUNC(targetEvent);
     };
@@ -66,7 +67,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["playMoveNow", {
     (_this select 0) params ["_unit", "_move"];
-    if (!local _unit) exitWith {
+    if !(local _unit) exitWith {
         LOG("PlayMoveNow event has wrong locality");
         ["playMoveNow", _unit, _this select 0] call CFUNC(targetEvent);
     };
@@ -74,7 +75,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["setVectorUp", {
     (_this select 0) params ["_object", "_vector"];
-    if (!local _object) exitWith {
+    if !(local _object) exitWith {
         LOG("SetVectorUp event has wrong locality");
         ["setVectorUp", _object, _this select 0] call CFUNC(targetEvent);
     };
@@ -82,7 +83,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["allowDamage", {
     (_this select 0) params ["_object", "_allow"];
-    if (!local _object) exitWith {
+    if !(local _object) exitWith {
         LOG("AllowDamage event has wrong locality");
         ["allowDamage", _object, _this select 0] call CFUNC(targetEvent);
     };
@@ -90,7 +91,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["setFuel", {
     (_this select 0) params ["_vehicle", "_value"];
-    if (!local _vehicle) exitWith {
+    if !(local _vehicle) exitWith {
         LOG("SetFuel event has wrong locality");
         ["setFuel", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
@@ -98,7 +99,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["removeMagazineTurret", {
     (_this select 0) params ["_vehicle", "_args"];
-    if (!local _vehicle) exitWith {
+    if !(local _vehicle) exitWith {
         LOG("RemoveMagazineTurret event has wrong locality");
         ["removeMagazineTurret", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
@@ -106,7 +107,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["addMagazineTurret", {
     (_this select 0) params ["_vehicle", "_args"];
-    if (!local _vehicle) exitWith {
+    if !(local _vehicle) exitWith {
         LOG("AddMagazineTurret event has wrong locality");
         ["addMagazineTurret", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
@@ -117,7 +118,7 @@ GVAR(ignoredLogEventNames_1) = [];
 ["deleteGroup", {
     (_this select 0) params ["_group"];
     if (isNull _group) exitWith {};
-    if (!local _group) exitWith {
+    if !(local _group) exitWith {
         if (isServer) exitWith {
             ["deleteGroup", groupOwner _group, _group] call CFUNC(targetEvent);
         };
@@ -129,7 +130,7 @@ GVAR(ignoredLogEventNames_1) = [];
 ["selectLeader", {
     (_this select 0) params ["_group", "_unit"];
     if (isNull _group) exitWith {};
-    if (!local _group) exitWith {
+    if !(local _group) exitWith {
         if (isServer) exitWith {
             ["selectLeader", groupOwner _group, [_group, _unit]] call CFUNC(targetEvent);
         };
@@ -163,7 +164,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     DFUNC(entityCreated) = {
         params ["_obj"];
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
+        if (!(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic")) then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
         };
@@ -194,7 +195,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entities) deleteAt 0;
-        if !(isNull _obj) then {
+        if (!isNull _obj) then {
             _obj call FUNC(entityCreated);
         };
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
@@ -205,5 +206,4 @@ GVAR(ignoredLogEventNames_1) = [];
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM)] call CFUNC(startStatemachine);
-
 }] call CFUNC(addEventHandler);

@@ -14,6 +14,7 @@
     Returns:
     None
 */
+
 params ["_name", "_enable"];
 
 private _variableName = format [QGVAR(PerformanceTimerTickTime_%1), _name];

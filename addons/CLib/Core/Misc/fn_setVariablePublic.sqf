@@ -26,7 +26,7 @@ params ["_object", "_varName", "_value", ["_delay", 1]];
 _object setVariable [_varName, _value];
 
 // Exit if in SP - "duh"
-if (!isMultiplayer) exitWith {};
+if !(isMultiplayer) exitWith {};
 
 // If we are on embargo, exit
 if (_object isEqualTo (_object getVariable [format ["CLib_onEmbargo_%1", _varName], objNull])) exitWith {};
@@ -43,7 +43,7 @@ _object setVariable [format ["CLib_onEmbargo_%1", _varName], _object];
     private _curValue = _object getVariable _varName;
 
     //If value at start of embargo doesn't equal current, then broadcast and start new embargo
-    if (!(_value isEqualTo _curValue)) then {
+    if !(_value isEqualTo _curValue) then {
         [_object, _varName, _curValue] call CFUNC(setVariablePublic);
     };
 }, _delay, _this] call CFUNC(wait);

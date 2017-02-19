@@ -15,6 +15,7 @@
     Returns:
     None
 */
+
 params ["_control", "_xPos", "_yPos"];
 
 private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGroup);

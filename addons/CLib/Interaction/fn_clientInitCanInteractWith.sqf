@@ -13,8 +13,8 @@
     Returns:
     None
 */
-// [CLib_Player, CLib_Player,["inNotVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]] call CLib_fnc_canInteractWith;
 
+// [CLib_Player, CLib_Player,["inNotVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]] call CLib_fnc_canInteractWith;
 
 // ["isNotInVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]
 
@@ -60,7 +60,7 @@ GVAR(reloadMutex) = false;
                 } else {
                     _duration = 3;
                 };
-                if (!GVAR(reloadMutex)) then {
+                if !(GVAR(reloadMutex)) then {
                     GVAR(reloadMutex) = true;
                     [{
                         GVAR(reloadMutex) = false;

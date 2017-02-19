@@ -16,11 +16,12 @@
     Returns:
     None
 */
+
 EXEC_ONLY_UNSCHEDULED
 params ["_state"];
 
 if (_state) then {
-    if (!isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
+    if !(isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
 
     // end TFAR and ACRE2 radio transmissions
     // call CFUNC(endRadioTransmission);
@@ -49,8 +50,6 @@ if (_state) then {
             for "_index" from 100 to 2000 do {
                 (_dlg displayCtrl _index) ctrlEnable false;
             };
-
-
 
             private _ctrl = _dlg displayctrl 103;
             _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickEndStr)];
@@ -86,7 +85,7 @@ if (_state) then {
         true
     }];
 } else {
-    if !(isNil QGVAR(disableUserInputKeyEventHandler)) then {
+    if (!isNil QGVAR(disableUserInputKeyEventHandler)) then {
         (findDisplay 46) displayRemoveEventHandler ["KeyDown", GVAR(disableUserInputKeyEventHandler)];
         (findDisplay 46) displayRemoveEventHandler ["MouseButtonDown", GVAR(disableUserInputMouseButtonEventHandler)];
         (findDisplay 46) displayRemoveEventHandler ["MouseZChanged", GVAR(disableUserInputScrollWheelEventHandler)];

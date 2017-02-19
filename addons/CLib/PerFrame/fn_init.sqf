@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(waitArray) = [];
 GVAR(sortWaitArray) = false;
 
@@ -30,7 +31,6 @@ GVAR(nextFrameNo) = diag_frameNo;
 
 CGVAR(deltaTime) = diag_tickTime - (diag_tickTime / 10000);
 GVAR(lastFrameTime) = diag_tickTime;
-
 
 GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
     if (getClientState == "GAME FINISHED") exitWith {
@@ -56,7 +56,6 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
         nil
     } count GVAR(perFrameHandlerArray);
 
-
     if (GVAR(sortWaitArray)) then {
         GVAR(waitArray) sort true;
         GVAR(sortWaitArray) = false;
@@ -76,7 +75,6 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
         _delete = false;
     };
 
-
     {
         if ((_x select 2) call (_x select 1)) then {
             (_x select 2) call (_x select 0);
@@ -84,7 +82,6 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
             GVAR(waitUntilArray) set [_forEachIndex, objNull];
         };
     } forEach GVAR(waitUntilArray);
-
 
     if (_delete) then {
         GVAR(waitUntilArray) = GVAR(waitUntilArray) - [objNull];

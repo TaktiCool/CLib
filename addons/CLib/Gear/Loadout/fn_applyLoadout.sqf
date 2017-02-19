@@ -168,7 +168,6 @@ private _fnc_do = {
     } count _item;
 }, false] call _fnc_do;
 
-
 // Items
 ["items", {
     {
@@ -183,7 +182,6 @@ private _fnc_do = {
         nil
     } count _item;
 }, false] call _fnc_do;
-
 
 // Linked Items
 ["linkedItems", {

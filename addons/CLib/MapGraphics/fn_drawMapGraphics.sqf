@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 params ["_map"];
 
 private _mapScale = ctrlMapScale _map;
@@ -101,8 +102,6 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             _map drawPolygon [_temp, _lineColor];
         };
     };
-
-
     nil
 } count GVAR(MapGraphicsCache);
 
