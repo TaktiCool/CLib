@@ -13,9 +13,17 @@
     Returns:
     None
 */
+
 GVAR(StatusEffectsNamespace) = call CFUNC(createNamespace);
 
-["forceWalk", {
-    params ["_allParameters"];
-    CLib_Player forceWalk (true in _allParameters);
-}] call CFUNC(addStatusEffectType)
+if (hasInterface) then {
+    ["forceWalk", {
+        params ["_allParameters"];
+        CLib_Player forceWalk (true in _allParameters);
+    }] call CFUNC(addStatusEffectType);
+
+    ["allowDamage", {
+        params ["_allParameters"];
+        CLib_Player allowDamage !(false in _allParameters);
+    }] call CFUNC(addStatusEffectType);
+};
