@@ -31,8 +31,7 @@ GVAR(nextFrameNo) = diag_frameNo;
 CGVAR(deltaTime) = diag_tickTime - (diag_tickTime / 10000);
 GVAR(lastFrameTime) = diag_tickTime;
 
-
-GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
+DFUNC(onEachFrameHandler) = {
     if (getClientState == "GAME FINISHED") exitWith {
         removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
     };
@@ -121,4 +120,7 @@ GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {
     GVAR(nextFrameNo) = diag_frameNo + 1;
 
     PERFORMANCECOUNTER_END(PFHCounter);
-}];
+};
+
+
+GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {call FUNC(onEachFrameHandler)}];
