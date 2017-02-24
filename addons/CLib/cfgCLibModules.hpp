@@ -251,10 +251,12 @@ class CfgCLibModules {
             APIFNC(createStatemachine);
             APIFNC(createStatemachineFromConfig);
             APIFNC(getVariableStatemachine);
-            FNC(init);
             APIFNC(setVariableStatemachine);
             APIFNC(startStatemachine);
             APIFNC(stepStatemachine);
+
+            FNC(init);
+
         };
 
         MODULE(StatusEffects) {
