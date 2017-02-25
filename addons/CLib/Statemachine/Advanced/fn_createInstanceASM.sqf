@@ -21,5 +21,8 @@ _instances pushBack [_initialState, _data];
 _statemachine setVariable [QGVAR(Instances), _instances];
 
 if ((_statemachine getVariable [QGVAR(pfhId), -1]) == -1) then {
-    _statemachine setVariable [QGVAR(pfhId), [FUNC(stepASM), 0] call CFUNC(addPerFrameHandler)];
+    _statemachine setVariable [QGVAR(pfhId), [{
+        params ["_statemachine", "_id"];
+        [_statemachine] call FUNC(stepASM)
+    }, 0, _statemachine] call CFUNC(addPerFrameHandler)];
 };

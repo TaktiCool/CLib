@@ -46,6 +46,6 @@ _data call _stateAction;
         nil;
     };
     nil;
-} count ((_statemachine getVariable [TRANSITIONS(_state), []]) + (_statemachine getVariable [TRANSITIONS(), []]));
+} count ((_statemachine getVariable [TRANSITIONS(_state), []]) + (_statemachine getVariable [QGVAR(eventransitions), []]));
 
 _statemachine setVariable [QGVAR(InstancePointer), _instancePointer + 1];
