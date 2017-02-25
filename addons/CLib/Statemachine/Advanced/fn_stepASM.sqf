@@ -19,7 +19,12 @@ private _instances = _statemachine getVariable [QGVAR(Instances), []];
 private _instancePointer = _statemachine getVariable [QGVAR(InstancePointer), 0];
 private _nbrInstances = count _instances;
 
-if (_nbrInstances == 0) exitWith {};
+if (_nbrInstances == 0) exitWith {
+     private _pfhId = _statemachine getVariable [QGVAR(pfhId), -1];
+     if (_pfhId > -1) then {
+         _pfhId call CFUNC(removePerFrameHandler);
+     };
+};
 
 if (_nbrInstances <= _instancePointer) then {
     _instancePointer = 0;
@@ -37,7 +42,10 @@ _data call _stateAction;
         _data call _transitionAction;
         (_instances select _instancePointer) set [0, _destinationState];
         _data call _entryAction;
+        _instances deleteAt _instancePointer;
         nil;
-    }
+    };
     nil;
-} count (_statemachine getVariable [TRANSITIONS(_state), []]);
+} count ((_statemachine getVariable [TRANSITIONS(_state), []]) + (_statemachine getVariable [TRANSITIONS(), []]));
+
+_statemachine setVariable [QGVAR(InstancePointer), _instancePointer + 1];

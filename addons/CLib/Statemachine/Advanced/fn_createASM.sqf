@@ -15,5 +15,4 @@
 */
 
 private _namespace = false call CFUNC(createNamespace);
-
-_namespace
+_namespace;

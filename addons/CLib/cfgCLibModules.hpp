@@ -246,14 +246,24 @@ class CfgCLibModules {
 
         MODULE(Statemachine) {
             dependency[] = {"CLib/Events"};
-            APIFNC(addStatemachineState);
-            APIFNC(copyStatemachine);
-            APIFNC(createStatemachine);
-            APIFNC(createStatemachineFromConfig);
-            APIFNC(getVariableStatemachine);
-            APIFNC(setVariableStatemachine);
-            APIFNC(startStatemachine);
-            APIFNC(stepStatemachine);
+            MODULE(Simple) {
+                APIFNC(addStatemachineState);
+                APIFNC(copyStatemachine);
+                APIFNC(createStatemachine);
+                APIFNC(createStatemachineFromConfig);
+                APIFNC(getVariableStatemachine);
+                APIFNC(setVariableStatemachine);
+                APIFNC(startStatemachine);
+                APIFNC(stepStatemachine);
+            };
+            MODULE(Advanced) {
+                APIFNC(createASM);
+                APIFNC(addStateASM);
+                APIFNC(addTransitionASM);
+                APIFNC(addTransitionEventASM);
+                APIFNC(createInstanceASM);
+                APIFNC(stepASM);
+            };
 
             FNC(init);
 

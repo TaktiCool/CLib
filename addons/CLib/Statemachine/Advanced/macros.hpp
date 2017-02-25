@@ -1,5 +1,4 @@
-#define MODULE AdvancedStatemachine
-#include "\tc\CLib\addons\CLib\CLib_Macros.hpp"
+#include "\tc\CLib\addons\CLib\Statemachine\macros.hpp"
 
 #define STATE(var) QEGVAR(state,var)
 #define TRANSITIONS(var) QEGVAR(transitions,var)
