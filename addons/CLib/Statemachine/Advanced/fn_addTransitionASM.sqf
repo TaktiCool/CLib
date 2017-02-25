@@ -21,5 +21,5 @@
 params ["_statemachine", "_sourceState", "_destinationState", "_name", ["_condition", {}], ["_action", {}]];
 
 private _transitions = _statemachine getVariable [TRANSITIONS(_sourceState), []];
-_transitions pushBack [_name, _condition, _destinationState, _action]; 
+_transitions pushBack [_name, _condition, _destinationState, _action];
 _statemachine setVariable [TRANSITIONS(_sourceState), _transitions];

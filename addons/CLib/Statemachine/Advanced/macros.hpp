@@ -1,5 +1,5 @@
 #include "\tc\CLib\addons\CLib\Statemachine\macros.hpp"
 
-#define STATE(var) QEGVAR(state,var)
-#define TRANSITIONS(var) QEGVAR(transitions,var)
-#define EVENTTRANSITIONS(var) QEGVAR(eventransitions,var)
+#define STATE(var) QGVAR(state) + var
+#define TRANSITIONS(var) QGVAR(transitions) + var
+#define EVENTTRANSITIONS(var) QGVAR(eventransitions) + var
