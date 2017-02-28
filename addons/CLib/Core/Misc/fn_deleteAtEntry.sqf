@@ -31,11 +31,11 @@ if (_deleteAll) exitWith {
         _return pushBack _index;
     };
     _return
-} else {
-    private _index = _array find _entry;
-    if (_index != -1) exitWith {
-        _array deleteAt _index;
-        [_index]
-    };
-    []
-}
+};
+
+private _index = _array find _entry;
+if (_index != -1) exitWith {
+    _array deleteAt _index;
+    [_index]
+};
+[]
