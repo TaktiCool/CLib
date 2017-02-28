@@ -1,6 +1,7 @@
 ﻿using RGiesecke.DllExport;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -186,6 +187,12 @@ namespace CLib
                                 Debugger.Log($"Added: {filename} at: {extensionPath}");
                             }
                             
+                        }
+                        catch (Win32Exception e)
+                        {
+                            // Trying to load an x64 dll within an x86 process fails with an error with no nativ error code. We can ignore that.
+                            if (e.NativeErrorCode != 0)
+                                Debugger.Log(e);
                         }
                         catch (Exception e)
                         {

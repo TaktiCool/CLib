@@ -3,10 +3,11 @@ branches:
   - master
   - release
 
-language: node_js
-node_js:
-  - "node"
+language: python
+python:
+  - '3.5'
+install: true
 before_script:
   - cd tools
 script:
-  - node sqf_validator.js
+  - python3 sqf_validator.py

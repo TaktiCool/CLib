@@ -5,7 +5,7 @@
     Author: NetFusion
 
     Description:
-    Init for settings
+    Get a settings value
 
     Parameter(s):
     None
@@ -13,4 +13,6 @@
     Returns:
     None
 */
-GVAR(settingsNamespaceOld) = call CFUNC(createNamespace);
+params ["_name", "_default"];
+
+[GVAR(settingsNamespaceOld), _name, _default] call CFUNC(getVariable)

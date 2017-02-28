@@ -878,6 +878,7 @@ class CfgPatches {
 #include "CfgCLibModules.hpp"
 
 #ifdef ISDEV
+    #include "Settings\CfgCLibSettings.hpp"
     #include "SimpleObjectFramework\CfgCLibSimpleObject.hpp"
     #include "Gear\Loadout\CfgCLibLoadouts.hpp"
 #endif

@@ -17,27 +17,24 @@
     Returns:
     None
 */
+
 params ["_object"];
 
-// setHitPointDamage requires local object
-if (!local _object) exitWith {
-    ["fixFloating", _object, _object] call CFUNC(targeEvent);
-};
-//Ignore mans
-if (_object isKindOf "CAManBase") exitWith {};
+// Ensure locality and ignore men
+if (!local _object || _object isKindOf "CAManBase") exitWith {};
 
-//We need to manually set allowDamage to true for setHitIndex to function
-["blockDamage", [_object, false]] call CFUNC(localEvent);
+// We need to manually set allowDamage to true for setHitIndex to function
+_object allowDamage true;
 
-// save and restore hitpoints, see below why
+// Save and restore hitpoints, see below why
 private _hitPointDamages = getAllHitPointsDamage _object;
 
-// get correct format for objects without hitpoints
+// Get correct format for objects without hitpoints
 if (_hitPointDamages isEqualTo []) then {
     _hitPointDamages = [[], [], []];
 };
 
-// this prevents physx objects from floating when near other physx objects with allowDamage false
+// This prevents physx objects from floating when near other physx objects with allowDamage false
 _object setDamage (damage _object);
 
 {

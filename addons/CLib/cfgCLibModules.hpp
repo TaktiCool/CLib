@@ -22,7 +22,6 @@ class CfgCLibModules {
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
-            FNC(init);
         };
 
         MODULE(ConfigCaching) {
@@ -229,9 +228,15 @@ class CfgCLibModules {
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            APIFNC(getSetting);
+            FNC(serverInit);
+            FNC(clientInit);
             FNC(init);
+            APIFNC(getSettingOld);
+            APIFNC(getSetting);
+            APIFNC(getSettings);
+            APIFNC(getSettingSubClasses);
             APIFNC(loadSettings);
+            APIFNC(registerSettings);
         };
 
         MODULE(SimpleObjectFramework) {
