@@ -84,7 +84,7 @@ GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
 _condition = _condition call CFUNC(codeToString);
 
-_condition = "[_target, _this, " + str _ignoredCanInteractConditions + "] call " + QCFUNC(canInteractWith) + " && " + _condition;
+_condition = "[_this, _target, " + str _ignoredCanInteractConditions + "] call " + QCFUNC(canInteractWith) + " && " + _condition;
 
 _condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
 
