@@ -33,7 +33,7 @@
         _control ctrlSetFont "PuristaMedium";
         _control ctrlCommit 0;
 
-        for "_i" from (FRAMECOUNT - 1) to 0 step -1 do {
+        for "_i" from 0 to (FRAMECOUNT - 1) do {
             private _control = _display ctrlCreate ["RscPicture", 9502 + _i, _ctrlGroup];
             _control ctrlSetPosition [PX(_i * 0.2 + 4), PY(0), PX(0.2), PY(5)];
             _control ctrlSetText "#(argb,8,8,3)color(1,1,1,1)";
@@ -54,7 +54,7 @@
 
             private _prevFrameFPS = 0;
             private _maxFPS = 0;
-            for "_i" from (FRAMECOUNT - 1) to 0 step -1 do {
+            for "_i" from 0 to (FRAMECOUNT - 1) do {
                 private _control = _display displayCtrl (9502 + _i);
                 private _position = ctrlPosition _control;
                 private _frameFPS = GVAR(FPSStorage) select _i;
