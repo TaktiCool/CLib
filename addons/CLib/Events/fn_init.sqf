@@ -177,13 +177,13 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "init", {
         GVAR(entitiesCached) = [];
-        GVAR(entities) = [];
-        "refillEntitiesData";
+        GVAR(entities) = (entities [[], [], true, false]);
+        GVAR(entities) append allMissionObjects "All";
+        "clearOutEntits"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "refillEntitiesData", {
         GVAR(entities) = (entities [[], [], true, false]);
-        GVAR(entities) append allMissionObjects "All";
         "clearOutEntits"
     }] call CFUNC(addStatemachineState);
 
