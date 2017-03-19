@@ -72,8 +72,13 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     (GVAR(objectStorage) select 0) params ["_object", "_enqueueTime"];
 
     // If the time has not passed exit. This assumes all following object are pushed after the current one.
-    if (isNull _object) exitWith {GVAR(objectStorage) deleteAt 0};
-    if (_enqueueTime > time) exitWith {};
+    if (isNull _object) exitWith {
+        GVAR(objectStorage) deleteAt 0;
+        ["checkObject", "checkGroups"] select (GVAR(objectStorage) isEqualTo []);
+    };
+    if (_enqueueTime > time) exitWith {
+        ["checkObject", "checkGroups"] select (GVAR(objectStorage) isEqualTo []);
+    };
     if !(_object getVariable [QCGVAR(noClean), false]) then {
 
         // Remove the object from the storage.
