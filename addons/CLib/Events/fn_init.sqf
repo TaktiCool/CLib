@@ -49,7 +49,7 @@ GVAR(ignoredLogEventNames_1) = [];
 ["addCuratorEditableObjects", {
     (_this select 0) params ["_curatorObject", "_args"];
     if (!isServer) exitWith {
-        LOG("EnableSimulation has to be a server event");
+        LOG("AddCuratorEditableObjects has to be a server event");
     };
     _curatorObject addCuratorEditableObjects _args;
 }] call CFUNC(addEventhandler);
