@@ -23,7 +23,9 @@ params [["_isGlobal", false]];
 
 private _ret = if (_isGlobal isEqualType true && {_isGlobal}) then {
     private _grp = call CFUNC(getLogicGroup);
-    _grp createUnit ["Logic", POS, [], 0, "NONE"];
+    private _ns = _grp createUnit ["Logic", [0,0,0], [], 0, "NONE"];
+    _ns setPos POS;
+    _ns
 } else {
     createLocation ["fakeTown", POS, 0, 0];
 };
