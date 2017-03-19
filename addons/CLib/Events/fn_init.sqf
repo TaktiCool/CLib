@@ -46,6 +46,13 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _object enableSimulationGlobal _value;
 }] call CFUNC(addEventhandler);
+["addCuratorEditableObjects", {
+    (_this select 0) params ["_curatorObject", "_args"];
+    if (!isServer) exitWith {
+        LOG("EnableSimulation has to be a server event");
+    };
+    _curatorObject addCuratorEditableObjects _args;
+}] call CFUNC(addEventhandler);
 
 // Events for commands with local args
 ["fixFloating", {
