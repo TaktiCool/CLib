@@ -46,6 +46,20 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _object enableSimulationGlobal _value;
 }] call CFUNC(addEventhandler);
+["assignCurator", {
+    (_this select 0) params ["_player", "_curatorObject"];
+    if (!isServer) exitWith {
+        LOG("AssignCurator has to be a server event");
+    };
+    _player assignCurator _curatorObject;
+}] call CFUNC(addEventhandler);
+["unassignCurator", {
+    (_this select 0) params ["_curatorObject"];
+    if (!isServer) exitWith {
+        LOG("UnassignCurator has to be a server event");
+    };
+    unassignCurator _curatorObject;
+}] call CFUNC(addEventhandler);
 ["addCuratorEditableObjects", {
     (_this select 0) params ["_curatorObject", "_args"];
     if (!isServer) exitWith {
