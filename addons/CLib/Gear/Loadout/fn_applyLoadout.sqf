@@ -15,11 +15,11 @@
     None
 */
 
-if (isNil QGVAR(defaultLoadoutValues)) exitWith {
+if (isNil QGVAR(loadoutsLoaded)) exitWith {
     [{
         _this call CFUNC(applyLoadout);
     }, {
-        !isNil QGVAR(defaultLoadoutValues)
+        !isNil QGVAR(loadoutsLoaded)
     }, _this] call CFUNC(waitUntil);
 };
 params [["_unit", player, [objNull]], ["_class", "", ["", configNull, []]]];

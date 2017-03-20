@@ -57,4 +57,5 @@ if (isServer) then {
         [GVAR(loadoutsNamespace), _name, _loadout, QGVAR(allLoadouts)] call CFUNC(setVariable);
         nil
     } count _data;
+    GVAR(loadoutsLoaded) = true;
 }] call CFUNC(addEventhandler);
