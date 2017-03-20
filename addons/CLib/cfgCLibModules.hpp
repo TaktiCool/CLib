@@ -118,7 +118,7 @@ class CfgCLibModules {
         };
 
         MODULE(Gear) {
-            dependency[] = {};
+            dependency[] = {"CLib/PerFrame"};
             MODULE(Loadout) {
                 APIFNC(getAllLoadouts);
                 APIFNC(getLoadoutDetails);
