@@ -51,7 +51,7 @@ private _fnc_do = {
 ["removeAllItems", {
     if (_item isEqualTo 1) then {removeAllItems _unit};
 }, true] call _fnc_do;
-["removeAllAssingedItems", {
+["removeAllAssignedItems", {
     if (_item isEqualTo 1) then {removeAllAssignedItems _unit};
 }, true] call _fnc_do;
 
