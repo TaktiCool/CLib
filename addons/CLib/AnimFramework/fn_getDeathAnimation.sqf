@@ -24,7 +24,7 @@ private _unitAnimCfg = configFile >> "CfgMovesMaleSdr" >> "States" >> _animState
 // exit if dead unit is already in the death Anim
 if (getNumber (_unitAnimCfg >> "terminal") isEqualTo 1) exitWith {_animState};
 
-if (isNull objectParent _unit) exitWith {
+if (isNull objectParent _unit) then {
     private _interpolateTo = getArray (_unitAnimCfg >> "interpolateTo");
     if (!(_interpolateTo isEqualTo [])) exitWith {
         _interpolateTo select 0
