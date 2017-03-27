@@ -36,7 +36,7 @@ _object setVariable [_varName, _value, true];
 _object setVariable [format ["CLib_onEmbargo_%1", _varName], _object];
 
 [{
-    params ["_object", "_varName", "_value"];
+    params ["_object", "_varName", "_value", "_delay"];
     if (isNull _object) exitWith {};
 
     _object setVariable [format ["CLib_onEmbargo_%1", _varName], nil]; //Remove Embargo
@@ -44,6 +44,6 @@ _object setVariable [format ["CLib_onEmbargo_%1", _varName], _object];
 
     //If value at start of embargo doesn't equal current, then broadcast and start new embargo
     if (!(_value isEqualTo _curValue)) then {
-        [_object, _varName, _curValue] call CFUNC(setVariablePublic);
+        [_object, _varName, _curValue, _delay] call CFUNC(setVariablePublic);
     };
 }, _delay, _this] call CFUNC(wait);
