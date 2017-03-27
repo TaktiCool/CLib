@@ -39,7 +39,7 @@ GVAR(groupUnits) = [];
 
     _data = visibleMap;
     if (!(_data isEqualTo GVAR(OldVisibleMap))) then {
-        ["visibleMapChanged", [_data, GVAR(OldVisibleMap)]] call CFUNC(localEvent);
+        ["visibleMapChanged", _data] call CFUNC(localEvent);
         GVAR(OldVisibleMap) = _data;
     };
 
