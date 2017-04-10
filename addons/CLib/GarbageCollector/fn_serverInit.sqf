@@ -18,6 +18,9 @@ if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarb
 
 DFUNC(pushbackInQueue) = {
     params ["_object"];
+    if !(isNull attachedTo _object) exitWith { // exit if the Object is attached to a object. we then ignore it because it could be used by a script
+        _object setVariable [QCGVAR(noClean), true, true];
+    };
     if (!(_object getVariable [QCGVAR(noClean), false])) then {
         if (!(_object getVariable [QGVAR(queued), false])) then {
             _object setVariable [QGVAR(queued), true];
