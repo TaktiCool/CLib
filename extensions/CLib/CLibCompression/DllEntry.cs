@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using RGiesecke.DllExport;
 using System.Reflection;
 using System.Diagnostics;
 
@@ -14,7 +13,6 @@ namespace CLibCompression
         private const int MinMatchLength = 2;
         private const uint MaxMatchLength = (1 << 4) - MinMatchLength;
 
-        [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             if (input != "version")
@@ -34,7 +32,6 @@ namespace CLibCompression
             }
         }
 
-        [DllExport("_Compress@4", CallingConvention = CallingConvention.Winapi)]
         public static string Compress(string input)
         {
             var output = new StringBuilder();

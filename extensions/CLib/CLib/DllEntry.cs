@@ -165,18 +165,31 @@ namespace CLib
                     if (!Path.IsPathRooted(fullPath))
                         fullPath = Path.Combine(Environment.CurrentDirectory, path);
 
+#if WIN64
+                    var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
+#else
                     var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
+#endif
                     foreach (string extensionPath in extensionPaths)
                     {
                         try
                         {
                             var exports = FunctionLoader.ExportTable(extensionPath);
+#if WIN64
+                            if (!exports.Contains("RVExtension"))
+#else
                             if (!exports.Contains("_RVExtension@12"))
+#endif
                                 continue;
 
                             string filename = Path.GetFileNameWithoutExtension(extensionPath);
                             if (filename == null)
                                 continue;
+
+#if WIN64
+                            filename = filename.Substring(0, filename.Length - 4);
+#endif
+
 
                             if (AvailableExtensions.ContainsKey(filename))
                             {
