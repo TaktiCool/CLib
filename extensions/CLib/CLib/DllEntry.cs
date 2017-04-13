@@ -1,5 +1,4 @@
-﻿using RGiesecke.DllExport;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -40,7 +39,6 @@ namespace CLib
             Debugger.Log("Extension framework initialized");
         }
 
-        [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             switch (input)
