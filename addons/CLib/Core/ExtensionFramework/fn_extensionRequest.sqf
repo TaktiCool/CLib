@@ -94,3 +94,4 @@ if (_taskId == -1 && (_result select [0, 1]) == GVAR(STX)) exitWith {
 };
 
 DUMP(_result)
+_result
