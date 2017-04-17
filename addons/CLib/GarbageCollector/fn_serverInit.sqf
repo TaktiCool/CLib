@@ -40,11 +40,12 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     };
 
     GVAR(objectStorage) = [];
-    GVAR(lastFilledTime) = time;
+
     "fillGrenades"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillGrenades", {
+    GVAR(lastFilledTime) = time;
     // Cycle through all units to detect near shells and enqueue them for removal.
     {
         // Cycle through all near shells.
@@ -55,14 +56,38 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
         } count (getPos _x nearObjects ["GrenadeHand", 100]);
         nil
     } count allUnits;
-    "fillObjects"
+    "fillWeaponHolder"
 }] call CFUNC(addStatemachineState);
 
-[GVAR(statemachine), "fillObjects", {
+[GVAR(statemachine), "fillWeaponHolder", {
     {
         _x call DFUNC(pushbackInQueue);
         nil
-    } count (allMissionObjects "WeaponHolder") + (allMissionObjects "GroundWeaponHolder") + (allMissionObjects "WeaponHolderSimulated") + allDead;
+    } count (allMissionObjects "WeaponHolder");
+    "fillGroundWeaponHolder"
+}] call CFUNC(addStatemachineState);
+
+[GVAR(statemachine), "fillGroundWeaponHolder", {
+    {
+        _x call DFUNC(pushbackInQueue);
+        nil
+    } count (allMissionObjects "GroundWeaponHolder");
+    "fillWeaponHolderSimulated"
+}] call CFUNC(addStatemachineState);
+
+[GVAR(statemachine), "fillWeaponHolderSimulated", {
+    {
+        _x call DFUNC(pushbackInQueue);
+        nil
+    } count (allMissionObjects "WeaponHolderSimulated");
+    "fillDeadUnits"
+}] call CFUNC(addStatemachineState);
+
+[GVAR(statemachine), "fillDeadUnits", {
+    {
+        _x call DFUNC(pushbackInQueue);
+        nil
+    } count allDead;
     "checkObject"
 }] call CFUNC(addStatemachineState);
 
@@ -124,7 +149,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "wait", {
-    ["wait", "fillGrenades"] select (time - (GVAR(lastFilledTime)) >= 0); // only Fill every min 6 Frames the Cache for checking
+    ["wait", "fillGrenades"] select (time - (GVAR(lastFilledTime)) >= GVAR(waitTime));
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine)] call CFUNC(startStatemachine);
