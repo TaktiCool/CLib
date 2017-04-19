@@ -22,7 +22,6 @@ if (hasInterface) then {
 };
 
 if (hasInterface) then {
-
     // functions for disabling user input
     DFUNC(onButtonClickEndStr) = {
         closeDialog 0;
