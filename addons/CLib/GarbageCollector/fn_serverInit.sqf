@@ -24,28 +24,61 @@ DFUNC(pushbackInQueue) = {
     if (!(_object getVariable [QCGVAR(noClean), false])) then {
         if (!(_object getVariable [QGVAR(queued), false])) then {
             _object setVariable [QGVAR(queued), true];
-            GVAR(objectStorage) pushBack [_object, time + GVAR(waitTime)];
+            [{
+                _this call FUNC(removeMissionObject);
+            }, GVAR(waitTime), _object] call CFUNC(wait);
         };
     };
+};
+
+DFUNC(removeMissionObject) = {
+    params [["_object", objNull]];
+    if (isNull _object) exitWith {};
+    if (_object getVariable [QCGVAR(noClean), false]) exitWith {};
+    // Disable collision with the surface.
+    _object enableSimulationGlobal false;
+
+    // Calculate the height of the object to determine whether its below surface.
+    private _boundingBox = boundingBox _object;
+    private _height = ((_boundingBox select 1) select 2) - ((_boundingBox select 0) select 2);
+
+    // Use an WaitUntil to move the object slowly below the surface.
+    [{
+        params ["_object"];
+        deleteVehicle _object;
+    }, {
+        params ["_object", "_height", "_position"];
+
+        // Get the current position and subtract some value from the z axis.
+        _position set [2, (_position select 2) - 0.02];
+
+        // Apply the position change.
+        _object setPos _position;
+
+        (_position select 2) < (0 - _height)
+    }, [_object, _height, getPos _object]] call CFUNC(waitUntil);
 };
 
 GVAR(statemachine) = call CFUNC(createStatemachine);
 
 [GVAR(statemachine), "init", {
-    private _configPath = (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "GarbageCollectorTime");
-    GVAR(waitTime) = if (isNumber _configPath) then {
-        getNumber _configPath
+    private _configPath = (missionConfigFile >> QPREFIX >> "GarbageCollector");
+    // time to wait until the objet gets deleted
+    GVAR(waitTime) = if (isNumber (_configPath >> "GarbageCollectorTime")) then {
+        getNumber (_configPath >> "GarbageCollectorTime")
     } else {
         120
     };
-
-    GVAR(objectStorage) = [];
-
+    GVAR(loopTime) = if (isNumber (_configPath >> "GarbageCollectorLoopTime")) then {
+        getNumber (_configPath >> "GarbageCollectorLoopTime")
+    } else {
+        GVAR(waitTime)/5;
+    };
     "fillGrenades"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillGrenades", {
-    GVAR(lastFilledTime) = time;
+    GVAR(lastFilledTime) = time + GVAR(loopTime);
     // Cycle through all units to detect near shells and enqueue them for removal.
     {
         // Cycle through all near shells.
@@ -88,51 +121,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
         _x call DFUNC(pushbackInQueue);
         nil
     } count allDead;
-    "checkObject"
-}] call CFUNC(addStatemachineState);
-
-[GVAR(statemachine), "checkObject", {
-    (GVAR(objectStorage) select 0) params ["_object", "_enqueueTime"];
-
-    // If the time has not passed exit. This assumes all following object are pushed after the current one.
-    if (isNull _object) exitWith {
-        GVAR(objectStorage) deleteAt 0;
-        ["checkObject", "checkGroups"] select (GVAR(objectStorage) isEqualTo []);
-    };
-    if (_enqueueTime > time) exitWith {
-        ["checkObject", "checkGroups"] select (GVAR(objectStorage) isEqualTo []);
-    };
-    if !(_object getVariable [QCGVAR(noClean), false]) then {
-
-        // Remove the object from the storage.
-        GVAR(objectStorage) deleteAt 0;
-        // Disable collision with the surface.
-        _object enableSimulationGlobal false;
-
-        // Calculate the height of the object to determine whether its below surface.
-        private _boundingBox = boundingBox _object;
-        private _height = ((_boundingBox select 1) select 2) - ((_boundingBox select 0) select 2);
-
-        // Use an PFH to move the object slowly below the surface.
-        // TODO make this optional cause it should not be visible in general.
-        [{
-            params ["_object"];
-            deleteVehicle _object;
-        }, {
-            params ["_object", "_height", "_position"];
-
-            // Get the current position and subtract some value from the z axis.
-            _position set [2, (_position select 2) - 0.02];
-
-            // Apply the position change.
-            _object setPos _position;
-
-            (_position select 2) < (0 - _height)
-        }, [_object, _height, getPos _object]] call CFUNC(waitUntil);
-    } else {
-        GVAR(objectStorage) deleteAt (GVAR(objectStorage) find _x);
-    };
-    ["checkObject", "checkGroups"] select (GVAR(objectStorage) isEqualTo []);
+    "checkGroups"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "checkGroups", {
@@ -149,7 +138,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "wait", {
-    ["wait", "fillGrenades"] select (time - (GVAR(lastFilledTime)) >= GVAR(waitTime));
+    ["wait", "fillGrenades"] select (GVAR(lastFilledTime) < time);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine)] call CFUNC(startStatemachine);
