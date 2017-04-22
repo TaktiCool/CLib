@@ -57,7 +57,7 @@ while {_dataPosition <= _dataCount && _result == GVAR(ACK)} do {
     while {_data select [_dataPosition + _chunkSize - 1, 1] == GVAR(RC)} do {
         _chunkSize = _chunkSize - 1;
     };
-    _dataChunk = _data select [_dataPosition, _dataPosition + _chunkSize];
+    _dataChunk = _data select [_dataPosition, _chunkSize];
     _result = "CLib" callExtension _dataChunk;
     _dataPosition = _dataPosition + _chunkSize;
 };
