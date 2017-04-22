@@ -1,9 +1,9 @@
-﻿using RGiesecke.DllExport;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -39,9 +39,7 @@ namespace CLib
             Debugger.Log("Extension framework initialized");
         }
 
-        [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
-        public static void RVExtension(StringBuilder output, int outputSize,
-            [MarshalAs(UnmanagedType.LPStr)] string input)
+        public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             switch (input)
             {
@@ -51,7 +49,7 @@ namespace CLib
                     var executingAssembly = Assembly.GetExecutingAssembly();
                     try
                     {
-                        var location = executingAssembly.Location;
+                        string location = executingAssembly.Location;
                         if (location == null)
                             throw new Exception("Assembly location not found");
                         output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
@@ -68,11 +66,11 @@ namespace CLib
                             output.Append(_outputBuffer);
                             break;
                         case ControlCharacter.ENQ:
+                            if (Tasks.Count == 0)
+                                break;
+
                             try
                             {
-                                if (Tasks.Count == 0)
-                                    break;
-
                                 var completedTasksIndices = new List<int>();
                                 foreach (var taskEntry in Tasks)
                                 {
@@ -84,7 +82,7 @@ namespace CLib
                                     completedTasksIndices.Add(taskEntry.Key);
                                 }
 
-                                foreach (var index in completedTasksIndices)
+                                foreach (int index in completedTasksIndices)
                                 {
                                     Tasks.Remove(index);
                                 }
@@ -115,13 +113,18 @@ namespace CLib
                     break;
             }
 
-            if (output.Length > outputSize - 1)
+            List<byte> outputBytes = Encoding.UTF8.GetBytes(output.ToString()).ToList();
+            if (outputBytes.Count <= outputSize)
+                return;
+
+            int outputSplitPosition = outputSize;
+            while ((outputBytes[outputSplitPosition - 1] & 0xC0) == 0x80)
             {
-                _outputBuffer = output.ToString().Substring(outputSize - 1);
-                output.Remove(outputSize - 1, output.Length - outputSize + 1);
+                outputSplitPosition--;
             }
 
-            outputSize -= output.Length + 1;
+            _outputBuffer = Encoding.UTF8.GetString(outputBytes.GetRange(outputSplitPosition, outputBytes.Count - outputSplitPosition).ToArray());
+            output.Remove(output.Length - _outputBuffer.Length, _outputBuffer.Length);
         }
 
         private delegate string CLibFuncDelegate(string input);
@@ -138,14 +141,12 @@ namespace CLib
             {
                 return ControlCharacter.STX + function(request.Data) + ControlCharacter.EOT;
             }
-            else
-            {
-                var task = Task.Run(() => function(request.Data));
-                if (Tasks.ContainsKey(request.TaskId))
-                    Tasks.Remove(request.TaskId);
-                Tasks.Add(request.TaskId, task);
-                return (ControlCharacter.ACK).ToString();
-            }
+
+            var task = Task.Run(() => function(request.Data));
+            if (Tasks.ContainsKey(request.TaskId))
+                Tasks.Remove(request.TaskId);
+            Tasks.Add(request.TaskId, task);
+            return (ControlCharacter.ACK).ToString();
         }
 
         private static void DetectExtensions()
@@ -164,18 +165,31 @@ namespace CLib
                     if (!Path.IsPathRooted(fullPath))
                         fullPath = Path.Combine(Environment.CurrentDirectory, path);
 
+#if WIN64
+                    var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
+#else
                     var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
+#endif
                     foreach (string extensionPath in extensionPaths)
                     {
                         try
                         {
                             var exports = FunctionLoader.ExportTable(extensionPath);
+#if WIN64
+                            if (!exports.Contains("RVExtension"))
+#else
                             if (!exports.Contains("_RVExtension@12"))
+#endif
                                 continue;
 
                             string filename = Path.GetFileNameWithoutExtension(extensionPath);
                             if (filename == null)
                                 continue;
+
+#if WIN64
+                            filename = filename.Substring(0, filename.Length - 4);
+#endif
+
 
                             if (AvailableExtensions.ContainsKey(filename))
                             {

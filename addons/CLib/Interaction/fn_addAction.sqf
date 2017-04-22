@@ -103,6 +103,7 @@ if (_onObject isEqualType []) then {
 if (_onObject isEqualType objNull) then {
     if (_onObject isEqualTo CLib_Player) then {
         if (_text isEqualType {}) then {
+            private _target = _onObject;
             _text = call _text;
         };
         if (_text call CFUNC(isLocalised)) then {
