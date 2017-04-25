@@ -144,7 +144,6 @@ namespace CLib
                 return ControlCharacter.STX + function(request.Data) + ControlCharacter.EOT;
             }
 
-            Debugger.Log(request.Data.Length);
             var task = Task.Run(() => function(request.Data));
             if (Tasks.ContainsKey(request.TaskId))
                 Tasks.Remove(request.TaskId);
