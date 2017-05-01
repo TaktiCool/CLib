@@ -88,9 +88,7 @@ if (_taskId >= 0 && _result == GVAR(ACK)) exitWith {
 // Parse the result if there is one
 if (_taskId == -1 && (_result select [0, 1]) == GVAR(STX)) exitWith {
     // Fetch and parse all chunks of data
-    private _result = _result call FUNC(extensionFetch);
-
-    _result
+    _result call FUNC(extensionFetch)
 };
 
 DUMP(_result)

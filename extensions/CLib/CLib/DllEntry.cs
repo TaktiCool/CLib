@@ -41,6 +41,8 @@ namespace CLib
 
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
+            outputSize--;
+
             switch (input)
             {
                 case "":
@@ -56,14 +58,14 @@ namespace CLib
                     }
                     catch (Exception e)
                     {
-                        output.Append(e);
+                        output.Append(e.Message);
                     }
                     break;
                 default:
                     switch (input[0])
                     {
                         case ControlCharacter.ACK:
-                            output.Append(_outputBuffer);
+                            output.Append(DllEntry._outputBuffer);
                             break;
                         case ControlCharacter.ENQ:
                             if (Tasks.Count == 0)
@@ -91,7 +93,7 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
-                                output.Append(e);
+                                output.Append(e.Message);
                             }
                             break;
                         default:
@@ -106,14 +108,14 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
-                                output.Append(e);
+                                output.Append(e.Message);
                             }
                             break;
                     }
                     break;
             }
 
-            List<byte> outputBytes = Encoding.UTF8.GetBytes(output.ToString()).ToList();
+            List<byte> outputBytes = Encoding.Default.GetBytes(output.ToString()).ToList();
             if (outputBytes.Count <= outputSize)
                 return;
 
@@ -123,8 +125,8 @@ namespace CLib
                 outputSplitPosition--;
             }
 
-            _outputBuffer = Encoding.UTF8.GetString(outputBytes.GetRange(outputSplitPosition, outputBytes.Count - outputSplitPosition).ToArray());
-            output.Remove(output.Length - _outputBuffer.Length, _outputBuffer.Length);
+            DllEntry._outputBuffer = Encoding.Default.GetString(outputBytes.GetRange(outputSplitPosition, outputBytes.Count - outputSplitPosition).ToArray());
+            output = output.Remove(output.Length - DllEntry._outputBuffer.Length, DllEntry._outputBuffer.Length);
         }
 
         private delegate string CLibFuncDelegate(string input);
