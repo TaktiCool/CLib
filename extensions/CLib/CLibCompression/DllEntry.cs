@@ -16,7 +16,7 @@ namespace CLibCompression
 #if WIN64
         [DllExport("RVExtension")]
 #else
-        [DllExport("_RVExtension@12")]
+        [DllExport("_RVExtension@12", CallingConvention.StdCall)]
 #endif
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
