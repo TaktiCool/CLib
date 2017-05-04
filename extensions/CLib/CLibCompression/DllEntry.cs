@@ -13,6 +13,11 @@ namespace CLibCompression
         private const int MinMatchLength = 2;
         private const uint MaxMatchLength = (1 << 4) - MinMatchLength;
 
+#if WIN64
+        [DllExport("RVExtension")]
+#else
+        [DllExport("_RVExtension@12")]
+#endif
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             if (input != "version")
@@ -32,6 +37,7 @@ namespace CLibCompression
             }
         }
 
+        [DllExport("Compress")]
         public static string Compress(string input)
         {
             var output = new StringBuilder();

@@ -1,14 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLib", "CLib\CLib.csproj", "{3B6CA58C-9DB3-4256-8A10-BC7101D1EE8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibCompression", "CLibCompression\CLibCompression.csproj", "{C780B540-D5AA-4C4E-A89B-E50D5DBF76A4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3B6CA58C-9DB3-4256-8A10-BC7101D1EE8A} = {3B6CA58C-9DB3-4256-8A10-BC7101D1EE8A}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibLogging", "CLibLogging\CLibLogging.csproj", "{6EC8493C-6803-487C-8061-0F8C4D33A7E6}"
 EndProject

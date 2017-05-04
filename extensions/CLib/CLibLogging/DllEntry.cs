@@ -13,6 +13,11 @@ namespace CLibLogging
             startTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         }
 
+#if WIN64
+        [DllExport("RVExtension")]
+#else
+        [DllExport("_RVExtension@12")]
+#endif
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             if (input.ToLower() == "version")
@@ -21,6 +26,7 @@ namespace CLibLogging
             }
         }
 
+        [DllExport("Log")]
         public static string Log(string input)
         {
             string[] inputParts = input.Split(new char[] { ':' }, 2);

@@ -39,6 +39,11 @@ namespace CLib
             Debugger.Log("Extension framework initialized");
         }
 
+#if WIN64
+        [DllExport("RVExtension")]
+#else
+        [DllExport("_RVExtension@12")]
+#endif
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             outputSize--;
