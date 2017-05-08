@@ -16,6 +16,8 @@
 
 // This is needed to provide a player object for zeus controlled units. Important to ensure that player is not null here (which is done in autoload).
 CLib_Player = player;
+uiNamespace setVariable ["CLib_Player", player];
+parsingNamespace setVariable ["CLib_Player", player];
 GVAR(oldGear) = CLib_Player call CFUNC(getAllGear);
 GVAR(oldVisibleMap) = false;
 GVAR(oldPLayerSide) = playerSide;
@@ -29,6 +31,8 @@ GVAR(groupUnits) = [];
     if (CLib_Player != _data && !(isNull _data)) then {
         ["playerChanged", [_data, CLib_Player]] call CFUNC(localEvent);
         CLib_Player = _data;
+        uiNamespace setVariable ["CLib_Player", _data];
+        parsingNamespace setVariable ["CLib_Player", _data];
     };
 
     _data = CLib_Player call CFUNC(getAllGear);
@@ -39,7 +43,7 @@ GVAR(groupUnits) = [];
 
     _data = visibleMap;
     if (!(_data isEqualTo GVAR(OldVisibleMap))) then {
-        ["visibleMapChanged", [_data, GVAR(OldVisibleMap)]] call CFUNC(localEvent);
+        ["visibleMapChanged", _data] call CFUNC(localEvent);
         GVAR(OldVisibleMap) = _data;
     };
 

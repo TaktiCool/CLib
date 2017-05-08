@@ -41,11 +41,10 @@ private _headerLength = count _header;
 private _dataPosition = TRANSMISSIONSIZE - _headerLength;
 
 // Create first chunk of data
-private _dataChunk = _data select [0, _dataPosition];
-while {_dataChunk select [_dataPosition - 1, 1] == GVAR(RC)} do {
+while {_data select [_dataPosition - 1, 1] == GVAR(RC)} do {
     _dataPosition = _dataPosition - 1;
 };
-_dataChunk = _dataChunk select [0, _dataPosition];
+private _dataChunk = _data select [0, _dataPosition];
 
 private _parameterString = format ["%1%2", _header, _dataChunk];
 
@@ -55,11 +54,10 @@ private _result = "CLib" callExtension _parameterString;
 // Tranmit the remaining data in chunks of TRANSMISSIONSIZE
 while {_dataPosition <= _dataCount && _result == GVAR(ACK)} do {
     private _chunkSize = TRANSMISSIONSIZE;
-    _dataChunk = _data select [_dataPosition, _chunkSize];
-    while {_dataChunk select [_chunkSize - 1, 1] == GVAR(RC)} do {
+    while {_data select [_dataPosition + _chunkSize - 1, 1] == GVAR(RC)} do {
         _chunkSize = _chunkSize - 1;
     };
-    _dataChunk = _dataChunk select [0, _chunkSize];
+    _dataChunk = _data select [_dataPosition, _chunkSize];
     _result = "CLib" callExtension _dataChunk;
     _dataPosition = _dataPosition + _chunkSize;
 };
@@ -90,9 +88,8 @@ if (_taskId >= 0 && _result == GVAR(ACK)) exitWith {
 // Parse the result if there is one
 if (_taskId == -1 && (_result select [0, 1]) == GVAR(STX)) exitWith {
     // Fetch and parse all chunks of data
-    private _result = _result call FUNC(extensionFetch);
-
-    _result
+    _result call FUNC(extensionFetch)
 };
 
 DUMP(_result)
+_result

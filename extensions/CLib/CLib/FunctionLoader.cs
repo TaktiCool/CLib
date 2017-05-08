@@ -16,7 +16,7 @@ namespace CLib
             [FieldOffset(60)]
             public int e_lfanew;
 
-            public bool isValid => new string(e_magic) == "MZ";
+            public bool IsValid => new string(e_magic) == "MZ";
         }
 
         [StructLayout(LayoutKind.Explicit)]
@@ -34,23 +34,220 @@ namespace CLib
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public struct IMAGE_NT_HEADERS
+        public struct IMAGE_OPTIONAL_HEADER32
+        {
+            [FieldOffset(0)]
+            public ushort Magic;
+            [FieldOffset(2)]
+            public byte MajorLinkerVersion;
+            [FieldOffset(3)]
+            public byte MinorLinkerVersion;
+            [FieldOffset(4)]
+            public uint SizeOfCode;
+            [FieldOffset(8)]
+            public uint SizeOfInitializedData;
+            [FieldOffset(12)]
+            public uint SizeOfUninitializedData;
+            [FieldOffset(16)]
+            public uint AddressOfEntryPoint;
+            [FieldOffset(20)]
+            public uint BaseOfCode;
+            // PE32 contains this additional field
+            [FieldOffset(24)]
+            public uint BaseOfData;
+            [FieldOffset(28)]
+            public uint ImageBase;
+            [FieldOffset(32)]
+            public uint SectionAlignment;
+            [FieldOffset(36)]
+            public uint FileAlignment;
+            [FieldOffset(40)]
+            public ushort MajorOperatingSystemVersion;
+            [FieldOffset(42)]
+            public ushort MinorOperatingSystemVersion;
+            [FieldOffset(44)]
+            public ushort MajorImageVersion;
+            [FieldOffset(46)]
+            public ushort MinorImageVersion;
+            [FieldOffset(48)]
+            public ushort MajorSubsystemVersion;
+            [FieldOffset(50)]
+            public ushort MinorSubsystemVersion;
+            [FieldOffset(52)]
+            public uint Win32VersionValue;
+            [FieldOffset(56)]
+            public uint SizeOfImage;
+            [FieldOffset(60)]
+            public uint SizeOfHeaders;
+            [FieldOffset(64)]
+            public uint CheckSum;
+            [FieldOffset(68)]
+            public ushort Subsystem;
+            [FieldOffset(70)]
+            public ushort DllCharacteristics;
+            [FieldOffset(72)]
+            public uint SizeOfStackReserve;
+            [FieldOffset(76)]
+            public uint SizeOfStackCommit;
+            [FieldOffset(80)]
+            public uint SizeOfHeapReserve;
+            [FieldOffset(84)]
+            public uint SizeOfHeapCommit;
+            [FieldOffset(88)]
+            public uint LoaderFlags;
+            [FieldOffset(92)]
+            public uint NumberOfRvaAndSizes;
+            [FieldOffset(96)]
+            public IMAGE_DATA_DIRECTORY ExportTable;
+            [FieldOffset(104)]
+            public IMAGE_DATA_DIRECTORY ImportTable;
+            [FieldOffset(112)]
+            public IMAGE_DATA_DIRECTORY ResourceTable;
+            [FieldOffset(120)]
+            public IMAGE_DATA_DIRECTORY ExceptionTable;
+            [FieldOffset(128)]
+            public IMAGE_DATA_DIRECTORY CertificateTable;
+            [FieldOffset(136)]
+            public IMAGE_DATA_DIRECTORY BaseRelocationTable;
+            [FieldOffset(144)]
+            public IMAGE_DATA_DIRECTORY Debug;
+            [FieldOffset(152)]
+            public IMAGE_DATA_DIRECTORY Architecture;
+            [FieldOffset(160)]
+            public IMAGE_DATA_DIRECTORY GlobalPtr;
+            [FieldOffset(168)]
+            public IMAGE_DATA_DIRECTORY TLSTable;
+            [FieldOffset(176)]
+            public IMAGE_DATA_DIRECTORY LoadConfigTable;
+            [FieldOffset(184)]
+            public IMAGE_DATA_DIRECTORY BoundImport;
+            [FieldOffset(192)]
+            public IMAGE_DATA_DIRECTORY IAT;
+            [FieldOffset(200)]
+            public IMAGE_DATA_DIRECTORY DelayImportDescriptor;
+            [FieldOffset(208)]
+            public IMAGE_DATA_DIRECTORY CLRRuntimeHeader;
+            [FieldOffset(216)]
+            public IMAGE_DATA_DIRECTORY Reserved;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct IMAGE_NT_HEADERS32
         {
             [FieldOffset(0)]
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
             public char[] Signature;
-            [FieldOffset(4)]
-            public IMAGE_FILE_HEADER FileHeader;
-            [FieldOffset(120)]
-            public IMAGE_DATA_DIRECTORY ExportTable32;
-            [FieldOffset(136)]
-            public IMAGE_DATA_DIRECTORY ExportTable64;
-            [FieldOffset(232)]
-            public IMAGE_DATA_DIRECTORY CLRRuntimeHeader32;
-            [FieldOffset(248)]
-            public IMAGE_DATA_DIRECTORY CLRRuntimeHeader64;
+            [FieldOffset(24)]
+            public IMAGE_OPTIONAL_HEADER32 OptionalHeader;
 
-            public bool isValid => new string(Signature) == "PE\0\0";
+            public bool IsValid => new string(Signature) == "PE\0\0";
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct IMAGE_OPTIONAL_HEADER64
+        {
+            [FieldOffset(0)]
+            public ushort Magic;
+            [FieldOffset(2)]
+            public byte MajorLinkerVersion;
+            [FieldOffset(3)]
+            public byte MinorLinkerVersion;
+            [FieldOffset(4)]
+            public uint SizeOfCode;
+            [FieldOffset(8)]
+            public uint SizeOfInitializedData;
+            [FieldOffset(12)]
+            public uint SizeOfUninitializedData;
+            [FieldOffset(16)]
+            public uint AddressOfEntryPoint;
+            [FieldOffset(20)]
+            public uint BaseOfCode;
+            [FieldOffset(24)]
+            public ulong ImageBase;
+            [FieldOffset(32)]
+            public uint SectionAlignment;
+            [FieldOffset(36)]
+            public uint FileAlignment;
+            [FieldOffset(40)]
+            public ushort MajorOperatingSystemVersion;
+            [FieldOffset(42)]
+            public ushort MinorOperatingSystemVersion;
+            [FieldOffset(44)]
+            public ushort MajorImageVersion;
+            [FieldOffset(46)]
+            public ushort MinorImageVersion;
+            [FieldOffset(48)]
+            public ushort MajorSubsystemVersion;
+            [FieldOffset(50)]
+            public ushort MinorSubsystemVersion;
+            [FieldOffset(52)]
+            public uint Win32VersionValue;
+            [FieldOffset(56)]
+            public uint SizeOfImage;
+            [FieldOffset(60)]
+            public uint SizeOfHeaders;
+            [FieldOffset(64)]
+            public uint CheckSum;
+            [FieldOffset(68)]
+            public ushort Subsystem;
+            [FieldOffset(70)]
+            public ushort DllCharacteristics;
+            [FieldOffset(72)]
+            public ulong SizeOfStackReserve;
+            [FieldOffset(80)]
+            public ulong SizeOfStackCommit;
+            [FieldOffset(88)]
+            public ulong SizeOfHeapReserve;
+            [FieldOffset(96)]
+            public ulong SizeOfHeapCommit;
+            [FieldOffset(104)]
+            public uint LoaderFlags;
+            [FieldOffset(108)]
+            public uint NumberOfRvaAndSizes;
+            [FieldOffset(112)]
+            public IMAGE_DATA_DIRECTORY ExportTable;
+            [FieldOffset(120)]
+            public IMAGE_DATA_DIRECTORY ImportTable;
+            [FieldOffset(128)]
+            public IMAGE_DATA_DIRECTORY ResourceTable;
+            [FieldOffset(136)]
+            public IMAGE_DATA_DIRECTORY ExceptionTable;
+            [FieldOffset(144)]
+            public IMAGE_DATA_DIRECTORY CertificateTable;
+            [FieldOffset(152)]
+            public IMAGE_DATA_DIRECTORY BaseRelocationTable;
+            [FieldOffset(160)]
+            public IMAGE_DATA_DIRECTORY Debug;
+            [FieldOffset(168)]
+            public IMAGE_DATA_DIRECTORY Architecture;
+            [FieldOffset(176)]
+            public IMAGE_DATA_DIRECTORY GlobalPtr;
+            [FieldOffset(184)]
+            public IMAGE_DATA_DIRECTORY TLSTable;
+            [FieldOffset(192)]
+            public IMAGE_DATA_DIRECTORY LoadConfigTable;
+            [FieldOffset(200)]
+            public IMAGE_DATA_DIRECTORY BoundImport;
+            [FieldOffset(208)]
+            public IMAGE_DATA_DIRECTORY IAT;
+            [FieldOffset(216)]
+            public IMAGE_DATA_DIRECTORY DelayImportDescriptor;
+            [FieldOffset(224)]
+            public IMAGE_DATA_DIRECTORY CLRRuntimeHeader;
+            [FieldOffset(232)]
+            public IMAGE_DATA_DIRECTORY Reserved;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct IMAGE_NT_HEADERS64
+        {
+            [FieldOffset(0)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+            public char[] Signature;
+            [FieldOffset(24)]
+            public IMAGE_OPTIONAL_HEADER64 OptionalHeader;
+
+            public bool IsValid => new string(Signature) == "PE\0\0";
         }
 
         [StructLayout(LayoutKind.Explicit)]
@@ -91,26 +288,18 @@ namespace CLib
             try
             {
                 var imageDosHeader = Marshal.PtrToStructure<IMAGE_DOS_HEADER>(hModule);
-                if (!imageDosHeader.isValid)
+                if (!imageDosHeader.IsValid)
                     throw new Exception("IMAGE_DOS_HEADER is invalid: " + dllPath);
 
-                var imageNtHeaders = Marshal.PtrToStructure<IMAGE_NT_HEADERS>(hModule + imageDosHeader.e_lfanew);
-                if (!imageNtHeaders.isValid)
+#if WIN64
+                var imageNtHeaders = Marshal.PtrToStructure<IMAGE_NT_HEADERS64>(hModule + imageDosHeader.e_lfanew);
+#else
+                var imageNtHeaders = Marshal.PtrToStructure<IMAGE_NT_HEADERS32>(hModule + imageDosHeader.e_lfanew);
+#endif
+                if (!imageNtHeaders.IsValid)
                     throw new Exception("IMAGE_NT_HEADERS is invalid: " + dllPath);
 
-                IMAGE_DATA_DIRECTORY exportTabledataDirectory;
-                switch (imageNtHeaders.FileHeader.Machine)
-                {
-                    case 0x014C:
-                        exportTabledataDirectory = imageNtHeaders.ExportTable32;
-                        break;
-                    case 0x8664:
-                        exportTabledataDirectory = imageNtHeaders.ExportTable64;
-                        break;
-                    default:
-                        throw new Exception("File is not a valid x86 or x64 executable: " + dllPath);
-                }
-
+                IMAGE_DATA_DIRECTORY exportTabledataDirectory = imageNtHeaders.OptionalHeader.ExportTable;
                 if (exportTabledataDirectory.Size == 0)
                     return new List<string>();
 

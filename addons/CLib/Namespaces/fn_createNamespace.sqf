@@ -22,10 +22,7 @@
 params [["_isGlobal", false]];
 
 private _ret = if (_isGlobal isEqualType true && {_isGlobal}) then {
-    private _grp = call CFUNC(getLogicGroup);
-    private _ns = _grp createUnit ["Logic", [0,0,0], [], 0, "NONE"];
-    _ns setPos POS;
-    _ns
+    createSimpleObject ["\A3\Weapons_F\empty.p3d", POS];
 } else {
     createLocation ["fakeTown", POS, 0, 0];
 };

@@ -50,7 +50,9 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
         case ("RECTANGLE"): {
             _iconData params ["_type", "_position", "_width", "_height", "_angle", "_lineColor", "_fillColor", "_code"];
             call _code;
-
+            if (_fillColor isEqualType []) then {
+                _fillColor = format ["#(rgb,8,8,3)color(%1,%2,%3,%4)", _fillColor select 0, _fillColor select 1, _fillColor select 2, _fillColor select 3];
+            };
             if (_angle isEqualType objNull) then {
                 _angle = getDirVisual _angle;
             };
@@ -66,6 +68,10 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
 
             if (_angle isEqualType objNull) then {
                 _angle = getDirVisual _angle;
+            };
+
+            if (_fillColor isEqualType []) then {
+                _fillColor = format ["#(rgb,8,8,3)color(%1,%2,%3,%4)", _fillColor select 0, _fillColor select 1, _fillColor select 2, _fillColor select 3];
             };
 
             _position = [_position, _map] call CFUNC(mapGraphicsPosition);
