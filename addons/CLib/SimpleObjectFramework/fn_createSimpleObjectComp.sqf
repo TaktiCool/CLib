@@ -49,7 +49,7 @@ private _intersections = lineIntersectsSurfaces [
 private _normalVector = (_intersections select 0) select 1;
 private _posVectorASL = (_intersections select 0) select 0;
 
-private _originObj = "Land_HelipadEmpty_F" createVehicleLocal ASLToAGL _posVectorASL;
+private _originObj = "Land_HelipadEmpty_F" createVehicleLocal [0, 0, 0];
 _originObj setPosASL _posVectorASL;
 
 private _xVector = _dir vectorCrossProduct _normalVector;
