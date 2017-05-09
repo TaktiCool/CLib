@@ -82,3 +82,5 @@
 #else
     #define USE_COMPRESSION(var) var
 #endif
+
+#define SCRIPTSCOPENAME (_fnc_scriptName + "_Main")
