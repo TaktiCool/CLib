@@ -158,7 +158,8 @@ GVAR(groupUnits) = [];
     "InventoryOpened",
     "Killed",
     "Respawn",
-    "AnimStateChanged"
+    "AnimStateChanged",
+    "HandleDamage"
 ];
 
 // Fix an Arma bug
