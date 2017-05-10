@@ -18,17 +18,8 @@
 EXEC_ONLY_UNSCHEDULED
 
 #ifdef ISDEV
-    params [["_eventName", "", [""]], ["_args", []], ["_sender", "Local Called"]];
-
-    // dont Log to reduce Spam
-    if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
-        // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
-        if (toLower _eventName in GVAR(ignoredLogEventNames_1)) then {
-            DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName)
-        } else {
-            DUMP("Local event: " + "Sendet from: " + _sender + "; EventName: " + _eventName + ":" + str _args)
-        };
-    };
+    params [["_eventName", "", [""]], ["_args", []], ["_CLib_sender", "Local Called"]];
+    private _Clib_EventTime = diag_tickTime;
 #else
     params [["_eventName", "", [""]], ["_args", []]];
 #endif
@@ -47,6 +38,16 @@ if !(isNil "_eventArray") then {
         nil
     } count _eventArray;
 };
+
+#ifdef ISDEV
+    // dont Log to reduce Spam
+    if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
+        _Clib_EventTime = diag_tickTime - _Clib_EventTime;
+        // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
+        private _text = format ["Local Event: %1 (%2ms) Sendet from %3: %4", _eventName, _Clib_EventTime * 1000, _CLib_sender, ["", _args] select ((toLower _eventName) in GVAR(ignoredLogEventNames_1))];
+        DUMP(_text)
+    };
+#endif
 if (isNil "_CLib_EventReturn") then {
     nil
 } else {
