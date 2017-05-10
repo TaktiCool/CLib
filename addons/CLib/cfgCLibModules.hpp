@@ -244,10 +244,7 @@ class CfgCLibModules {
             APIFNC(createSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);
-            FNC(exportSimpleObjectComp) {
-                api = 1;
-                serverOnly = 1;
-            };
+            FNC(exportSimpleObjectComp) { api = 1; serverOnly = 1; };
         };
 
         MODULE(Statemachine) {
