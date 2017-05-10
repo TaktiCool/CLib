@@ -44,7 +44,7 @@ if !(isNil "_eventArray") then {
     if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
         _Clib_EventTime = diag_tickTime - _Clib_EventTime;
         // remove spamm events like eventadded, cursortargetchanged, playerinventorychanged from being logged
-        private _text = format ["Local Event: %1 (%2ms) Sendet from %3: %4", _eventName, _Clib_EventTime * 1000, _CLib_sender, ["", _args] select ((toLower _eventName) in GVAR(ignoredLogEventNames_1))];
+        private _text = format ["Local Event: %1 (%2ms) Sendet from %3: %4", _eventName, _Clib_EventTime * 1000, _CLib_sender, [_args, ""] select ((toLower _eventName) in GVAR(ignoredLogEventNames_1))];
         DUMP(_text)
     };
 #endif
