@@ -17,7 +17,7 @@ Converts a 3dGraphicsPosition into PositionAGL
 Examples:
 
 ```sqf
-private _prosition = [[0, 0, 0]] call CLib_fnc_3dGraphicsPosition;
+private _position = [[0, 0, 0]] call CLib_fnc_3dGraphicsPosition;
 
 ```
 

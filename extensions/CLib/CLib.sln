@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibCompression", "CLibComp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibLogging", "CLibLogging\CLibLogging.csproj", "{6EC8493C-6803-487C-8061-0F8C4D33A7E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibWebSocket", "CLibWebSocket\CLibWebSocket.csproj", "{9573C0AE-7B68-4B63-B7DD-E982E62F6086}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|x64 = Release|x64
@@ -27,6 +29,10 @@ Global
 		{6EC8493C-6803-487C-8061-0F8C4D33A7E6}.Release|x64.Build.0 = Release|x64
 		{6EC8493C-6803-487C-8061-0F8C4D33A7E6}.Release|x86.ActiveCfg = Release|x86
 		{6EC8493C-6803-487C-8061-0F8C4D33A7E6}.Release|x86.Build.0 = Release|x86
+		{9573C0AE-7B68-4B63-B7DD-E982E62F6086}.Release|x64.ActiveCfg = Release|x64
+		{9573C0AE-7B68-4B63-B7DD-E982E62F6086}.Release|x64.Build.0 = Release|x64
+		{9573C0AE-7B68-4B63-B7DD-E982E62F6086}.Release|x86.ActiveCfg = Release|x86
+		{9573C0AE-7B68-4B63-B7DD-E982E62F6086}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

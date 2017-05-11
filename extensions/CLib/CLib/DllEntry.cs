@@ -158,6 +158,7 @@ namespace CLib
 
         private static void DetectExtensions()
         {
+            Debugger.Log("Current directory is: " + Environment.CurrentDirectory);
             Debugger.Log("Extensions Found:");
             var startParameters = Environment.GetCommandLineArgs();
             foreach (string startParameter in startParameters)
