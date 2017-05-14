@@ -15,7 +15,7 @@
     Returns:
     None
 */
-params [["_uid", "", [""]], ["_event", "", [""]], ["_id", -1, [-1]]];
+params [["_uid", "", [""]], ["_eventName", "", [""]], ["_id", -1, [-1]]];
 
 // build Namespace Variablename
 _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
