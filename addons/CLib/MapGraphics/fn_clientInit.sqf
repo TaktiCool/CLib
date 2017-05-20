@@ -36,5 +36,5 @@ GVAR(MapGraphicsGeometryCache) = [];
 }, {!(isNull ((findDisplay 12) displayCtrl 51))}] call CFUNC(waitUntil);
 
 [{
-    ((uiNamespace getVariable "RscMiniMap") displayCtrl 101) call CFUNC(registerMapControl);
-}, {!(isNull (uiNamespace getVariable "RscMiniMap"))}] call CFUNC(waitUntil);
+    ((uiNamespace getVariable "RscCustomInfoMiniMap") displayCtrl 101) call CFUNC(registerMapControl);
+}, {!(isNull (uiNamespace getVariable "RscCustomInfoMiniMap"))}] call CFUNC(waitUntil);
