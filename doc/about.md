@@ -9,6 +9,4 @@ Every document is generated based on the corresponding `.md` file in the `doc/` 
 
 If errors are found in this documentation, please [submit an issue][].
 
-##
-
 [submit an issue]: https://github.com/TaktiCool/CLib/issues/new
