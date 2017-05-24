@@ -2,14 +2,17 @@
 
 > Maintainer: BadGuy
 
+The 3dGraphics module is a system built around the SQF commands [`drawIcon3D`] and [`drawLine3D`].
+
+
 ## Graphics Data
 
-Graphics data is an array representing an 3d graphic. Currently there are two types of graphics supported: `ICON` and `LINE`.
+Graphics data is an array representing an 3d graphic. Currently there are two types of graphics supported: [`ICON`] and [`LINE`].
 The required data is different depending on the graphic type.
 
 ### Icon data
 
-* [`<String>`] Graphics type (should be "ICON")
+* [`<String>`] Graphics type (should be `"ICON"`)
 * [`<String>`] Texture
 * [`<Color>`] Color
 * [`<3dGraphicsPosition>`] Position
@@ -23,6 +26,9 @@ The required data is different depending on the graphic type.
 * [`<String>`] Text alignment
 * [`<Boolean>`] Draw side arrows
 * [`<Code>`] Visibility condition
+
+The code receives the following [`Magic Variables`]:
+`_texture`, `_color`, `_position`, `_width`, `_height`, `_angle`, `_text`, `_shadow`, `_textSize`, `_font`, `_align`, `_drawSideArrows`
 
 Example:
 ```sqf
@@ -46,11 +52,14 @@ Example:
 
 ### Line data
 
-* [`<String>`] Graphics type (should be "LINE")
+* [`<String>`] Graphics type (should be `"LINE"`)
 * [`<3dGraphicsPosition>`] Start position
 * [`<3dGraphicsPosition>`] End position
 * [`<Color>`] Color
 * [`<Code>`] Visibility condition
+
+The code receives the following [`Magic Variables`]:
+`_start`, `_end`, `_lineColor`
 
 Example:
 ```sqf
@@ -72,21 +81,6 @@ If you want to attach the graphic to an object, its also possible to pass an [`<
 * [`<Position>`] Selection offset (model space)
 * [`<Position>`] Position offset (world space)
 
-## CLib_fnc_3dGraphicsPosition
-
-Parameter(s):
-* [`<3dGraphicsPosition>`] 3dGraphicsPosition
-
-Returns:
-* [`<Position>`] PositionAGL
-
-Converts a 3dGraphicsPosition into PositionAGL
-
-Examples:
-```sqf
-private _position = [[0, 0, 0]] call CLib_fnc_3dGraphicsPosition;
-```
-
 ## CLib_fnc_add3dGraphics
 
 Parameter(s):
@@ -96,7 +90,7 @@ Parameter(s):
 Returns:
 * None
 
-Adds a 3D icon to the system
+Adds 3d graphic to the system. It can consist of multiple icon and lines.
 
 Examples:
 ```sqf
@@ -120,10 +114,6 @@ Examples:
 ]] call CLib_fnc_add3dGraphics;
 ```
 
-## CLib_fnc_build3dGraphicsCache
-
-## CLib_fnc_draw3dGraphics
-
 ## CLib_fnc_remove3dGraphics
 
 Parameter(s):
@@ -141,6 +131,8 @@ Examples:
 
 [`<3dGraphicsData>`]: #graphics_data
 [`<3dGraphicsPosition>`]: #graphics_position
+[`ICON`]: #icon_data
+[`LINE`]: #line_data
 
 [`<Object>`]: https://community.bistudio.com/wiki/Object
 [`<Array>`]: https://community.bistudio.com/wiki/Array
@@ -150,3 +142,8 @@ Examples:
 [`<Number>`]: https://community.bistudio.com/wiki/Number
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
+
+[`drawIcon3D`]: https://community.bistudio.com/wiki/drawIcon3D
+[`drawLine3D`]: https://community.bistudio.com/wiki/drawLine3D
+
+[`Magic Variables`]: https://community.bistudio.com/wiki/Magic_Variables

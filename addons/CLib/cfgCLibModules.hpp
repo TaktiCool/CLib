@@ -9,11 +9,11 @@ class CfgCLibModules {
 
         MODULE(3dGraphics) {
             dependency[] = {"CLib/Events"};
-            APIFNC(3dGraphicsPosition);
+            FNC(3dGraphicsPosition);
             APIFNC(add3dGraphics);
-            APIFNC(build3dGraphicsCache);
+            FNC(build3dGraphicsCache);
             FNC(clientInit);
-            APIFNC(draw3dGraphics);
+            FNC(draw3dGraphics);
             APIFNC(remove3dGraphics);
         };
 
