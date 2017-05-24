@@ -8,6 +8,7 @@ Graphics data is an array representing an 3d graphic. Currently there are two ty
 The required data is different depending on the graphic type.
 
 ### Icon data
+
 * [`<String>`] Graphics type (should be "ICON")
 * [`<String>`] Texture
 * [`<Color>`] Color
@@ -44,6 +45,7 @@ Example:
 ```
 
 ### Line data
+
 * [`<String>`] Graphics type (should be "LINE")
 * [`<3dGraphicsPosition>`] Start position
 * [`<3dGraphicsPosition>`] End position
