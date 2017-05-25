@@ -37,12 +37,12 @@ private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F"), true] ca
 ## CLib_fnc_getDataCached
 
 Parameter(s):
-* [`<Config>`] [`<Array>`] Path to Data
-* [`<String>`] [`<Array>`] [`<Number>`] Default Return (optional)
+* [`<Config>`], [`<Array>`] Path to Data
+* [`<String>`], [`<Array>`], [`<Number>`] Default Return (optional)
 * [`<Boolean>`] Force Type of Default Return (optional)
 
 Returns:
-* [`<String>`] [`<Array>`] [`<Number>`] Config Data or Default value if the Config does not exist
+* [`<String>`], [`<Array>`], [`<Number>`] Config Data or Default value if the Config does not exist
 
 Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
