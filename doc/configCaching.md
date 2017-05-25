@@ -38,7 +38,7 @@ private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F"), true] ca
 
 Parameter(s):
 * [`<Config>`] [`<Array>`] Path to Data
-* [`<String>`] [`<Array>`, `<Number>`] Default Return (optional)
+* [`<String>`] [`<Array>`] [`<Number>`] Default Return (optional)
 * [`<Boolean>`] Force Type of Default Return (optional)
 
 Returns:
