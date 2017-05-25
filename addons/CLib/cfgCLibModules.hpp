@@ -29,7 +29,7 @@ class CfgCLibModules {
             APIFNC(configProperties);
             FNC(init);
             APIFNC(returnParents);
-            APIFNC(arrayToPath);
+            FNC(arrayToPath);
             APIFNC(getDataCached);
         };
 
