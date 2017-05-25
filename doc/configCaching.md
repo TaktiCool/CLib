@@ -51,7 +51,6 @@ Examples:
 private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getDataCached;
 ```
 
-[`<Object>`]: https://community.bistudio.com/wiki/Object
 [`<Array>`]: https://community.bistudio.com/wiki/Array
 [`<String>`]: https://community.bistudio.com/wiki/String
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
