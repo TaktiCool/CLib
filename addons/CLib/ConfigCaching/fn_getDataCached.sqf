@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Caches values from config properties
+    Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
     Parameter(s):
     0: Config path <Config, Array>
