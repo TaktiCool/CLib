@@ -55,3 +55,4 @@ private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBan
 [`<String>`]: https://community.bistudio.com/wiki/String
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Config>`]: https://community.bistudio.com/wiki/Config
+[`<Number>`]: https://community.bistudio.com/wiki/Number
