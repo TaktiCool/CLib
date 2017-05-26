@@ -17,13 +17,13 @@ class CLib {
 };
 ```
 
-## EnableGarbageCollector
+### EnableGarbageCollector
 Boolean if the Garbage Collector is Active
 
-## GarbageCollectorTime
+### GarbageCollectorTime
 The Time in seconds that a Objects wait in the Queue until its get deleted
 
-## GarbageCollectorLoopTime
+### GarbageCollectorLoopTime
 The Time the Loops Runs
 
 ## Dont Delete a Object or a Group
