@@ -7,7 +7,7 @@ Empty Groups will be deleted Directly after they are empty and not flagged
 
 ## Settings
 the Settings can get set in the missionConfigFile
-```c++
+```sqf
 class CLib {
     class GarbageCollector {
         [`EnableGarbageCollector`] = 1;
