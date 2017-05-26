@@ -1,4 +1,4 @@
-# AnimFramework
+# GarbageCollector
 
 > Maintainer: joko // Jonas
 
