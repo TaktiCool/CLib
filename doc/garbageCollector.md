@@ -10,9 +10,9 @@ the Settings can get set in the missionConfigFile
 ```sqf
 class CLib {
     class GarbageCollector {
-        [`EnableGarbageCollector`] = 1;
-        [`GarbageCollectorTime`] = 120;
-        [`GarbageCollectorLoopTime`] = 50;
+        EnableGarbageCollector = 1;
+        GarbageCollectorTime = 120;
+        GarbageCollectorLoopTime = 50;
     };
 };
 ```
