@@ -17,4 +17,4 @@
 */
 params ["_stateMachine", "_varName", "_default"];
 
-[_stateMachine, format [SMVAR(%1), _varName], _default] call CFUNC(getVariable);
+_stateMachine getVariable [format [SMVAR(%1), _varName], _default];

@@ -21,7 +21,8 @@
     0: Return Name <TYPE>
 */
 params ["_uid", "_fnc", "_args", "_duration", "_event"];
-if (([GVAR(cachedCall), _uid, [-9999999]] call CFUNC(getVariable)) select 0 < time) then {
+private _lastTime = (GVAR(cachedCall) getVariable [_uid, [-999999999]]) select 0;
+if (_lastTime < time) then {
     GVAR(cachedCall) setVariable [_uid, [time + _duration, _args call _fnc]];
 
     // Does the cache need to be cleared on an event?
@@ -38,7 +39,7 @@ if (([GVAR(cachedCall), _uid, [-9999999]] call CFUNC(getVariable)) select 0 < ti
                 // _eventName is defined on the function that calls the event
                 // Get the list of caches to clear
                 private _varName = format [QGVAR(clearCache_%1), _eventName];
-                private _cacheList = [GVAR(cachedCall), _varName, []] call CFUNC(getVariable);
+                private _cacheList = GVAR(cachedCall) getVariable [_varName, []];
                 // Erase all the cached results
                 {
                     GVAR(cachedCall) setVariable [_x, nil];

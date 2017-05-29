@@ -16,12 +16,12 @@
 params [["_locaName", "STR_CLib_ERROR"]];
 
 #ifdef ISDEV
-    private _text = [GVAR(ClientNamespace), _locaName, "Error"] call CFUNC(getVariable);
+    private _text = GVAR(ClientNamespace) getVariable [_locaName, "Error"];
     if (_text isEqualTo "Error") then {
         LOG("Error Localisation not Found: " + _locaName);
         _text = _locaName;
     };
     _text
 #else
-    [GVAR(ClientNamespace), _locaName, _locaName] call CFUNC(getVariable);
+    GVAR(ClientNamespace) getVariable [_locaName, _locaName];
 #endif

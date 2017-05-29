@@ -54,7 +54,7 @@ private _inGameUiEventHandler = {
     if (GVAR(DisablePrevAction) && {_eventName == "PrevAction"} || (GVAR(DisableNextAction) && {_eventName == "NextAction"}) || (GVAR(DisableAction) && {_eventName == "Action"})) then {
         true
     } else {
-        private _ehData = [GVAR(InGameUIEventHandler), format ["%1_%2", _eventName, _id], []] call CFUNC(getVariable);
+        private _ehData = GVAR(InGameUIEventHandler) getVariable [format ["%1_%2", _eventName, _id], []];
         _ehData params [["_code", {}], ["_args", []]];
         [_target, _caller, _id, _args] call _code;
     };

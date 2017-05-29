@@ -146,7 +146,7 @@ private _completeGroupData = [];
 private _stateNum = 0 max (["normal", "hover", "selected"] find _state);
 
 // save the data
-private _currentIcon = [GVAR(MapGraphicsGroup), _groupName, [_layer, 0, 0, [], [], []]] call CFUNC(getVariable);
+private _currentIcon = GVAR(MapGraphicsGroup) getVariable [_groupName, [_layer, 0, 0, [], [], []]];
 _currentIcon set [_stateNum + 3, _completeGroupData];
 _currentIcon set [1, diag_tickTime];
 [GVAR(MapGraphicsGroup), _groupName, _currentIcon] call CFUNC(setVariable);

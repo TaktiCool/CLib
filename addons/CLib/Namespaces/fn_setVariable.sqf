@@ -22,7 +22,7 @@
 */
 params ["_namespace", "_varName", "_varContent", ["_cacheName", QGVAR(allVariableCache)], ["_global", false, [false]]];
 
-private _cache = [_namespace, _cacheName, []] call CFUNC(getVariable);
+private _cache = _namespace getVariable [_cacheName, []];
 if (isNil "_varContent") then {
     private _index = _cache find _varName;
     if (_index != -1) then {
