@@ -56,7 +56,7 @@ class CfgCLibModules {
 
             MODULE(ExtensionFramework) {
                 APIFNC(callExtension);
-                FNC(extensionRequest) { serverOnly = 1; };
+                APIFNC(extensionRequest) { serverOnly = 1; };
                 FNC(extensionFetch) { serverOnly = 1; };
                 FNC(initExtensionFramework);
                 FNC(serverInitExtensionFramework);

@@ -20,7 +20,7 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params ["_extensionName", "_actionName", ["_data", []], ["_callback", {}], ["_args", []]];
+params ["_extensionName", "_actionName", ["_data", ""], ["_callback", {}], ["_args", []]];
 
 private _id = GVAR(taskIds) find objNull;
 if (_id == -1) then {
@@ -29,4 +29,5 @@ if (_id == -1) then {
     GVAR(taskIds) set [_id, [_callback, _args]];
 };
 
-[QGVAR(extensionRequest), [_extensionName, _actionName, _data, CLib_Player, _id]] call CFUNC(serverEvent);
+private _sender = [CLib_Player, 2] select isServer;
+[QGVAR(extensionRequest), [_extensionName, _actionName, _data, _sender, _id]] call CFUNC(serverEvent);
