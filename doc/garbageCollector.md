@@ -5,6 +5,7 @@
 The GarbageCollector is a Module that Clears WeaponHolder, Dead Vehicle and Dead Units after a defined amount of Time.
 Empty Groups will be deleted Directly after they are empty and not flagged
 
+
 ## Settings
 the Settings can get set in the missionConfigFile
 ```sqf

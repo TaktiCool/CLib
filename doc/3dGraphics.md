@@ -73,7 +73,7 @@ Example:
 
 ## Graphics position
 
-The graphics position can be given in multiple ways. The easiest is to use the normal [`<Position>`]. 
+The graphics position can be given in multiple ways. The easiest is to use the normal [`<Position>`].
 
 If you want to attach the graphic to an object, its also possible to pass an [`<Object>`]. If you want to specify a detailed position you can pass an [`<Array>`] in with the following data:
 * [`<Object>`] Object
