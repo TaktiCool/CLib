@@ -24,5 +24,5 @@ GVAR(3dGraphicsCacheVersion) = 0;
 // Use the missionStarted EH to prevent unnecessary executions.
 ["missionStarted", {
     // The draw3D event triggers on each frame if the client window has focus.
-    addMissionEventHandler ["Draw3D", {call CFUNC(draw3dGraphics)}];
+    addMissionEventHandler ["Draw3D", {call FUNC(draw3dGraphics)}];
 }] call CFUNC(addEventHandler);
