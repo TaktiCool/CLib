@@ -20,6 +20,7 @@
 params ["_control", "_button", "_xPos", "_yPos"];
 
 private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGroup);
+/*
 {
     private _icon = GVAR(MapGraphicsGroup) getVariable _x;
     if ((_icon select 2) == 2 && _nearestIcon != _x) then {
@@ -30,9 +31,10 @@ private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGro
     };
     nil;
 } count ([GVAR(MapGraphicsGroup)] call CFUNC(allVariables));
-
+*/
 if (_nearestIcon == "") exitWith {};
-
+[_nearestIcon, "clicked", [_control, _xPos, _yPos]] call CFUNC(triggerMapGraphicsEvent);
+/*
 private _icon = GVAR(MapGraphicsGroup) getVariable _nearestIcon;
 
 if ((_icon select 2) < 2) then {
@@ -41,3 +43,4 @@ if ((_icon select 2) < 2) then {
     [_nearestIcon, "selected", [_control, _xPos, _yPos]] call CFUNC(triggerMapGraphicsEvent);
     GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
 };
+*/

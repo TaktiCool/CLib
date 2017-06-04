@@ -18,7 +18,7 @@
 params [["_cfg", "", ["", configNull]]];
 
 private _loadoutName = _cfg;
-if (_cfg isEqualType "") then {
+if (_cfg isEqualType configNull) then {
     _loadoutName = configName _cfg;
 };
 
@@ -29,13 +29,12 @@ if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
 };
 
 if (_cfg isEqualType "") then {
-    _cfg = (configFile >> "CfgCLibLoadouts" >> _class);
+    _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
     if (isClass _cfg) exitWith {};
-    _cfg = (missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _class);
+
+    _cfg = missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _loadoutName;
 };
-
 if (!isClass _cfg) exitWith {};
-
 
 private _loadout = [];
 private _loadoutVars = [];
@@ -64,18 +63,6 @@ private _fnc_assignValue = {
     };
 };
 
-private _fnc_readClass = {
-    params ["_config"];
-    {
-        if (isClass _x) then {
-            _x call _fnc_readClass;
-        } else {
-            _x call _fnc_readData;
-        };
-        nil
-    } count configProperties [_config, "true", true];
-};
-
 private _fnc_readData = {
     params ["_config"];
 
@@ -93,6 +80,14 @@ private _fnc_readData = {
     if !(isNil "_value") then {
         _value call _fnc_assignValue;
     };
+};
+
+private _fnc_readClass = {
+    params ["_config"];
+    {
+        _x call ([_fnc_readData, _fnc_readClass] select isClass _x);
+        nil
+    } count configProperties [_config, "true", true];
 };
 
 _cfg call _fnc_readClass;

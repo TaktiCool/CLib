@@ -25,7 +25,7 @@ if (_positionIn isEqualType []) exitWith {
         _positionIn
     };
     if ((_positionIn select 0) isEqualType objNull) exitWith {
-        _positionIn params ["_refPos", ["_refPosSelection", [0, 0, 0]], ["_refPosOffset", [0, 0, 0]], ["_offset", [0, 0, 0]]];
+        _positionIn params ["_refPos", ["_refPosSelection", ""], ["_refPosOffset", [0, 0, 0]], ["_offset", [0, 0, 0]]];
         (_refPos modelToWorldVisual ((_refPos selectionPosition _refPosSelection) vectorAdd _refPosOffset)) vectorAdd _offset
     };
 };

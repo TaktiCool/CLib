@@ -71,7 +71,7 @@ private _fnc_readSimpleObjectClass = {
         {
             _hideSelectionArray pushBack [configName _x, getNumber _x];
             nil
-        } count (configProperties [_x >> "hideSelection", "true", true]);
+        } count (configProperties [_config >> "hideSelection", "true", true]);
     };
     if (_hideSelectionArray isEqualTo []) then {
         _hideSelectionArray = false;
@@ -82,7 +82,7 @@ private _fnc_readSimpleObjectClass = {
         {
             _setObjectTextureArray pushBack [getNumber (_x >> "isMaterial"), getNumber (_x >> "id"), getText (_x >> "texture")];
             nil
-        } count (configProperties [_x >> "setTexture", "true", true]);
+        } count (configProperties [_config >> "setTexture", "true", true]);
     };
     if (_setObjectTextureArray isEqualTo []) then {
         _setObjectTextureArray = false;

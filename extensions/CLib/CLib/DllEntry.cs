@@ -1,8 +1,9 @@
-﻿using RGiesecke.DllExport;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -38,10 +39,15 @@ namespace CLib
             Debugger.Log("Extension framework initialized");
         }
 
-        [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
-        public static void RVExtension(StringBuilder output, int outputSize,
-            [MarshalAs(UnmanagedType.LPStr)] string input)
+#if WIN64
+        [DllExport("RVExtension")]
+#else
+        [DllExport("_RVExtension@12", CallingConvention.StdCall)]
+#endif
+        public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
+            outputSize--;
+
             switch (input)
             {
                 case "":
@@ -50,28 +56,28 @@ namespace CLib
                     var executingAssembly = Assembly.GetExecutingAssembly();
                     try
                     {
-                        var location = executingAssembly.Location;
+                        string location = executingAssembly.Location;
                         if (location == null)
                             throw new Exception("Assembly location not found");
                         output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
                     }
                     catch (Exception e)
                     {
-                        output.Append(e);
+                        output.Append(e.Message);
                     }
                     break;
                 default:
                     switch (input[0])
                     {
                         case ControlCharacter.ACK:
-                            output.Append(_outputBuffer);
+                            output.Append(DllEntry._outputBuffer);
                             break;
                         case ControlCharacter.ENQ:
+                            if (Tasks.Count == 0)
+                                break;
+
                             try
                             {
-                                if (Tasks.Count == 0)
-                                    break;
-
                                 var completedTasksIndices = new List<int>();
                                 foreach (var taskEntry in Tasks)
                                 {
@@ -83,7 +89,7 @@ namespace CLib
                                     completedTasksIndices.Add(taskEntry.Key);
                                 }
 
-                                foreach (var index in completedTasksIndices)
+                                foreach (int index in completedTasksIndices)
                                 {
                                     Tasks.Remove(index);
                                 }
@@ -92,7 +98,7 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
-                                output.Append(e);
+                                output.Append(e.Message);
                             }
                             break;
                         default:
@@ -107,20 +113,25 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
-                                output.Append(e);
+                                output.Append(e.Message);
                             }
                             break;
                     }
                     break;
             }
 
-            if (output.Length > outputSize - 1)
+            List<byte> outputBytes = Encoding.Default.GetBytes(output.ToString()).ToList();
+            if (outputBytes.Count <= outputSize)
+                return;
+
+            int outputSplitPosition = outputSize;
+            while ((outputBytes[outputSplitPosition - 1] & 0xC0) == 0x80)
             {
-                _outputBuffer = output.ToString().Substring(outputSize - 1);
-                output.Remove(outputSize - 1, output.Length - outputSize + 1);
+                outputSplitPosition--;
             }
 
-            outputSize -= output.Length + 1;
+            DllEntry._outputBuffer = Encoding.Default.GetString(outputBytes.GetRange(outputSplitPosition, outputBytes.Count - outputSplitPosition).ToArray());
+            output = output.Remove(output.Length - DllEntry._outputBuffer.Length, DllEntry._outputBuffer.Length);
         }
 
         private delegate string CLibFuncDelegate(string input);
@@ -137,18 +148,17 @@ namespace CLib
             {
                 return ControlCharacter.STX + function(request.Data) + ControlCharacter.EOT;
             }
-            else
-            {
-                var task = Task.Run(() => function(request.Data));
-                if (Tasks.ContainsKey(request.TaskId))
-                    Tasks.Remove(request.TaskId);
-                Tasks.Add(request.TaskId, task);
-                return (ControlCharacter.ACK).ToString();
-            }
+
+            var task = Task.Run(() => function(request.Data));
+            if (Tasks.ContainsKey(request.TaskId))
+                Tasks.Remove(request.TaskId);
+            Tasks.Add(request.TaskId, task);
+            return (ControlCharacter.ACK).ToString();
         }
 
         private static void DetectExtensions()
         {
+            Debugger.Log("Current directory is: " + Environment.CurrentDirectory);
             Debugger.Log("Extensions Found:");
             var startParameters = Environment.GetCommandLineArgs();
             foreach (string startParameter in startParameters)
@@ -163,18 +173,31 @@ namespace CLib
                     if (!Path.IsPathRooted(fullPath))
                         fullPath = Path.Combine(Environment.CurrentDirectory, path);
 
+#if WIN64
+                    var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
+#else
                     var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
+#endif
                     foreach (string extensionPath in extensionPaths)
                     {
                         try
                         {
                             var exports = FunctionLoader.ExportTable(extensionPath);
+#if WIN64
+                            if (!exports.Contains("RVExtension"))
+#else
                             if (!exports.Contains("_RVExtension@12"))
+#endif
                                 continue;
 
                             string filename = Path.GetFileNameWithoutExtension(extensionPath);
                             if (filename == null)
                                 continue;
+
+#if WIN64
+                            filename = filename.Substring(0, filename.Length - 4);
+#endif
+
 
                             if (AvailableExtensions.ContainsKey(filename))
                             {
@@ -186,6 +209,12 @@ namespace CLib
                                 Debugger.Log($"Added: {filename} at: {extensionPath}");
                             }
                             
+                        }
+                        catch (Win32Exception e)
+                        {
+                            // Trying to load an x64 dll within an x86 process fails with an error with no nativ error code. We can ignore that.
+                            if (e.NativeErrorCode != 0)
+                                Debugger.Log(e);
                         }
                         catch (Exception e)
                         {

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Caches values from config properties
+    Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
     Parameter(s):
     0: Config path <Config, Array>
@@ -19,7 +19,7 @@
 params [["_path", configNull, [configNull, []]], ["_default", "", [[], "", 0]], ["_forceDefaultType", false, [true]]];
 // convert Array Config Path to Config Path
 if (_path isEqualType []) then {
-    _path = _path call CFUNC(arrayToPath);
+    _path = _path call FUNC(arrayToPath);
 };
 private _ret = GVAR(configCache) getVariable format [QGVAR(getCachedData_%1), _path];
 if (isNil "_ret") then {
@@ -27,7 +27,7 @@ if (isNil "_ret") then {
     if (_forceDefaultType) then {
         switch (typeName _default) do {
             case "NUMBER": {
-                if (isNumber _path) then {
+                if (isNumber _path || isText _path) then { // some config Values can be stores as text in a Calculation
                     _ret = getNumber _path;
                 };
             };

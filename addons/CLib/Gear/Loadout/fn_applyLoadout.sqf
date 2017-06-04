@@ -15,11 +15,11 @@
     None
 */
 
-if (isNil QGVAR(defaultLoadoutValues)) exitWith {
+if (isNil QGVAR(loadoutsLoaded)) exitWith {
     [{
         _this call CFUNC(applyLoadout);
     }, {
-        !isNil QGVAR(defaultLoadoutValues)
+        !isNil QGVAR(loadoutsLoaded)
     }, _this] call CFUNC(waitUntil);
 };
 params [["_unit", player, [objNull]], ["_class", "", ["", configNull, []]]];
@@ -51,7 +51,7 @@ private _fnc_do = {
 ["removeAllItems", {
     if (_item isEqualTo 1) then {removeAllItems _unit};
 }, true] call _fnc_do;
-["removeAllAssingedItems", {
+["removeAllAssignedItems", {
     if (_item isEqualTo 1) then {removeAllAssignedItems _unit};
 }, true] call _fnc_do;
 

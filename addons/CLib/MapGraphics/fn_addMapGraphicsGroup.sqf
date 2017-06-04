@@ -94,7 +94,7 @@ private _completeGroupData = [];
                 ["_height", 25, [0, []]],
                 ["_angle", 0, [0, objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
-                ["_fillColor", [0, 0, 0, 1]],
+                ["_fillColor", ""],
                 ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code];
@@ -106,7 +106,7 @@ private _completeGroupData = [];
                 ["_height", 25, [0, []]],
                 ["_angle", 0, [0, objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
-                ["_fillColor", [0, 0, 0, 1]],
+                ["_fillColor", ""],
                 ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code];

@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
-using RGiesecke.DllExport;
 
 namespace CLibLogging
 {
@@ -11,10 +10,14 @@ namespace CLibLogging
         private static string startTime = "";
         static DllEntry()
         {
-            startTime = currentDate("{0}-{1}-{2}_{3}-{4}-{5}");
+            startTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         }
 
-        [DllExport("_RVExtension@12", CallingConvention = CallingConvention.Winapi)]
+#if WIN64
+        [DllExport("RVExtension")]
+#else
+        [DllExport("_RVExtension@12", CallingConvention.StdCall)]
+#endif
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
             if (input.ToLower() == "version")
@@ -23,28 +26,23 @@ namespace CLibLogging
             }
         }
 
-        [DllExport("_CLiblog@4", CallingConvention = CallingConvention.Winapi)]
-        public static string log(string input)
+        [DllExport("Log")]
+        public static string Log(string input)
         {
             string[] inputParts = input.Split(new char[] { ':' }, 2);
 
-            string path = Environment.CurrentDirectory + "\\CLib_Logs\\" + startTime.ToString().Replace("-", "");
+            string path = Path.Combine(Environment.CurrentDirectory, "CLib_Logs", startTime.Replace("-", ""));
             if (!File.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
             // TODO let the user define the File format
-            StreamWriter file = new System.IO.StreamWriter(path + string.Format("\\CLibLog_{0}_{1}.{2}", startTime, inputParts[0], "log"), true);
-            string log = currentDate("[{3}:{4}:{5}]") + inputParts[1];
-            file.WriteLine(log);
-            file.Close();
+            using (StreamWriter file = new StreamWriter(path + string.Format("\\CLibLog_{0}_{1}.{2}", startTime, inputParts[0], "log"), true))
+            {
+                string log = DateTime.Now.ToString("HH-mm-ss") + inputParts[1];
+                file.WriteLine(log);
+            }
             return "";
-            
-        }
-
-        private static string currentDate(string formating)
-        {
-            return string.Format(formating, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
         }
     }
 }

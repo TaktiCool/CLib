@@ -9,11 +9,11 @@ class CfgCLibModules {
 
         MODULE(3dGraphics) {
             dependency[] = {"CLib/Events"};
-            APIFNC(3dGraphicsPosition);
+            FNC(3dGraphicsPosition);
             APIFNC(add3dGraphics);
-            APIFNC(build3dGraphicsCache);
+            FNC(build3dGraphicsCache);
             FNC(clientInit);
-            APIFNC(draw3dGraphics);
+            FNC(draw3dGraphics);
             APIFNC(remove3dGraphics);
         };
 
@@ -29,7 +29,7 @@ class CfgCLibModules {
             APIFNC(configProperties);
             FNC(init);
             APIFNC(returnParents);
-            APIFNC(arrayToPath);
+            FNC(arrayToPath);
             APIFNC(getDataCached);
         };
 
@@ -56,7 +56,7 @@ class CfgCLibModules {
 
             MODULE(ExtensionFramework) {
                 APIFNC(callExtension);
-                FNC(extensionRequest) { serverOnly = 1; };
+                FNC(extensionRequest) { api = 1; serverOnly = 1; };
                 FNC(extensionFetch) { serverOnly = 1; };
                 FNC(initExtensionFramework);
                 FNC(serverInitExtensionFramework);
@@ -118,7 +118,7 @@ class CfgCLibModules {
         };
 
         MODULE(Gear) {
-            dependency[] = {};
+            dependency[] = {"CLib/PerFrame"};
             MODULE(Loadout) {
                 APIFNC(getAllLoadouts);
                 APIFNC(getLoadoutDetails);
@@ -221,16 +221,22 @@ class CfgCLibModules {
         MODULE(RemoteExecution) {
             FNC(execute);
             FNC(init);
-            FNC(handleIncomeData);
+            FNC(handleIncomeData) { serverOnly = 1; };
             APIFNC(remoteExec);
             FNC(serverInit);
         };
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            APIFNC(getSetting);
+            FNC(serverInit);
+            FNC(clientInit);
             FNC(init);
+            APIFNC(getSettingOld);
+            APIFNC(getSetting);
+            APIFNC(getSettings);
+            APIFNC(getSettingSubClasses);
             APIFNC(loadSettings);
+            APIFNC(registerSettings);
         };
 
         MODULE(SimpleObjectFramework) {
@@ -238,10 +244,7 @@ class CfgCLibModules {
             APIFNC(createSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);
-            FNC(exportSimpleObjectComp) {
-                api = 1;
-                serverOnly = 1;
-            };
+            FNC(exportSimpleObjectComp) { api = 1; serverOnly = 1; };
         };
 
         MODULE(Statemachine) {

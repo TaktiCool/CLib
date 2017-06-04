@@ -8,16 +8,15 @@ namespace CLib
         public string ExtensionName { get; private set; }
         public string ActionName { get; private set; }
         public string Data { get; private set; }
-        public string Response { get; private set; }
 
         public static ArmaRequest Parse(string input)
         {
-            var headerStart = input.IndexOf((char)ControlCharacter.SOH);
-            var textStart = input.IndexOf((char)ControlCharacter.STX);
-            var textEnd = input.IndexOf((char)ControlCharacter.ETX);
+            int headerStart = input.IndexOf(ControlCharacter.SOH);
+            int textStart = input.IndexOf(ControlCharacter.STX);
+            int textEnd = input.IndexOf(ControlCharacter.ETX);
 
-            var header = input.Substring(headerStart < 0 ? 0 : headerStart + 1, (textStart < 0 ? input.Length : textStart) - 1);
-            var headerValues = header.Split(new char[] { (char)ControlCharacter.US }, 3);
+            string header = input.Substring(headerStart < 0 ? 0 : headerStart + 1, (textStart < 0 ? input.Length : textStart) - 1);
+            string[] headerValues = header.Split(new [] { ControlCharacter.US }, 3);
 
             var request = new ArmaRequest();
             int taskId;

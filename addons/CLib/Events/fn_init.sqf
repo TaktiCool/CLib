@@ -46,6 +46,27 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _object enableSimulationGlobal _value;
 }] call CFUNC(addEventhandler);
+["assignCurator", {
+    (_this select 0) params ["_player", "_curatorObject"];
+    if (!isServer) exitWith {
+        LOG("AssignCurator has to be a server event");
+    };
+    _player assignCurator _curatorObject;
+}] call CFUNC(addEventhandler);
+["unassignCurator", {
+    (_this select 0) params ["_curatorObject"];
+    if (!isServer) exitWith {
+        LOG("UnassignCurator has to be a server event");
+    };
+    unassignCurator _curatorObject;
+}] call CFUNC(addEventhandler);
+["addCuratorEditableObjects", {
+    (_this select 0) params ["_curatorObject", "_args"];
+    if (!isServer) exitWith {
+        LOG("AddCuratorEditableObjects has to be a server event");
+    };
+    _curatorObject addCuratorEditableObjects _args;
+}] call CFUNC(addEventhandler);
 
 // Events for commands with local args
 ["fixFloating", {
@@ -163,7 +184,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     DFUNC(entityCreated) = {
         params ["_obj"];
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic") then {
+        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic" || (typeOf _obj) isEqualTo "") then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
         };
@@ -177,20 +198,29 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "init", {
         GVAR(entitiesCached) = [];
-        GVAR(entities) = [];
-        "fillEntitiesCheck";
-    }] call CFUNC(addStatemachineState);
-
-    [GVAR(entityCreatedSM), "fillEntitiesCheck", {
         GVAR(entities) = (entities [[], [], true, false]);
         GVAR(entities) append allMissionObjects "All";
+        "clearOutEntits"
+    }] call CFUNC(addStatemachineState);
+
+    [GVAR(entityCreatedSM), "refillEntitiesData", {
+        GVAR(entities) = (entities [[], [], true, false]);
+        "clearOutEntits"
+    }] call CFUNC(addStatemachineState);
+
+    [GVAR(entityCreatedSM), "clearOutEntits", {
         GVAR(entities) = GVAR(entities) - GVAR(entitiesCached);
         GVAR(entities) = GVAR(entities) arrayIntersect GVAR(entities);
+        "applyNewEntitieVariables"
+    }] call CFUNC(addStatemachineState);
+
+    [GVAR(entityCreatedSM), "applyNewEntitieVariables", {
         GVAR(lastFilledEntities) = diag_frameNo + 15;
         GVAR(entitiesCached) append GVAR(entities);
         GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
         ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
     }] call CFUNC(addStatemachineState);
+
 
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entities) deleteAt 0;
@@ -201,7 +231,7 @@ GVAR(ignoredLogEventNames_1) = [];
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "wait", {
-        ["wait", "fillEntitiesCheck"] select (diag_frameNo - (GVAR(lastFilledEntities)) >= 0); // only Fill every min 6 Frames the Cache for checking
+        ["wait", "refillEntitiesData"] select (diag_frameNo - (GVAR(lastFilledEntities)) >= 0); // only Fill every min 15 Frames the Cache for checking
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM)] call CFUNC(startStatemachine);

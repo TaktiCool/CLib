@@ -84,7 +84,7 @@ _searchSpaces append allMissionObjects "";
 private _temp = [];
 {
     private _space = _x;
-    _count = {
+    private _count = {
         if (_x find QPREFIX != -1) then {
             private _var = _space getVariable _x;
             if !(_var isEqualType {}) then {
