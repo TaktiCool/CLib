@@ -30,6 +30,6 @@ if (isNull (objectParent _unit)) then {
     [_case, [_unit, _anim]] call CFUNC(globalEvent);
 };
 
-if (_priority >= 2 && {animationState _unit != _animation}) then {
+if (_priority >= 2 && {animationState _unit != _anim}) then {
     ["switchMove", [_unit, _anim]] call CFUNC(globalEvent);
 };
