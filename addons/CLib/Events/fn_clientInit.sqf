@@ -110,7 +110,7 @@ GVAR(groupUnits) = [];
         private _oldValue = GVAR(EventNamespace) getVariable _name;
 
         // If the value changed trigger the event and update the value in out variable.
-        _currentValue = call _code;
+        private _currentValue = call _code;
         if (!(_oldValue isEqualTo _currentValue)) then {
             [_name + "Changed", [_currentValue, _oldValue]] call CFUNC(localEvent);
             GVAR(EventNamespace) setVariable [_name, _currentValue];

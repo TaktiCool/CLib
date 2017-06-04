@@ -17,7 +17,7 @@
 */
 params [["_uid", "", [""]], ["_eventName", "", [""]], ["_args", []]];
 
-_eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
+private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
 private _namespace = missionNamespace getVariable _eventNameSpace;
 
 if (isNil "_namespace") exitWith {};

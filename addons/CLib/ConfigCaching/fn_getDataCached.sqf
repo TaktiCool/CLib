@@ -27,7 +27,7 @@ if (isNil "_ret") then {
     if (_forceDefaultType) then {
         switch (typeName _default) do {
             case "NUMBER": {
-                if (isNumber _path) then {
+                if (isNumber _path || isText _path) then { // some config Values can be stores as text in a Calculation
                     _ret = getNumber _path;
                 };
             };
