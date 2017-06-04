@@ -21,8 +21,8 @@
     0: Return Name <TYPE>
 */
 params ["_uid", "_fnc", "_args", "_duration", "_event"];
-private _lastTime = (GVAR(cachedCall) getVariable [_uid, [-999999999]]) select 0;
-if (_lastTime < time) then {
+private _timestamp = (GVAR(cachedCall) getVariable [_uid, [-999999999]]) select 0;
+if (_timestamp < time) then {
     GVAR(cachedCall) setVariable [_uid, [time + _duration, _args call _fnc]];
 
     // Does the cache need to be cleared on an event?
