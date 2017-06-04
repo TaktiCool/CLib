@@ -29,7 +29,7 @@ private _stance = switch (_animState select [4, 4]) do {
 };
 
 private _speed = ["stp", "run"] select ((vectorMagnitude (velocity _unit)) > 1);
-private _weaponAIndex = ["", primaryWeapon _unit, secondaryWeapon _unit, handgunWeapon _unit, binocular _unit] find (currentWeapon _unit) max 0;
+private _weaponAIndex = (["", primaryWeapon _unit, secondaryWeapon _unit, handgunWeapon _unit, binocular _unit] find (currentWeapon _unit)) max 0;
 private _weapon = ["non", "rfl", "lnr", "pst", "bin"] select _weaponAIndex;
 private _weaponPos = [["ras", "low"] select (weaponLowered _unit), "non"] select (currentWeapon _unit == "");
 private _prev = ["non", _animState select [(count _animState) - 1, 1]] select ((_animState select [(count _animState) - 2, 2]) in ["df", "db", "dl", "dr"]);

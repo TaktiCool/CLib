@@ -91,5 +91,5 @@ if (_taskId == -1 && (_result select [0, 1]) == GVAR(STX)) exitWith {
     _result call FUNC(extensionFetch)
 };
 
-DUMP(_result)
+DUMP(toArray _result);
 _result
