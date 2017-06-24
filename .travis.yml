@@ -21,12 +21,4 @@ matrix:
     # Job #2 - Building Extensions
     ###############################################################################
     - language: csharp
-      solution: CLib.sln
-      mono:
-      - latest
-      - 3.12.0
-      - 3.10.0
-
-      before_install:
-      - cd extensions
-      - cd CLib
+      solution: ./Extensions/CLib/CLib.sln
