@@ -24,6 +24,9 @@ matrix:
       solution: CLib.sln
       mono:
       - latest
+      - 3.12.0
+      - 3.10.0
+
       before_install:
       - cd extensions
       - cd CLib
