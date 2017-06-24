@@ -21,4 +21,7 @@ matrix:
     # Job #2 - Building Extensions
     ###############################################################################
     - language: csharp
-      solution: ./Extensions/CLib/CLib.sln
+      before_install:
+      - cd extensions
+      - cd CLib
+      solution: CLib.sln
