@@ -18,10 +18,10 @@ matrix:
       - python3 sqf_validator.py
 
     ###############################################################################
-    # Job #2 - Building Extensions
+    # Job #2 - Building Extensions Disabled because not working :(
     ###############################################################################
-    - language: csharp
-      before_install:
-      - cd extensions
-      - cd CLib
-      solution: CLib.sln
+    #- language: csharp
+    #  before_install:
+    #  - cd extensions
+    #  - cd CLib
+    #  solution: CLib.sln
