@@ -25,7 +25,8 @@ matrix:
       mono:
       - latest
       before_install:
-      - cd extensions\CLib
+      - cd extensions
+      - cd CLib
       install:
       - sudo apt-get install -y gtk-sharp2
       - nuget restore CLib.sln
