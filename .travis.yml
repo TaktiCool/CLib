@@ -4,10 +4,31 @@ branches:
   - release
 dist: trusty
 language: python
-python:
-  - '3.5'
-install: true
-before_script:
-  - cd tools
-script:
-  - python3 sqf_validator.py
+
+matrix:
+  include:
+    ###############################################################################
+    # Job #1 - SQF validation
+    ###############################################################################
+
+    -python:
+      - '3.5'
+        install: true
+        before_script:
+          - cd tools
+        script:
+          - python3 sqf_validator.py
+
+    ###############################################################################
+    # Job #2 - Building intercept
+    ###############################################################################
+    - language: csharp
+      solution: CLib.sln
+      mono:
+        - latest
+       before_install:
+        - cd extensions\CLib
+      install:
+        - sudo apt-get install -y gtk-sharp2
+        - nuget restore CLib.sln
+      
