@@ -54,7 +54,12 @@ scopeName (_fnc_scriptName + '_Main');
 DUMP("Compile Function: " + _functionName);
 
 {
-    _x setVariable [_functionName, _functionCode];
+    if !(_x getVariable [_functionName, {}] isEqualTo _functionCode) then {
+        _x setVariable [_functionName, _functionCode];
+        if !(_x getVariable [_functionName, {}] isEqualTo _functionCode) then {
+            LOG("Error: " + _functionName + " could not get overwritten but is different from the current version!");
+        };
+    };
     nil
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
