@@ -22,9 +22,9 @@ private _loadout = _name call CFUNC(loadLoadout);
 _request apply {
     _x params ["_findData", ["_ret", ""]];
     {
-        private _index = _loadout find (toLower (_findData));
+        private _index = _x find (toLower (_findData));
         if (_index != -1) exitWith {
-            _ret = _loadout select (_index + 1);
+            _ret = _x select (_index + 1);
         };
     } forEach _loadout;
     _ret;
