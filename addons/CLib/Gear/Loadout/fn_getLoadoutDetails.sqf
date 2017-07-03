@@ -10,7 +10,7 @@
     Parameter(s):
     0: LoadoutName <String, Config>
     1: Requested details <Array>
-    
+
     Returns:
     Array With all Informations <Array>
 */
@@ -28,4 +28,5 @@ _request apply {
         };
         nil
     } count _loadout;
+    _ret;
 };
