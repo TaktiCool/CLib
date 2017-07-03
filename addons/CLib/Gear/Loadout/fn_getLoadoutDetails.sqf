@@ -23,13 +23,9 @@ private _loadout = _name call CFUNC(loadLoadout);
 _request apply {
     _x params ["_findData", ["_ret", ""]];
     _findData = toLower _findData;
-    {
-        private _index = _x find _findData;
-        if (_index != -1) exitWith {
-            _ret = _loadout select (_forEachIndex + 1);
-            nil
-        };
-        nil
-    } forEach _loadout;
+    private _index = _loadout find _findData;
+    if (_index != -1) then {
+        _ret = (_loadout select (_index + 1)) select 1;
+    };
     _ret;
 };
