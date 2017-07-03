@@ -212,7 +212,7 @@ private _fnc_do = {
 }, false] call _fnc_do;
 
 if !(_loadoutVars isEqualTo []) then {
-    for "_i" from 0 to (count _loadoutVars) step 2 do {
+    for "_i" from 0 to (count _loadoutVars) - 1 step 2 do {
         private _name = _loadoutVars select _i;
         private _value = _loadoutVars select (_i + 1);
 
