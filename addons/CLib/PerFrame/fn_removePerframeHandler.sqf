@@ -19,15 +19,11 @@ EXEC_ONLY_UNSCHEDULED
 params [["_handle", -1, [0]]];
 
 if (_handle < 0 || {_handle >= count GVAR(PFHhandles)}) exitWith {};
-private _index = GVAR(PFHhandles) select _handle;
 
-if (isNil "_index") exitWith {};
-GVAR(deletedIndexes) pushback _index;
-
-private _oldData = GVAR(perFrameHandlerArray) select _index;
-_oldData set [6, true];
-
-GVAR(perFrameHandlerArray) set [_index, _oldData];
-
+GVAR(perFrameHandlerArray) deleteAt (GVAR(PFHhandles) select _handle);
 GVAR(PFHhandles) set [_handle, nil];
-GVAR(pfhDeleleted) = true;
+
+{
+    _x params ["", "", "", "", "", "_handle"];
+    GVAR(PFHhandles) set [_handle, _forEachIndex];
+} forEach GVAR(perFrameHandlerArray);
