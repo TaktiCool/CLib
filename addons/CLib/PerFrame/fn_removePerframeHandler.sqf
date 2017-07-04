@@ -25,7 +25,7 @@ if (isNil "_index") exitWith {};
 GVAR(deletedIndexes) pushback _index;
 
 private _oldData = GVAR(perFrameHandlerArray) select _index;
-_oldData set [6, true];
+_oldData set [5, true];
 
 GVAR(perFrameHandlerArray) set [_index, _oldData];
 
