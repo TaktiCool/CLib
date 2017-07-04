@@ -20,6 +20,8 @@ GVAR(waitUntilArray) = [];
 
 GVAR(perFrameHandlerArray) = [];
 GVAR(PFHhandles) = [];
+GVAR(pfhDeleleted) = false;
+GVAR(deletedIndexes) = [];
 
 GVAR(skipFrameArray) = [];
 GVAR(sortSkipFrameArray) = false;
@@ -118,6 +120,21 @@ DFUNC(onEachFrameHandler) = {
     GVAR(nextFrameBufferA) = +GVAR(nextFrameBufferB);
     GVAR(nextFrameBufferB) = [];
     GVAR(nextFrameNo) = diag_frameNo + 1;
+
+
+    if (GVAR(pfhDeleleted)) then {
+        {
+            GVAR(perFrameHandlerArray) set [_forEachIndex, objNull];
+        } forEach GVAR(deletedIndexes);
+
+        GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
+
+        {
+            _x params ["", "", "", "", "", "_handle"];
+            GVAR(PFHhandles) set [_handle, _forEachIndex];
+        } forEach GVAR(perFrameHandlerArray);
+        GVAR(pfhDeleleted) = false;
+    };
 
     PERFORMANCECOUNTER_END(PFHCounter);
 };
