@@ -70,7 +70,7 @@ private _fnc_readLocalisationClass = {
         nil
     } count configProperties [_x >> "CfgCLibLocalisation", "isClass _x", true];
     nil
-} count [configFile, campaignConfigFile, missionConfigFile >> "CLib"];
+} count [campaignConfigFile, missionConfigFile >> "CLib", configFile];
 
 publicVariable QGVAR(ServerNamespace);
 publicVariable QGVAR(supportedLanguages);
