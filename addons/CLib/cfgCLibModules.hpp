@@ -133,6 +133,15 @@ class CfgCLibModules {
             APIFNC(saveGear);
         };
 
+        MODULE(Hashes) {
+            APIFNC(containsKey);
+            APIFNC(containsValue);
+            APIFNC(createHash);
+            APIFNC(forEachHash);
+            APIFNC(getHash);
+            APIFNC(setHash);
+        };
+
         MODULE(Interaction) {
             dependency[] = {"CLib/Events"};
             APIFNC(addAction);
