@@ -75,5 +75,5 @@ for "_i" from 0 to 11 do {
 DFUNC(IdleAnimation) = {
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
     params ["_title", "_iconIdle", "_hint"];
-    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((diag_tickTime / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
+    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
 };
