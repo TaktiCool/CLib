@@ -64,7 +64,7 @@ private _fnc_getValue = {
                         _description = getText (_x >> "description");
                     };
                     _value = (_x >> "value") call _fnc_getValue;
-                    if (_force == 0) then {
+                    if (_force == 0 && _value isEqualType 0) then {
                         _value = [_path joinString "_", _value] call BIS_fnc_getParamValue;
                     };
                 } else {
@@ -73,7 +73,7 @@ private _fnc_getValue = {
             } else {
                 if (isText _x || isNumber _x || isArray _x) then {
                     _value = (_x >> "value") call _fnc_getValue;
-                    if (_force == 0) then {
+                    if (_force == 0 && _value isEqualType 0) then {
                         _value = [_path joinString "_", _value] call BIS_fnc_getParamValue;
                     };
                 };
