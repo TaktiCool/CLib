@@ -106,9 +106,19 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
 
             _map drawPolygon [_temp, _lineColor];
         };
+        case ("TRIANGLE"): {
+            _iconData params ["_type", "_positions", "_lineColor", "_fillColor", "_code"];
+            call _code;
+            private _temp = _positions apply {
+                _x params ["_p0", "_p1", "_p2"];
+                _p0 = [_p0, _map] call CFUNC(mapGraphicsPosition);
+                _p1 = [_p1, _map] call CFUNC(mapGraphicsPosition);
+                _p2 = [_p2, _map] call CFUNC(mapGraphicsPosition);
+                [_p0, _p1, _p2];
+            };
+            _map drawTriangle [_temp, _lineColor, _fillColor];
+        };
     };
-
-
     nil
 } count GVAR(MapGraphicsCache);
 
