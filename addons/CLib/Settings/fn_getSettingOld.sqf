@@ -14,5 +14,4 @@
     None
 */
 params ["_name", "_default"];
-
-[GVAR(settingsNamespaceOld), _name, _default] call CFUNC(getVariable)
+GVAR(settingsNamespaceOld) getVariable [_name, _default];

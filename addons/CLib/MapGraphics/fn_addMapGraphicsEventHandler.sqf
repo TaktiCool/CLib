@@ -29,7 +29,7 @@ if (isNil "_namespace") then {
     missionNamespace setVariable [_eventNameSpace, _namespace];
 };
 
-private _eventArray = [_namespace, _uid, []] call CFUNC(getVariable);
+private _eventArray = _namespace getVariable [_uid, []];
 
 private _id = _eventArray pushBack [_code, _args];
 

@@ -23,7 +23,7 @@ params [["_event", "", [""]], ["_function", {}, [{}, ""]], ["_args", []]];
 // add This so we get can get sure some events that only gets triggered once get right
 ["eventAdded", [_event, _function, _args]] call CFUNC(localEvent);
 
-private _eventArray = [GVAR(EventNamespace), _event, []] call CFUNC(getVariable);
+private _eventArray = GVAR(EventNamespace) getVariable [_event, []];
 private _id = _eventArray pushBack [_function, _args];
 GVAR(EventNamespace) setVariable [_event, _eventArray];
 
