@@ -10,7 +10,7 @@
     Parameter(s):
     0: Unit that get the Loadout <Object>
     1: Classname <String>
-
+    2: Allow Random Items <Bool> (Default: true)
     Returns:
     None
 */
@@ -22,8 +22,8 @@ if (isNil QGVAR(loadoutsLoaded)) exitWith {
         !isNil QGVAR(loadoutsLoaded)
     }, _this] call CFUNC(waitUntil);
 };
-params [["_unit", player, [objNull]], ["_class", "", ["", configNull, []]]];
 
+params [["_unit", player, [objNull]], ["_class", "", ["", []]], ["_allowRandom", true, [true]]];
 private _loadoutArray = _class call CFUNC(loadLoadout);
 
 private _loadout = _loadoutArray select 0;
@@ -34,10 +34,13 @@ private _fnc_do = {
 
     private _i = _loadout find toLower _find;
     if (_i != -1) then {
-        private _item = if (_isRandom) then {
-            selectRandom (_loadout select (_i + 1));
-        } else {
-            _loadout select (_i + 1);
+        private _item = _loadout select (_i + 1);
+        if (_isRandom) then {
+            if (_allowRandom) then {
+                _item = selectRandom _item;
+            } else {
+                _item = _item select 0;
+            };
         };
         if (isNil "_item") exitWith {};
         call _do;
@@ -209,7 +212,7 @@ private _fnc_do = {
 }, false] call _fnc_do;
 
 if !(_loadoutVars isEqualTo []) then {
-    for "_i" from 0 to (count _loadoutVars) step 2 do {
+    for "_i" from 0 to (count _loadoutVars) - 1 step 2 do {
         private _name = _loadoutVars select _i;
         private _value = _loadoutVars select (_i + 1);
 

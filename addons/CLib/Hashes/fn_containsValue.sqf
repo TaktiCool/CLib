@@ -5,11 +5,14 @@
     Author: joko // Jonas
 
     Description:
-    Server for Core Module
+
 
     Parameter(s):
-    None
+
 
     Returns:
-    None
+
 */
+params ["_hashSet", "_value"];
+
+_value in (_hashSet select HASH_KEY);
