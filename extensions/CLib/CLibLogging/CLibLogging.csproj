@@ -8,9 +8,15 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CLibLogging</RootNamespace>
-    <AssemblyName>CLibLogging_x64</AssemblyName>
+    <AssemblyName>CLibLogging</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <DllExportNamespace>CLibLogging</DllExportNamespace>
+    <DllExportDDNSCecil>true</DllExportDDNSCecil>
+    <DllExportSkipOnAnyCpu>false</DllExportSkipOnAnyCpu>
+    <DllExportOrdinalsBase>1</DllExportOrdinalsBase>
+    <DllExportGenExpLib>false</DllExportGenExpLib>
+    <DllExportOurILAsm>false</DllExportOurILAsm>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <AssemblyName>CLibLogging_x64</AssemblyName>
@@ -31,6 +37,26 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>WIN32</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <AssemblyName>CLibLogging_x64</AssemblyName>
+    <OutputPath>..\..\..\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WIN64</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <AssemblyName>CLibLogging</AssemblyName>
+    <OutputPath>..\..\..\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WIN32</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DllExport, Version=1.5.2.30304, Culture=neutral, PublicKeyToken=8337224c9ad9e356, processorArchitecture=MSIL">
