@@ -15,6 +15,11 @@ namespace CLib
         public Debugger()
         {
             InitializeComponent();
+#if Debug
+            this.Show()
+#else 
+            this.Hide();
+#endif
         }
 
         public void Log(object obj)
@@ -35,5 +40,44 @@ namespace CLib
             //this.rtb_log.SelectionStart = this.rtb_log.Text.Length;
             //this.rtb_log.ScrollToCaret();
         }
+
+        public void Toggle()
+        {
+            if (this.rtb_log.InvokeRequired)
+            {
+                this.rtb_log.Invoke(new Action(delegate {
+                    this.Toggle();
+                }));
+                return;
+            }
+            if (this.Visible)
+                this.Hide();
+            else
+                this.Show();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (this.rtb_log.InvokeRequired)
+            {
+                this.rtb_log.Invoke(new Action(delegate {
+                    this.OnFormClosing(e);
+                }));
+                return;
+            }
+
+            if (e.CloseReason != CloseReason.UserClosing)
+            {
+                Dispose(true);
+                Application.Exit();
+            }
+            else
+            {
+                this.Hide();
+            }
+        }
+
+
+
     }
 }

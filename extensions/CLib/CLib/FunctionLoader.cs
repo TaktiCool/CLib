@@ -25,7 +25,7 @@ namespace CLib
 #else
                 var imageNtHeaders = Marshal.PtrToStructure<IMAGE_NT_HEADERS32>(hModule + imageDosHeader.e_lfanew);
 #endif
-				if (!imageNtHeaders.IsValid)
+                if (!imageNtHeaders.IsValid)
                     throw new Exception("IMAGE_NT_HEADERS is invalid: " + dllPath);
 
                 IMAGE_DATA_DIRECTORY exportTabledataDirectory = imageNtHeaders.OptionalHeader.ExportTable;

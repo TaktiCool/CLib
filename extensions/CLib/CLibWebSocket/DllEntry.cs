@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-
+using CLib;
 namespace CLibWebSocket
 {
     public class DllEntry

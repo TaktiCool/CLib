@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,26 +14,26 @@ namespace CLibCompression
         private const int MinMatchLength = 2;
         private const uint MaxMatchLength = (1 << 4) - MinMatchLength;
 #if WIN64
-		[DllExport("RVExtensionVersion")]
+        [DllExport("RVExtensionVersion")]
 #else
 		[DllExport("_RVExtensionVersion@6", CallingConvention.StdCall)]
 #endif
-		public static void RVExtensionVersion(StringBuilder output, int outputSize)
-		{
-			outputSize--;
-			var executingAssembly = Assembly.GetExecutingAssembly();
-			try
-			{
-				string location = executingAssembly.Location;
-				if (location == null)
-					throw new Exception("Assembly location not found");
-				output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
-			}
-			catch (Exception e)
-			{
-				output.Append(e.Message);
-			}
-		}
+        public static void RVExtensionVersion(StringBuilder output, int outputSize)
+        {
+            outputSize--;
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            try
+            {
+                string location = executingAssembly.Location;
+                if (location == null)
+                    throw new Exception("Assembly location not found");
+                output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
+            }
+            catch (Exception e)
+            {
+                output.Append(e.Message);
+            }
+        }
 #if WIN64
         [DllExport("RVExtension")]
 #else

@@ -55,6 +55,7 @@
             this.Text = "Debugger";
             this.TopMost = true;
             this.ResumeLayout(false);
+
         }
 
         #endregion
