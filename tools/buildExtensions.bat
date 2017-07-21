@@ -15,9 +15,9 @@ GOTO :Que
 )
 
 IF %choice% EQU 1 (
-set BUILD=Debug
-) ELSE (
 set BUILD=Release
+) ELSE (
+set BUILD=Debug
 )
 
 cd "..\extensions\CLib"
