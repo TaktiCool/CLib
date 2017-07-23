@@ -16,5 +16,4 @@
 */
 
 params ["_namespace", ["_cacheName", QGVAR(allVariableCache)]];
-
-[_namespace, _cacheName, []] call CFUNC(getVariable);
+_namespace getVariable [_cacheName, []];
