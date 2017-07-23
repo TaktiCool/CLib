@@ -122,10 +122,10 @@ DFUNC(onEachFrameHandler) = {
     GVAR(nextFrameNo) = diag_frameNo + 1;
 
 
-    if (GVAR(pfhDeleleted)) then {
+    if !(GVAR(deletedIndices) isEqualTo []) then {
         {
-            GVAR(perFrameHandlerArray) set [_forEachIndex, objNull];
-        } forEach GVAR(deletedIndexes);
+            GVAR(perFrameHandlerArray) set [_x, objNull];
+        } forEach GVAR(deletedIndices);
 
         GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
 
@@ -133,7 +133,7 @@ DFUNC(onEachFrameHandler) = {
             _x params ["", "", "", "", "", "_handle"];
             GVAR(PFHhandles) set [_handle, _forEachIndex];
         } forEach GVAR(perFrameHandlerArray);
-        GVAR(pfhDeleleted) = false;
+        GVAR(deletedIndices) = [];
     };
 
     PERFORMANCECOUNTER_END(PFHCounter);
