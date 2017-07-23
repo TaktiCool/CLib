@@ -42,6 +42,23 @@ private _fnc_getValue = {
     nil;
 };
 
+private _fnc_getSettingsValue = {
+    params ["_force", "_path", "_config"];
+    private _value = _config call _fnc_getValue;
+    private _tempPathString = _path joinString "_";
+    if (_force == 0) then {
+        if (_value isEqualType 0) then {
+            _value = [_path joinString "_", _value] call BIS_fnc_getParamValue;
+        } else {
+            private _valueIndex = [_path joinString "_", _value] call BIS_fnc_getParamValue;
+            private _tempPathString = [(_path joinString "_"), _value] call BIS_fnc_getParamValue;
+            if (isArray (missionConfigFile >> "Params" >> _tempPathString >> "valueData")) then {
+                _value = getArray (missionConfigFile >> "Params" >> _tempPathString >> "valueData") select _valueIndex;
+            };
+        };
+    };
+    _value
+};
 
 {
     {
@@ -63,19 +80,13 @@ private _fnc_getValue = {
                     if (isText (_x >> "description")) then {
                         _description = getText (_x >> "description");
                     };
-                    _value = (_x >> "value") call _fnc_getValue;
-                    if (_force == 0 && _value isEqualType 0) then {
-                        _value = [_path joinString "_", _value] call BIS_fnc_getParamValue;
-                    };
+                    _value = [_force, _path, (_x >> "value")] call _fnc_getSettingsValue;
                 } else {
                     [_path] call CFUNC(registerSettings);
                 };
             } else {
                 if (isText _x || isNumber _x || isArray _x) then {
-                    _value = (_x >> "value") call _fnc_getValue;
-                    if (_force == 0 && _value isEqualType 0) then {
-                        _value = [_path joinString "_", _value] call BIS_fnc_getParamValue;
-                    };
+                    _value = [_force, _path, _x] call _fnc_getSettingsValue;
                 };
             };
         };

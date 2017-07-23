@@ -21,16 +21,21 @@ respawn = 3;
 respawnDelay = 3;
 respawnDialog = 0;
 
-class Params
-{
-	class CLibSettingsTest_simpleValueNumber
-	{
-		title = "SimpleTestValue"; // Param name visible in the list
-		values[] = {0,1,2}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Test 1","test 2","test 3"}; // Description of each selectable item
-		default = 1; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
+class Params {
+    class CLibSettingsTest_simpleValueNumber {
+        title = "SimpleTestValue";
+        values[] = {0,1,2};
+        texts[] = {"Test 1","test 2","test 3"};
+        default = 1;
+    };
+    class CLibSettingsTest_simpleValueText {
+        title = "SimpleTestValue Value Data";
+        values[] = {0,1,2};
+        texts[] = {"Test 1","test 2","test 3"};
+        valueData[] = {"test1", "test2", "test3"};
+        default = 1;
+
+    }
 };
 
 
