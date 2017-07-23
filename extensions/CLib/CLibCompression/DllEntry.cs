@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Reflection;
 using System.Diagnostics;
-using CLib;
+using RGiesecke.DllExport;
 
 namespace CLibCompression
 {
