@@ -86,7 +86,7 @@ parsingNamespace setVariable ["CLib_Player", player];
     ["playerSide", {playerSide}],
     ["cursorTarget", {cursorTarget}],
     ["cursorObject", {cursorObject}],
-    ["units", {units CLib_Player}]
+    ["groupUnits", {units CLib_Player}]
 ];
 
 // Import the vanilla events in the event system.
