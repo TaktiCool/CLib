@@ -48,20 +48,14 @@ parsingNamespace setVariable ["CLib_Player", player];
 }] call CFUNC(addEventHandler);
 
 
-private _codeStr = "";
+private _codeStr = "private ['_oldValue', '_currentValue'];";
 // Build a dynamic event system to use it in modules.
 {
     _x params ["_name", "_code"];
 
     // Build a name for the variable where we store the data. Fill it with the initial value.
     GVAR(EventNamespace) setVariable [_name, call _code];
-    _codeStr = _codeStr + format ["
-    private _oldValue = %4 getVariable %2;
-    private _currentValue = call %1;
-    if (!(_oldValue isEqualTo _currentValue)) then {
-        ['%2Changed', [_currentValue, _oldValue]] call %3
-    };
-    ", _code, _name, QCFUNC(localEvent), QGVAR(EventNamespace)];
+    _codeStr = _codeStr + format ["_oldValue = %4 getVariable %2; _currentValue = call %1; if (!(_oldValue isEqualTo _currentValue)) then { ['%2Changed', [_currentValue, _oldValue]] call %3 };", _code, _name, QCFUNC(localEvent), QGVAR(EventNamespace)];
     true
 } count [
     ["player", {missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player]}],
