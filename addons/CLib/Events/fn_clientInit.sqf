@@ -47,28 +47,20 @@ parsingNamespace setVariable ["CLib_Player", player];
     };
 }] call CFUNC(addEventHandler);
 
+
+private _codeStr = "";
 // Build a dynamic event system to use it in modules.
 {
     _x params ["_name", "_code"];
 
     // Build a name for the variable where we store the data. Fill it with the initial value.
     GVAR(EventNamespace) setVariable [_name, call _code];
-
-    // Use an OEF EH to detect if the value changes.
-    [{
-        (_this select 0) params ["_name", "_code"];
-
-        // Read the value we detected earlier.
-        private _oldValue = GVAR(EventNamespace) getVariable _name;
-
-        // If the value changed trigger the event and update the value in out variable.
-        _currentValue = call _code;
-        if (!(_oldValue isEqualTo _currentValue)) then {
-            [_name + "Changed", [_currentValue, _oldValue]] call CFUNC(localEvent);
-            GVAR(EventNamespace) setVariable [_name, _currentValue];
-        };
-    }, 0, [_name, _code]] call CFUNC(addPerFrameHandler);
-
+    _codeStr = _codeStr + format ["
+    private _currentValue = call %1;
+    if (!(_oldValue isEqualTo _currentValue)) then {
+        ['%2Changed', [_currentValue, _oldValue]] call %3
+    };
+    ", _code, _name, QCFUNC(localEvent)];
     true
 } count [
     ["player", {missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player]}],
@@ -88,6 +80,8 @@ parsingNamespace setVariable ["CLib_Player", player];
     ["cursorObject", {cursorObject}],
     ["groupUnits", {units CLib_Player}]
 ];
+
+[compile _codeStr, 0] call CFUNC(addPerFrameHandler);
 
 // Import the vanilla events in the event system.
 {
