@@ -19,7 +19,7 @@ EXEC_ONLY_UNSCHEDULED
 
 params [["_code", {}], ["_args", []], ["_mutexId", "main"]];
 
-private _mutexCache = [GVAR(mutexCaches), _mutexId, []] call CFUNC(getVariable);
+private _mutexCache = GVAR(mutexCaches) getVariable [_mutexId, []];
 
 // Cache the function and args
 private _index = _mutexCache pushBackUnique [_code, _args];

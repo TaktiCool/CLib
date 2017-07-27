@@ -94,7 +94,7 @@ private _hcInit = [];
             private _time = diag_tickTime;
             _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
             _time = diag_tickTime - _time;
-            LOG("Mission Module Call: " + _x + " (" + str (_time * 1000) + " ms)");
+            LOG("Mission Module Call: " + _x + " (" + ((_time * 1000) toFixed 20) + " ms)");
             nil
         } count (_x select 0);
     };

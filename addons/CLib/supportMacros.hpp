@@ -22,9 +22,9 @@
 #define IS_NUMBER(var)   IS_SCALAR(var)
 
 // is Voted Admin Server (not 100% supported the Server Owner can change the comands what the voted Admin can use)
-#define IS_ADMIN serverCommandAvailable "#kick"
+#define IS_ADMIN ((call BIS_fnc_admin) isEqualTo 1)
 // is Logged Admin Server (not 100% supported the Server Owner can change the comands what the voted Admin can use)
-#define IS_ADMIN_LOGGED serverCommandAvailable "#shutdown"
+#define IS_ADMIN_LOGGED ((call BIS_fnc_admin) isEqualTo 2)
 
 // Deprecated System for Functions
 #define DEPRECATEFUNC(OLD_FUNC,NEW_FUNC) \
@@ -82,3 +82,7 @@
 #else
     #define USE_COMPRESSION(var) var
 #endif
+
+#define SCRIPTSCOPENAME (_fnc_scriptName + "_Main")
+
+#define RELDIR(pos1,pos2) (((pos1 getRelDir pos2) + 180) % 360 - 180)

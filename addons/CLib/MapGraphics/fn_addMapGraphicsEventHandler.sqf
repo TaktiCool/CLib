@@ -20,7 +20,7 @@
 params [["_uid", "", [""]], ["_eventName", "", [""]], ["_code", {}, ["", {}]], ["_args", []]];
 
 // build Namespace Variablename
-_eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
+private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
 private _namespace = missionNamespace getVariable _eventNameSpace;
 
 // Check if namespace exist and if not create and save it
@@ -29,7 +29,7 @@ if (isNil "_namespace") then {
     missionNamespace setVariable [_eventNameSpace, _namespace];
 };
 
-private _eventArray = [_namespace, _uid, []] call CFUNC(getVariable);
+private _eventArray = _namespace getVariable [_uid, []];
 
 private _id = _eventArray pushBack [_code, _args];
 

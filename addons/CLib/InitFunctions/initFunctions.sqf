@@ -288,7 +288,7 @@ private _compileFinal = !cheatsEnabled && ((uiNamespace getVariable ["gui_displa
             private _tag = configName _currentTag;
             private _tagName = getText (_currentTag >> "tag");
             if (_tagName == "") then {_tagName = configName _currentTag};
-            _itemPathTag = getText (_currentTag >> "file");
+            private _itemPathTag = getText (_currentTag >> "file");
 
             {
 

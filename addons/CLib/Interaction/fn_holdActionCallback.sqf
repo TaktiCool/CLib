@@ -37,7 +37,7 @@ _actionArguments params [
 
 GVAR(DisablePrevAction) = true;
 GVAR(DisableNextAction) = true;
-GVAR(HoldActionStartTime) = diag_tickTime;
+GVAR(HoldActionStartTime) = time;
 
 [_target, _caller, _id, _arguments] call _codeStart;
 
@@ -86,8 +86,8 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     if (_ret isEqualType 0) then {
         _ret = (_ret min 1) max 0;
         private _progressIconPath = format ["\A3\Ui_f\data\IGUI\Cfg\HoldActions\progress\progress_%1_ca.paa", floor (_ret * 24)];
-        if (diag_tickTime - GVAR(HoldActionStartTime) <= 0.15) then {
-            _progressIconPath = format ["\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_%1_ca.paa", floor ((diag_tickTime - GVAR(HoldActionStartTime)) / 0.05)];
+        if (time - GVAR(HoldActionStartTime) <= 0.15) then {
+            _progressIconPath = format ["\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_%1_ca.paa", floor ((time - GVAR(HoldActionStartTime)) / 0.05)];
         };
 
         if (_id isEqualType 123) then {

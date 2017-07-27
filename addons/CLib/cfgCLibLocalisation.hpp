@@ -15,6 +15,8 @@ class CfgCLibLocalisation {
             Russian = "Test Russian";
             Japanese = "Test Japanese";
             Korean = "Test Korean";
+            Chinese = "Test Chinese";
+            Chinesesimp = "Test simplified Chinese";
         };
         class Error {
             English = "Error";

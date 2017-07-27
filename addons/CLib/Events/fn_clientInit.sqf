@@ -106,7 +106,8 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     "InventoryOpened",
     "Killed",
     "Respawn",
-    "AnimStateChanged"
+    "AnimStateChanged",
+    "HandleDamage"
 ];
 
 // Fix an Arma bug

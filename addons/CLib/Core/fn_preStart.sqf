@@ -46,4 +46,4 @@ CLib_playerUID = "";
     call CFUNC(readAllFunctions);
 #endif
 call CFUNC(compileAllFunctions);
-LOG("Reading and Compiling all Function and Modules Required: " + str ((diag_tickTime - _startTime) * 1000) + " ms")
+LOG("Reading and Compiling all Function and Modules Required: " +  (((diag_tickTime - _startTime) * 1000) toFixed 20) + " ms")
