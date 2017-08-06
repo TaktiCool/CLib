@@ -86,6 +86,7 @@ class CfgCLibModules {
                 APIFNC(shuffleArray);
                 FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
+                APIFNC(toFixedNumber);
             };
 
             MODULE(MissionModuleLoader) {
