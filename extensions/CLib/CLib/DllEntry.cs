@@ -84,7 +84,24 @@ namespace CLib
                                     if (!taskEntry.Value.IsCompleted)
                                         continue;
 
-                                    output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    try
+                                    {
+                                        output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    } catch (Exception e) {
+                                        output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX);
+                                        if (e is AggregateException) 
+                                        {
+                                            ((AggregateException)e).Handle(x => 
+                                            {
+                                                output.Append(x.Message + "\n");
+                                                return true;
+                                            });
+                                        } 
+                                        else 
+                                        {
+                                            output.Append(e.Message);
+                                        }
+                                    }
                                     Debugger.Log("Task result: " + taskEntry.Key);
                                     completedTasksIndices.Add(taskEntry.Key);
                                 }
@@ -98,6 +115,7 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
+                                Debugger.Log(e);
                                 output.Append(e.Message);
                             }
                             break;
