@@ -73,7 +73,8 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["playerSide", {playerSide}],
     ["cursorTarget", {cursorTarget}],
     ["cursorObject", {cursorObject}],
-    ["groupUnits", {units CLib_Player}]
+    ["groupUnits", {units CLib_Player}],
+    ["cameraView", {cameraView}]
 ];
 
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);
