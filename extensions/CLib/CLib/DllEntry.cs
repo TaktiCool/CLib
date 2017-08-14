@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CLib
@@ -23,7 +24,6 @@ namespace CLib
         static DllEntry()
         {
             Debugger = new Debugger();
-            Debugger.Show();
             Debugger.Log("Extension framework initializing");
 
             try
@@ -51,6 +51,9 @@ namespace CLib
             switch (input)
             {
                 case "":
+                    return;
+                case "debugger":
+                    Debugger.Toggle();
                     return;
                 case "version":
                     var executingAssembly = Assembly.GetExecutingAssembly();

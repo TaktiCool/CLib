@@ -148,6 +148,7 @@ namespace CLibWebSocket
             }
 
             if (DllEntry.sockets.ContainsKey(hash) && DllEntry.sockets[hash].State != WebSocketState.Open) {
+                Log("Closed");
                 DllEntry.sockets[hash].Abort();
                 DllEntry.sockets.Remove(hash);
             }
