@@ -176,6 +176,25 @@ namespace CLibWebSocket
             return hash;
         }
 
+        [DllExport("IsConnected")]
+        public static string IsConnected(string hash)
+        {
+            if (!DllEntry.sockets.ContainsKey(hash))
+            {
+                return "false";
+            }
+
+            if (DllEntry.sockets.ContainsKey(hash) && DllEntry.sockets[hash].State != WebSocketState.Open)
+            {
+                Log("Closed");
+                DllEntry.sockets[hash].Abort();
+                DllEntry.sockets.Remove(hash);
+                return "false";
+            }
+
+            return "true";
+        }
+
         [DllExport("Send")]
         public static string Send(string data) {
             string[] dataParts = data.Split(new char[] { ':' }, 2);
