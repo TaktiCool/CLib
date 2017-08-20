@@ -148,7 +148,7 @@ namespace CLibWebSocket
             }
 
             if (DllEntry.sockets.ContainsKey(hash) && DllEntry.sockets[hash].State != WebSocketState.Open) {
-                Log("Closed");
+                Log("Closed - State: " + DllEntry.sockets[hash].State);
                 DllEntry.sockets[hash].Abort();
                 DllEntry.sockets.Remove(hash);
             }
@@ -169,6 +169,8 @@ namespace CLibWebSocket
                     Log("Connected");
                 } else {
                     Log("Connecting error");
+                    DllEntry.sockets[hash].Abort();
+                    DllEntry.sockets.Remove(hash);
                     return "error";
                 }
             }
@@ -186,7 +188,7 @@ namespace CLibWebSocket
 
             if (DllEntry.sockets.ContainsKey(hash) && DllEntry.sockets[hash].State != WebSocketState.Open)
             {
-                Log("Closed");
+                Log("Closed - State: " + DllEntry.sockets[hash].State);
                 DllEntry.sockets[hash].Abort();
                 DllEntry.sockets.Remove(hash);
                 return "false";
@@ -200,7 +202,7 @@ namespace CLibWebSocket
             string[] dataParts = data.Split(new char[] { ':' }, 2);
             string hash = dataParts[0];
             data = dataParts[1];
-            Log(data);
+
             if (!DllEntry.sockets.ContainsKey(hash))
                 throw new ArgumentException("Socket for address not connected");
 
@@ -209,7 +211,7 @@ namespace CLibWebSocket
             Task task = new Task(async () => {
                 Log("Sending: ", data);
                 await socket.SendAsync(new ArraySegment<byte>(Encoding.Default.GetBytes(data)), WebSocketMessageType.Text, true, CancellationToken.None);
-                Log("Sended");
+                Log("Sent");
             });
             task.RunSynchronously();
 
