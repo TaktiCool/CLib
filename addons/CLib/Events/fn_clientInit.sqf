@@ -74,6 +74,7 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["cursorTarget", {cursorTarget}],
     ["cursorObject", {cursorObject}],
     ["groupUnits", {units CLib_Player}],
+    ["assignedTeam", {assignedTeam CLib_Player}],
     ["cameraView", {cameraView}]
 ];
 
