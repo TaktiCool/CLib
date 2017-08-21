@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLib", "CLib\CLib.csproj", "{3B6CA58C-9DB3-4256-8A10-BC7101D1EE8A}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibCompression", "CLibComp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibLogging", "CLibLogging\CLibLogging.csproj", "{6EC8493C-6803-487C-8061-0F8C4D33A7E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibWebSocket", "CLibWebSocket\CLibWebSocket.csproj", "{9573C0AE-7B68-4B63-B7DD-E982E62F6086}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLibSocket", "CLibSocket\CLibSocket.csproj", "{9573C0AE-7B68-4B63-B7DD-E982E62F6086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80B1FA6F-48B2-42F7-A149-CE008D675BCD}
 	EndGlobalSection
 EndGlobal
