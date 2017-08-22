@@ -65,12 +65,6 @@ namespace CLib
             this.rtb_log.AppendText(obj.ToString() + "\n");
         }
 
-        private void rtb_log_TextChanged(object sender, EventArgs e)
-        {
-            //this.rtb_log.SelectionStart = this.rtb_log.Text.Length;
-            //this.rtb_log.ScrollToCaret();
-        }
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (this.rtb_log.InvokeRequired)

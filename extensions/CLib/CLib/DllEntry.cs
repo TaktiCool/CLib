@@ -161,7 +161,7 @@ namespace CLib
             _inputBuffer = "";
 
             if (!AvailableExtensions.ContainsKey(request.ExtensionName))
-                throw new ArgumentException("Extension is not valid: " + Environment.CurrentDirectory);
+                throw new ArgumentException($"Extension is not valid: {request.ExtensionName}");
 
             var function = FunctionLoader.LoadFunction<CLibFuncDelegate>(AvailableExtensions[request.ExtensionName], request.ActionName);
 
@@ -179,7 +179,7 @@ namespace CLib
 
         private static void DetectExtensions()
         {
-            Debugger.Log("Current directory is: " + Environment.CurrentDirectory);
+            Debugger.Log($"Current directory is: {Environment.CurrentDirectory}");
             Debugger.Log("Extensions Found:");
             var startParameters = Environment.GetCommandLineArgs();
             foreach (string startParameter in startParameters)
@@ -218,7 +218,6 @@ namespace CLib
 #if WIN64
                             filename = filename.Substring(0, filename.Length - 4);
 #endif
-
 
                             if (AvailableExtensions.ContainsKey(filename))
                             {
