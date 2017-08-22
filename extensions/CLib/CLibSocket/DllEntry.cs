@@ -18,8 +18,20 @@ namespace CLibSocket
         public struct MIB_UDPROW_OWNER_PID
         {
             public uint LocalAddress;
-            public ushort LocalPort;
+            private ushort localPort;
             public uint PID;
+
+            public ushort LocalPort
+            {
+                get
+                {
+                    byte[] bytes = BitConverter.GetBytes(this.localPort);
+                    if (BitConverter.IsLittleEndian)
+                        Array.Reverse(bytes);
+                    
+                    return BitConverter.ToUInt16(bytes, 0);
+                }
+            }
         }
 
         enum UDP_TABLE_CLASS
@@ -83,7 +95,7 @@ namespace CLibSocket
                     if (tcpClient.Connected)
                     {
                         Log("Connected");
-                        DllEntry.Send(tcpClient, "Arma3Server:" + string.Join<int>(":", DllEntry.GetArmaServerPorts()));
+                        DllEntry.Send(tcpClient, "Arma3Server:" + string.Join(":", DllEntry.GetArmaServerPorts()));
                         return hash;
                     }
 
