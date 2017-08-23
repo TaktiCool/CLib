@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CLib
@@ -23,7 +24,6 @@ namespace CLib
         static DllEntry()
         {
             Debugger = new Debugger();
-            Debugger.Show();
             Debugger.Log("Extension framework initializing");
 
             try
@@ -51,6 +51,9 @@ namespace CLib
             switch (input)
             {
                 case "":
+                    return;
+                case "debugger":
+                    Debugger.Toggle();
                     return;
                 case "version":
                     var executingAssembly = Assembly.GetExecutingAssembly();
@@ -84,7 +87,24 @@ namespace CLib
                                     if (!taskEntry.Value.IsCompleted)
                                         continue;
 
-                                    output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    try
+                                    {
+                                        output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    } catch (Exception e) {
+                                        output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX);
+                                        if (e is AggregateException) 
+                                        {
+                                            ((AggregateException)e).Handle(x => 
+                                            {
+                                                output.Append(x.Message + "\n");
+                                                return true;
+                                            });
+                                        } 
+                                        else 
+                                        {
+                                            output.Append(e.Message);
+                                        }
+                                    }
                                     Debugger.Log("Task result: " + taskEntry.Key);
                                     completedTasksIndices.Add(taskEntry.Key);
                                 }
@@ -98,6 +118,7 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
+                                Debugger.Log(e);
                                 output.Append(e.Message);
                             }
                             break;
@@ -140,7 +161,7 @@ namespace CLib
             _inputBuffer = "";
 
             if (!AvailableExtensions.ContainsKey(request.ExtensionName))
-                throw new ArgumentException("Extension is not valid: " + Environment.CurrentDirectory);
+                throw new ArgumentException($"Extension is not valid: {request.ExtensionName}");
 
             var function = FunctionLoader.LoadFunction<CLibFuncDelegate>(AvailableExtensions[request.ExtensionName], request.ActionName);
 
@@ -158,7 +179,7 @@ namespace CLib
 
         private static void DetectExtensions()
         {
-            Debugger.Log("Current directory is: " + Environment.CurrentDirectory);
+            Debugger.Log($"Current directory is: {Environment.CurrentDirectory}");
             Debugger.Log("Extensions Found:");
             var startParameters = Environment.GetCommandLineArgs();
             foreach (string startParameter in startParameters)
@@ -197,7 +218,6 @@ namespace CLib
 #if WIN64
                             filename = filename.Substring(0, filename.Length - 4);
 #endif
-
 
                             if (AvailableExtensions.ContainsKey(filename))
                             {

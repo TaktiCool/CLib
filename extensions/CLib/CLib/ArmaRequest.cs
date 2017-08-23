@@ -21,7 +21,7 @@ namespace CLib
             var request = new ArmaRequest();
             int taskId;
             if (!int.TryParse(headerValues[0], out taskId))
-                throw new ArgumentException("Invalid task id: " + headerValues[0]);
+                throw new ArgumentException($"Invalid task id: {headerValues[0]}");
             request.TaskId = taskId;
             request.ExtensionName = headerValues[1].Trim();
             request.ActionName = headerValues[2].Trim();

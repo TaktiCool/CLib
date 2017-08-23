@@ -27,7 +27,7 @@ params ["_name", "_modName", "_module", "_var", "_file", "_line"];
     private _formatStr = "(%1) [%2 %3 - %4]: %5";
 #endif
 private _str = format [_formatStr, diag_frameNo, _modName, _name, _module, _var, _file, _line];
-diag_log _str;
+diag_log text _str;
 #ifdef ISDEV
     systemChat _str;
     if (hasInterface && !isServer) then {

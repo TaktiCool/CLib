@@ -15,25 +15,80 @@ namespace CLib
         public Debugger()
         {
             InitializeComponent();
+
+#if Debug
+            this.Show()
+#else 
+            this.Hide();
+#endif
+        }
+
+        public void Toggle()
+        {
+            if (this.rtb_log.InvokeRequired)
+            {
+                try
+                {
+                    this.rtb_log.Invoke(new Action(delegate
+                    {
+                        this.Toggle();
+                    }));
+                }
+                catch (ObjectDisposedException) {}
+                return;
+            }
+
+            if (this.Visible)
+            {
+                this.Hide();
+            }
+            else
+            {
+                this.Show();
+            }
         }
 
         public void Log(object obj)
         {
             if (this.rtb_log.InvokeRequired)
             {
-                this.rtb_log.Invoke(new Action(delegate {
-                    this.Log(obj);
-                }));
+                try
+                {
+                    this.rtb_log.Invoke(new Action(delegate {
+                        this.Log(obj);
+                    }));
+                }
+                catch (ObjectDisposedException) {}
                 return;
             }
 
             this.rtb_log.AppendText(obj.ToString() + "\n");
         }
 
-        private void rtb_log_TextChanged(object sender, EventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            //this.rtb_log.SelectionStart = this.rtb_log.Text.Length;
-            //this.rtb_log.ScrollToCaret();
+            if (this.rtb_log.InvokeRequired)
+            {
+                try
+                {
+                    this.rtb_log.Invoke(new Action(delegate
+                    {
+                        this.OnFormClosing(e);
+                    }));
+                }
+                catch (ObjectDisposedException) {}
+                return;
+            }
+
+            if (e.CloseReason != CloseReason.UserClosing)
+            {
+                this.Dispose(true);
+                Application.Exit();
+            }
+            else
+            {
+                this.Hide();
+            }
         }
     }
 }
