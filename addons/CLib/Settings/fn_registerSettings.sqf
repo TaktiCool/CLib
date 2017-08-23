@@ -48,10 +48,10 @@ private _fnc_getSettingsValue = {
     private _tempPathString = _path joinString "_";
     if (_force == 0) then {
         if (_value isEqualType 0) then {
-            _value = [_path joinString "_", _value] call BIS_fnc_getParamValue;
+            _value = [_tempPathString, _value] call BIS_fnc_getParamValue;
         } else {
-            private _valueIndex = [_path joinString "_", _value] call BIS_fnc_getParamValue;
-            private _tempPathString = [(_path joinString "_"), _value] call BIS_fnc_getParamValue;
+            private _valueIndex = [_tempPathString, -1] call BIS_fnc_getParamValue;
+            if (_valueIndex == -1) exitWith {};
             if (isArray (missionConfigFile >> "Params" >> _tempPathString >> "valueData")) then {
                 _value = getArray (missionConfigFile >> "Params" >> _tempPathString >> "valueData") select _valueIndex;
             };
