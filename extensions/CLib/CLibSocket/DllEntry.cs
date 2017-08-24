@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 
 namespace CLibSocket
 {
@@ -44,10 +45,20 @@ namespace CLibSocket
         [DllImport("iphlpapi.dll", SetLastError = true)]
         private static extern uint GetExtendedUdpTable(IntPtr pTcpTable, ref int dwOutBufLen, bool sort, int ipVersion, UDP_TABLE_CLASS tblClass, uint reserved = 0);
 
-        private static Dictionary<string, TcpClient> tcpClients = new Dictionary<string, TcpClient>();
+        private class TcpClientEntry
+        {
+            public Uri Uri;
+            public TcpClient TcpClient;
+        }
+
+        private static Dictionary<string, TcpClientEntry> tcpClients = new Dictionary<string, TcpClientEntry>();
+        private static Timer reconnectTimer;
+        private static ReaderWriterLock locker = new ReaderWriterLock();
 
         static DllEntry() {
             System.IO.File.WriteAllText("CLibSocket.log", string.Empty);
+
+            DllEntry.reconnectTimer = new Timer(DllEntry.ReconnectAllSockets, null, 0, 5000);
         }
 
 #if WIN64
@@ -73,43 +84,41 @@ namespace CLibSocket
         [DllExport("Connect")]
         public static string Connect(string address) {
             string hash = "";
-            using (SHA1Managed sha1 = new SHA1Managed()) {
+            using (SHA1Managed sha1 = new SHA1Managed())
+            {
                 hash = string.Join("", sha1.ComputeHash(Encoding.Default.GetBytes(address)).Select(b => b.ToString("x2"))).Substring(0, 7);
             }
+            Log(hash);
 
-            if (DllEntry.tcpClients.ContainsKey(hash) && !DllEntry.tcpClients[hash].Connected) {
-                Log("Closed");
-                DllEntry.tcpClients[hash].Close();
-                DllEntry.tcpClients.Remove(hash);
+            if (DllEntry.tcpClients.ContainsKey(hash)) {
+                return hash;
             }
 
-            if (!DllEntry.tcpClients.ContainsKey(hash)) {
-                if (Uri.TryCreate(address, UriKind.Absolute, out Uri uri))
-                {
-                    TcpClient tcpClient = new TcpClient();
-                    DllEntry.tcpClients.Add(hash, tcpClient);
-
-                    Log("Connecting to: " + uri.Host + ":" + uri.Port);
-
-                    tcpClient.Connect(uri.Host, uri.Port);
-                    if (tcpClient.Connected)
-                    {
-                        Log("Connected");
-                        DllEntry.Send(tcpClient, "Arma3Server:" + string.Join(":", DllEntry.GetArmaServerPorts()));
-                        return hash;
-                    }
-
-                    Log("Connecting error");
-                    DllEntry.tcpClients[hash].Close();
-                    DllEntry.tcpClients.Remove(hash);
-                    return "error";
-                }
-
+            if (!Uri.TryCreate(address, UriKind.Absolute, out Uri uri))
+            {
                 Log("Malformed address: " + address);
                 return "error";
             }
 
+            Log("Connecting to: " + uri.Host + ":" + uri.Port);
+            TcpClient tcpClient = DllEntry.Connect(uri);
+            DllEntry.tcpClients.Add(hash, new TcpClientEntry() { Uri = uri, TcpClient = tcpClient });
+
             return hash;
+        }
+
+        [DllExport("Disconnect")]
+        public static string Disconnect(string hash)
+        {
+            if (!DllEntry.tcpClients.ContainsKey(hash))
+            {
+                return "false";
+            }
+            
+            DllEntry.tcpClients[hash].TcpClient.Close();
+            DllEntry.tcpClients.Remove(hash);
+            
+            return "success";
         }
 
         [DllExport("IsConnected")]
@@ -117,18 +126,10 @@ namespace CLibSocket
         {
             if (!DllEntry.tcpClients.ContainsKey(hash))
             {
-                return "false";
+                return "error";
             }
 
-            if (DllEntry.tcpClients[hash].Client.Poll(1, SelectMode.SelectRead) && DllEntry.tcpClients[hash].Client.Available == 0)
-            {
-                Log("Closed");
-                DllEntry.tcpClients[hash].Close();
-                DllEntry.tcpClients.Remove(hash);
-                return "false";
-            }
-
-            return "true";
+            return DllEntry.IsConnected(DllEntry.tcpClients[hash].TcpClient) ? "success" : "false";
         }
 
         [DllExport("Send")]
@@ -140,16 +141,64 @@ namespace CLibSocket
             if (!DllEntry.tcpClients.ContainsKey(hash))
                 return "Socket for address not connected";
 
-            TcpClient tcpClient = DllEntry.tcpClients[hash];
-            DllEntry.Send(tcpClient, data);
+            DllEntry.Send(DllEntry.tcpClients[hash].TcpClient, data);
 
-            return "Success";
+            return "success";
+        }
+
+        private static TcpClient Connect(Uri uri)
+        {
+            TcpClient tcpClient = new TcpClient(uri.Host, uri.Port);
+            tcpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+
+            DllEntry.Send(tcpClient, $"Arma3Server:{string.Join(":", DllEntry.GetArmaServerPorts())}");
+            return tcpClient;
+        }
+
+        private static bool IsConnected(TcpClient tcpClient)
+        {
+            try
+            {
+                return tcpClient.Connected && !(tcpClient.Client.Poll(1, SelectMode.SelectRead) && tcpClient.Client.Available == 0);
+            }
+            catch (ObjectDisposedException)
+            {
+                return false;
+            }
         }
 
         private static void Send(TcpClient tcpClient, string message)
         {
             byte[] dataBytes = Encoding.Default.GetBytes(message);
             tcpClient.GetStream().Write(dataBytes, 0, dataBytes.Length);
+        }
+
+        private static void ReconnectAllSockets(object state)
+        {
+            foreach (KeyValuePair<string, TcpClientEntry> kvPair in DllEntry.tcpClients)
+            {
+                string hash = kvPair.Key;
+                TcpClientEntry entry = kvPair.Value;
+
+                if (!DllEntry.IsConnected(entry.TcpClient))
+                {
+                    try
+                    {
+                        entry.TcpClient.Close();
+                    }
+                    catch (ObjectDisposedException) { }
+
+                    try
+                    {
+                        entry.TcpClient = DllEntry.Connect(entry.Uri);
+                        Log("Reconnected");
+                    }
+                    catch (SocketException e)
+                    {
+                        Log($"Reconnect - Socket exception {e.Message}");
+                    }
+                }
+            }
         }
 
         private static List<int> GetArmaServerPorts()
@@ -188,7 +237,15 @@ namespace CLibSocket
         }
 
         private static void Log(params object[] obj) {
-            System.IO.File.AppendAllText("CLibSocket.log", string.Concat(DateTime.Now.ToString("HH:mm:ss.fff"), " ", string.Concat(obj), "\r\n"));
+            try
+            {
+                locker.AcquireWriterLock(int.MaxValue);
+                System.IO.File.AppendAllText("CLibSocket.log", string.Concat(DateTime.Now.ToString("HH:mm:ss.fff"), " ", string.Concat(obj), "\r\n"));
+            }
+            finally
+            {
+                locker.ReleaseWriterLock();
+            }
         }
     }
 }
