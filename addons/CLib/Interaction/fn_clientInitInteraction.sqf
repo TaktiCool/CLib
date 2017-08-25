@@ -54,7 +54,7 @@ private _inGameUiEventHandler = {
     if (GVAR(DisablePrevAction) && {_eventName == "PrevAction"} || (GVAR(DisableNextAction) && {_eventName == "NextAction"}) || (GVAR(DisableAction) && {_eventName == "Action"})) then {
         true
     } else {
-        private _ehData = [GVAR(InGameUIEventHandler), format ["%1_%2", _eventName, _id], []] call CFUNC(getVariable);
+        private _ehData = GVAR(InGameUIEventHandler) getVariable [format ["%1_%2", _eventName, _id], []];
         _ehData params [["_code", {}], ["_args", []]];
         [_target, _caller, _id, _args] call _code;
     };
@@ -75,5 +75,5 @@ for "_i" from 0 to 11 do {
 DFUNC(IdleAnimation) = {
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
     params ["_title", "_iconIdle", "_hint"];
-    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((diag_tickTime / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
+    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
 };

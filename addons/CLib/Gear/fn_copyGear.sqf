@@ -22,21 +22,21 @@ removeAllWeapons _u2;
 removeHeadgear _u2;
 removeGoggles _u2;
 
-[_u2, uniform _u1] call CFUNC(addContainer);
-[_u2, vest _u1] call CFUNC(addContainer);
-[_u2, backpack _u1] call CFUNC(addContainer);
+[_u2, uniform _u1, 0] call CFUNC(addContainer);
+[_u2, vest _u1, 1] call CFUNC(addContainer);
+[_u2, backpack _u1, 2] call CFUNC(addContainer);
 _u2 addHeadgear headgear _u1;
 
 
-_uniformItems = uniformItems _u1;
-_vestItems = vestItems _u1;
-_backpackItems = backpackItems _u1;
+private _uniformItems = uniformItems _u1;
+private _vestItems = vestItems _u1;
+private _backpackItems = backpackItems _u1;
 
-_primaryWeapon = [primaryWeapon _u1] call BIS_fnc_baseWeapon;
-_secondaryWeapon = [secondaryWeapon _u1] call BIS_fnc_baseWeapon;
-_handgunWeapon = [handgunWeapon _u1] call BIS_fnc_baseWeapon;
+private _primaryWeapon = [primaryWeapon _u1] call BIS_fnc_baseWeapon;
+private _secondaryWeapon = [secondaryWeapon _u1] call BIS_fnc_baseWeapon;
+private _handgunWeapon = [handgunWeapon _u1] call BIS_fnc_baseWeapon;
 
-_magazinesAmmoFull = magazinesAmmoFull _u1;
+private _magazinesAmmoFull = magazinesAmmoFull _u1;
 
 {
     _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];

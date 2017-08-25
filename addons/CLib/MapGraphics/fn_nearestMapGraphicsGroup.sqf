@@ -26,7 +26,7 @@ private _nearestIcon = "";
     _x params ["_iconId", "_pos", "_w", "_h", "_angle", "_isRectangle"];
 
     if (_mousePosition inArea [_pos, _w, _h, _angle, _isRectangle]) then {
-        _temp1 = _pos distance _mousePosition;
+        private _temp1 = _pos distance _mousePosition;
         if (_temp1 < _r) then {
             _nearestIcon = _iconId;
             _r = _temp1;

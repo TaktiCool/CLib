@@ -32,9 +32,9 @@ if (_containerNumber == -1) then {
 
 switch (_containerNumber) do {
     case 0: {
-        _uniformName = uniform _unit;
+        private _uniformName = uniform _unit;
         if (_containerClassName == _uniformName && _containerClassName != "") then {
-            _uniform = uniformContainer _unit;
+            private _uniform = uniformContainer _unit;
             clearItemCargoGlobal _uniform;
             clearMagazineCargoGlobal _uniform;
             clearWeaponCargoGlobal _uniform;
@@ -47,9 +47,9 @@ switch (_containerNumber) do {
         };
     };
     case 1: {
-        _vestName = vest _unit;
+        private _vestName = vest _unit;
         if (_containerClassName == _vestName && _containerClassName != "") then {
-            _vest = vestContainer _unit;
+            private _vest = vestContainer _unit;
             clearItemCargoGlobal _vest;
             clearMagazineCargoGlobal _vest;
             clearWeaponCargoGlobal _vest;
@@ -62,9 +62,9 @@ switch (_containerNumber) do {
         };
     };
     case 2: {
-        _backpackName = backpack _unit;
+        private _backpackName = backpack _unit;
         if (_containerClassName == _backpackName && _containerClassName != "") then {
-            _backpack = backpackContainer _unit;
+            private _backpack = backpackContainer _unit;
             clearItemCargoGlobal _backpack;
             clearMagazineCargoGlobal _backpack;
             clearWeaponCargoGlobal _backpack;

@@ -18,7 +18,7 @@
     All near units <Array<Object>>
 */
 params ["_postion", "_radius"];
-[format [QGVAR(nearUnits_%1), _radius], {
+[format [QGVAR(nearUnits_%1_%2), _radius, _postion], {
     private _nearObjects = _postion nearObjects _radius;
 
     private _return = _nearObjects select {

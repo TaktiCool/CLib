@@ -7,13 +7,13 @@
     <ProjectGuid>{9573C0AE-7B68-4B63-B7DD-E982E62F6086}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CLibWebSocket</RootNamespace>
-    <AssemblyName>CLibWebSocket_x64</AssemblyName>
+    <RootNamespace>CLibSocket</RootNamespace>
+    <AssemblyName>CLibSocket_x64</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <AssemblyName>CLibWebSocket_x64</AssemblyName>
+    <AssemblyName>CLibSocket_x64</AssemblyName>
     <OutputPath>..\..\..\</OutputPath>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -23,7 +23,7 @@
     <DefineConstants>WIN64</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <AssemblyName>CLibWebSocket</AssemblyName>
+    <AssemblyName>CLibSocket</AssemblyName>
     <OutputPath>..\..\..\</OutputPath>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>

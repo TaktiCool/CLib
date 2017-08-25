@@ -20,6 +20,8 @@ GVAR(waitUntilArray) = [];
 
 GVAR(perFrameHandlerArray) = [];
 GVAR(PFHhandles) = [];
+GVAR(pfhDeleleted) = false;
+GVAR(deletedIndexes) = [];
 
 GVAR(skipFrameArray) = [];
 GVAR(sortSkipFrameArray) = false;
@@ -43,9 +45,9 @@ DFUNC(onEachFrameHandler) = {
     GVAR(lastFrameTime) = diag_tickTime;
 
     {
-        _x params ["_function", "_delay", "_delta", "", "_args", "_handle"];
+        _x params ["_function", "_delay", "_delta", "_args", "_handle", "_isDeleted"];
 
-        if (time > _delta) then {
+        if (time > _delta && !_isDeleted) then {
             _x set [2, _delta + _delay];
             if (_function isEqualType "") then {
                 _function = (parsingNamespace getVariable [_function, {}]);
@@ -118,6 +120,21 @@ DFUNC(onEachFrameHandler) = {
     GVAR(nextFrameBufferA) = +GVAR(nextFrameBufferB);
     GVAR(nextFrameBufferB) = [];
     GVAR(nextFrameNo) = diag_frameNo + 1;
+
+
+    if !(GVAR(deletedIndices) isEqualTo []) then {
+        {
+            GVAR(perFrameHandlerArray) set [_x, objNull];
+        } forEach GVAR(deletedIndices);
+
+        GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
+
+        {
+            _x params ["", "", "", "", "", "_handle"];
+            GVAR(PFHhandles) set [_handle, _forEachIndex];
+        } forEach GVAR(perFrameHandlerArray);
+        GVAR(deletedIndices) = [];
+    };
 
     PERFORMANCECOUNTER_END(PFHCounter);
 };
