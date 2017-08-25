@@ -185,7 +185,7 @@ namespace CLib
             foreach (string startParameter in startParameters)
             {
                 // Arma 3 allows start parameters seperated by new lines instead of spaces
-                foreach (string realStartParameter in startParameter.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string realStartParameter in startParameter.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var match = Regex.Match(realStartParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
                     if (!match.Success)

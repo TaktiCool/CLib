@@ -52,13 +52,14 @@ namespace CLibSocket
         }
 
         private static Dictionary<string, TcpClientEntry> tcpClients = new Dictionary<string, TcpClientEntry>();
-        private static Timer reconnectTimer;
+        private static Timer tickTimer;
+        private static List<int> serverPorts = new List<int>();
         private static ReaderWriterLock locker = new ReaderWriterLock();
 
         static DllEntry() {
             System.IO.File.WriteAllText("CLibSocket.log", string.Empty);
 
-            DllEntry.reconnectTimer = new Timer(DllEntry.ReconnectAllSockets, null, 0, 5000);
+            DllEntry.tickTimer = new Timer(DllEntry.OnTick, null, 0, 5000);
         }
 
 #if WIN64
@@ -150,8 +151,6 @@ namespace CLibSocket
         {
             TcpClient tcpClient = new TcpClient(uri.Host, uri.Port);
             tcpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-
-            DllEntry.Send(tcpClient, $"Arma3Server:{string.Join(":", DllEntry.GetArmaServerPorts())}");
             return tcpClient;
         }
 
@@ -173,7 +172,22 @@ namespace CLibSocket
             tcpClient.GetStream().Write(dataBytes, 0, dataBytes.Length);
         }
 
-        private static void ReconnectAllSockets(object state)
+        private static void OnTick(object state)
+        {
+            DllEntry.ReconnectAllSockets();
+
+            List<int> ports = DllEntry.GetArmaServerPorts();
+            if (!ports.SequenceEqual(DllEntry.serverPorts))
+            {
+                DllEntry.serverPorts = ports;
+                foreach (TcpClientEntry tcpClientEntry in DllEntry.tcpClients.Values)
+                {
+                    DllEntry.Send(tcpClientEntry.TcpClient, $"PORTS:{string.Join(":", DllEntry.serverPorts)}");
+                }
+            }
+        }
+
+        private static void ReconnectAllSockets()
         {
             foreach (KeyValuePair<string, TcpClientEntry> kvPair in DllEntry.tcpClients)
             {
