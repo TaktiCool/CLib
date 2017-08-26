@@ -31,6 +31,19 @@ GVAR(ignoredLogEventNames_1) = [];
     [QEGVAR(ExtensionFramework,extensionResult), 0]
 ];
 
+// EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
+["eventAdded", {
+    params ["_arguments", "_data"];
+    _arguments params ["_event", "_function", "_args"];
+    if (!(isNil QGVAR(missionStartedTriggered)) && {_event isEqualTo "missionStarted"}) then {
+        LOG("Mission Started Event get Added After Mission Started");
+        if (_function isEqualType "") then {
+            _function = parsingNamespace getVariable [_function, {}];
+        };
+        [nil, _args] call _function;
+    };
+}] call CFUNC(addEventHandler);
+
 // Events for serveronly commands
 ["hideObject", {
     (_this select 0) params ["_object", "_value"];
