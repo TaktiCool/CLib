@@ -34,19 +34,6 @@ parsingNamespace setVariable ["CLib_Player", player];
     ["playerJoined", CLib_Player] call CFUNC(globalEvent);
 }, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
 
-// EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
-["eventAdded", {
-    params ["_arguments", "_data"];
-    _arguments params ["_event", "_function", "_args"];
-    if ((!(isNil QGVAR(missionStartedTriggered)) || !(isNull (findDisplay 46))) && {_event isEqualTo "missionStarted"}) then {
-        LOG("Mission Started Event get Added After Mission Started");
-        if (_function isEqualType "") then {
-            _function = parsingNamespace getVariable [_function, {}];
-        };
-        [nil, _args] call _function;
-    };
-}] call CFUNC(addEventHandler);
-
 
 private _codeStr = "private ['_oldValue', '_currentValue'];";
 // Build a dynamic event system to use it in modules.
