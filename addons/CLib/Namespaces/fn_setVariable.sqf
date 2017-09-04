@@ -20,7 +20,7 @@
     Returns:
     None
 */
-params ["_namespace", "_varName", "_varContent", ["_cacheName", QGVAR(allVariableCache)], ["_global", false, [false]]];
+params ["_namespace", "_varName", ["_varContent", nil], ["_cacheName", QGVAR(allVariableCache)], ["_global", false, [false]]];
 
 private _cache = _namespace getVariable [_cacheName, []];
 if (isNil "_varContent") then {
@@ -33,9 +33,19 @@ if (isNil "_varContent") then {
 };
 
 if (_namespace isEqualType locationNull) then {
-    _namespace setVariable [_varName, _varContent];
+    // we need to check our self if varContent is Nil else BI throws a error
+    if (isNil "_varContent") then {
+        _namespace setVariable [_varName, nil];
+    } else {
+        _namespace setVariable [_varName, _varContent];
+    };
     _namespace setVariable [_cacheName, _cache];
 } else {
-    _namespace setVariable [_varName, _varContent, _global];
+    // we need to check our self if varContent is Nil else BI throws a error
+    if (isNil "_varContent") then {
+        _namespace setVariable [_varName, nil, _global];
+    } else {
+        _namespace setVariable [_varName, _varContent, _global];
+    };
     _namespace setVariable [_cacheName, _cache, _global];
 };
