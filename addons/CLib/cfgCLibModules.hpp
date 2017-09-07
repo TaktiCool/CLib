@@ -238,8 +238,6 @@ class CfgCLibModules {
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            FNCSERVER(server);
-            FNC(client);
             FNC(init);
             APIFNC(getSettingOld);
             APIFNC(getSetting);
