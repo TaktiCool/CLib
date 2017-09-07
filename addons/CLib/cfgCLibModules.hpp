@@ -80,7 +80,6 @@ class CfgCLibModules {
                 APIFNC(groupPlayers);
                 APIFNC(inFOV);
                 FNC(initVoiceDetection);
-                APIFNC(invokePlayerChanged);
                 APIFNC(log);
                 APIFNC(name);
                 APIFNC(sanitizeString);
@@ -104,6 +103,7 @@ class CfgCLibModules {
             APIFNC(globalEvent);
             FNC(hcInit);
             FNC(init);
+            APIFNC(invokePlayerChanged);
             APIFNC(localEvent);
             APIFNC(removeEventhandler);
             APIFNC(serverEvent);
