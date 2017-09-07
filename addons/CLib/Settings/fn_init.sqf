@@ -14,3 +14,11 @@
     None
 */
 GVAR(settingsNamespaceOld) = call CFUNC(createNamespace);
+
+if (isServer) then {
+    call FUNC(server);
+};
+
+if (hasInterface) then {
+    call FUNC(client);
+};
