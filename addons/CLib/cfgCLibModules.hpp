@@ -141,6 +141,8 @@ class CfgCLibModules {
             APIFNC(createHash);
             APIFNC(forEachHash);
             APIFNC(getHash);
+            APIFNC(hashToNamespace);
+            APIFNC(namespaceToHash);
             APIFNC(setHash);
         };
 

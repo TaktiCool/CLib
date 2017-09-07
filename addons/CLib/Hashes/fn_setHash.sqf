@@ -28,12 +28,12 @@ switch (true) do {
         } count _hash;
         _hash
     };
-    case (_contain): {
+    case (_contain && !_delete): {
         private _i = (_hash select HASH_KEY) find _key;
         (_hash select HASH_VALUE) set [_i, _value];
         _hash
     };
-    case (!_contain): {
+    case (!_contain && !_delete): {
         private _i = (_hash select HASH_KEY) pushBack _key;
         (_hash select HASH_VALUE) set [_i, _value];
         _hash
