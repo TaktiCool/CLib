@@ -17,6 +17,8 @@
 // Skip the briefing by pressing the continue button on behalf of the user
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
+diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
+
 0 spawn {
     if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
     if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
