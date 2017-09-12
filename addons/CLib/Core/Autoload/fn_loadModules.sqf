@@ -37,7 +37,7 @@ diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)]
         false
     };
 };
-
+GVAR(loadingCanceled) = false;
 // The client waits for the player to be available. This makes sure the player variable is initialized in every script later.
 if (hasInterface) then {
     // Briefing is over
@@ -79,6 +79,7 @@ if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
 // Bind EH on client to compile the received function code. Collect all functions names to determine which need to be called later in an array.
 GVAR(requiredFunctions) = [];
 QGVAR(receiveFunction) addPublicVariableEventHandler {
+    if (GVAR(loadingCanceled)) exitWith {};
     (_this select 1) params ["_functionVarName", "_functionCode", "_progress"];
 
     DUMP("Function Recieved: " + _functionVarName);
@@ -106,6 +107,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                     ["Warning function %1 is corrupted on your client, please restart your client.", _functionVarName] call BIS_fnc_errorMsg;
                     GVAR(unregisterClient) = player;
                     publicVariableServer QGVAR(unregisterClient);
+                    GVAR(loadingCanceled) = true;
                     endLoadingScreen;
                     disableUserInput false;
                     endMission "LOSER";
