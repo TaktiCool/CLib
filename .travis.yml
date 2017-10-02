@@ -3,11 +3,25 @@ branches:
   - master
   - release
 
+dist: trusty
 language: python
-python:
-  - '3.5'
-install: true
-before_script:
-  - cd tools
-script:
-  - python3 sqf_validator.py
+
+matrix:
+  include:
+    ###############################################################################
+    # Job #1 - SQF validation
+    ###############################################################################
+    - python: '3.5'
+      before_script:
+      - cd tools
+      script:
+      - python3 sqf_validator.py
+
+    ###############################################################################
+    # Job #2 - Building Extensions Disabled because not working :(
+    ###############################################################################
+    #- language: csharp
+    #  before_install:
+    #  - cd extensions
+    #  - cd CLib
+    #  solution: CLib.sln

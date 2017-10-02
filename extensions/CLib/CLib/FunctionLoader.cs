@@ -273,10 +273,10 @@ namespace CLib
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool FreeLibrary(IntPtr hModule);
 
-        [DllImport("Kernel32.dll")]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
 
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true)]
         private static extern int GetLastError();
 
         public static List<string> ExportTable(string dllPath)
@@ -289,7 +289,7 @@ namespace CLib
             {
                 var imageDosHeader = Marshal.PtrToStructure<IMAGE_DOS_HEADER>(hModule);
                 if (!imageDosHeader.IsValid)
-                    throw new Exception("IMAGE_DOS_HEADER is invalid: " + dllPath);
+                    throw new Exception($"IMAGE_DOS_HEADER is invalid: {dllPath}");
 
 #if WIN64
                 var imageNtHeaders = Marshal.PtrToStructure<IMAGE_NT_HEADERS64>(hModule + imageDosHeader.e_lfanew);
@@ -297,7 +297,7 @@ namespace CLib
                 var imageNtHeaders = Marshal.PtrToStructure<IMAGE_NT_HEADERS32>(hModule + imageDosHeader.e_lfanew);
 #endif
                 if (!imageNtHeaders.IsValid)
-                    throw new Exception("IMAGE_NT_HEADERS is invalid: " + dllPath);
+                    throw new Exception($"IMAGE_NT_HEADERS is invalid: {dllPath}");
 
                 IMAGE_DATA_DIRECTORY exportTabledataDirectory = imageNtHeaders.OptionalHeader.ExportTable;
                 if (exportTabledataDirectory.Size == 0)
@@ -328,11 +328,11 @@ namespace CLib
         {
             var hModule = LoadLibraryEx(dllPath, IntPtr.Zero, 0);
             if (hModule == IntPtr.Zero)
-                throw new ArgumentException("Dll not found: " + dllPath + " error code: " + GetLastError());
+                throw new ArgumentException($"Dll not found: {dllPath} - Error code: {GetLastError()}");
 
             var functionAddress = GetProcAddress(hModule, functionName);
             if (functionAddress == IntPtr.Zero)
-                throw new ArgumentException("Function not found: " + functionName + " error code: " + GetLastError());
+                throw new ArgumentException($"Function not found: {functionName} - Error code: {GetLastError()}");
 
             return Marshal.GetDelegateForFunctionPointer<T>(functionAddress);
         }

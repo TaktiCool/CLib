@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CLib
@@ -23,7 +24,6 @@ namespace CLib
         static DllEntry()
         {
             Debugger = new Debugger();
-            Debugger.Show();
             Debugger.Log("Extension framework initializing");
 
             try
@@ -51,6 +51,9 @@ namespace CLib
             switch (input)
             {
                 case "":
+                    return;
+                case "debugger":
+                    Debugger.Toggle();
                     return;
                 case "version":
                     var executingAssembly = Assembly.GetExecutingAssembly();
@@ -84,7 +87,24 @@ namespace CLib
                                     if (!taskEntry.Value.IsCompleted)
                                         continue;
 
-                                    output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    try
+                                    {
+                                        output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX + taskEntry.Value.Result);
+                                    } catch (Exception e) {
+                                        output.Append(ControlCharacter.SOH + taskEntry.Key.ToString() + ControlCharacter.STX);
+                                        if (e is AggregateException) 
+                                        {
+                                            ((AggregateException)e).Handle(x => 
+                                            {
+                                                output.Append(x.Message + "\n");
+                                                return true;
+                                            });
+                                        } 
+                                        else 
+                                        {
+                                            output.Append(e.Message);
+                                        }
+                                    }
                                     Debugger.Log("Task result: " + taskEntry.Key);
                                     completedTasksIndices.Add(taskEntry.Key);
                                 }
@@ -98,6 +118,7 @@ namespace CLib
                             }
                             catch (Exception e)
                             {
+                                Debugger.Log(e);
                                 output.Append(e.Message);
                             }
                             break;
@@ -140,7 +161,7 @@ namespace CLib
             _inputBuffer = "";
 
             if (!AvailableExtensions.ContainsKey(request.ExtensionName))
-                throw new ArgumentException("Extension is not valid: " + Environment.CurrentDirectory);
+                throw new ArgumentException($"Extension is not valid: {request.ExtensionName}");
 
             var function = FunctionLoader.LoadFunction<CLibFuncDelegate>(AvailableExtensions[request.ExtensionName], request.ActionName);
 
@@ -158,67 +179,70 @@ namespace CLib
 
         private static void DetectExtensions()
         {
-            Debugger.Log("Current directory is: " + Environment.CurrentDirectory);
+            Debugger.Log($"Current directory is: {Environment.CurrentDirectory}");
             Debugger.Log("Extensions Found:");
             var startParameters = Environment.GetCommandLineArgs();
             foreach (string startParameter in startParameters)
             {
-                var match = Regex.Match(startParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
-                if (!match.Success)
-                    continue;
-
-                foreach (string path in match.Groups[1].Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                // Arma 3 allows start parameters seperated by new lines instead of spaces
+                foreach (string realStartParameter in startParameter.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    string fullPath = path;
-                    if (!Path.IsPathRooted(fullPath))
-                        fullPath = Path.Combine(Environment.CurrentDirectory, path);
+                    var match = Regex.Match(realStartParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
+                    if (!match.Success)
+                        continue;
 
-#if WIN64
-                    var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
-#else
-                    var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
-#endif
-                    foreach (string extensionPath in extensionPaths)
+                    foreach (string path in match.Groups[1].Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                     {
-                        try
-                        {
-                            var exports = FunctionLoader.ExportTable(extensionPath);
+                        string fullPath = path;
+                        if (!Path.IsPathRooted(fullPath))
+                            fullPath = Path.Combine(Environment.CurrentDirectory, path);
+
 #if WIN64
-                            if (!exports.Contains("RVExtension"))
+                        var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
 #else
-                            if (!exports.Contains("_RVExtension@12"))
+                        var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
 #endif
-                                continue;
+                        foreach (string extensionPath in extensionPaths)
+                        {
+                            try
+                            {
+                                var exports = FunctionLoader.ExportTable(extensionPath);
+#if WIN64
+                                if (!exports.Contains("RVExtension"))
+#else
+                                if (!exports.Contains("_RVExtension@12"))
+#endif
+                                    continue;
 
-                            string filename = Path.GetFileNameWithoutExtension(extensionPath);
-                            if (filename == null)
-                                continue;
+                                string filename = Path.GetFileNameWithoutExtension(extensionPath);
+                                if (filename == null)
+                                    continue;
 
 #if WIN64
-                            filename = filename.Substring(0, filename.Length - 4);
+                                filename = filename.Substring(0, filename.Length - 4);
 #endif
 
+                                if (AvailableExtensions.ContainsKey(filename))
+                                {
+                                    Debugger.Log($"Duplicate: {filename} at: {extensionPath}");
+                                }
+                                else
+                                {
+                                    AvailableExtensions.Add(filename, extensionPath);
+                                    Debugger.Log($"Added: {filename} at: {extensionPath}");
+                                }
 
-                            if (AvailableExtensions.ContainsKey(filename))
-                            {
-                                Debugger.Log($"Duplicate: {filename} at: {extensionPath}");
                             }
-                            else
+                            catch (Win32Exception e)
                             {
-                                AvailableExtensions.Add(filename, extensionPath);
-                                Debugger.Log($"Added: {filename} at: {extensionPath}");
+                                // Trying to load an x64 dll within an x86 process fails with an error with no nativ error code. We can ignore that.
+                                if (e.NativeErrorCode != 0)
+                                    Debugger.Log(e);
                             }
-                            
-                        }
-                        catch (Win32Exception e)
-                        {
-                            // Trying to load an x64 dll within an x86 process fails with an error with no nativ error code. We can ignore that.
-                            if (e.NativeErrorCode != 0)
+                            catch (Exception e)
+                            {
                                 Debugger.Log(e);
-                        }
-                        catch (Exception e)
-                        {
-                            Debugger.Log(e);
+                            }
                         }
                     }
                 }
