@@ -34,7 +34,7 @@ class CfgCLibLoadoutsClassBase {
 
     removeAllWeapons = 1;
     removeAllItems = 1;
-    removeAllAssingedItems = 1;
+    removeAllAssignedItems = 1;
 };
 
 class CfgCLibLoadouts {

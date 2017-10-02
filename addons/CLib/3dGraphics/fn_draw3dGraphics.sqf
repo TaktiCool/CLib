@@ -24,7 +24,7 @@ private _cameraPosition = positionCameraToWorld [0, 0, 0];
 
 if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
     GVAR(3dGraphicsCacheVersion) = GVAR(3dGraphicsCacheBuildFlag);
-    call CFUNC(build3dGraphicsCache);
+    call FUNC(build3dGraphicsCache);
 };
 
 {
@@ -34,7 +34,7 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
                 _x params ["_type", "_texture", "_color", "_position", "_width", "_height", "_angle", "_text", "_shadow", "_textSize", "_font", "_align", "_drawSideArrows", "_code"];
                 private _isVisible = call _code;
                 if (_isVisible) then {
-                    _position = [_position] call CFUNC(3dGraphicsPosition);
+                    _position = [_position] call FUNC(3dGraphicsPosition);
                     drawIcon3d [_texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows];
                 };
             };
@@ -42,8 +42,8 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
                 _x params ["_type", "_start", "_end", "_lineColor", "_code"];
                 private _isVisible = call _code;
                 if (_isVisible) then {
-                    _start = [_start] call CFUNC(3dGraphicsPosition);
-                    _end = [_end] call CFUNC(3dGraphicsPosition);
+                    _start = [_start] call FUNC(3dGraphicsPosition);
+                    _end = [_end] call FUNC(3dGraphicsPosition);
                     drawLine3d [_start, _end, _lineColor];
                 };
             };

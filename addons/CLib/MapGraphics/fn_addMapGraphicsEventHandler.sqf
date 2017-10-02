@@ -20,7 +20,7 @@
 params [["_uid", "", [""]], ["_eventName", "", [""]], ["_code", {}, ["", {}]], ["_args", []]];
 
 // build Namespace Variablename
-_eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
+private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
 private _namespace = missionNamespace getVariable _eventNameSpace;
 
 // Check if namespace exist and if not create and save it

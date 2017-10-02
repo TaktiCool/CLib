@@ -28,7 +28,7 @@ GVAR(pendingTasks) = 0;
         GVAR(tasks) set [_taskId, [_sender, _clientTaskId]];
     };
 
-    private _result = [_taskId, _extensionName, _actionName, _data] call FUNC(extensionRequest);
+    private _result = [_taskId, _extensionName, _actionName, _data] call CFUNC(extensionRequest);
     if (!isNil "_result") then {
         GVAR(tasks) set [_taskId, objNull];
         [QGVAR(extensionResult), _sender, [_clientTaskId, _result]] call CFUNC(targetEvent);
@@ -39,7 +39,7 @@ GVAR(pendingTasks) = 0;
 DFUNC(serverLog) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);
-    [-1, "CLibLogging", "_CLiblog@4", _file + ":" + _log] call FUNC(extensionRequest);
+    [-1, "CLibLogging", "Log", _file + ":" + _log] call CFUNC(extensionRequest);
 };
 
 QCGVAR(sendlogfile) addPublicVariableEventHandler {

@@ -22,9 +22,9 @@
 #define IS_NUMBER(var)   IS_SCALAR(var)
 
 // is Voted Admin Server (not 100% supported the Server Owner can change the comands what the voted Admin can use)
-#define IS_ADMIN serverCommandAvailable "#kick"
+#define IS_ADMIN ((call BIS_fnc_admin) isEqualTo 1)
 // is Logged Admin Server (not 100% supported the Server Owner can change the comands what the voted Admin can use)
-#define IS_ADMIN_LOGGED serverCommandAvailable "#shutdown"
+#define IS_ADMIN_LOGGED ((call BIS_fnc_admin) isEqualTo 2)
 
 // Deprecated System for Functions
 #define DEPRECATEFUNC(OLD_FUNC,NEW_FUNC) \
@@ -72,13 +72,15 @@
 #define QELSTRING(var1,var2) QUOTE(ELSTRING(var1,var2))
 
 #define LOC(var) var call CFUNC(readLocalisation)
-
 #define MLOC(var) LOC(QLSTRING(var))
 
-#define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith {[currentNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall); LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment")};
+#define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith { LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment from "+ _fnc_scriptNameParent); [missionNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall);};
+#define EXEC_ONLY_IN_MISSIONNAMESPACE if !(currentNamespace isEqualTo missionNamespace) exitWith { with missionNamespace do {LOG("WARNING: " + _fnc_scriptName + " was called in the wrong Namespace from "+ _fnc_scriptNameParent); _this call (missionNamespace getVariable _fnc_scriptName);};
 
 #ifdef DISABLECOMPRESSION
     #define USE_COMPRESSION(var) false
 #else
     #define USE_COMPRESSION(var) var
 #endif
+
+#define SCRIPTSCOPENAME (_fnc_scriptName + "_Main")

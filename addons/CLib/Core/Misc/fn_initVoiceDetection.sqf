@@ -32,12 +32,14 @@ switch (true) do {
     case (isClass (_cfg >> "acre_api")): {
         LOG("ACRE Detected.");
         DCFUNC(isSpeaking) = {
+            params [["_unit", objNull, [objNull]]];
             [_unit] call ACRE_api_fnc_isSpeaking;
         };
     };
     case (isClass (_cfg >> "task_force_radio")): {
         LOG("TFAR Detected.");
         DCFUNC(isSpeaking) = {
+            params [["_unit", objNull, [objNull]]];
             _unit getVariable ["tf_isSpeaking", false];
         };
     };
@@ -51,7 +53,7 @@ switch (true) do {
         }, 0.2] call CFUNC(addPerFrameHandler);
 
         DCFUNC(isSpeaking) = {
-            params ["_unit"];
+            params [["_unit", objNull, [objNull]]];
             (_unit getVariable [QGVAR(isUsingVoice), false])
         };
     };

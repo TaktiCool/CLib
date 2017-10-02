@@ -35,7 +35,7 @@ if (_nbrInstances <= _instancePointer) then {
 _data call _stateAction;
 
 {
-    _x params [_name, _condition, _destinationState, _transitionAction];
+    _x params ["_name", "_condition", "_destinationState", "_transitionAction"];
     if (_data call _condition) exitWith {
         (_statemachine getVariable [STATE(_destinationState), [{},{},{}]]) params ["_entryAction"];
         _data call _exitAction;
