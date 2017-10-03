@@ -14,10 +14,11 @@
     Returns:
     None
 */
-params ["_className", "_count"];
+params ["_unit", "_magazineData"];
+_magazineData params ["_className", ["_count", 1]];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
-        CLib_Player addMagazine _className;
+        _unit addMagazine _className;
     };
 };

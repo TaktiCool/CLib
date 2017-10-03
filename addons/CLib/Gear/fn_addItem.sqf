@@ -14,12 +14,13 @@
     Returns:
     None
 */
-params ["_className", ["_count", 1]];
+params ["_unit", "_itemData"];
+_itemData params ["_className", ["_count", 1]];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
-        if (CLib_Player canAdd _className) then {
-            CLib_Player addItem _className;
+        if (_unit canAdd _className) then {
+            _unit addItem _className;
         } else {
             hint format ["Item %1 can't added because Gear is Full", _className];
         };
