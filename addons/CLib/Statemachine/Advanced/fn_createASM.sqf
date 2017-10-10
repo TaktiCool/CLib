@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Arma At War
+    Community Lib - CLib
 
     Author: BadGuy
 
