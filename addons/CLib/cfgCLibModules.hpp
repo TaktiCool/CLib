@@ -254,27 +254,26 @@ class CfgCLibModules {
             APIFNCSERVER(exportSimpleObjectComp);
         };
 
+        MODULE(AdvancedStatemachine) {
+            dependency[] = {"CLib/Events"};
+            APIFNC(create);
+            APIFNC(createInstance);
+            APIFNC(addState);
+            APIFNC(addTransition);
+            APIFNC(addTransitionEvent);
+            APIFNC(step);
+        };
+
         MODULE(Statemachine) {
             dependency[] = {"CLib/Events"};
-            MODULE(Simple) {
-                APIFNC(addStatemachineState);
-                APIFNC(copyStatemachine);
-                APIFNC(createStatemachine);
-                APIFNC(createStatemachineFromConfig);
-                APIFNC(getVariableStatemachine);
-                APIFNC(setVariableStatemachine);
-                APIFNC(startStatemachine);
-                APIFNC(stepStatemachine);
-            };
-            MODULE(Advanced) {
-                APIFNC(createASM);
-                APIFNC(addStateASM);
-                APIFNC(addTransitionASM);
-                APIFNC(addTransitionEventASM);
-                APIFNC(createInstanceASM);
-                APIFNC(stepASM);
-            };
-
+            APIFNC(addStatemachineState);
+            APIFNC(copyStatemachine);
+            APIFNC(createStatemachine);
+            APIFNC(createStatemachineFromConfig);
+            APIFNC(getVariableStatemachine);
+            APIFNC(setVariableStatemachine);
+            APIFNC(startStatemachine);
+            APIFNC(stepStatemachine);
             FNC(init);
 
         };

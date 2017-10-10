@@ -42,10 +42,13 @@ _data call _stateAction;
         _data call _transitionAction;
         (_instances select _instancePointer) set [0, _destinationState];
         _data call _entryAction;
-        _instances deleteAt _instancePointer;
+        if (_destinationState == "exit") then {
+            _instances deleteAt _instancePointer;
+        };
+
         nil;
     };
     nil;
-} count ((_statemachine getVariable [TRANSITIONS(_state), []]) + (_statemachine getVariable [QGVAR(eventransitions), []]));
+} count ((_statemachine getVariable [TRANSITIONS(_state), []]) + (_statemachine getVariable [TRANSITIONS(''), []]));
 
 _statemachine setVariable [QGVAR(InstancePointer), _instancePointer + 1];

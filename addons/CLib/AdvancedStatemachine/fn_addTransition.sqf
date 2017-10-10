@@ -20,6 +20,14 @@
 */
 params ["_statemachine", "_sourceState", "_destinationState", "_name", ["_condition", {}], ["_action", {}]];
 
-private _transitions = _statemachine getVariable [TRANSITIONS(_sourceState), []];
-_transitions pushBack [_name, _condition, _destinationState, _action];
-_statemachine setVariable [TRANSITIONS(_sourceState), _transitions];
+if (_sourceState isEqualType "String") then {
+    _sourceState = [_sourceState];
+};
+
+private _transitions = _statemachine getVariable [TRANSITIONS(_x), []];
+
+{
+    _transitions pushBack [_name, _condition, _destinationState, _action];
+} count _sourceState;
+
+_statemachine setVariable [TRANSITIONS(_x), _transitions];
