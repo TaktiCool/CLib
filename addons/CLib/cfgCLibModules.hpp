@@ -103,6 +103,7 @@ class CfgCLibModules {
             APIFNC(globalEvent);
             FNC(hcInit);
             FNC(init);
+            APIFNC(invokePlayerChanged);
             APIFNC(localEvent);
             APIFNC(removeEventhandler);
             APIFNC(serverEvent);
@@ -140,6 +141,8 @@ class CfgCLibModules {
             APIFNC(createHash);
             APIFNC(forEachHash);
             APIFNC(getHash);
+            APIFNC(hashToNamespace);
+            APIFNC(namespaceToHash);
             APIFNC(setHash);
         };
 

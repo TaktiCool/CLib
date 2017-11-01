@@ -13,6 +13,7 @@
     Returns:
     None
 */
+PERFORMANCECOUNTER_START(DRAWMapIcons);
 params ["_map"];
 
 private _mapScale = ctrlMapScale _map;
@@ -113,3 +114,4 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
 } count GVAR(MapGraphicsCache);
 
 GVAR(MapGraphicsGeometryCache) = _cache;
+PERFORMANCECOUNTER_END(DRAWMapIcons);

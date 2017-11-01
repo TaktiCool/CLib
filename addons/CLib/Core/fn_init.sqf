@@ -51,5 +51,3 @@ if (hasInterface) then {
         GVAR(staticVehicleFix) = GVAR(staticVehicleFix) - [objNull];
     }] call CFUNC(addEventhandler);
 };
-
-diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];

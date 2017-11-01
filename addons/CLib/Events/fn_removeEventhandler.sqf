@@ -14,10 +14,9 @@
     Returns:
     is Removed <Bool>
 */
-params [["_eventName", "", [""]], ["_id", -1, [-1]]];
+params [["_event", "", [""]], ["_id", -1, [-1]]];
 
-DUMP("Eventhandler Removed: "+ _eventName);
-private _event = format ["CLib_Event_%1", _eventName];
+DUMP("Eventhandler Removed: "+ _event);
 private _eventArray = GVAR(EventNamespace) getVariable [_event, []];
 if (count _eventArray >= _id) then {
     _eventArray set [_id, nil];
