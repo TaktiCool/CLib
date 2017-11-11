@@ -20,10 +20,10 @@ private _instancePointer = _statemachine getVariable [QGVAR(InstancePointer), 0]
 private _nbrInstances = count _instances;
 
 if (_nbrInstances == 0) exitWith {
-     private _pfhId = _statemachine getVariable [QGVAR(pfhId), -1];
-     if (_pfhId > -1) then {
-         _pfhId call CFUNC(removePerFrameHandler);
-     };
+    private _pfhId = _statemachine getVariable [QGVAR(pfhId), -1];
+    if (_pfhId > -1) then {
+        _pfhId call CFUNC(removePerFrameHandler);
+    };
 };
 
 if (_nbrInstances <= _instancePointer) then {
@@ -31,13 +31,13 @@ if (_nbrInstances <= _instancePointer) then {
 };
 
 (_instances select _instancePointer) params ["_state", "_data"];
-(_statemachine getVariable [STATE(_state), [{},{},{}]]) params ["_entryAction", "_stateAction", "_exitAction"];
+(_statemachine getVariable [STATE(_state), [{}, {}, {}]]) params ["_entryAction", "_stateAction", "_exitAction"];
 _data call _stateAction;
 
 {
-    _x params ["_name", "_condition", "_destinationState", "_transitionAction"];
+    _x params ["_condition", "_destinationState", "_transitionAction"];
     if (_data call _condition) exitWith {
-        (_statemachine getVariable [STATE(_destinationState), [{},{},{}]]) params ["_entryAction"];
+        (_statemachine getVariable [STATE(_destinationState), [{}, {}, {}]]) params ["_entryAction"];
         _data call _exitAction;
         _data call _transitionAction;
         (_instances select _instancePointer) set [0, _destinationState];

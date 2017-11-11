@@ -14,6 +14,16 @@ class CfgCLibModules {
             APIFNC(remove3dGraphics);
         };
 
+        MODULE(AdvancedStatemachine) {
+            dependency[] = {"CLib/Events"};
+            APIFNC(create);
+            APIFNC(createInstance);
+            APIFNC(addState);
+            APIFNC(addTransition);
+            APIFNC(addTransitionEvent);
+            APIFNC(step);
+        };
+
         MODULE(AnimFramework) {
             dependency[] = {"CLib/Events"};
             APIFNC(doAnimation);
@@ -255,16 +265,6 @@ class CfgCLibModules {
             FNC(init);
             APIFNC(readSimpleObjectComp);
             APIFNCSERVER(exportSimpleObjectComp);
-        };
-
-        MODULE(AdvancedStatemachine) {
-            dependency[] = {"CLib/Events"};
-            APIFNC(create);
-            APIFNC(createInstance);
-            APIFNC(addState);
-            APIFNC(addTransition);
-            APIFNC(addTransitionEvent);
-            APIFNC(step);
         };
 
         MODULE(Statemachine) {
