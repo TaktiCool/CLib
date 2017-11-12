@@ -96,3 +96,4 @@ Examples:
 [`<String>`]: https://community.bistudio.com/wiki/String
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Array>`]: https://community.bistudio.com/wiki/Array
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything
