@@ -14,14 +14,14 @@ class CfgCLibModules {
             APIFNC(remove3dGraphics);
         };
 
-        MODULE(AdvancedStatemachine) {
-            dependency[] = {"CLib/Events"};
-            APIFNC(create);
-            APIFNC(createInstance);
-            APIFNC(addState);
-            APIFNC(addTransition);
-            APIFNC(addTransitionEvent);
-            APIFNC(step);
+        MODULE(AdvancedStateMachine) {
+            dependency[] = {"CLib/Events", "CLib/Namespaces", "CLib/PerFrame"};
+            APIFNC(addASMState);
+            APIFNC(addASMTransition);
+            APIFNC(addASMTransitionEvent);
+            APIFNC(createASM);
+            APIFNC(createASMInstance);
+            FNC(stepASM);
         };
 
         MODULE(AnimFramework) {
@@ -274,11 +274,10 @@ class CfgCLibModules {
             APIFNC(createStatemachine);
             APIFNC(createStatemachineFromConfig);
             APIFNC(getVariableStatemachine);
+            FNC(init);
             APIFNC(setVariableStatemachine);
             APIFNC(startStatemachine);
             APIFNC(stepStatemachine);
-            FNC(init);
-
         };
 
         MODULE(StatusEffects) {
