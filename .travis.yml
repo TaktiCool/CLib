@@ -5,7 +5,8 @@ branches:
 
 dist: trusty
 language: python
-
+python:
+  - '3.5'
 matrix:
   include:
     ###############################################################################
@@ -16,7 +17,7 @@ matrix:
       - pip3 install sqflint
       script:
       - python3 tools/sqf_validator.py
-      - sqflint -d serverAddons/AAW/addons
+      - sqflint -d addons
     ###############################################################################
     # Job #2 - Building Extensions Disabled because not working :(
     ###############################################################################
