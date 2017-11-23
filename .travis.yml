@@ -13,10 +13,10 @@ matrix:
     ###############################################################################
     - python: '3.5'
       before_script:
-      - cd tools
+      - pip3 install sqflint
       script:
-      - python3 sqf_validator.py
-
+      - python3 tools/sqf_validator.py
+      - sqflint -d serverAddons/AAW/addons
     ###############################################################################
     # Job #2 - Building Extensions Disabled because not working :(
     ###############################################################################
