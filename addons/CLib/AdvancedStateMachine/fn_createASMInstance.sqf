@@ -36,7 +36,7 @@ _stateMachine setVariable [QGVAR(Instances), _instances];
 
 if ((_stateMachine getVariable [QGVAR(pfhId), -1]) == -1) then {
     _stateMachine setVariable [QGVAR(pfhId), [{
-        params ["_stateMachine", "_id"];
+        params ["_stateMachine"];
         [_stateMachine] call FUNC(stepASM)
     }, 0, _stateMachine] call CFUNC(addPerFrameHandler)];
 };

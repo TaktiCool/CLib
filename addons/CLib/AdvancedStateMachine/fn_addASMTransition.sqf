@@ -41,7 +41,7 @@ if (_sourceStateNames isEqualType "") then {
 {
     if (_x isEqualType "") then {
         private _transitions = _stateMachine getVariable [TRANSITIONS(_x), []];
-        _transitions pushBack [_condition, _destinationState, _action];
+        _transitions pushBack [_condition, _destinationStateName, _action];
         _statemachine setVariable [TRANSITIONS(_x), _transitions];
     } else {
         LOG("Invalid source state name passed to addASMTransition");
