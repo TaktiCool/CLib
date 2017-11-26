@@ -38,7 +38,7 @@ if (_instancesCount <= _instancePointer) then {
 };
 
 (_instances select _instancePointer) params ["_stateName", "_data"];
-(_stateMachine getVariable [STATE(_stateName), [{}, {}, {}]]) params ["_entryAction", "_stateAction", "_exitAction"];
+(_stateMachine getVariable [STATE(_stateName), [{}, {}, {}]]) params ["", "_stateAction", "_exitAction"];
 _data call _stateAction;
 
 {
