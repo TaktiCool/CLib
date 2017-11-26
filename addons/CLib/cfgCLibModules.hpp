@@ -14,6 +14,16 @@ class CfgCLibModules {
             APIFNC(remove3dGraphics);
         };
 
+        MODULE(AdvancedStateMachine) {
+            dependency[] = {"CLib/Events", "CLib/Namespaces", "CLib/PerFrame"};
+            APIFNC(addASMState);
+            APIFNC(addASMTransition);
+            APIFNC(addASMTransitionEvent);
+            APIFNC(createASM);
+            APIFNC(createASMInstance);
+            FNC(stepASM);
+        };
+
         MODULE(AnimFramework) {
             dependency[] = {"CLib/Events"};
             APIFNC(doAnimation);
