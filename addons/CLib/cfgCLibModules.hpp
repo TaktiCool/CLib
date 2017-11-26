@@ -18,7 +18,6 @@ class CfgCLibModules {
             dependency[] = {"CLib/Events", "CLib/Namespaces", "CLib/PerFrame"};
             APIFNC(addASMState);
             APIFNC(addASMTransition);
-            APIFNC(addASMTransitionEvent);
             APIFNC(createASM);
             APIFNC(createASMInstance);
             FNC(stepASM);
