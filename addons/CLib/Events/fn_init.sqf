@@ -33,7 +33,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
 // EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
 ["eventAdded", {
-    params ["_arguments", "_data"];
+    params ["_arguments"];
     _arguments params ["_event", "_function", "_args"];
     if (!(isNil QGVAR(missionStartedTriggered)) && {_event isEqualTo "missionStarted"}) then {
         LOG("Mission Started Event get Added After Mission Started");
@@ -130,6 +130,22 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _vehicle setFuel _value;
 }] call CFUNC(addEventHandler);
+["setDamage", {
+    (_this select 0) params ["_vehicle", "_value"];
+    if (!local _vehicle) exitWith {
+        LOG("setDamage event has wrong locality");
+        ["setDamage", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle setDamage _value;
+}] call CFUNC(addEventHandler);
+["setVehicleAmmo", {
+    (_this select 0) params ["_vehicle", "_value"];
+    if (!local _vehicle) exitWith {
+        LOG("setVehicleAmmo event has wrong locality");
+        ["setVehicleAmmo", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle setVehicleAmmo _value;
+}] call CFUNC(addEventHandler);
 ["removeMagazineTurret", {
     (_this select 0) params ["_vehicle", "_args"];
     if (!local _vehicle) exitWith {
@@ -197,7 +213,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
     DFUNC(entityCreated) = {
         params ["_obj"];
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic" || (typeOf _obj) isEqualTo "") then {
+        if !(_obj getVariable [QGVAR(isProcessed), false] || [_obj, ["Animal", "Logic"]] call CFUNC(isKindOfArray) || (typeOf _obj) isEqualTo "") then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
         };
