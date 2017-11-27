@@ -22,7 +22,7 @@ TODO Example here
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
-[`<Any>`]: https://community.bistudio.com/wiki/Data_Types
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
 [`<Object>`]: https://community.bistudio.com/wiki/Object
 [`<String>`]: https://community.bistudio.com/wiki/String
