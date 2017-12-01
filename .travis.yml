@@ -14,10 +14,10 @@ matrix:
     ###############################################################################
     - python: '3.5'
       before_script:
-      - pip3 install sqflint
+      - git clone https://github.com/jokoho48/sqf.git sqfLint
       script:
       - python3 tools/sqf_validator.py
-      - sqflint -d addons
+      - python3 sqfLint/sqflint.py -d addons
     ###############################################################################
     # Job #2 - Building Extensions Disabled because not working :(
     ###############################################################################
