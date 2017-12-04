@@ -18,7 +18,7 @@ if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarb
 
 DFUNC(pushbackInQueue) = {
     params ["_object"];
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {_object getVariable [QCGVAR(noClean), true, true];}; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {_object setVariable [QCGVAR(noClean), true, true];}; // Dont Pushback Vehciles that are handled by BIS Respawn Module
     if !(_object getVariable [QCGVAR(noClean), false]) then {
         if !(isNull attachedTo _object) exitWith {}; // exit if the Object is attached to a object. we then ignore it because it could be used by a script
         if (!(_object getVariable [QGVAR(queued), false])) then {
