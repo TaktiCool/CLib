@@ -14,6 +14,15 @@ class CfgCLibModules {
             APIFNC(remove3dGraphics);
         };
 
+        MODULE(AdvancedStateMachine) {
+            dependency[] = {"CLib/Events", "CLib/Namespaces", "CLib/PerFrame"};
+            APIFNC(addASMState);
+            APIFNC(addASMTransition);
+            APIFNC(createASM);
+            APIFNC(createASMInstance);
+            FNC(stepASM);
+        };
+
         MODULE(AnimFramework) {
             dependency[] = {"CLib/Events"};
             APIFNC(doAnimation);
@@ -80,6 +89,7 @@ class CfgCLibModules {
                 APIFNC(groupPlayers);
                 APIFNC(inFOV);
                 FNC(initVoiceDetection);
+                APIFNC(isKindOfArray);
                 APIFNC(log);
                 APIFNC(name);
                 APIFNC(sanitizeString);
@@ -92,7 +102,6 @@ class CfgCLibModules {
             MODULE(MissionModuleLoader) {
                 FNC(postInit);
             };
-
         };
 
         MODULE(Events) {
@@ -103,6 +112,7 @@ class CfgCLibModules {
             APIFNC(globalEvent);
             FNC(hcInit);
             FNC(init);
+            APIFNC(invokePlayerChanged);
             APIFNC(localEvent);
             APIFNC(removeEventhandler);
             APIFNC(serverEvent);
@@ -140,6 +150,8 @@ class CfgCLibModules {
             APIFNC(createHash);
             APIFNC(forEachHash);
             APIFNC(getHash);
+            APIFNC(hashToNamespace);
+            APIFNC(namespaceToHash);
             APIFNC(setHash);
         };
 
@@ -207,6 +219,11 @@ class CfgCLibModules {
             APIFNC(getVariable);
             APIFNC(setVar);
             APIFNC(setVariable);
+        };
+
+        MODULE(ObjectPooling) {
+            APIFNC(getPoolObject);
+            FNCSERVER(init);
         };
 
         MODULE(PerformanceInfo) {

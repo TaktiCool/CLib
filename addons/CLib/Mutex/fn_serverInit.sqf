@@ -58,7 +58,7 @@ DFUNC(checkNextMutexClient) = {
     false
 }] call BIS_fnc_addStackedEventHandler;
 
-// EH which fired if some client requests mutex executing
+// EH which fires if a client requests mutex executing
 [QGVAR(mutexRequest), {
     (_this select 0) params ["_clientObject", "_mutexId"];
 
@@ -89,10 +89,10 @@ GVAR(TimeOutSM) = call CFUNC(createStatemachine);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(TimeOutSM), "checkMutex", {
-    params ["_dummy", "_mutexIds"];
+    params ["", "_mutexIds"];
     private _mutexId = _mutexIds deleteAt 0;
     private _mutex = GVAR(mutexes) getVariable [_mutexId, [0, [], 0]];
-    _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
+    _mutex params ["", "_clientQueue", "_currentMutexTime"];
     if (!(_clientQueue isEqualTo []) && (time - _currentMutexTime) > 3) then {
         _mutexId call FUNC(checkNextMutexClient);
     };

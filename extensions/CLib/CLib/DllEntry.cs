@@ -184,61 +184,65 @@ namespace CLib
             var startParameters = Environment.GetCommandLineArgs();
             foreach (string startParameter in startParameters)
             {
-                var match = Regex.Match(startParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
-                if (!match.Success)
-                    continue;
-
-                foreach (string path in match.Groups[1].Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                // Arma 3 allows start parameters seperated by new lines instead of spaces
+                foreach (string realStartParameter in startParameter.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    string fullPath = path;
-                    if (!Path.IsPathRooted(fullPath))
-                        fullPath = Path.Combine(Environment.CurrentDirectory, path);
+                    var match = Regex.Match(realStartParameter, "^-(?:server)?mod=(.*)", RegexOptions.IgnoreCase);
+                    if (!match.Success)
+                        continue;
 
-#if WIN64
-                    var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
-#else
-                    var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
-#endif
-                    foreach (string extensionPath in extensionPaths)
+                    foreach (string path in match.Groups[1].Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                     {
-                        try
-                        {
-                            var exports = FunctionLoader.ExportTable(extensionPath);
+                        string fullPath = path;
+                        if (!Path.IsPathRooted(fullPath))
+                            fullPath = Path.Combine(Environment.CurrentDirectory, path);
+
 #if WIN64
-                            if (!exports.Contains("RVExtension"))
+                        var extensionPaths = Directory.GetFiles(fullPath, "*_x64.dll", SearchOption.AllDirectories);
 #else
-                            if (!exports.Contains("_RVExtension@12"))
+                        var extensionPaths = Directory.GetFiles(fullPath, "*.dll", SearchOption.AllDirectories);
 #endif
-                                continue;
+                        foreach (string extensionPath in extensionPaths)
+                        {
+                            try
+                            {
+                                var exports = FunctionLoader.ExportTable(extensionPath);
+#if WIN64
+                                if (!exports.Contains("RVExtension"))
+#else
+                                if (!exports.Contains("_RVExtension@12"))
+#endif
+                                    continue;
 
-                            string filename = Path.GetFileNameWithoutExtension(extensionPath);
-                            if (filename == null)
-                                continue;
+                                string filename = Path.GetFileNameWithoutExtension(extensionPath);
+                                if (filename == null)
+                                    continue;
 
 #if WIN64
-                            filename = filename.Substring(0, filename.Length - 4);
+                                filename = filename.Substring(0, filename.Length - 4);
 #endif
 
-                            if (AvailableExtensions.ContainsKey(filename))
-                            {
-                                Debugger.Log($"Duplicate: {filename} at: {extensionPath}");
+                                if (AvailableExtensions.ContainsKey(filename))
+                                {
+                                    Debugger.Log($"Duplicate: {filename} at: {extensionPath}");
+                                }
+                                else
+                                {
+                                    AvailableExtensions.Add(filename, extensionPath);
+                                    Debugger.Log($"Added: {filename} at: {extensionPath}");
+                                }
+
                             }
-                            else
+                            catch (Win32Exception e)
                             {
-                                AvailableExtensions.Add(filename, extensionPath);
-                                Debugger.Log($"Added: {filename} at: {extensionPath}");
+                                // Trying to load an x64 dll within an x86 process fails with an error with no nativ error code. We can ignore that.
+                                if (e.NativeErrorCode != 0)
+                                    Debugger.Log(e);
                             }
-                            
-                        }
-                        catch (Win32Exception e)
-                        {
-                            // Trying to load an x64 dll within an x86 process fails with an error with no nativ error code. We can ignore that.
-                            if (e.NativeErrorCode != 0)
+                            catch (Exception e)
+                            {
                                 Debugger.Log(e);
-                        }
-                        catch (Exception e)
-                        {
-                            Debugger.Log(e);
+                            }
                         }
                     }
                 }

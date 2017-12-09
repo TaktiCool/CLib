@@ -31,6 +31,6 @@ GVAR(RC) = toString [65533];
 if (isNil QFUNC(extensionFetch)) then {
     DFUNC(extensionFetch) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionFetch.sqf";
 };
-if (isNil QFUNC(extensionRequest)) then {
-    DFUNC(extensionRequest) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionRequest.sqf";
+if (isNil QCFUNC(extensionRequest)) then {
+    DCFUNC(extensionRequest) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_extensionRequest.sqf";
 };

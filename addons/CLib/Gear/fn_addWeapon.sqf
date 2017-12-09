@@ -15,9 +15,9 @@
     Returns:
     None
 */
-params ["_className", "_magazine", "_count"];
+params ["_unit", "_className", "_magazineData"];
 
 if (_className != "") then {
-    [_magazine, _count] call CFUNC(addMagazine);
-    CLib_Player addWeapon _className;
+    [_unit, _magazineData] call CFUNC(addMagazine);
+    _unit addWeapon _className;
 };
