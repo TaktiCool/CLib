@@ -33,7 +33,7 @@ if (_object isEqualTo (_object getVariable [format [QGVAR(onEmbargo_%1), _varNam
 
 // Publish Now and set last update time:
 _object setVariable [_varName, _value, true];
-_object setVariable [format ["CLib_onEmbargo_%1", _varName], _object];
+_object setVariable [format [QGVAR(onEmbargo_%1), _varName], _object];
 
 [{
     params ["_object", "_varName", "_value", "_delay"];

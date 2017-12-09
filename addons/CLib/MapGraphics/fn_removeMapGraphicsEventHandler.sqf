@@ -19,9 +19,11 @@ params [["_uid", "", [""]], ["_eventName", "", [""]], ["_id", -1, [-1]]];
 
 // build Namespace Variablename
 private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
-private _namespace = missionNamespace getVariable _eventNameSpace;
+private _namespace = missionNamespace getVariable [_eventNameSpace, objNull];
 
-private _eventArray = [_namespace, _uid, []] call CFUNC(getVariable);
+if (isNull _namespace) exitWith {};
+
+private _eventArray = _namespace getVariable [_uid, []];
 if (_id == -1) then {
     {
         _eventArray set [_forEachIndex, nil];

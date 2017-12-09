@@ -55,3 +55,6 @@ extensions/CLib/packages
 # IDEA files
 .idea/
 *.iml
+*.bikey
+
+*.bisign

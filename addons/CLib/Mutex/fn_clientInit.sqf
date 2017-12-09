@@ -21,7 +21,7 @@ GVAR(mutexCaches) = false call CFUNC(createNamespace);
 [QGVAR(mutexLock), {
     (_this select 0) params ["_mutexId"];
 
-    private _mutexCache = [GVAR(mutexCaches), _mutexId, []] call CFUNC(getVariable);
+    private _mutexCache = GVAR(mutexCaches) getVariable [_mutexId, []];
 
     // Its time to execute the cached functions.
     {

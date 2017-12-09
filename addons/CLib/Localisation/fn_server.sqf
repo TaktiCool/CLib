@@ -44,7 +44,6 @@ private _fnc_setLanguageKey = {
 
 private _fnc_readLocalisation = {
     params ["_config", "_name"];
-    private _currentConfig = _x;
     private _allLocalisations = [];
     {
         [_name, configName _x, getText _x] call _fnc_setLanguageKey;

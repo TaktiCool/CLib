@@ -41,7 +41,6 @@
             this.rtb_log.Size = new System.Drawing.Size(639, 237);
             this.rtb_log.TabIndex = 0;
             this.rtb_log.Text = "";
-            this.rtb_log.TextChanged += new System.EventHandler(this.rtb_log_TextChanged);
             // 
             // Debugger
             // 

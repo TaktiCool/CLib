@@ -22,9 +22,9 @@ removeAllWeapons _u2;
 removeHeadgear _u2;
 removeGoggles _u2;
 
-[_u2, uniform _u1] call CFUNC(addContainer);
-[_u2, vest _u1] call CFUNC(addContainer);
-[_u2, backpack _u1] call CFUNC(addContainer);
+[_u2, uniform _u1, 0] call CFUNC(addContainer);
+[_u2, vest _u1, 1] call CFUNC(addContainer);
+[_u2, backpack _u1, 2] call CFUNC(addContainer);
 _u2 addHeadgear headgear _u1;
 
 
