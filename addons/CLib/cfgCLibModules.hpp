@@ -102,7 +102,6 @@ class CfgCLibModules {
             MODULE(MissionModuleLoader) {
                 FNC(postInit);
             };
-
         };
 
         MODULE(Events) {
@@ -220,6 +219,11 @@ class CfgCLibModules {
             APIFNC(getVariable);
             APIFNC(setVar);
             APIFNC(setVariable);
+        };
+
+        MODULE(ObjectPooling) {
+            APIFNC(getPoolObject);
+            FNCSERVER(init);
         };
 
         MODULE(PerformanceInfo) {
