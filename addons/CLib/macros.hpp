@@ -57,14 +57,14 @@
 #define QFUNC(var) QUOTE(DFUNC(var))
 
 #ifdef ISDEV
-    #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
+    #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil in %2 L%3", QEFUNC(var1,var2), __FILE__, __LINE__] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
 #endif
 
 #ifdef ENABLEFUNCTIONTRACE
     #undef EFUNC
     #define EFUNC(var1,var2) {\
         DUMP("Function " + QEFUNC(var1,var2) + " called with " + str (_this));\
-        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
+        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil in %2 L%3", QEFUNC(var1,var2), __FILE__, __LINE__] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
         if (!isNil "_tempRet") then {\
             _tempRet\
         }\

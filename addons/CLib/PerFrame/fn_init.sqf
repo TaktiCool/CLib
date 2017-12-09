@@ -79,7 +79,7 @@ DFUNC(onEachFrameHandler) = {
 
 
     {
-        if ((_x select 2) call (_x select 1)) then {
+        if (_x isEqualType [] && {(_x select 2) call (_x select 1)}) then {
             (_x select 2) call (_x select 0);
             _delete = true;
             GVAR(waitUntilArray) set [_forEachIndex, objNull];

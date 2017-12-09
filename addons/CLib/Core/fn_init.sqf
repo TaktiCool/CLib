@@ -40,7 +40,7 @@ if (hasInterface) then {
     GVAR(staticVehicleFix) = [];
     ["entityCreated", {
         params ["_args"];
-        if (_args isKindOf "Car" || _args isKindOf "StaticWeapon") then {
+        if ([_args, ["Car", "StaticWeapon"]] call CFUNC(isKindOfArray)) then {
             private _id = GVAR(staticVehicleFix) pushBackUnique _args;
             if (_id != -1) then {
                 [{}, {
@@ -51,5 +51,3 @@ if (hasInterface) then {
         GVAR(staticVehicleFix) = GVAR(staticVehicleFix) - [objNull];
     }] call CFUNC(addEventhandler);
 };
-
-diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
