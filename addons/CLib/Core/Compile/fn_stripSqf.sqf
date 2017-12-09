@@ -46,6 +46,8 @@ private _outStr = "";
         _sqString = _x == 39;
         _inPreProcessor = _x == 35;
         if (_sqString || _dqString || _inPreProcessor) then {
+            _outStr = _outStr + toLower toString _token;
+            _token = [];
             if (_inPreProcessor) then {
                 _outStr = _outStr + toString [10];
             };

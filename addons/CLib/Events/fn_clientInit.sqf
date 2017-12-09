@@ -18,119 +18,57 @@
 CLib_Player = player;
 uiNamespace setVariable ["CLib_Player", player];
 parsingNamespace setVariable ["CLib_Player", player];
-GVAR(oldGear) = CLib_Player call CFUNC(getAllGear);
-GVAR(oldVisibleMap) = false;
-GVAR(oldPLayerSide) = playerSide;
-GVAR(oldCursorObject) = objNull;
-GVAR(oldCursorTarget) = objNull;
-GVAR(groupUnits) = [];
-[{
-    // There is no command to get the current player but BI has an variable in mission namespace we can use.
-    private _data = missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player];
-    // If the player changed we trigger an event and update the global variable.
-    if (CLib_Player != _data && !(isNull _data)) then {
-        ["playerChanged", [_data, CLib_Player]] call CFUNC(localEvent);
-        CLib_Player = _data;
-        uiNamespace setVariable ["CLib_Player", _data];
-        parsingNamespace setVariable ["CLib_Player", _data];
-    };
+["playerChanged", {
+    (_this select 0) params ["_newPlayer"];
 
-    _data = CLib_Player call CFUNC(getAllGear);
-    if !(_data isEqualTo GVAR(oldGear)) then {
-        "playerInventoryChanged" call CFUNC(localEvent);
-        GVAR(oldGear) = _data;
-    };
-
-    _data = visibleMap;
-    if (!(_data isEqualTo GVAR(OldVisibleMap))) then {
-        ["visibleMapChanged", _data] call CFUNC(localEvent);
-        GVAR(OldVisibleMap) = _data;
-    };
-
-    _data = playerSide;
-    if (!(_data isEqualTo GVAR(OldPLayerSide))) then {
-        ["playerSideChanged", [_data, GVAR(OldPLayerSide)]] call CFUNC(localEvent);
-        GVAR(OldPLayerSide) = _data;
-    };
-
-    _data = cursorTarget;
-    if (!(_data isEqualTo GVAR(oldCursorTarget))) then {
-        ["cursorTargetChanged", _data] call CFUNC(localEvent);
-        GVAR(oldCursorTarget) = _data;
-    };
-
-    _data = cursorObject;
-    if (!(_data isEqualTo GVAR(oldCursorObject))) then {
-        ["cursorObjectChanged", _data] call CFUNC(localEvent);
-        GVAR(oldCursorObject) = _data;
-    };
-
-    _data = units CLib_Player;
-    if !(GVAR(groupUnits) isEqualTo _data) then {
-        ["groupUnitsChanged", _data] call CFUNC(localEvent);
-        GVAR(groupUnits) = _data;
-    };
-}] call CFUNC(addPerFrameHandler);
-
+    CLib_Player = _newPlayer;
+    uiNamespace setVariable ["CLib_Player", _newPlayer];
+    parsingNamespace setVariable ["CLib_Player", _newPlayer];
+}] call CFUNC(addEventHandler);
 
 // To ensure that the ingame display is available and prevent unnecessary draw3D calls during briefings we trigger an event if the mission starts.
 [{
-    // If ingame display is available trigger the event and remove the OEF EH to ensure that the event is only triggered once.
-    "missionStarted" call CFUNC(localEvent);
+    // If ingame display is available trigger the event.
+    ["missionStarted"] call CFUNC(localEvent);
 
     ["playerJoined", CLib_Player] call CFUNC(globalEvent);
 }, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
 
-// EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
-["eventAdded", {
-    params ["_arguments", "_data"];
-    _arguments params ["_event", "_function", "_args"];
-    if ((!(isNil QGVAR(missionStartedTriggered)) || !(isNull (findDisplay 46))) && {_event isEqualTo "missionStarted"}) then {
-        LOG("Mission Started Event get Added After Mission Started");
-        if (_function isEqualType "") then {
-            _function = parsingNamespace getVariable [_function, {}];
-        };
-        [nil, _args] call _function;
-    };
-}] call CFUNC(addEventHandler);
 
+private _codeStr = "private ['_oldValue', '_currentValue'];";
 // Build a dynamic event system to use it in modules.
 {
-    private _code = compile format ["%1 CLib_Player", _x];
+    _x params ["_name", "_code"];
 
     // Build a name for the variable where we store the data. Fill it with the initial value.
-    GVAR(EventNamespace) setVariable [_x, call _code];
-
-    // Use an OEF EH to detect if the value changes.
-    [{
-        params ["_params"];
-        _params params ["_name", "_code"];
-
-        // Read the value we detected earlier.
-        private _oldValue = GVAR(EventNamespace) getVariable _name;
-
-        // If the value changed trigger the event and update the value in out variable.
-        private _currentValue = call _code;
-        if (!(_oldValue isEqualTo _currentValue)) then {
-            [_name + "Changed", [_currentValue, _oldValue]] call CFUNC(localEvent);
-            GVAR(EventNamespace) setVariable [_name, _currentValue];
-        };
-    }, 0, [_x, _code]] call CFUNC(addPerFrameHandler);
-
-    true
+    private _varName = format [QGVAR(EventData_%1), _name];
+    GVAR(EventNamespace) setVariable [_varName, call _code];
+    _codeStr = _codeStr + format ["_oldValue = %4 getVariable '%2'; _currentValue = call %1; if (!(_oldValue isEqualTo _currentValue)) then { ['%5Changed', [_currentValue, _oldValue]] call %3; _oldValue = %4 setVariable ['%2', _currentValue]; };", _code, _varName, QCFUNC(localEvent), QGVAR(EventNamespace), _name];
+    nil
 } count [
-    "currentThrowable",
-    "currentWeapon",
-    "vehicle",
-    "assignedVehicleRole", // This has to be after "vehicle"
-    "side",
-    "group",
-    "leader",
-    "getConnectedUAV",
-    "currentVisionMode"
+    ["player", {missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player]}],
+    ["currentThrowable", {currentThrowable CLib_Player}],
+    ["currentWeapon", {currentWeapon CLib_Player}],
+    ["vehicle", {vehicle CLib_Player}],
+    ["assignedVehicleRole", {assignedVehicleRole CLib_Player}], // This has to be after "vehicle"
+    ["side", {side CLib_Player}],
+    ["group", {group CLib_Player}],
+    ["leader", {leader CLib_Player}],
+    ["getConnectedUAV", {getConnectedUAV CLib_Player}],
+    ["currentVisionMode", {currentVisionMode CLib_Player}],
+    ["playerInventory", {CLib_Player call CFUNC(getAllGear)}],
+    ["visibleMap", {visibleMap}],
+    ["playerSide", {playerSide}],
+    ["cursorTarget", {cursorTarget}],
+    ["cursorObject", {cursorObject}],
+    ["groupUnits", {units CLib_Player}],
+    ["assignedTeam", {assignedTeam CLib_Player}],
+    ["cameraView", {cameraView}]
 ];
 
-// Import the vanilla events in the event system and provide a permanent zeus compatible player.
+[compile _codeStr, 0] call CFUNC(addPerFrameHandler);
+
+// Import the vanilla events in the event system.
 {
     // The event has the same name and data as the vanilla version.
     private _code = compile format ["[""%1"", _this] call %2", _x, QCFUNC(localEvent)];

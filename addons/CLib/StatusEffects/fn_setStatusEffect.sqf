@@ -19,8 +19,8 @@
 EXEC_ONLY_UNSCHEDULED
 params ["_id", "_reason", "_parameter"];
 
-private _allParameters = [GVAR(StatusEffectsNamespace), "Parameter_" + _id, []] call CFUNC(getVariable);
-private _allReasons = [GVAR(StatusEffectsNamespace), "Reason_" + _id, []] call CFUNC(getVariable);
+private _allParameters = GVAR(StatusEffectsNamespace) getVariable ["Parameter_" + _id, []];
+private _allReasons = GVAR(StatusEffectsNamespace) getVariable ["Reason_" + _id, []];
 
 private _ind = _allReasons pushBackUnique _reason;
 if (_ind < 0) then {
@@ -33,5 +33,5 @@ _allParameters set [_ind, _parameter];
 
 GVAR(StatusEffectsNamespace) setVariable ["Parameter_" + _id, _allParameters];
 GVAR(StatusEffectsNamespace) setVariable ["Reason_" + _id, _allReasons];
-private _code = [GVAR(StatusEffectsNamespace), "Code_" + _id, []] call CFUNC(getVariable);
+private _code = GVAR(StatusEffectsNamespace) getVariable ["Code_" + _id, []];
 [_allParameters] call _code;

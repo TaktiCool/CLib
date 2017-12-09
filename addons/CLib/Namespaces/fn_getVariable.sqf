@@ -17,12 +17,6 @@
 */
 params ["_namespace", "_varName", "_default"];
 
-if !(_namespace isEqualType locationNull) exitWith {
-    _namespace getVariable [_varName, _default];
-};
+REPLACEDFUNC("CLib_fnc_getVariable", "namespace getVariable ARRAY", "0.9");
 
-private _ret = _namespace getVariable _varName;
-
-if (isNil "_ret") exitWith {_default};
-
-_ret
+_namespace getVariable [_varName, _default];

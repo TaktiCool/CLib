@@ -32,7 +32,7 @@
 
 #define SYSLOGGING(var1,var2) if (isNil "CLib_fnc_log") then {\
     private _CLib_loggingVar = format ["(%1) [%2 %3 - %4]: %5 %6:%7", diag_frameNo, QUOTE(PREFIX), var1, QUOTE(MODULE), var2, __FILE__, __LINE__];\
-    diag_log _CLib_loggingVar;\
+    diag_log text _CLib_loggingVar;\
 } else {\
     [var1 ,QUOTE(PREFIX), QUOTE(MODULE), var2, __FILE__, __LINE__] call CLib_fnc_log;\
 };
@@ -57,14 +57,14 @@
 #define QFUNC(var) QUOTE(DFUNC(var))
 
 #ifdef ISDEV
-    #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
+    #define EFUNC(var1,var2) (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil in %2 L%3", QEFUNC(var1,var2), __FILE__, __LINE__] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}])
 #endif
 
 #ifdef ENABLEFUNCTIONTRACE
     #undef EFUNC
     #define EFUNC(var1,var2) {\
         DUMP("Function " + QEFUNC(var1,var2) + " called with " + str (_this));\
-        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil", QEFUNC(var1,var2)] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
+        private _tempRet = _this call (currentNamespace getVariable [QEFUNC(var1,var2), {if (time > 0) then {["Error function %1 dont exist or isNil in %2 L%3", QEFUNC(var1,var2), __FILE__, __LINE__] call BIS_fnc_errorMsg;}; DUMP(QEFUNC(var1,var2) + " Dont Exist")}]);\
         if (!isNil "_tempRet") then {\
             _tempRet\
         }\

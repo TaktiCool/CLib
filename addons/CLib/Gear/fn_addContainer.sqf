@@ -22,7 +22,7 @@ if (_containerNumber == -1) then {
     if (_containerClassName isKindOf ["Uniform_Base", _cfg]) then {
         _containerNumber = 0;
     };
-    if (_containerClassName isKindOf ["Vest_NoCamo_Base", _cfg] || _containerClassname isKindOf ["Vest_Camo_Base", _cfg]) then {
+    if ([_containerClassName, [["Vest_NoCamo_Base", _cfg], ["Vest_Camo_Base", _cfg]]] call CFUNC(isKindOfArray)) then {
         _containerNumber = 1;
     };
     if (_containerClassName isKindOf "Bag_Base") then {
