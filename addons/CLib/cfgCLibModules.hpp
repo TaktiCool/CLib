@@ -32,11 +32,12 @@ class CfgCLibModules {
 
         MODULE(ConfigCaching) {
             dependency[] = {"CLib/Namespaces"};
+            FNC(arrayToPath);
             APIFNC(configProperties);
+            APIFNC(getConfigDataCached);
+            APIFNC(getConfigData);
             FNC(init);
             APIFNC(returnParents);
-            FNC(arrayToPath);
-            APIFNC(getDataCached);
         };
 
         MODULE(Core) {
