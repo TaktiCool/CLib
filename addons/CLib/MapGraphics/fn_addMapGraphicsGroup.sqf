@@ -54,7 +54,10 @@
         1: Positions <Array> of MapGraphicsPosition
         2: Line Color <Array> [r,g,b,a]
     last element: Code <Code> called every frame
-
+    Class = "TRIANGLE"
+        1: Positions <Array> of <Array> of MapGraphicsPosition
+        2: Line Color <Array> [r,g,b,a]
+        3: Fill Color <Array> [r,g,b,a]
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
@@ -136,6 +139,15 @@ private _completeGroupData = [];
                 ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _polygon, _color, _code];
+        };
+        case ("TRIANGLE"): {
+            _attributes params [
+                ["_tris", []],
+                ["_lineColor", [0, 0, 0, 1]],
+                ["_fillColor", ""],
+                ["_code", {}]
+            ];
+            _completeGroupData pushBack [_class, _tris, _lineColor, _fillColor, _code];
         };
     };
 
