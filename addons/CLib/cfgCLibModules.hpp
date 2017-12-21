@@ -28,6 +28,7 @@ class CfgCLibModules {
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
+            FNC(init);
         };
 
         MODULE(ConfigCaching) {
