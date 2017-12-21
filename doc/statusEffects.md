@@ -3,7 +3,7 @@
 > Maintainer: BadGuy
 
 Status effects is a module which manages effects on units which depend on multiple conditions.  
-For example if a unit is forced to walk it could have several reasons. It could be due to an injured leg or a heavy box he is carrying.
+For example, if a unit is forced to walk it could have several reasons. It could be due to an injured leg or a heavy box he is carrying.
 If the status changes (e.g. the unit drops the box) the status effects module will check if there are any other conditions preventing the unit to walk normally again and apply the effect accordingly.
 
 

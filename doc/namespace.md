@@ -2,7 +2,8 @@
 
 > Maintainer: joko // Jonas
 
-TODO text here
+The Namespace Module is a Module to handle Local and Global Variable Namespaces.
+Its also allows to setVariables and save them in a later readable Array.
 
 
 ## CLib_fnc_createNamespace
@@ -18,7 +19,9 @@ Create a Local or Global Namespace
 Examples:
 
 ```sqf
-
+GVAR(awsomeLocalNamespace) = false call CFUNC(createNamespace);
+GVAR(awsomeGlobalNamespace) = true call CFUNC(createNamespace);
+publicVariable QGVAR(awsomeGlobalNamespace);
 ```
 
 ## CLib_fnc_deleteNamespace
@@ -34,7 +37,7 @@ Delete a Local or Global Namespace that was created with CLib_fnc_createNamespac
 Examples:
 
 ```sqf
-
+GVAR(awsomeLocalNamespace) = false call CFUNC(deleteNamespace);
 ```
 
 ## CLib_fnc_getLogicGroup
@@ -51,26 +54,26 @@ DEPRECATED FUCNTION
 Parameter(s):
 * [`<Object>`], [`<Location>`] Namespace
 * [`<String>`] Variable Name
-* [`<Any>`] Data
+* [`<Anything>`] Data
 * [`<String>`] Cache name
 * [`<Boolean>`] Global
 
 Returns:
 * None
 
-Sets a Varaible on a Object/Namespace and also saves the Varaible Name in a Array on this Namespace for later use
+Sets a Varaible on a Object/Namespace and
+Saves the Varaible Name in a Array on this Namespace for later use with [`<allVariable>`]
 
 Examples:
 
 ```sqf
-
+[GVAR(namespace), "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CFUNC(setVariable);
 ```
 
 ## CLib_fnc_allVariable
 
 Parameter(s):
 * [`<Object>`], [`<Location>`] Namespace
-* [`<String>`] Variable Name
 * [`<String>`] Cache name
 
 Returns:
@@ -81,11 +84,11 @@ Sets a Varaible on a Object/Namespace and also saves the Varaible Name in a Arra
 Examples:
 
 ```sqf
-
+private _return = [GVAR(namespace), "BananasAreAwsome"] call CFUNC(setVariable);
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
-[`<Any>`]: https://community.bistudio.com/wiki/Data_Types
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
 [`<Object>`]: https://community.bistudio.com/wiki/Object
 [`<String>`]: https://community.bistudio.com/wiki/String
@@ -96,3 +99,4 @@ Examples:
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<allVariable>`]: ##CLib_fnc_allVariable
