@@ -2,7 +2,7 @@
 /*
     Community Lib - CLib
 
-    Author: NetFusion
+    Author: NetFusion, joko // Jonas
 
     Description:
     This function is the entry point for the core module. It is called by autoloader for all clients. It adds OEF EH to trigger some common events.
