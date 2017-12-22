@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Fake function that calls and compiles initFunctions because no PreProcessor is Avable over the cfgFunctions entry
+    Fake function that calls and compiles init Functions because no PreProcessor is Available over the cfgFunctions entry
 
     Parameter(s):
     None
