@@ -13,6 +13,13 @@
     Returns:
     None
 */
-
-_this call compile preprocessFileLineNumbers "tc\CLib\addons\CLib\initFunctions.sqf";
-//_this call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";
+RUNTIMESTART;
+if (getNumber (configFile >> "cfgFunctions" >> "version") == 3) then {
+    private _initFunctionsArgs = _this;
+    isNil {
+        _initFunctionsArgs call compile preprocessFileLineNumbers "tc\CLib\addons\CLib\InitFunctions\initFunctions.sqf";
+    };
+} else {
+    _this call compile preprocessFileLineNumbers "a3\functions_f\initfunctions.sqf";
+};
+RUNTIME("InitCompile");

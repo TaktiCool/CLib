@@ -65,6 +65,14 @@
     #define PERFORMANCECOUNTER_END(var1) /* Performance Counter disabled */
 #endif
 
+#ifdef ISDEV
+    #define RUNTIMESTART private _debugStartTime = diag_tickTime
+    #define RUNTIME(var) DUMP(var + " Needed: " + ((diag_tickTime - _debugStartTime) call CFUNC(toFixedNumber)) + " ms")
+#else
+    #define RUNTIMESTART /*Disabled*/
+    #define RUNTIME(var) /*Disabled*/
+#endif
+
 #define ELSTRING(var1,var2) TRIPLE(DOUBLE(STR,PREFIX),var1,var2)
 #define LSTRING(var) ELSTRING(MODULE,var)
 
