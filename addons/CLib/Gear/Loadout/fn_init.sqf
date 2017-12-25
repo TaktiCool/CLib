@@ -21,7 +21,7 @@ if (isServer) then {
     GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLower (configName _x)};
     publicVariable QGVAR(defaultLoadoutValues);
 
-    ["registerClientToServerForLoadout", {
+    ["clientRequestServerLoadout", {
         (_this select 0) params ["_unit", "_knownLoadouts"];
         private _data = [];
         {
@@ -44,7 +44,7 @@ if (isServer) then {
     } count [missionConfigFile >> "CLib", configFile];
 
     if (isMultiplayer) then {
-        ["registerClientToServerForLoadout", [CLib_Player, [GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables)]] call CFUNC(serverEvent);
+        ["clientRequestServerLoadout", [CLib_Player, [GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables)]] call CFUNC(serverEvent);
     };
 }, {
     !isNil QGVAR(defaultLoadoutValues)

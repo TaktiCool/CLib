@@ -63,8 +63,7 @@ if (isClass _currentItem) then {
     //--- Register function
     if (_itemCompile isEqualType {}) then {
         if !(_itemVar in _functions_list) then {
-            private ["_namespaces"];
-            _namespaces = if (_pathAccess == 0) then {[uiNamespace]} else {[missionNamespace]};
+            private _namespaces = if (_pathAccess == 0) then {[uiNamespace, missionNamespace]} else {[missionNamespace]};
             {
                 //---- Save function
                 _x setVariable [

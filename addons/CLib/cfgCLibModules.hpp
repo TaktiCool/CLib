@@ -70,7 +70,6 @@ class CfgCLibModules {
             };
 
             MODULE(Misc) {
-                APIFNC(addPerformanceCounter);
                 APIFNC(blurScreen);
                 APIFNC(cachedCall);
                 APIFNC(codeToString);
@@ -78,7 +77,6 @@ class CfgCLibModules {
                 APIFNC(deleteAtEntry);
                 APIFNC(directCall);
                 APIFNC(disableUserInput);
-                // APIFNC(dumpPerformanceInformation); // FIXME
                 APIFNC(getPos);
                 APIFNC(fileExist);
                 APIFNC(flatConfigPath);
@@ -229,7 +227,9 @@ class CfgCLibModules {
 
         MODULE(PerformanceInfo) {
             dependency[] = {"CLib/Events"};
+            APIFNC(addPerformanceCounter);
             FNC(clientInit);
+            APIFNC(dumpPerformanceInformation);
         };
 
         MODULE(PerFrame) {

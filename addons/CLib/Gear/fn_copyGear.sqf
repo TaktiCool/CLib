@@ -55,7 +55,7 @@ private _magazinesAmmoFull = magazinesAmmoFull _u1;
 } count [_primaryWeapon, _secondaryWeapon, _handgunWeapon];
 
 {
-    _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];
+    _x params ["_magazine", "_count", "_isLoaded", "", "_location"];
 
     if (!_isLoaded) then {
         private _container = objNull;

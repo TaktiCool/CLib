@@ -42,6 +42,10 @@ DFUNC(serverLog) = {
     [-1, "CLibLogging", "Log", _file + ":" + _log] call CFUNC(extensionRequest);
 };
 
+[QCGVAR(serverLog), {
+    (_this select 0) params ["_log", "_id"];
+    [_log, _id] call FUNC(serverLog);
+}] call CFUNC(addEventhandler);
 QCGVAR(sendlogfile) addPublicVariableEventHandler {
     (_this select 1) call FUNC(serverLog);
 };
