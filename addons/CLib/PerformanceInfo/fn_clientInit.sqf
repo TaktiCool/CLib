@@ -14,7 +14,7 @@
     None
 */
 
-#define FRAMECOUNT 120
+#define FRAMECOUNT 40
 GVAR(topFPS) = 0;
 GVAR(FPSStorage) = [];
 GVAR(FPSStorage) resize FRAMECOUNT;
