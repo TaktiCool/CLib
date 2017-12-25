@@ -21,7 +21,7 @@ private _varName = [_objClass, _objClass + "_local"] select _local;
 
 private _objsData = GVAR(objPool) getVariable [_varName, [[-999, objNull]]];
 private _data = _objsData select 0;
-_data param ["_time", "_obj"];
+_data params ["_time", "_obj"];
 if (!alive _obj || _time >= time) then {
     if (_local) then {
         _obj = _objClass createVehicleLocal [0, 0, 0];
