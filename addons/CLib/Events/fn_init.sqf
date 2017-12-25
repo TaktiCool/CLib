@@ -208,7 +208,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
 ["missionStarted", {
     GVAR(missionStartedTriggered) = true;
-
+#define REFILL_TIMINGS 15
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
     DFUNC(entityCreated) = {
@@ -227,36 +227,35 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "init", {
         GVAR(entitiesCached) = [];
-        GVAR(entities) = (entities [[], [], true, false]);
-        GVAR(entities) append allMissionObjects "All";
-        "clearOutEntits"
+        GVAR(entitieQueue) append allMissionObjects "All";
+        "refillEntitiesData"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "refillEntitiesData", {
-        GVAR(entities) = (entities [[], [], true, false]);
+        GVAR(entitieQueue) = (entities [[], [], true, false]);
         "clearOutEntits"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "clearOutEntits", {
-        GVAR(entities) = GVAR(entities) - GVAR(entitiesCached);
-        GVAR(entities) = GVAR(entities) arrayIntersect GVAR(entities);
+        GVAR(entitieQueue) = GVAR(entitieQueue) - GVAR(entitiesCached);
+        GVAR(entitieQueue) = GVAR(entitieQueue) arrayIntersect GVAR(entitieQueue);
         "applyNewEntitieVariables"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "applyNewEntitieVariables", {
-        GVAR(lastFilledEntities) = diag_frameNo + 15;
-        GVAR(entitiesCached) append GVAR(entities);
+        GVAR(lastFilledEntities) = diag_frameNo + REFILL_TIMINGS;
+        GVAR(entitiesCached) append GVAR(entitieQueue);
         GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
-        ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
+        ["checkObject", "wait"] select (GVAR(entitieQueue) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
 
     [GVAR(entityCreatedSM), "checkObject", {
-        private _obj = GVAR(entities) deleteAt 0;
+        private _obj = GVAR(entitieQueue) deleteAt 0;
         if !(isNull _obj) then {
             _obj call FUNC(entityCreated);
         };
-        ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
+        ["checkObject", "wait"] select (GVAR(entitieQueue) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "wait", {

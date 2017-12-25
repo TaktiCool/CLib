@@ -23,9 +23,9 @@ _allGear params [
     "_uniform", "_uniformItems",
     "_vest", "_vestItems",
     "_backpack", "_backpackItems",
-    "_primaryWeapon", "_primaryWeaponItems", "_primaryWeaponMagazine",
-    "_secondaryWeapon", "_secondaryWeaponItems", "_secondaryWeaponMagazine",
-    "_handgun", "_handgunItems", "_handgunMagazine",
+    "_primaryWeapon", "_primaryWeaponItems", "",
+    "_secondaryWeapon", "_secondaryWeaponItems", "",
+    "_handgun", "_handgunItems", "",
     "_assignedItems",
     "_binocular"
 ];
@@ -42,7 +42,7 @@ removeGoggles _u2;
 [_u2, _vest, 1] call CFUNC(addContainer);
 [_u2, _backpack, 2] call CFUNC(addContainer);
 _u2 addHeadgear _headgear;
-
+_u2 addGoggles _goggles;
 
 _primaryWeapon = [_primaryWeapon] call BIS_fnc_baseWeapon;
 _secondaryWeapon = [_secondaryWeapon] call BIS_fnc_baseWeapon;
@@ -69,7 +69,7 @@ _assignedItems = _assignedItems - [_binocular];
 } count [_primaryWeapon, _secondaryWeapon, _handgun, _binocular];
 
 {
-    _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];
+    _x params ["_magazine", "_count", "_isLoaded", "", "_location"];
 
     if (!_isLoaded) then {
         private _container = objNull;
