@@ -29,7 +29,7 @@ parsingNamespace setVariable ["CLib_Player", player];
 // To ensure that the ingame display is available and prevent unnecessary draw3D calls during briefings we trigger an event if the mission starts.
 [{
     // If ingame display is available trigger the event.
-    ["missionStarted"] call CFUNC(localEvent);
+    ["missionStarted", findDisplay 46] call CFUNC(localEvent);
 
     ["playerJoined", CLib_Player] call CFUNC(globalEvent);
 }, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
