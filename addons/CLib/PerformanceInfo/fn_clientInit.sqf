@@ -22,9 +22,7 @@ GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
 GVAR(ctrlGroup) = controlNull;
 GVAR(pfhID) = -1;
 
-#ifdef ISDEV
-    call FUNC(toggleFrameInfo);
-#endif
+
 
 DFUNC(toggleFrameInfo) = {
 
@@ -98,6 +96,9 @@ DFUNC(toggleFrameInfo) = {
     GVAR(ctrlGroup) ctrlShow false;
     GVAR(ctrlGroup) ctrlCommit 0;
 
+    #ifdef ISDEV
+        call FUNC(toggleFrameInfo);
+    #endif
 }] call CFUNC(addEventHandler);
 
 [QGVAR(dumpPerformanceInfo), {
