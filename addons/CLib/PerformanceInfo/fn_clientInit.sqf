@@ -27,7 +27,6 @@ GVAR(pfhID) = -1;
 
 
 DFUNC(toggleFrameInfo) = {
-
     if (GVAR(pfhID) != -1) exitWith {
         GVAR(pfhID) call CFUNC(removePerFrameHandler);
         GVAR(pfhID) = -1;
@@ -43,8 +42,7 @@ DFUNC(toggleFrameInfo) = {
 
     // Create the PFH
     GVAR(pfhID) = [{
-        params ["_display"];
-
+        private _display = findDisplay 46;
         if (isNull _display) exitWith {};
 
         private _currentFPS = 1 / CGVAR(deltaTime);
