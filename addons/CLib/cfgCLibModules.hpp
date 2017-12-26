@@ -229,7 +229,7 @@ class CfgCLibModules {
             dependency[] = {"CLib/Events"};
             APIFNC(addPerformanceCounter);
             FNC(clientInit);
-            APIFNC(dumpPerformanceInformation);
+            APIFNC(dumpPerformanceInfo);
         };
 
         MODULE(PerFrame) {
