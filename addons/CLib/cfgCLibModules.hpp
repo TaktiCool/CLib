@@ -93,7 +93,6 @@ class CfgCLibModules {
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
-                FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
                 APIFNC(toFixedNumber);
             };
