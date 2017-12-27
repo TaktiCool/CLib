@@ -14,7 +14,6 @@
     None
 */
 GVAR(lnbDataControlCache) = [];
-GVAR(lnbDataDataCache) = false call CFUNC(createNamespace);
 
 [{
     GVAR(lnbDataControlCache) = GVAR(lnbDataControlCache) - [controlNull];

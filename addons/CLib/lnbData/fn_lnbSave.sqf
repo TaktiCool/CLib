@@ -18,5 +18,5 @@
 params ["_control", "_rowAndColumn", "_data"];
 
 private _index = GVAR(lnbDataControlCache) pushBack _control;
-GVAR(lnbDataDataCache) setVariable [str _index, _data];
+_control setVariable [str _index, _data];
 _control lnbSetValue [_rowAndColumn, _index];
