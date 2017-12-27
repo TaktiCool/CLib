@@ -28,7 +28,7 @@
     None
 */
 
-params ["_text", "_onObject", "_distance", "_condition", "_callback", ["_dynamicArguments", []]];
+params ["_text", "_target", "_distance", "_condition", "_callback", ["_dynamicArguments", []]];
 
 private _args = [];
 private _priority = 1.5;
@@ -84,37 +84,36 @@ GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
 _condition = _condition call CFUNC(codeToString);
 
-_condition = "[_this, _target, " + str _ignoredCanInteractConditions + "] call " + QCFUNC(canInteractWith) + " && " + _condition;
+_condition = "[_this, _target, " + str _ignoredCanInteractConditions + "] call " + QCFUNC(canInteractWith) + " && _this call {" + _condition + "}";
 
-_condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
+_condition = if (_distance > 0 && !(_target isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
 
 _callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);
 if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};
-if (_onObject isEqualType "") then {_onObject = [_onObject]};
+if (_target isEqualType "") then {_target = [_target]};
 
-if (_onObject isEqualType []) then {
+if (_target isEqualType []) then {
     {
         GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
         false
-    } count _onObject;
+    } count _target;
 };
 
-if (_onObject isEqualType objNull) then {
-    if (_onObject isEqualTo CLib_Player) then {
+if (_target isEqualType objNull) then {
+    if (_target isEqualTo CLib_Player) then {
         if (_text isEqualType {}) then {
-            private _target = _onObject;
             _text = call _text;
         };
         if (_text call CFUNC(isLocalised)) then {
             _text = _text call CFUNC(readLocalisation);
         };
         private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
-        private _id = _onObject addAction _argArray;
-        [_id, _onObject, _argArray] call _onActionAdded;
+        private _id = _target addAction _argArray;
+        [_id, _target, _argArray] call _onActionAdded;
         GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
     } else {
-        GVAR(Interaction_Actions) pushBackUnique [_onObject, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        GVAR(Interaction_Actions) pushBackUnique [_target, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
     };
-    DUMP("addAction to " + str _onObject)
+    DUMP("addAction to " + str _target)
 };
