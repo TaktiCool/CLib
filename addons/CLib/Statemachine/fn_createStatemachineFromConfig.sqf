@@ -20,8 +20,13 @@ private _stateMachine = call CFUNC(createStatemachine);
 
 {
     private _code = getText (_x >> "stateCode");
+    if (isNil _code) then {
+        _code = compile _code;
+    } else {
+        _code = currentNamespace getVariable _code;
+    };
     private _name = configName _x;
-    [_stateMachine, _name, compile _code] call CFUNC(addStatemachineState);
+    [_stateMachine, _name, _code] call CFUNC(addStatemachineState);
     nil
 } count ([_configPath, "isClass _x", true] call CFUNC(configProperties));
 

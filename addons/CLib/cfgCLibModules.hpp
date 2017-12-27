@@ -279,6 +279,8 @@ class CfgCLibModules {
             APIFNC(createStatemachineFromConfig);
             APIFNC(getVariableStatemachine);
             FNC(init);
+            APIFNC(registerLocalVariableInStatemachine);
+            APIFNC(removeLocalVariableInStatemachine);
             APIFNC(setVariableStatemachine);
             APIFNC(startStatemachine);
             APIFNC(stepStatemachine);

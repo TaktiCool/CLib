@@ -35,29 +35,31 @@ if (isNil "_stateData") exitWith {
 };
 
 _stateData params ["_code", "_args"];
-/* TODO this would require changes in the Event system.
-if (_code isEqualType "") then {
-    private _nextState = [_code, _args] call CFUNC(localEvent);
-} else {
-    private _nextState = _args call _code;
-};
-*/
 
-private _nextState = if (_currentState isEqualType "") then {
-    [_args, []] call _code;
+private _stateValues = [];
+if (_currentState isEqualType []) then {
+    _stateValues = _currentState select 1;
+};
+
+private _allVars = _stateMachine getVariable [QGVAR(allLocalStateVariables), [[], []]];
+_allVars params ["_varNames", "_vars"];
+
+private _nextState = if (_varNames isEqualTo []) then {
+    [_args, _stateValues] call _code;
 } else {
-    [_args, _currentState select 1] call _code;
+    _vars params _varNames;
+    [_args, _stateValues] call _code;
+
+    _vars = _varNames apply {
+        call (compile _x);
+    };
+    _allVars = [_varNames, _vars];
+    _stateMachine setVariable [SMVAR(allLocalStateVariables), _allVars];
 };
-private _nextStateName = if (_nextState isEqualType "") then {
-    _nextState
-} else {
-    _nextState select 0;
-};
-/*
-if (_nextStateName in EGVAR(Statemachine,exitStateNames)) exitWith {
-    [_stateMachine] call CFUNC(killStatemachine);
-    _nextStateName
-};
-*/
+
 _stateMachine setVariable [SMSVAR(nextStateData), _nextState];
-_nextStateName
+
+if (_nextState isEqualType []) then {
+    _nextState = _nextState select 0;
+};
+_nextState
