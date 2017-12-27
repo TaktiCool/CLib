@@ -14,6 +14,6 @@
     None
 */
 
-params ["_u1"];
+params ["_unit"];
 
-[[_u1] call CFUNC(getAllGear), magazinesAmmoFull _u1]
+[[_unit] call CFUNC(getAllGear), magazinesAmmoFull _unit]
