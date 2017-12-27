@@ -26,8 +26,8 @@ GVAR(deletedIndexes) = [];
 GVAR(skipFrameArray) = [];
 GVAR(sortSkipFrameArray) = false;
 
-GVAR(nextFrameBufferA) = [];
-GVAR(nextFrameBufferB) = [];
+GVAR(currentFrameBuffer) = [];
+GVAR(nextFrameBuffer) = [];
 GVAR(nextFrameNo) = diag_frameNo;
 
 CGVAR(deltaTime) = diag_tickTime - (diag_tickTime / 10000);
@@ -114,11 +114,11 @@ DFUNC(onEachFrameHandler) = {
     {
         (_x select 0) call (_x select 1);
         nil
-    } count GVAR(nextFrameBufferA);
+    } count GVAR(currentFrameBuffer);
 
     //Swap double-buffer:
-    GVAR(nextFrameBufferA) = +GVAR(nextFrameBufferB);
-    GVAR(nextFrameBufferB) = [];
+    GVAR(currentFrameBuffer) = +GVAR(nextFrameBuffer);
+    GVAR(nextFrameBuffer) = [];
     GVAR(nextFrameNo) = diag_frameNo + 1;
 
 
