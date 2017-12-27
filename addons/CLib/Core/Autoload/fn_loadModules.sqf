@@ -85,7 +85,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
     DUMP("Function Recieved: " + _functionVarName);
 
     // Compile the function code and assign it.
-    if (USE_COMPRESSION(CGVAR(useFunctionCompression))) then {
+    if (USE_COMPRESSION(true)) then {
         _functionCode = _functionCode call CFUNC(decompressString);
     };
     _functionCode = CMP _functionCode;

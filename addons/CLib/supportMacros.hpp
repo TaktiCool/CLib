@@ -88,7 +88,7 @@
 #ifdef DISABLECOMPRESSION
     #define USE_COMPRESSION(var) false
 #else
-    #define USE_COMPRESSION(var) var
+    #define USE_COMPRESSION(var) var && (!isNil QCGVAR(useCompression) && {CGVAR(useCompression)})
 #endif
 
 #define SCRIPTSCOPENAME (_fnc_scriptName + "_Main")
