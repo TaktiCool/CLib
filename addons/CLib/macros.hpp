@@ -15,6 +15,8 @@
 
 #define QUOTE(var) #var
 
+#define MODPATH \##PATH\##PREFIX\addons\##MOD
+#define QMODPATH QUOTE(MODPATH)
 #define FUNCPATH(var) \##PATH\##PREFIX\addons\##MOD\##MODULE\fn_##var.sqf
 #define FFNCPATH(subModule,var) \##PATH\##PREFIX\addons\##MOD\##MODULE\##subModule\fn_##var.sqf
 
@@ -79,6 +81,12 @@
 
 #define DCFUNC(var) TRIPLE(CLib,fnc,var)
 #define QCFUNC(var) QUOTE(DCFUNC(var))
+
+#define MFUNC(var) EFUNC(Common,var)
+#define QMFUNC(var) QEFUNC(Common,var)
+#define MGVAR(var) EGVAR(Common,var)
+#define QMGVAR(var) QUOTE(MGVAR(var))
+
 
 #ifdef ISDEV
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
