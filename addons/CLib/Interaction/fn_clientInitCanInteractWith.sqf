@@ -19,14 +19,17 @@
 // ["isNotInVehicle", "isNotSwimming", "isNotDead", "isNotOnMap", "isNotUnconscious", "isNotDragging"]
 
 ["isNotInVehicle", {
+    params ["_caller", "_target"];
     (isNull objectParent _caller) && (isNull objectParent _target)
 }] call CFUNC(addCanInteractWith);
 
 ["isNotSwimming", {
+    params ["_caller", "_target"];
     !underwater _caller && !underwater _target
 }] call CFUNC(addCanInteractWith);
 
 ["isNotDead", {
+    params ["_caller", "_target"];
     alive _caller && alive _target
 }] call CFUNC(addCanInteractWith);
 

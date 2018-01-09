@@ -21,7 +21,7 @@ params [["_caller", objNull, [objNull]], ["_target", objNull, [objNull]], ["_ign
     {
         _x params ["_type", "_condition"];
         if !(_type in _ignoredTypes) then {
-            private _status = call _condition;
+            private _status = [_caller, _target] call _condition;
             if (!isNil "_status" && {!_status}) then {
                 false breakOut "canInteractWithScope";
             };
