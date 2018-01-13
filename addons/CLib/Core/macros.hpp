@@ -2,7 +2,7 @@
 #include "\tc\CLib\addons\CLib\CLib_Macros.hpp"
 
 #ifdef ISDEV
-    #define CMP compile
+    #define CMP(var) compile var
 #else
-    #define CMP compileFinal
+    #define CMP(var) compileFinal var
 #endif
