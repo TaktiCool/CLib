@@ -31,7 +31,7 @@ private _unitAnimCfg = _animConfig >> _animState;
 if (getNumber (_unitAnimCfg >> "terminal") isEqualTo 1) then {
     _return = _animState;
 } else {
-    if (isNull (objectParent _unit)) then {
+    if (_isInVehicle) then {
         private _interpolateTo = getArray (_unitAnimCfg >> "interpolateTo");
         {
             if (getNumber (_animConfig >> _x >> "terminal") == 1) exitWith {
