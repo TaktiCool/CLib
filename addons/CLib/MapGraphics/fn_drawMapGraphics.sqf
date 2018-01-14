@@ -106,6 +106,7 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             };
 
             _map drawPolygon [_temp, _lineColor];
+            _cache pushBack [_groupId, _positions, nil, nil, nil, false, true];
         };
         case ("TRIANGLE"): {
             _iconData params ["_type", "_positions", "_lineColor", "_fillColor", "_code"];
@@ -118,6 +119,7 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
                 [_p0, _p1, _p2];
             };
             _map drawTriangle [_temp, _lineColor, _fillColor];
+            _cache pushBack [_groupId, _positions, nil, nil, nil, false, true];
         };
     };
     nil
