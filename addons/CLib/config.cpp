@@ -6,7 +6,7 @@ class CfgPatches {
         requiredVersion = 1.56;
         author = "CLib Team";
         authors[] = {"joko // Jonas", "NetFusion", "BadGuy"};
-        authorUrl = "";
+        authorUrl = "https://www.atwar-mod.com/";
         version = VERSION;
         versionStr = QUOTE(VERSION);
         versionAr[] = {VERSION_AR};

@@ -40,7 +40,7 @@ private _fnc_addRequiredModule = {
 _requiredModules = _requiredModules apply {toLower _x};
 
 LOG("Loaded Modules: " + str _this);
-
+GVAR(LoadedModules) = _requiredModules;
 {
     private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
     private _fullFunctionModName = (parsingNamespace getVariable (_x + "_data")) select 3;
