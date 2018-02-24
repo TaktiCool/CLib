@@ -1,6 +1,7 @@
 #include "CLib_Macros.hpp"
 class CfgPatches {
     class CLib {
+        name = "CLib - Community Libary";
         units[] = {};
         weapons[] = {};
         requiredVersion = 1.56;
