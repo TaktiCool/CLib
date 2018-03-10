@@ -22,7 +22,8 @@ if (_className != "" && _count > 0) then {
         if (_unit canAdd _className) then {
             _unit addItem _className;
         } else {
-            hint format ["Item %1 can't added because Gear is Full", _className];
+            private _message = format ["Item %1 can't added because Gear is Full", _className];
+            LOG(_message);
         };
     };
 };
