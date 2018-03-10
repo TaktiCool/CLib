@@ -245,15 +245,13 @@ class CfgCLibModules {
         MODULE(RemoteExecution) {
             FNC(execute);
             FNC(init);
-            FNC(handleIncomeData) { serverOnly = 1; };
+            FNCSERVER(handleIncomeData);
             APIFNC(remoteExec);
             FNC(serverInit);
         };
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            FNC(serverInit);
-            FNC(clientInit);
             FNC(init);
             APIFNC(getSettingOld);
             APIFNC(getSetting);
