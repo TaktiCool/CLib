@@ -13,9 +13,8 @@
     Returns:
     None
 */
-GVAR(ServerNamespace) = true call CFUNC(createNamespace);
+GVAR(Namepace) = true call CFUNC(createNamespace);
 GVAR(supportedLanguages) = [];
-// GVAR(supportedLanguages) = getArray(configFile >> "CfgCLibLocalisation" >> "supportedLanguages"); // disabled this so we have a Dynamic Supported languages
 
 private _fnc_languageIndex = {
     private _index = GVAR(supportedLanguages) find _this;
@@ -31,23 +30,22 @@ private _fnc_setLanguageKey = {
     _index = _index call _fnc_languageIndex;
 
     private _locName = format ["STR_%1", _name];
-    private _var = GVAR(ServerNamespace) getVariable [_locName, []];
-    /* TODO Fix Compression
-    if (USECOMPRESSION) then {
+    private _var = GVAR(Namepace) getVariable [_locName, []];
+    if (USE_COMPRESSION(true)) then {
         _data = _data call CFUNC(compressString);
     };
-    */
+
     _var set [_index, _data];
 
-    [GVAR(ServerNamespace), _locName, _var, QGVAR(allLocalisations), true] call CFUNC(setVariable);
+    [GVAR(Namepace), _locName, _var, QGVAR(allLocalisations), true] call CFUNC(setVariable);
 };
 
 private _fnc_readLocalisation = {
     params ["_config", "_name"];
-    private _allLocalisations = [];
     {
         [_name, configName _x, getText _x] call _fnc_setLanguageKey;
-    } forEach configProperties [_config, "isText _x", true];
+        nil
+    } count configProperties [_config, "isText _x", true];
 };
 
 private _fnc_readLocalisationClass = {
@@ -71,5 +69,5 @@ private _fnc_readLocalisationClass = {
     nil
 } count [campaignConfigFile, missionConfigFile >> "CLib", configFile];
 
-publicVariable QGVAR(ServerNamespace);
+publicVariable QGVAR(Namepace);
 publicVariable QGVAR(supportedLanguages);

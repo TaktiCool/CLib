@@ -15,6 +15,6 @@
 */
 
 params [["_locaName", "STR_CLib_ERROR"]];
-private _temp = GVAR(ClientNamespace) getVariable _locaName;
+private _temp = GVAR(Namepace) getVariable _locaName;
 
 !isNil "_temp";
