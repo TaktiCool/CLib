@@ -169,7 +169,6 @@ class CfgCLibModules {
 
         MODULE(lnbData) {
             dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
-            FNC(init);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
