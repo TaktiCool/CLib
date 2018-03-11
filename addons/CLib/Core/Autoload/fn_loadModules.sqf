@@ -103,18 +103,20 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
 
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
-                    waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
-                    [
-                        format ["Warning function %1 is corrupted on your client, please restart your client.", _functionVarName],
-                        "[CLib Anti Cheat Warning]",
-                        nil,nil,nil
-                    ] spawn BIS_fnc_guiMessage;
-                    GVAR(unregisterClient) = player;
-                    publicVariableServer QGVAR(unregisterClient);
-                    GVAR(loadingCanceled) = true;
-                    endLoadingScreen;
-                    disableUserInput false;
-                    endMission "LOSER";
+                    _functionVarName spawn {
+                        waitUntil {missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
+                        [
+                            format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
+                            "[CLib Anti Cheat Warning]",
+                            nil,nil,nil
+                        ] spawn BIS_fnc_guiMessage;
+                        GVAR(unregisterClient) = player;
+                        publicVariableServer QGVAR(unregisterClient);
+                        GVAR(loadingCanceled) = true;
+                        endLoadingScreen;
+                        disableUserInput false;
+                        endMission "LOSER";
+                    };
                 };
             };
         #endif
