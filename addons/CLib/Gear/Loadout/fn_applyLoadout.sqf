@@ -14,7 +14,6 @@
     Returns:
     None
 */
-
 if (isNil QGVAR(loadoutsLoaded)) exitWith {
     [{
         _this call CFUNC(applyLoadout);
@@ -43,73 +42,73 @@ private _fnc_do = {
             };
         };
         if (isNil "_item") exitWith {};
-        call _do;
+        _item call _do;
     };
 };
 
 // Remove Actions
 ["removeAllWeapons", {
-    if (_item isEqualTo 1) then {removeAllWeapons _unit};
+    if (_this isEqualTo 1) then {removeAllWeapons _unit};
 }, true] call _fnc_do;
 ["removeAllItems", {
-    if (_item isEqualTo 1) then {removeAllItems _unit};
+    if (_this isEqualTo 1) then {removeAllItems _unit};
 }, true] call _fnc_do;
 ["removeAllAssignedItems", {
-    if (_item isEqualTo 1) then {removeAllAssignedItems _unit};
+    if (_this isEqualTo 1) then {removeAllAssignedItems _unit};
 }, true] call _fnc_do;
 
 // Uniform
 ["uniform", {
-    [_unit, _item, 0] call CFUNC(addContainer);
+    [_unit, _this, 0] call CFUNC(addContainer);
 }, true] call _fnc_do;
 
 // Vest
 ["vest", {
-    [_unit, _item, 1] call CFUNC(addContainer);
+    [_unit, _this, 1] call CFUNC(addContainer);
 }, true] call _fnc_do;
 
 // Backpack
 ["backpack", {
-    [_unit, _item, 2] call CFUNC(addContainer);
+    [_unit, _this, 2] call CFUNC(addContainer);
 }, true] call _fnc_do;
 
 // Headgear
 ["headgear", {
-    if (_item != "") then {
+    if (_this != "") then {
         removeHeadgear _unit;
-        _unit addHeadgear _item;
+        _unit addHeadgear _this;
     };
 }, true] call _fnc_do;
 
 // Goggles
 ["goggle", {
-    if (_item != "") then {
+    if (_this != "") then {
         removeGoggles _unit;
-        _unit addGoggles _item;
+        _unit addGoggles _this;
     };
 }, true] call _fnc_do;
 
 // Weapons
 {
-    [_x, {_unit addWeapon _item}, true] call _fnc_do;
+    [_x, {_unit addWeapon _this}, true] call _fnc_do;
     nil
 } count ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
 
 // Primary Weapon Items
 {
-    [_x, {_unit addPrimaryWeaponItem _item}, true] call _fnc_do;
+    [_x, {_unit addPrimaryWeaponItem _this}, true] call _fnc_do;
     nil
 } count ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
 
 // Secondary Weapon Items
 {
-    [_x, {_unit addSecondaryWeaponItem _item}, true] call _fnc_do;
+    [_x, {_unit addSecondaryWeaponItem _this}, true] call _fnc_do;
     nil
 } count ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
 
 // Handgun Items
 {
-    [_x, {_unit addHandgunItem _item}, true] call _fnc_do;
+    [_x, {_unit addHandgunItem _this}, true] call _fnc_do;
     nil
 } count ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
 
@@ -125,7 +124,7 @@ private _fnc_do = {
             _unit addItemToUniform _x;
         };
         nil
-    } count _item;
+    } count _this;
 }, true] call _fnc_do;
 
 // Items to Vest
@@ -140,7 +139,7 @@ private _fnc_do = {
             _unit addItemToVest _x;
         };
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 // Items to Backpack
@@ -155,7 +154,7 @@ private _fnc_do = {
             _unit addItemToBackpack _x;
         };
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 // Magazines
@@ -168,7 +167,7 @@ private _fnc_do = {
             _unit addMagazine _x;
         };
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 
@@ -184,7 +183,7 @@ private _fnc_do = {
             _unit addItem _x;
         };
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 
@@ -193,7 +192,7 @@ private _fnc_do = {
     {
         _unit linkItem _x;
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 // Scripts
@@ -201,14 +200,14 @@ private _fnc_do = {
     {
         [_unit, _loadout] call compile _x;
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 ["unitTrait", {
     {
         _unit setUnitTrait _x;
         nil
-    } count _item;
+    } count _this;
 }, false] call _fnc_do;
 
 if !(_loadoutVars isEqualTo []) then {

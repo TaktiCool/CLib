@@ -14,7 +14,7 @@
 
 */
 params ["_namespace", "_hash", ["_allVarName", ""]];
-private _allVarName = if (_allVarName == "") then {
+private _allVar = if (_allVarName == "") then {
     allVariables _namespace;
 } else {
     [_namespace, _allVarName] call CFUNC(allVariables);
@@ -26,4 +26,4 @@ private _allVarName = if (_allVarName == "") then {
         [_hash, _x, _var] call CFUNC(setHash);
     };
     nil
-} count _allVarName;
+} count _allVar;

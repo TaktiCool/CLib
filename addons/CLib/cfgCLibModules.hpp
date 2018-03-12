@@ -28,6 +28,7 @@ class CfgCLibModules {
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
+            FNC(init);
         };
 
         MODULE(ConfigCaching) {
@@ -70,7 +71,6 @@ class CfgCLibModules {
             };
 
             MODULE(Misc) {
-                APIFNC(addPerformanceCounter);
                 APIFNC(blurScreen);
                 APIFNC(cachedCall);
                 APIFNC(codeToString);
@@ -78,7 +78,6 @@ class CfgCLibModules {
                 APIFNC(deleteAtEntry);
                 APIFNC(directCall);
                 APIFNC(disableUserInput);
-                // APIFNC(dumpPerformanceInformation); // FIXME
                 APIFNC(getPos);
                 APIFNC(fileExist);
                 APIFNC(flatConfigPath);
@@ -95,7 +94,6 @@ class CfgCLibModules {
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
-                FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
                 APIFNC(toFixedNumber);
             };
@@ -172,7 +170,6 @@ class CfgCLibModules {
 
         MODULE(lnbData) {
             dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
-            FNC(init);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
@@ -230,7 +227,9 @@ class CfgCLibModules {
 
         MODULE(PerformanceInfo) {
             dependency[] = {"CLib/Events"};
+            APIFNC(addPerformanceCounter);
             FNC(clientInit);
+            APIFNC(dumpPerformanceInfo);
         };
 
         MODULE(PerFrame) {
@@ -247,15 +246,13 @@ class CfgCLibModules {
         MODULE(RemoteExecution) {
             FNC(execute);
             FNC(init);
-            FNC(handleIncomeData) { serverOnly = 1; };
+            FNCSERVER(handleIncomeData);
             APIFNC(remoteExec);
             FNC(serverInit);
         };
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            FNC(serverInit);
-            FNC(clientInit);
             FNC(init);
             APIFNC(getSettingOld);
             APIFNC(getSetting);

@@ -2,7 +2,7 @@
 
 > Maintainer: joko // Jonas
 
-TODO text here
+The Animation Framework is Build around the build in Animation System in Arma 3 to make it easier to Sync Animations over the network and on multiple Clients.
 
 
 ## CLib_fnc_doAnimation
@@ -15,7 +15,7 @@ Parameter(s):
 Returns:
 * None
 
-Do a Animation for a Unit
+Do an Animation for a Unit
 
 Examples:
 ```sqf

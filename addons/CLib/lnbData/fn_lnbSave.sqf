@@ -17,6 +17,9 @@
 */
 params ["_control", "_rowAndColumn", "_data"];
 
-private _index = GVAR(lnbDataControlCache) pushBack _control;
-GVAR(lnbDataDataCache) setVariable [str _index, _data];
-_control lnbSetValue [_rowAndColumn, _index];
+if (isNil QGVAR(index)) then {
+    GVAR(index) = -1;
+};
+GVAR(index) = GVAR(index) + 1;
+_control setVariable [str GVAR(index), _data];
+_control lnbSetValue [_rowAndColumn, GVAR(index)];

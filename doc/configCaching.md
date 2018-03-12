@@ -35,7 +35,24 @@ Examples:
 private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F"), true] call CLib_fnc_returnParents;
 ```
 
-## CLib_fnc_getDataCached
+## CLib_fnc_getConfigData
+
+Parameter(s):
+* [`<Config>`], [`<Array>`] Path to Data
+* [`<String>`], [`<Array>`], [`<Number>`] Default Return (optional)
+* [`<Boolean>`] Force Type of Default Return (optional)
+
+Returns:
+* [`<String>`], [`<Array>`], [`<Number>`] Config Data or Default value if the Config does not exist
+
+Get a Config Value.
+
+Examples:
+```sqf
+private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getConfigData;
+```
+
+## CLib_fnc_getConfigDataCached
 
 Parameter(s):
 * [`<Config>`], [`<Array>`] Path to Data
@@ -49,7 +66,7 @@ Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
 Examples:
 ```sqf
-private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getDataCached;
+private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getConfigDataCached;
 ```
 
 [`<Array>`]: https://community.bistudio.com/wiki/Array

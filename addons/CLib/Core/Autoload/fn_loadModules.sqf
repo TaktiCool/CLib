@@ -85,10 +85,10 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
     DUMP("Function Recieved: " + _functionVarName);
 
     // Compile the function code and assign it.
-    if (USE_COMPRESSION(CGVAR(useFunctionCompression))) then {
+    if (USE_COMPRESSION(true)) then {
         _functionCode = _functionCode call CFUNC(decompressString);
     };
-    _functionCode = CMP _functionCode;
+    _functionCode = CMP(_functionCode);
 
     {
         #ifdef ISDEV
@@ -98,19 +98,25 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                 _x setVariable [_functionVarName, _functionCode];
             } else {
                 if !((_x getVariable _functionVarName) isEqualTo _functionCode) then {
-                    private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
+                    private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3"" as Function Defined and is Different to the current Use Version!", profileName, GVAR(playerUID), _functionVarName];
                     LOG(_log);
 
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
-
-                    ["Warning function %1 is corrupted on your client, please restart your client.", _functionVarName] call BIS_fnc_errorMsg;
-                    GVAR(unregisterClient) = player;
-                    publicVariableServer QGVAR(unregisterClient);
-                    GVAR(loadingCanceled) = true;
-                    endLoadingScreen;
-                    disableUserInput false;
-                    endMission "LOSER";
+                    _functionVarName spawn {
+                        waitUntil {missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
+                        [
+                            format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
+                            "[CLib Anti Cheat Warning]",
+                            nil,nil,nil
+                        ] spawn BIS_fnc_guiMessage;
+                        GVAR(unregisterClient) = player;
+                        publicVariableServer QGVAR(unregisterClient);
+                        GVAR(loadingCanceled) = true;
+                        endLoadingScreen;
+                        disableUserInput false;
+                        endMission "LOSER";
+                    };
                 };
             };
         #endif

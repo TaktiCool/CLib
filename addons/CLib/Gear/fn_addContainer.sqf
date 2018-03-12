@@ -15,22 +15,39 @@
     Returns:
     None
 */
-params [["_unit", objNull, [objNull]], ["_containerClassName", "", ["STRING"]], ["_containerNumber", -1, [-1]]];
+params [["_unit", objNull, [objNull]], ["_containerClassName", "", ["STRING"]], ["_containerType", -1, [-1, ""]]];
 
-if (_containerNumber == -1) then {
-    private _cfg = configFile >> "CfgWeapons";
-    if (_containerClassName isKindOf ["Uniform_Base", _cfg]) then {
-        _containerNumber = 0;
-    };
-    if ([_containerClassName, [["Vest_NoCamo_Base", _cfg], ["Vest_Camo_Base", _cfg]]] call CFUNC(isKindOfArray)) then {
-        _containerNumber = 1;
-    };
-    if (_containerClassName isKindOf "Bag_Base") then {
-        _containerNumber = 2;
+if (_containerType isEqualType "") then {
+    switch (toLower (_containerType)) do {
+        case ("uniform"): {
+            _containerType = 0;
+        };
+        case ("vest"): {
+            _containerType = 1;
+        };
+        case ("backpack"): {
+            _containerType = 2;
+        };
+        default {
+            _containerType = -1;
+        };
     };
 };
 
-switch (_containerNumber) do {
+if (_containerType == -1) then {
+    private _cfg = configFile >> "CfgWeapons";
+    if (_containerClassName isKindOf ["Uniform_Base", _cfg]) then {
+        _containerType = 0;
+    };
+    if ([_containerClassName, [["Vest_NoCamo_Base", _cfg], ["Vest_Camo_Base", _cfg]]] call CFUNC(isKindOfArray)) then {
+        _containerType = 1;
+    };
+    if (_containerClassName isKindOf "Bag_Base") then {
+        _containerType = 2;
+    };
+};
+
+switch (_containerType) do {
     case 0: {
         private _uniformName = uniform _unit;
         if (_containerClassName == _uniformName && _containerClassName != "") then {

@@ -17,4 +17,4 @@
 params ["_control", "_rowAndColumn"];
 
 private _index = _control lnbValue _rowAndColumn;
-GVAR(lnbDataDataCache) getVariable (str _index);
+_control getVariable (str _index);

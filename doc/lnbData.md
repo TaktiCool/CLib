@@ -2,7 +2,7 @@
 
 > Maintainer: joko // Jonas
 
-lnbData is a Module that add the Posiblity to save all Type of Data on a lnb Control
+lnbData is a Module that adds the Possibility to save all Type of Data on an lnb Control
 
 
 ## CLib_fnc_lnbSave
@@ -10,12 +10,12 @@ lnbData is a Module that add the Posiblity to save all Type of Data on a lnb Con
 Parameter(s):
 * [`<Control>`] Control
 * [`<Array>`] Row and Column as [`<Number>`]
-* [`<Any>`] Data that get Saved on the Control
+* [`<Anything>`] Data that get Saved on the Control
 
 Returns:
 * None
 
-Do a Animation for a Unit
+Save a Value on a lnb.
 
 Examples:
 ```sqf
@@ -29,7 +29,9 @@ Parameter(s):
 * [`<Array>`] Row and Column as [`<Number>`]
 
 Returns:
-* [`<Any>`] Data that is Saved on the Control
+* [`<Anything>`] Data that is Saved on the Control
+
+Read a Value from a lnb.
 
 Examples:
 ```sqf
@@ -39,4 +41,4 @@ private _data = [_control, [1,4]] call CLib_fnc_lnbLoad;
 [`<Array>`]: https://community.bistudio.com/wiki/Array
 [`<Number>`]: https://community.bistudio.com/wiki/Number
 [`<Control>`]: https://community.bistudio.com/wiki/Control
-[`<Any>`]: https://community.bistudio.com/wiki/Data_Types
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything

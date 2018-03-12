@@ -5,13 +5,12 @@
     Author: joko // Jonas
 
     Description:
-    Returns all loadouts
+    Init for Anim Framework
 
     Parameter(s):
     None
 
     Returns:
-    Array With all Loadout Names <Array>
+    None
 */
-
-[GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables);
+GVAR(animDeathNamespace) = false call CFUNC(createNamespace);

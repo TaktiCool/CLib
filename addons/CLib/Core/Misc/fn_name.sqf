@@ -22,15 +22,21 @@ private _ret = _unit getVariable QGVAR(playerName);
 if (isNil "_ret") then {
     _ret = name _unit;
     // fall back if the unit/Object has no name
-    if (_ret == "Error: No vehicle") then {
+    if (_ret == "Error: No unit" || _ret == "Error: No vehicle") then {
         _ret = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
-        [{
-            if (_this getVariable [QGVAR(playerName), ""] != "") exitWith {
-                _this setVariable [QGVAR(playerName), name _this, true];
-            };
-        }, {
-            name _this == "Error: No vehicle" || _this getVariable [QGVAR(playerName), ""] != ""
-        }, _unit] call CFUNC(waitUntil);
-    }
+
+        if (_ret == "Error: No vehicle") then {
+            _ret = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
+            [{
+                if (_this getVariable [QGVAR(playerName), ""] != "") exitWith {
+                    _this setVariable [QGVAR(playerName), name _this, true];
+                };
+            }, {
+                name _this == "Error: No vehicle" || _this getVariable [QGVAR(playerName), ""] != ""
+            }, _unit] call CFUNC(waitUntil);
+        } else {
+            _unit setVariable [QGVAR(playerName), _ret];
+        };
+    };
 };
 _ret
