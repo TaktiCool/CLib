@@ -195,6 +195,7 @@ class CfgCLibModules {
             FNC(clientInit);
             APIFNC(drawMapGraphics);
             APIFNC(mapGraphicsMouseButtonClick);
+            APIFNC(mapGraphicsMouseButtonDblClick);
             APIFNC(mapGraphicsMouseMoving);
             APIFNC(mapGraphicsPosition);
             APIFNC(nearestMapGraphicsGroup);
