@@ -41,6 +41,7 @@ _requiredModules = _requiredModules apply {toLower _x};
 
 LOG("Loaded Modules: " + str _this);
 GVAR(LoadedModules) = _requiredModules;
+publicVariable QGVAR(LoadedModules);
 {
     private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
     private _fullFunctionModName = (parsingNamespace getVariable (_x + "_data")) select 3;

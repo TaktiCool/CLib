@@ -91,6 +91,8 @@ class CfgCLibModules {
                 FNC(initVoiceDetection);
                 APIFNC(isKindOfArray);
                 APIFNC(log);
+                APIFNC(modLoaded);
+                APIFNC(moduleLoaded);
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
