@@ -18,6 +18,9 @@
     Returns:
     None
 */
+
+EXEC_ONLY_UNSCHEDULED
+
 params ["_name", "_modName", "_module", "_var", "_file", "_line", "_scriptName", "_scriptNameParent", "_scriptMap"];
 
 private _formatStr = "(%1) [%2 %3 - %4]: %5";
