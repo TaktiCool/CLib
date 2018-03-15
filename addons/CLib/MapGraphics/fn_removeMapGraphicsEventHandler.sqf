@@ -25,9 +25,7 @@ if (isNull _namespace) exitWith {};
 
 private _eventArray = _namespace getVariable [_uid, []];
 if (_id == -1) then {
-    {
-        _eventArray set [_forEachIndex, nil];
-    } forEach _eventArray;
+    _namespace setVariable [_uid, nil];
 } else {
     if ((count _eventArray) <= _id) exitWith {};
     _eventArray set [_id, nil];
