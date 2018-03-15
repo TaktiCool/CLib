@@ -21,7 +21,7 @@ params ["_groupName"];
 [_groupName, "hoverin"] call CFUNC(removeMapGraphicsEventHandler);
 [_groupName, "hoverout"] call CFUNC(removeMapGraphicsEventHandler);
 [_groupName, "dblclicked"] call CFUNC(removeMapGraphicsEventHandler);
-[_groupName, "dblclicked"] call CFUNC(removeMapGraphicsEventHandler);
+[_groupName, "clicked"] call CFUNC(removeMapGraphicsEventHandler);
 
 // increment map graphics cache
 GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
