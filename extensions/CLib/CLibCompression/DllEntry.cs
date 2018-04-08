@@ -14,6 +14,16 @@ namespace CLibCompression
         private const uint MaxMatchLength = (1 << 4) - MinMatchLength;
 
 #if WIN64
+        [DllExport("RVExtensionVersion")]
+#else
+        [DllExport("_RVExtensionVersion@8", CallingConvention.StdCall)]
+#endif
+        public static void RVExtensionVersion(StringBuilder output, int outputSize)
+        {
+            output.Append(DllEntry.GetVersion());
+        }
+
+#if WIN64
         [DllExport("RVExtension")]
 #else
         [DllExport("_RVExtension@12", CallingConvention.StdCall)]
@@ -23,18 +33,21 @@ namespace CLibCompression
             if (input != "version")
                 return;
 
+            output.Append(DllEntry.GetVersion());
+        }
+
+        private static string GetVersion()
+        {
             var executingAssembly = Assembly.GetExecutingAssembly();
             try
             {
-                var location = executingAssembly.Location;
+                string location = executingAssembly.Location;
                 if (location == null)
                     throw new Exception("Assembly location not found");
-                output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
+                return FileVersionInfo.GetVersionInfo(location).FileVersion;
             }
-            catch (Exception e)
-            {
-                output.Append(e);
-            }
+            catch (Exception) { }
+            return "0.0.0.0";
         }
 
         [DllExport("Compress")]
