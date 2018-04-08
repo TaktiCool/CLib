@@ -40,6 +40,16 @@ namespace CLib
         }
 
 #if WIN64
+        [DllExport("RVExtensionVersion")]
+#else
+        [DllExport("_RVExtensionVersion@8", CallingConvention.StdCall)]
+#endif
+        public static void RVExtensionVersion(StringBuilder output, int outputSize)
+        {
+            output.Append(DllEntry.GetVersion());
+        }
+
+#if WIN64
         [DllExport("RVExtension")]
 #else
         [DllExport("_RVExtension@12", CallingConvention.StdCall)]
@@ -56,18 +66,7 @@ namespace CLib
                     Debugger.Toggle();
                     return;
                 case "version":
-                    var executingAssembly = Assembly.GetExecutingAssembly();
-                    try
-                    {
-                        string location = executingAssembly.Location;
-                        if (location == null)
-                            throw new Exception("Assembly location not found");
-                        output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
-                    }
-                    catch (Exception e)
-                    {
-                        output.Append(e.Message);
-                    }
+                    output.Append(DllEntry.GetVersion());
                     break;
                 default:
                     switch (input[0])
@@ -153,6 +152,20 @@ namespace CLib
 
             DllEntry._outputBuffer = Encoding.Default.GetString(outputBytes.GetRange(outputSplitPosition, outputBytes.Count - outputSplitPosition).ToArray());
             output = output.Remove(output.Length - DllEntry._outputBuffer.Length, DllEntry._outputBuffer.Length);
+        }
+
+        private static string GetVersion()
+        {
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            try
+            {
+                string location = executingAssembly.Location;
+                if (location == null)
+                    throw new Exception("Assembly location not found");
+                return FileVersionInfo.GetVersionInfo(location).FileVersion;
+            }
+            catch (Exception) { }
+            return "0.0.0.0";
         }
 
         private delegate string CLibFuncDelegate(string input);

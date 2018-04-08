@@ -15,10 +15,10 @@
 */
 
 if ((getNumber (missionConfigFile >> (QPREFIX + "_useExperimentalAutoload"))) isEqualTo 1) then {
-
-    [QGVAR(onPlayerConnected), "onPlayerConnected", {
+    addMissionEventHandler ["PlayerConnected", {
+        params ["", "", "", "", "_owner"];
         [] remoteExec [QCFUNC(loadModules), _owner];
-    }] call BIS_fnc_addStackedEventHandler;
+    }];
 
     call CFUNC(loadModules); // call LoadModules on Server
 };
