@@ -83,14 +83,16 @@
 #define MLOC(var) LOC(QLSTRING(var))
 
 #define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith { LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment from "+ _fnc_scriptNameParent); [missionNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall);};
-#define EXEC_ONLY_IN_MISSIONNAMESPACE if !(currentNamespace isEqualTo missionNamespace) exitWith { with missionNamespace do {LOG("WARNING: " + _fnc_scriptName + " was called in the wrong Namespace from "+ _fnc_scriptNameParent); _this call (missionNamespace getVariable _fnc_scriptName);};
+#define EXEC_ONLY_IN_NAMESPACE(var) if !(currentNamespace isEqualTo var) exitWith { with var do {LOG("WARNING: " + _fnc_scriptName + " was called in the wrong Namespace from "+ _fnc_scriptNameParent); _this call (var getVariable _fnc_scriptName);}
+#define EXEC_ONLY_IN_MISSIONNAMESPACE EXEC_ONLY_IN_NAMESPACE(missionNamespace)
 
 #ifdef DISABLECOMPRESSION
     #define USE_COMPRESSION(var) false
 #else
-    #define USE_COMPRESSION(var) var
+    #define USE_COMPRESSION(var) var && (!isNil QCGVAR(useCompression) && {CGVAR(useCompression)})
 #endif
 
 #define SCRIPTSCOPENAME (_fnc_scriptName + "_Main")
+#define FUNCTIONNAME _fnc_scriptName
 
 #define RELDIR(pos1,pos2) (((pos1 getRelDir pos2) + 180) % 360 - 180)

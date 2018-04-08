@@ -28,6 +28,7 @@ class CfgCLibModules {
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
+            FNC(init);
         };
 
         MODULE(ConfigCaching) {
@@ -90,6 +91,8 @@ class CfgCLibModules {
                 FNC(initVoiceDetection);
                 APIFNC(isKindOfArray);
                 APIFNC(log);
+                APIFNC(modLoaded);
+                APIFNC(moduleLoaded);
                 APIFNC(name);
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
@@ -169,7 +172,6 @@ class CfgCLibModules {
 
         MODULE(lnbData) {
             dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
-            FNC(init);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
@@ -192,6 +194,7 @@ class CfgCLibModules {
             FNC(clientInit);
             APIFNC(drawMapGraphics);
             APIFNC(mapGraphicsMouseButtonClick);
+            APIFNC(mapGraphicsMouseButtonDblClick);
             APIFNC(mapGraphicsMouseMoving);
             APIFNC(mapGraphicsPosition);
             APIFNC(nearestMapGraphicsGroup);
@@ -245,15 +248,13 @@ class CfgCLibModules {
         MODULE(RemoteExecution) {
             FNC(execute);
             FNC(init);
-            FNC(handleIncomeData) { serverOnly = 1; };
+            FNCSERVER(handleIncomeData);
             APIFNC(remoteExec);
             FNC(serverInit);
         };
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            FNC(serverInit);
-            FNC(clientInit);
             FNC(init);
             APIFNC(getSettingOld);
             APIFNC(getSetting);

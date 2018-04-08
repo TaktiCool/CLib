@@ -75,7 +75,13 @@ name = %3",
 ];
 _text call _fnc_outputText;
 
-
+if !(GVAR(FPSStorage) isEqualTo []) then {
+    _text = "------Last Client Frames------
+    ";
+    {
+        _text = _text + _x + " ";
+    } count GVAR(FPSStorage);
+};
 
 "
 ------CLib Variables------" call _fnc_outputText;

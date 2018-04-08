@@ -21,8 +21,7 @@ GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
 ["cursorObjectChanged", FUNC(onCursorObjectChanged)] call CFUNC(addEventhandler);
 ["playerChanged", {
-    params ["_data", "_params"];
-    _data params ["_currentPlayer", "_oldPlayer"];
+    (_this select 0) params ["_currentPlayer", "_oldPlayer"];
     // Posible Fix for Double Squad Menu Entry
     if (_currentPlayer isEqualTo _oldPlayer) exitWith {};
     {
