@@ -37,7 +37,7 @@ Delete a Local or Global Namespace that was created with CLib_fnc_createNamespac
 Examples:
 
 ```sqf
-GVAR(awsomeLocalNamespace) = false call CFUNC(deleteNamespace);
+GVAR(awsomeLocalNamespace) call CFUNC(deleteNamespace);
 ```
 
 ## CLib_fnc_getLogicGroup
@@ -62,7 +62,7 @@ Returns:
 * None
 
 Sets a Varaible on a Object/Namespace and
-Saves the Varaible Name in a Array on this Namespace for later use with [`<allVariable>`]
+Saves the Varaible Name in a Array on this Namespace for later use with [`CLib_fnc_allVariable`]
 
 Examples:
 
@@ -77,14 +77,15 @@ Parameter(s):
 * [`<String>`] Cache name
 
 Returns:
-* [`<Array>`] Array with all Variable Names that where set with CLib_fnc_setVariable
+* [`<Array>`] Array with all Variable Names that where set with [`CLib_fnc_setVariable`]
 
-Sets a Varaible on a Object/Namespace and also saves the Varaible Name in a Array on this Namespace for later use
+Gets a Varaible on a Object/Namespace that where saved with [`CLib_fnc_setVariable`]
 
 Examples:
 
 ```sqf
-private _return = [GVAR(namespace), "BananasAreAwsome"] call CFUNC(setVariable);
+[GVAR(namespace), "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CFUNC(setVariable);
+private _return = [GVAR(namespace), "BananasAreAwsome"] call CFUNC(allVariable);
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
@@ -99,4 +100,5 @@ private _return = [GVAR(namespace), "BananasAreAwsome"] call CFUNC(setVariable);
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Location>`]: https://community.bistudio.com/wiki/Location
-[`<allVariable>`]: ##CLib_fnc_allVariable
+[`CLib_fnc_allVariable`]: ##CLib_fnc_allVariable
+[`CLib_fnc_setVariable`]: ##CLib_fnc_setVariable

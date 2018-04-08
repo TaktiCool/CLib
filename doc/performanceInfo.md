@@ -1,4 +1,4 @@
-# TEMPLATEMODULE
+# Performance Info
 
 > Maintainer: NetFuison
 

@@ -1,6 +1,6 @@
-# Object Pooling
+# Mission Module Loader
 
-> Maintainer: joko // Jonas
+> Maintainer: joko // Jonas, NetFusion
 
 TODO text here
 

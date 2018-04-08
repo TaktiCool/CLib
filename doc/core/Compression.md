@@ -1,6 +1,6 @@
-# Object Pooling
+# Compression
 
-> Maintainer: joko // Jonas
+> Maintainer: joko // Jonas, NetFusion
 
 TODO text here
 

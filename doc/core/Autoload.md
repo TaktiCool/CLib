@@ -1,24 +1,24 @@
-# Object Pooling
+# Autoload
 
-> Maintainer: joko // Jonas
+> Maintainer: joko // Jonas, NetFusion
 
-TODO text here
+Autoload is the Sub Module that is responsible for the Loading and Transferring process of the Mod Data to the Client.
 
 
-## FUNCTION
+## CLib_fnc_loadModules
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* None
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+CLib_fnc_loadModules is the Entry function that is called Once in the Mission init.sqf to initialize CLib
 
 Examples:
 
 ```sqf
-TODO Example here
+call CLib_fnc_loadModules;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

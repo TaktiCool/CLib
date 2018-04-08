@@ -1,6 +1,6 @@
-# Object Pooling
+# Events
 
-> Maintainer: joko // Jonas
+> Maintainer: joko // Jonas, NetFusion
 
 TODO text here
 
