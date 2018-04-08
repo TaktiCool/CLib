@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace CLibLogging
+namespace CLibDatabase
 {
     public class DllEntry
     {
