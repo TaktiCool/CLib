@@ -12,7 +12,7 @@
     0: Position <Array>
     1: Radius <Number>
     2: Minimal Radius <Number> (Default: 0)
-    2: Vehicle Class <String> (Default: Nil)
+    3: Vehicle Class <String> (Default: Nil)
 
     Returns:
     Save Position <Array>

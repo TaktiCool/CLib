@@ -59,7 +59,7 @@ class CfgCLibModules {
                 FNCSERVER(checkAllFunctionCompression);
                 FNCSERVER(checkCompression);
                 FNCSERVER(compressString);
-                FNCSERVER(decompressString);
+                APIFNCSERVER(decompressString);
             };
 
             MODULE(ExtensionFramework) {

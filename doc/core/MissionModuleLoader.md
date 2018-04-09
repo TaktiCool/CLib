@@ -2,23 +2,28 @@
 
 > Maintainer: joko // Jonas, NetFusion
 
-TODO text here
+The Mission Module Loader is a Module where you are able to use a CLib Entry Point from the mission side.
 
-
-## FUNCTION
-
-Parameter(s):
-* [`<Type>`] TODO text here
-
-Returns:
-* [`<Type>`] TODO text here
-
-TODO text here
-
+The Script files are Required to be called fn_functionName.sqf in the folder CLibModules/MODULE.  
+Sub Modules and Dependency's are not Supported!  
+Supported Entry Points are init(all clients and server), serverInit(isServer), clientInit(hasInterface), hcInit(not hasInterface and not isServer).  
+All Mission Modules are always loaded.
+All CLib Modules are available at the point of calling.
+## Mission Side Implementation
 Examples:
-
 ```sqf
-TODO Example here
+class CLib {
+    class CfgCLibMissionModules {
+        tag = "Test";
+        class testModule {
+            class clientInit;
+            class hcInit;
+            class init;
+            class serverInit;
+            class testFnc;
+        };
+    };
+};
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

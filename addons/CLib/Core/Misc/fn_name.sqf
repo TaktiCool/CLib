@@ -5,38 +5,37 @@
     Author: joko // Jonas
 
     Description:
-    Gets player name if the corresponding unit is dead
+    Gets a Object Name or displayName.
 
     Parameter(s):
-    0: Unit whose name will be detected <Object>
+    0: Object whose name will be detected <Object>
 
     Returns:
-    Name of the unit <String>
+    Name of the Object <String>
 */
-params ["_unit"];
+params ["_object"];
 
-if (isNull _unit) exitWith {"objNull"};
-private _ret = _unit getVariable QGVAR(playerName);
+if (isNull _object) exitWith {"objNull"};
+private _ret = _object getVariable QGVAR(objectName);
 
 // fallback if the Unit doesn't have a name set
 if (isNil "_ret") then {
-    _ret = name _unit;
-    // fall back if the unit/Object has no name
-    if (_ret == "Error: No unit" || _ret == "Error: No vehicle") then {
-        _ret = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
-
-        if (_ret == "Error: No vehicle") then {
-            _ret = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
-            [{
-                if (_this getVariable [QGVAR(playerName), ""] != "") exitWith {
-                    _this setVariable [QGVAR(playerName), name _this, true];
-                };
-            }, {
-                name _this == "Error: No vehicle" || _this getVariable [QGVAR(playerName), ""] != ""
-            }, _unit] call CFUNC(waitUntil);
-        } else {
-            _unit setVariable [QGVAR(playerName), _ret];
-        };
+    if (_object isKindOf "CAManBase") then {
+        _ret = name _object;
+        if (_ret != "Error: No vehicle") exitWith {};
+        _ret = getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName");
+        _object setVariable [QGVAR(waitForNameIsRunning), true];
+        [{
+            if (_this getVariable [QGVAR(objectName), ""] != "") exitWith {
+                _this setVariable [QGVAR(objectName), name _this];
+            };
+        }, {
+            name _this != "Error: No vehicle"
+             || _this getVariable [QGVAR(objectName), ""] != ""
+        }, _object] call CFUNC(waitUntil);
+    } else {
+        _ret = getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName");
+        _this setVariable [QGVAR(objectName), name _this];
     };
 };
 _ret

@@ -9,7 +9,7 @@
 
     Parameter(s):
     https://community.bistudio.com/wiki/isKindOf
-    exect that 2nd Parameter is a Array with Multible Types/Checks Posible
+    exept that 2nd Parameter is a Array with Multible Types/Checks Posible
 
     Returns:
     Bool is Kind Of Input1

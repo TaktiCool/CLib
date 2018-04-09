@@ -8,12 +8,7 @@
     Write Log
 
     Parameter(s):
-    0: Type of Logging <String>
-    1: Mod Name <String>
-    2: Module Name <String>
-    3: Log <Any>
-    4: File Path <String>
-    5: Line <Number>
+    This Function Should not be called by hand. use DUMP or LOG Macro for that
 
     Returns:
     None

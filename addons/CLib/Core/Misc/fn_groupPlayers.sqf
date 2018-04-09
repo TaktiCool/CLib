@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Gets all players of a group. Compareable to units command.
+    Gets all players of a group. Comparable to units command.
 
     Parameter(s):
     0: group or unit

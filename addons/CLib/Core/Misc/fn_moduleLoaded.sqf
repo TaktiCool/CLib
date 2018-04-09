@@ -13,10 +13,6 @@
     Returns:
     Module is Loaded <Bool>
 */
-params ["_mod"];
-private _loadedMods = [];
-{
-    _loadedMods pushbackUnique ((_x splitString "/\") select 0);
-    nil
-} count GVAR(LoadedModules);
-_mod in _loadedMods;
+params ["_module"];
+
+_module in GVAR(LoadedModules);

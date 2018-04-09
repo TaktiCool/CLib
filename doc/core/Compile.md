@@ -1,9 +1,8 @@
-# Compression
+# Compile
 
 > Maintainer: joko // Jonas, NetFusion
 
-Compression is a Module that is responsible for the ability to Compress and Decompress String to reduce Network traffic.
-
+Compile is the Core Sub Module that takes care of loading and compiling all Modules, Functions and Building the Dependency Graph
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
