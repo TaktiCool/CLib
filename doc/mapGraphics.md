@@ -5,7 +5,87 @@
 TODO text here
 
 
-## FUNCTION
+## CLib_fnc_addMapGraphicsEventHandler
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_addMapGraphicsGroup
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_removeMapGraphicsEventhandler
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_removeMapGraphicsGroup
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_registerMapControl
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_unregisterMapControl
 
 Parameter(s):
 * [`<Type>`] TODO text here

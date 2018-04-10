@@ -1,11 +1,11 @@
-# SimpleObjectFramework
+# State Machine
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: joko // Jonas
 
 TODO text here
 
 
-## CLib_fnc_createObjectComp
+## CLib_fnc_addStatemachineState
 
 Parameter(s):
 * [`<Type>`] TODO text here
@@ -21,7 +21,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_exportSimpleObjectComp
+## CLib_fnc_copyStatemachine
 
 Parameter(s):
 * [`<Type>`] TODO text here
@@ -37,7 +37,87 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_readSimpleObjectComp
+## CLib_fnc_createStatemachine
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_createStatemachineFromConfig
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_getVariableStatemachine
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_setVariableStatemachine
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_startStatemachine
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+TODO text here
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_stepStatemachine
 
 Parameter(s):
 * [`<Type>`] TODO text here
