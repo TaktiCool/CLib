@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Trigger Event on a Traget
+    Triggers a Event on the Local Client
 
     Parameter(s):
     0: Event name <String>

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Trigger Event on a Target
+    Trigger Event on a Target Client
 
     Parameter(s):
     0: Event Name <String>
