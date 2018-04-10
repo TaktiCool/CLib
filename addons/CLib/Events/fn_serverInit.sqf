@@ -29,5 +29,6 @@ if (isDedicated) then {
 }] call CFUNC(addEventhandler);
 
 ["loadJIPQueue", {
-    owner (_this select 0) publicVariableClient QGVAR(jipQueue);
+    (_this select 0) params ["_target"];
+    (owner _target) publicVariableClient QGVAR(jipQueue);
 }] call CFUNC(addEventhandler);
