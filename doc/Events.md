@@ -9,7 +9,7 @@ It Contains code for Build in Events and also Custom build Events.
 
 Parameter(s):
 * [`<String>`] Event ID
-* [`<Code>`, `<String>`] Event Function Code
+* [`<Code>`], [`<String>`] Event Function Code
 * [`<Anything>`] Event Arguments
 
 Returns:
@@ -48,7 +48,7 @@ Examples:
 Parameter(s):
 * [`<String>`] Event name
 * [`<Anything>`] Arguments (Optional)
-* [`<String>`, `<Number >`] Persistent (Optional)
+* [`<String>`], [`<Number >`] Persistent (Optional)
 
 Returns:
 * None
@@ -115,7 +115,7 @@ Examples:
 
 Parameter(s):
 * [`<String>`] Event name
-* [`<Object>`, `<Number>`, `<String>`, `<Array>`] Targets
+* [`<Object>`], [`<Number>`], [`<String>`], [`<Array>`] Targets
 * [`<Anything>`] Arguments (Optional)
 
 Returns:

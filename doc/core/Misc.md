@@ -79,9 +79,9 @@ TODO Example here
 ## CLib_fnc_deleteAtEntry
 
 Parameter(s):
-* [`<Type>`] Array reference
-* [`<Type>`] Entry to delete
-* [`<Type>`] Delete every entry
+* [`<Array>`] Array reference
+* [`<Anything>`] Entry to delete
+* [`<Boolean>`] Delete every entry
 
 Returns:
 * [`<Array>`] Deleted Index [`<Number>`]
@@ -233,7 +233,7 @@ TODO Example here
 ## CLib_fnc_getNearUnits
 
 Parameter(s):
-* [`<Postion>`, `<Object>`] Position
+* [`<Postion>`], [`<Object>`] Position
 * [`<Number>`] Radius
 
 Returns:
@@ -251,7 +251,7 @@ Examples:
 ## CLib_fnc_getPos
 
 Parameter(s):
-* [`<String>`, `<Object>`, `<Position>`] Position Data
+* [`<String>`], [`<Object>`], [`<Position>`] Position Data
 
 Returns:
 * [`<Position>`] Position
@@ -267,7 +267,7 @@ TODO Example here
 ## CLib_fnc_groupPlayers
 
 Parameter(s):
-* [`<Object>`, `<Group>`] Group or Unit with Players in
+* [`<Object>`], [`<Group>`] Group or Unit with Players in
 
 Returns:
 * [`<Array>`] Array of Players in Group [`<Object>`]
@@ -284,7 +284,7 @@ private _allGroupPlayers = CLib_Player call CFUNC(groupPlayers);
 
 Parameter(s):
 * [`<`<Position>`>`] Seeker Object
-* [`<Position>`, `<Object>`] Target Position or Object
+* [`<Position>`], [`<Object>`] Target Position or Object
 * [`<Number >`] Size of Target Position/Target
 
 Returns:
@@ -408,14 +408,14 @@ Parameter(s):
 * [`<Number>`] Embargo delay (Optional. Default: 1)
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
 Publish a variable but wait a certain amount of time before allowing it to be published it again.
 
 Examples:
 
 ```sqf
-TODO Example here
+[CLib_Player, "TestVariable", str (random 1000), 5] call CFUNC(setVariablePublic);
 ```
 
 ## CLib_fnc_shufffleArray
