@@ -462,3 +462,4 @@ private _strNumber = (10/3) call CLib_fnc_toFixedNumber;
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
+[`<Location>`]: https://community.bistudio.com/wiki/Location

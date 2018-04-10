@@ -146,6 +146,7 @@ Examples:
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
+[`<Location>`]: https://community.bistudio.com/wiki/Location
 
 [`drawIcon3D`]: https://community.bistudio.com/wiki/drawIcon3D
 [`drawLine3D`]: https://community.bistudio.com/wiki/drawLine3D

@@ -50,3 +50,4 @@ private _data = [_control, [1,4]] call CLib_fnc_lnbLoad;
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
+[`<Location>`]: https://community.bistudio.com/wiki/Location

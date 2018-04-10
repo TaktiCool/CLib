@@ -33,3 +33,5 @@ call CLib_fnc_loadModules;
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
+[`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<Location>`]: https://community.bistudio.com/wiki/Location
