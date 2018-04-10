@@ -19,9 +19,9 @@ Create a Local or Global Namespace
 Examples:
 
 ```sqf
-GVAR(awsomeLocalNamespace) = false call CFUNC(createNamespace);
-GVAR(awsomeGlobalNamespace) = true call CFUNC(createNamespace);
-publicVariable QGVAR(awsomeGlobalNamespace);
+Docs_awsomeLocalNamespace = false call CLib_fnc_createNamespace;
+Docs_awsomeGlobalNamespace = true call CLib_fnc_createNamespace;
+publicVariable "Docs_awsomeGlobalNamespace";
 ```
 
 ## CLib_fnc_deleteNamespace
@@ -37,7 +37,7 @@ Delete a Local or Global Namespace that was created with CLib_fnc_createNamespac
 Examples:
 
 ```sqf
-GVAR(awsomeLocalNamespace) call CFUNC(deleteNamespace);
+Docs_awsomeLocalNamespace call CLib_fnc_deleteNamespace;
 ```
 
 ## CLib_fnc_getLogicGroup
@@ -67,7 +67,7 @@ Saves the Varaible Name in a Array on this Namespace for later use with [`CLib_f
 Examples:
 
 ```sqf
-[GVAR(namespace), "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CFUNC(setVariable);
+[Docs_namespace, "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CLib_fnc_setVariable;
 ```
 
 ## CLib_fnc_allVariable
@@ -84,8 +84,8 @@ Gets a Varaible on a Object/Namespace that where saved with [`CLib_fnc_setVariab
 Examples:
 
 ```sqf
-[GVAR(namespace), "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CFUNC(setVariable);
-private _return = [GVAR(namespace), "BananasAreAwsome"] call CFUNC(allVariable);
+[Docs_namespace, "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CLib_fnc_setVariable;
+private _return = [Docs_namespace, "BananasAreAwsome"] call CLib_fnc_allVariable;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

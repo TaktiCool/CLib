@@ -22,7 +22,7 @@ Examples:
 ```sqf
 ["myAwsomeEvent", {
     hint "this is my Awesome Event";
-}] call CFUNC(addEventhandler);
+}] call CLib_fnc_addEventHandler;
 ```
 
 ## CLib_fnc_addIgnoredEventLog
@@ -39,8 +39,8 @@ Adds events that do not get logged
 Examples:
 
 ```sqf
-["myAwsomeEvent2", 1] call CFUNC(addIgnoredEventLog);
-["myAwsomeEvent3", 0] call CFUNC(addIgnoredEventLog);
+["myAwsomeEvent2", 1] call CLib_fnc_addIgnoredEventLog;
+["myAwsomeEvent3", 0] call CLib_fnc_addIgnoredEventLog;
 ```
 
 ## CLib_fnc_globalEvent
@@ -58,7 +58,7 @@ Trigger a event on every machine that is connected
 Examples:
 
 ```sqf
-"myAwsomeEvent" call CFUNC(globalEvent);
+"myAwsomeEvent" call CLib_fnc_globalEvent;
 ```
 
 ## CLib_fnc_invokePlayerChanged
@@ -74,7 +74,10 @@ Invokes Scripted player Change
 Examples:
 
 ```sqf
-TODO Example here
+private _tempGroup = createGroup east;
+private _newUnit = _tempGroup createUnit ["O_Soldier_F", [0, 0, 0], [], 0, "CAN_COLLIDE"];
+selectPlayer _newUnit;
+_newUnit call CLib_fnc_invokePlayerChanged;
 ```
 
 ## CLib_fnc_localEvent
@@ -91,7 +94,7 @@ Triggers a Event on the Local Client
 Examples:
 
 ```sqf
-"myAwsomeEvent" call CFUNC(localEvent);
+"myAwsomeEvent" call CLib_fnc_localEvent;
 ```
 
 ## CLib_fnc_serverEvent
@@ -108,7 +111,7 @@ Trigger an event on the server
 Examples:
 
 ```sqf
-"myAwsomeEvent" call CFUNC(serverEvent);
+"myAwsomeEvent" call CLib_fnc_serverEvent;
 ```
 
 ## CLib_fnc_targetEvent
@@ -126,7 +129,7 @@ Trigger Event on a Target Client
 Examples:
 
 ```sqf
-["myAwsomeEvent", [cursorTarget, 2, 1337]] call CFUNC(targetEvent);
+["myAwsomeEvent", [cursorTarget, 2, 1337]] call CLib_fnc_targetEvent;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

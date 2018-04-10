@@ -19,7 +19,7 @@ Blurs the Players Screen
 Examples:
 
 ```sqf
-[1337, true] call CFUNC(blurScreen)
+[1337, true] call CLib_fnc_blurScreen;
 ```
 
 ## CLib_fnc_cachedCall
@@ -39,7 +39,7 @@ Calls a function and Caches the Return for a certain amount of time or until a c
 Examples:
 
 ```sqf
-["Am_I_Dead", {alive _this}, CLib_player, 5, "I_Know_That_I_Am_Dead"] call CFUNC(cachedCall);
+["Am_I_Dead", {alive _this}, CLib_player, 5, "I_Know_That_I_Am_Dead"] call CLib_fnc_cachedCall;
 ```
 
 ## CLib_fnc_codeToString
@@ -55,7 +55,7 @@ Converts the given code to a string which is needed for some EventHandler
 Examples:
 
 ```sqf
-{hint "this is Needed for some Eventhandler!";} call CFUNC(codeToString);
+{hint "this is Needed for some Eventhandler!";} call CLib_fnc_codeToString;
 ```
 
 ## CLib_fnc_createPPEffect
@@ -109,7 +109,7 @@ Calls a funcion directly and changes the Environment to Unscheduled
 Examples:
 
 ```sqf
-{hint "this Runs in a Unscheduled Environment"} call CFUNC(directCall);
+{hint "this Runs in a Unscheduled Environment"} call CLib_fnc_directCall;
 ```
 
 ## CLib_fnc_disabledUserInput
@@ -125,7 +125,7 @@ Disables key input. ESC can still be pressed to open the menu.
 Examples:
 
 ```sqf
-true call CFUNC(disabledUserInput);
+true call CLib_fnc_disabledUserInput;
 ```
 
 ## CLib_fnc_fileExist
@@ -161,7 +161,7 @@ Finds a save postion for a unit. This function always returns a position.
 Examples:
 
 ```sqf
-private _spawnPos = [getPos CLib_Player, 100, 5, "B_Truck_01_mover_F"] call CFUNC(findSavePosition);
+private _spawnPos = [getPos CLib_Player, 100, 5, "B_Truck_01_mover_F"] call CLib_fnc_findSavePosition;
 ```
 
 ## CLib_fnc_fixFloating
@@ -178,7 +178,7 @@ Handles the fixFloating event
 Examples:
 
 ```sqf
-CLib_player call CFUNC(fixFloating);
+CLib_player call CLib_fnc_fixFloating;
 ```
 
 ## CLib_fnc_fixPosition
@@ -194,7 +194,7 @@ Fixes position of an object. Moves object above ground and adjusts to terrain sl
 Examples:
 
 ```sqf
-CarryCrate call CFUNC(fixFloating);
+CarryCrate call CLib_fnc_fixPosition;
 ```
 
 ## CLib_fnc_flatConfigPath
@@ -211,7 +211,7 @@ This function fixes an issue occuring when using str on a config without appendi
 Examples:
 
 ```sqf
-[configFile >> "TestConfig" >> "andMoreTest", ">>"] call CFUNC(flatConfigPath);
+[configFile >> "TestConfig" >> "andMoreTest", ">>"] call CLib_fnc_flatConfigPath;
 ```
 
 ## CLib_fnc_getFOV
@@ -227,7 +227,7 @@ Calculate Current FOV and Zoom
 Examples:
 
 ```sqf
-TODO Example here
+private _currentFOV = call CLib_fnc_getFOV;
 ```
 
 ## CLib_fnc_getNearUnits
@@ -245,7 +245,7 @@ The Cache can be reset with the Event CLib_clearUnits
 Examples:
 
 ```sqf
-{_x setDamage 1} forEach [CLib_player, 100] call CFUNC(getNearUnits);
+{_x setDamage 1} forEach [CLib_player, 100] call CLib_fnc_getNearUnits;
 ```
 
 ## CLib_fnc_getPos
@@ -277,7 +277,7 @@ Gets all players of a group. Comparable to units command.
 Examples:
 
 ```sqf
-private _allGroupPlayers = CLib_Player call CFUNC(groupPlayers);
+private _allGroupPlayers = CLib_Player call CLib_fnc_groupPlayers;
 ```
 
 ## CLib_fnc_inFOV
@@ -328,7 +328,7 @@ checks if player is speaking works with TFAR, ACRE2 and Vanilla In Game Voice
 Examples:
 
 ```sqf
-private _isSpeaking = cursorTarget call CFUNC(isSpeaking);
+private _isSpeaking = cursorTarget call CLib_fnc_isSpeaking;
 ```
 
 ## CLib_fnc_log
@@ -380,7 +380,7 @@ Gets a Object Name or displayName.
 Examples:
 
 ```sqf
-CLib_Player call CFUNC(name);
+CLib_Player call CLib_fnc_name;
 ```
 
 ## CLib_fnc_sanitizeString
@@ -415,7 +415,7 @@ Publish a variable but wait a certain amount of time before allowing it to be pu
 Examples:
 
 ```sqf
-[CLib_Player, "TestVariable", str (random 1000), 5] call CFUNC(setVariablePublic);
+[CLib_Player, "TestVariable", str (random 1000), 5] call CLib_fnc_setVariablePublic;
 ```
 
 ## CLib_fnc_shufffleArray
@@ -431,7 +431,7 @@ Returns a shuffled array.
 Examples:
 
 ```sqf
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CFUNC(shuffleArray);
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shufffleArray;
 ```
 
 ## CLib_fnc_toFixedNumber
@@ -447,7 +447,7 @@ Removes all Not needed 0 from toFixed numbers and returls only the max toFixed n
 Examples:
 
 ```sqf
-private _strNumber = (10/3) call CFUNC(toFixedNumber);
+private _strNumber = (10/3) call CLib_fnc_toFixedNumber;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
