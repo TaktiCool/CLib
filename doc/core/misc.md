@@ -1,4 +1,4 @@
-# Events
+# Misc
 
 > Maintainer: joko // Jonas, NetFusion
 
@@ -9,7 +9,7 @@ The Misc Module is a Core Sub Module with various functions that don't fit in an
 
 Parameter(s):
 * [`<Number>`] ID
-* [`<Boolean>`, `<Number>`] Show?
+* [`<Boolean>`], [`<Number>`] Show?
 
 Returns:
 * None
@@ -115,10 +115,10 @@ Examples:
 ## CLib_fnc_disabledUserInput
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Boolean>`] True to disable key inputs, false to re-enable them
 
 Returns:
-* [`<Boolean>`] True to disable key inputs, false to re-enable them
+* None
 
 Disables key input. ESC can still be pressed to open the menu.
 
@@ -233,7 +233,7 @@ private _currentFOV = call CLib_fnc_getFOV;
 ## CLib_fnc_getNearUnits
 
 Parameter(s):
-* [`<Postion>`], [`<Object>`] Position
+* [`<Position>`], [`<Object>`] Position
 * [`<Number>`] Radius
 
 Returns:
@@ -461,3 +461,4 @@ private _strNumber = (10/3) call CLib_fnc_toFixedNumber;
 [`<Color>`]: https://community.bistudio.com/wiki/Color
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group

@@ -15,3 +15,4 @@ Compile is the Core Sub Module that takes care of loading and compiling all Modu
 [`<Color>`]: https://community.bistudio.com/wiki/Color
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group

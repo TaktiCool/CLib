@@ -134,14 +134,18 @@ Examples:
 [`ICON`]: #icon_data
 [`LINE`]: #line_data
 
+[`<Control>`]: https://community.bistudio.com/wiki/Control
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything
+[`<Config>`]: https://community.bistudio.com/wiki/Config
 [`<Object>`]: https://community.bistudio.com/wiki/Object
+[`<String>`]: https://community.bistudio.com/wiki/String
+[`<Number>`]: https://community.bistudio.com/wiki/Number
 [`<Array>`]: https://community.bistudio.com/wiki/Array
 [`<Position>`]: https://community.bistudio.com/wiki/Position
-[`<String>`]: https://community.bistudio.com/wiki/String
 [`<Color>`]: https://community.bistudio.com/wiki/Color
-[`<Number>`]: https://community.bistudio.com/wiki/Number
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group
 
 [`drawIcon3D`]: https://community.bistudio.com/wiki/drawIcon3D
 [`drawLine3D`]: https://community.bistudio.com/wiki/drawLine3D

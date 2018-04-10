@@ -32,3 +32,4 @@ call CLib_fnc_loadModules;
 [`<Color>`]: https://community.bistudio.com/wiki/Color
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group

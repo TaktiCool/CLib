@@ -16,3 +16,4 @@ Compression is a Module that is responsible for the ability to Compress and Deco
 [`<Color>`]: https://community.bistudio.com/wiki/Color
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group

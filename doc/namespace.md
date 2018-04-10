@@ -99,6 +99,6 @@ private _return = [Docs_namespace, "BananasAreAwsome"] call CLib_fnc_allVariable
 [`<Color>`]: https://community.bistudio.com/wiki/Color
 [`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
 [`<Code>`]: https://community.bistudio.com/wiki/Code
-[`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<Group>`]: https://community.bistudio.com/wiki/Group
 [`CLib_fnc_allVariable`]: ##CLib_fnc_allVariable
 [`CLib_fnc_setVariable`]: ##CLib_fnc_setVariable
