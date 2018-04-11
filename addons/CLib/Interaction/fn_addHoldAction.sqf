@@ -38,9 +38,9 @@ params [
     ["_priority", 1000, [123]],
     ["_removeCompleted", true, [true]],
     ["_showUnconscious", false, [true]],
+    ["_ignoredCanInteractConditions", [], [[]]],
     ["_selection", "", [""]],
-    ["_memorypoint", "", [""]],
-    ["_ignoredCanInteractConditions", [], [[]]]
+    ["_memorypoint", "", [""]]
 ];
 
 //preprocess data
