@@ -21,9 +21,10 @@
         "shortcut": Key name to add binding for action <String> (Default: "")
         "radius": Distance in meters the unit activating the action must be within to activate it <Number> (Default: 15)
         "unconscious": Visible to incapacitated player <Bool> (Default: false)
+        "selection": named selection in Geometry LOD to which the action is attached (Default: "")
+        "memoryPoint": memory point on the object to which the action is attached. If parameter selection is supplied, parameter memoryPoint is not used. (Default: "")
         "onActionAdded": Code which will be executed when action was added <Code>
         "ignoredCanInteractConditions": Interact conditions that will be ignored <Array> (Default: [])
-
     Returns:
     None
 */
@@ -39,6 +40,8 @@ private _radius = 15;
 private _unconscious = false;
 private _onActionAdded = {};
 private _ignoredCanInteractConditions = [];
+private _memorypoint = "";
+private _selection = "";
 
 private _argName = "";
 {
@@ -66,6 +69,12 @@ private _argName = "";
             };
             case ("unconscious"): {
                 _unconscious = _x;
+            };
+            case ("selection"): {
+                _selection = _x;
+            };
+            case ("memorypoint"): {
+                _memorypoint = _x;
             };
             case ("onActionAdded"): {
                 _onActionAdded = _x;
@@ -95,7 +104,7 @@ if (_target isEqualType "") then {_target = [_target]};
 
 if (_target isEqualType []) then {
     {
-        GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
         false
     } count _target;
 };
@@ -108,12 +117,12 @@ if (_target isEqualType objNull) then {
         if (_text call CFUNC(isLocalised)) then {
             _text = _text call CFUNC(readLocalisation);
         };
-        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
         private _id = _target addAction _argArray;
         [_id, _target, _argArray] call _onActionAdded;
-        GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
     } else {
-        GVAR(Interaction_Actions) pushBackUnique [_target, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        GVAR(Interaction_Actions) pushBackUnique [_target, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
     };
     DUMP("addAction to " + str _target)
 };

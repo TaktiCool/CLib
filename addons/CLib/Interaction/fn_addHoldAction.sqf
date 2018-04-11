@@ -38,6 +38,8 @@ params [
     ["_priority", 1000, [123]],
     ["_removeCompleted", true, [true]],
     ["_showUnconscious", false, [true]],
+    ["_selection", "", [""]],
+    ["_memorypoint", "", [""]],
     ["_ignoredCanInteractConditions", [], [[]]]
 ];
 
@@ -75,7 +77,9 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _arguments,
         _priority,
         _removeCompleted,
-        _showUnconscious
+        _showUnconscious,
+        _selection,
+        _memorypoint
     ]] call CFUNC(overrideAction);
 } else {
 
@@ -96,8 +100,10 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _priority,
         _removeCompleted,
         _showUnconscious,
-        _ignoredCanInteractConditions
-    ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "onActionAdded", {
+        _ignoredCanInteractConditions,
+        _selection,
+        _memorypoint
+    ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "selection", _selection, "memorypoint", _memorypoint,"onActionAdded", {
         params ["_id", "_target", "_argArray"];
         _argArray params ["", "", "_args"];
         _args params [
@@ -115,7 +121,9 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
             "_priority",
             "_removeCompleted",
             "_showUnconscious",
-            "_ignoredCanInteractConditions"
+            "_ignoredCanInteractConditions",
+            "_selection",
+            "_memorypoint"
         ];
 
         _target setUserActionText [_id, _title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconIdle)]];

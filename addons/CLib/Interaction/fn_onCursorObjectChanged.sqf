@@ -22,7 +22,7 @@ private _actionIDs = _target getVariable [QGVAR(ActionIDs), []];
 private _currentID = _actionIDs param [(count _actionIDs) - 1, -999];
 if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
 {
-    _x params ["_onObject", "_text", "_condition", "_code", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded", "_actionID"];
+    _x params ["_onObject", "_text", "_condition", "_code", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_selection", "_memorypoint", "_onActionAdded", "_actionID"];
 
     if (_text isEqualType {}) then {
         _text = call _text;
@@ -35,7 +35,7 @@ if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
     if !(_actionID in _actionIDs) then {
         if (_onObject isEqualType "") then {
             if (_target isKindOf _onObject) then {
-                private _argArray = [_text, _code, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+                private _argArray = [_text, _code, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
                 private _id = _target addAction _argArray;
                 [_id, _target, _argArray] call _onActionAdded;
                 _actionIDs pushBackUnique _actionID;
@@ -45,7 +45,7 @@ if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
 
         if (_onObject isEqualType objNull) then {
             if (_target == _onObject) then {
-                private _argArray = [_text, _code, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+                private _argArray = [_text, _code, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
                 private _id = _target addAction _argArray;
                 [_id, _target, _argArray] call _onActionAdded;
                 _actionIDs pushBackUnique _actionID;
