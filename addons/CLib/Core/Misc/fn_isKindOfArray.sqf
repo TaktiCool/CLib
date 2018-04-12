@@ -14,11 +14,21 @@
     Returns:
     Bool is Kind Of Input1
 */
-params ["_input1", "_inputs"];
-{
-    if (_input1 isKindOf _x) then {
-        true breakOut SCRIPTSCOPENAME;
-    };
-    nil
-} count _inputs;
+params ["_input1", "_inputs", "_config"];
+if (isNil "_config") then {
+    {
+        if (_input1 isKindOf _x) then {
+            true breakOut SCRIPTSCOPENAME;
+        };
+        nil
+    } count _inputs;
+} else {
+    {
+        if (_input1 isKindOf [_x, _config]) then {
+            true breakOut SCRIPTSCOPENAME;
+        };
+        nil
+    } count _inputs;
+};
+
 false
