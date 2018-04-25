@@ -65,19 +65,9 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["cursorObject", {cursorObject}],
     ["groupUnits", {units CLib_Player}],
     ["assignedTeam", {assignedTeam CLib_Player}],
-    ["cameraView", {cameraView}]
+    ["cameraView", {cameraView}],
+    ["inCurator", {isNull curatorCamera}]
 ];
-
-_codeStr = _codeStr + ({
-    if (isNull curatorCamera && GVAR(lastStatus)) then {
-        "exitCurator" call CFUNC(localEvent);
-        GVAR(lastZeusStatus) = false;
-    };
-    if (!(isNull curatorCamera) && !GVAR(lastStatus)) then {
-        "enterCurator" call CFUNC(localEvent);
-        GVAR(lastZeusStatus) = true;
-    };
-} call CFUNC(codeToString));
 
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);
 
