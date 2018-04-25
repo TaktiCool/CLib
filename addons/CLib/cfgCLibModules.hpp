@@ -91,6 +91,7 @@ class CfgCLibModules {
                 FNC(initVoiceDetection);
                 APIFNC(isKindOfArray);
                 APIFNC(log);
+                APIFNC(messageBox);
                 APIFNC(modLoaded);
                 APIFNC(moduleLoaded);
                 APIFNC(name);

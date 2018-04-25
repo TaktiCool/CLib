@@ -59,6 +59,8 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _object enableSimulationGlobal _value;
 }] call CFUNC(addEventhandler);
+
+// Curator Commands
 ["assignCurator", {
     (_this select 0) params ["_player", "_curatorObject"];
     if (!isServer) exitWith {
@@ -79,6 +81,13 @@ GVAR(ignoredLogEventNames_1) = [];
         LOG("AddCuratorEditableObjects has to be a server event");
     };
     _curatorObject addCuratorEditableObjects _args;
+}] call CFUNC(addEventhandler);
+["removeCuratorEditableObjects", {
+    (_this select 0) params ["_curatorObject", "_args"];
+    if (!isServer) exitWith {
+        LOG("RemoveCuratorEditableObjects has to be a server event");
+    };
+    _curatorObject removeCuratorEditableObjects _args;
 }] call CFUNC(addEventhandler);
 
 // Events for commands with local args
@@ -206,6 +215,31 @@ GVAR(ignoredLogEventNames_1) = [];
     _vehicle setVehicleVarName _name;
 }] call CFUNC(addEventhandler);
 
+// Dynamic Simulation System
+["enableDynamicSimulationSystem", {
+    (_this select 0) params ["_bool"];
+    enableDynamicSimulationSystem _bool;
+}] call CFUNC(addEventhandler);
+["enableDynamicSimulation", {
+    (_this select 0) params ["_obj", "_bool"];
+    if (_obj isKindOf "LaserTarget") exitWith {};
+    _obj enableDynamicSimulation _bool;
+}] call CFUNC(addEventhandler);
+["setDynamicSimulationDistance", {
+    (_this select 0) params ["_category", "_distance"];
+    _category setDynamicSimulationDistance _distance
+}] call CFUNC(addEventhandler);
+["setDynamicSimulationDistanceCoef", {
+    (_this select 0) params ["_class", "_multiplier"];
+    _class setDynamicSimulationDistanceCoef _multiplier;
+}] call CFUNC(addEventhandler);
+["triggerDynamicSimulation", {
+    (_this select 0) params ["_obj", "_bool"];
+    if (_obj isKindOf "LaserTarget") exitWith {};
+    _obj triggerDynamicSimulation _bool;
+}] call CFUNC(addEventhandler);
+
+// Entity Created Events
 ["missionStarted", {
     GVAR(missionStartedTriggered) = true;
 #define REFILL_TIMINGS 15

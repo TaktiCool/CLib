@@ -125,7 +125,8 @@ DFUNC(onEachFrameHandler) = {
     if !(GVAR(deletedIndices) isEqualTo []) then {
         {
             GVAR(perFrameHandlerArray) set [_x, objNull];
-        } forEach GVAR(deletedIndices);
+            nil
+        } count GVAR(deletedIndices);
 
         GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
 

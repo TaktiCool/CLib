@@ -18,6 +18,7 @@
 CLib_Player = player;
 uiNamespace setVariable ["CLib_Player", player];
 parsingNamespace setVariable ["CLib_Player", player];
+GVAR(lastZeusStatus) = false;
 ["playerChanged", {
     (_this select 0) params ["_newPlayer"];
 
@@ -36,6 +37,7 @@ parsingNamespace setVariable ["CLib_Player", player];
 
 
 private _codeStr = "private ['_oldValue', '_currentValue'];";
+
 // Build a dynamic event system to use it in modules.
 {
     _x params ["_name", "_code"];
@@ -65,6 +67,17 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["assignedTeam", {assignedTeam CLib_Player}],
     ["cameraView", {cameraView}]
 ];
+
+_codeStr = _codeStr + ({
+    if (isNull curatorCamera && GVAR(lastStatus)) then {
+        "exitCurator" call CFUNC(localEvent);
+        GVAR(lastZeusStatus) = false;
+    };
+    if (!(isNull curatorCamera) && !GVAR(lastStatus)) then {
+        "enterCurator" call CFUNC(localEvent);
+        GVAR(lastZeusStatus) = true;
+    };
+} call CFUNC(codeToString));
 
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);
 
