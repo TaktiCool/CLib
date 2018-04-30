@@ -8,14 +8,19 @@
     Start a Statemachine.
 
     Parameter(s):
-    0: Statemachine Object <Location>
-    1: First State <String> (default: "init")
-    2: Tick Time <Number> (default: 0)
+    0: Statemachine Object <Location> (Default: locationNull)
+    1: First State <String> (Default: "init")
+    2: Tick Time <Number> (Default: 0)
 
     Returns:
     Index of the Statemachine PFH <Number>
 */
-params ["_stateMachine", "_firstState", ["_tickeTime", 0]];
+
+params [
+    ["_stateMachine", locationNull, [locationNull]],
+    ["_firstState", "init", [""]],
+    ["_tickeTime", 0, [0]]
+];
 
 if !(isNil "_firstState") then {
     _stateMachine setVariable [SMSVAR(nextStateData), _firstState];
