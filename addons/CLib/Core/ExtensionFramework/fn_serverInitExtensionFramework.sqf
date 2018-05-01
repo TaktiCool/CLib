@@ -39,7 +39,7 @@ GVAR(pendingTasks) = 0;
 DFUNC(serverLog) = {
     params [["_log", "", [""]], ["_file", "", [""]]];
     _file = _file call CFUNC(sanitizeString);
-    ["CLibLogging", "Log", _file + ":" + _log]; call CFUNC(callExtension);
+    ["CLibLogging", "Log", _file + ":" + _log] call CFUNC(callExtension);
 };
 
 [QCGVAR(serverLog), {
