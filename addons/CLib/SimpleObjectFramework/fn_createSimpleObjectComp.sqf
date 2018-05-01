@@ -13,8 +13,13 @@
     2: Rotation <Array>
 
     Returns:
-    All SimpleObjects <Array<Objects>>
+    ID of SimpleObject Comp
 */
+
+if !(isServer) exitWith {
+    [QGVAR(createSimpleObjectComp), _this] call CFUNC(serverEvent);
+};
+
 params ["_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
 
 _input = switch (typeName _input) do {
@@ -101,7 +106,8 @@ private _return = [];
 
 deleteVehicle _originObj;
 
-_return;
+GVAR(simpleObjectComps) pushBack _return;
+
 /* return
 [
     [

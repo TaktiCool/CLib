@@ -270,6 +270,7 @@ class CfgCLibModules {
             APIFNC(createSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);
+            APIFNC(deleteSimpleObjectComp);
             APIFNCSERVER(exportSimpleObjectComp);
         };
 

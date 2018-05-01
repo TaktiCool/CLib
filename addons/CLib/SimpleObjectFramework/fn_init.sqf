@@ -14,6 +14,7 @@
     None
 */
 if (isServer) then {
+    GVAR(simpleObjectComps) = [];
     GVAR(namespace) = true call CFUNC(createNamespace); // we need a Global Namespace because Only the Server have the Mod Config Classes
     {
         {
@@ -38,4 +39,12 @@ if (isServer) then {
         }] call CFUNC(waitUntil);
         _CLib_EventReturn = true;
     };
+}] call CFUNC(addEventhandler);
+
+[QGVAR(createSimpleObjectComp), {
+    (_this select 0) call CFUNC(createSimpleObjectComp);
+}] call CFUNC(addEventhandler);
+
+[QGVAR(deleteSimpleObjectComp), {
+    (_this select 0) call CFUNC(deleteSimpleObjectComp);
 }] call CFUNC(addEventhandler);
