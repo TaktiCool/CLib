@@ -268,6 +268,7 @@ class CfgCLibModules {
         MODULE(SimpleObjectFramework) {
             dependency[] = {"CLib/Namespaces", "CLib/Events"};
             APIFNC(createSimpleObjectComp);
+            APIFNC(deleteSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);
             APIFNCSERVER(exportSimpleObjectComp);
