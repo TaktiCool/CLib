@@ -10,10 +10,6 @@
     Parameter(s):
     0: Object or Client owner on what the Dump should get Created <Object, Number>
 
-
-    TODO
-    fix this function in CLib
-
     Returns:
     None
 */
@@ -24,9 +20,12 @@ if !(local _unit) exitWith {
 };
 
 private _fnc_outputText = {
-    [QGVAR(dump), _this] call CFUNC(localEvent);
-    [QGVAR(dumpServer), [_this, name _unit]] call CFUNC(serverEvent);
-    [QGVAR(dump), _returnTo, _this] call CFUNC(targetEvent);
+    if (_unit isEqualTo _returnTo || isNil "_returnTo" || _returnTo isEqualTo CLib_Player) then {
+        [QGVAR(dump), _this] call CFUNC(localEvent);
+    } else {
+        [QGVAR(dump), _returnTo, _this] call CFUNC(targetEvent);
+    };
+    [QCGVAR(serverLog), [_this, name _unit]] call CFUNC(serverEvent);
 };
 
 private _text = format [
@@ -54,15 +53,18 @@ count diag_activeMissionFSMs = %10",
 ];
 _text call _fnc_outputText;
 
-_text = format [
-"------Unit------
-typeOf = %1
-animationState = %2
-name = %3",
-    if (isNull _unit) then {"null"} else {typeOf _unit},
-    if (isNull _unit) then {"null"} else {animationState _unit},
-    if (isNull _unit) then {"null"} else {name _unit}
-];
+if (_unit != CLib_Player) then {
+    _text = format [
+    "------Unit------
+    typeOf = %1
+    animationState = %2
+    name = %3",
+        if (isNull _unit) then {"null"} else {typeOf _unit},
+        if (isNull _unit) then {"null"} else {animationState _unit},
+        if (isNull _unit) then {"null"} else {name _unit}
+    ];
+    _text call _fnc_outputText;
+};
 
 _text = format [
 "------Client------
@@ -81,6 +83,7 @@ if !(GVAR(FPSStorage) isEqualTo []) then {
     {
         _text = _text + _x + " ";
     } count GVAR(FPSStorage);
+    _text call _fnc_outputText;
 };
 
 "
@@ -120,6 +123,7 @@ private _temp = [];
     _text = format ["%1 have %2 Varialbe", _space, _count];
     _text call _fnc_outputText;
 } count _searchSpaces;
+
 {
     _x call _fnc_outputText;
 } count _temp;
