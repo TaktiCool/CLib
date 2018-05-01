@@ -8,27 +8,36 @@
     Description
 
     Parameter(s):
-    0: Uniqe Idinifier <String>
-    1: ClassName/ConfigPath/SimpleObjectStructure <String, Config, Array>
-    2: Position <Array>
-    3: Rotation <Array>
-    4: Ignored Object <Object>
-    5: Ignored Object <Object>
+    0: Unique identifier <String> (Default: "")
+    1: ClassName configPath or simpleObjectStructure <String, Config, Array> (Default: "")
+    2: Position3D <Array> (Default: [0, 0, 0])
+    3: Rotation <Array> (Default: [0, 0, 0])
+    4: Ignored Object <Object> (Default: objNull)
+    5: Ignored Object <Object> (Default: objNull)
 
     Returns:
     None
 */
-params [["_uid", "", [""]], "_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
 
-if !(isServer) then {
+params [
+    ["_uid", "", [""]],
+    ["_input", "", ["", configNull, []], 2],
+    ["_pos", [0, 0, 0], [[]], 3],
+    ["_dir", [0, 0, 0], [[]], 3],
+    ["_ignoreObj1", objNull, [objNull]],
+    ["_ignoreObj2", objNull, [objNull]]
+];
+
+if !(isServer) exitWith {
     [QGVAR(createSimpleObjectComp), _this] call CFUNC(serverEvent);
 };
+
 if (_uid isEqualTo "") exitWith {
-    LOG("ERROR: UID Name is not Valid");
+    LOG("ERROR: Unique identifier is not valid");
 };
 
 if !(isNil {GVAR(compNamespace) getVariable _uid}) then {
-    LOG("Warning: the UID is already in Use");
+    LOG("WARNING: the UID is already in use");
 };
 
 switch (typeName _input) do {
@@ -51,7 +60,7 @@ switch (typeName _input) do {
 _input params ["_alignOnSurface", "_objects"];
 
 if (isNil "_input" || {_input isEqualTo []}) exitWith {
-    LOG("ERROR SimpleObjectComp Dont exist: " + _input);
+    LOG("ERROR: SimpleObjectComp does not exist: " + _input);
     nil
 };
 private _intersections = lineIntersectsSurfaces [

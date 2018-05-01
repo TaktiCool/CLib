@@ -11,11 +11,11 @@
     0: Config Path <Config> (Default: configNull)
     1: Name <String> (Default: config name of the config)
 
-    Remarks:
-    this function only work properly on the Server on Mod Config
-
     Returns:
     SimpleObjectStructure <Array>
+
+    Remarks:
+    this function only work properly on the Server on Mod Config
 */
 
 params [

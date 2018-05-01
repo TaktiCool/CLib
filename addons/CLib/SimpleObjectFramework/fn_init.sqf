@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 if (isServer) then {
     GVAR(compNamespace) = true call CFUNC(createNamespace);
     GVAR(namespace) = true call CFUNC(createNamespace); // we need a Global Namespace because Only the Server have the Mod Config Classes

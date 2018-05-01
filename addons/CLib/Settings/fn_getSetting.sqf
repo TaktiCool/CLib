@@ -8,11 +8,16 @@
     Get a settings value
 
     Parameter(s):
-    0: path <STRING>
-    0: default value <SCALAR|STRING|ARRAY> (Depends on the Setting)
+    0: Path <String> (Default: "")
+    1: Default value <Array, String, Number> (Default: nil)
 
     Returns:
-    <SCALAR|STRING|ARRAY> (Depends on the Setting)
+    Setting value <Array, String, Number>
 */
-params [["_path", ""], ["_defaultValue", nil]];
-(GVAR(allSettings) getVariable [_path, [_defaultValue]]) select 0;
+
+params [
+    ["_path", "", [""]],
+    ["_defaultValue", nil, [[], "", 0], []]
+];
+
+(GVAR(allSettings) getVariable [_path, [_defaultValue]]) select 0

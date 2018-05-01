@@ -13,7 +13,6 @@
     Returns:
     None
 */
-GVAR(settingsNamespaceOld) = call CFUNC(createNamespace);
 
 if (isServer) then {
     // store all configs in global namespace
@@ -27,7 +26,7 @@ if (isServer) then {
 
 if (hasInterface) then {
     {
-        if (_x select [0,8] != "classes:" && _x select [0,9] != "settings:") then {
+        if (_x select [0, 8] != "classes:" && _x select [0, 9] != "settings:") then {
             private _var = GVAR(allSettings) getVariable _x;
             _var params ["_value", "_force", "_isClient"];
             if (_isClient == 1 && {_force == 0}) then {
