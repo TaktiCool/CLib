@@ -8,8 +8,8 @@
     Read a Simple object out of the config and make a Avable over the SOF
 
     Parameter(s):
-    0: Config Path <Config>
-    1: Name <String> (Default: ConfigName of the ConfigPath)
+    0: Config Path <Config> (Default: configNull)
+    1: Name <String> (Default: config name of the config)
 
     Remarks:
     this function only work properly on the Server on Mod Config
@@ -17,8 +17,13 @@
     Returns:
     SimpleObjectStructure <Array>
 */
-params [["_config", configNull, [configNull]], "_name"];
-if (isNil "_name" || {_name isEqualTo ""}) then {
+
+params [
+    ["_config", configNull, [configNull]],
+    ["_name", "", [""]]
+];
+
+if (_name isEqualTo "") then {
     _name = configName _config;
 };
 
