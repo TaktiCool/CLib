@@ -54,7 +54,7 @@ DFUNC(toggleFrameInfo) = {
         private _prevFrameFPS = 0;
         private _maxFPS = 0;
         for "_i" from 0 to (FRAMECOUNT - 1) do {
-            private _control = _display displayCtrl (9502 + _i);
+            private _control = _display displayCtrl (9503 + _i);
             private _position = ctrlPosition _control;
             private _frameFPS = GVAR(FPSStorage) select _i;
             _maxFPS = _frameFPS max _maxFPS;
@@ -71,7 +71,8 @@ DFUNC(toggleFrameInfo) = {
             GVAR(topFPS) = GVAR(topFPS) * 0.8;
         };
 
-        (_display displayCtrl 9501) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2 : %3</t>", PY(1.5) / 0.035, round GVAR(topFPS), _currentFPS];
+        (_display displayCtrl 9501) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round GVAR(topFPS)];
+        (_display displayCtrl 9502) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round _currentFPS];
     }, 0, _display] call CFUNC(addPerFrameHandler);
     private _ctrlGroup = uiNamespace getVariable [QGVAR(ctrlGroup), controlNull];
     _ctrlGroup ctrlShow true;
@@ -91,8 +92,13 @@ DFUNC(toggleFrameInfo) = {
     _control ctrlSetFont "PuristaMedium";
     _control ctrlCommit 0;
 
+    _control = _display ctrlCreate ["RscStructuredText", 9502, _ctrlGroup];
+    _control ctrlSetPosition [PX(0), PY(3.5), PX(4), PY(1.5)];
+    _control ctrlSetFont "PuristaMedium";
+    _control ctrlCommit 0;
+
     for "_i" from 0 to (FRAMECOUNT - 1) do {
-        private _control = _display ctrlCreate ["RscPicture", 9502 + _i, _ctrlGroup];
+        private _control = _display ctrlCreate ["RscPicture", 9503 + _i, _ctrlGroup];
         _control ctrlSetPosition [PX(_i * 0.2 + 4), PY(0), PX(0.2), PY(5)];
         _control ctrlSetText "#(argb,8,8,3)color(1,1,1,1)";
         _control ctrlCommit 0;
