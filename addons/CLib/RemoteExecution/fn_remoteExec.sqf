@@ -8,10 +8,10 @@
     Check if the RemoteExecFall Back is used and handle after that the Data and share it to the server
 
     Parameter(s):
-    0: Arguments for the function/command <Any>
-    1: Function/Command that get executed on the remote Clients <String>
-    2: Target to what the Event should get sendet <Number, Side, Object, Group, Array of Prev named Types>
-    3: Forced to use Fallback Version <Bool>
+    0: Arguments for the function or command <Anything> (Default: [])
+    1: Function or command that get executed on the remote clients <String> (Default: "")
+    2: Target who should receive the event <Number, Object, Side, Group, Array> (Default: 0)
+    3: Forced to use fallback version <Bool> (Default: false)
 
     Returns:
     None
@@ -19,7 +19,12 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params ["_args", ["_function", "", [""]], ["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_forceUseFallBack", false]];
+params [
+    ["_args", [], []],
+    ["_function", "", [""]],
+    ["_target", 0, [0, objNull, sideUnknown, grpNull, []], []],
+    ["_forceUseFallBack", false, [true]]
+];
 
 // exit with Vanilla Method if it is not disabled
 if !(GVAR(useRemoteFallback) || _forceUseFallBack) exitWith {
@@ -52,6 +57,6 @@ if (_target isEqualType objNull && {local _target}) exitWith {
 if (isServer) then {
     [_target, _args, _function] call FUNC(handleIncomeData);
 } else {
-    GVAR(remoteServerData) = [_target, _args, _target];
+    GVAR(remoteServerData) = [_target, _args, _function];
     publicVariableServer QGVAR(remoteServerData);
 };

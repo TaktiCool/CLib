@@ -8,9 +8,9 @@
     Handles income data and process it and sending it to the other clients if required
 
     Parameter(s):
-    0: Arguments for the function/command <Any>
-    1: Function/Command that get executed on the remote Clients <String>
-    2: Target to what the Event should get sendet <Number, Side, Object, Group, Array of Prev named Types>
+    0: Target to what the Event should get sendet <Number, Object, Side, Group, Array> (Default: 0)
+    1: Arguments for the function or command <Anything> (Default: [])
+    2: Function or command that get executed on the remote clients <String> (Default: "")
 
     Returns:
     None
@@ -18,7 +18,11 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params [["_target", 0, [0, sideUnknown, objNull, grpNull, []]], ["_function", "", [""]], "_args"];
+params [
+    ["_target", 0, [0, objNull, sideUnknown, grpNull, []], []],
+    ["_args", [], []],
+    ["_function", "", [""]]
+];
 
 // target must be a Array
 if !(_target isEqualType []) then {
@@ -26,7 +30,6 @@ if !(_target isEqualType []) then {
 };
 
 private _targets = [];
-
 
 {
     private _var = _x;
