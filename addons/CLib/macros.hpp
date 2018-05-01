@@ -83,7 +83,7 @@
 #ifdef ISDEV
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
 #else
-    #define CFUNC(var) TRIPLE(CLib,fnc,var)
+    #define CFUNC(var) DCFUNC(var)
 #endif
 
 // #define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);
