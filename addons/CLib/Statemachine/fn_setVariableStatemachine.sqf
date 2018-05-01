@@ -13,7 +13,7 @@
     2: Value <Anything> (Default: nil)
 
     Returns:
-    0: Return <Type>
+    None
 */
 
 params [

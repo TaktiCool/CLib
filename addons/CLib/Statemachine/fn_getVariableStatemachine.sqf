@@ -13,7 +13,7 @@
     2: Default <Anything> (Default: nil)
 
     Returns:
-    Variable Value <Any>
+    Variable Value <Anything>
 */
 
 params [

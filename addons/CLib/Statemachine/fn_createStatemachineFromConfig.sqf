@@ -11,7 +11,7 @@
     0: Config Path <Config> (Default: configNull)
 
     Returns:
-    0: Statemachine Object <Location>
+    Statemachine Object <Location>
 */
 
 params [
