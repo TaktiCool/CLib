@@ -12,7 +12,7 @@
 
     Parameter(s):
     0: Code to execute <Code> (Default: {})
-    1: Parameters to run the code with <Array> (Default: [])
+    1: Parameters to run the code with <Anything> (Default: [])
 
     Returns:
     None
@@ -22,7 +22,7 @@ EXEC_ONLY_UNSCHEDULED
 
 params [
     ["_func", {}, [{}]],
-    ["_params", [], [[]], []]
+    ["_params", [], []]
 ];
 
 if (diag_frameNo == GVAR(nextFrameNo)) then {
