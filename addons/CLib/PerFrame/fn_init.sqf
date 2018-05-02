@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(waitArray) = [];
 GVAR(sortWaitArray) = false;
 
@@ -57,7 +58,6 @@ DFUNC(onEachFrameHandler) = {
         nil
     } count GVAR(perFrameHandlerArray);
 
-
     if (GVAR(sortWaitArray)) then {
         GVAR(waitArray) sort true;
         GVAR(sortWaitArray) = false;
@@ -77,7 +77,6 @@ DFUNC(onEachFrameHandler) = {
         _delete = false;
     };
 
-
     {
         if (_x isEqualType [] && {(_x select 2) call (_x select 1)}) then {
             (_x select 2) call (_x select 0);
@@ -85,7 +84,6 @@ DFUNC(onEachFrameHandler) = {
             GVAR(waitUntilArray) set [_forEachIndex, objNull];
         };
     } forEach GVAR(waitUntilArray);
-
 
     if (_delete) then {
         GVAR(waitUntilArray) = GVAR(waitUntilArray) - [objNull];
@@ -121,7 +119,6 @@ DFUNC(onEachFrameHandler) = {
     GVAR(nextFrameBuffer) = [];
     GVAR(nextFrameNo) = diag_frameNo + 1;
 
-
     if !(GVAR(deletedIndices) isEqualTo []) then {
         {
             GVAR(perFrameHandlerArray) set [_x, objNull];
@@ -139,6 +136,5 @@ DFUNC(onEachFrameHandler) = {
 
     PERFORMANCECOUNTER_END(PFHCounter);
 };
-
 
 GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {call FUNC(onEachFrameHandler)}];

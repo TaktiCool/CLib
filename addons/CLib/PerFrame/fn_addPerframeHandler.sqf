@@ -8,12 +8,9 @@
     Adds a PerFrame eventhandler
 
     Parameter(s):
-    0: Function that get called <Code, String>
-    1: Delay <Number>
-    2: Arguments <Any>
-
-    Remarks:
-    Never call This in scheduled Environment
+    0: Function that get called <Code, String> (Default: {})
+    1: Delay <Number> (Default: 0)
+    2: Arguments <Anything> (Default: [])
 
     Returns:
     None
@@ -21,7 +18,11 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params [["_function", {}, [{}, ""]], ["_delay", 0, [0]], ["_args", []]];
+params [
+    ["_function", {}, [{}, ""]],
+    ["_delay", 0, [0]],
+    ["_args", [], []]
+];
 
 if (_function isEqualTo {}) exitWith {-1};
 

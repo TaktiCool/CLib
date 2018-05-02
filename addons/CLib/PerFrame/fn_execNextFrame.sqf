@@ -11,8 +11,8 @@
     Execture a Code on the Next Frame
 
     Parameter(s):
-    0: Code to execute <Code>
-    1: Parameters to run the code with <Array>
+    0: Code to execute <Code> (Default: {})
+    1: Parameters to run the code with <Array> (Default: [])
 
     Returns:
     None
@@ -20,7 +20,11 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params [["_func", {}], ["_params", []]];
+params [
+    ["_func", {}, [{}]],
+    ["_params", [], [[]], []]
+];
+
 if (diag_frameNo == GVAR(nextFrameNo)) then {
     GVAR(nextFrameBuffer) pushBack [_params, _func];
 } else {

@@ -11,9 +11,9 @@
     Waits a time and executes a script
 
     Parameter(s):
-    0: Code that get Executed if the Conditon is True <Code>
-    1: Time to Wait <Number>
-    2: Paramter <Any>
+    0: Code that gets executed if the condition is true <Code> (Default: {})
+    1: Time to Wait <Number> (Default: 0)
+    2: Paramter <Anything> (Default: [])
 
     Returns:
     None
@@ -21,7 +21,12 @@
 
 EXEC_ONLY_UNSCHEDULED
 
-params [["_code", {}], ["_time", 0], ["_args", []]];
+params [
+    ["_code", {}, [{}]],
+    ["_time", 0, [0]],
+    ["_args", [], []]
+];
+
 GVAR(waitArray) pushBack [_time + time, _code, _args];
 GVAR(sortWaitArray) = true;
 nil
