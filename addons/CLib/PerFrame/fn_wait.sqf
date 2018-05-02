@@ -11,7 +11,7 @@
     Waits a time and executes a script
 
     Parameter(s):
-    0: Code that gets executed if the condition is true <Code> (Default: {})
+    0: Code that gets executed <Code> (Default: {})
     1: Time to Wait <Number> (Default: 0)
     2: Paramter <Anything> (Default: [])
 
