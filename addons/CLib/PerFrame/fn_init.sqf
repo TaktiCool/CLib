@@ -46,9 +46,9 @@ DFUNC(onEachFrameHandler) = {
     GVAR(lastFrameTime) = diag_tickTime;
 
     {
-        _x params ["_function", "_delay", "_delta", "_args", "_handle", "_isDeleted"];
+        _x params ["_function", "_delay", "_delta", "_args", "_handle"];
 
-        if (time > _delta && !_isDeleted) then {
+        if (time > _delta) then {
             _x set [2, _delta + _delay];
             if (_function isEqualType "") then {
                 _function = (parsingNamespace getVariable [_function, {}]);

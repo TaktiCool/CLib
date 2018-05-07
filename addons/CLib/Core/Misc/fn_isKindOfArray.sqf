@@ -8,27 +8,20 @@
     is Kind Of Array
 
     Parameter(s):
-    https://community.bistudio.com/wiki/isKindOf
-    exept that 2nd Parameter is a Array with Multible Types/Checks Posible
+    0: Target for isKindOf <Object, String>
+    1: Compare Types <Array<String>>
+    2: Config to Search in <Config> (Default: configNull)
 
     Returns:
     Bool is Kind Of Input1
 */
-params ["_input1", "_inputs", "_config"];
-if (isNil "_config") then {
-    {
-        if (_input1 isKindOf _x) then {
-            true breakOut SCRIPTSCOPENAME;
-        };
-        nil
-    } count _inputs;
+params [
+    ["_input", objNull, [objNull, ""]],
+    ["_inputs", [], [[]]],
+    ["_config", configNull, [configNull]]
+];
+if (isNull _config) then {
+    (_inputs findIf {_input isKindOf _x}) != -1;
 } else {
-    {
-        if (_input1 isKindOf [_x, _config]) then {
-            true breakOut SCRIPTSCOPENAME;
-        };
-        nil
-    } count _inputs;
+    (_inputs findIf {_input isKindOf [_x, _config]}) != -1;
 };
-
-false
