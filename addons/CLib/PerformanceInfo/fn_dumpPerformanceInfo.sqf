@@ -8,17 +8,26 @@
     Dump all CLib relevant varibles to config
 
     Parameter(s):
-    0: Object to dump <Object> (Default: CLib_Player)
-    1: Target who receives the dump <Number, Object, String, Side, Group, Array> (Default: CLib_Player)
+    0: Object to dump <Object> (Default: objNull)
+    1: Target who receives the dump <Number, Object, String, Side, Group, Array> (Default: objNull)
 
     Returns:
     None
 */
 
 params [
-    ["_unit", CLib_Player, [objNull]],
-    ["_returnTo", CLib_Player, [0, objNull, "", sideUnknown, grpNull, []], []]
+    ["_unit", objNull, [objNull]],
+    ["_returnTo", objNull, [0, objNull, "", sideUnknown, grpNull, []], []]
 ];
+
+if (!isServer) then {
+    if (isNull _returnTo) then {
+        _returnTo = CLib_Player;
+    };
+    if (isNull _unit) then {
+        _unit = CLib_Player;
+    };
+};
 
 if !(local _unit) exitWith {
     [QGVAR(dumpPerformanceInfo), _unit, _this] call CFUNC(targetEvent);
