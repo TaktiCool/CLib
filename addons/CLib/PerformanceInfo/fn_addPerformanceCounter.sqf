@@ -8,13 +8,17 @@
     Starts or stops the performance counter with the given name
 
     Parameter(s):
-    0: Name of Counter <String>
-    1: Toggle <Bool>
+    0: Name of Counter <String> (Default: "")
+    1: Toggle <Bool> (Default: true)
 
     Returns:
     None
 */
-params ["_name", "_enable"];
+
+params [
+    ["_name", "", [""]],
+    ["_enable", true, [true]]
+];
 
 private _variableName = format [QGVAR(PerformanceTimerTickTime_%1), _name];
 
