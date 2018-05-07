@@ -418,7 +418,7 @@ Examples:
 [CLib_Player, "TestVariable", str (random 1000), 5] call CLib_fnc_setVariablePublic;
 ```
 
-## CLib_fnc_shufffleArray
+## CLib_fnc_shuffleArray
 
 Parameter(s):
 * [`<Array>`] Unshuffled Array
@@ -431,7 +431,7 @@ Returns a shuffled array.
 Examples:
 
 ```sqf
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shufffleArray;
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shuffleArray;
 ```
 
 ## CLib_fnc_toFixedNumber
