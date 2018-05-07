@@ -21,10 +21,7 @@ GVAR(FPSStorage) resize FRAMECOUNT;
 GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
 uiNamespace setVariable [QGVAR(ctrlGroup), controlNull];
 
-
 GVAR(pfhID) = -1;
-
-
 
 DFUNC(toggleFrameInfo) = {
     if (GVAR(pfhID) != -1) exitWith {

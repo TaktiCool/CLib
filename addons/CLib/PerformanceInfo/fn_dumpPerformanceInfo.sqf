@@ -5,31 +5,32 @@
     Author: joko // Jonas
 
     Description:
-    Dump all CLib Relevant Varibles to Config
+    Dump all CLib relevant varibles to config
 
     Parameter(s):
-    0: Object or Client owner on what the Dump should get Created <Object, Number>
+    0: Object to dump <Object> (Default: CLib_Player)
+    1: Target who receives the dump <Number, Object, String, Side, Group, Array> (Default: CLib_Player)
 
     Returns:
     None
 */
-params ["_unit", "_returnTo"];
+
+params [
+    ["_unit", CLib_Player, [objNull]],
+    ["_returnTo", CLib_Player, [0, objNull, "", sideUnknown, grpNull, []], []]
+];
 
 if !(local _unit) exitWith {
     [QGVAR(dumpPerformanceInfo), _unit, _this] call CFUNC(targetEvent);
 };
 
 private _fnc_outputText = {
-    if (_unit isEqualTo _returnTo || isNil "_returnTo" || _returnTo isEqualTo CLib_Player) then {
-        [QGVAR(dump), _this] call CFUNC(localEvent);
-    } else {
-        [QGVAR(dump), _returnTo, _this] call CFUNC(targetEvent);
-    };
+    [QGVAR(dump), _returnTo, _this] call CFUNC(targetEvent);
     [QCGVAR(serverLog), [_this, name _unit]] call CFUNC(serverEvent);
 };
 
 private _text = format [
-"------CLib Debug------
+    "------CLib Debug------
 time = %1
 ServerTime =%2
 ------Performance------
@@ -55,10 +56,10 @@ _text call _fnc_outputText;
 
 if (_unit != CLib_Player) then {
     _text = format [
-    "------Unit------
-    typeOf = %1
-    animationState = %2
-    name = %3",
+        "------Unit------
+typeOf = %1
+animationState = %2
+name = %3",
         if (isNull _unit) then {"null"} else {typeOf _unit},
         if (isNull _unit) then {"null"} else {animationState _unit},
         if (isNull _unit) then {"null"} else {name _unit}
@@ -67,7 +68,7 @@ if (_unit != CLib_Player) then {
 };
 
 _text = format [
-"------Client------
+    "------Client------
 typeOf = %1
 animationState = %2
 name = %3",
