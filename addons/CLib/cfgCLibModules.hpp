@@ -257,11 +257,9 @@ class CfgCLibModules {
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
             FNC(init);
-            APIFNC(getSettingOld);
             APIFNC(getSetting);
             APIFNC(getSettings);
             APIFNC(getSettingSubClasses);
-            APIFNC(loadSettings);
             APIFNC(registerSettings);
         };
 
