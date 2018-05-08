@@ -8,19 +8,26 @@
     Sets a variable on a namespace and saves the name of the variable
 
     Parameter(s):
-    0: Namespace to set variable on <Namespace>
-    1: Variable name <String>
-    2: Variable content <Any>
-    3: Cache name <String> (default: QGVAR(allVariableCache))
-    4: Global <Bool> (default: false)
-
-    Remark:
-    4: Is ignored if namespace is a location
+    0: Namespace to set variable on <Location, Object> (Default: locationNull)
+    1: Variable name <String> (Default: "")
+    2: Variable content <Anything> (Default: [])
+    3: Cache name <String> (Default: QGVAR(allVariableCache))
+    4: Global <Bool> (Default: false)
 
     Returns:
     None
+
+    Remarks:
+    Global parameter is ignored if namespace is of type location
 */
-params ["_namespace", "_varName", "_varContent", ["_cacheName", QGVAR(allVariableCache)], ["_global", false, [false]]];
+
+params [
+    ["_namespace", locationNull, [locationNull, objNull]],
+    ["_varName", "", [""]],
+    ["_varContent", [], []],
+    ["_cacheName", QGVAR(allVariableCache), [""]],
+    ["_global", false, [true]]
+];
 
 private _cache = _namespace getVariable [_cacheName, []];
 if (isNil "_varContent") then {
