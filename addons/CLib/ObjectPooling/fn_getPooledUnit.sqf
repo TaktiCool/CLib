@@ -41,22 +41,23 @@ private _unit = objNull;
         breakTo SCRIPTSCOPENAME;
     };
 } forEach _unitsData;
+_unitParams params [["_grp", grpNull], ["_init", {}], ["_skill", 0.5], ["_rank", "PRIVATE"]];
 if (isNull _unit) then {
-    private _params = [[0, 0, 0]];
-    _params append _unitParams;
-    _unit = _unitClass createUnit _params;
+    _unit = _grp createUnit [_unitClass, [0,0,0]];
 } else {
-    _unitParams params [["_grp", grpNull], ["_init", {}], ["_skill", 0.5], ["_rank", "PRIVATE"]];
     [_unit] joinSilent _grp;
-    if (_init isEqualType "") then {
-        _init = compile _init;
-    };
-    _unit call _init;
-    _unit setSkill _skill;
-    _unit setRank _rank;
+    _unit setDamage 0;
+    _unit allowDamage true;
+    ["enableSimulation", [_unit, true]] call CFUNC(serverEvent);
+};
+if (_init isEqualType "") then {
+    _init = compile _init;
 };
 
+_unit call _init;
+_unit setSkill _skill;
+_unit setRank _rank;
+
 _unitsData pushBack [_lockedCondition, _unit];
-_unitsData sort true;
 GVAR(objPool) setVariable [_varName, _unitsData, true];
 _unit
