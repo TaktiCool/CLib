@@ -224,7 +224,8 @@ class CfgCLibModules {
         };
 
         MODULE(ObjectPooling) {
-            APIFNC(getPoolObject);
+            APIFNC(getPooledObject);
+            APIFNC(getPooledUnit);
             FNCSERVER(init);
         };
 

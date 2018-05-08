@@ -5,17 +5,22 @@
     Author: joko // Jonas
 
     Description:
-    try to get a Object from a Object Pool.
+    Get an object from an object pool
 
     Parameter(s):
-    0: Requested Object Type <String>
-    1: Time to be locked after use <Number>
-    2: should the Object be Local <Bool>
+    0: Requested object type <String> (Default: "")
+    1: Time to be locked after use <Number> (Default: 10)
+    2: Should the object be local <Bool> (Default: true)
 
     Returns:
     Requested Object <Object>
 */
-params [["_objClass", "", [""]], ["_lockingTime", 10, [0]], ["_local", true, [false]]];
+
+params [
+    ["_objClass", "", [""]],
+    ["_lockingTime", 10, [0]],
+    ["_local", true, [true]]
+];
 
 private _varName = [_objClass, _objClass + "_local"] select _local;
 

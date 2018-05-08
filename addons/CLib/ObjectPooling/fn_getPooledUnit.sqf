@@ -5,21 +5,29 @@
     Author: joko // Jonas
 
     Description:
-    try to get a Unit from a Unit Pool.
+    Get a unit from a unit pool
 
     Parameter(s):
-    0: Requested Object Type <String>
-    1: Time to be locked after use <Number>
-    2: Unit Parameter
-        0: Group <Group> (default: grpNull)
-        1: Init Code executed on the unit <String, Code> (default: "")
-        2: Skill <Number> (default: 0.5)
-        3: Rank <String> (default: "PRIVATE")
+    0: Requested Object Type <String> (Default: "")
+    1: Locked condition <Code> (Default: {})
+    2: Unit Parameter <Array> (Default: [grpNull, "", 0.5, "PRIVATE"])
 
     Returns:
     Requested Object <Object>
+
+    Remarks:
+    Unit parameter structure:
+        0: Group <Group> (Default: grpNull)
+        1: Init Code executed on the unit <String, Code> (Default: "")
+        2: Skill <Number> (Default: 0.5)
+        3: Rank <String> (Default: "PRIVATE")
 */
-params [["_unitClass", "", [""]], ["_lockedCondition", {}, [{}]], ["_unitParams", [grpNull, "", 0.5, "PRIVATE"]]];
+
+params [
+    ["_unitClass", "", [""]],
+    ["_lockedCondition", {}, [{}]],
+    ["_unitParams", [grpNull, {}, 0.5, "PRIVATE"], [[]], 4]
+];
 
 private _varName = _unitClass + "_unit";
 
@@ -34,11 +42,11 @@ private _unit = objNull;
     };
 } forEach _unitsData;
 if (isNull _unit) then {
-    private _params = [[0,0,0]];
+    private _params = [[0, 0, 0]];
     _params append _unitParams;
     _unit = _unitClass createUnit _params;
 } else {
-    _unitParams params [["_grp", grpNull], ["_init", ""], ["_skill", 0.5], ["_rank", "PRIVATE"]];
+    _unitParams params [["_grp", grpNull], ["_init", {}], ["_skill", 0.5], ["_rank", "PRIVATE"]];
     [_unit] joinSilent _grp;
     if (_init isEqualType "") then {
         _init = compile _init;

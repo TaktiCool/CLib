@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 if (isServer) then {
     GVAR(objPool) = true call CFUNC(createNamespace);
 };
