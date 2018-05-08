@@ -16,4 +16,5 @@
 
 if (isServer) then {
     GVAR(objPool) = true call CFUNC(createNamespace);
+    publicVariable QGVAR(objPool);
 };

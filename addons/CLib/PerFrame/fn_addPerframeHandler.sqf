@@ -27,7 +27,7 @@ params [
 if (_function isEqualTo {}) exitWith {-1};
 
 if (count GVAR(PFHhandles) >= 999999) exitWith {
-    diag_log _function;
+    LOG("ERROR: Could not add more PFH. Max count from 999999 where exceeded");
     -1
 };
 
