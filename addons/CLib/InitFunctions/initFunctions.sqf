@@ -187,6 +187,7 @@ private _functions_listPreStart = [];
 private _functions_list = call (uiNamespace getVariable ["BIS_functions_list",{[]}]);
 private _functions_listPreInit = [call (uiNamespace getVariable ["BIS_functions_listPreInit",{[]}]),[]];
 private _functions_listPostInit = [call (uiNamespace getVariable ["BIS_functions_listPostInit",{[]}]),[]];
+
 private _functions_listRecompile = call (uiNamespace getVariable ["BIS_functions_listRecompile",{[]}]);
 
 //--- When not forced, recompile only mission if uiNamespace functions exists
@@ -307,6 +308,7 @@ private _compileFinal =
                         private _itemExt = getText (_currentItem >> "ext");
                         private _itemPreInit = getNumber (_currentItem >> "preInit");
                         private _itemPostInit = getNumber (_currentItem >> "postInit");
+                        private _itemUnscheudled = getNumber (_currentItem >> "unscheudled");
                         private _itemPreStart = getNumber (_currentItem >> "preStart");
                         private _itemRecompile = getNumber (_currentItem >> "recompile");
                         private _itemCheatsEnabled = getNumber (_currentItem >> "cheatsEnabled");
@@ -332,7 +334,7 @@ private _compileFinal =
                         //--- Compile function
                         if (_itemPath == "") then {_itemPath = _pathFile + "\" + _categoryName + "\fn_" + _itemName + _itemExt};
                         private _itemVar = _tagName + "_fnc_" + _itemName;
-                        private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile> 0, _tag, _categoryName, _itemName];
+                        private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile> 0, _tag, _categoryName, _itemName, _itemUnscheudled> 0];
                         private _itemCompile = if (_itemCheatsEnabled == 0 || (_itemCheatsEnabled > 0 && cheatsEnabled)) then {
                             [_itemVar, _itemMeta, _itemHeader, _compileFinal] call _fncCompile;
                         } else {
@@ -589,10 +591,17 @@ if (_recompile in [3,5]) then {
             {
                 {
                     private _time = diag_tickTime;
-                    [_x,didJIP] call {
-                        params ["_data", "_didJip"];
+                    private _unscheudled = (missionNamespace getVariable _x + "_meta") select 9;
+                    [_x, didJIP, _unscheudled] call {
+                        params ["_data", "_didJip", "_unscheudled"];
                         private ["_time"];
-                        ["postInit", _didJip] call (missionNamespace getVariable _data);
+                        if (_unscheudled) then {
+                            isNil {
+                                ["postInit", _didJip] call (missionNamespace getVariable _data);
+                            };
+                        } else {
+                            ["postInit", _didJip] call (missionNamespace getVariable _data);
+                        };
                     };
                     ["%1 (%2 ms)",_x,(diag_tickTime - _time) * 1000] call BIS_fnc_logFormat;
                     nil;
