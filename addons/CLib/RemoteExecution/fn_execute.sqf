@@ -15,7 +15,7 @@
     Function return <Anything>
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 params [
     ["_function", "", [""]],

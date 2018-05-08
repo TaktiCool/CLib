@@ -16,7 +16,7 @@
     the ID of the Current Eventhandler <Number>
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 params [["_event", "", [""]], ["_function", {}, [{}, ""]], ["_args", []]];
 

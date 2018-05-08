@@ -16,7 +16,7 @@
     None
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 params [["_event", "EventError", [""]], ["_args", []], "_persistent"];
 #ifdef ISDEV

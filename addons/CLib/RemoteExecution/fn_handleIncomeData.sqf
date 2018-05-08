@@ -16,7 +16,7 @@
     None
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 params [
     ["_target", 0, [0, objNull, sideUnknown, grpNull, []], []],

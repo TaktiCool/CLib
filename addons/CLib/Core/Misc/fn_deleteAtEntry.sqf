@@ -18,7 +18,7 @@
     Returns:
     Deleted Index <Array<Numbers>>
 */
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 params ["_array", "_entry", ["_deleteAll", false]];
 private "_index";
 private _return = [];

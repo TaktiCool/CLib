@@ -14,7 +14,7 @@
     None
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 params [
     ["_handle", -1, [0]]

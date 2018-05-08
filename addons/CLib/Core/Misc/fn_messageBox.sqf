@@ -18,7 +18,7 @@
     Returns:
     None
 */
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 params [["_text", "testText"], ["_header", "header"], ["_button1Callback", {}, [[], {}]], ["_button2Callback", {}, [[], {}]], ["_onClose", {}, [{}]], "_args"];
 private _button1Text = "Ok";
 private _button2Text = "Cancel";

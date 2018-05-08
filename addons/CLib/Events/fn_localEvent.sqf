@@ -15,7 +15,7 @@
     Return of Last set on _CLib_EventReturn <Any>
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 #ifdef ISDEV
     params [["_eventName", "", [""]], ["_args", []], ["_CLib_sender", "Local Called"]];
