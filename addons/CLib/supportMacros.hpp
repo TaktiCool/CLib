@@ -53,21 +53,12 @@
     }; \
 };
 
-
 #define singleFunctionConfig(Module,func,baseClass) class func : baseClass {file = QUOTE(\PATH\PREFIX\addons\MOD\##Module##\fn_##func##.sqf);};
 #define singleFunctionConfigSub(Module,submodule,func,baseClass) class func : baseClass {file = QUOTE(\PATH\PREFIX\addons\MOD\##Module##\##submodule##\fn_##func##.sqf);};
 
 #ifdef ENABLEPERFORMANCECOUNTER
-    #define PERFORMANCECOUNTER_START(var1) [#var1, true] call CFUNC(addPerformanceCounter);
-    #define PERFORMANCECOUNTER_END(var1) [#var1, false] call CFUNC(addPerformanceCounter);
-#else
-    #define PERFORMANCECOUNTER_START(var1) /* Performance Counter disabled */
-    #define PERFORMANCECOUNTER_END(var1) /* Performance Counter disabled */
-#endif
-
-#ifdef ISDEV
-    #define RUNTIMESTART private _debugStartTime = diag_tickTime
-    #define RUNTIME(var) DUMP(var + " Needed: " + ((diag_tickTime - _debugStartTime) call CFUNC(toFixedNumber)) + " ms")
+    #define RUNTIMESTART private _CLib_Debug_debugStartTime = diag_tickTime
+    #define RUNTIME(var) DUMP(var + " Needed: " + ((diag_tickTime - _CLib_Debug_debugStartTime) call CFUNC(toFixedNumber)) + " ms")
 #else
     #define RUNTIMESTART /*Disabled*/
     #define RUNTIME(var) /*Disabled*/
@@ -82,7 +73,7 @@
 #define LOC(var) var call CFUNC(readLocalisation)
 #define MLOC(var) LOC(QLSTRING(var))
 
-#define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith { LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment from "+ _fnc_scriptNameParent); [missionNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall);};
+#define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith { LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment from "+ _fnc_scriptNameParent); [missionNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall);}
 #define EXEC_ONLY_IN_NAMESPACE(var) if !(currentNamespace isEqualTo var) exitWith { with var do {LOG("WARNING: " + _fnc_scriptName + " was called in the wrong Namespace from "+ _fnc_scriptNameParent); _this call (var getVariable _fnc_scriptName);}
 #define EXEC_ONLY_IN_MISSIONNAMESPACE EXEC_ONLY_IN_NAMESPACE(missionNamespace)
 

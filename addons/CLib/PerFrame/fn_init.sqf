@@ -39,7 +39,7 @@ DFUNC(onEachFrameHandler) = {
         removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
     };
 
-    PERFORMANCECOUNTER_START(PFHCounter);
+    RUNTIMESTART;
 
     // Delta time Describe the time that the last Frame needed to calculate this is required for some One Each Frame Balance Math Calculations
     CGVAR(deltaTime) = diag_tickTime - GVAR(lastFrameTime);
@@ -134,7 +134,7 @@ DFUNC(onEachFrameHandler) = {
         GVAR(deletedIndices) = [];
     };
 
-    PERFORMANCECOUNTER_END(PFHCounter);
+    RUNTIME("PFHCounter");
 };
 
 GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {call FUNC(onEachFrameHandler)}];

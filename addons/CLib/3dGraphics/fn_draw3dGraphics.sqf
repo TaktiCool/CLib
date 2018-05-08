@@ -17,7 +17,7 @@
 // Dont Render 3d Icons if a UI is Open.
 if (!isNull (findDisplay 49) || dialog) exitWith {};
 
-PERFORMANCECOUNTER_START(3dGraphics);
+RUNTIMESTART;
 
 private _fov = (call CFUNC(getFOV)) * 3;
 private _cameraPosition = positionCameraToWorld [0, 0, 0];
@@ -53,4 +53,4 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
 } count GVAR(3dGraphicsCache);
 
 
-PERFORMANCECOUNTER_END(3dGraphics)
+RUNTIME("3dGraphics")
