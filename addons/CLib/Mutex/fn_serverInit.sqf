@@ -5,7 +5,7 @@
     Author: NetFusion
 
     Description:
-    Init for Mutex System on Server
+    Init for mutex system on server
 
     Parameter(s):
     None
@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 // Queue of clients who requested mutex executing
 GVAR(mutexes) = false call CFUNC(createNamespace); // Entries are [currentClient, clientQueue, currentMutexTime]
 
