@@ -4,6 +4,31 @@
 
 TODO text here
 
+## AllGearData
+* [`<String>`] Headgear
+* [`<String>`] Googgles
+* [`<String>`] Uniform
+* [`<Array>`] of [`<String>`] Uniform Items
+* [`<String>`] Vest
+* [`<Array>`] of [`<String>`] Vest Items
+* [`<String>`] Backpack
+* [`<Array>`] of [`<String>`] Backpack Items
+* [`<String>`] Rifle
+* [`<Array>`] of [`<String>`] Rifle Items
+* [`<Array>`] of [`<String>`] Rifle Magazine
+* [`<String>`] Launcher
+* [`<Array>`] of [`<String>`] Launcher Items
+* [`<Array>`] of [`<String>`] Launcher Magazines
+* [`<String>`] Handgun
+* [`<Array>`] of [`<String>`] Handgun Items
+* [`<Array>`] of [`<String>`] Handgun Magazines
+* [`<Array>`] of [`<String>`] Assigned Items
+* [`<String>`] Binoculars
+
+## RestoreGearData
+* [`<AllGearData>`] AllGearData
+* [`<magazinesAmmoFull>`] magazinesAmmoFull Return
+
 ## CLib_fnc_addContainer
 
 Parameter(s):
@@ -102,7 +127,7 @@ TODO Example here
 
 Parameter(s):
 * [`<Object>`] Source Unit
-* [`<Object>`] TODO text Destination Unit
+* [`<Object>`] Destination Unit
 
 Returns:
 * None
@@ -118,10 +143,10 @@ TODO Example here
 ## CLib_fnc_getAllGear
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Object>`] Unit
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<AllGearData>`] AllGear Data
 
 Returns an array containing all items of a given unit
 
@@ -134,12 +159,13 @@ TODO Example here
 ## CLib_fnc_restoreGear
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Object>`] Unit
+* [`<RestoreGearData>`] Restore Gear Data
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Restore gear from saveGear Function to Unit
 
 Examples:
 
@@ -150,12 +176,12 @@ TODO Example here
 ## CLib_fnc_saveGear
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Object>`] Unit
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<RestoreGearData>`] Restore Gear Data
 
-TODO text here
+Save Gear 
 
 Examples:
 
@@ -176,6 +202,9 @@ TODO Example here
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
+[`magazinesAmmoFull`]: https://community.bistudio.com/wiki/magazinesAmmoFull
 [`<ItemData>`]: #ItemData
 [`<MagData>`]: #MagData
 [`<MagazineData>`]: #MagazineData
+[`<AllGearData>`]: #AllGearData
+[`<RestoreGearData>`]: #RestoreGearData
