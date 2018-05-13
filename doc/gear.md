@@ -202,7 +202,7 @@ TODO Example here
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
-[`magazinesAmmoFull`]: https://community.bistudio.com/wiki/magazinesAmmoFull
+[`<magazinesAmmoFull>`]: https://community.bistudio.com/wiki/magazinesAmmoFull
 [`<ItemData>`]: #ItemData
 [`<MagData>`]: #MagData
 [`<MagazineData>`]: #MagazineData
