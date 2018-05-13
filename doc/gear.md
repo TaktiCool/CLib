@@ -54,7 +54,7 @@ or
 * [`<String>`] Item Classname
 
 ### MagData
-* [`<String>`] or [`<MagData>`] Item Classname
+* [`<String>`] Item Classname
 * [`<Number>`] Amount of Bullets in the Magazine
 or
 * [`<String>`] Item Classname
