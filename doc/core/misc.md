@@ -285,7 +285,7 @@ private _allGroupPlayers = CLib_Player call CLib_fnc_groupPlayers;
 Parameter(s):
 * [`<Position>`] Seeker Object
 * [`<Position>`], [`<Object>`] Target Position or Object
-* [`<Number >`] Size of Target Position/Target
+* [`<Number>`] Size of Target Position/Target
 
 Returns:
 * [`<Boolean>`] In FOV
