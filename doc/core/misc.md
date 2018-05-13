@@ -405,7 +405,7 @@ Parameter(s):
 * [`<Object>`] Object the variable should be assigned to
 * [`<String>`] Name of the variable
 * [`<Anything>`] Value of the variable
-* [`<Number>`] Embargo delay (Optional. Default: 1)
+* [`<Number>`] Embargo delay (Default: 1)
 
 Returns:
 * None
@@ -432,6 +432,35 @@ Examples:
 
 ```sqf
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shuffleArray;
+```
+
+## CLib_fnc_textTile
+
+Parameter(s):
+* [`<String>`, `<Structured Text>`] Content <String(Path to Image), Stuctured Text>
+* [`<Array>`, `<Boolean>`] Position (Default: [0, 0, 1, 1])
+* [`<Number>`, `<Array>`] Size (Default: 10)
+* [`<Number>`] Duration (Default: 5)
+* [`<Array>`, `<Number>`] Fade Times <Array, Number> (Default: [0.5, 0.5])
+* [`<Number>`] Max Alpha <Number> (Default: 0.3)
+
+Returns:
+* None
+
+Show animated text
+
+Examples:
+
+```sqf
+[
+    parseText "<img size='15' color='#ffffff' shadow='false' image='images\pawLogo.paa'/>",
+    [0.1,0.2,1,0.5],
+    [10,3],
+    3,
+    3,
+    0
+] call CLib_fnc_textTiles;
+
 ```
 
 ## CLib_fnc_toFixedNumber
@@ -463,3 +492,4 @@ private _strNumber = (10/3) call CLib_fnc_toFixedNumber;
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
