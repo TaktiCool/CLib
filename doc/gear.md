@@ -22,7 +22,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_addItem
+## CLib_fnc_addItemIIII
 
 ### ItemData
 * [`<String>`] Item Classname
