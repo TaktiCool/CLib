@@ -51,9 +51,9 @@ TODO Example here
 
 ### ItemData
 * [`<String>`] Item Classname
-* [`<Number>`] Amount of Items get Added  
+* [`<Number>`] Amount of Items get Added
 
-or  
+or
 
 * [`<String>`] Item Classname
 
@@ -76,9 +76,9 @@ TODO Example here
 
 ### MagazineData
 * [`<String>`] or [`<MagData>`] Magazine Classname
-* [`<Number>`] Amount of Magazines get Added  
+* [`<Number>`] Amount of Magazines get Added
 
-or  
+or
 
 * [`<String>`] Item Classname
 
