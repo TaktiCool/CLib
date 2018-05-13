@@ -47,13 +47,13 @@ TODO Example here
 
 ## CLib_fnc_addMagazine
 
-## MagazineData
+### MagazineData
 * [`<String>`] or [`<MagData>`] Magazine Classname
 * [`<Number>`] Amount of Magazines get Added
 or
 * [`<String>`] Item Classname
 
-## MagData
+### MagData
 * [`<String>`] or [`<MagData>`] Item Classname
 * [`<Number>`] Amount of Bullets in the Magazine
 or
