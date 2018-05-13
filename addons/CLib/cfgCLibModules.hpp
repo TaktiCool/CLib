@@ -98,6 +98,7 @@ class CfgCLibModules {
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
                 APIFNC(setVariablePublic);
+                APIFNC(textTiles);
                 APIFNC(toFixedNumber);
             };
 
@@ -217,9 +218,6 @@ class CfgCLibModules {
             APIFNC(allVariables);
             APIFNC(createNamespace);
             APIFNC(deleteNamespace);
-            APIFNC(getLogicGroup);
-            APIFNC(getVariable);
-            APIFNC(setVar);
             APIFNC(setVariable);
         };
 
