@@ -37,25 +37,29 @@ private _fnc_do = {
         if (_isRandom) then {
             if (_allowRandom) then {
                 _item = selectRandom _item;
+                if (isNil "_item") exitWith {};
+                _item call _do;
             } else {
-                _item = _item select 0;
+                {
+                    _x call _do;
+                    nil
+                } count _item;
             };
         };
-        if (isNil "_item") exitWith {};
-        _item call _do;
+
     };
 };
 
 // Remove Actions
 ["removeAllWeapons", {
     if (_this isEqualTo 1) then {removeAllWeapons _unit};
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 ["removeAllItems", {
     if (_this isEqualTo 1) then {removeAllItems _unit};
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 ["removeAllAssignedItems", {
     if (_this isEqualTo 1) then {removeAllAssignedItems _unit};
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 
 // Uniform
 ["uniform", {
@@ -125,7 +129,7 @@ private _fnc_do = {
         };
         nil
     } count _this;
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 
 // Items to Vest
 ["itemsVest", {
