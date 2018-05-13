@@ -25,10 +25,6 @@ TODO text here
 * [`<Array>`] of [`<String>`] Assigned Items
 * [`<String>`] Binoculars
 
-## RestoreGearData
-* [`<AllGearData>`] AllGearData
-* [`<magazinesAmmoFull>`] magazinesAmmoFull Return
-
 ## CLib_fnc_addContainer
 
 Parameter(s):
@@ -157,6 +153,10 @@ TODO Example here
 ```
 
 ## CLib_fnc_restoreGear
+
+### RestoreGearData
+* [`<AllGearData>`] AllGearData
+* [`<magazinesAmmoFull>`] magazinesAmmoFull Return
 
 Parameter(s):
 * [`<Object>`] Unit
