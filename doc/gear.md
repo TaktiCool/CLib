@@ -26,8 +26,10 @@ TODO Example here
 
 ### ItemData
 * [`<String>`] Item Classname
-* [`<Number>`] Amount of Items get Added
-or
+* [`<Number>`] Amount of Items get Added  
+
+or  
+
 * [`<String>`] Item Classname
 
 Parameter(s):
