@@ -28,7 +28,7 @@ Parameter(s):
 * [`<String>`] Cache ID
 * [`<Code>`] Function whose return value gets cached
 * [`<Anything>`] Arguments
-* [`<Number>`] Time until the cached values are being obsolet
+* [`<Number>`] Time until the cached values are being obsolete
 * [`<String>`] Event that clears the cache
 
 Returns:
@@ -104,7 +104,7 @@ Parameter(s):
 Returns:
 * [`<Anything>`] Return of the Function
 
-Calls a funcion directly and changes the Environment to Unscheduled
+Calls a function directly and changes the Environment to Unscheduled
 
 Examples:
 
@@ -155,8 +155,8 @@ Parameter(s):
 Returns:
 * [`<Position>`] Save Position
 
-This function is a failsave wrapper function for findEmptyPosition.
-Finds a save postion for a unit. This function always returns a position.
+This function is a failsafe wrapper function for findEmptyPosition.
+Finds a save position for a unit. This function always returns a position.
 
 Examples:
 
@@ -172,7 +172,7 @@ Parameter(s):
 Returns:
 * None
 
-Attempt to fix floating physx with disabled damage after setPosXXX commands.
+Attempt to fix floating physix with disabled damage after setPosXXX commands.
 Handles the fixFloating event
 
 Examples:
@@ -206,7 +206,7 @@ Parameter(s):
 Returns:
 * [`<String>`] Path in a String from
 
-This function fixes an issue occuring when using str on a config without appending the complete file path
+This function fixes an issue occurring when using str on a config without appending the complete file path
 
 Examples:
 
@@ -220,7 +220,7 @@ Parameter(s):
 * None
 
 Returns:
-* [`<Number>`] Current FOV/Focal Lenth
+* [`<Number>`] Current FOV/Focal Length
 
 Calculate Current FOV and Zoom
 
@@ -301,8 +301,8 @@ TODO Example here
 ## CLib_fnc_isKindOfArray
 
 Parameter(s):
-https://community.bistudio.com/wiki/isKindOf
-exept that 2nd Parameter is a Array with Multible Types/Checks Posible
+* [`<Object>`], [`<String>`] Target Kind
+* [`Array`] of [`String`] Possible Kinds
 
 Returns:
 * [`<Boolean>`] is Kind Of Input1
@@ -437,7 +437,7 @@ Examples:
 ## CLib_fnc_textTile
 
 Parameter(s):
-* [`<String>`], [`<Structured Text>`] Content <String(Path to Image), Stuctured Text>
+* [`<String>`], [`<Structured Text>`] Content
 * [`<Array>`], [`<Boolean>`] Position (Default: [0, 0, 1, 1])
 * [`<Number>`], [`<Array>`] Size (Default: 10)
 * [`<Number>`] Duration (Default: 5)
