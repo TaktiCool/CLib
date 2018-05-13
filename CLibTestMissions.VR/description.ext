@@ -82,7 +82,7 @@ class CLib {
             script[] = {};
             removeAllWeapons = 0;
             removeAllItems = 0;
-            removeAllAssingedItems = 0;
+            removeAllAssignedItems = 0;
 
         };
 
