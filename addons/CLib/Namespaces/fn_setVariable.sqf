@@ -8,7 +8,7 @@
     Sets a variable on a namespace and saves the name of the variable
 
     Parameter(s):
-    0: Namespace to set variable on <Location, Object> (Default: locationNull)
+    0: Namespace to set variable on <Location, Namespace, Object> (Default: locationNull)
     1: Variable name <String> (Default: "")
     2: Variable content <Anything> (Default: [])
     3: Cache name <String> (Default: QGVAR(allVariableCache))
@@ -22,7 +22,7 @@
 */
 
 params [
-    ["_namespace", locationNull, [locationNull, objNull]],
+    ["_namespace", locationNull, [locationNull, missionNamespace, objNull]],
     ["_varName", "", [""]],
     ["_varContent", [], []],
     ["_cacheName", QGVAR(allVariableCache), [""]],

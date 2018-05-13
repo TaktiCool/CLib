@@ -8,7 +8,7 @@
     Returns all variables that have been set on a namespace with our setVariable function
 
     Parameter(s):
-    0: Namespace <Location, Object> (Default: locationNull)
+    0: Namespace <Location, Namespace, Object> (Default: locationNull)
     1: Cache name <String> (Default: QGVAR(allVariableCache))
 
     Returns:
@@ -16,7 +16,7 @@
 */
 
 params [
-    ["_namespace", locationNull, [locationNull, objNull]],
+    ["_namespace", locationNull, [locationNull, missionNamespace, objNull]],
     ["_cacheName", QGVAR(allVariableCache), [""]]
 ];
 
