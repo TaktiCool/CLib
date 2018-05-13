@@ -53,13 +53,13 @@ private _fnc_do = {
 // Remove Actions
 ["removeAllWeapons", {
     if (_this isEqualTo 1) then {removeAllWeapons _unit};
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 ["removeAllItems", {
     if (_this isEqualTo 1) then {removeAllItems _unit};
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 ["removeAllAssignedItems", {
     if (_this isEqualTo 1) then {removeAllAssignedItems _unit};
-}, true] call _fnc_do;
+}, false] call _fnc_do;
 
 // Uniform
 ["uniform", {
