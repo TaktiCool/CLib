@@ -49,14 +49,14 @@ TODO Example here
 
 ### MagazineData
 * [`<String>`] or [`<MagData>`] Magazine Classname
-* [`<Number>`] Amount of Magazines get Added
-or
+* [`<Number>`] Amount of Magazines get Added  
+or  
 * [`<String>`] Item Classname
 
 ### MagData
 * [`<String>`] Item Classname
-* [`<Number>`] Amount of Bullets in the Magazine
-or
+* [`<Number>`] Amount of Bullets in the Magazine  
+or  
 * [`<String>`] Item Classname
 
 Parameter(s):
