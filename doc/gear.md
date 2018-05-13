@@ -47,7 +47,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_addItemIIII
+## CLib_fnc_addItem
 
 ### ItemData
 * [`<String>`] Item Classname
@@ -181,7 +181,7 @@ Parameter(s):
 Returns:
 * [`<RestoreGearData>`] Restore Gear Data
 
-Save Gear 
+Save Gear
 
 Examples:
 
