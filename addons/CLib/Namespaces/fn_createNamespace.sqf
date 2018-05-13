@@ -8,7 +8,7 @@
     Create a Location
 
     Parameter(s):
-    0: Global <Bool> (Default: false)
+    0: Global <Anything> (Default: false)
 
     Returns:
     Namespace <Location, Object>
@@ -18,8 +18,12 @@
 */
 
 params [
-    ["_isGlobal", false, [true]]
+    ["_isGlobal", false, []]
 ];
+
+if !(_isGlobal isEqualType true) then {
+    _isGlobal = false;
+};
 
 #define POS [-2000, -2000, -2000]
 
