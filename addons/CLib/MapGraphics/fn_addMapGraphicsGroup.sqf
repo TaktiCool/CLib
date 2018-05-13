@@ -8,10 +8,13 @@
     Adds a new group to the MapGraphics system
 
     Parameter(s):
-    0: Group Name <String>
-    1: Group Data <Array>
-    2: Group Layer <Number>
-    3: State <String>
+    0: Group Name <String> (Default: "")
+    1: Group Data <Array> (Default: ["RECTANGLE"])
+    2: State <String> (Default: "normal")
+    3: Group Layer <Number> (Default: 0)
+
+    Returns:
+    None
 
     Remarks:
     Group Data is defined as <ARRAY> of GraphicsElements of following Structure:
@@ -61,11 +64,14 @@
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
-
-    Returns:
-    None
 */
-params ["_groupName", "_groupData", ["_state", "normal"], ["_layer", 0]];
+
+params [
+    ["_groupName", "", [""]],
+    ["_groupData", ["RECTANGLE"], [[]], []],
+    ["_state", "normal", [""]],
+    ["_layer", 0, [0]]
+];
 
 // Compete the data for the map graphics cache
 private _completeGroupData = [];

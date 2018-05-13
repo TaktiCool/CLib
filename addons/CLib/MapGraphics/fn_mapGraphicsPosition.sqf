@@ -8,16 +8,20 @@
     Converts a Position from MapGraphicsPosition into a position
 
     Parameter(s):
-    0: Position <Array, Object>
-    1: Map <Control>
+    0: Position <Array, Object> (Default: objNull)
+    1: Map <Control> (Default: controlNull)
 
     Returns:
-    0: position <Position>
+    Position <Array>
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
 */
-params ["_position", "_map"];
+
+params [
+    ["_position", objNull, [[], objNull], 2],
+    ["_map", controlNull, [controlNull]]
+];
 
 if (_position isEqualType [] && {(_position select 1) isEqualType []}) then {
     _position params ["_pos", "_offset"];

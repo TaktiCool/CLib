@@ -8,13 +8,15 @@
     Remove a group from the MapGraphics system
 
     Parameter(s):
-    0: Group name <String>
+    0: Group name <String> (Default: "")
 
     Returns:
     None
 */
 
-params ["_groupName"];
+params [
+    ["_groupName", "", [""]]
+];
 
 [GVAR(MapGraphicsGroup), _groupName, nil] call CFUNC(setVariable);
 

@@ -8,12 +8,16 @@
     Registers a Map Control for MapGraphics
 
     Parameter(s):
-    0: Map <Control>
+    0: Map <Control> (Default: controlNull)
 
     Returns:
     None
 */
-params ["_map"];
+
+params [
+    ["_map", controlNull, [controlNull]]
+];
+
 private _exit = false;
 // make sure that the control not already have a draw function
 with uiNamespace do {

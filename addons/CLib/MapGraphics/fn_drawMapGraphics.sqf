@@ -8,13 +8,17 @@
     Draws the map icons on map
 
     Parameter(s):
-    0: Map <Control>
+    0: Map <Control> (Default: controlNull)
 
     Returns:
     None
 */
+
+params [
+    ["_map", controlNull, [controlNull]]
+];
+
 RUNTIMESTART;
-params ["_map"];
 
 private _mapScale = ctrlMapScale _map;
 private _cache = [];
