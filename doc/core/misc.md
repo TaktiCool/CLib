@@ -437,12 +437,12 @@ Examples:
 ## CLib_fnc_textTile
 
 Parameter(s):
-* [`<String>`, `<Structured Text>`] Content <String(Path to Image), Stuctured Text>
-* [`<Array>`, `<Boolean>`] Position (Default: [0, 0, 1, 1])
-* [`<Number>`, `<Array>`] Size (Default: 10)
+* [`<String>`], [`<Structured Text>`] Content <String(Path to Image), Stuctured Text>
+* [`<Array>`], [`<Boolean>`] Position (Default: [0, 0, 1, 1])
+* [`<Number>`], [`<Array>`] Size (Default: 10)
 * [`<Number>`] Duration (Default: 5)
-* [`<Array>`, `<Number>`] Fade Times <Array, Number> (Default: [0.5, 0.5])
-* [`<Number>`] Max Alpha <Number> (Default: 0.3)
+* [`<Array>`], [`<Number>`] Fade Times (Default: [0.5, 0.5])
+* [`<Number>`] Max Alpha (Default: 0.3)
 
 Returns:
 * None
@@ -469,7 +469,7 @@ Parameter(s):
 * [`<Number>`] Number
 
 Returns:
-* [`<Type>`] Number in a String form
+* [`<String>`] Number in a String form
 
 Removes all Not needed 0 from toFixed numbers and returls only the max toFixed number count that is required.
 
