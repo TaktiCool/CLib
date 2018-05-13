@@ -302,10 +302,10 @@ TODO Example here
 
 Parameter(s):
 * [`<Object>`], [`<String>`] Target Kind
-* [`Array`] of [`String`] Possible Kinds
+* [`<Array>`] of [`<String>`] Possible Kinds
 
 Returns:
-* [`<Boolean>`] is Kind Of Input1
+* [`<Boolean>`] is Kind Of Target Kind
 
 is Kind Of Array
 
