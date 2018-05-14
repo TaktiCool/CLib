@@ -8,14 +8,19 @@
     Save Data for lnb Data
 
     Parameter(s):
-    0: Control or IDC from dialog <Number, Control>
-    1: Row and column <Array>
-    2: Data that will saved <Any>
+    0: Control from dialog <Control> (Default: controlNull)
+    1: Row and column <Array> (Default: [0, 0])
+    2: Data that will saved <Anything> (Default: [])
 
     Returns:
     None
 */
-params ["_control", "_rowAndColumn", "_data"];
+
+params [
+    ["_control", controlNull, [controlNull]],
+    ["_rowAndColumn", [0, 0], [[]], 2],
+    ["_data", [], []]
+];
 
 if (isNil QGVAR(index)) then {
     GVAR(index) = -1;
