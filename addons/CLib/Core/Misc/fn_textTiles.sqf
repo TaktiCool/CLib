@@ -65,10 +65,10 @@ private _xList = [0,1,2,3,4,5,6,7,8,9];
 private _yList = [0,1,2,3,4,5,6,7,8,9];
 _xList resize _sizeX;
 _yList resize _sizeY;
-private _gridsDef = [];
+private _grids = [];
 for "_x" from 0 to (_sizeX - 1) do {
     for "_y" from 0 to (_sizeY - 1) do {
-        _gridsDef pushBack [_x,_y];
+        _grids pushBack [_x,_y];
     };
 };
 
@@ -121,8 +121,7 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
     _groupContent ctrlSetFade 0;
     _groupContent ctrlCommit (random _fadeIn);
     nil
-} count _gridsDef;
-
+} count _grids;
 [{
     params ["_grids", "_contentIsStructuredText", "_sizeW", "_sizeH", "_posW", "_posH", "_fadeOut"];
     private _display = uiNamespace getVariable "RscTilesGroup";
@@ -144,4 +143,4 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
         _groupContent ctrlCommit (random _fadeOut);
         nil
     } count _grids;
-}, _fadeIn + _duration, [_gridsDef, _contentIsStructuredText, _sizeW, _sizeH, _posW, _posH, _fadeOut]] call CFUNC(wait);
+}, _fadeIn + _duration, [_grids, _contentIsStructuredText, _sizeW, _sizeH, _posW, _posH, _fadeOut]] call CFUNC(wait);

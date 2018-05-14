@@ -28,7 +28,7 @@ Parameter(s):
 * [`<String>`] Cache ID
 * [`<Code>`] Function whose return value gets cached
 * [`<Anything>`] Arguments
-* [`<Number>`] Time until the cached values are being obsolet
+* [`<Number>`] Time until the cached values are being obsolete
 * [`<String>`] Event that clears the cache
 
 Returns:
@@ -104,7 +104,7 @@ Parameter(s):
 Returns:
 * [`<Anything>`] Return of the Function
 
-Calls a funcion directly and changes the Environment to Unscheduled
+Calls a function directly and changes the Environment to Unscheduled
 
 Examples:
 
@@ -155,8 +155,8 @@ Parameter(s):
 Returns:
 * [`<Position>`] Save Position
 
-This function is a failsave wrapper function for findEmptyPosition.
-Finds a save postion for a unit. This function always returns a position.
+This function is a failsafe wrapper function for findEmptyPosition.
+Finds a save position for a unit. This function always returns a position.
 
 Examples:
 
@@ -172,7 +172,7 @@ Parameter(s):
 Returns:
 * None
 
-Attempt to fix floating physx with disabled damage after setPosXXX commands.
+Attempt to fix floating physix with disabled damage after setPosXXX commands.
 Handles the fixFloating event
 
 Examples:
@@ -206,7 +206,7 @@ Parameter(s):
 Returns:
 * [`<String>`] Path in a String from
 
-This function fixes an issue occuring when using str on a config without appending the complete file path
+This function fixes an issue occurring when using str on a config without appending the complete file path
 
 Examples:
 
@@ -220,7 +220,7 @@ Parameter(s):
 * None
 
 Returns:
-* [`<Number>`] Current FOV/Focal Lenth
+* [`<Number>`] Current FOV/Focal Length
 
 Calculate Current FOV and Zoom
 
@@ -285,7 +285,7 @@ private _allGroupPlayers = CLib_Player call CLib_fnc_groupPlayers;
 Parameter(s):
 * [`<Position>`] Seeker Object
 * [`<Position>`], [`<Object>`] Target Position or Object
-* [`<Number >`] Size of Target Position/Target
+* [`<Number>`] Size of Target Position/Target
 
 Returns:
 * [`<Boolean>`] In FOV
@@ -301,11 +301,11 @@ TODO Example here
 ## CLib_fnc_isKindOfArray
 
 Parameter(s):
-https://community.bistudio.com/wiki/isKindOf
-exept that 2nd Parameter is a Array with Multible Types/Checks Posible
+* [`<Object>`], [`<String>`] Target Kind
+* [`<Array>`] of [`<String>`] Possible Kinds
 
 Returns:
-* [`<Boolean>`] is Kind Of Input1
+* [`<Boolean>`] is Kind Of Target Kind
 
 is Kind Of Array
 
@@ -405,7 +405,7 @@ Parameter(s):
 * [`<Object>`] Object the variable should be assigned to
 * [`<String>`] Name of the variable
 * [`<Anything>`] Value of the variable
-* [`<Number>`] Embargo delay (Optional. Default: 1)
+* [`<Number>`] Embargo delay (Default: 1)
 
 Returns:
 * None
@@ -434,13 +434,42 @@ Examples:
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shuffleArray;
 ```
 
+## CLib_fnc_textTile
+
+Parameter(s):
+* [`<String>`], [`<Structured Text>`] Content
+* [`<Array>`], [`<Boolean>`] Position (Default: [0, 0, 1, 1])
+* [`<Number>`], [`<Array>`] Size (Default: 10)
+* [`<Number>`] Duration (Default: 5)
+* [`<Array>`], [`<Number>`] Fade Times (Default: [0.5, 0.5])
+* [`<Number>`] Max Alpha (Default: 0.3)
+
+Returns:
+* None
+
+Show animated text
+
+Examples:
+
+```sqf
+[
+    parseText "<img size='15' color='#ffffff' shadow='false' image='images\pawLogo.paa'/>",
+    [0.1,0.2,1,0.5],
+    [10,3],
+    3,
+    3,
+    0
+] call CLib_fnc_textTiles;
+
+```
+
 ## CLib_fnc_toFixedNumber
 
 Parameter(s):
 * [`<Number>`] Number
 
 Returns:
-* [`<Type>`] Number in a String form
+* [`<String>`] Number in a String form
 
 Removes all Not needed 0 from toFixed numbers and returls only the max toFixed number count that is required.
 
@@ -463,3 +492,4 @@ private _strNumber = (10/3) call CLib_fnc_toFixedNumber;
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
