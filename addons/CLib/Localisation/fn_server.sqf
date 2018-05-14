@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(Namepace) = true call CFUNC(createNamespace);
 GVAR(supportedLanguages) = [];
 
