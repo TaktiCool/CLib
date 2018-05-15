@@ -8,14 +8,18 @@
     Call for interaction system that gets called when the cursortarget changes
 
     Parameter(s):
-    0: Current cursor object <Object>
-    1: Previous cursor object <Object>
+    0: Current cursor object <Object> (Default: objNull)
+    1: Previous cursor object <Object> (Default: objNull)
 
     Returns:
     None
 */
 
-(_this select 0) params ["_target"];
+params [
+    ["_target", objNull, [objNull]],
+    ["", objNull, [objNull]]
+];
+
 if (isNull _target || !(simulationEnabled _target)) exitWith {};
 
 private _actionIDs = _target getVariable [QGVAR(ActionIDs), []];

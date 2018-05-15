@@ -8,12 +8,18 @@
     Add an action to an object or types of objects
 
     Parameter(s):
-    0: Title of the action <String, Code>
-    1: Object or type which the action should be added to <Object, Array, String>
-    2: Distance in which the action is visible <Number>
-    3: Condition which is evaluated on every frame if player is in range to determine if the action is visible <String, Code>
-    4: Callback which gets called when the action is activated <Code>
-    5: Optional named parameters <Array>
+    0: Title of the action <String, Code> (Default: "MISSING TITLE")
+    1: Object or type which the action should be added to <Object, Array, String> (Default: objNull)
+    2: Distance in which the action is visible <Number> (Default: 10)
+    3: Condition which is evaluated on every frame if player is in range to determine if the action is visible <String, Code> (Default: "true")
+    4: Callback which gets called when the action is activated <Code> (Default: {})
+    5: Optional named parameters <Array> (Default: [])
+
+    Returns:
+    None
+
+    Remarks:
+    Named parameters:
         "arguments": Arguments which get passed to the callback <Array> (Default: [])
         "priority": Priority of the action <Number> (Default: 1.5)
         "showWindow": Players see title text in mid screen <Bool> (Default: true)
@@ -21,15 +27,20 @@
         "shortcut": Key name to add binding for action <String> (Default: "")
         "radius": Distance in meters the unit activating the action must be within to activate it <Number> (Default: 15)
         "unconscious": Visible to incapacitated player <Bool> (Default: false)
-        "selection": named selection in Geometry LOD to which the action is attached (Default: "")
-        "memoryPoint": memory point on the object to which the action is attached. If parameter selection is supplied, parameter memoryPoint is not used. (Default: "")
-        "onActionAdded": Code which will be executed when action was added <Code>
+        "onActionAdded": Code which will be executed when action was added <Code> (Default: {})
         "ignoredCanInteractConditions": Interact conditions that will be ignored <Array> (Default: [])
-    Returns:
-    None
+        "selection": named selection in Geometry LOD to which the action is attached <String> (Default: "")
+        "memoryPoint": memory point on the object to which the action is attached. If parameter selection is supplied, parameter memoryPoint is not used <String> (Default: "")
 */
 
-params ["_text", "_target", "_distance", "_condition", "_callback", ["_dynamicArguments", []]];
+params [
+    ["_text", "MISSING TITLE", ["", {}]],
+    ["_target", objNull, [objNull, [], ""], []],
+    ["_distance", 10, [0]],
+    ["_condition", "true", ["", {}]],
+    ["_callback", {}, [{}]],
+    ["_dynamicArguments", [], [[]], []]
+];
 
 private _args = [];
 private _priority = 1.5;
@@ -87,7 +98,6 @@ private _argName = "";
     };
     nil
 } count _dynamicArguments;
-
 
 GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String

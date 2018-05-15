@@ -8,12 +8,17 @@
     Add a canInteractWith condition
 
     Parameter(s):
-    0: Type <String>
-    1: Conditions <Code>
+    0: Type <String> (Default: "")
+    1: Conditions <Code> (Default: {})
 
     Returns:
     None
 */
+
+params [
+    ["", "", [""]],
+    ["", {}, [{}]]
+];
 
 if (isNil QGVAR(canInteractWithTypes)) exitWith {
     GVAR(canInteractWithTypes) = [_this];

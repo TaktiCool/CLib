@@ -166,7 +166,7 @@ class CfgCLibModules {
             APIFNC(canInteractWith);
             FNC(clientInitCanInteractWith);
             FNC(clientInitInteraction);
-            APIFNC(holdActionCallback);
+            FNC(holdActionCallback);
             APIFNC(inRange);
             FNC(onCursorObjectChanged);
             APIFNC(overrideAction);
