@@ -37,3 +37,14 @@ if (hasInterface) then {
         };
     } count allVariables GVAR(allSettings);
 };
+
+#ifdef ISDEV
+{
+    if (_x select [0, 8] != "classes:" && _x select [0, 9] != "settings:") then {
+        private _var = GVAR(allSettings) getVariable _x;
+        _var params ["_value", "_force", "_isClient"];
+        private _t = format ["%1: %2,%3,%4", _x, _value, _force, _isClient];
+        LOG(_t);
+    };
+} count allVariables GVAR(allSettings);
+#endif
