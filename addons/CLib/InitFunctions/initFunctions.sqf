@@ -1,21 +1,35 @@
+#include "macros.hpp"
 /*
     Community Lib - CLib
 
     Author: joko // Jonas
 
     Original author: Karel Moricky, Killzone_Kid
-    a3\functions_f\initFunctions.sqf
+    a3/functions_f/initFunctions.sqf
 
     Description:
     Function library initialization.
 
     Parameter(s):
-    0: Function to compile with optional header type <String, Array>
+    0: Function to compile with optional header type <String, Number> (Default: 0)
 
     Returns:
     None
+
+    Remarks:
+    When parameter is string containing function name instead of number, only the function is recompiled.
+    0 - Autodetect what compile type should be used
+    1 - Forced recompile of all the things
+    2 - Create only uiNamespace variables (used in UI)
+    3 - Create missionNamespace variables and initialize mission
+    4 - Create only missionNamespace variables
+    5 - Recompile all functions, and initialize mission (used for editor preview with function recompile)
 */
-#define SCRIPTNAME(var) private _fnc_scriptName = var
+
+params [
+    ["_recompile", 0, ["", 0]]
+];
+
 if (isNil "BIS_fnc_MP_packet") then {BIS_fnc_MP_packet = compileFinal ""}; //--- is not used anymore and so it should not be used anymore
 
 //--- Fake header
@@ -56,9 +70,8 @@ private _headerNone = "";
 private _debugHeaderExtended = "";
 
 //--- Compose headers based on current debug mode
-private _debug = uiNamespace getVariable ["BIS_fnc_initFunctions_debugMode",0];
+private _debug = uiNamespace getVariable ["BIS_fnc_initFunctions_debugMode", 0];
 private _headerDefault = switch _debug do {
-
     //--- 0 - Debug mode off
     default {
         _headerNoDebug
@@ -75,12 +88,11 @@ private _headerDefault = switch _debug do {
     };
 };
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //--- Compile function
 private _fncCompile = {
-    private ["_fncExt","_header","_debugMessage"];
-    params  ["_fncVar","_fncMeta","_fncHeader", "_fncFinal"];
+    private ["_fncExt", "_header", "_debugMessage"];
+    params ["_fncVar", "_fncMeta", "_fncHeader", "_fncFinal"];
     _fncMeta params ["_fncPath", "_fncExt"];
 
     switch _fncExt do {
@@ -102,7 +114,7 @@ private _fncCompile = {
             };
 
             //--- Extend error report by including name of the function responsible
-            _debugHeaderExtended = format ["%4%1line 1 ""%2 [%3]""%4", "#", _fncPath, _fncVar, toString [13,10]];
+            _debugHeaderExtended = format ["%4%1line 1 ""%2 [%3]""%4", "#", _fncPath, _fncVar, toString [13, 10]];
             _debugMessage = "Log: [Functions]%1 | %2";
 
             if (_fncFinal) then {
@@ -121,11 +133,6 @@ private _fncCompile = {
     };
 };
 
-//--- Compile only selected
-if (isNil "_this") then {_this = [];};
-if !(_this isEqualType []) then {_this = [_this];};
-params [["_recompile", 0]];
-
 /******************************************************************************************************
     COMPILE ONE FUNCTION
 
@@ -139,30 +146,33 @@ params [["_recompile", 0]];
 ******************************************************************************************************/
 
 if (_recompile isEqualType "") exitwith {
-
     //--- Recompile specific function
     private _fnc_uiNamespace = true;
     private _fnc = uiNamespace getVariable _recompile;
-    if (isNil "_fnc") then {_fnc = missionNamespace getVariable _recompile; _fnc_uiNamespace = false;};
+    if (isNil "_fnc") then {
+        _fnc = missionNamespace getVariable _recompile;
+        _fnc_uiNamespace = false;
+    };
     if !(isNil "_fnc") then {
         private _fncMeta = _recompile call (uiNamespace getVariable "BIS_fnc_functionMeta");
         private _headerType = if (count _this > 1) then {_this select 1} else {0};
         private _var = [_recompile, [_recompile, _fncMeta, _headerType, false] call _fncCompile];
-        if (cheatsEnabled && {_fnc_uiNamespace}) then {uiNamespace setVariable _var;}; //--- Cannot recompile compileFinal functions in public version
+        if (cheatsEnabled && {_fnc_uiNamespace}) then {
+            uiNamespace setVariable _var; //--- Cannot recompile compileFinal functions in public version
+        };
         missionNamespace setVariable _var;
         if (isNil "_functions_listRecompile") then {
-            textLogFormat ["Log: [Functions]: %1 recompiled with meta %2",_recompile,_fncMeta];
+            textLogFormat ["Log: [Functions]: %1 recompiled with meta %2", _recompile, _fncMeta];
         };
     } else {
         private _fncError = uiNamespace getVariable "BIS_fnc_error";
         if !(isNil "_fncError") then {
-            ["%1 is not a function.",_recompile] call _fncError;
+            ["%1 is not a function.", _recompile] call _fncError;
         } else {
-            textLogFormat ["Log: [Functions]: ERROR: %1 is not a function.",_recompile];
+            textLogFormat ["Log: [Functions]: ERROR: %1 is not a function.", _recompile];
         };
     };
 };
-
 
 /******************************************************************************************************
     COMPILE EVERYTHING IN GIVEN NAMESPACE(S)
@@ -184,11 +194,11 @@ RscDisplayLoading_progressMission = nil;
 //--- Get existing lists (create new ones when they doesn't exist)
 
 private _functions_listPreStart = [];
-private _functions_list = call (uiNamespace getVariable ["BIS_functions_list",{[]}]);
-private _functions_listPreInit = [call (uiNamespace getVariable ["BIS_functions_listPreInit",{[]}]),[]];
-private _functions_listPostInit = [call (uiNamespace getVariable ["BIS_functions_listPostInit",{[]}]),[]];
+private _functions_list = call (uiNamespace getVariable ["BIS_functions_list", {[]}]);
+private _functions_listPreInit = [call (uiNamespace getVariable ["BIS_functions_listPreInit", {[]}]), []];
+private _functions_listPostInit = [call (uiNamespace getVariable ["BIS_functions_listPostInit", {[]}]), []];
 
-private _functions_listRecompile = call (uiNamespace getVariable ["BIS_functions_listRecompile",{[]}]);
+private _functions_listRecompile = call (uiNamespace getVariable ["BIS_functions_listRecompile", {[]}]);
 
 //--- When not forced, recompile only mission if uiNamespace functions exists
 if !(_recompile isEqualType 1) then {
@@ -196,44 +206,49 @@ if !(_recompile isEqualType 1) then {
 };
 
 //--- When autodetect, recognize what recompile type is required
-if (_recompile == 0 && !isNil {uiNamespace getVariable "BIS_fnc_init"}) then {_recompile = 3;};
-if (_recompile == 3 && !isNil {missionNamespace getVariable "BIS_fnc_init"}) then {_recompile = 4;};
-if (_recompile == 3 && !is3DEN && ("Preferences" get3DENMissionAttribute "RecompileFunctions")) then {_recompile = 5;};
+if (_recompile == 0 && !isNil {uiNamespace getVariable "BIS_fnc_init"}) then {
+    _recompile = 3;
+};
+if (_recompile == 3 && !isNil {missionNamespace getVariable "BIS_fnc_init"}) then {
+    _recompile = 4;
+};
+if (_recompile == 3 && !is3DEN && ("Preferences" get3DENMissionAttribute "RecompileFunctions")) then {
+    _recompile = 5;
+};
 
 private _file = getText (configfile >> "cfgFunctions" >> "file");
 private _cfgSettings = [
-    [    configfile,        _file,        0    ],    //--- 0
-    [    campaignconfigfile,    "functions",    1    ],    //--- 1
-    [    missionconfigfile,    "functions",    1    ]    //--- 2
+    [configfile, _file, 0], //--- 0
+    [campaignconfigfile, "functions", 1], //--- 1
+    [missionconfigfile, "functions", 1] //--- 2
 ];
 
 private _listConfigs = switch _recompile do {
     case 0: {
-        [0,1,2];
+        [0, 1, 2];
     };
     case 5;
     case 1: {
         _functions_list = [];
-        uiNamespace setVariable ["BIS_functions_list",_functions_list];
-        _functions_listPreInit = [[],[]];
-        uiNamespace setVariable ["BIS_functions_listPreInit",_functions_listPreInit];
-        _functions_listPostInit = [[],[]];
-        uiNamespace setVariable ["BIS_functions_listPostInit",_functions_listPostInit];
+        uiNamespace setVariable ["BIS_functions_list", _functions_list];
+        _functions_listPreInit = [[], []];
+        uiNamespace setVariable ["BIS_functions_listPreInit", _functions_listPreInit];
+        _functions_listPostInit = [[], []];
+        uiNamespace setVariable ["BIS_functions_listPostInit", _functions_listPostInit];
         _functions_listRecompile = [];
-        uiNamespace setVariable ["BIS_functions_listRecompile",_functions_listRecompile];
-        [0,1,2];
+        uiNamespace setVariable ["BIS_functions_listRecompile", _functions_listRecompile];
+        [0, 1, 2];
     };
     case 2: {
         [0];
     };
     case 3: {
-        [1,2];
+        [1, 2];
     };
     case 4: {
-        [1,2];
+        [1, 2];
     };
 };
-
 
 /******************************************************************************************************
     SCAN CFGFUNCTIONS
@@ -255,13 +270,8 @@ private _listConfigs = switch _recompile do {
 ******************************************************************************************************/
 
 //--- Allow recompile in dev version, in the editor and when description.ext contains 'allowFunctionsRecompile = 1;'
-private _compileFinal =
-//--- Dev version
-!cheatsEnabled
-//--- Editor mission
- && ((uiNamespace getVariable ["gui_displays",[]]) find (finddisplay 26) != 1)
-//--- Manual toggle
- && getNumber (missionconfigfile >> "allowFunctionsRecompile") == 0;
+//---                     Dev version                                  Editor mission                                                       Manual toggle
+private _compileFinal = !cheatsEnabled && ((uiNamespace getVariable ["gui_displays", []]) find (finddisplay 26) != 1) && getNumber (missionconfigfile >> "allowFunctionsRecompile") == 0;
 
 {
     private _cfg = _cfgSettings select _x;
@@ -271,7 +281,7 @@ private _compileFinal =
         private _currentTag = _x;
         //--- Is Tag
         //--- Check of all required patches are in CfgPatches
-        private ["_requiredAddons","_requiredAddonsMet"];
+        private ["_requiredAddons", "_requiredAddonsMet"];
         private _requiredAddons = getArray (_currentTag >> "requiredAddons");
         _requiredAddonsMet = true;
         {
@@ -281,7 +291,6 @@ private _compileFinal =
         } count _requiredAddons;
 
         if (_requiredAddonsMet) then {
-
             //--- Initialize tag
             private _tag = configName _currentTag;
             private _tagName = getText (_currentTag >> "tag");
@@ -318,7 +327,9 @@ private _compileFinal =
                                 //--- Disable rewriting of global BIS functions from outside (ToDo: Make it dynamic, so anyone can protect their functions)
                                 private _itemPathItemA3 = (tolower _itemPathItem) find "a3";
                                 private _itemPathSlash = (tolower _itemPathItem) find "\";
-                                if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {_itemPathItem = "";};
+                                if ((_itemPathItemA3 < 0 || _itemPathItemA3 > 1) && _itemPathSlash > 0) then {
+                                    _itemPathItem = "";
+                                };
                             };
                             _itemPathItem
                         } else {
@@ -334,7 +345,7 @@ private _compileFinal =
                         //--- Compile function
                         if (_itemPath == "") then {_itemPath = _pathFile + "\" + _categoryName + "\fn_" + _itemName + _itemExt};
                         private _itemVar = _tagName + "_fnc_" + _itemName;
-                        private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile> 0, _tag, _categoryName, _itemName, _itemUnscheudled> 0];
+                        private _itemMeta = [_itemPath, _itemExt, _itemHeader, _itemPreInit > 0, _itemPostInit > 0, _itemRecompile > 0, _tag, _categoryName, _itemName, _itemUnscheudled > 0];
                         private _itemCompile = if (_itemCheatsEnabled == 0 || (_itemCheatsEnabled > 0 && cheatsEnabled)) then {
                             [_itemVar, _itemMeta, _itemHeader, _compileFinal] call _fncCompile;
                         } else {
@@ -390,7 +401,7 @@ private _compileFinal =
                                     private _errorFnc = uiNamespace getVariable "BIS_fnc_error";
                                     private _errorText = "%1 is a mission / campaign function and cannot contain 'preStart = 1;' param";
                                     if (isNil "_errorFnc") then {
-                                        diag_log format ["Log: [Functions]: " + _errorText,_itemVar];
+                                        diag_log format ["Log: [Functions]: " + _errorText, _itemVar];
                                     } else {
                                         [_errorText, _itemVar] call _errorFnc;
                                     };
@@ -406,10 +417,10 @@ private _compileFinal =
                                 } else {
                                     private _errorFnc = uiNamespace getVariable "BIS_fnc_error";
                                     private _errorText = "Redundant use of 'recompile = 1;' in %1 - mission / campaign functions are recompiled on start by default.";
-                                    if (isNil "_errorFnc") then  {
-                                        diag_log format ["Log: [Functions]: " + _errorText,_itemVar];
+                                    if (isNil "_errorFnc") then {
+                                        diag_log format ["Log: [Functions]: " + _errorText, _itemVar];
                                     } else {
-                                        [_errorText,_itemVar] call _errorFnc;
+                                        [_errorText, _itemVar] call _errorFnc;
                                     };
                                 };
                             };
@@ -458,7 +469,7 @@ if (isNil {uiNamespace getVariable "BIS_functions_list"} || {cheatsEnabled}) the
 ******************************************************************************************************/
 
 //--- Not core
-if (_recompile in [0,1,3,4,5]) then {
+if (_recompile in [0, 1, 3, 4, 5]) then {
     {
         private _allowRecompile = (_x call (uiNamespace getVariable "BIS_fnc_functionMeta")) select 5;
 
@@ -476,7 +487,7 @@ if (_recompile == 2) then {
     //--- Call preStart functions
     if (isnull (finddisplay 0)) then {
         {
-            ["preStart %1",_x] call BIS_fnc_logFormat;
+            ["preStart %1", _x] call BIS_fnc_logFormat;
             private _function = [] call (uiNamespace getVariable _x);
             uiNamespace setVariable [_x + "_preStart", _function];
             nil;
@@ -485,8 +496,7 @@ if (_recompile == 2) then {
 };
 
 //--- Mission only
-if (_recompile in [3,5]) then {
-
+if (_recompile in [3, 5]) then {
     //--- Switch to mission loading bar
     RscDisplayLoading_progressMission = true;
 
@@ -494,12 +504,12 @@ if (_recompile in [3,5]) then {
     [] call BIS_fnc_preload;
 
     //--- Create functions logic (cannot be created when game is launching; server only)
-    if (isServer && isNull (missionNamespace getVariable ["BIS_functions_mainscope",objnull]) && !isNil {uiNamespace getVariable "BIS_fnc_init"} && worldname != "") then {
+    if (isServer && isNull (missionNamespace getVariable ["BIS_functions_mainscope", objnull]) && !isNil {uiNamespace getVariable "BIS_fnc_init"} && worldname != "") then {
         private ["_grpLogic"];
         createcenter sidelogic;
         _grpLogic = creategroup sidelogic;
-        BIS_functions_mainscope = _grpLogic createunit ["Logic",[9,9,9],[],0,"none"];
-        BIS_functions_mainscope setVariable ["isDedicated",isDedicated,true];
+        BIS_functions_mainscope = _grpLogic createunit ["Logic", [9, 9, 9], [], 0, "none"];
+        BIS_functions_mainscope setVariable ["isDedicated", isDedicated, true];
 
         //--- Support for netId in SP (used in BIS_fnc_netId, BIS_fnc_objectFromNetId, BIS_fnc_groupFromNetId)
         //--- Format [netId1,grpOrObj1,netId2,grpOrObj2,...]
@@ -511,8 +521,10 @@ if (_recompile in [3,5]) then {
 
     if (!isNil "BIS_functions_mainscope") then {
         private ["_test", "_test2"];
-        _test = BIS_functions_mainscope setPos (position BIS_functions_mainscope); if (isNil "_test") then {_test = false};
-        _test2 = BIS_functions_mainscope playMove ""; if (isNil "_test2") then {_test2 = false};
+        _test = BIS_functions_mainscope setPos (position BIS_functions_mainscope);
+        if (isNil "_test") then {_test = false};
+        _test2 = BIS_functions_mainscope playMove "";
+        if (isNil "_test2") then {_test2 = false};
         if (_test || _test2) then {0 call (compile (preprocessFileLineNumbers "a3\functions_f\misc\fn_initCounter.sqf"))};
     };
 
@@ -520,7 +532,7 @@ if (_recompile in [3,5]) then {
     if (!is3DEN) then {
         _fnc_scriptname = "recompile";
         {
-            ["recompile %1",_x] call BIS_fnc_logFormat;
+            ["recompile %1", _x] call BIS_fnc_logFormat;
             _x call BIS_fnc_recompile;
             nil;
         } count _functions_listRecompile;
@@ -531,10 +543,10 @@ if (_recompile in [3,5]) then {
             {
                 private _time = diag_tickTime;
                 _x call {
-                    private ["_recompile","_functions_list","_functions_listPreInit","_functions_listPostInit","_functions_listRecompile","_time"];
+                    private ["_recompile", "_functions_list", "_functions_listPreInit", "_functions_listPostInit", "_functions_listRecompile", "_time"];
                     ["preInit"] call (missionNamespace getVariable _this)
                 };
-                ["%1 (%2 ms)",_x,(diag_tickTime - _time) * 1000] call BIS_fnc_logFormat;
+                ["%1 (%2 ms)", _x, (diag_tickTime - _time) * 1000] call BIS_fnc_logFormat;
                 nil;
             } count _x;
             nil;
@@ -543,11 +555,11 @@ if (_recompile in [3,5]) then {
 
     //--- Call postInit functions once player is present
     _functions_listPostInit spawn {
-        SCRIPTNAME("script");
+        private _fnc_scriptName = "script";
         0.15 call BIS_fnc_progressloadingscreen;
 
         //--- Wait until server is initialized (to avoid running scripts before the server)
-        waitUntil {call (missionNamespace getVariable ["BIS_fnc_preload_server",{isServer}]) || getClientState == "LOGGED IN"};
+        waitUntil {call (missionNamespace getVariable ["BIS_fnc_preload_server", {isServer}]) || getClientState == "LOGGED IN"};
         if (getClientState == "LOGGED IN") exitwith {}; //--- Server lost
         0.30 call BIS_fnc_progressloadingscreen;
 
@@ -558,7 +570,10 @@ if (_recompile in [3,5]) then {
 
             ["BIS_fnc_initFunctions"] call BIS_fnc_startLoadingScreen;
         };
-        if (isNil "BIS_functions_mainscope") exitwith {endLoadingScreen; ["[x] Error while loading the mission!"] call BIS_fnc_errorMsg;}; //--- Error while loading
+        if (isNil "BIS_functions_mainscope") exitwith {
+            endLoadingScreen;
+            ["[x] Error while loading the mission!"] call BIS_fnc_errorMsg;
+        }; //--- Error while loading
         BIS_functions_mainscope setVariable ["didJIP", didJIP];
         0.45 call BIS_fnc_progressloadingscreen;
 
@@ -579,15 +594,15 @@ if (_recompile in [3,5]) then {
 
             //--- Run mission scripts
             if !(isDedicated) then {
-                [player,didJIP] execVM "initPlayerLocal.sqf";
-                [[[player,didJIP],"initPlayerServer.sqf"],"BIS_fnc_execVM",false,false] call BIS_fnc_mp;
+                [player, didJIP] execVM "initPlayerLocal.sqf";
+                [[[player, didJIP], "initPlayerServer.sqf"], "BIS_fnc_execVM", false, false] call BIS_fnc_mp;
                 "initPlayerLocal.sqf" call BIS_fnc_logFormat;
                 "initPlayerServer.sqf" call BIS_fnc_logFormat;
             };
             0.90 call BIS_fnc_progressloadingscreen;
 
             //--- Call postInit functions
-            SCRIPTNAME("postInit");
+            private _fnc_scriptName = "postInit";
             {
                 {
                     private _time = diag_tickTime;
@@ -603,7 +618,7 @@ if (_recompile in [3,5]) then {
                             ["postInit", _didJip] call (missionNamespace getVariable _data);
                         };
                     };
-                    ["%1 (%2 ms)",_x,(diag_tickTime - _time) * 1000] call BIS_fnc_logFormat;
+                    ["%1 (%2 ms)", _x, (diag_tickTime - _time) * 1000] call BIS_fnc_logFormat;
                     nil;
                 } count _x;
                 nil;
@@ -612,35 +627,31 @@ if (_recompile in [3,5]) then {
         };
 
         //--- MissionNamespace init
-        missionNamespace setVariable ["BIS_fnc_init",true];
+        missionNamespace setVariable ["BIS_fnc_init", true];
 
-        if !(isServer) then
-        {
+        if !(isServer) then {
             ["BIS_fnc_initFunctions"] call BIS_fnc_endLoadingScreen;
         };
     };
 };
 
 //--- Not mission
-if (_recompile in [0,1,2]) then {
-
+if (_recompile in [0, 1, 2]) then {
     //--- UInameSpace init
-    uiNamespace setVariable ["BIS_fnc_init",true]
+    uiNamespace setVariable ["BIS_fnc_init", true]
 };
 
 //--- Only mission variables
 if (_recompile in [4]) then {
-
     //--- MissionNameSpace init
-    missionNamespace setVariable ["BIS_fnc_init",true];
+    missionNamespace setVariable ["BIS_fnc_init", true];
 };
 
 //--- Only mission variables
-if (_recompile in [1,5]) then {
+if (_recompile in [1, 5]) then {
     _fnc_scriptname = "initFunctions";
     "Functions recompiled" call BIS_fnc_log;
 };
-
 
 //--- Log the info about selected recompile type
 /*

@@ -13,10 +13,10 @@
     Returns:
     None
 */
+
 RUNTIMESTART;
 private _initFunctionsArgs = _this;
 isNil {
-    _initFunctionsArgs call compile preprocessFileLineNumbers (["tc\CLib\addons\CLib\InitFunctions\initFunctions.sqf","a3\functions_f\initfunctions.sqf"] select (getNumber (configFile >> "cfgFunctions" >> "version") == 3));
+    _initFunctionsArgs call compile preprocessFileLineNumbers (["tc\CLib\addons\CLib\InitFunctions\initFunctions.sqf", "a3\functions_f\initfunctions.sqf"] select (getNumber (configFile >> "cfgFunctions" >> "version") == 3));
 };
-
 RUNTIME("InitCompile");
