@@ -5,11 +5,10 @@
     Author: joko // Jonas
 
     Description:
-    Load and Assign loadout to Unit
+    Load loadout to Unit
 
     Parameter(s):
-    0: Unit that get the Loadout <Unit>
-    1: Classname what Loadout the unit will get <String>
+    0: Classname what Loadout the unit will get <String>
 
     Returns:
     None

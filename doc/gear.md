@@ -1,6 +1,6 @@
 # Events
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: joko // Jonas, Badguy
 
 TODO text here
 

@@ -1,6 +1,6 @@
 # Compression
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: joko // Jonas, NetFusion, Badguy
 
 Compression is a Module that is responsible for the ability to Compress and Decompress String to reduce Network traffic.
 

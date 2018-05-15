@@ -1,6 +1,6 @@
 # Mission Module Loader
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: joko // Jonas
 
 The Mission Module Loader is a Module where you are able to use a CLib Entry Point from the mission side.
 

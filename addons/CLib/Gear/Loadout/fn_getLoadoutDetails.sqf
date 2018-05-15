@@ -13,10 +13,11 @@
         0: Requested Detail
             0: Requested Data <String>
             1: Default if Data not exist <any>
+
     Returns:
     Array With all Informations <Array>
 */
-params [["_name", "", ["", configNull]], ["_request", [], [[], ""]]];
+params [["_name", "", ["", configNull]], ["_request", [], [[]]]];
 
 private _loadout = _name call CFUNC(loadLoadout);
 _request apply {

@@ -22,7 +22,7 @@ if (isNil QGVAR(loadoutsLoaded)) exitWith {
     }, _this] call CFUNC(waitUntil);
 };
 
-params [["_unit", player, [objNull]], ["_class", "", ["", []]], ["_allowRandom", true, [true]]];
+params [["_unit", player, [objNull]], ["_class", "", ["", configNull]], ["_allowRandom", true, [true]]];
 private _loadoutArray = _class call CFUNC(loadLoadout);
 
 private _loadout = _loadoutArray select 0;
@@ -34,19 +34,24 @@ private _fnc_do = {
     private _i = _loadout find toLower _find;
     if (_i != -1) then {
         private _item = _loadout select (_i + 1);
-        if (_isRandom) then {
-            if (_allowRandom) then {
+        switch (true) do {
+            case (_isRandom && _allowRandom): {
                 _item = selectRandom _item;
                 if (isNil "_item") exitWith {};
                 _item call _do;
-            } else {
+            };
+            case (_isRandom && !_allowRandom): {
+                _item = _item select 0;
+                if (isNil "_item") exitWith {};
+                _item call _do;
+            };
+            default {
                 {
                     _x call _do;
                     nil
                 } count _item;
             };
         };
-
     };
 };
 
