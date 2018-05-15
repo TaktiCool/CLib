@@ -1,6 +1,6 @@
 # RemoteExecution
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: joko // Jonas
 
 TODO text here
 

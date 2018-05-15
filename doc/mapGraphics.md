@@ -1,4 +1,4 @@
-# MapGraphics
+# Map Graphics
 
 > Maintainer: BadGuy
 

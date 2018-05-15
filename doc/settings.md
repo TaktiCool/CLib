@@ -1,6 +1,6 @@
 # Settings
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: BadGuy, joko // Jonas
 
 TODO text here
 

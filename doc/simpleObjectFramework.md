@@ -1,6 +1,6 @@
 # SimpleObjectFramework
 
-> Maintainer: joko // Jonas, NetFusion
+> Maintainer: joko // Jonas, BadGuy
 
 TODO text here
 

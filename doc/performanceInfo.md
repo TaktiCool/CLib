@@ -1,5 +1,5 @@
 # Performance Info
 
-> Maintainer: NetFuison
+> Maintainer: NetFuison, joko // Jonas
 
 TODO text here

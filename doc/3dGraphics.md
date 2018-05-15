@@ -1,4 +1,4 @@
-# 3dGraphics
+# 3D Graphics
 
 > Maintainer: BadGuy
 
