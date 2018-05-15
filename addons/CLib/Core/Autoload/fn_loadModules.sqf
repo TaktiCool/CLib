@@ -18,6 +18,8 @@
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
 diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
+diag_log text format ["[CLib]: isServer: %1 isDedicated: %2 hasInterface: %3 isMultiplayer: %4 isMultiplayerSolo: %5", isServer, isDedicated, hasInterface, isMultiplayer, isMultiplayerSolo];
+diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2", CGVAR(useCompression), CGVAR(useRemoteFallback)];
 
 0 spawn {
     if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
