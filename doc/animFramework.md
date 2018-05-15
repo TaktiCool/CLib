@@ -1,4 +1,4 @@
-# AnimFramework
+# Animation Framework
 
 > Maintainer: joko // Jonas
 

@@ -1,4 +1,4 @@
-# lnbData
+# lnb Data
 
 > Maintainer: joko // Jonas
 

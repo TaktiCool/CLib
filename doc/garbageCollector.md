@@ -1,4 +1,4 @@
-# GarbageCollector
+# Garbage Collector
 
 > Maintainer: joko // Jonas
 

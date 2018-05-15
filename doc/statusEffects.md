@@ -1,4 +1,4 @@
-# StatusEffects
+# Status Effects
 
 > Maintainer: BadGuy
 

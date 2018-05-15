@@ -1,4 +1,4 @@
-# PerFrame
+# Per Frame
 
 > Maintainer: joko // Jonas
 

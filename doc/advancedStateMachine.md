@@ -1,4 +1,4 @@
-# AdvancedStateMachine
+# Advanced Statemachine
 
 > Maintainer: BadGuy
 

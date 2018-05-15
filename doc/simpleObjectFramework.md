@@ -1,4 +1,4 @@
-# SimpleObjectFramework
+# Simple Object Framework
 
 > Maintainer: joko // Jonas, BadGuy
 

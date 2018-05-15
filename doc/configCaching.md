@@ -1,4 +1,4 @@
-# ConfigCaching
+# Config Caching
 
 > Maintainer: joko // Jonas
 
