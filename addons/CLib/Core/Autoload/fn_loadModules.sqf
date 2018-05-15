@@ -18,6 +18,8 @@
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
 diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
+diag_log text format ["[CLib]: isServer: %1 isDedicated: %2 hasInterface: %3 isMultiplayer: %4 isMultiplayerSolo: %5", isServer, isDedicated, hasInterface, isMultiplayer, isMultiplayerSolo];
+diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2 useExperimentalAutoload: %3", CGVAR(useCompression), CGVAR(useRemoteFallback), CGVAR(useExperimentalAutoload)];
 
 0 spawn {
     if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
@@ -63,10 +65,12 @@ if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
 if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
     if (!isServer) exitWith {
-        diag_log text "CLib is a server mod - do not load it on a client";
-        endLoadingScreen;
+        diag_log text "------------------------- CRITICAL ERROR -------------------------";
+        diag_log text "CRITICAL ERROR: CLib is a server mod - do not load it on a client!";
+
         disableUserInput false;
-        endMission "LOSER";
+
+        compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.sqf"; // Crashes Client to Desktop
     };
 
     if (!(isNil "_this") && {!(_this isEqualTo [])}) then {

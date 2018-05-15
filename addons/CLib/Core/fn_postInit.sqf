@@ -14,7 +14,7 @@
     None
 */
 
-if ((getNumber (missionConfigFile >> (QPREFIX + "_useExperimentalAutoload"))) isEqualTo 1) then {
+if (CGVAR(useExperimentalAutoload)) then {
     addMissionEventHandler ["PlayerConnected", {
         params ["", "", "", "", "_owner"];
         [] remoteExec [QCFUNC(loadModules), _owner];

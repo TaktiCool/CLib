@@ -19,9 +19,11 @@
 if (isServer) then {
     CGVAR(useRemoteFallback) = getNumber (missionConfigFile >> QPREFIX >> "useFallbackRemoteExecution") isEqualTo 1;
     CGVAR(useCompression) = getNumber (missionConfigFile >> QPREFIX >> "useCompression") isEqualTo 1;
+    CGVAR(useExperimentalAutoload) = (getNumber (missionConfigFile >> QPREFIX >> "useExperimentalAutoload")) isEqualTo 1;
 
     publicVariable QCGVAR(useCompression);
     publicVariable QCGVAR(useRemoteFallback);
+    publicVariable QCGVAR(useExperimentalAutoload);
 
     publicVariable QCFUNC(decompressString);
     publicVariable QCFUNC(loadModules);
