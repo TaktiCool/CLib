@@ -270,7 +270,7 @@ class CfgCLibModules {
             APIFNCSERVER(exportSimpleObjectComp);
         };
 
-        MODULE(Statemachine) {
+        MODULE(StateMachine) {
             dependency[] = {"CLib/Events"};
             APIFNC(addStatemachineState);
             APIFNC(copyStatemachine);
