@@ -14,12 +14,6 @@
     Returns:
     None
 */
-
-params [
-    ["", "", [""]],
-    ["", {}, [{}]]
-];
-
 if (isNil QGVAR(canInteractWithTypes)) exitWith {
     GVAR(canInteractWithTypes) = [_this];
 };

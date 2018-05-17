@@ -16,8 +16,7 @@
 */
 
 params [
-    ["_target", objNull, [objNull]],
-    ["", objNull, [objNull]]
+    ["_target", objNull, [objNull]]
 ];
 
 if (isNull _target || !(simulationEnabled _target)) exitWith {};
