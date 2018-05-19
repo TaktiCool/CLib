@@ -15,12 +15,13 @@
     None
 */
 params [["_code", {}, [{}]], ["_arguments", nil, []]];
+isNil {
+    if (CGVAR(loadingIsFinished)) exitWith {
+        _arguments call _code;
+    };
 
-if (CGVAR(loadingIsFinished)) exitWith {
-    _arguments call _code;
+    if (isNil QCGVAR(entryPointQueue)) then {
+        CGVAR(entryPointQueue) = [];
+    };
+    CGVAR(entryPointQueue) pushBack [_code, _arguments];
 };
-
-if (isNil QCGVAR(entryPointQueue)) then {
-    CGVAR(entryPointQueue) = [];
-};
-CGVAR(entryPointQueue) pushBack [_code, _arguments];
