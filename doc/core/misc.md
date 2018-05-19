@@ -383,6 +383,23 @@ Examples:
 CLib_Player call CLib_fnc_name;
 ```
 
+## CLib_fnc_registerEntryPoint
+
+Parameter(s):
+* [`<Code>`] Code To Execute when CLib is Loaded
+* [`<Anything>`] Arguments that get passed to Code
+
+Returns:
+* None
+
+Function that allows to execute code from the mission direct without using Mission Modules.
+
+Examples:
+
+```sqf
+[{}, "Arguments"] call CLib_fnc_registerEntryPoint;
+```
+
 ## CLib_fnc_sanitizeString
 
 Parameter(s):
