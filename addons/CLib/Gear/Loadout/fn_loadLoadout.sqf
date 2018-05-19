@@ -1,4 +1,4 @@
-#include "macros.hpp"
+_key#include "macros.hpp"
 /*
     Community Lib - CLib
 
@@ -35,29 +35,27 @@ if (_cfg isEqualType "") then {
 };
 if (!isClass _cfg) exitWith {};
 
-private _loadout = [];
-private _loadoutVars = [];
+private _loadout = call CFUNC(createHash);
+private _loadoutVars = call CFUNC(createHash);
 
 private _fnc_assignValue = {
-    params ["_name", "_value"];
-    _name = toLower _name;
-    if (_name in GVAR(defaultLoadoutValues)) then {
-        if (_name in _loadout) then {
-            private _i = _loadout find _name;
-            private _v2 = _loadout select (_i + 1);
-            _value append _v2;
-            _loadout set [_i + 1, _value];
+    params ["_key", "_value"];
+    _key = toLower _key;
+    if (_key in GVAR(defaultLoadoutValues)) then {
+        if ([_loadout, _key] call CFUNC(containsKey)) then {
+            private _data = [_loadout, _key] call CFUNC(getHash);
+            _data append _value;
+            [_loadout, _key, _data] call CFUNC(setHash);
         } else {
-            _loadout append [_name, _value];
+            [_loadout, _key, _value] call CFUNC(setHash);
         };
     } else {
-        if (_name in _loadoutVars) then {
-            private _i = _loadoutVars find _name;
-            private _v2 = _loadoutVars select (_i + 1);
-            _value append _v2;
-            _loadoutVars set [_i + 1, _value];
+        if ([_loadoutVars, _key] call CFUNC(containsKey)) then {
+            private _data = [_loadoutVars, _key] call CFUNC(getHash);
+            _data append _value;
+            [_loadoutVars, _key, _data] call CFUNC(setHash);
         } else {
-            _loadoutVars append [_name, _value];
+            [_loadoutVars, _key, _value] call CFUNC(setHash);
         };
     };
 };
@@ -84,12 +82,12 @@ private _fnc_readData = {
 private _fnc_readClass = {
     params ["_config"];
     {
-        _x call ([_fnc_readData, _fnc_readClass] select isClass _x);
+        _x call ([_fnc_readData, _fnc_readClass] select (isClass _x));
         nil
     } count configProperties [_config, "true", true];
 };
 
 _cfg call _fnc_readClass;
-private _return = [_loadout, _loadoutVars];
+private _return = [_loadoutVars, _loadout];
 [GVAR(loadoutsNamespace), _varName, _return, QGVAR(allLoadouts)] call CFUNC(setVariable);
 _return
