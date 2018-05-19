@@ -17,7 +17,6 @@
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
 */
-DUMP("MapGraphicsPosition Input: " + str _this);
 params [
     ["_position", objNull, [[], objNull], [2,3]],
     ["_map", controlNull, [controlNull]]
