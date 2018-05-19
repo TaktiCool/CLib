@@ -95,6 +95,7 @@ class CfgCLibModules {
                 APIFNC(modLoaded);
                 APIFNC(moduleLoaded);
                 APIFNC(name);
+                APIFNC(registerEntryPoint);
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
                 APIFNC(setVariablePublic);

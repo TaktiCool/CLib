@@ -39,6 +39,8 @@ diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2
         false
     };
 };
+
+CGVAR(loadingIsFinished) = false;
 GVAR(loadingCanceled) = false;
 // The client waits for the player to be available. This makes sure the player variable is initialized in every script later.
 if (hasInterface) then {

@@ -100,6 +100,11 @@ private _thread = 0 spawn {
         GVAR(AutoLoad_loadingScreenDone) = true;
         disableUserInput false;
         terminate _this;
+        CGVAR(loadingIsFinished) = true;
+        {
+            (_x select 1) call (_this select 0);
+            nil
+        } count CGVAR(entryPointQueue);
     }, _this select 1] call CFUNC(execNextFrame);
 
 }, [_postInit, _thread]] call CFUNC(execNextFrame);
