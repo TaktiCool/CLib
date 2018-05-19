@@ -151,6 +151,7 @@ class CfgCLibModules {
         MODULE(Hashes) {
             APIFNC(containsKey);
             APIFNC(containsValue);
+            APIFNC(countHash);
             APIFNC(createHash);
             APIFNC(forEachHash);
             APIFNC(getHash);
