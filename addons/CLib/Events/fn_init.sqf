@@ -35,6 +35,20 @@ GVAR(ignoredLogEventNames_1) = [];
 ["eventAdded", {
     params ["_arguments"];
     _arguments params ["_event", "_function", "_args"];
+
+    if (_event isEqualTo "entityCreated") exitWith {
+        if !(isNil QGVAR(entitiesCached) && {GVAR(entitiesCached) isEqualTo []}) then {
+            GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
+            if (_function isEqualType "") then {
+                _function = parsingNamespace getVariable [_function, {}];
+            };
+            {
+                [_x, _args] call _function;
+                nil
+            } count GVAR(entitiesCached);
+        };
+    };
+
     if (!(isNil QGVAR(missionStartedTriggered)) && {_event isEqualTo "missionStarted"}) then {
         LOG("Mission Started Event get Added After Mission Started");
         if (_function isEqualType "") then {
@@ -242,7 +256,7 @@ GVAR(ignoredLogEventNames_1) = [];
 // Entity Created Events
 ["missionStarted", {
     GVAR(missionStartedTriggered) = true;
-#define REFILL_TIMINGS 15
+    #define REFILL_TIMINGS 15
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
     DFUNC(entityCreated) = {
@@ -250,6 +264,7 @@ GVAR(ignoredLogEventNames_1) = [];
         if !(_obj getVariable [QGVAR(isProcessed), false] || [_obj, ["Animal", "Logic"]] call CFUNC(isKindOfArray) || (typeOf _obj) isEqualTo "") then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
+            GVAR(entitiesCached) pushBackUnique _obj;
         };
     };
 
@@ -278,7 +293,6 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "applyNewEntitieVariables", {
         GVAR(lastFilledEntities) = diag_frameNo + REFILL_TIMINGS;
-        GVAR(entitiesCached) append GVAR(entitieQueue);
         GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
         ["checkObject", "wait"] select (GVAR(entitieQueue) isEqualTo []);
     }] call CFUNC(addStatemachineState);
