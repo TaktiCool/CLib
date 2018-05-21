@@ -25,32 +25,30 @@ if (isNil QGVAR(loadoutsLoaded)) exitWith {
 params [["_unit", player, [objNull]], ["_class", "", ["", configNull]], ["_allowRandom", true, [true]]];
 private _loadoutArray = _class call CFUNC(loadLoadout);
 
-private _loadout = _loadoutArray select 0;
-private _loadoutVars = _loadoutArray select 1;
+private _loadout = _loadoutArray select 1;
+private _loadoutVars = _loadoutArray select 0;
 
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _i = _loadout find toLower _find;
-    if (_i != -1) then {
-        private _item = _loadout select (_i + 1);
-        switch (true) do {
-            case (_isRandom && _allowRandom): {
-                _item = selectRandom _item;
-                if (isNil "_item") exitWith {};
-                _item call _do;
-            };
-            case (_isRandom && !_allowRandom): {
-                _item = _item select 0;
-                if (isNil "_item") exitWith {};
-                _item call _do;
-            };
-            default {
-                {
-                    _x call _do;
-                    nil
-                } count _item;
-            };
+    private _item = [_loadout, _find, nil] call CFUNC(getHash);
+    if (isNil "_item") exitWith {};
+    switch (true) do {
+        case (_isRandom && _allowRandom): {
+            _item = selectRandom _item;
+            if (isNil "_item") exitWith {};
+            _item call _do;
+        };
+        case (_isRandom && !_allowRandom): {
+            _item = _item select 0;
+            if (isNil "_item") exitWith {};
+            _item call _do;
+        };
+        default {
+            {
+                _x call _do;
+                nil
+            } count _item;
         };
     };
 };
@@ -219,11 +217,7 @@ private _fnc_do = {
     } count _this;
 }, false] call _fnc_do;
 
-if !(_loadoutVars isEqualTo []) then {
-    for "_i" from 0 to (count _loadoutVars) - 1 step 2 do {
-        private _name = _loadoutVars select _i;
-        private _value = _loadoutVars select (_i + 1);
-
-        _unit setVariable [_name, _value, true];
-    };
-};
+[_loadoutVars, {
+    params ["_key", "_value"];
+    _unit setVariable [_key, _value, true];
+}] call CFUNC(forEachHash);
