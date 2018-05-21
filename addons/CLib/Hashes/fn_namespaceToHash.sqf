@@ -5,15 +5,17 @@
     Author: joko // Jonas
 
     Description:
-
+    Converts a Namespace into a Hash
 
     Parameter(s):
-
+    0: Namespace <Object, Location>
+    1: HashSet <Array>
+    2: AllVarNames Cache <String>
 
     Returns:
-
+    None
 */
-params ["_namespace", "_hash", ["_allVarName", ""]];
+params ["_namespace", "_hashSet", ["_allVarName", ""]];
 private _allVar = if (_allVarName == "") then {
     allVariables _namespace;
 } else {
@@ -23,7 +25,7 @@ private _allVar = if (_allVarName == "") then {
 {
     private _var = _namespace getVariable _x;
     if !(isNil "_var") then {
-        [_hash, _x, _var] call CFUNC(setHash);
+        [_hashSet, _x, _var] call CFUNC(setHash);
     };
     nil
 } count _allVar;
