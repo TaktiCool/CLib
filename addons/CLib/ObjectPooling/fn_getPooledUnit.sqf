@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Requested Object Type <String> (Default: "")
-    1: Locked condition <Code> (Default: {})
+    1: Locked condition <Code> (Default: {false})
     2: Unit Parameter <Array> (Default: [grpNull, "", 0.5, "PRIVATE"])
 
     Returns:
@@ -25,7 +25,7 @@
 
 params [
     ["_unitClass", "", [""]],
-    ["_lockedCondition", {}, [{}]],
+    ["_condition", {false}, [{}]],
     ["_unitParams", [grpNull, {}, 0.5, "PRIVATE"], [[]], 4]
 ];
 
@@ -36,7 +36,7 @@ private _unit = objNull;
 {
     _x params ["_lockedCondition", "_obj"];
     if (alive _obj && !(call _lockedCondition)) then {
-        _unitsData select _forEachIndex;
+        _unitsData deleteAt _forEachIndex;
         _unit = _obj;
         breakTo SCRIPTSCOPENAME;
     };
@@ -58,6 +58,6 @@ _unit call _init;
 _unit setSkill _skill;
 _unit setRank _rank;
 
-_unitsData pushBack [_lockedCondition, _unit];
+_unitsData pushBack [_condition, _unit];
 GVAR(objPool) setVariable [_varName, _unitsData, true];
 _unit
