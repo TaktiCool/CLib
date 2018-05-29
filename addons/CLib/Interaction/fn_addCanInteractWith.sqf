@@ -9,13 +9,19 @@
 
     Parameter(s):
     0: Type <String> (Default: "")
-    1: Conditions <Code> (Default: {})
+    1: Condition <Code> (Default: {})
 
     Returns:
     None
 */
+
+params [
+    ["_type", "", [""]],
+    ["_condition", {}, [{}]]
+];
+
 if (isNil QGVAR(canInteractWithTypes)) exitWith {
-    GVAR(canInteractWithTypes) = [_this];
+    GVAR(canInteractWithTypes) = [[_type, _condition]];
 };
-GVAR(canInteractWithTypes) pushBackUnique _this;
+GVAR(canInteractWithTypes) pushBackUnique [_type, _condition];
 nil

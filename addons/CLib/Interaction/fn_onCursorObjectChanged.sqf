@@ -9,7 +9,6 @@
 
     Parameter(s):
     0: Current cursor object <Object> (Default: objNull)
-    1: Previous cursor object <Object> (Default: objNull)
 
     Returns:
     None

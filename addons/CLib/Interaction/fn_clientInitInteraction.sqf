@@ -19,7 +19,7 @@ if !(hasInterface) exitWith {};
 GVAR(currentActionID) = -1;
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorObjectChanged", { (_this select 0) call FUNC(onCursorObjectChanged)}] call CFUNC(addEventhandler);
+["cursorObjectChanged", {(_this select 0) call FUNC(onCursorObjectChanged)}] call CFUNC(addEventhandler);
 ["playerChanged", {
     (_this select 0) params ["_currentPlayer", "_oldPlayer"];
     // Posible Fix for Double Squad Menu Entry

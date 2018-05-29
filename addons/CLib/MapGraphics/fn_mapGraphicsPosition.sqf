@@ -17,8 +17,9 @@
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
 */
+
 params [
-    ["_position", objNull, [[], objNull], [2,3]],
+    ["_position", objNull, [[], objNull], [2, 3]],
     ["_map", controlNull, [controlNull]]
 ];
 
