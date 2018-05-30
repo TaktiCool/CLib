@@ -8,14 +8,27 @@
     Add item Wraper
 
     Parameter(s):
-    0: Item Classname <String>
-    1: Count <Number>
+    0: Unit <Object> (Default: objNull)
+    1: Item data <Array> (Default: ["", 0])
 
     Returns:
     None
+
+    Remarks:
+    Item data:
+        0: Item Classname <String> (Default: "")
+        1: Item count <Number> (Default: 1)
 */
-params ["_unit", "_itemData"];
-_itemData params ["_className", ["_count", 1]];
+
+params [
+    ["_unit", objNull, [objNull]],
+    ["_itemData", ["", 0], [[]], 2]
+];
+
+_itemData params [
+    ["_className", "", [""]],
+    ["_count", 1, [0]]
+];
 
 if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {

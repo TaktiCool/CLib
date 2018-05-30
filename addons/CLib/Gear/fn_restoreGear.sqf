@@ -8,13 +8,18 @@
     Restore gear from saveGear Function to destination
 
     Parameter(s):
-    0: Gear <Array>
-    1: Destination Unit <Object>
+    0: Gear <Array> (Default: [[], []])
+    1: Destination Unit <Object> (Default: player)
 
     Returns:
     None
 */
-params ["_gear", "_unit"];
+
+params [
+    ["_gear", [[], []], [[]], 2],
+    ["_unit", player, [objNull]]
+];
+
 _gear params ["_allGear", "_magazinesAmmoFull"];
 
 _allGear params [
@@ -29,9 +34,6 @@ _allGear params [
     "_assignedItems",
     "_binocular"
 ];
-
-// DUMP(_allGear)
-// DUMP(_magazinesAmmoFull)
 
 removeAllAssignedItems _unit;
 removeAllWeapons _unit;
@@ -48,9 +50,7 @@ _primaryWeapon = [_primaryWeapon] call BIS_fnc_baseWeapon;
 _secondaryWeapon = [_secondaryWeapon] call BIS_fnc_baseWeapon;
 _handgun = [_handgun] call BIS_fnc_baseWeapon;
 
-
 _assignedItems = _assignedItems - [_binocular];
-
 
 {
     _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];

@@ -8,14 +8,27 @@
     Add magazine Wraper
 
     Parameter(s):
-    0: Magazine Classname <String>
-    1: Magazine count <Number>
+    0: Unit <Object> (Default: objNull)
+    1: Magazine data <Array> (Default: ["", 0])
 
     Returns:
     None
+
+    Remarks:
+    Magazine data:
+        0: Magazine Classname <String> (Default: "")
+        1: Magazine count <Number> (Default: 1)
 */
-params ["_unit", "_magazineData"];
-_magazineData params ["_className", ["_count", 1]];
+
+params [
+    ["_unit", objNull, [objNull]],
+    ["_magazineData", ["", 0], [[]], 2]
+];
+
+_magazineData params [
+    ["_className", "", [""]],
+    ["_count", 1, [0]]
+];
 
 private _bullets = -1;
 if (_className isEqualType []) then {

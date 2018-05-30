@@ -8,14 +8,19 @@
     Add Container Wrapper
 
     Parameter(s):
-    0: Unit <Object>
-    1: Container classname <String>
-    2: Type of classname <Number> (Default: -1)
+    0: Unit <Object> (Default: objNull)
+    1: Container classname <String> (Default: "")
+    2: Type of classname <Number, String> (Default: -1)
 
     Returns:
     None
 */
-params [["_unit", objNull, [objNull]], ["_containerClassName", "", ["STRING"]], ["_containerType", -1, [-1, ""]]];
+
+params [
+    ["_unit", objNull, [objNull]],
+    ["_containerClassName", "", [""]],
+    ["_containerType", -1, [0, ""]]
+];
 
 if (_containerType isEqualType "") then {
     switch (toLower (_containerType)) do {
