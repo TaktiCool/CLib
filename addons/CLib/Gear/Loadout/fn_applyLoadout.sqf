@@ -30,32 +30,38 @@ private _loadoutArray = _class call CFUNC(loadLoadout);
 
 private _loadout = _loadoutArray select 1;
 private _loadoutVars = _loadoutArray select 0;
-
+DUMP(str _loadout);
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _item = [_loadout, _find, nil] call CFUNC(getHash);
-    if (isNil "_item") exitWith {};
+    private _items = [_loadout, toLower _find, nil] call CFUNC(getHash);
+    DUMP(_find + ": " + format [str _items]);
+    if (isNil "_items") exitWith {};
     switch (true) do {
         case (_isRandom && _allowRandom): {
-            _item = selectRandom _item;
+            DUMP("Random");
+            private _item = selectRandom _items;
             if (isNil "_item") exitWith {};
             _item call _do;
         };
         case (_isRandom && !_allowRandom): {
-            _item = _item select 0;
+            DUMP("Random Not Allowed");
+            private _item = _items select 0;
             if (isNil "_item") exitWith {};
             _item call _do;
         };
+        case (!_isRandom);
         default {
-            if (_item isEqualType []) then {
+            DUMP("Not Random");
+            if (_items isEqualType []) then {
                 {
                     _x call _do;
                     nil
-                } count _item;
+                } count _items;
             } else {
-                _item call _do;
+                _items call _do;
             };
+
         };
     };
 };
@@ -104,124 +110,103 @@ private _fnc_do = {
 
 // Weapons
 {
-    [_x, {_unit addWeapon _this}, true] call _fnc_do;
+    [_x, {_unit addWeapon _this}, false] call _fnc_do;
     nil
 } count ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
 
 // Primary Weapon Items
 {
-    [_x, {_unit addPrimaryWeaponItem _this}, true] call _fnc_do;
+    [_x, {_unit addPrimaryWeaponItem _this}, false] call _fnc_do;
     nil
 } count ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
 
 // Secondary Weapon Items
 {
-    [_x, {_unit addSecondaryWeaponItem _this}, true] call _fnc_do;
+    [_x, {_unit addSecondaryWeaponItem _this}, false] call _fnc_do;
     nil
 } count ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
 
 // Handgun Items
 {
-    [_x, {_unit addHandgunItem _this}, true] call _fnc_do;
+    [_x, {_unit addHandgunItem _this}, false] call _fnc_do;
     nil
 } count ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
 
 // Items to Uniform
 ["itemsUniform", {
-    {
-        if (_x isEqualType []) then {
-            for "_i" from 1 to (_x select 1) do {
-                _unit addItemToUniform (_x select 0);
-            };
+    if (_this isEqualType []) then {
+        for "_i" from 1 to (_this select 1) do {
+            _unit addItemToUniform (_this select 0);
         };
-        if (_x isEqualType "") then {
-            _unit addItemToUniform _x;
-        };
-        nil
-    } count _this;
+    };
+    if (_this isEqualType "") then {
+        _unit addItemToUniform _this;
+    };
 }, false] call _fnc_do;
 
 // Items to Vest
 ["itemsVest", {
-    {
-        if (_x isEqualType []) then {
-            for "_i" from 1 to (_x select 1) do {
-                _unit addItemToVest (_x select 0);
-            };
+    if (_this isEqualType []) then {
+        for "_i" from 1 to (_this select 1) do {
+            _unit addItemToVest (_this select 0);
         };
-        if (_x isEqualType "") then {
-            _unit addItemToVest _x;
-        };
-        nil
-    } count _this;
+    };
+    if (_this isEqualType "") then {
+        _unit addItemToVest _this;
+    };
 }, false] call _fnc_do;
 
 // Items to Backpack
 ["itemsBackpack", {
-    {
-        if (_x isEqualType []) then {
-            for "_i" from 1 to (_x select 1) do {
-                _unit addItemToBackpack (_x select 0);
-            };
+    if (_x isEqualType []) then {
+        for "_i" from 1 to (_this select 1) do {
+            _unit addItemToBackpack (_this select 0);
         };
-        if (_x isEqualType "") then {
-            _unit addItemToBackpack _x;
-        };
-        nil
-    } count _this;
+    };
+    if (_x isEqualType "") then {
+        _unit addItemToBackpack _this;
+    };
+    nil
 }, false] call _fnc_do;
 
 // Magazines
 ["magazines", {
-    {
-        if (_x isEqualType []) then {
-            _unit addMagazines _x;
-        };
-        if (_x isEqualType "") then {
-            _unit addMagazine _x;
-        };
-        nil
-    } count _this;
+    if (_this isEqualType []) then {
+        _unit addMagazines _this;
+    };
+    if (_this isEqualType "") then {
+        _unit addMagazine _this;
+    };
+    nil
 }, false] call _fnc_do;
 
 // Items
 ["items", {
-    {
-        if (_x isEqualType []) then {
-            for "_i" from 1 to (_x select 1) do {
-                _unit addItem (_x select 0);
-            };
+    if (_this isEqualType []) then {
+        for "_i" from 1 to (_this select 1) do {
+            _unit addItem (_this select 0);
         };
-        if (_x isEqualType "") then {
-            _unit addItem _x;
-        };
-        nil
-    } count _this;
+    };
+    if (_this isEqualType "") then {
+        _unit addItem _this;
+    };
 }, false] call _fnc_do;
 
 // Linked Items
 ["linkedItems", {
-    {
-        _unit linkItem _x;
-        nil
-    } count _this;
+    _unit linkItem _this;
+    nil
 }, false] call _fnc_do;
 
 // Scripts
 ["script", {
-    {
-        [_unit, _loadout] call compile _x;
-        nil
-    } count _this;
+    [_unit, _loadout] call compile _this;
 }, false] call _fnc_do;
 
 ["unitTrait", {
-    {
-        _unit setUnitTrait _x;
-        nil
-    } count _this;
+    _unit setUnitTrait _this;
 }, false] call _fnc_do;
-
+DUMP(str _loadoutVars);
 [_loadoutVars, {
     params ["_key", "_value"];
     _unit setVariable [_key, _value, true];
