@@ -8,21 +8,24 @@
     Applys a loadout to a unit
 
     Parameter(s):
-    0: Unit that get the Loadout <Object>
-    1: Classname <String>
+    0: Unit that get the Loadout <Object> (Default: player)
+    1: Classname or config of loadout <Config, String> (Default: "")
     2: Allow Random Items <Bool> (Default: true)
+
     Returns:
     None
 */
+
+params [
+    ["_unit", player, [objNull]],
+    ["_class", "", [configNull, ""]],
+    ["_allowRandom", true, [true]]
+];
+
 if (isNil QGVAR(loadoutsLoaded)) exitWith {
-    [{
-        _this call CFUNC(applyLoadout);
-    }, {
-        !isNil QGVAR(loadoutsLoaded)
-    }, _this] call CFUNC(waitUntil);
+    [{_this call CFUNC(applyLoadout)}, {!isNil QGVAR(loadoutsLoaded)}, _this] call CFUNC(waitUntil); //TODO use event
 };
 
-params [["_unit", player, [objNull]], ["_class", "", ["", configNull]], ["_allowRandom", true, [true]]];
 private _loadoutArray = _class call CFUNC(loadLoadout);
 
 private _loadout = _loadoutArray select 1;
@@ -177,7 +180,6 @@ private _fnc_do = {
     } count _this;
 }, false] call _fnc_do;
 
-
 // Items
 ["items", {
     {
@@ -192,7 +194,6 @@ private _fnc_do = {
         nil
     } count _this;
 }, false] call _fnc_do;
-
 
 // Linked Items
 ["linkedItems", {

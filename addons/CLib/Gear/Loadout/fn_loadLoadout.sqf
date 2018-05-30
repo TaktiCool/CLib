@@ -8,13 +8,15 @@
     Load loadout to Unit
 
     Parameter(s):
-    0: Classname what Loadout the unit will get <String>
+    0: Classname or config of loadout <Config, String> (Default: "")
 
     Returns:
     None
 */
 
-params [["_cfg", "", ["", configNull]]];
+params [
+    ["_cfg", "", [configNull, ""]]
+];
 
 private _loadoutName = _cfg;
 if (_cfg isEqualType configNull) then {
