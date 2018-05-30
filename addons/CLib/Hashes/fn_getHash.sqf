@@ -10,7 +10,7 @@
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
     1: Key <Anything> (Default: "")
-    2: Default Value <Anything, Nothing> (Default: objNull)
+    2: Default Value <Anything> (Default: objNull)
 
     Returns:
     Value from Hashset <Anything>
@@ -19,7 +19,7 @@
 params [
     ["_hashSet", [[], []], [[]], 2],
     ["_key", "", []],
-    "_default"
+    ["_default", nil, []]
 ];
 
 private _i = (_hashSet select HASH_KEYS) find _key;
