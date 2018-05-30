@@ -19,7 +19,7 @@
 params [
     ["_hashSet", [[], []], [[]], 2],
     ["_key", "", []],
-    ["_value", objNull, []]
+    "_value"
 ];
 
 private _delete = isNil "_value";
