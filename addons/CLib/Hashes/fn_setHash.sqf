@@ -10,7 +10,7 @@
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
     1: Key <Anything> (Default: "")
-    2: Value <Anything> (Default: objNull)
+    2: Value <Anything, Nothing> (Default: objNull)
 
     Returns:
     HashSet <Array>

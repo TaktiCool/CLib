@@ -56,7 +56,6 @@ private _fnc_do = {
             } else {
                 _item call _do;
             };
-
         };
     };
 };
