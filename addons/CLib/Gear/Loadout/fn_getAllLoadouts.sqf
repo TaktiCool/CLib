@@ -14,4 +14,6 @@
     Array With all Loadout Names <Array>
 */
 
-[GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables);
+([GVAR(loadoutsNamespace), QGVAR(allLoadouts)] call CFUNC(allVariables)) apply {
+    _x select [18];
+};

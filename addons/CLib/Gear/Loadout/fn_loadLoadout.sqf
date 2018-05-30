@@ -91,5 +91,5 @@ private _fnc_readClass = {
 
 _cfg call _fnc_readClass;
 private _return = [_loadoutVars, _loadout];
-[GVAR(loadoutsNamespace), _varName, _return, QGVAR(allLoadouts)] call CFUNC(setVariable);
+[GVAR(loadoutsNamespace), _varName, _return, QGVAR(allLoadouts), true] call CFUNC(setVariable);
 _return
