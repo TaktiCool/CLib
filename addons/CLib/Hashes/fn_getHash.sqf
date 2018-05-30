@@ -19,7 +19,7 @@
 params [
     ["_hashSet", [[], []], [[]], 2],
     ["_key", "", []],
-    ["_default", objNull, []]
+    "_default"
 ];
 
 private _i = (_hashSet select HASH_KEYS) find _key;

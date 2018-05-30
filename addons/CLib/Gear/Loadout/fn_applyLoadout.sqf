@@ -45,10 +45,15 @@ private _fnc_do = {
             _item call _do;
         };
         default {
-            {
-                _x call _do;
-                nil
-            } count _item;
+            if (_item isEqualType []) then {
+                {
+                    _x call _do;
+                    nil
+                } count _item;
+            } else {
+                _item call _do;
+            };
+
         };
     };
 };
