@@ -8,14 +8,19 @@
     Sets a Value on to a Hash
 
     Parameter(s):
-    0: HashSet <Array>
-    1: Key <Anything>
-    2: Value <Anything>
+    0: HashSet <Array> (Default: [[], []])
+    1: Key <Anything> (Default: "")
+    2: Value <Anything> (Default: objNull)
 
     Returns:
-    None
+    HashSet <Array>
 */
-params ["_hashSet", "_key", "_value"];
+
+params [
+    ["_hashSet", [[], []], [[]], 2],
+    ["_key", "", []],
+    ["_value", objNull, []]
+];
 
 private _delete = isNil "_value";
 
@@ -23,7 +28,7 @@ private _contain = [_hashSet, _key] call CFUNC(containsKey);
 
 switch (true) do {
     case (_contain && _delete): {
-        private _i = (_hashSet select HASH_KEY) find _key;
+        private _i = (_hashSet select HASH_KEYS) find _key;
         {
             _x deleteAt _i;
             nil
@@ -31,13 +36,13 @@ switch (true) do {
         _hashSet
     };
     case (_contain && !_delete): {
-        private _i = (_hashSet select HASH_KEY) find _key;
-        (_hashSet select HASH_VALUE) set [_i, _value];
+        private _i = (_hashSet select HASH_KEYS) find _key;
+        (_hashSet select HASH_VALUES) set [_i, _value];
         _hashSet
     };
     case (!_contain && !_delete): {
-        private _i = (_hashSet select HASH_KEY) pushBack _key;
-        (_hashSet select HASH_VALUE) set [_i, _value];
+        private _i = (_hashSet select HASH_KEYS) pushBack _key;
+        (_hashSet select HASH_VALUES) set [_i, _value];
         _hashSet
     };
     default {

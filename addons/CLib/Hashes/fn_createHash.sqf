@@ -14,4 +14,4 @@
     New Hashset <Array>
 */
 
-[[],[]] // return
+[[], []] // return

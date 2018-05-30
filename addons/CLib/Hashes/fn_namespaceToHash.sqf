@@ -8,14 +8,20 @@
     Converts a Namespace into a Hash
 
     Parameter(s):
-    0: Namespace <Object, Location>
-    1: HashSet <Array>
-    2: AllVarNames Cache <String>
+    0: Namespace <Location, Namespace, Object> (Default: locationNull)
+    1: HashSet <Array> (Default: [[], []])
+    2: AllVarNames Cache <String> (Default: EGVAR(Namespaces,allVariableCache))
 
     Returns:
     None
 */
-params ["_namespace", "_hashSet", ["_allVarName", ""]];
+
+params [
+    ["_namespace", locationNull, [locationNull, missionNamespace, objNull]],
+    ["_hashSet", [[], []], [[]], 2],
+    ["_allVarName", EGVAR(Namespaces,allVariableCache), [""]]
+];
+
 private _allVar = if (_allVarName == "") then {
     allVariables _namespace;
 } else {
