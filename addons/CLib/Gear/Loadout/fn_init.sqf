@@ -14,8 +14,6 @@
     None
 */
 
-
-
 if (isServer) then {
     GVAR(loadoutsNamespace) = true call CFUNC(createNamespace);
     publicVariable QGVAR(loadoutsNamespace);
