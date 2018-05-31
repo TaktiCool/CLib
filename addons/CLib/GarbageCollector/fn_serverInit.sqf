@@ -18,7 +18,9 @@ if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarb
 
 DFUNC(pushbackInQueue) = {
     params ["_object"];
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {_object setVariable [QCGVAR(noClean), true, true];}; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {
+        _object setVariable [QCGVAR(noClean), true, true]; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    };
     if !(_object getVariable [QCGVAR(noClean), false]) then {
         if !(isNull attachedTo _object) exitWith {}; // exit if the Object is attached to a object. we then ignore it because it could be used by a script
         if (!(_object getVariable [QGVAR(queued), false])) then {
@@ -33,7 +35,9 @@ DFUNC(pushbackInQueue) = {
 DFUNC(removeMissionObject) = {
     params [["_object", objNull]];
     if (isNull _object) exitWith {};
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {_object getVariable [QCGVAR(noClean), true, true];}; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {
+        _object getVariable [QCGVAR(noClean), true, true]; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    };
     if (_object getVariable [QCGVAR(noClean), false]) exitWith {};
     // Disable collision with the surface.
     _object enableSimulationGlobal false;
@@ -72,7 +76,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     GVAR(loopTime) = if (isNumber (_configPath >> "GarbageCollectorLoopTime")) then {
         getNumber (_configPath >> "GarbageCollectorLoopTime")
     } else {
-        GVAR(waitTime)/5;
+        GVAR(waitTime) / 5;
     };
     "fillGrenades"
 }] call CFUNC(addStatemachineState);
