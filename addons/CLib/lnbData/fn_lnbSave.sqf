@@ -10,7 +10,7 @@
     Parameter(s):
     0: Control from dialog <Control> (Default: controlNull)
     1: Row and column <Array> (Default: [0, 0])
-    2: Data that will saved <Anything> (Default: [])
+    2: Data that will saved <Any> (Default: [])
 
     Returns:
     None

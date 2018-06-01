@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
-    1: Key <Anything> (Default: "")
+    1: Key <Any> (Default: "")
 
     Returns:
     Contains Key in Hash set <Bool>

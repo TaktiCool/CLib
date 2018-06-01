@@ -24,7 +24,7 @@
 params [
     ["_namespace", locationNull, [locationNull, missionNamespace, objNull]],
     ["_varName", "", [""]],
-    ["_varContent", nil, []],
+    "_varContent",
     ["_cacheName", QGVAR(allVariableCache), [""]],
     ["_global", false, [true]]
 ];

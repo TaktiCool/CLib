@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
-    1: Value <Anything> (Default: objNull)
+    1: Value <Any> (Default: objNull)
 
     Returns:
     Contains Value in Hash set <Bool>

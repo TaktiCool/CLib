@@ -113,14 +113,16 @@ private _thread = 0 spawn {
 if (didJIP) then {
     QGVAR(jipQueue) addPublicVariableEventHandler {
         {
-            _x params ["_persistent", "_args", "_event"];
-            if ((typeName _persistent) in ["STRING", "BOOL"]) then {
-                if (_persistent isEqualType false && {_persistent}) then {
+            _x params [
+                ["_persistent", false, ["", true]],
+                ["_args", [], []],
+                ["_event", "EventError", [""]]
+            ];
+            if (_persistent isEqualType true && {_persistent}) then {
+                [_event, _args] call CFUNC(localEvent);
+            } else {
+                if (_persistent isEqualTo (getPlayerUID CLib_Player)) then {
                     [_event, _args] call CFUNC(localEvent);
-                } else {
-                    if (_persistent isEqualTo (getPlayerUID CLib_Player)) then {
-                        [_event, _args] call CFUNC(localEvent);
-                    };
                 };
             };
             nil

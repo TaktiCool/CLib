@@ -10,7 +10,7 @@
     Parameter(s):
     0: Function that get called <Code, String> (Default: {})
     1: Delay <Number> (Default: 0)
-    2: Arguments <Anything> (Default: [])
+    2: Arguments <Any> (Default: [])
 
     Returns:
     None

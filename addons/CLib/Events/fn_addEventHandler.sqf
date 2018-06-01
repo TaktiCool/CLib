@@ -5,26 +5,30 @@
     Author: joko // Jonas
 
     Description:
-    -
+    Adds an event handler
 
     Parameter(s):
-    0: Event ID <String>
-    1: Functions <Code>
-    2: Arguments <Any>
+    0: Event ID <String> (Default: "EventError")
+    1: Callback <Code, String> (Default: {})
+    2: Arguments <Any> (Default: [])
 
     Returns:
-    the ID of the Current Eventhandler <Number>
+    ID of the Current Eventhandler <Number>
 */
 
 EXEC_ONLY_UNSCHEDULED;
 
-params [["_event", "", [""]], ["_function", {}, [{}, ""]], ["_args", []]];
+params [
+    ["_event", "EventError", [""]],
+    ["_callback", {}, [{}, ""]],
+    ["_args", [], []]
+];
 
-// add This so we get can get sure some events that only gets triggered once get right
-["eventAdded", [_event, _function, _args]] call CFUNC(localEvent);
+// Add this so we get can get sure some events that only gets triggered once get right
+["eventAdded", [_event, _callback, _args]] call CFUNC(localEvent);
 
 private _eventArray = GVAR(EventNamespace) getVariable [_event, []];
-private _id = _eventArray pushBack [_function, _args];
+private _id = _eventArray pushBack [_callback, _args];
 GVAR(EventNamespace) setVariable [_event, _eventArray];
 
 _id

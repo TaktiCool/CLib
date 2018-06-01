@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Function or command that get executed <String> (Default: "")
-    1: Arguments for the event <Anything> (Default: [])
+    1: Arguments for the event <Any> (Default: [])
 
     Returns:
     Function return <Anything>

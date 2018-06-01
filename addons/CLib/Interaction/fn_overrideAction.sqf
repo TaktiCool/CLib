@@ -10,7 +10,7 @@
     Parameter(s):
     0: ActionName <String> (Default: "")
     1: Code <Code> (Default: {})
-    2: Arguments <Anything> (Default: [])
+    2: Arguments <Any> (Default: [])
 
     Returns:
     None

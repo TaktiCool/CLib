@@ -11,7 +11,7 @@
     0: Icon Id <String> (Default: "")
     1: Event name <String> (Default: "")
     2: Code that gets executed on event <Code, String> (Default: {})
-    3: Arguments passed to the event <Anything> (Default: [])
+    3: Arguments passed to the event <Any> (Default: [])
 
     Returns:
     ID of the Event <Number>

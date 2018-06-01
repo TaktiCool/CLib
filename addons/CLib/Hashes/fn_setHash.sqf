@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
-    1: Key <Anything> (Default: "")
+    1: Key <Any> (Default: "")
     2: Value <Anything> (Default: objNull)
 
     Returns:
@@ -19,7 +19,7 @@
 params [
     ["_hashSet", [[], []], [[]], 2],
     ["_key", "", []],
-    ["_value", nil, []]
+    "_value"
 ];
 
 private _delete = isNil "_value";

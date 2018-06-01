@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(EventNamespace) = false call CFUNC(createNamespace);
 
 GVAR(ignoredLogEventNames_0) = [];
@@ -297,7 +298,6 @@ GVAR(ignoredLogEventNames_1) = [];
         ["checkObject", "wait"] select (GVAR(entitieQueue) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
-
     [GVAR(entityCreatedSM), "checkObject", {
         private _obj = GVAR(entitieQueue) deleteAt 0;
         if !(isNull _obj) then {
@@ -311,5 +311,4 @@ GVAR(ignoredLogEventNames_1) = [];
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM)] call CFUNC(startStatemachine);
-
 }] call CFUNC(addEventHandler);

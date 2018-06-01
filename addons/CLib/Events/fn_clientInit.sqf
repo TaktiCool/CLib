@@ -35,7 +35,6 @@ GVAR(lastZeusStatus) = false;
     ["playerJoined", CLib_Player] call CFUNC(globalEvent);
 }, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
 
-
 private _codeStr = "private ['_oldValue', '_currentValue'];";
 
 // Build a dynamic event system to use it in modules.

@@ -8,8 +8,8 @@
     Trigger an event on the server
 
     Parameter(s):
-    0: Event Name <String>
-    1: Arguments <Any>
+    0: Event Name <String> (Default: "EventError")
+    1: Arguments <Any> (Default: [])
 
     Returns:
     None
@@ -17,7 +17,10 @@
 
 EXEC_ONLY_UNSCHEDULED;
 
-params [["_event", "EventError", [""]], ["_args", []]];
+params [
+    ["_event", "EventError", [""]],
+    ["_args", [], []]
+];
 
 if (isServer) then {
     [_event, _args] call CFUNC(localEvent);

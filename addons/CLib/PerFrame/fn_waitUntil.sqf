@@ -10,7 +10,7 @@
     Parameter(s):
     0: Code that get executed if the conditon is true <Code> (Default: {})
     1: Conditon that get executed every frame <Code> (Default: {})
-    2: Paramter <Anything> (Default: [])
+    2: Paramter <Any> (Default: [])
 
     Returns:
     None
