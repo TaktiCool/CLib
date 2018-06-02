@@ -157,12 +157,12 @@ private _fnc_do = {
 
 // Items to Backpack
 ["itemsBackpack", {
-    if (_x isEqualType []) then {
+    if (_this isEqualType []) then {
         for "_i" from 1 to (_this select 1) do {
             _unit addItemToBackpack (_this select 0);
         };
     };
-    if (_x isEqualType "") then {
+    if (_this isEqualType "") then {
         _unit addItemToBackpack _this;
     };
     nil
