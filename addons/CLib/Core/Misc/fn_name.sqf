@@ -35,7 +35,7 @@ if (isNil "_ret") then {
         }, _object] call CFUNC(waitUntil);
     } else {
         _ret = getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName");
-        _this setVariable [QGVAR(objectName), name _this];
+        _this setVariable [QGVAR(objectName), _ret];
     };
 };
 _ret

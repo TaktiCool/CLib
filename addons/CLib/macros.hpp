@@ -30,11 +30,13 @@
 
 #define UIVAR(var1) QEGVAR(UI,var1)
 
-#define SYSLOGGING(var1,var2) if (isNil "CLib_fnc_log") then {\
-    private _CLib_loggingVar = format ["(%1) [%2 %3 - %4]: %5 %6:%7", diag_frameNo, QUOTE(PREFIX), var1, QUOTE(MODULE), var2, __FILE__, __LINE__];\
-    diag_log text _CLib_loggingVar;\
-} else {\
-    [var1 ,QUOTE(PREFIX), QUOTE(MODULE), var2, __FILE__, __LINE__, _fnc_scriptName, _fnc_scriptNameParent, _fnc_scriptMap] call CLib_fnc_log;\
+#define SYSLOGGING(var1,var2) isNil {\
+    if (isNil "CLib_fnc_log") then {\
+        private _CLib_loggingVar = format ["(%1) [%2 %3 - %4]: %5 %6:%7", diag_frameNo, QUOTE(PREFIX), var1, QUOTE(MODULE), var2, __FILE__, __LINE__];\
+        diag_log text _CLib_loggingVar;\
+    } else {\
+        [var1 ,QUOTE(PREFIX), QUOTE(MODULE), var2, __FILE__, __LINE__, _fnc_scriptName, _fnc_scriptNameParent, _fnc_scriptMap] call CLib_fnc_log;\
+    };\
 };
 
 // Logging/Dumping macros
