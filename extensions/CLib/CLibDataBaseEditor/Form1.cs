@@ -20,6 +20,7 @@ namespace CLibDataBaseEditor
         {
             InitializeComponent();
         }
+
         #region Events
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -27,13 +28,16 @@ namespace CLibDataBaseEditor
             loadFile(openFileDialog1.FileName);
             fillDataGrid();
         }
-
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.ShowDialog();
             saveFile(saveFileDialog1.FileName);
         }
-
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Environment.Exit(0);
+        }
         #endregion Events
         #region Functions
         public void fillDataGrid()
@@ -71,7 +75,12 @@ namespace CLibDataBaseEditor
             Dict.Clear();
             foreach (DataGridViewRow item in dataGridView1.Rows)
             {
-                Dict.Add(item.Cells[0].EditedFormattedValue.ToString(), item.Cells[1].EditedFormattedValue.ToString());
+                string key = item.Cells[0].EditedFormattedValue.ToString();
+                string value = item.Cells[1].EditedFormattedValue.ToString();
+                if (!(Dict.ContainsKey(key) || String.IsNullOrEmpty(key)))
+                {
+                    Dict.Add(key, value);
+                }
             }
             Dict.Remove("");
             using (FileStream fs = File.OpenWrite(filePath))
@@ -89,13 +98,6 @@ namespace CLibDataBaseEditor
                 }
             }
         }
-
         #endregion Functions
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Environment.Exit(0);
-        }
     }
 }
