@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.IO.Compression;
 
 namespace CLibDatabase
 {
@@ -90,17 +91,21 @@ namespace CLibDatabase
                 return "true";
 
             using (FileStream fs = File.OpenRead(Path.Combine(DllEntry.databaseFolder, filename + ".clibdata")))
-            using (BinaryReader reader = new BinaryReader(fs))
             {
-                int count = reader.ReadInt32();
-                DllEntry.database = new Dictionary<string, string>(count);
-                for (int i = 0; i < count; i++)
+                GZipStream cmp = new GZipStream(fs, CompressionLevel.Optimal);
+                using (BinaryReader reader = new BinaryReader(cmp))
                 {
-                    string key = reader.ReadString();
-                    string value = reader.ReadString();
-                    DllEntry.database.Add(key, value);
+                    int count = reader.ReadInt32();
+                    DllEntry.database = new Dictionary<string, string>(count);
+                    for (int i = 0; i < count; i++)
+                    {
+                        string key = reader.ReadString();
+                        string value = reader.ReadString();
+                        DllEntry.database.Add(key, value);
+                    }
                 }
             }
+
             DllEntry.loadedDatabase = filename;
             return "true";
         }
@@ -109,16 +114,20 @@ namespace CLibDatabase
         public static string Save(string filename)
         {
             using (FileStream fs = File.OpenWrite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".clibdata")))
-            using (BinaryWriter writer = new BinaryWriter(fs))
             {
-                writer.Write(DllEntry.database.Count);
-                foreach (var pair in DllEntry.database)
+                GZipStream dcmp = new GZipStream(fs, CompressionMode.Decompress);
+
+                using (BinaryWriter writer = new BinaryWriter(dcmp))
                 {
-                    writer.Write(pair.Key);
-                    writer.Write(pair.Value);
+                    writer.Write(DllEntry.database.Count);
+                    foreach (var pair in DllEntry.database)
+                    {
+                        writer.Write(pair.Key);
+                        writer.Write(pair.Value);
+                    }
                 }
+                return "true";
             }
-            return "true";
         }
 
         ~DllEntry()
