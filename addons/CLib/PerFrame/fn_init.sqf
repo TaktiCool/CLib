@@ -21,7 +21,6 @@ GVAR(waitUntilArray) = [];
 
 GVAR(perFrameHandlerArray) = [];
 GVAR(PFHhandles) = [];
-GVAR(pfhDeleleted) = false;
 GVAR(deletedIndexes) = [];
 
 GVAR(skipFrameArray) = [];
@@ -115,24 +114,9 @@ DFUNC(onEachFrameHandler) = {
     } count GVAR(currentFrameBuffer);
 
     //Swap double-buffer:
-    GVAR(currentFrameBuffer) = +GVAR(nextFrameBuffer);
+    GVAR(currentFrameBuffer) = GVAR(nextFrameBuffer);
     GVAR(nextFrameBuffer) = [];
     GVAR(nextFrameNo) = diag_frameNo + 1;
-
-    if !(GVAR(deletedIndices) isEqualTo []) then {
-        {
-            GVAR(perFrameHandlerArray) set [_x, objNull];
-            nil
-        } count GVAR(deletedIndices);
-
-        GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
-
-        {
-            _x params ["", "", "", "", "", "_handle"];
-            GVAR(PFHhandles) set [_handle, _forEachIndex];
-        } forEach GVAR(perFrameHandlerArray);
-        GVAR(deletedIndices) = [];
-    };
 
     RUNTIME("PFHCounter");
 };
