@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO.Compression;
-
+using SimpleJSON;
 namespace CLibDatabase
 {
     public class DllEntry
@@ -130,9 +130,64 @@ namespace CLibDatabase
             }
         }
 
+        private static JSONNode ConvertToJson()
+        {
+            JSONNode json = JSON.Parse("{}");
+            foreach (var item in database)
+            {
+                json.Add(item.Key, item.Value);
+            }
+            return json;
+        }
+        private static void ConvertToDictionary(JSONNode json)
+        {
+            database.Clear();
+            foreach (var item in json.Linq)
+            {
+                database.Add(item.Key, item.Value.Value);
+            }
+        }
+        #region Import/Export
+        [DllExport("ExportJson")]
+        public static string ExportJson(string filename)
+        {
+            JSONNode json = ConvertToJson();
+            StringBuilder exportStringBuilder = new StringBuilder();
+            json.WriteToStringBuilder(exportStringBuilder, 0, 4, JSONTextMode.Indent);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".json"), exportStringBuilder.ToString());
+            return "true";
+        }
+
+        [DllExport("ExportJsonBinary")]
+        public static string ExportJsonBinary(string filename)
+        {
+            var json = ConvertToJson();
+            json.SaveToCompressedFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".bson"));
+            return "true";
+        }
+
+        [DllExport("ImportJson")]
+        public static string ImportJson(string filename)
+        {
+            string jsonStr = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".json"));
+            JSONNode json = JSON.Parse(jsonStr);
+            ConvertToDictionary(json);
+            return "true";
+        }
+
+        [DllExport("ImportJsonBinary")]
+        public static string ImportJsonBinary(string filename)
+        {
+            var json = JSONNode.LoadFromCompressedFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".bson"));
+            ConvertToDictionary(json);
+            return "true";
+        }
+        #endregion Import/Export
+
         ~DllEntry()
         {
             DllEntry.Save(DllEntry.loadedDatabase);
         }
     }
 }
+
