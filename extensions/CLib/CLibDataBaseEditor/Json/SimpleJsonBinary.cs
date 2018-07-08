@@ -34,52 +34,55 @@
  * SOFTWARE.
  * 
  * * * * */
+
 using System;
+using System.IO;
 using System.IO.Compression;
+
 namespace SimpleJSON
 {
     public abstract partial class JSONNode
     {
-        public abstract void SerializeBinary(System.IO.BinaryWriter aWriter);
+        public abstract void SerializeBinary(BinaryWriter aWriter);
 
-        public void SaveToBinaryStream(System.IO.Stream aData)
+        public void SaveToBinaryStream(Stream aData)
         {
-            var W = new System.IO.BinaryWriter(aData);
+            BinaryWriter W = new BinaryWriter(aData);
             SerializeBinary(W);
         }
 
-        public void SaveToCompressedStream(System.IO.Stream aData)
+        public void SaveToCompressedStream(Stream aData)
         {
-            using (var gzipOut = new GZipStream(aData, CompressionLevel.Optimal))
+            using (GZipStream gzipOut = new GZipStream(aData, CompressionLevel.Optimal))
             {
                 SaveToBinaryStream(gzipOut);
                 gzipOut.Close();
             }
         }
- 
+
         public void SaveToCompressedFile(string aFileName)
         {
- 
-            System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
-            using(var F = System.IO.File.OpenWrite(aFileName))
+            Directory.CreateDirectory(new FileInfo(aFileName).Directory.FullName);
+            using (FileStream F = File.OpenWrite(aFileName))
             {
                 SaveToCompressedStream(F);
             }
         }
+
         public string SaveToCompressedBase64()
         {
-            using (var stream = new System.IO.MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 SaveToCompressedStream(stream);
                 stream.Position = 0;
-                return System.Convert.ToBase64String(stream.ToArray());
+                return Convert.ToBase64String(stream.ToArray());
             }
         }
 
         public void SaveToBinaryFile(string aFileName)
         {
-            System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
-            using (var F = System.IO.File.OpenWrite(aFileName))
+            Directory.CreateDirectory(new FileInfo(aFileName).Directory.FullName);
+            using (FileStream F = File.OpenWrite(aFileName))
             {
                 SaveToBinaryStream(F);
             }
@@ -87,87 +90,90 @@ namespace SimpleJSON
 
         public string SaveToBinaryBase64()
         {
-            using (var stream = new System.IO.MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 SaveToBinaryStream(stream);
                 stream.Position = 0;
-                return System.Convert.ToBase64String(stream.ToArray());
+                return Convert.ToBase64String(stream.ToArray());
             }
         }
 
-        public static JSONNode DeserializeBinary(System.IO.BinaryReader aReader)
+        public static JSONNode DeserializeBinary(BinaryReader aReader)
         {
-            JSONNodeType type = (JSONNodeType)aReader.ReadByte();
+            JSONNodeType type = (JSONNodeType) aReader.ReadByte();
             switch (type)
             {
                 case JSONNodeType.Array:
-                    {
-                        int count = aReader.ReadInt32();
-                        JSONArray tmp = new JSONArray();
-                        for (int i = 0; i < count; i++)
-                            tmp.Add(DeserializeBinary(aReader));
-                        return tmp;
-                    }
+                {
+                    int count = aReader.ReadInt32();
+                    JSONArray tmp = new JSONArray();
+                    for (int i = 0; i < count; i++)
+                        tmp.Add(DeserializeBinary(aReader));
+                    return tmp;
+                }
                 case JSONNodeType.Object:
+                {
+                    int count = aReader.ReadInt32();
+                    JSONObject tmp = new JSONObject();
+                    for (int i = 0; i < count; i++)
                     {
-                        int count = aReader.ReadInt32();
-                        JSONObject tmp = new JSONObject();
-                        for (int i = 0; i < count; i++)
-                        {
-                            string key = aReader.ReadString();
-                            var val = DeserializeBinary(aReader);
-                            tmp.Add(key, val);
-                        }
-                        return tmp;
+                        string key = aReader.ReadString();
+                        JSONNode val = DeserializeBinary(aReader);
+                        tmp.Add(key, val);
                     }
+
+                    return tmp;
+                }
                 case JSONNodeType.String:
-                    {
-                        return new JSONString(aReader.ReadString());
-                    }
+                {
+                    return new JSONString(aReader.ReadString());
+                }
                 case JSONNodeType.Number:
-                    {
-                        return new JSONNumber(aReader.ReadDouble());
-                    }
+                {
+                    return new JSONNumber(aReader.ReadDouble());
+                }
                 case JSONNodeType.Boolean:
-                    {
-                        return new JSONBool(aReader.ReadBoolean());
-                    }
+                {
+                    return new JSONBool(aReader.ReadBoolean());
+                }
                 case JSONNodeType.NullValue:
-                    {
-                        return JSONNull.CreateOrGet();
-                    }
+                {
+                    return JSONNull.CreateOrGet();
+                }
                 default:
-                    {
-                        throw new Exception("Error deserializing JSON. Unknown tag: " + type);
-                    }
+                {
+                    throw new Exception("Error deserializing JSON. Unknown tag: " + type);
+                }
             }
         }
 
-        public static JSONNode LoadFromCompressedStream(System.IO.Stream aData)
+        public static JSONNode LoadFromCompressedStream(Stream aData)
         {
-            var zin = new GZipStream(aData, CompressionMode.Decompress);
+            GZipStream zin = new GZipStream(aData, CompressionMode.Decompress);
             return LoadFromBinaryStream(zin);
         }
+
         public static JSONNode LoadFromCompressedFile(string aFileName)
         {
-            using(var F = System.IO.File.OpenRead(aFileName))
+            using (FileStream F = File.OpenRead(aFileName))
             {
                 return LoadFromCompressedStream(F);
             }
         }
+
         public static JSONNode LoadFromCompressedBase64(string aBase64)
         {
-            var tmp = System.Convert.FromBase64String(aBase64);
-            var stream = new System.IO.MemoryStream(tmp)
+            byte[] tmp = Convert.FromBase64String(aBase64);
+            MemoryStream stream = new MemoryStream(tmp)
             {
                 Position = 0
             };
             return LoadFromCompressedStream(stream);
         }
 
-        public static JSONNode LoadFromBinaryStream(System.IO.Stream aData)
+        public static JSONNode LoadFromBinaryStream(Stream aData)
         {
-            using (var R = new System.IO.BinaryReader(aData))
+            using (BinaryReader R = new BinaryReader(aData))
             {
                 return DeserializeBinary(R);
             }
@@ -175,7 +181,7 @@ namespace SimpleJSON
 
         public static JSONNode LoadFromBinaryFile(string aFileName)
         {
-            using (var F = System.IO.File.OpenRead(aFileName))
+            using (FileStream F = File.OpenRead(aFileName))
             {
                 return LoadFromBinaryStream(F);
             }
@@ -183,8 +189,8 @@ namespace SimpleJSON
 
         public static JSONNode LoadFromBinaryBase64(string aBase64)
         {
-            var tmp = System.Convert.FromBase64String(aBase64);
-            var stream = new System.IO.MemoryStream(tmp)
+            byte[] tmp = Convert.FromBase64String(aBase64);
+            MemoryStream stream = new MemoryStream(tmp)
             {
                 Position = 0
             };
@@ -194,22 +200,19 @@ namespace SimpleJSON
 
     public partial class JSONArray : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-            aWriter.Write((byte)JSONNodeType.Array);
+            aWriter.Write((byte) JSONNodeType.Array);
             aWriter.Write(m_List.Count);
-            for (int i = 0; i < m_List.Count; i++)
-            {
-                m_List[i].SerializeBinary(aWriter);
-            }
+            for (int i = 0; i < m_List.Count; i++) m_List[i].SerializeBinary(aWriter);
         }
     }
 
     public partial class JSONObject : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-            aWriter.Write((byte)JSONNodeType.Object);
+            aWriter.Write((byte) JSONNodeType.Object);
             aWriter.Write(m_Dict.Count);
             foreach (string K in m_Dict.Keys)
             {
@@ -221,42 +224,43 @@ namespace SimpleJSON
 
     public partial class JSONString : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-            aWriter.Write((byte)JSONNodeType.String);
+            aWriter.Write((byte) JSONNodeType.String);
             aWriter.Write(m_Data);
         }
     }
 
     public partial class JSONNumber : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-            aWriter.Write((byte)JSONNodeType.Number);
+            aWriter.Write((byte) JSONNodeType.Number);
             aWriter.Write(m_Data);
         }
     }
 
     public partial class JSONBool : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-            aWriter.Write((byte)JSONNodeType.Boolean);
+            aWriter.Write((byte) JSONNodeType.Boolean);
             aWriter.Write(m_Data);
         }
     }
+
     public partial class JSONNull : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-            aWriter.Write((byte)JSONNodeType.NullValue);
+            aWriter.Write((byte) JSONNodeType.NullValue);
         }
     }
+
     internal partial class JSONLazyCreator : JSONNode
     {
-        public override void SerializeBinary(System.IO.BinaryWriter aWriter)
+        public override void SerializeBinary(BinaryWriter aWriter)
         {
-
         }
     }
 }

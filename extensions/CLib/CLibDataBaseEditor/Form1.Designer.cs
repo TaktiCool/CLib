@@ -115,12 +115,14 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.FileName = "*.clibdata";
-            this.saveFileDialog1.Filter = "CLib DataBase|*.clibdata|Binary Json|*.bson|Json|*.json";
+            this.saveFileDialog1.Filter = "CLib DataBase|*.clibdata|Binary Json|*.bson|Json|*.json|XML|*.xml";
+            this.saveFileDialog1.RestoreDirectory = true;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "CLib DataBase|*.clibdata|Binary Json|*.bson|Json|*.json";
+            this.openFileDialog1.Filter = "CLib DataBase|*.clibdata|Binary Json|*.bson|Json|*.json|XML|*.xml";
+            this.openFileDialog1.RestoreDirectory = true;
             // 
             // Form1
             // 
