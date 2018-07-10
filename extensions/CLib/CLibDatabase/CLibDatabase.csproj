@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DllEntry.cs" />
+    <Compile Include="Json\SimpleJson.cs" />
+    <Compile Include="Json\SimpleJsonBinary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

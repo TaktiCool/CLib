@@ -58,3 +58,5 @@ extensions/CLib/packages
 *.bikey
 
 *.bisign
+
+CLibDataBaseEditor\.exe\.config
