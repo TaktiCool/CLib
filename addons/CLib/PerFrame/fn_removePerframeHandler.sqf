@@ -24,9 +24,25 @@ if (_handle < 0 || {_handle >= count GVAR(PFHhandles)}) exitWith {};
 private _index = GVAR(PFHhandles) select _handle;
 
 if (isNil "_index") exitWith {};
-GVAR(deletedIndices) pushback _index;
 
 private _oldData = GVAR(perFrameHandlerArray) select _index;
 _oldData set [0, {}];
 
 GVAR(PFHhandles) set [_handle, nil];
+if (GVAR(deletedIndices) isEqualTo []) then {
+    [{
+        {
+            GVAR(perFrameHandlerArray) set [_x, objNull];
+            nil
+        } count GVAR(deletedIndices);
+
+        GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
+
+        {
+            _x params ["", "", "", "", "", "_handle"];
+            GVAR(PFHhandles) set [_handle, _forEachIndex];
+        } forEach GVAR(perFrameHandlerArray);
+        GVAR(deletedIndices) = [];
+    }] call CFUNC(execNextFrame);
+};
+GVAR(deletedIndices) pushback _index;
