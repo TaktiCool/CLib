@@ -11,9 +11,13 @@
     Returns an array containing all items of a given unit
 
     Parameter(s):
-    0: Unit <Object>
+    0: Unit <Object> (Default: player)
 
     Returns:
+    Loadout <Array>
+
+    Remarks:
+    Loadout
      0: Headgear <String>
      1: Goggles <String>
      2: Uniform <String>
@@ -35,7 +39,9 @@
     18: Binoculars <String>
 */
 
-params ["_unit"];
+params [
+    ["_unit", player, [objNull]]
+];
 
 if (isNull _unit) exitWith {[
     "",

@@ -12,13 +12,13 @@
 
     Parameter(s):
     0: Cache ID <String>
-    1: Function whose return value gets cached <String, Code>
-    2: Arguments <Any>
+    1: Function whose return value gets cached <Code>
+    2: Arguments <Anything>
     3: Time until the cached values are being obsolet <Number>
     4: Event that clears the cache <String>
 
     Returns:
-    0: Return Name <TYPE>
+    0: Return Name <Anything>
 */
 params ["_uid", "_fnc", "_args", "_duration", "_event"];
 private _timestamp = (GVAR(cachedCall) getVariable [_uid, [-999999999]]) select 0;

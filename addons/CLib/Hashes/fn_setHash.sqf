@@ -5,38 +5,45 @@
     Author: joko // Jonas
 
     Description:
-
+    Sets a Value on to a Hash
 
     Parameter(s):
-
+    0: HashSet <Array> (Default: [[], []])
+    1: Key <Any> (Default: "")
+    2: Value <Anything> (Default: objNull)
 
     Returns:
-
+    HashSet <Array>
 */
-params ["_hash", "_key", "_value"];
+
+params [
+    ["_hashSet", [[], []], [[]], 2],
+    ["_key", "", []],
+    "_value"
+];
 
 private _delete = isNil "_value";
 
-private _contain = [_hash, _key] call CFUNC(containsKey);
+private _contain = [_hashSet, _key] call CFUNC(containsKey);
 
 switch (true) do {
     case (_contain && _delete): {
-        private _i = (_hash select HASH_KEY) find _key;
+        private _i = (_hashSet select HASH_KEYS) find _key;
         {
             _x deleteAt _i;
             nil
-        } count _hash;
-        _hash
+        } count _hashSet;
+        _hashSet
     };
-    case (_contain): {
-        private _i = (_hash select HASH_KEY) find _key;
-        (_hash select HASH_VALUE) set [_i, _value];
-        _hash
+    case (_contain && !_delete): {
+        private _i = (_hashSet select HASH_KEYS) find _key;
+        (_hashSet select HASH_VALUES) set [_i, _value];
+        _hashSet
     };
-    case (!_contain): {
-        private _i = (_hash select HASH_KEY) pushBack _key;
-        (_hash select HASH_VALUE) set [_i, _value];
-        _hash
+    case (!_contain && !_delete): {
+        private _i = (_hashSet select HASH_KEYS) pushBack _key;
+        (_hashSet select HASH_VALUES) set [_i, _value];
+        _hashSet
     };
     default {
         DUMP("ERROR: Something went wrong");

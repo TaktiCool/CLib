@@ -8,16 +8,21 @@
     Add weapon Wraper
 
     Parameter(s):
-    0: Weapon Classname <String>
-    1: Magazine Classname <String>
-    2: Magazine count <Number>
+    0: Unit <Object> (Default: objNull)
+    1: Weapon classsname <String> (Default: "")
+    2: Magazine data <Array> (Default: ["", 0])
 
     Returns:
     None
 */
-params ["_className", "_magazine", "_count"];
+
+params [
+    ["_unit", objNull, [objNull]],
+    ["_className", "", [""]],
+    ["_magazineData", ["", 0], [[]], 2]
+];
 
 if (_className != "") then {
-    [_magazine, _count] call CFUNC(addMagazine);
-    CLib_Player addWeapon _className;
+    [_unit, _magazineData] call CFUNC(addMagazine);
+    _unit addWeapon _className;
 };

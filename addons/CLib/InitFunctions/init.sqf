@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Fake function that calls and compiles initFunctions because no PreProcessor is Avable over the cfgFunctions entry
+    Fake function that calls and compiles init Functions because no PreProcessor is Available over the cfgFunctions entry
 
     Parameter(s):
     None
@@ -14,5 +14,9 @@
     None
 */
 
-_this call compile preprocessFileLineNumbers "tc\CLib\addons\CLib\initFunctions.sqf";
-//_this call compile preprocessFileLineNumbers "A3\functions_f\initFunctions.sqf";
+RUNTIMESTART;
+private _initFunctionsArgs = _this;
+isNil {
+    _initFunctionsArgs call compile preprocessFileLineNumbers (["tc\CLib\addons\CLib\InitFunctions\initFunctions.sqf", "a3\functions_f\initfunctions.sqf"] select (getNumber (configFile >> "cfgFunctions" >> "version") == 3));
+};
+RUNTIME("InitCompile");

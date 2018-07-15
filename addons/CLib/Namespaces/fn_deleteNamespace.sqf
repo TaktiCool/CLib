@@ -8,12 +8,15 @@
     Delete a Location
 
     Parameter(s):
-    Namespace <Location>
+    0: Namespace <Location, Object> (Default: locationNull)
 
     Returns:
     None
 */
-params [["_namespace", locationNull, [locationNull]]];
+
+params [
+    ["_namespace", locationNull, [locationNull, objNull]]
+];
 
 GVAR(allCustomNamespaces) deleteAt (GVAR(allCustomNamespaces) find _namespace);
 

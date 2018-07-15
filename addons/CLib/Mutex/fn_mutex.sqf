@@ -8,16 +8,21 @@
     Executes a block of code and prevents it from being partially executed on different clients.
 
     Parameter(s):
-    0: Code which gets executed <Code>
-    1: Aruments for the Code <Any>
+    0: Code which gets executed <Code> (Default: {})
+    1: Aruments for the Code <Any> (Default: [])
+    2: Mutex identifier <String> (Default: main)
 
     Returns:
-    <Any>
+    None
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
-params [["_code", {}], ["_args", []], ["_mutexId", "main"]];
+params [
+    ["_code", {}, [{}]],
+    ["_args", [], []],
+    ["_mutexId", "main", [""]]
+];
 
 private _mutexCache = GVAR(mutexCaches) getVariable [_mutexId, []];
 

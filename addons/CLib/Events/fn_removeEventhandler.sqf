@@ -8,16 +8,19 @@
     Remove Eventhandler
 
     Parameter(s):
-    0: Event name <String>
-    1: ID <Number>
+    0: Event name <String> (Default: "")
+    1: ID <Number> (Default: -1)
 
     Returns:
-    is Removed <Bool>
+    Removed <Bool>
 */
-params [["_eventName", "", [""]], ["_id", -1, [-1]]];
 
-DUMP("Eventhandler Removed: "+ _eventName);
-private _event = format ["CLib_Event_%1", _eventName];
+params [
+    ["_event", "", [""]],
+    ["_id", -1, [0]]
+];
+
+DUMP("Eventhandler Removed: "+ _event);
 private _eventArray = GVAR(EventNamespace) getVariable [_event, []];
 if (count _eventArray >= _id) then {
     _eventArray set [_id, nil];

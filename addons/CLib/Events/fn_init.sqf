@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(EventNamespace) = false call CFUNC(createNamespace);
 
 GVAR(ignoredLogEventNames_0) = [];
@@ -33,8 +34,22 @@ GVAR(ignoredLogEventNames_1) = [];
 
 // EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
 ["eventAdded", {
-    params ["_arguments", "_data"];
+    params ["_arguments"];
     _arguments params ["_event", "_function", "_args"];
+
+    if (_event isEqualTo "entityCreated") exitWith {
+        if !(isNil QGVAR(entitiesCached) && {GVAR(entitiesCached) isEqualTo []}) then {
+            GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
+            if (_function isEqualType "") then {
+                _function = parsingNamespace getVariable [_function, {}];
+            };
+            {
+                [_x, _args] call _function;
+                nil
+            } count GVAR(entitiesCached);
+        };
+    };
+
     if (!(isNil QGVAR(missionStartedTriggered)) && {_event isEqualTo "missionStarted"}) then {
         LOG("Mission Started Event get Added After Mission Started");
         if (_function isEqualType "") then {
@@ -59,6 +74,8 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _object enableSimulationGlobal _value;
 }] call CFUNC(addEventhandler);
+
+// Curator Commands
 ["assignCurator", {
     (_this select 0) params ["_player", "_curatorObject"];
     if (!isServer) exitWith {
@@ -79,6 +96,13 @@ GVAR(ignoredLogEventNames_1) = [];
         LOG("AddCuratorEditableObjects has to be a server event");
     };
     _curatorObject addCuratorEditableObjects _args;
+}] call CFUNC(addEventhandler);
+["removeCuratorEditableObjects", {
+    (_this select 0) params ["_curatorObject", "_args"];
+    if (!isServer) exitWith {
+        LOG("RemoveCuratorEditableObjects has to be a server event");
+    };
+    _curatorObject removeCuratorEditableObjects _args;
 }] call CFUNC(addEventhandler);
 
 // Events for commands with local args
@@ -130,6 +154,22 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _vehicle setFuel _value;
 }] call CFUNC(addEventHandler);
+["setDamage", {
+    (_this select 0) params ["_vehicle", "_value"];
+    if (!local _vehicle) exitWith {
+        LOG("setDamage event has wrong locality");
+        ["setDamage", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle setDamage _value;
+}] call CFUNC(addEventHandler);
+["setVehicleAmmo", {
+    (_this select 0) params ["_vehicle", "_value"];
+    if (!local _vehicle) exitWith {
+        LOG("setVehicleAmmo event has wrong locality");
+        ["setVehicleAmmo", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle setVehicleAmmo _value;
+}] call CFUNC(addEventHandler);
 ["removeMagazineTurret", {
     (_this select 0) params ["_vehicle", "_args"];
     if (!local _vehicle) exitWith {
@@ -145,6 +185,22 @@ GVAR(ignoredLogEventNames_1) = [];
         ["addMagazineTurret", _vehicle, _this select 0] call CFUNC(targetEvent);
     };
     _vehicle addMagazineTurret _args;
+}] call CFUNC(addEventHandler);
+["removeMagazine", {
+    (_this select 0) params ["_vehicle", "_args"];
+    if (!local _vehicle) exitWith {
+        LOG("RemoveMagazine event has wrong locality");
+        ["removeMagazine", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle removeMagazine _args;
+}] call CFUNC(addEventHandler);
+["addMagazine", {
+    (_this select 0) params ["_vehicle", "_args"];
+    if (!local _vehicle) exitWith {
+        LOG("AddMagazine event has wrong locality");
+        ["addMagazine", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle addMagazine _args;
 }] call CFUNC(addEventHandler);
 
 // Events for commands with owner ids
@@ -190,16 +246,42 @@ GVAR(ignoredLogEventNames_1) = [];
     _vehicle setVehicleVarName _name;
 }] call CFUNC(addEventhandler);
 
+// Dynamic Simulation System
+["enableDynamicSimulationSystem", {
+    (_this select 0) params ["_bool"];
+    enableDynamicSimulationSystem _bool;
+}] call CFUNC(addEventhandler);
+["enableDynamicSimulation", {
+    (_this select 0) params ["_obj", "_bool"];
+    if (_obj isKindOf "LaserTarget") exitWith {};
+    _obj enableDynamicSimulation _bool;
+}] call CFUNC(addEventhandler);
+["setDynamicSimulationDistance", {
+    (_this select 0) params ["_category", "_distance"];
+    _category setDynamicSimulationDistance _distance
+}] call CFUNC(addEventhandler);
+["setDynamicSimulationDistanceCoef", {
+    (_this select 0) params ["_class", "_multiplier"];
+    _class setDynamicSimulationDistanceCoef _multiplier;
+}] call CFUNC(addEventhandler);
+["triggerDynamicSimulation", {
+    (_this select 0) params ["_obj", "_bool"];
+    if (_obj isKindOf "LaserTarget") exitWith {};
+    _obj triggerDynamicSimulation _bool;
+}] call CFUNC(addEventhandler);
+
+// Entity Created Events
 ["missionStarted", {
     GVAR(missionStartedTriggered) = true;
-
+    #define REFILL_TIMINGS 15
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
 
     DFUNC(entityCreated) = {
         params ["_obj"];
-        if !(_obj getVariable [QGVAR(isProcessed), false] || _obj isKindOf "Animal" || _obj isKindOf "Logic" || (typeOf _obj) isEqualTo "") then {
+        if !(_obj getVariable [QGVAR(isProcessed), false] || [_obj, ["Animal", "Logic"]] call CFUNC(isKindOfArray) || (typeOf _obj) isEqualTo "") then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
+            GVAR(entitiesCached) pushBackUnique _obj;
         };
     };
 
@@ -211,36 +293,33 @@ GVAR(ignoredLogEventNames_1) = [];
 
     [GVAR(entityCreatedSM), "init", {
         GVAR(entitiesCached) = [];
-        GVAR(entities) = (entities [[], [], true, false]);
-        GVAR(entities) append allMissionObjects "All";
-        "clearOutEntits"
+        GVAR(entitieQueue) append allMissionObjects "All";
+        "refillEntitiesData"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "refillEntitiesData", {
-        GVAR(entities) = (entities [[], [], true, false]);
+        GVAR(entitieQueue) = (entities [[], [], true, false]);
         "clearOutEntits"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "clearOutEntits", {
-        GVAR(entities) = GVAR(entities) - GVAR(entitiesCached);
-        GVAR(entities) = GVAR(entities) arrayIntersect GVAR(entities);
+        GVAR(entitieQueue) = GVAR(entitieQueue) - GVAR(entitiesCached);
+        GVAR(entitieQueue) = GVAR(entitieQueue) arrayIntersect GVAR(entitieQueue);
         "applyNewEntitieVariables"
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "applyNewEntitieVariables", {
-        GVAR(lastFilledEntities) = diag_frameNo + 15;
-        GVAR(entitiesCached) append GVAR(entities);
+        GVAR(lastFilledEntities) = diag_frameNo + REFILL_TIMINGS;
         GVAR(entitiesCached) = GVAR(entitiesCached) - [objNull];
-        ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
+        ["checkObject", "wait"] select (GVAR(entitieQueue) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
-
     [GVAR(entityCreatedSM), "checkObject", {
-        private _obj = GVAR(entities) deleteAt 0;
+        private _obj = GVAR(entitieQueue) deleteAt 0;
         if !(isNull _obj) then {
             _obj call FUNC(entityCreated);
         };
-        ["checkObject", "wait"] select (GVAR(entities) isEqualTo []);
+        ["checkObject", "wait"] select (GVAR(entitieQueue) isEqualTo []);
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM), "wait", {
@@ -248,5 +327,4 @@ GVAR(ignoredLogEventNames_1) = [];
     }] call CFUNC(addStatemachineState);
 
     [GVAR(entityCreatedSM)] call CFUNC(startStatemachine);
-
 }] call CFUNC(addEventHandler);

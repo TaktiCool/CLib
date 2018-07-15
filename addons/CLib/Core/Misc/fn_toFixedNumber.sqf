@@ -8,10 +8,10 @@
     Removes all Not needed 0 from toFixed numbers and returls only the max toFixed number count that is required.
 
     Parameter(s):
-    0: Argument <Type>
+    Number <Number>
 
     Returns:
-    0: Return <Type>
+    Number in a String form <String>
 */
 params [["_number", 0, [0]]];
 

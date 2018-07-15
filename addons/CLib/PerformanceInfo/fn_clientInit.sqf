@@ -14,65 +14,105 @@
     None
 */
 
-#ifdef ISDEV
-    #define FRAMECOUNT 40
-    GVAR(topFPS) = 0;
-    GVAR(FPSStorage) = [];
-    GVAR(FPSStorage) resize FRAMECOUNT;
-    GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
+#define FRAMECOUNT 40
+GVAR(topFPS) = 0;
+GVAR(FPSStorage) = [];
+GVAR(FPSStorage) resize FRAMECOUNT;
+GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
+uiNamespace setVariable [QGVAR(ctrlGroup), controlNull];
 
-    ["missionStarted", {
-        // Create all controls
-        private _display = findDisplay 46;
-        private _ctrlGroup = _display ctrlCreate ["RscControlsGroupNoScrollbars", 9500];
-        _ctrlGroup ctrlSetPosition [safeZoneX + safeZoneW - PX(FRAMECOUNT * 0.2 + 5), 0.5 + PY(3.4), PX(FRAMECOUNT * 0.2 + 4), PY(5)];
+GVAR(pfhID) = -1;
+
+DFUNC(toggleFrameInfo) = {
+    if (GVAR(pfhID) != -1) exitWith {
+        GVAR(pfhID) call CFUNC(removePerFrameHandler);
+        GVAR(pfhID) = -1;
+
+        private _ctrlGroup = uiNamespace getVariable [QGVAR(ctrlGroup), controlNull];
+        _ctrlGroup ctrlShow false;
         _ctrlGroup ctrlCommit 0;
 
-        private _control = _display ctrlCreate ["RscStructuredText", 9501, _ctrlGroup];
-        _control ctrlSetPosition [PX(0), PY(0), PX(4), PY(1.5)];
-        _control ctrlSetFont "PuristaMedium";
-        _control ctrlCommit 0;
+        GVAR(topFPS) = 0;
+        GVAR(FPSStorage) resize FRAMECOUNT;
+        GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
+    };
 
+    // Create the PFH
+    GVAR(pfhID) = [{
+        private _display = findDisplay 46;
+        if (isNull _display) exitWith {};
+
+        private _currentFPS = 1 / CGVAR(deltaTime);
+        GVAR(topFPS) = _currentFPS max GVAR(topFPS);
+
+        GVAR(FPSStorage) deleteAt 0;
+        GVAR(FPSStorage) pushBack _currentFPS;
+
+        private _prevFrameFPS = 0;
+        private _maxFPS = 0;
         for "_i" from 0 to (FRAMECOUNT - 1) do {
-            private _control = _display ctrlCreate ["RscPicture", 9502 + _i, _ctrlGroup];
-            _control ctrlSetPosition [PX(_i * 0.2 + 4), PY(0), PX(0.2), PY(5)];
-            _control ctrlSetText "#(argb,8,8,3)color(1,1,1,1)";
+            private _control = _display displayCtrl (9503 + _i);
+            private _position = ctrlPosition _control;
+            private _frameFPS = GVAR(FPSStorage) select _i;
+            _maxFPS = _frameFPS max _maxFPS;
+            private _height = _frameFPS / GVAR(topFPS) * PY(5);
+            _position set [1, PY(5) - _height];
+            _position set [3, _height];
+            _control ctrlSetPosition _position;
+            _control ctrlSetTextColor ([[1, 1, 1, 0.8], [1, 0, 0, 0.8]] select (_frameFPS < _prevFrameFPS * 0.7));
             _control ctrlCommit 0;
+            _prevFrameFPS = _frameFPS;
         };
 
-        // Create the PFH
-        [{
-            params ["_display"];
+        if (_maxFPS < GVAR(topFPS) * 0.7) then {
+            GVAR(topFPS) = GVAR(topFPS) * 0.8;
+        };
 
-            if (isNull _display) exitWith {};
+        (_display displayCtrl 9501) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round GVAR(topFPS)];
+        (_display displayCtrl 9502) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round _currentFPS];
+    }, 0, _display] call CFUNC(addPerFrameHandler);
+    private _ctrlGroup = uiNamespace getVariable [QGVAR(ctrlGroup), controlNull];
+    _ctrlGroup ctrlShow true;
+    _ctrlGroup ctrlCommit 0;
+};
+["missionStarted", {
+    params ["_display"];
+    // Create all controls
+    private _ctrlGroup = _display ctrlCreate ["RscControlsGroupNoScrollbars", 9500];
+    _ctrlGroup ctrlSetPosition [safeZoneX + safeZoneW - PX(FRAMECOUNT * 0.2 + 5), 0.5 + PY(3.4), PX(FRAMECOUNT * 0.2 + 4), PY(5)];
+    _ctrlGroup ctrlCommit 0;
 
-            private _currentFPS = 1 / CGVAR(deltaTime);
-            GVAR(topFPS) = _currentFPS max GVAR(topFPS);
+    uiNamespace setVariable [QGVAR(ctrlGroup), _ctrlGroup];
 
-            GVAR(FPSStorage) deleteAt 0;
-            GVAR(FPSStorage) pushBack _currentFPS;
+    private _control = _display ctrlCreate ["RscStructuredText", 9501, _ctrlGroup];
+    _control ctrlSetPosition [PX(0), PY(0), PX(4), PY(1.5)];
+    _control ctrlSetFont "PuristaMedium";
+    _control ctrlCommit 0;
 
-            private _prevFrameFPS = 0;
-            private _maxFPS = 0;
-            for "_i" from 0 to (FRAMECOUNT - 1) do {
-                private _control = _display displayCtrl (9502 + _i);
-                private _position = ctrlPosition _control;
-                private _frameFPS = GVAR(FPSStorage) select _i;
-                _maxFPS = _frameFPS max _maxFPS;
-                private _height = _frameFPS / GVAR(topFPS) * PY(5);
-                _position set [1, PY(5) - _height];
-                _position set [3, _height];
-                _control ctrlSetPosition _position;
-                _control ctrlSetTextColor ([[1, 1, 1, 0.8], [1, 0, 0, 0.8]] select (_frameFPS < _prevFrameFPS * 0.7));
-                _control ctrlCommit 0;
-                _prevFrameFPS = _frameFPS;
-            };
+    _control = _display ctrlCreate ["RscStructuredText", 9502, _ctrlGroup];
+    _control ctrlSetPosition [PX(0), PY(3.5), PX(4), PY(1.5)];
+    _control ctrlSetFont "PuristaMedium";
+    _control ctrlCommit 0;
 
-            if (_maxFPS < GVAR(topFPS) * 0.7) then {
-                GVAR(topFPS) = GVAR(topFPS) * 0.8;
-            };
+    for "_i" from 0 to (FRAMECOUNT - 1) do {
+        private _control = _display ctrlCreate ["RscPicture", 9503 + _i, _ctrlGroup];
+        _control ctrlSetPosition [PX(_i * 0.2 + 4), PY(0), PX(0.2), PY(5)];
+        _control ctrlSetText "#(argb,8,8,3)color(1,1,1,1)";
+        _control ctrlCommit 0;
+    };
 
-            (_display displayCtrl 9501) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round GVAR(topFPS)];
-        }, 0, _display] call CFUNC(addPerFrameHandler);
-    }] call CFUNC(addEventHandler);
-#endif
+    _ctrlGroup ctrlShow false;
+    _ctrlGroup ctrlCommit 0;
+
+    #ifdef ISDEV
+        call FUNC(toggleFrameInfo);
+    #endif
+}] call CFUNC(addEventHandler);
+
+[QGVAR(dumpPerformanceInfo), {
+    (_this select 0) call FUNC(dumpPerformanceInfo);
+}] call CFUNC(addEventhandler);
+
+[QGVAR(dump), {
+    diag_log text (_this select 0);
+}] call CFUNC(addEventhandler);

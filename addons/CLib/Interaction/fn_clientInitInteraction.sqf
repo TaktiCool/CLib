@@ -19,16 +19,15 @@ if !(hasInterface) exitWith {};
 GVAR(currentActionID) = -1;
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorObjectChanged", FUNC(onCursorObjectChanged)] call CFUNC(addEventhandler);
+["cursorObjectChanged", {(_this select 0) call FUNC(onCursorObjectChanged)}] call CFUNC(addEventhandler);
 ["playerChanged", {
-    params ["_data", "_params"];
-    _data params ["_currentPlayer", "_oldPlayer"];
+    (_this select 0) params ["_currentPlayer", "_oldPlayer"];
     // Posible Fix for Double Squad Menu Entry
     if (_currentPlayer isEqualTo _oldPlayer) exitWith {};
     {
-        _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded"];
+        _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_selection", "_memorypoint", "_onActionAdded"];
         _oldPlayer removeAction _id;
-        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
         _id = _currentPlayer addAction _argArray;
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
@@ -49,7 +48,7 @@ GVAR(DisableNextAction) = false;
 GVAR(DisableAction) = false;
 
 private _inGameUiEventHandler = {
-    params ["_target", "_caller", "_idx", "_id", "_title", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_visibility", "_eventName"];
+    params ["_target", "_caller", "_idx", "_id", "_title", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_visibility", "_selection", "_memorypoint", "_eventName"];
 
     if (GVAR(DisablePrevAction) && {_eventName == "PrevAction"} || (GVAR(DisableNextAction) && {_eventName == "NextAction"}) || (GVAR(DisableAction) && {_eventName == "Action"})) then {
         true

@@ -8,14 +8,19 @@
     Trigger a Eventhandler on a Map Icon Draw
 
     Parameter(s):
-    0: Icon Id <String>
-    1: Icon Event Name <String>
-    2: Arguments <Any>
+    0: Icon Id <String> (Default: "")
+    1: Icon Event Name <String> (Default: "")
+    2: Arguments <Any> (Default: [])
 
     Returns:
     None
 */
-params [["_uid", "", [""]], ["_eventName", "", [""]], ["_args", []]];
+
+params [
+    ["_uid", "", [""]],
+    ["_eventName", "", [""]],
+    ["_args", [], []]
+];
 
 private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
 private _namespace = missionNamespace getVariable _eventNameSpace;

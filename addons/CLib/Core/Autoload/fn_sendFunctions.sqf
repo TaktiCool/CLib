@@ -17,7 +17,7 @@
 
 params [["_functionName", ""], ["_clientID", -1], ["_index", 0]];
 
-private _functionCode = if (USE_COMPRESSION(CGVAR(useFunctionCompression))) then {
+private _functionCode = if (USE_COMPRESSION(true)) then {
     parsingNamespace getVariable [_functionName + "_Compressed", ""];
 } else {
     private _code = parsingNamespace getVariable [_functionName, {}];

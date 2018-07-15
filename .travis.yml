@@ -5,18 +5,19 @@ branches:
 
 dist: trusty
 language: python
-
+python:
+  - '3.6'
 matrix:
   include:
     ###############################################################################
     # Job #1 - SQF validation
     ###############################################################################
-    - python: '3.5'
+    - python: '3.6'
       before_script:
-      - cd tools
+      - git clone https://github.com/jokoho48/sqf.git sqfLint
       script:
-      - python3 sqf_validator.py
-
+      - python3 tools/sqf_validator.py
+      - python3 sqfLint/sqflint.py -d addons
     ###############################################################################
     # Job #2 - Building Extensions Disabled because not working :(
     ###############################################################################

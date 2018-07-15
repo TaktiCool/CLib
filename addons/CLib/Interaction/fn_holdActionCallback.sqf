@@ -8,15 +8,22 @@
     Callback function for the Hold Action
 
     Parameter(s):
-    0: Target <Object>
-    1: Caller <Object>
-    2: Action arguments <Array>
+    0: Target <Object> (Default: objNull)
+    1: Caller <Object> (Default: objNull)
+    2: Action name <Number, String> (Default: 0)
+    3: Action arguments <Array> (Default: [])
 
     Returns:
     None
 */
 
-params ["_target", "_caller", "_id", "_actionArguments"];
+params [
+    ["_target", objNull, [objNull]],
+    ["_caller", objNull, [objNull]],
+    ["_id", 0, [0, ""]],
+    ["_actionArguments", [], [[]], 17]
+];
+
 _actionArguments params [
     "_title",
     "_hint",
@@ -41,7 +48,6 @@ GVAR(HoldActionStartTime) = time;
 
 [_target, _caller, _id, _arguments] call _codeStart;
 
-
 if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     private _display = findDisplay 46;
     private _ctrl = _display ctrlCreate ["RscStructuredText", 6000];
@@ -52,10 +58,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     _ctrl ctrlSetPosition [0, 0.509, 1, 0.5];
     _ctrl ctrlSetFont "PuristaMedium";
     uiNamespace setVariable [UIVAR(HoldAction), _display];
-    //([UIVAR(HoldAction)] call BIS_fnc_rscLayer) cutRsc [UIVAR(HoldAction),"PLAIN",0];
 };
-
-
 
 [{
     params ["_args", "_handle"];
@@ -74,9 +77,10 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
         "_arguments",
         "_priority",
         "_removeCompleted",
-        "_showUnconscious"
+        "_showUnconscious",
+        "_ignoredCanInteractConditions"
     ];
-    private _ret = !((inputAction "Action" < 0.5 && {inputAction "ActionContext" < 0.5}) || !(call _condProgress));
+    private _ret = !((inputAction "Action" < 0.5 && {inputAction "ActionContext" < 0.5}) || !(_args call _condProgress)); // TODO check _ignoredCanInteractConditions
     private _display = uiNamespace getVariable [UIVAR(HoldAction), displayNull];
 
     if (_ret) then {
@@ -91,7 +95,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
         };
 
         if (_id isEqualType 123) then {
-
             (_display displayCtrl 6000) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6001) ctrlSetPosition [0, 0.54, 1, 0.5];
             (_display displayCtrl 6000) ctrlSetStructuredText parseText format ["<t align='center'><img size='3' shadow='0' color='#ffffffff' image='%1'/></t>", _progressIconPath];
@@ -107,8 +110,6 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
             (_display displayCtrl 6000) ctrlCommit 0;
             (_display displayCtrl 6001) ctrlCommit 0;
         };
-
-
 
         if (_ret >= 1) then {
             _ret = true;

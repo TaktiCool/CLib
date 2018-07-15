@@ -16,14 +16,11 @@
     Returns:
     None
 */
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 params ["_state"];
 
 if (_state) then {
     if (!isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
-
-    // end TFAR and ACRE2 radio transmissions
-    // call CFUNC(endRadioTransmission);
 
     // Close map
     if (visibleMap) then {
@@ -32,9 +29,6 @@ if (_state) then {
     GVAR(DisablePrevAction) = true;
     GVAR(DisableNextAction) = true;
     GVAR(DisableAction) = true;
-    //inGameUISetEventHandler ["PrevAction", "true"];
-    //inGameUISetEventHandler ["NextAction", "true"];
-    //inGameUISetEventHandler ["Action", "true"];
 
     GVAR(disableUserInputScrollWheelEventHandler) = (findDisplay 46) displayAddEventHandler ["MouseZChanged", {true}];
     GVAR(disableUserInputMouseButtonEventHandler) = (findDisplay 46) displayAddEventHandler ["MouseButtonDown", {true}];
@@ -49,8 +43,6 @@ if (_state) then {
             for "_index" from 100 to 2000 do {
                 (_dlg displayCtrl _index) ctrlEnable false;
             };
-
-
 
             private _ctrl = _dlg displayctrl 103;
             _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickEndStr)];
@@ -97,8 +89,4 @@ if (_state) then {
     GVAR(DisablePrevAction) = false;
     GVAR(DisableNextAction) = false;
     GVAR(DisableAction) = false;
-
-    //inGameUISetEventHandler ["PrevAction", ""];
-    //inGameUISetEventHandler ["NextAction", ""];
-    //inGameUISetEventHandler ["Action", ""];
 };

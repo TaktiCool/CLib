@@ -8,12 +8,15 @@
     Copy a Statemachine and create a New one with the same States
 
     Parameter(s):
-    0: Statemachine Object <Location>
+    0: Statemachine Object <Location> (Default: locationNull)
 
     Returns:
     Statemachine Object <Location>
 */
-params [["_stateMachine", locationNull, [locationNull]]];
+
+params [
+    ["_stateMachine", locationNull, [locationNull]]
+];
 
 private _stateMachineNew = call CFUNC(createStatemachine);
 private _allVar = [_stateMachine, QGVAR(allStatemachineVariables)] call CFUNC(allVariables);

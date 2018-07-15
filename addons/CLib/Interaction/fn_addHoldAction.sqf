@@ -8,23 +8,33 @@
     Hold Action Handler
 
     Parameter(s):
-    3: Arguments <Array>
-        0: OnStart <Code>
-        1: OnProgress <Code>
-        2: OnCompletion <Code>
-        2: OnAbortion <Code>
-        3: IdleIcon <String>
-        4: ProgressIcon <String>
-        5: IdleText <String>
-        6: Arguments <Array>
+    0: Target <Object, String, Array> (Default: objNull)
+    1: Title <String> (Default: "MISSING TITLE")
+    2: Idle icon <String, Code> (Default: "MISSING ICON")
+    3: Progress icon <String, Code> (Default: "MISSING ICON")
+    4: Show condition <Code> (Default: {true})
+    5: Progress condition <Code> (Default: {true})
+    6: Start code <Code> (Default: {})
+    7: Progress code <Code> (Default: {})
+    8: Completed code <Code> (Default: {})
+    9: Interrupted code <Code> (Default: {})
+    10: Arguments <Any> (Default: [])
+    11: Priority <Number> (Default: 1000)
+    12: Remove on complete <Bool> (Default: true)
+    13: Show unconscious <Bool> (Default: false)
+    14: Ignored canInteract conditions <Array> (Default: [])
+    15: Selection <String> (Default: "")
+    16: Memorypoint <String> (Default: "")
 
-
-    [cursorTarget, "TestHold", "", "", {true}, {true}, {StartTime = time;}, {(time - StartTime)/10},{hint "COMPLETED";},{hint "INTERRUPTED"}] call CFUNC(addHoldAction)
     Returns:
-    0: Return <Type>
+    None
+
+    Example:
+    [cursorTarget, "TestHold", "", "", {true}, {true}, {StartTime = time;}, {(time - StartTime)/10},{hint "COMPLETED";},{hint "INTERRUPTED"}] call CLib_fnc_addHoldAction;
 */
+
 params [
-    ["_target", objNull, [objNull, "", []]],
+    ["_target", objNull, [objNull, "", []], []],
     ["_title", "MISSING TITLE", [""]],
     ["_iconIdle", "MISSING ICON", ["", {}]],
     ["_iconProgress", "MISSING ICON", ["", {}]],
@@ -34,11 +44,13 @@ params [
     ["_codeProgress", {}, [{}]],
     ["_codeCompleted", {}, [{}]],
     ["_codeInterrupted", {}, [{}]],
-    ["_arguments", [], [[]]],
-    ["_priority", 1000, [123]],
+    ["_arguments", [], []],
+    ["_priority", 1000, [0]],
     ["_removeCompleted", true, [true]],
     ["_showUnconscious", false, [true]],
-    ["_ignoredCanInteractConditions", [], [[]]]
+    ["_ignoredCanInteractConditions", [], [[]], []],
+    ["_selection", "", [""]],
+    ["_memorypoint", "", [""]]
 ];
 
 //preprocess data
@@ -47,7 +59,6 @@ private _keyName = _keyNameRaw select [1, count _keyNameRaw - 2];
 private _keyNameColored = format ["<t color='#ffae00'>%1</t>", _keyName];
 private _hint = format [localize "STR_A3_HoldKeyTo", _keyNameColored, _title];
 _hint = format ["<t font='RobotoCondensedBold'>%1</t>", _hint];
-
 
 if (_iconIdle isEqualType "") then {
     _iconIdle = compile format ["""%1""", _iconIdle];
@@ -59,7 +70,7 @@ if (_iconProgress isEqualType "") then {
 
 if (_target isEqualType "" && {_target == "VanillaAction"}) then {
     [_title, {
-        _this call CFUNC(holdActionCallback);
+        _this call FUNC(holdActionCallback);
         true
     }, [
         _title,
@@ -75,13 +86,14 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _arguments,
         _priority,
         _removeCompleted,
-        _showUnconscious
+        _showUnconscious,
+        _selection,
+        _memorypoint
     ]] call CFUNC(overrideAction);
 } else {
-
     _title = format ["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>", _title, _keyName];
     _condShow = compile format ["if (_this call %1) then {[""%2"", %3, ""%4""] call " + QFUNC(IdleAnimation) + "; true;} else {false};", _condShow, _title, _iconIdle, _hint];
-    [_title, _target, 0, _condShow, CFUNC(holdActionCallback), ["arguments", [
+    [_title, _target, 0, _condShow, FUNC(holdActionCallback), ["arguments", [
         _title,
         _hint,
         _iconIdle,
@@ -96,8 +108,10 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _priority,
         _removeCompleted,
         _showUnconscious,
-        _ignoredCanInteractConditions
-    ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "onActionAdded", {
+        _ignoredCanInteractConditions,
+        _selection,
+        _memorypoint
+    ], "priority", _priority, "showWindow", true, "hideOnUse", false, "unconscious", _showUnconscious, "selection", _selection, "memorypoint", _memorypoint, "onActionAdded", {
         params ["_id", "_target", "_argArray"];
         _argArray params ["", "", "_args"];
         _args params [
@@ -115,10 +129,11 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
             "_priority",
             "_removeCompleted",
             "_showUnconscious",
-            "_ignoredCanInteractConditions"
+            "_ignoredCanInteractConditions",
+            "_selection",
+            "_memorypoint"
         ];
 
         _target setUserActionText [_id, _title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconIdle)]];
-
     }, "ignoredCanInteractConditions", _ignoredCanInteractConditions]] call CFUNC(addAction);
 };

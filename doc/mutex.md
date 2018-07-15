@@ -2,14 +2,14 @@
 
 > Maintainer: NetFusion
 
-TODO text here
+The Mutex Module is built around the Idea of Giving Tokens to Clients so that the client can execute code without other clients Interfering with the data the client may modify.
 
 
 ## CLib_fnc_mutex
 
 Parameter(s):
 * [`<Code>`] Code
-* [`<Array>`] Arguments
+* [`<Anything>`] Arguments
 * [`<String>`] Identifier
 
 Returns:
@@ -31,6 +31,16 @@ Examples:
 }, [_myObject], ""] call CLib_fnc_mutex;
 ```
 
-[`<Code>`]: https://community.bistudio.com/wiki/Code
-[`<Array>`]: https://community.bistudio.com/wiki/Array
+[`<Control>`]: https://community.bistudio.com/wiki/Control
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything
+[`<Config>`]: https://community.bistudio.com/wiki/Config
+[`<Object>`]: https://community.bistudio.com/wiki/Object
 [`<String>`]: https://community.bistudio.com/wiki/String
+[`<Number>`]: https://community.bistudio.com/wiki/Number
+[`<Array>`]: https://community.bistudio.com/wiki/Array
+[`<Position>`]: https://community.bistudio.com/wiki/Position
+[`<Color>`]: https://community.bistudio.com/wiki/Color
+[`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
+[`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group
+[`<Location>`]: https://community.bistudio.com/wiki/Location

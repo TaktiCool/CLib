@@ -22,6 +22,26 @@ private _postInit = [];
 private _clientInit = [];
 private _hcInit = [];
 
+private _thread = 0 spawn {
+    scopeName "LoadingScreenFailCheck";
+    private _time = time + 6;
+    while {isNil QGVAR(AutoLoad_loadingScreenDone)} do {
+        if (_time <= time) then {
+            [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
+            disableUserInput false;
+            waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
+            private _errorText = "Warning A Script Error that Crashed Autoload has appeared the Loading Screen got Terminated Automaticly!";
+            [
+                _errorText,
+                "ERROR: A Script Error happend"
+            ] spawn BIS_fnc_guiMessage;
+            LOG("ERROR: " + _errorText);
+            breakOut "LoadingScreenFailCheck";
+        };
+        UIsleep 1;
+    };
+};
+
 // Cycle through all available functions and determine whether to call them or not.
 {
     call {
@@ -73,27 +93,36 @@ private _hcInit = [];
         LOG("Addon Module Call: " + _x + " (" + _strTime + " ms)");
 
         nil
-    } count _this;
+    } count (_this select 0);
 
     [{
         [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
+        GVAR(AutoLoad_loadingScreenDone) = true;
         disableUserInput false;
-    }] call CFUNC(execNextFrame);
+        terminate _this;
+        CGVAR(loadingIsFinished) = true;
+        {
+            (_x select 1) call (_this select 0);
+            nil
+        } count CGVAR(entryPointQueue);
+    }, _this select 1] call CFUNC(execNextFrame);
 
-}, _postInit] call CFUNC(execNextFrame);
+}, [_postInit, _thread]] call CFUNC(execNextFrame);
 
 
 if (didJIP) then {
     QGVAR(jipQueue) addPublicVariableEventHandler {
         {
-            _x params ["_persistent", "_args", "_event"];
-            if ((typeName _persistent) in ["STRING", "BOOL"]) then {
-                if (_persistent isEqualType false && {_persistent}) then {
+            _x params [
+                ["_persistent", false, ["", true]],
+                ["_args", [], []],
+                ["_event", "EventError", [""]]
+            ];
+            if (_persistent isEqualType true && {_persistent}) then {
+                [_event, _args] call CFUNC(localEvent);
+            } else {
+                if (_persistent isEqualTo (getPlayerUID CLib_Player)) then {
                     [_event, _args] call CFUNC(localEvent);
-                } else {
-                    if (_persistent isEqualTo (getPlayerUID CLib_Player)) then {
-                        [_event, _args] call CFUNC(localEvent);
-                    };
                 };
             };
             nil

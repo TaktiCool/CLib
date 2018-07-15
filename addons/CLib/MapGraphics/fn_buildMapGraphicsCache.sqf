@@ -14,7 +14,7 @@
     None
 
 */
-params ["_map"];
+
 private _cache = [];
 
 {

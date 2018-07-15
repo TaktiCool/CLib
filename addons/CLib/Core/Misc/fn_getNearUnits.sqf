@@ -26,8 +26,7 @@ params ["_postion", "_radius"];
     };
 
     private _vehicles = _nearObjects select {
-        _x isKindOf "Car" || _x isKindOf "Air" || _x isKindOf "Motorcycle"
-         || _x isKindOf "StaticWeapon" || _x isKindOf "Tank" || _x isKindOf "Ship"
+        [_x, ["Car", "Air", "Motorcycle", "StaticWeapon", "Tank", "Ship"]] call CFUNC(isKindOfArray)
     };
 
     {
@@ -38,4 +37,4 @@ params ["_postion", "_radius"];
     [_return, CLib_Player] call CFUNC(deleteAtEntry);
 
     _return
-}, [_postion, _radius], 2, QGVAR(clearNearUnits)] call CFUNC(cachedCall);
+}, [_postion, _radius], 2, QCGVAR(clearNearUnits)] call CFUNC(cachedCall);

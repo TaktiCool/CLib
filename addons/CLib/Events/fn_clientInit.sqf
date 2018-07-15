@@ -2,7 +2,7 @@
 /*
     Community Lib - CLib
 
-    Author: NetFusion
+    Author: NetFusion, joko // Jonas
 
     Description:
     This function is the entry point for the core module. It is called by autoloader for all clients. It adds OEF EH to trigger some common events.
@@ -18,6 +18,7 @@
 CLib_Player = player;
 uiNamespace setVariable ["CLib_Player", player];
 parsingNamespace setVariable ["CLib_Player", player];
+GVAR(lastZeusStatus) = false;
 ["playerChanged", {
     (_this select 0) params ["_newPlayer"];
 
@@ -29,13 +30,13 @@ parsingNamespace setVariable ["CLib_Player", player];
 // To ensure that the ingame display is available and prevent unnecessary draw3D calls during briefings we trigger an event if the mission starts.
 [{
     // If ingame display is available trigger the event.
-    ["missionStarted"] call CFUNC(localEvent);
+    ["missionStarted", findDisplay 46] call CFUNC(localEvent);
 
     ["playerJoined", CLib_Player] call CFUNC(globalEvent);
 }, {!(isNull (findDisplay 46))}] call CFUNC(waitUntil);
 
-
 private _codeStr = "private ['_oldValue', '_currentValue'];";
+
 // Build a dynamic event system to use it in modules.
 {
     _x params ["_name", "_code"];
@@ -63,7 +64,8 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["cursorObject", {cursorObject}],
     ["groupUnits", {units CLib_Player}],
     ["assignedTeam", {assignedTeam CLib_Player}],
-    ["cameraView", {cameraView}]
+    ["cameraView", {cameraView}],
+    ["inCurator", {isNull curatorCamera}]
 ];
 
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);

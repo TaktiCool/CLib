@@ -35,6 +35,23 @@ GVAR(MapGraphicsGeometryCache) = [];
     ((findDisplay 12) displayCtrl 51) call CFUNC(registerMapControl);
 }, {!(isNull ((findDisplay 12) displayCtrl 51))}] call CFUNC(waitUntil);
 
+GVAR(CuratorMapCheckRunning) = true;
+[{
+    GVAR(CuratorMapCheckRunning) = false;
+    ((findDisplay 312) displayCtrl 50) call CFUNC(registerMapControl);
+}, {!(isNull ((findDisplay 312) displayCtrl 50))}] call CFUNC(waitUntil);
+
+["inCuratorChanged", {
+    (_this select 0) params ["_new"];
+    if !(_new) exitWith {};
+    if (GVAR(CuratorMapCheckRunning)) exitWith {};
+    GVAR(CuratorMapCheckRunning) = true;
+    [{
+        GVAR(CuratorMapCheckRunning) = false;
+        ((findDisplay 312) displayCtrl 50) call CFUNC(registerMapControl);
+    }, {!(isNull ((findDisplay 312) displayCtrl 50))}] call CFUNC(waitUntil);
+}] call CFUNC(addEventhandler);
+
 [{
     ((uiNamespace getVariable "RscCustomInfoMiniMap") displayCtrl 101) call CFUNC(registerMapControl);
 }, {!(isNull (uiNamespace getVariable "RscCustomInfoMiniMap"))}] call CFUNC(waitUntil);

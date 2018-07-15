@@ -17,6 +17,10 @@
 // Skip the briefing by pressing the continue button on behalf of the user
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
+diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
+diag_log text format ["[CLib]: isServer: %1 isDedicated: %2 hasInterface: %3 isMultiplayer: %4 isMultiplayerSolo: %5", isServer, isDedicated, hasInterface, isMultiplayer, isMultiplayerSolo];
+diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2 useExperimentalAutoload: %3", CGVAR(useCompression), CGVAR(useRemoteFallback), CGVAR(useExperimentalAutoload)];
+
 0 spawn {
     if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
     if (getNumber (missionConfigFile >> "briefing") == 1) exitWith {};
@@ -36,6 +40,8 @@
     };
 };
 
+CGVAR(loadingIsFinished) = false;
+GVAR(loadingCanceled) = false;
 // The client waits for the player to be available. This makes sure the player variable is initialized in every script later.
 if (hasInterface) then {
     // Briefing is over
@@ -61,10 +67,12 @@ if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
 if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
     // clients are not allowed to load CLib localy its Only a Server mod
     if (!isServer) exitWith {
-        diag_log text "CLib is a server mod - do not load it on a client";
-        endLoadingScreen;
+        diag_log text "------------------------- CRITICAL ERROR -------------------------";
+        diag_log text "CRITICAL ERROR: CLib is a server mod - do not load it on a client!";
+
         disableUserInput false;
-        endMission "LOSER";
+
+        compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.sqf"; // Crashes Client to Desktop
     };
 
     if (!(isNil "_this") && {!(_this isEqualTo [])}) then {
@@ -77,15 +85,16 @@ if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
 // Bind EH on client to compile the received function code. Collect all functions names to determine which need to be called later in an array.
 GVAR(requiredFunctions) = [];
 QGVAR(receiveFunction) addPublicVariableEventHandler {
+    if (GVAR(loadingCanceled)) exitWith {};
     (_this select 1) params ["_functionVarName", "_functionCode", "_progress"];
 
     DUMP("Function Recieved: " + _functionVarName);
 
     // Compile the function code and assign it.
-    if (USE_COMPRESSION(CGVAR(useFunctionCompression))) then {
+    if (USE_COMPRESSION(true)) then {
         _functionCode = _functionCode call CFUNC(decompressString);
     };
-    _functionCode = CMP _functionCode;
+    _functionCode = CMP(_functionCode);
 
     {
         #ifdef ISDEV
@@ -95,18 +104,25 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                 _x setVariable [_functionVarName, _functionCode];
             } else {
                 if !((_x getVariable _functionVarName) isEqualTo _functionCode) then {
-                    private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3""!", profileName, GVAR(playerUID), _functionVarName];
+                    private _log = format ["[CLib: CheatWarning!]: Player %1(%2) allready have ""%3"" as Function Defined and is Different to the current Use Version!", profileName, GVAR(playerUID), _functionVarName];
                     LOG(_log);
 
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
-
-                    ["Warning function %1 is corrupted on your client, please restart your client.", _functionVarName] call BIS_fnc_errorMsg;
-                    GVAR(unregisterClient) = player;
-                    publicVariableServer QGVAR(unregisterClient);
-                    endLoadingScreen;
-                    disableUserInput false;
-                    endMission "LOSER";
+                    _functionVarName spawn {
+                        waitUntil {missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
+                        [
+                            format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
+                            "[CLib Anti Cheat Warning]",
+                            nil,nil,nil
+                        ] spawn BIS_fnc_guiMessage;
+                        GVAR(unregisterClient) = player;
+                        publicVariableServer QGVAR(unregisterClient);
+                        GVAR(loadingCanceled) = true;
+                        endLoadingScreen;
+                        disableUserInput false;
+                        endMission "LOSER";
+                    };
                 };
             };
         #endif

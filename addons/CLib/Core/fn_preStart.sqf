@@ -32,7 +32,6 @@ if (isNil QCFUNC(compileAllFunctions)) then {
 };
 if (isNil QCFUNC(buildDependencyGraph)) then {
     DCFUNC(buildDependencyGraph) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compile\fn_buildDependencyGraph.sqf";
-
 };
 if (isNil QCFUNC(compressString)) then {
     DCFUNC(compressString) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compression\fn_compressString.sqf";
@@ -55,16 +54,16 @@ call compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFrame
 
 CGVAR(playerUID) = "";
 
-#ifndef ISDEV
+#ifdef ISDEV
+    call CFUNC(readAllModules);
+    call CFUNC(buildDependencyGraph);
+    call CFUNC(readAllFunctions);
+#else
     if (isNil {parsingNamespace getVariable QCGVAR(allFunctionNamesCached)}) then {
         call CFUNC(readAllModules);
         call CFUNC(buildDependencyGraph);
         call CFUNC(readAllFunctions);
     };
-#else
-    call CFUNC(readAllModules);
-    call CFUNC(buildDependencyGraph);
-    call CFUNC(readAllFunctions);
 #endif
 call CFUNC(compileAllFunctions);
 private _strTime = ((diag_tickTime - _startTime) * 1000) call CFUNC(toFixedNumber);

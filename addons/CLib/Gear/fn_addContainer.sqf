@@ -8,29 +8,51 @@
     Add Container Wrapper
 
     Parameter(s):
-    0: Unit <Object>
-    1: Container classname <String>
-    2: Type of classname <Number> (Default: -1)
+    0: Unit <Object> (Default: objNull)
+    1: Container classname <String> (Default: "")
+    2: Type of classname <Number, String> (Default: -1)
 
     Returns:
     None
 */
-params [["_unit", objNull, [objNull]], ["_containerClassName", "", ["STRING"]], ["_containerNumber", -1, [-1]]];
 
-if (_containerNumber == -1) then {
-    private _cfg = configFile >> "CfgWeapons";
-    if (_containerClassName isKindOf ["Uniform_Base", _cfg]) then {
-        _containerNumber = 0;
-    };
-    if (_containerClassName isKindOf ["Vest_NoCamo_Base", _cfg] || _containerClassname isKindOf ["Vest_Camo_Base", _cfg]) then {
-        _containerNumber = 1;
-    };
-    if (_containerClassName isKindOf "Bag_Base") then {
-        _containerNumber = 2;
+params [
+    ["_unit", objNull, [objNull]],
+    ["_containerClassName", "", [""]],
+    ["_containerType", -1, [0, ""]]
+];
+
+if (_containerType isEqualType "") then {
+    switch (toLower (_containerType)) do {
+        case ("uniform"): {
+            _containerType = 0;
+        };
+        case ("vest"): {
+            _containerType = 1;
+        };
+        case ("backpack"): {
+            _containerType = 2;
+        };
+        default {
+            _containerType = -1;
+        };
     };
 };
 
-switch (_containerNumber) do {
+if (_containerType == -1) then {
+    private _cfg = configFile >> "CfgWeapons";
+    if (_containerClassName isKindOf ["Uniform_Base", _cfg]) then {
+        _containerType = 0;
+    };
+    if ([_containerClassName, [["Vest_NoCamo_Base", _cfg], ["Vest_Camo_Base", _cfg]]] call CFUNC(isKindOfArray)) then {
+        _containerType = 1;
+    };
+    if (_containerClassName isKindOf "Bag_Base") then {
+        _containerType = 2;
+    };
+};
+
+switch (_containerType) do {
     case 0: {
         private _uniformName = uniform _unit;
         if (_containerClassName == _uniformName && _containerClassName != "") then {

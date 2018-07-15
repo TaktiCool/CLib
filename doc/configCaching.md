@@ -1,4 +1,4 @@
-# ConfigCaching
+# Config Caching
 
 > Maintainer: joko // Jonas
 
@@ -35,7 +35,24 @@ Examples:
 private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F"), true] call CLib_fnc_returnParents;
 ```
 
-## CLib_fnc_getDataCached
+## CLib_fnc_getConfigData
+
+Parameter(s):
+* [`<Config>`], [`<Array>`] Path to Data
+* [`<String>`], [`<Array>`], [`<Number>`] Default Return (optional)
+* [`<Boolean>`] Force Type of Default Return (optional)
+
+Returns:
+* [`<String>`], [`<Array>`], [`<Number>`] Config Data or Default value if the Config does not exist
+
+Get a Config Value.
+
+Examples:
+```sqf
+private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getConfigData;
+```
+
+## CLib_fnc_getConfigDataCached
 
 Parameter(s):
 * [`<Config>`], [`<Array>`] Path to Data
@@ -49,11 +66,19 @@ Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
 Examples:
 ```sqf
-private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getDataCached;
+private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getConfigDataCached;
 ```
 
-[`<Array>`]: https://community.bistudio.com/wiki/Array
-[`<String>`]: https://community.bistudio.com/wiki/String
-[`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
+[`<Control>`]: https://community.bistudio.com/wiki/Control
+[`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
+[`<Object>`]: https://community.bistudio.com/wiki/Object
+[`<String>`]: https://community.bistudio.com/wiki/String
 [`<Number>`]: https://community.bistudio.com/wiki/Number
+[`<Array>`]: https://community.bistudio.com/wiki/Array
+[`<Position>`]: https://community.bistudio.com/wiki/Position
+[`<Color>`]: https://community.bistudio.com/wiki/Color
+[`<Boolean>`]: https://community.bistudio.com/wiki/Boolean
+[`<Code>`]: https://community.bistudio.com/wiki/Code
+[`<Group>`]: https://community.bistudio.com/wiki/Group
+[`<Location>`]: https://community.bistudio.com/wiki/Location

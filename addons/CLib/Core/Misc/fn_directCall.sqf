@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Calls a funcion directly and changes the Env
+    Calls a funcion directly and changes the Environment to Unscheduled
 
     Parameter(s):
     0: Code or Function that gets called <Code>

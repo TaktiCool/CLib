@@ -17,8 +17,13 @@ class CLib_basePreStartFNC: CLib_baseFNC {
     preStart = 1;
 };
 
+class CLib_basePostScheudledFNC: CLib_baseFNC {
+    postInit = 1;
+};
+
 class CLib_basePostFNC: CLib_baseFNC {
     postInit = 1;
+    unscheudled = 1;
 };
 
 class CLib_basePreInitStartFNC: CLib_baseFNC {
@@ -27,10 +32,9 @@ class CLib_basePreInitStartFNC: CLib_baseFNC {
 };
 
 class cfgFunctions {
-
     createShortcuts = 1;
 
-    //init = "tc\CLib\addons\CLib\init.sqf";
+    // init = "tc\CLib\addons\CLib\InitFunctions\init.sqf";
     class CLib {
         class CLib {
             file = "\tc\CLib\addons\CLib\Core";
