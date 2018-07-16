@@ -186,6 +186,22 @@ GVAR(ignoredLogEventNames_1) = [];
     };
     _vehicle addMagazineTurret _args;
 }] call CFUNC(addEventHandler);
+["removeMagazine", {
+    (_this select 0) params ["_vehicle", "_args"];
+    if (!local _vehicle) exitWith {
+        LOG("RemoveMagazine event has wrong locality");
+        ["removeMagazine", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle removeMagazine _args;
+}] call CFUNC(addEventHandler);
+["addMagazine", {
+    (_this select 0) params ["_vehicle", "_args"];
+    if (!local _vehicle) exitWith {
+        LOG("AddMagazine event has wrong locality");
+        ["addMagazine", _vehicle, _this select 0] call CFUNC(targetEvent);
+    };
+    _vehicle addMagazine _args;
+}] call CFUNC(addEventHandler);
 
 // Events for commands with owner ids
 ["deleteGroup", {

@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CLibDatabase")]
+[assembly: AssemblyTitle("CLibDataBaseEditor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CLibDatabase")]
+[assembly: AssemblyProduct("CLibDataBaseEditor")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("07cd2d0a-18ba-4c2f-be3d-aca0ed52ff86")]
+[assembly: Guid("4e33037a-e04d-4d10-9ca1-1824ec7bcd1a")]
 
 // Version information for an assembly consists of the following four values:
 //

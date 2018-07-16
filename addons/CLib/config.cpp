@@ -874,9 +874,9 @@ class CfgPatches {
 
 #include "cfgFunctions.hpp"
 
-#include "CfgCLibLocalisation.hpp"
+#include "cfgCLibLocalisation.hpp"
 
-#include "CfgCLibModules.hpp"
+#include "cfgCLibModules.hpp"
 
 #include "Gear\Loadout\CfgCLibLoadouts.hpp"
 

@@ -203,7 +203,14 @@ private _fnc_do = {
 }, false] call _fnc_do;
 
 ["unitTrait", {
-    _unit setUnitTrait _this;
+    _this params ["_type", "_state", ["_custom", false]];
+    if (_state isEqualType "") then {
+        _state = call compile _state;
+    };
+    if (_custom isEqualType "") then {
+        _custom = call compile _custom;
+    };
+    _unit setUnitTrait [_type, _state, _custom];
 }, false] call _fnc_do;
 DUMP(str _loadoutVars);
 [_loadoutVars, {
