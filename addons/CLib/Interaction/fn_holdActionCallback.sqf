@@ -39,7 +39,9 @@ _actionArguments params [
     "_priority",
     "_removeCompleted",
     "_showUnconscious",
-    "_ignoredCanInteractConditions"
+    "_ignoredCanInteractConditions",
+    "_selection",
+    "_memorypoint"
 ];
 
 GVAR(DisablePrevAction) = true;
