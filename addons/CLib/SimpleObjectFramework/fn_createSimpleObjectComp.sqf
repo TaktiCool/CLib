@@ -40,7 +40,7 @@ if !(isNil {GVAR(compNamespace) getVariable _uid}) then {
     LOG("WARNING: the UID is already in use");
 };
 
-switch (typeName _input) do {
+_input = switch (typeName _input) do {
     case "STRING": {
         GVAR(namespace) getVariable _input
     };
@@ -87,11 +87,16 @@ private _originPosASL = AGLToASL _originPosAGL;
 
 private _return = [];
 {
-    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray", "_setObjectTextureArray"];
+    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray", "_setObjectTextureArray", ["_fullObject", 0]];
 
     private _obj = objNull;
 
-    _obj = createSimpleObject [_path, AGLToASL (_originObj modelToWorld _posOffset)];
+    if (_fullObject == 0) then {
+        _obj = createSimpleObject [_path, AGLToASL (_originObj modelToWorld _posOffset)];
+    } else {
+        _obj = createVehicle [_path, (_originObj modelToWorld _posOffset), [], 0, "CAN_COLLIDE"];
+    };
+
     _obj setVariable [QGVAR(isSimpleObject), true, true];
     _obj setVectorDirAndUp [AGLToASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL, AGLToASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
@@ -126,3 +131,4 @@ private _return = [];
 deleteVehicle _originObj;
 
 GVAR(compNamespace) setVariable [_uid, _return, true];
+_return;
