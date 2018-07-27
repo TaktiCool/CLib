@@ -28,16 +28,10 @@ if (isServer) then {
     publicVariable QGVAR(compNamespace);
 };
 
-GVAR(callbackNamespace) = true call CFUNC(createNamespace);
-
 [QGVAR(simpleObjectsCreated), {
-    (_this select 0) params ["_pid", "_objects"];
+    (_this select 0) params ["_uid", "_code", "_parameter"];
 
-    private _callbackData = GVAR(callbackNamespace) getVariable [_pid, []];
-
-    if !(_callbackData isEqualTo []) then {
-        [_objects] call (_callbackData select 1);
-    };
+    [_uid, _parameter] call _code;
 
 }] call CFUNC(addEventhandler);
 

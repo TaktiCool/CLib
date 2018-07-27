@@ -26,12 +26,8 @@ params [
     ["_dir", [0, 0, 0], [[]], 3],
     ["_ignoreObj1", objNull, [objNull]],
     ["_ignoreObj2", objNull, [objNull]],
-    ["_callback", {}, [{}]]
+    ["_callback", [], [[]]]
 ];
-
-if !(_callback isEqualTo {}) then {
-    GVAR(compNamespace) setVariable [_uid, [CLib_player, _callback]];
-};
 
 if !(isServer) exitWith {
     [QGVAR(createSimpleObjectComp), _this] call CFUNC(serverEvent);
@@ -137,8 +133,11 @@ deleteVehicle _originObj;
 
 GVAR(compNamespace) setVariable [_uid, _return, true];
 
-private _callbackData = GVAR(callbackNamespace) getVariable [_uid, []];
 
-if !(_callbackData isEqualTo []) then {
-    [QGVAR(simpleObjectsCreated), _callbackData select 0, _return] call CFUNC(targetEvent);
+if !(_callback isEqualTo []) then {
+    _callback params [["_target", objNull], ["_code", {}], ["_parameter", []]];
+    if !(_code isEqualTo [] || isNull _target) then {
+        [QGVAR(simpleObjectsCreated), _target, [_uid, _code, _parameter]] call CFUNC(targetEvent);
+    };
+
 };
