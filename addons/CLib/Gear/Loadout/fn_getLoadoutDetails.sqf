@@ -33,7 +33,7 @@ _request apply {
     ];
 
     {
-        _ret = [_x, _findData, _ret] call CFUNC(getHash);
+        _ret = [_x, toLower _findData, _ret] call CFUNC(getHash);
     } forEach _loadout;
     _ret;
 };
