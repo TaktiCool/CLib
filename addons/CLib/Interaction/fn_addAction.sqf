@@ -102,10 +102,11 @@ private _argName = "";
 GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
 _condition = _condition call CFUNC(codeToString);
-
-_condition = "[_this, _target, " + str _ignoredCanInteractConditions + "] call " + QCFUNC(canInteractWith) + " && _this call {" + _condition + "}";
-
-_condition = if (_distance > 0 && !(_target isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
+private _format = [
+    "[_this, _target, %1] call %2 && {_this call {%3}}",
+    "[_this, _target, %1] call %2 && {[_traget, %4] call %5} && {_this call {%3}}"
+] select (_distance > 0 && !(_target isEqualTo CLib_Player))
+_condition = format [_format, _ignoredCanInteractConditions, QCFUNC(canInteractWith), _condition, _distance, QCFUNC(inRange)];
 
 _callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);

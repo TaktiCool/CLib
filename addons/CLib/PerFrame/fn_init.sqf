@@ -40,7 +40,7 @@ DFUNC(onEachFrameHandler) = {
     RUNTIMESTART;
 
     // Delta time Describe the time that the last Frame needed to calculate this is required for some One Each Frame Balance Math Calculations
-    CGVAR(deltaTime) = time - GVAR(lastFrameTime);
+    CGVAR(deltaTime) = (time - GVAR(lastFrameTime)) max 0.000001;
     GVAR(lastFrameTime) = time;
 
     {
