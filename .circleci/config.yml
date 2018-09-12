@@ -10,7 +10,10 @@ jobs:
           command: git clone https://github.com/jokoho48/sqf.git sqfLint
       - run:
           name: Validate SQF
-          command: python tools/sqf_validator.py && sqfLint/sqflint.py -d addons
+          command: python tools/sqf_validator.py
+      - run:
+          name:  Validate SQF 2
+          command: sqfLint/sqflint.py -d addons
       - run:
           name: Build
           command: armake --version
