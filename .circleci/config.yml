@@ -13,7 +13,7 @@ jobs:
           command: python tools/sqf_validator.py
       - run:
           name:  Validate SQF 2
-          command: sqfLinter/sqflint.py -d addons
+          command: python sqfLinter/sqflint.py -d addons
       - run:
           name: Build
           command: armake --version
