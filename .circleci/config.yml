@@ -6,8 +6,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Validate SQF And Config style
-          command: python tools/sqf_validator.py
+          name: Checkout SQFLint
+          command: git clone https://github.com/jokoho48/sqf.git sqfLint
+      - run:
+          name: Validate SQF
+          command: python tools/sqf_validator.py && sqfLint/sqflint.py -d addons
       - run:
           name: Build
           command: armake --version
