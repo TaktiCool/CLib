@@ -29,5 +29,5 @@ if (isServer) then {
 
     publicVariable QCFUNC(decompressString);
     publicVariable QCFUNC(loadModules);
-    publicVariable QCFUNC(entryPoint);
+    publicVariable QCFUNC(registerEntryPoint);
 };
