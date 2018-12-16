@@ -31,6 +31,7 @@ private _fnc_readSimpleObjectClass = {
     params ["_config"];
 
     private _path = getText (_config >> "path");
+    private _fullObject = getNumber (_config >> "fullObject");
     private _offset = getArray (_config >> "offset");
     private _dir = getArray (_config >> "dirVector");
     private _up = getArray (_config >> "upVector");
@@ -93,7 +94,7 @@ private _fnc_readSimpleObjectClass = {
         _setObjectTextureArray = false;
     };
 
-    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray, _setObjectTextureArray]
+    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray, _setObjectTextureArray, _fullObject]
 };
 
 private _return = [];

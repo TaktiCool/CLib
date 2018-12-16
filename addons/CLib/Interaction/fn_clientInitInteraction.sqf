@@ -48,7 +48,7 @@ GVAR(DisableNextAction) = false;
 GVAR(DisableAction) = false;
 
 private _inGameUiEventHandler = {
-    params ["_target", "_caller", "_idx", "_id", "_title", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_visibility", "_selection", "_memorypoint", "_eventName"];
+    params ["_target", "_caller", "_idx", "_id", "_title", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_visibility", "_eventName"];
 
     if (GVAR(DisablePrevAction) && {_eventName == "PrevAction"} || (GVAR(DisableNextAction) && {_eventName == "NextAction"}) || (GVAR(DisableAction) && {_eventName == "Action"})) then {
         true

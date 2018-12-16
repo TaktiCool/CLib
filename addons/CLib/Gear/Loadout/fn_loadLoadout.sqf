@@ -30,10 +30,10 @@ if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
 };
 
 if (_cfg isEqualType "") then {
-    _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
-    if (isClass _cfg) exitWith {};
-
     _cfg = missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _loadoutName;
+    if (isClass _cfg) exitWith {};
+    _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
+
 };
 if (!isClass _cfg) exitWith {};
 

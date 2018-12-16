@@ -102,7 +102,7 @@ private _thread = 0 spawn {
         terminate _this;
         CGVAR(loadingIsFinished) = true;
         {
-            (_x select 1) call (_this select 0);
+            (_x select 1) call (_x select 0);
             nil
         } count CGVAR(entryPointQueue);
     }, _this select 1] call CFUNC(execNextFrame);

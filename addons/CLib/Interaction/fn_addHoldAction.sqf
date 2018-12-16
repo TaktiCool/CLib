@@ -87,6 +87,7 @@ if (_target isEqualType "" && {_target == "VanillaAction"}) then {
         _priority,
         _removeCompleted,
         _showUnconscious,
+        _ignoredCanInteractConditions,
         _selection,
         _memorypoint
     ]] call CFUNC(overrideAction);

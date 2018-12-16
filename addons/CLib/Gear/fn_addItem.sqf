@@ -22,8 +22,12 @@
 
 params [
     ["_unit", objNull],
-    ["_itemData", ["", 0]]
+    ["_itemData", ["", 0], ["",[]]]
 ];
+
+if (_itemData isEqualType "") then {
+    _itemData = [_itemData, 1];
+};
 
 _itemData params [
     ["_className", ""],

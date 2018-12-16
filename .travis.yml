@@ -10,7 +10,7 @@ python:
 matrix:
   include:
     ###############################################################################
-    # Job #1 - SQF validation
+    # Job - SQF validation
     ###############################################################################
     - python: '3.6'
       before_script:
@@ -18,11 +18,3 @@ matrix:
       script:
       - python3 tools/sqf_validator.py
       - python3 sqfLint/sqflint.py -d addons
-    ###############################################################################
-    # Job #2 - Building Extensions Disabled because not working :(
-    ###############################################################################
-    #- language: csharp
-    #  before_install:
-    #  - cd extensions
-    #  - cd CLib
-    #  solution: CLib.sln

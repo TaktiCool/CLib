@@ -30,9 +30,8 @@ GVAR(currentFrameBuffer) = [];
 GVAR(nextFrameBuffer) = [];
 GVAR(nextFrameNo) = diag_frameNo;
 
-CGVAR(deltaTime) = diag_tickTime - (diag_tickTime / 10000);
-GVAR(lastFrameTime) = diag_tickTime;
-
+CGVAR(deltaTime) = time - (time / 10000);
+GVAR(lastFrameTime) = time;
 DFUNC(onEachFrameHandler) = {
     if (getClientState == "GAME FINISHED") exitWith {
         removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
@@ -41,8 +40,8 @@ DFUNC(onEachFrameHandler) = {
     RUNTIMESTART;
 
     // Delta time Describe the time that the last Frame needed to calculate this is required for some One Each Frame Balance Math Calculations
-    CGVAR(deltaTime) = diag_tickTime - GVAR(lastFrameTime);
-    GVAR(lastFrameTime) = diag_tickTime;
+    CGVAR(deltaTime) = (time - GVAR(lastFrameTime)) max 0.000001;
+    GVAR(lastFrameTime) = time;
 
     {
         _x params ["_function", "_delay", "_delta", "_args", "_handle"];

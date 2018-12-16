@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: acemod/armake
+    steps:
+      - checkout
+      - run:
+          name: Checkout SQFLint
+          command: git clone https://github.com/jokoho48/sqf.git sqfLinter
+      - run:
+          name: Validate SQF
+          command: python tools/sqf_validator.py
+      - run:
+          name:  Validate SQF 2
+          command: python sqfLinter/sqflint.py -d addons
+      - run:
+          name: Build
+          command: armake --version

@@ -74,6 +74,7 @@ class CfgCLibModules {
                 APIFNC(blurScreen);
                 APIFNC(cachedCall);
                 APIFNC(codeToString);
+                APIFNC(compatibleMagazines);
                 APIFNC(createPPEffect);
                 APIFNC(deleteAtEntry);
                 APIFNC(directCall);
