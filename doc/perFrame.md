@@ -77,7 +77,7 @@ Executes a code once in the unscheduled environment after a condition is true. M
 
 Examples:
 ```sqf
-[{hintSilent format ["This is Delayed %1", _this]}, {time == 1000 }, "Awesome Delay"] call CLib_fnc_waitUntil;
+[{hintSilent format ["This is Delayed %1", _this]}, {time == 1000}, "Awesome Delay"] call CLib_fnc_waitUntil;
 ```
 
 ## CLib_fnc_execNextFrame
