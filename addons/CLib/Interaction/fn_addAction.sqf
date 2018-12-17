@@ -105,7 +105,7 @@ _condition = _condition call CFUNC(codeToString);
 private _format = [
     "[_this, _target, %1] call %2 && {_this call {%3}}",
     "[_this, _target, %1] call %2 && {[_target, %4] call %5} && {_this call {%3}}"
-] select (_distance > 0 && !(_target isEqualTo CLib_Player))
+] select (_distance > 0 && !(_target isEqualTo CLib_Player));
 _condition = format [_format, _ignoredCanInteractConditions, QCFUNC(canInteractWith), _condition, _distance, QCFUNC(inRange)];
 
 _callback = _callback call CFUNC(codeToString);
