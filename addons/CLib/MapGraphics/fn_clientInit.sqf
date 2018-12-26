@@ -43,13 +43,28 @@ GVAR(CuratorMapCheckRunning) = true;
 
 ["inCuratorChanged", {
     (_this select 0) params ["_new"];
-    if !(_new) exitWith {};
     if (GVAR(CuratorMapCheckRunning)) exitWith {};
     GVAR(CuratorMapCheckRunning) = true;
     [{
         GVAR(CuratorMapCheckRunning) = false;
         ((findDisplay 312) displayCtrl 50) call CFUNC(registerMapControl);
     }, {!(isNull ((findDisplay 312) displayCtrl 50))}] call CFUNC(waitUntil);
+}] call CFUNC(addEventhandler);
+
+GVAR(EGSpectatorMapCheckRunning) = true;
+[{
+    GVAR(EGSpectatorMapCheckRunning) = false;
+    ((uiNamespace getVariable "RscDisplayEGSpectator") displayCtrl 62609) call CFUNC(registerMapControl);
+}, {!(isNull ((uiNamespace getVariable "RscDisplayEGSpectator") displayCtrl 62609))}] call CFUNC(waitUntil);
+
+["inEGSpectatorChanged", {
+    (_this select 0) params ["_new"];
+    if (GVAR(EGSpectatorMapCheckRunning)) exitWith {};
+    GVAR(EGSpectatorMapCheckRunning) = true;
+    [{
+        GVAR(EGSpectatorMapCheckRunning) = false;
+        ((uiNamespace getVariable "RscDisplayEGSpectator") displayCtrl 62609) call CFUNC(registerMapControl);
+    }, {!(isNull ((uiNamespace getVariable "RscDisplayEGSpectator") displayCtrl 62609))}] call CFUNC(waitUntil);
 }] call CFUNC(addEventhandler);
 
 [{
