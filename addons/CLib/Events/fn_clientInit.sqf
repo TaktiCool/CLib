@@ -59,6 +59,7 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["currentVisionMode", {currentVisionMode CLib_Player}],
     ["playerInventory", {CLib_Player call CFUNC(getAllGear)}],
     ["visibleMap", {visibleMap}],
+    ["visibleGPS", {visibleGPS}],
     ["playerSide", {playerSide}],
     ["cursorTarget", {cursorTarget}],
     ["cursorObject", {cursorObject}],
