@@ -69,4 +69,4 @@ GVAR(EGSpectatorMapCheckRunning) = true;
 
 [{
     ((uiNamespace getVariable "RscCustomInfoMiniMap") displayCtrl 101) call CFUNC(registerMapControl);
-}, {!(isNull (uiNamespace getVariable "RscCustomInfoMiniMap"))}] call CFUNC(waitUntil);
+}, {!((isNull (uiNamespace getVariable "RscCustomInfoMiniMap") displayCtrl 101))}] call CFUNC(waitUntil);
