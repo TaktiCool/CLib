@@ -11,7 +11,7 @@
     0: UnCompressed String <String>
 
     Returns:
-    Failed compression <Array< LZ77, LZW>>
+    Whether the compression has worked properly <Boolean>
 */
 
 params ["_string"];
