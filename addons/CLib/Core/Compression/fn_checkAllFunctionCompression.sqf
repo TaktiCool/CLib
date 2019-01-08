@@ -18,10 +18,10 @@
     private _fncName = _x;
     private _originalFunction = (parsingNamespace getVariable _fncName) call CFUNC(codeToString);
 
-    if !(_originalFunction call CFUNC(checkCompression)) then {
-        LOG("Compression Check ERROR: " + _fncName + " " + _x + " compression does not work correct")
-    } else {
+    if (_originalFunction call CFUNC(checkCompression)) then {
         LOG("Compression Check: " + _fncName + " " + _x + " passed Test")
+    } else {
+        LOG("Compression Check ERROR: " + _fncName + " " + _x + " compression does not work correct")
     };
     nil
 } count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
