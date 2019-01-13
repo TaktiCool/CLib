@@ -59,7 +59,7 @@ if (isServer) then {
         {
             private _configPath = (configFile >> "CfgPatches" >> _x);
             private _modData = modParams [_x, ["name"]];
-            private _name = _modData select 0;
+            private _name = _modData param [0, configName _configPath];
             if (isText (_configPath >> "name")) then {
                 _name = getText (_configPath >> "name");
             };
