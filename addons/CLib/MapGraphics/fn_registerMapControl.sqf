@@ -18,11 +18,8 @@ params [
     ["_map", controlNull, [controlNull]]
 ];
 
-private _exit = false;
 // make sure that the control not already have a draw function
-with uiNamespace do {
-    _exit = _map in GVAR(MapGraphicsMapControls);
-};
+private _exit = _map in (uiNamespace getVariable [QGVAR(MapGraphicsMapControls), []]);
 
 if (_exit) exitWith {nil};
 
