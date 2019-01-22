@@ -67,6 +67,17 @@ GVAR(EGSpectatorMapCheckRunning) = true;
     }, {!(isNull ((uiNamespace getVariable "RscDisplayEGSpectator") displayCtrl 62609))}] call CFUNC(waitUntil);
 }] call CFUNC(addEventhandler);
 
+GVAR(GPSMapCheckRunning) = true;
 [{
+    GVAR(GPSMapCheckRunning) = false;
     ((uiNamespace getVariable "RscCustomInfoMiniMap") displayCtrl 101) call CFUNC(registerMapControl);
 }, {!(isNull (uiNamespace getVariable "RscCustomInfoMiniMap"))}] call CFUNC(waitUntil);
+
+["vehicleChanged", {
+    if (GVAR(GPSMapCheckRunning)) exitWith {};
+    GVAR(GPSMapCheckRunning) = true;
+    [{
+        GVAR(GPSMapCheckRunning) = false;
+        ((uiNamespace getVariable "RscCustomInfoMiniMap") displayCtrl 101) call CFUNC(registerMapControl);
+    }, {!(isNull (uiNamespace getVariable "RscCustomInfoMiniMap"))}] call CFUNC(waitUntil);
+}] call CFUNC(addEventhandler);
