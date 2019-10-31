@@ -14,9 +14,12 @@
     Returns:
     None
 */
-params [["_code", {}, [{}]], ["_arguments", nil, []]];
+params [["_code", {}, [{}, ""]], ["_arguments", nil, []]];
 isNil {
     if (CGVAR(loadingIsFinished)) exitWith {
+        if (_code isEqualType "") then {
+            _code = missionNamespace getVariable [_code, {LOG("Code not Found")}];
+        };
         _arguments call _code;
     };
 
