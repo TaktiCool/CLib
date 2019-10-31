@@ -102,7 +102,11 @@ private _thread = 0 spawn {
         terminate _this;
         CGVAR(loadingIsFinished) = true;
         {
-            (_x select 1) call (_x select 0);
+            _x params ["_code", "_args"];
+            if (_code isEqualType "") then {
+                _code = missionNamespace getVariable [_code, {LOG("Code not Found")}];
+            };
+            _args call _code;
             nil
         } count CGVAR(entryPointQueue);
     }, _this select 1] call CFUNC(execNextFrame);
