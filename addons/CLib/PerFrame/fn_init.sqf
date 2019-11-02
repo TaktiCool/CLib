@@ -30,7 +30,7 @@ GVAR(currentFrameBuffer) = [];
 GVAR(nextFrameBuffer) = [];
 GVAR(nextFrameNo) = diag_frameNo;
 
-CGVAR(deltaTime) = time - (time / 10000);
+CGVAR(deltaTime) = diag_deltaTime max 0.000001;
 GVAR(lastFrameTime) = time;
 DFUNC(onEachFrameHandler) = {
     if (getClientState == "GAME FINISHED") exitWith {
@@ -40,7 +40,7 @@ DFUNC(onEachFrameHandler) = {
     RUNTIMESTART;
 
     // Delta time Describe the time that the last Frame needed to calculate this is required for some One Each Frame Balance Math Calculations
-    CGVAR(deltaTime) = (time - GVAR(lastFrameTime)) max 0.000001;
+    CGVAR(deltaTime) = diag_deltaTime max 0.000001;
     GVAR(lastFrameTime) = time;
 
     {
