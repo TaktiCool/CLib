@@ -16,11 +16,8 @@
     Config Value <Sring, Number, Array>
 */
 
-params [["_path", configNull, [configNull, []]], ["_default", "", [[], "", 0]], ["_forceDefaultType", false, [true]]];
-// convert Array Config Path to Config Path
-if (_path isEqualType []) then {
-    _path = _path call FUNC(arrayToPath);
-};
+params [["_path", configNull, [configNull]], ["_default", "", [[], "", 0]], ["_forceDefaultType", false, [true]]];
+
 private _ret = GVAR(configCache) getVariable format [QGVAR(getCachedData_%1), _path];
 if (isNil "_ret") then {
     _ret = [_path, _default, _forceDefaultType]call CFUNC(getConfigData);

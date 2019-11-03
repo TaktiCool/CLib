@@ -47,22 +47,22 @@ private _thread = 0 spawn {
     call {
         private _name = toLower _x;
         // Client only functions.
-        if (_name find "_fnc_clientinit" > 0) exitWith {
+        if ("_fnc_clientinit" in _name) exitWith {
             _clientInit pushBack _x;
         };
         // Server only functions.
-        if (_name find "_fnc_serverinit" > 0) exitWith {
+        if ("_fnc_serverinit" in _name) exitWith {
             _serverInit pushBack _x;
         };
         // HC only functions.
-        if (_name find "_fnc_hcinit" > 0) exitWith {
+        if ("_fnc_hcinit" in _name) exitWith {
             _hcInit pushBack _x;
         };
         // Functions for both.
-        if (_name find "_fnc_init" > 0) exitWith {
+        if ("_fnc_init" in _name) exitWith {
             _init pushBack _x;
         };
-        if (_name find "_fnc_postinit" > 0) exitWith {
+        if ("_fnc_postinit" in _name) exitWith {
             _postInit pushBack _x;
         };
     };
