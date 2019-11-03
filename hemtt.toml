@@ -7,6 +7,8 @@ reuse_private_key = false
 files = [
     "mod.cpp",
     "*.paa",
-    "LICENSE"
+    "LICENSE",
+    "*.dll",
+    "CLibDataBaseEditor.exe"
 ]
 include = ["./include"]

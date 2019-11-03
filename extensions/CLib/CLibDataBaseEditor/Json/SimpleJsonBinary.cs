@@ -1,4 +1,4 @@
-﻿/* * * * *
+/* * * * *
  * This is an extension of the SimpleJSON framework to provide methods to
  * serialize a JSON object tree into a compact binary format. Optionally the
  * binary stream can be compressed with the SharpZipLib when using the define

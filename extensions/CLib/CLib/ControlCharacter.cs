@@ -1,4 +1,4 @@
-﻿namespace CLib
+namespace CLib
 {
     public struct ControlCharacter
     {

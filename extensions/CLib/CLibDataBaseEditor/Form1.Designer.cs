@@ -1,4 +1,4 @@
-﻿namespace CLibDataBaseEditor
+namespace CLibDataBaseEditor
 {
     partial class Form1
     {
