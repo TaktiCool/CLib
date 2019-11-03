@@ -60,3 +60,6 @@ extensions/CLib/packages
 *.bisign
 
 CLibDataBaseEditor\.exe\.config
+releases/*
+*.biprivatekey
+keys/*
