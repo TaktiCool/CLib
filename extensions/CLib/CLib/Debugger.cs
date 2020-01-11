@@ -17,7 +17,7 @@ namespace CLib
             InitializeComponent();
 
 #if Debug
-            this.Show()
+            this.Show();
 #else 
             this.Hide();
 #endif
