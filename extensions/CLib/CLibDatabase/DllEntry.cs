@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml.Linq;
 using SimpleJSON;
 
 namespace CLibDatabase
@@ -14,7 +15,7 @@ namespace CLibDatabase
     {
         private static string loadedDatabase = "";
 
-        private static readonly string databaseFolder =
+        private static string databaseFolder =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase");
 
         private static Dictionary<string, string> database = new Dictionary<string, string>();
@@ -65,6 +66,14 @@ namespace CLibDatabase
 
             return "0.0.0.0";
         }
+        [DllExport("SetExportPath")]
+        public static string SetExportPath(string path)
+        {
+            databaseFolder = path;
+            if (!Directory.Exists(databaseFolder))
+                Directory.CreateDirectory(databaseFolder);
+            return "true";
+        }
 
         [DllExport("KeyExists")]
         public static string KeyExists(string key)
@@ -97,10 +106,10 @@ namespace CLibDatabase
         {
             if (loadedDatabase == filename)
                 return "true";
-
+            
             using (FileStream fs = File.OpenRead(Path.Combine(databaseFolder, filename + ".clibdata")))
             {
-                GZipStream cmp = new GZipStream(fs, CompressionLevel.Optimal);
+                GZipStream cmp = new GZipStream(fs, CompressionMode.Decompress);
                 using (BinaryReader reader = new BinaryReader(cmp))
                 {
                     int count = reader.ReadInt32();
@@ -121,11 +130,10 @@ namespace CLibDatabase
         [DllExport("Save")]
         public static string Save(string filename)
         {
-            using (FileStream fs = File.OpenWrite(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase",
-                filename + ".clibdata")))
+            string path = Path.Combine(databaseFolder, filename + ".clibdata");
+            using (FileStream fs = File.OpenWrite(path))
             {
-                GZipStream dcmp = new GZipStream(fs, CompressionMode.Decompress);
+                GZipStream dcmp = new GZipStream(fs, CompressionLevel.Optimal);
 
                 using (BinaryWriter writer = new BinaryWriter(dcmp))
                 {
@@ -136,14 +144,13 @@ namespace CLibDatabase
                         writer.Write(pair.Value);
                     }
                 }
-
-                return "true";
+                return $"File Exported to {path}";
             }
         }
 
         private static JSONNode ConvertToJson()
         {
-            JSONNode json = JSON.Parse("{}");
+            JSONNode json = new JSONObject();
             foreach (KeyValuePair<string, string> item in database) json.Add(item.Key, item.Value);
             return json;
         }
@@ -154,6 +161,23 @@ namespace CLibDatabase
             foreach (KeyValuePair<string, JSONNode> item in json.Linq) database.Add(item.Key, item.Value.Value);
         }
 
+        private static void ConvertToDictionary(XContainer xml)
+        {
+            database.Clear();
+            foreach (XElement item in xml.Elements())
+            {
+                database.Add(item.Name.LocalName, item.Value);
+            }
+        }
+        private static XDocument ConvertToXML()
+        {
+            XDocument xml = new XDocument();
+            foreach (KeyValuePair<string, string> item in database)
+            {
+                xml.Add(item.Key, new JSONString(item.Value));
+            }
+            return xml;
+        }
         #region Import/Export
 
         [DllExport("ExportJson")]
@@ -163,8 +187,7 @@ namespace CLibDatabase
             StringBuilder exportStringBuilder = new StringBuilder();
             json.WriteToStringBuilder(exportStringBuilder, 0, 4, JSONTextMode.Indent);
             File.WriteAllText(
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase",
-                    filename + ".json"), exportStringBuilder.ToString());
+                Path.Combine(databaseFolder, filename + ".json"), exportStringBuilder.ToString());
             return "true";
         }
 
@@ -172,17 +195,22 @@ namespace CLibDatabase
         public static string ExportJsonBinary(string filename)
         {
             JSONNode json = ConvertToJson();
-            json.SaveToCompressedFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "CLibDatabase", filename + ".bson"));
+            json.SaveToCompressedFile(Path.Combine(databaseFolder, filename + ".bson"));
+            return "true";
+        }
+
+        [DllExport("ExportXml")]
+        public static string ExportXml(string filePath)
+        {
+            XDocument xml = ConvertToXML();
+            xml.Save(filePath, SaveOptions.OmitDuplicateNamespaces);
             return "true";
         }
 
         [DllExport("ImportJson")]
         public static string ImportJson(string filename)
         {
-            string jsonStr = File.ReadAllText(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase",
-                filename + ".json"));
+            string jsonStr = File.ReadAllText(Path.Combine(databaseFolder, filename + ".json"));
             JSONNode json = JSON.Parse(jsonStr);
             ConvertToDictionary(json);
             return "true";
@@ -191,10 +219,15 @@ namespace CLibDatabase
         [DllExport("ImportJsonBinary")]
         public static string ImportJsonBinary(string filename)
         {
-            JSONNode json = JSONNode.LoadFromCompressedFile(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase",
-                filename + ".bson"));
+            JSONNode json = JSONNode.LoadFromCompressedFile(Path.Combine(databaseFolder, filename + ".bson"));
             ConvertToDictionary(json);
+            return "true";
+        }
+
+        public static string ImportXml(string filePath)
+        {
+            XDocument xml = XDocument.Load(filePath);
+            ConvertToDictionary(xml);
             return "true";
         }
 

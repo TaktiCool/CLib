@@ -1,4 +1,4 @@
-﻿using SimpleJSON;
+using SimpleJSON;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -109,7 +109,7 @@ namespace CLibDataBaseEditor
         #region Convertion
         private JSONNode ConvertToJson()
         {
-            JSONNode json = JSON.Parse("{}");
+            JSONNode json = new JSONObject();
             foreach (KeyValuePair<string, string> item in database)
             {
                 json.Add(item.Key, new JSONString(item.Value));
