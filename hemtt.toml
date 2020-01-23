@@ -1,5 +1,6 @@
 name = "CLib"
 prefix = ""
+mainprefix = "tc"
 author = "CLib Team"
 sigversion = 3
 version = "0.0.0" # NB: this is not the real version number. We use git tags.
