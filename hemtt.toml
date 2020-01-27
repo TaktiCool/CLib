@@ -1,8 +1,8 @@
 name = "CLib"
-prefix = ""
 mainprefix = "tc"
+prefix = "CLib"
 author = "CLib Team"
-sigversion = 3
+sig_version = 3
 version = "0.0.0" # NB: this is not the real version number. We use git tags.
 reuse_private_key = false
 files = [

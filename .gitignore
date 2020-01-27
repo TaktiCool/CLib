@@ -63,3 +63,4 @@ CLibDataBaseEditor\.exe\.config
 releases/*
 *.biprivatekey
 keys/*
+build.bat
