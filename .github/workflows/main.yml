@@ -30,10 +30,7 @@ jobs:
         uses: arma-actions/hemtt@master
         with:
           command: 'build --release'
-      - run: |
-          cp -r 'releases/0.0.0/@' '@CLib'
-          zip -r @CLib.zip @CLib/
       - uses: actions/upload-artifact@master
         with:
           name: '@CLib'
-          path: '@CLib'
+          path: 'releases/@CLib.zip'
