@@ -13,3 +13,13 @@ files = [
     "CLibDataBaseEditor.exe"
 ]
 include = ["./include"]
+
+keyname = "{{prefix}}_danger_{{version}}"
+signame = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
+
+releasebuild = [
+    "@zip @CLib"
+]
+
+[header_exts]
+version= "{{git \"id 8\"}}"
