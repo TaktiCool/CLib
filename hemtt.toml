@@ -14,8 +14,8 @@ files = [
 ]
 include = ["./include"]
 
-keyname = "{{prefix}}_danger_{{version}}"
-signame = "{{prefix}}_danger_{{version}}-{{git \"id 8\"}}"
+keyname = "{{prefix}}_{{version}}"
+signame = "{{prefix}}_{{version}}-{{git \"id 8\"}}"
 
 releasebuild = [
     "@zip @CLib"
