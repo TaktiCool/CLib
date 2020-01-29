@@ -34,23 +34,3 @@ jobs:
         with:
           name: '@CLib'
           path: 'releases/@CLib.zip'
-  ExtensionBuild:
-    runs-on: windows-latest
-    steps:
-      - name: Setup Nuget.exe
-        uses: warrenbuckley/Setup-Nuget@v1
-      - name: Nuget Restore
-        run: |
-          cd $Env:GITHUB_WORKSPACE\extensions\CLib\
-          nuget restore
-      - name: checkout
-        uses: actions/checkout@v1
-      - name: Build DotNET35
-        run: |
-           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\extensions\CLib\Clib.sln /p:Configuration=Release /p:Platform=x64 /maxcpucount
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\extensions\CLib\Clib.sln /p:Configuration=Release /p:Platform=x86 /maxcpucount
-      - uses: actions/upload-artifact@master
-        with:
-          name: '*.dll'
-          path: '*.dll'
