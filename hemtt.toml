@@ -1,5 +1,6 @@
 name = "CLib"
 mainprefix = "tc"
+modname = "CLib"
 prefix = ""
 author = "CLib Team"
 sig_version = 3
