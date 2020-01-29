@@ -1,4 +1,5 @@
 #include "macros.hpp"
+#include "\A3\ui_f\hpp\defineCommonGrids.inc"
 /*
     Community Lib - CLib
 
@@ -16,18 +17,19 @@
     3: Duration <Number> (Default: 5)
     4: Fade Times <Array, Number> (Default: [0.5, 0.5])
     5: Max Alpha <Number> (Default: 0.3)
+    6: On Fade out <Code> (Default: {})
 
     Returns:
     None
 */
-#include "\A3\ui_f\hpp\defineCommonGrids.inc"
 params [
     ["_content", "#(argb,8,8,3)color(1,0,1,1)", ["", parsetext ""]],
     ["_pos", [0,0,1,1], [[], true], 4],
     ["_size", 10, [0, []]],
     ["_duration", 5, [0]],
     ["_fade", [], [0, []]],
-    ["_maxAlpha", 0.3, [0]]
+    ["_maxAlpha", 0.3, [0]],
+    ["_onFadeOut", {}, [{}]]
 ];
 
 private _fadeIn = _fade param [0,0.5,[0]];
@@ -122,8 +124,9 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
     _groupContent ctrlCommit (random _fadeIn);
     nil
 } count _grids;
+
 [{
-    params ["_grids", "_contentIsStructuredText", "_sizeW", "_sizeH", "_posW", "_posH", "_fadeOut"];
+    params ["_grids", "_contentIsStructuredText", "_sizeW", "_sizeH", "_posW", "_posH", "_fadeOut", "_onFadeOut"];
     private _display = uiNamespace getVariable "RscTilesGroup";
     {
         _x params ["_ix", "_iy"];
@@ -143,4 +146,5 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
         _groupContent ctrlCommit (random _fadeOut);
         nil
     } count _grids;
-}, _fadeIn + _duration, [_grids, _contentIsStructuredText, _sizeW, _sizeH, _posW, _posH, _fadeOut]] call CFUNC(wait);
+    call _onFadeOut;
+}, _fadeIn + _duration, [_grids, _contentIsStructuredText, _sizeW, _sizeH, _posW, _posH, _fadeOut, _onFadeOut]] call CFUNC(wait);

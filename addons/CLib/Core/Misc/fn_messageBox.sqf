@@ -139,16 +139,16 @@ if !(createDialog "RscDisplayCommonMessage") exitWith { LOG("ERROR Display not C
     _display displayAddEventHandler ["Unload", {
         params ["_display", "_exitCode"];
         if (_exitCode isEqualTo 2) then {
-            [_display, QGVAR(callBack_onClose)] call DFUNC(MessageBoxCallback);
+            [_display, QGVAR(callBack_onClose)] call FUNC(MessageBoxCallback);
         };
     }];
 
     _ctrlButtonOK ctrlAddEventHandler ["buttonClick", {
-        [ctrlParent (_this select 0), QGVAR(callBack_Button1)] call DFUNC(MessageBoxCallback);
+        [ctrlParent (_this select 0), QGVAR(callBack_Button1)] call FUNC(MessageBoxCallback);
     }];
 
     _ctrlButtonCancel ctrlAddEventHandler ["buttonClick", {
-        [ctrlParent (_this select 0), QGVAR(callBack_Button2)] call DFUNC(MessageBoxCallback);
+        [ctrlParent (_this select 0), QGVAR(callBack_Button2)] call FUNC(MessageBoxCallback);
     }];
 
 }, {
