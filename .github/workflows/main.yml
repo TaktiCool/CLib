@@ -37,6 +37,12 @@ jobs:
   ExtensionBuild:
     runs-on: windows-latest
     steps:
+      - name: Setup Nuget.exe
+        uses: warrenbuckley/Setup-Nuget@v1
+      - name: Nuget Restore
+        run: |
+          cd $Env:GITHUB_WORKSPACE\extensions\CLib\
+          nuget restore
       - name: checkout
         uses: actions/checkout@v1
       - name: Build DotNET35
