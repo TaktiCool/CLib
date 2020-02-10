@@ -55,5 +55,5 @@ _allParameters set [_index, _parameter];
 _unit setVariable [_parametersVarName, _allParameters];
 _unit setVariable [_reasonVarName, _allReasons];
 
-private _code = GVAR(StatusEffectsNamespace) getVariable ["Code_" + _id, []];
+private _code = GVAR(StatusEffectsNamespace) getVariable [QGVAR(Code_) + _id, []];
 [_unit, _allParameters] call _code;
