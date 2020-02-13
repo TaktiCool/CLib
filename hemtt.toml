@@ -19,5 +19,8 @@ releasebuild = [
     "@zip @CLib"
 ]
 
+keyname = "CLib_{{version}}"
+signame = "CLib_{{version}}-{{git \"id 8\"}}"
+
 [header_exts]
 version= "{{git \"id 8\"}}"
