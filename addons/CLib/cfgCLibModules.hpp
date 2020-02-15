@@ -75,6 +75,7 @@ class CfgCLibModules {
                 APIFNC(cachedCall);
                 APIFNC(codeToString);
                 APIFNC(compatibleMagazines);
+                APIFNC(compileFinal);
                 APIFNC(createPPEffect);
                 APIFNC(deleteAtEntry);
                 APIFNC(directCall);

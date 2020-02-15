@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Streamator
+    Community Lib - CLib
 
     Author: joko // Jonas
 
