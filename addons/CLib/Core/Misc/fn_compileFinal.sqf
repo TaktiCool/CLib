@@ -23,7 +23,7 @@ private _strCode = _code call CFUNC(codeToString);
 #endif
 
 
-if !(isNil "_varName") {
+if !(isNil "_varName") then {
     {
         _x setVariable [_varName, _finalCode];
     } forEach [missionNamespace, uiNamespace, parsingNamespace];
