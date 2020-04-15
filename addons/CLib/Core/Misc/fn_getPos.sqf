@@ -14,8 +14,12 @@
     Position <Array>
 */
 params [
-    ["_entity", objNull, [objNull, grpNull, "", locationNull, taskNull, [], 0]] // [] and 0 to handle position
+    ["_entity", objNull, [objNull, grpNull, "", locationNull, taskNull, [], 0]]
 ];
+
+if (_this isEqualType [] && {_this isEqualTypeArray [grpNull, 0]}) then {
+    _entity = _this;
+};
 
 switch (typeName _entity) do {
     case ("ARRAY"): {
@@ -30,11 +34,7 @@ switch (typeName _entity) do {
         getPos _entity;
     };
     case ("GROUP"): {
-        if (_this isEqualType [] && {_this isEqualTypeArray [grpNull, 0]}) then {
-            getWPPos _this;
-        } else {
-            getPos (leader _entity);
-        };
+        getPos (leader _entity);
     };
     case ("STRING"): {
         getMarkerPos _entity;
@@ -43,7 +43,7 @@ switch (typeName _entity) do {
         taskDestination _entity;
     };
     case ("SCALAR"): {
-        + _entity;
+        + _this;
     };
     default {
         LOG("unkown Type in GetPos with: " + (typeName _this));

@@ -16,8 +16,8 @@
     Returns:
     None
 */
-
-params [
+params ["_args", ["_event", "clicked"]];
+_args params [
     ["_control", controlNull, [controlNull]],
     ["_button", 0, [0]],
     ["_xPos", 0, [0]],
@@ -27,4 +27,4 @@ params [
 private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGroup);
 
 if (_nearestIcon == "") exitWith {};
-[_nearestIcon, "clicked", [_control, _xPos, _yPos]] call CFUNC(triggerMapGraphicsEvent);
+[_nearestIcon, _event, [_control, _xPos, _yPos]] call CFUNC(triggerMapGraphicsEvent);
