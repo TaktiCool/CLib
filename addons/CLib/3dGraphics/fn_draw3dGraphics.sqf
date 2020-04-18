@@ -15,7 +15,7 @@
 */
 
 // Dont Render 3d Icons if a UI is Open.
-if (!isNull (findDisplay 49) || dialog) exitWith {};
+if (!isNull (findDisplay 49) || dialog || isGamePaused || !isGameFocused) exitWith {};
 
 RUNTIMESTART;
 

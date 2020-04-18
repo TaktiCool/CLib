@@ -20,6 +20,10 @@ private _ret = _object getVariable QGVAR(objectName);
 
 // fallback if the Unit doesn't have a name set
 if (isNil "_ret") then {
+    if (player == _object) exitWith {
+        _ret = profileName;
+        _object setVariable [QGVAR(objectName), _ret];
+    };
     if (_object isKindOf "CAManBase") then {
         _ret = name _object;
         if (_ret != "Error: No vehicle") exitWith {};
@@ -35,7 +39,7 @@ if (isNil "_ret") then {
         }, _object] call CFUNC(waitUntil);
     } else {
         _ret = getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName");
-        _this setVariable [QGVAR(objectName), _ret];
+        _object setVariable [QGVAR(objectName), _ret];
     };
 };
 _ret
