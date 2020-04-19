@@ -48,6 +48,7 @@
 
 #define LOG(var) SYSLOGGING("Log", var)
 
+#define ERROR_LOG(var) SYSLOGGING("Error", var)
 
 // Function macros
 #define EDFUNC(var1,var2) TRIPLE(PREFIX,var1,DOUBLE(fnc,var2))
