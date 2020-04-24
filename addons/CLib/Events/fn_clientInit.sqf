@@ -66,6 +66,7 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["groupUnits", {units CLib_Player}],
     ["assignedTeam", {assignedTeam CLib_Player}],
     ["cameraView", {cameraView}],
+    ["allMapMarkers", {allMapMarkers}],
     ["inCurator", {isNull curatorCamera}],
     ["inEGSpectator", {isNil "BIS_EGSpectator_initialized"}]
 ];
