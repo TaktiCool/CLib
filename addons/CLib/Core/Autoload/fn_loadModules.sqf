@@ -58,7 +58,7 @@ if (hasInterface) then {
 
 private _cfg = missionConfigFile >> QPREFIX >> "Modules";
 if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
-    endLoadingScreen;
+    [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
     disableUserInput false;
     diag_log text "No CLib Modules loaded in the mission";
 };
@@ -119,7 +119,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                         GVAR(unregisterClient) = player;
                         publicVariableServer QGVAR(unregisterClient);
                         GVAR(loadingCanceled) = true;
-                        endLoadingScreen;
+                        [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
                         disableUserInput false;
                         endMission "LOSER";
                     };
