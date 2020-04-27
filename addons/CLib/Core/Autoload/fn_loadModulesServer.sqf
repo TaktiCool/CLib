@@ -43,8 +43,9 @@ LOG("Loaded Modules: " + str _this);
 GVAR(LoadedModules) = _requiredModules;
 publicVariable QGVAR(LoadedModules);
 {
-    private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
-    private _fullFunctionModName = (parsingNamespace getVariable (_x + "_data")) select 3;
+    private _data = parsingNamespace getVariable (_x + "_data");
+    private _fullFunctionModuleName = _data select 1;
+    private _fullFunctionModName = _data select 3;
     // Push the function name on the array if its in the requested module list.
     if (_fullFunctionModuleName in _requiredModules || _fullFunctionModName in _requiredModules) then {
         GVAR(requiredFunctions) pushBackUnique _x;

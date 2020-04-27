@@ -35,13 +35,13 @@ if (_text isEqualType "") then {
     _text  = text _text;
 };
 if (isNil QFUNC(MessageBoxCallback)) then {
-    DFUNC(MessageBoxCallback) = {
+    DFUNC(MessageBoxCallback) = [{
         params [["_display", displayNull], "_typeName"];
         if (isNull _display && isNil "_typeName") exitWith {};
         private _args = _display getVariable QGVAR(Arguments);
         private _callBack = _display getVariable [_typeName, {}];
         _args call _callBack;
-    };
+    }] call CFUNC(compileFinal);
 };
 if !(createDialog "RscDisplayCommonMessage") exitWith { LOG("ERROR Display not Created"); };
 [{

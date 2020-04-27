@@ -275,15 +275,14 @@ GVAR(ignoredLogEventNames_1) = [];
     GVAR(missionStartedTriggered) = true;
     #define REFILL_TIMINGS 15
     GVAR(entityCreatedSM) = call CFUNC(createStatemachine);
-
-    DFUNC(entityCreated) = {
+    DFUNC(entityCreated) = [{
         params ["_obj"];
         if !(_obj getVariable [QGVAR(isProcessed), false] || [_obj, ["Animal", "Logic"]] call CFUNC(isKindOfArray) || (typeOf _obj) isEqualTo "") then {
             ["entityCreated", _obj] call CFUNC(localEvent);
             _obj setVariable [QGVAR(isProcessed), true];
             GVAR(entitiesCached) pushBackUnique _obj;
         };
-    };
+    }] call CFUNC(compileFinal);
 
     ["cursorObjectChanged", {
         (_this select 0) params ["_obj"];

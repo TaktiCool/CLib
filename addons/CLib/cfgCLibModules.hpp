@@ -45,6 +45,7 @@ class CfgCLibModules {
             dependency[] = {"CLib/Events"};
 
             FNC(init);
+            FNC(serverInit);
 
             MODULE(Autoload) {
                 FNCSERVER(autoloadEntryPoint);

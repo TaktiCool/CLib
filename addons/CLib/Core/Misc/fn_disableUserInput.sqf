@@ -45,13 +45,13 @@ if (_state) then {
             };
 
             private _ctrl = _dlg displayctrl 103;
-            _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickEndStr)];
+            _ctrl ctrlSetEventHandler ["buttonClick", call FUNC(onButtonClickEndStr)];
             _ctrl ctrlEnable true;
             _ctrl ctrlSetText "ABORT";
             _ctrl ctrlSetTooltip "Abort.";
 
             _ctrl = _dlg displayctrl ([104, 1010] select isMultiplayer);
-            _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickRespawnStr)];
+            _ctrl ctrlSetEventHandler ["buttonClick", call FUNC(onButtonClickRespawnStr)];
             _ctrl ctrlEnable call {
                 private _config = missionConfigFile >> "respawnButton";
                 !isNumber _config || {getNumber _config == 1}
