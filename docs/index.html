@@ -1,22 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+</style>
 <head>
   <meta charset="UTF-8">
   <title>Clib - Documenation</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css">
+
+  <!-- Theme: Simple Dark -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+<style>
+  :root {
+    /* Reduce the font size */
+    --base-font-size: 14px;
+
+    /* Change the theme color hue */
+    --theme-hue: 150;
+
+    /* Plugin: Search
+    ============================================================================= */
+    --search-background                      : ;
+    --search-margin                          : 1.5rem 0 0;
+    --search-padding                         : ;
+
+    /* Clear Button */
+    --search-clear-icon-color1               : ;
+    --search-clear-icon-color2               : ;
+
+    /* Input */
+    --search-input-background-color          : ;
+    --search-input-background-color--focus   : ;
+    --search-input-background-image          : ;
+    --search-input-background-image--focus   : ;
+    --search-input-background-position       : ;
+    --search-input-background-position--focus: ;
+    --search-input-background-repeat         : no-repeat;
+    --search-input-background-size           : ;
+    --search-input-background-size--focus    : ;
+    --search-input-border-color              : var(--mono-tint1);
+    --search-input-border-radius             : ;
+    --search-input-border-width              : 1px;
+    --search-input-color                     : ;
+    --search-input-font-size                 : ;
+    --search-input-margin                    : ;
+    --search-input-padding                   : 0.5em;
+    --search-input-placeholder-color         : ;
+    --search-input-transition                : ;
+
+    /* Order */
+    --search-flex-order                      : 1;
+
+    /* Results */
+    --search-result-heading-color            : var(--heading-color);
+    --search-result-heading-font-size        : var(--base-font-size);
+    --search-result-heading-font-weight      : normal;
+    --search-result-heading-margin           : 0 0 0.25em;
+    --search-result-item-border-color        : var(--mono-tint2);
+    --search-result-item-border-style        : solid;
+    --search-result-item-border-width        : 0 0 1px 0;
+    --search-result-item-color               : ;
+    --search-result-item-font-size           : ;
+    --search-result-item-font-weight         : normal;
+    --search-result-item-margin              : ;
+    --search-result-item-padding             : 1em 0;
+    --search-result-keyword-background       : var(--mark-background);
+    --search-result-keyword-border-radius    : var(--border-radius-s);
+    --search-result-keyword-color            : var(--mark-color);
+    --search-result-keyword-font-weight      : normal;
+    --search-result-keyword-margin           : 0 0.1em;
+    --search-result-keyword-padding          : 0.2em 0;
+
+    /* Plugin: Docsify Tabs
+    ============================================================================= */
+    /* Tab blocks */
+    --docsifytabs-border-color    : var(--mono-tint2);
+    --docsifytabs-border-radius-px: var(--border-radius-s);
+
+    /* Tabs */
+    --docsifytabs-tab-background  : var(--mono-tint3);
+    --docsifytabs-tab-color       : var(--mono-tint1);
+  }
+</style>
+
 </head>
 <body>
   <div id="app"></div>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  
+  <!-- JavaScript -->
   <script>
     window.$docsify = {
       name: 'Clib',
       repo: 'https://github.com/TaktiCool/CLib.git',
-      loadNavbar: true,
+      loadSidebar: '_navbar.md',
+      coverpage: "coverpage.md",
+      homepage: "README.md",
+      plugins: [
+        EditOnGithubPlugin.create("http://github.com/TaktiCool/CLib/edit/master/doc/", null, "edit on git"),
+      ],
+      themeable: {
+          readyTransition : true, // default
+          responsiveTables: true  // default
+      },
+      // docsify-copy-code (defaults)
+      copyCode: {
+        buttonText : 'Copy to clipboard',
+        errorText  : 'Error',
+        successText: 'Copied'
+      },
+      auto2top   : true,
+      maxLevel   : 3,
+      subMaxLevel: 3,
+      executeScript: true,
+      search: {
+        depth : 3,
+        noData : 'No results!',
+        placeholder : 'Search...'
+      },
+      pagination: {
+        crossChapter: true,
+        crossChapterText: true,
+      },
     }
+
   </script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+
 </body>
 </html>

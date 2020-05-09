@@ -1,3 +1,0 @@
-* [About](/doc)  
-<!-- -->
-* [Macros](/macros)

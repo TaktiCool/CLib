@@ -129,10 +129,10 @@ Examples:
 ["MyIcons"] call CLib_fnc_remove3dGraphics;
 ```
 
-[`<3dGraphicsData>`]: #graphics_data
-[`<3dGraphicsPosition>`]: #graphics_position
-[`ICON`]: #icon_data
-[`LINE`]: #line_data
+[`<3dGraphicsData>`]: #graphics-data
+[`<3dGraphicsPosition>`]: #graphics-position
+[`ICON`]: #icon-data
+[`LINE`]: #line-data
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything

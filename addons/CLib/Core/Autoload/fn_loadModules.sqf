@@ -151,5 +151,5 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
 };
 
 // Register client at the server to start transmission of function codes.
-GVAR(registerClient) = player;
+GVAR(registerClient) = [player, didJip];
 publicVariableServer QGVAR(registerClient);
