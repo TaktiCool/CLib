@@ -4,7 +4,6 @@
 
 Compression is a Module that is responsible for the ability to Compress and Decompress String to reduce Network traffic.
 
-
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
@@ -18,3 +17,6 @@ Compression is a Module that is responsible for the ability to Compress and Deco
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
+[`<Waypoint>`]: https://community.bistudio.com/wiki/Waypoint
+[`<Task>`]: https://community.bistudio.com/wiki/Task

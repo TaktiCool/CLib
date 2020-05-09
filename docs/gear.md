@@ -189,6 +189,13 @@ Examples:
 TODO Example here
 ```
 
+[`<magazinesAmmoFull>`]: https://community.bistudio.com/wiki/magazinesAmmoFull
+[`<ItemData>`]: #ItemData
+[`<MagData>`]: #MagData
+[`<MagazineData>`]: #MagazineData
+[`<AllGearData>`]: #AllGearData
+[`<RestoreGearData>`]: #RestoreGearData
+
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
@@ -202,9 +209,6 @@ TODO Example here
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
-[`<magazinesAmmoFull>`]: https://community.bistudio.com/wiki/magazinesAmmoFull
-[`<ItemData>`]: #ItemData
-[`<MagData>`]: #MagData
-[`<MagazineData>`]: #MagazineData
-[`<AllGearData>`]: #AllGearData
-[`<RestoreGearData>`]: #RestoreGearData
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
+[`<Waypoint>`]: https://community.bistudio.com/wiki/Waypoint
+[`<Task>`]: https://community.bistudio.com/wiki/Task

@@ -134,6 +134,11 @@ Examples:
 [`ICON`]: #icon-data
 [`LINE`]: #line-data
 
+[`drawIcon3D`]: https://community.bistudio.com/wiki/drawIcon3D
+[`drawLine3D`]: https://community.bistudio.com/wiki/drawLine3D
+
+[`Magic Variables`]: https://community.bistudio.com/wiki/Magic_Variables
+
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
@@ -147,8 +152,6 @@ Examples:
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
-
-[`drawIcon3D`]: https://community.bistudio.com/wiki/drawIcon3D
-[`drawLine3D`]: https://community.bistudio.com/wiki/drawLine3D
-
-[`Magic Variables`]: https://community.bistudio.com/wiki/Magic_Variables
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
+[`<Waypoint>`]: https://community.bistudio.com/wiki/Waypoint
+[`<Task>`]: https://community.bistudio.com/wiki/Task

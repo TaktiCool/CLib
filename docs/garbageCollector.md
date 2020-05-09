@@ -31,6 +31,7 @@ The Time the Loops Runs
 ```sqf
 [`<Object>`] setVariable ["CLib_noClean", true];
 ```
+
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
@@ -44,3 +45,6 @@ The Time the Loops Runs
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
+[`<Waypoint>`]: https://community.bistudio.com/wiki/Waypoint
+[`<Task>`]: https://community.bistudio.com/wiki/Task

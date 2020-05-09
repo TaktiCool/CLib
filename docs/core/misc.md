@@ -166,6 +166,8 @@ Examples:
 
 ```sqf
 true call CLib_fnc_disabledUserInput;
+
+[{ false call CLib_fnc_disabledUserInput; }, 10] CLib_fnc_wait;
 ```
 
 ## CLib_fnc_fileExist
@@ -550,3 +552,5 @@ private _strNumber = (10/3) call CLib_fnc_toFixedNumber;
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
 [`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
+[`<Waypoint>`]: https://community.bistudio.com/wiki/Waypoint
+[`<Task>`]: https://community.bistudio.com/wiki/Task

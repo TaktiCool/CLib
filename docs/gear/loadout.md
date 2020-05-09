@@ -75,6 +75,7 @@ Examples:
 private _loadouts = "Rifleman_Opfor" call CLib_fnc_loadLoadout;
 ```
 
+[`<SearchData>`]: #SearchData
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
@@ -88,4 +89,6 @@ private _loadouts = "Rifleman_Opfor" call CLib_fnc_loadLoadout;
 [`<Code>`]: https://community.bistudio.com/wiki/Code
 [`<Group>`]: https://community.bistudio.com/wiki/Group
 [`<Location>`]: https://community.bistudio.com/wiki/Location
-[`<SearchData>`]: #SearchData
+[`<Structured Text>`]: https://community.bistudio.com/wiki/Structured_Text
+[`<Waypoint>`]: https://community.bistudio.com/wiki/Waypoint
+[`<Task>`]: https://community.bistudio.com/wiki/Task

@@ -8,7 +8,7 @@
     Wrapper for getPos if you are not sure if you get an object array or string
 
     Parameter(s):
-    0: Position Data <String, Object, Array>
+    0: Position Data <String, Object, Group, Location, Task, Waypoint, Array>
 
     Returns:
     Position <Array>
