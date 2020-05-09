@@ -58,6 +58,46 @@ Examples:
 {hint "this is Needed for some Eventhandler!";} call CLib_fnc_codeToString;
 ```
 
+## CLib_fnc_compatibleMagazines
+
+Parameter(s):
+* [`<String>`] Weapon Name
+* [`<String>`] Muzzle Name
+
+Returns:
+* [`<Array>`] of [`<String>`] List of all Compatible Magazines of a Weapons Muzzle
+
+Returns a Array of All Compatible Magazines for Weapon/Muzzle
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+
+## CLib_fnc_compileFinal
+
+Parameter(s):
+* [`<Code>`] Code to Compile Final
+* [`<String>`] Variable Name
+
+Returns:
+* [`<Code>`] Final Compiled Code
+
+Compiles a Function Final and Saves them in a namespace
+if Variable Name is not set it will only return the function as Final Compiled Code
+
+Examples:
+
+```sqf
+MY_fnc_Function = {hint "Compiled Final Function"} call CLib_fnc_compileFinal;
+
+// Alt Syntax
+[{hint "Compiled Final Function"}, "MY_fnc_Function"] call CLib_fnc_compileFinal;
+
+```
+
 ## CLib_fnc_createPPEffect
 
 Parameter(s):

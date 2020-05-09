@@ -7,6 +7,7 @@
     Description:
     Compiles a Function Final and Saves them in a namespace
     if Variable Name is not set it will only return the function as Final Compiled Code
+    
     Parameter(s):
     0: Code to Compile Final <Code>
     1: Variable Name <String> (Default: nil)

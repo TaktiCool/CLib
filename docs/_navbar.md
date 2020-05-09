@@ -3,6 +3,7 @@
   - [Autoload](core/autoload.md)
   - [Compile](core/compile.md)
   - [Compression](core/compression.md)
+  - [Extension Framework](core/extensionFramework.md)
   - [Misc](core/misc.md)
   - [MissionModuleLoader](core/missionModuleLoader.md)
 - [Gear](gear.md)

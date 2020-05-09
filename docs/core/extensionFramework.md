@@ -2,23 +2,28 @@
 
 > Maintainer: joko // Jonas, NetFusion
 
-TODO text here
+The Extension Frameworks allows to Build your own extensions in C# and let CLib handle the in an output. 
+**WARNING! this framework is only functional on windows servers**
 
-
-## CLib_fnc_
+## CLib_fnc_callExtension
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<String>`] Extension name
+* [`<String>`] Action name
+* [`<Anything>`] Data (optional)
+* [`<Code>`] Callback (optional)
+* [`<Anything>`] Callback Arguments (optional)
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Call extension on the server. When the server finished the return value gets passed to the callback as a parameter.
 
 Examples:
 
 ```sqf
-TODO Example here
+    ["CLibLogging", "Log", "mylogFile.log:This is My Log Content i want to send over to the extension and in to the file"] call CLib_fnc_callExtension
+
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

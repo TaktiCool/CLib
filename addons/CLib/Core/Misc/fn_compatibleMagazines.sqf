@@ -8,10 +8,11 @@
     Compatible Magazines for Weapon/Muzzle
 
     Parameter(s):
-    None
+    0: Weapon Name <String>
+    1: Muzzle Name <String>
 
     Returns:
-    None
+    <Array<String>> List of all Compatible Magazines of a Weapons Muzzle
 */
 params ["_weapon", "_muzzle"];
 private _if = if (_muzzle != "");
