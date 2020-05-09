@@ -30,3 +30,5 @@
 - [State Machine](stateMachine.md)
 - [Status Effects](statusEffects.md)
 - [Macros](macros.md)
+- **Links**
+- [GitHub](https://github.com/TaktiCool/CLib)
