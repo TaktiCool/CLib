@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Unit <Object> (Default: objNull)
-    1: Item data <Array or String> (Default: ["", 0])
+    1: Item data <String, Array> (Default: ["", 0])
 
     Returns:
     None
@@ -21,8 +21,8 @@
 */
 
 params [
-    ["_unit", objNull],
-    ["_itemData", ["", 0], ["",[]]]
+    ["_unit", objNull, [objNull]],
+    ["_itemData", ["", 0], ["", []], 2]
 ];
 
 if (_itemData isEqualType "") then {
