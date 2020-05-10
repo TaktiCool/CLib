@@ -8,15 +8,25 @@
     Handles mouse clicking event
 
     Parameter(s):
-    0: Control <Control> (Default: controlNull)
-    1: Mouse button <Number> (Default: 0)
-    2: Mouse x position <Number> (Default: 0)
-    3: Mouse y position <Number> (Default: 0)
+    0: Arguments <Array> (Default: [])
+    1: Event name <String> (Default: "clicked")
 
     Returns:
     None
+
+    Remarks:
+    Arguments struct
+        0: Control <Control> (Default: controlNull)
+        1: Mouse button <Number> (Default: 0)
+        2: Mouse x position <Number> (Default: 0)
+        3: Mouse y position <Number> (Default: 0)
 */
-params ["_args", ["_event", "clicked"]];
+
+params [
+    ["_args", [], [[]], [1, 2, 3, 4]],
+    ["_event", "clicked", [""]]
+];
+
 _args params [
     ["_control", controlNull, [controlNull]],
     ["_button", 0, [0]],
