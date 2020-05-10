@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Title of the action <String, Code> (Default: "MISSING TITLE")
-    1: Object or type which the action should be added to <Object, Array, String> (Default: objNull)
+    1: Object or type which the action should be added to <Object, String, Array> (Default: objNull)
     2: Distance in which the action is visible <Number> (Default: 10)
     3: Condition which is evaluated on every frame if player is in range to determine if the action is visible <String, Code> (Default: "true")
     4: Callback which gets called when the action is activated <Code> (Default: {})

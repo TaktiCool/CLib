@@ -2,24 +2,79 @@
 
 > Maintainer: joko // Jonas
 
-TODO text here
+A Localisation system for the Server Side Nature of the CLib framework. The system Reads Eather from the Stringtable or the [`CfgCLibLocalisation`] config class
 
 
-## CLib_fnc_
+## CfgCLibLocalisation
+```sqf
+class CLib {
+    class TestTranslation { // Translation is accassable as STR_CLib_TestTranslation
+        English = "Test English";
+        German = "Test German";
+        Spanish = "Test Spanish";
+        French = "Test French";
+        Polish = "Test Polish";
+        Czech = "Test Czech";
+        Italian = "Test Italian";
+        Hungarian = "Test Hungarian";
+        Portuguese = "Test Portuguese";
+        Russian = "Test Russian";
+        Japanese = "Test Japanese";
+        Korean = "Test Korean";
+        Chinese = "Test Chinese";
+        Chinesesimp = "Test simplified Chinese";
+    };
+};
+```
+
+## CLib_fnc_formatLocalisation
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* Same Paramter as [format](https://community.bistudio.com/wiki/format)
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<String>`] Formated and localised string
 
-TODO text here
+Format localisation wrapper
+
+Examples:
+
+```sqf
+["%1 %2 %3 %4", "STR_This", "STR_Could", "STR_Be", "STR_Localized] call CLib_fnc_formatLocalisation
+```
+
+## CLib_fnc_isLocalsed
+
+Parameter(s):
+* [`<String>`] String to Check
+
+Returns:
+* [`<Boolean>`] String is Localisation Key
+
+Checks of a String is a Localisation Key
 
 Examples:
 
 ```sqf
 TODO Example here
 ```
+
+## CLib_fnc_readLocalisation
+
+Parameter(s):
+* [`<String>`] String to Localise
+
+Returns:
+* [`<String>`] Localised String
+
+TODO text here
+
+Examples:
+
+```sqf
+"STR_LocalisedString" call CLib_fnc_readLocalisation
+```
+[`CfgCLibLocalisation`]: #CfgCLibLocalisation
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything

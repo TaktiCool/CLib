@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Hold Action Handler
+    Adds a Hold Action to a Object, Object Type ,or A Array of Both, or Overrides Vanilla Action with Hold Action
 
     Parameter(s):
     0: Target <Object, String, Array> (Default: objNull)

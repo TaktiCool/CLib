@@ -8,10 +8,13 @@ TODO text here
 ## CLib_fnc_addMapGraphicsEventHandler
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<String>`] Icon ID
+* [`<String>`] Event Name
+* [`<Code>`, `<String>`] Code that gets executed on event
+* [`<Type>`] Arguments passed to the event
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Number>`] ID of the Event
 
 TODO text here
 

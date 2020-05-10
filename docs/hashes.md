@@ -16,7 +16,7 @@ Parameter(s):
 * [`<Anything>`] The Key to Check for
 
 Returns:
-* [`<Bool>`] Found the Searched Key
+* [`<Boolean>`] Found the Searched Key
 
 Checks if a Hashset Contains a Key
 
@@ -33,7 +33,7 @@ Parameter(s):
 * [`<Anything>`] The Valude to Check for
 
 Returns:
-* [`<Bool>`] Found the Searched Valude
+* [`<Boolean>`] Found the Searched Valude
 
 Checks if a Hashset Contains a Value
 
@@ -115,7 +115,7 @@ private _isBanana = [MyAwsomeHashSet, "isbanana"] call CLib_fnc_getHash;
 Parameter(s):
 * [`<Namespace>`, `<Location>`, `<Object>`, ] Namespace
 * [`<HashSet>`] HashSet
-* [`<Bool>`] Publish Variables
+* [`<Boolean>`] Publish Variables
 * [`<String>`] AllVarNames Cache Name
 
 Returns:

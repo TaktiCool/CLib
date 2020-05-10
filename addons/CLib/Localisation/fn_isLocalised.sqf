@@ -20,4 +20,4 @@ params [
 
 private _temp = GVAR(Namepace) getVariable _locaName;
 
-!isNil "_temp";
+!isNil "_temp" || isLocalised _locaName;
