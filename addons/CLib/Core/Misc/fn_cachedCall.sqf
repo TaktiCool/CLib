@@ -11,16 +11,24 @@
     Calls the given function and caches the result for a period of time
 
     Parameter(s):
-    0: Cache ID <String>
-    1: Function whose return value gets cached <Code>
-    2: Arguments <Anything>
-    3: Time until the cached values are being obsolet <Number>
-    4: Event that clears the cache <String>
+    0: Cache ID <String> (Default: "")
+    1: Function whose return value gets cached <Code> (Default: {})
+    2: Arguments <Any> (Default: [])
+    3: Time until the cached values are being obsolet <Number> (Default: 0)
+    4: Event that clears the cache <String> (Default: nil)
 
     Returns:
-    0: Return Name <Anything>
+    Return value <Anything>
 */
-params ["_uid", "_fnc", "_args", "_duration", "_event"];
+
+params [
+    ["_uid", "", [""]],
+    ["_fnc", {}, [{}]],
+    ["_args", [], []],
+    ["_duration", 0, [0]],
+    ["_event", nil, [""]]
+];
+
 private _timestamp = (GVAR(cachedCall) getVariable [_uid, [-999999999]]) select 0;
 if (_timestamp < time) then {
     GVAR(cachedCall) setVariable [_uid, [time + _duration, _args call _fnc]];

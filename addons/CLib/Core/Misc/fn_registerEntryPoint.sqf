@@ -8,13 +8,18 @@
     Function that allows to execute code from the mission direct without using Mission Modules
 
     Parameter(s):
-    0: Code To Execute when CLib is Loaded <Code>
+    0: Code To Execute when CLib is Loaded <Code, String> (Default: {})
     1: Arguments that get passed to Code <Anything> (Default: nil)
 
     Returns:
     None
 */
-params [["_code", {}, [{}, ""]], ["_arguments", nil, []]];
+
+params [
+    ["_code", {}, [{}, ""]],
+    "_arguments"
+];
+
 isNil {
     if (CGVAR(loadingIsFinished)) exitWith {
         if (_code isEqualType "") then {

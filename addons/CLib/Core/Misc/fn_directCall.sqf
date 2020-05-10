@@ -8,13 +8,18 @@
     Calls a funcion directly and changes the Environment to Unscheduled
 
     Parameter(s):
-    0: Code or Function that gets called <Code>
-    1: Arguments <Any>
+    0: Code or Function that gets called <Code> (Default: {})
+    1: Arguments <Any> (Default: [])
 
     Returns:
     Return of the Function <Any>
 */
-params [["_CLib_code", {}, [{}]], ["_CLib_arguments", []]];
+
+params [
+    ["_CLib_code", {}, [{}]],
+    ["_CLib_arguments", [], []]
+];
+
 if !(canSuspend) exitWith {
     _CLib_arguments call _CLib_code;
 };

@@ -5,15 +5,18 @@
     Author: joko // Jonas
 
     Description:
-    Removes all Not needed 0 from toFixed numbers and returls only the max toFixed number count that is required.
+    Removes all trailing zeros from a decimal number
 
     Parameter(s):
-    Number <Number>
+    0: Number <Number> (Default: 0)
 
     Returns:
     Number in a String form <String>
 */
-params [["_number", 0, [0]]];
+
+params [
+    ["_number", 0, [0]]
+];
 
 private _strNumber = _number toFixed 20;
 

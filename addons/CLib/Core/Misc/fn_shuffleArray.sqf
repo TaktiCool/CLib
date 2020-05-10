@@ -6,14 +6,20 @@
 
     Description:
     Returns a shuffled array.
-    See https://en.wikipedia.org/wiki/Fisher-Yates_shuffle for details.
 
     Parameter(s):
-    <Array>
+    0: Array <Array> (Default: [])
 
     Returns:
-    <Array>
+    Shuffled array <Array>
+
+    Remarks:
+    https://en.wikipedia.org/wiki/Fisher-Yates_shuffle
 */
+
+params [
+    ["_this", [], [[]], []]
+];
 
 _this = +_this;
 private _res = [];

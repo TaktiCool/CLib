@@ -8,31 +8,40 @@
     Creates a two-option message box in a new dialogue.
 
     Parameter(s):
-    0: Text <String, Text>
-    1: Header <String>
-    2: Button 1 CallBack <Code, Array<String, Code>>
-    3: Button 2 CallBack <Code, Array<String, Code>>
-    4: onClose <Code>
-    5: Arguments <Code>
+    0: Text <String, Text> (Default: "testText")
+    1: Header <String> (Default: "header")
+    2: Button 1 CallBack <Code, Array> (Default: {})
+    3: Button 2 CallBack <Code, Array> (Default: {})
+    4: OnClose <Code> (Default: {})
+    5: Arguments <Anything> (Default: nil)
 
     Returns:
     None
 */
+
 EXEC_ONLY_UNSCHEDULED;
-params [["_text", "testText"], ["_header", "header"], ["_button1Callback", {}, [[], {}]], ["_button2Callback", {}, [[], {}]], ["_onClose", {}, [{}]], "_args"];
+
+params [
+    ["_text", "testText", ["", text ""]],
+    ["_header", "header", [""]],
+    ["_button1Callback", {}, [{}, []], 2],
+    ["_button2Callback", {}, [{}, []], 2],
+    ["_onClose", {}, [{}]],
+    "_args"
+];
+
 private _button1Text = "Ok";
 private _button2Text = "Cancel";
 if (_button1Callback isEqualType []) then {
     _button1Text = _button1Callback select 0;
     _button1Callback = _button1Callback select 1;
-
 };
 if (_button2Callback isEqualType []) then {
     _button2Text = _button2Callback select 0;
     _button2Callback = _button2Callback select 1;
 };
 if (_text isEqualType "") then {
-    _text  = text _text;
+    _text = text _text;
 };
 if (isNil QFUNC(MessageBoxCallback)) then {
     DFUNC(MessageBoxCallback) = [{
@@ -43,7 +52,9 @@ if (isNil QFUNC(MessageBoxCallback)) then {
         _args call _callBack;
     }] call CFUNC(compileFinal);
 };
-if !(createDialog "RscDisplayCommonMessage") exitWith { LOG("ERROR Display not Created"); };
+if !(createDialog "RscDisplayCommonMessage") exitWith {
+    LOG("ERROR Display not Created");
+};
 [{
     params ["_button1Text", "_button2Text", "_text", "_header", "_button1Callback", "_button2Callback", "_onClose", "_args"];
 
@@ -94,7 +105,7 @@ if !(createDialog "RscDisplayCommonMessage") exitWith { LOG("ERROR Display not C
     private _bottomPosY = (_ctrlBcgCommonPos select 1) + _ctrlTextPosH + (_marginY * 2) + _bottomSpaceY;
     {
         private _xPos = ctrlPosition _x;
-        _xPos set [1,_bottomPosY];
+        _xPos set [1, _bottomPosY];
         _x ctrlSetPosition _xPos;
         _x ctrlCommit 0;
     } foreach [
@@ -150,7 +161,6 @@ if !(createDialog "RscDisplayCommonMessage") exitWith { LOG("ERROR Display not C
     _ctrlButtonCancel ctrlAddEventHandler ["buttonClick", {
         [ctrlParent (_this select 0), QGVAR(callBack_Button2)] call FUNC(MessageBoxCallback);
     }];
-
 }, {
     !isNull (uiNamespace getVariable ["RscDisplayCommonMessage_display", displayNull])
 }, [_button1Text, _button2Text, _text, _header, _button1Callback, _button2Callback, _onClose, _args]] call CFUNC(waitUntil);

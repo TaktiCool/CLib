@@ -8,12 +8,15 @@
     Gets a Object Name or displayName.
 
     Parameter(s):
-    0: Object whose name will be detected <Object>
+    0: Object whose name will be detected <Object> (Default: objNull)
 
     Returns:
     Name of the Object <String>
 */
-params ["_object"];
+
+params [
+    ["_object", objNull, [objNull]]
+];
 
 if (isNull _object) exitWith {"objNull"};
 private _ret = _object getVariable QGVAR(objectName);

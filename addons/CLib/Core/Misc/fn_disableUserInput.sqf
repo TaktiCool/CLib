@@ -11,13 +11,17 @@
     Disables key input. ESC can still be pressed to open the menu.
 
     Parameter(s):
-    0: True to disable key inputs, false to re-enable them <Bool>
+    0: Disable user input <Bool> (Default: true)
 
     Returns:
     None
 */
+
 EXEC_ONLY_UNSCHEDULED;
-params ["_state"];
+
+params [
+    ["_state", true, [true]]
+];
 
 if (_state) then {
     if (!isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
