@@ -3,7 +3,8 @@
 > Maintainer: joko // Jonas, NetFusion
 
 The Extension Frameworks allows to Build your own extensions in C# and let CLib handle the in an output. 
-**WARNING! this framework is only functional on windows servers**
+> [!WARNING] 
+> This framework is only functional on windows servers
 
 ## CLib_fnc_callExtension
 
@@ -23,7 +24,6 @@ Examples:
 
 ```sqf
     ["CLibLogging", "Log", "mylogFile.log:This is My Log Content i want to send over to the extension and in to the file"] call CLib_fnc_callExtension
-
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
