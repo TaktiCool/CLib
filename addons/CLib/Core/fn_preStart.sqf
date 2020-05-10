@@ -38,7 +38,6 @@ if (isNil QCFUNC(compressString)) then {
 };
 if (isNil QCFUNC(decompressString)) then {
     DCFUNC(decompressString) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compression\fn_decompressString.sqf";
-
 };
 if (isNil QCFUNC(checkCompression)) then {
     DCFUNC(checkCompression) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compression\fn_checkCompression.sqf";
