@@ -22,7 +22,7 @@
 - [lnbData](lnbData.md)
 - [Localisation](localisation.md)
 - [Map Graphics](mapGraphics.md)
-- [Mutex](mapGraphics.md)
+- [Mutex](mutex.md)
 - [Namespaces](namespaces.md)
 - [Object Pooling](objectPooling.md)
 - [Performance Info](performanceInfo.md)
