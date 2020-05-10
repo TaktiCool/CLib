@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 private _sortedModuleNames = [];
 private _modulesToSort = +(parsingNamespace getVariable QGVAR(allModuleNamesCached));
 

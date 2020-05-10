@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(allFunctionNamesCached) = [];
 
 private _fnc_checkNext = {
@@ -56,7 +57,6 @@ private _fnc_readFunction = {
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer);
 };
-
 
 DUMP("--------------------------Start CLib Function Search---------------------------------");
 {
