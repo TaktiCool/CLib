@@ -11,7 +11,7 @@
     0: Statemachine Object <Location> (Default: locationNull)
     1: Statename <String> (Default: "")
     2: StateCode <Code, String> (Default: {})
-    3: Arguments <Anything> (Default: [])
+    3: Arguments <Any> (Default: [])
 
     Returns:
     None
