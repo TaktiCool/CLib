@@ -9,21 +9,16 @@ using System.Text;
 using System.Xml.Linq;
 using SimpleJSON;
 
-namespace CLibDatabase
-{
-    public class DllEntry
-    {
+namespace CLibDatabase {
+    // ReSharper disable once UnusedMember.Global
+    public class DllEntry {
         private static string loadedDatabase = "";
-
-        private static string databaseFolder =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase");
-
+        private static readonly string DatabaseFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase");
         private static Dictionary<string, string> database = new Dictionary<string, string>();
 
-        static DllEntry()
-        {
-            if (!Directory.Exists(databaseFolder))
-                Directory.CreateDirectory(databaseFolder);
+        static DllEntry() {
+            if (!Directory.Exists(DatabaseFolder))
+                Directory.CreateDirectory(DatabaseFolder);
         }
 
 #if WIN64
@@ -31,8 +26,10 @@ namespace CLibDatabase
 #else
         [DllExport("_RVExtensionVersion@8", CallingConvention.StdCall)]
 #endif
-        public static void RVExtensionVersion(StringBuilder output, int outputSize)
-        {
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once UnusedParameter.Global
+        public static void RVExtensionVersion(StringBuilder output, int outputSize) {
             output.Append(GetVersion());
         }
 
@@ -41,27 +38,23 @@ namespace CLibDatabase
 #else
         [DllExport("_RVExtension@12", CallingConvention.StdCall)]
 #endif
-        public static void RVExtension(StringBuilder output, int outputSize,
-            [MarshalAs(UnmanagedType.LPStr)] string input)
-        {
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once UnusedParameter.Global
+        public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input) {
             if (input.ToLower() != "version")
                 return;
 
             output.Append(GetVersion());
         }
 
-        private static string GetVersion()
-        {
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            try
-            {
-                string location = executingAssembly.Location;
-                if (location == null)
-                    throw new Exception("Assembly location not found");
+        private static string GetVersion() {
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            try {
+                var location = executingAssembly.Location;
                 return FileVersionInfo.GetVersionInfo(location).FileVersion;
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
+                // ignored
             }
 
             return "0.0.0.0";
@@ -76,23 +69,21 @@ namespace CLibDatabase
         }
 
         [DllExport("KeyExists")]
-        public static string KeyExists(string key)
-        {
+        // ReSharper disable once UnusedMember.Global
+        public static string KeyExists(string key) {
             return database.ContainsKey(key).ToString();
         }
 
         [DllExport("Get")]
-        public static string Get(string key)
-        {
-            if (!database.ContainsKey(key))
-                return "ERROR";
-            return database[key];
+        // ReSharper disable once UnusedMember.Global
+        public static string Get(string key) {
+            return !database.ContainsKey(key) ? "ERROR" : database[key];
         }
 
         [DllExport("Set")]
-        public static string Set(string input)
-        {
-            string[] keyAndValue = input.Split(new[] {"~>"}, StringSplitOptions.RemoveEmptyEntries);
+        // ReSharper disable once UnusedMember.Global
+        public static string Set(string input) {
+            var keyAndValue = input.Split(new[] {"~>"}, StringSplitOptions.RemoveEmptyEntries);
             if (!database.ContainsKey(keyAndValue[0]))
                 database.Add(keyAndValue[0], keyAndValue[1]);
             else
@@ -102,24 +93,20 @@ namespace CLibDatabase
         }
 
         [DllExport("Load")]
-        public static string Load(string filename)
-        {
+        // ReSharper disable once UnusedMember.Global
+        public static string Load(string filename) {
             if (loadedDatabase == filename)
                 return "true";
-            
-            using (FileStream fs = File.OpenRead(Path.Combine(databaseFolder, filename + ".clibdata")))
-            {
-                GZipStream cmp = new GZipStream(fs, CompressionMode.Decompress);
-                using (BinaryReader reader = new BinaryReader(cmp))
-                {
-                    int count = reader.ReadInt32();
-                    database = new Dictionary<string, string>(count);
-                    for (int i = 0; i < count; i++)
-                    {
-                        string key = reader.ReadString();
-                        string value = reader.ReadString();
-                        database.Add(key, value);
-                    }
+
+            using (var fs = File.OpenRead(Path.Combine(DatabaseFolder, filename + ".clibdata")))
+            using (var gZipStream = new GZipStream(fs, CompressionLevel.Optimal))
+            using (var reader = new BinaryReader(gZipStream)) {
+                var count = reader.ReadInt32();
+                database = new Dictionary<string, string>(count);
+                for (var i = 0; i < count; i++) {
+                    var key = reader.ReadString();
+                    var value = reader.ReadString();
+                    database.Add(key, value);
                 }
             }
 
@@ -128,37 +115,33 @@ namespace CLibDatabase
         }
 
         [DllExport("Save")]
-        public static string Save(string filename)
-        {
-            string path = Path.Combine(databaseFolder, filename + ".clibdata");
-            using (FileStream fs = File.OpenWrite(path))
-            {
-                GZipStream dcmp = new GZipStream(fs, CompressionLevel.Optimal);
-
-                using (BinaryWriter writer = new BinaryWriter(dcmp))
-                {
-                    writer.Write(database.Count);
-                    foreach (KeyValuePair<string, string> pair in database)
-                    {
-                        writer.Write(pair.Key);
-                        writer.Write(pair.Value);
-                    }
+        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once UnusedMethodReturnValue.Global
+        public static string Save(string filename) {
+            using (var fs = File.OpenWrite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".clibdata")))
+            using (var gZipStream = new GZipStream(fs, CompressionMode.Decompress))
+            using (var writer = new BinaryWriter(gZipStream)) {
+                writer.Write(database.Count);
+                foreach (var pair in database) {
+                    writer.Write(pair.Key);
+                    writer.Write(pair.Value);
                 }
-                return $"File Exported to {path}";
+                return "true";
             }
         }
 
-        private static JSONNode ConvertToJson()
-        {
-            JSONNode json = new JSONObject();
-            foreach (KeyValuePair<string, string> item in database) json.Add(item.Key, item.Value);
+        private static JSONNode ConvertToJson() {
+            var json = JSON.Parse("{}");
+            foreach (var item in database)
+                json.Add(item.Key, item.Value);
             return json;
         }
 
-        private static void ConvertToDictionary(JSONNode json)
-        {
+        private static void ConvertToDictionary(JSONNode json) {
             database.Clear();
-            foreach (KeyValuePair<string, JSONNode> item in json.Linq) database.Add(item.Key, item.Value.Value);
+            foreach (var item in json.Linq)
+                database.Add(item.Key, item.Value.Value);
         }
 
         private static void ConvertToDictionary(XContainer xml)
@@ -179,62 +162,43 @@ namespace CLibDatabase
             return xml;
         }
         #region Import/Export
-
         [DllExport("ExportJson")]
-        public static string ExportJson(string filename)
-        {
-            JSONNode json = ConvertToJson();
-            StringBuilder exportStringBuilder = new StringBuilder();
+        // ReSharper disable once UnusedMember.Global
+        public static string ExportJson(string filename) {
+            var json = ConvertToJson();
+            var exportStringBuilder = new StringBuilder();
             json.WriteToStringBuilder(exportStringBuilder, 0, 4, JSONTextMode.Indent);
-            File.WriteAllText(
-                Path.Combine(databaseFolder, filename + ".json"), exportStringBuilder.ToString());
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".json"), exportStringBuilder.ToString());
             return "true";
         }
 
         [DllExport("ExportJsonBinary")]
-        public static string ExportJsonBinary(string filename)
-        {
-            JSONNode json = ConvertToJson();
-            json.SaveToCompressedFile(Path.Combine(databaseFolder, filename + ".bson"));
-            return "true";
-        }
-
-        [DllExport("ExportXml")]
-        public static string ExportXml(string filePath)
-        {
-            XDocument xml = ConvertToXML();
-            xml.Save(filePath, SaveOptions.OmitDuplicateNamespaces);
+        // ReSharper disable once UnusedMember.Global
+        public static string ExportJsonBinary(string filename) {
+            var json = ConvertToJson();
+            json.SaveToCompressedFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".bson"));
             return "true";
         }
 
         [DllExport("ImportJson")]
-        public static string ImportJson(string filename)
-        {
-            string jsonStr = File.ReadAllText(Path.Combine(databaseFolder, filename + ".json"));
-            JSONNode json = JSON.Parse(jsonStr);
+        // ReSharper disable once UnusedMember.Global
+        public static string ImportJson(string filename) {
+            var jsonStr = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".json"));
+            var json = JSON.Parse(jsonStr);
             ConvertToDictionary(json);
             return "true";
         }
 
         [DllExport("ImportJsonBinary")]
-        public static string ImportJsonBinary(string filename)
-        {
-            JSONNode json = JSONNode.LoadFromCompressedFile(Path.Combine(databaseFolder, filename + ".bson"));
+        // ReSharper disable once UnusedMember.Global
+        public static string ImportJsonBinary(string filename) {
+            var json = JSONNode.LoadFromCompressedFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLibDatabase", filename + ".bson"));
             ConvertToDictionary(json);
             return "true";
         }
-
-        public static string ImportXml(string filePath)
-        {
-            XDocument xml = XDocument.Load(filePath);
-            ConvertToDictionary(xml);
-            return "true";
-        }
-
         #endregion Import/Export
 
-        ~DllEntry()
-        {
+        ~DllEntry() {
             Save(loadedDatabase);
         }
     }
