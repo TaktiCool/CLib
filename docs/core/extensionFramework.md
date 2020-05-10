@@ -3,7 +3,7 @@
 > Maintainer: joko // Jonas, NetFusion
 
 The Extension Frameworks allows to Build your own extensions in C# and let CLib handle the in an output. 
-> [!WARNING] 
+> [!DANGER] 
 > This framework is only functional on windows servers
 
 ## CLib_fnc_callExtension
