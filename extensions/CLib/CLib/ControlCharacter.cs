@@ -1,4 +1,4 @@
-﻿namespace CLib {
+namespace CLib {
     public struct ControlCharacter {
         // ReSharper disable InconsistentNaming
         public const char SOH = '\x01';
