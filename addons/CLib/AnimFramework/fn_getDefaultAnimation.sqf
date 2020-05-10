@@ -8,14 +8,18 @@
     Gets the default animation for a unit
 
     Parameter(s):
-    0: Unit <Object>
+    0: Unit <Object> (Default: objNull)
 
     Returns:
     Animation <String>
 
     TODO Cache config Reads
 */
-params ["_unit"];
+
+params [
+    ["_unit", objNull, [objNull]]
+];
+
 private _animState = toLower (animationState _unit);
 
 // stances are broken for some Animations

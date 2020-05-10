@@ -20,7 +20,7 @@ params [["_path", configNull, [configNull]], ["_default", "", [[], "", 0]], ["_f
 
 private _ret = GVAR(configCache) getVariable format [QGVAR(getCachedData_%1), _path];
 if (isNil "_ret") then {
-    _ret = [_path, _default, _forceDefaultType]call CFUNC(getConfigData);
+    _ret = [_path, _default, _forceDefaultType] call CFUNC(getConfigData);
 
     GVAR(configCache) setVariable [format [QGVAR(getCachedData_%1), _path], _ret];
 };
