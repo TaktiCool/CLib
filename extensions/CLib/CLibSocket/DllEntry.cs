@@ -12,9 +12,6 @@ using System.Threading;
 namespace CLibSocket {
     // ReSharper disable once UnusedMember.Global
     public class DllEntry {
-        private const int AF_INET = 2;    // IP_v4 = System.Net.Sockets.AddressFamily.InterNetwork
-        private const int AF_INET6 = 23;  // IP_v6 = System.Net.Sockets.AddressFamily.InterNetworkV6
-
         [StructLayout(LayoutKind.Sequential)]
         private struct MIB_UDPROW_OWNER_PID {
             public uint LocalAddress;
@@ -26,7 +23,7 @@ namespace CLibSocket {
                     var bytes = BitConverter.GetBytes(this.localPort);
                     if (BitConverter.IsLittleEndian)
                         Array.Reverse(bytes);
-                    
+
                     return BitConverter.ToUInt16(bytes, 0);
                 }
             }
@@ -54,12 +51,11 @@ namespace CLibSocket {
         private static readonly Dictionary<string, TcpClientEntry> TcpClients = new Dictionary<string, TcpClientEntry>();
         private static readonly ReaderWriterLock Locker = new ReaderWriterLock();
         private static List<int> _serverPorts = new List<int>();
-        private static Timer _timer;
 
         static DllEntry() {
             System.IO.File.WriteAllText("CLibSocket.log", string.Empty);
 
-            _timer = new Timer(OnTick, null, 0, 5000);
+            new Timer(OnTick, null, 0, 5000);
         }
 
 #if WIN64
@@ -70,8 +66,9 @@ namespace CLibSocket {
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once UnusedMember.Global
         // ReSharper disable once UnusedParameter.Global
-        public static void RVExtensionVersion(StringBuilder output, int outputSize)
-        {
+#pragma warning disable IDE0060 // Remove unused parameter
+        public static void RVExtensionVersion(StringBuilder output, int outputSize) {
+#pragma warning restore IDE0060 // Remove unused parameter
             output.Append(GetVersion());
         }
 
@@ -83,7 +80,9 @@ namespace CLibSocket {
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once UnusedMember.Global
         // ReSharper disable once UnusedParameter.Global
+#pragma warning disable IDE0060 // Remove unused parameter
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input) {
+#pragma warning restore IDE0060 // Remove unused parameter
             if (input != "version")
                 return;
 
@@ -133,10 +132,10 @@ namespace CLibSocket {
             if (!TcpClients.ContainsKey(hash)) {
                 return "false";
             }
-            
+
             TcpClients[hash].TcpClient.Close();
             TcpClients.Remove(hash);
-            
+
             return "success";
         }
 
@@ -190,7 +189,7 @@ namespace CLibSocket {
             var ports = GetArmaServerPorts();
             if (ports.SequenceEqual(_serverPorts))
                 return;
-            
+
             _serverPorts = ports;
             foreach (var tcpClientEntry in TcpClients.Values) {
                 Send(tcpClientEntry.TcpClient, $"PORTS:{string.Join(":", _serverPorts)}");
@@ -203,7 +202,7 @@ namespace CLibSocket {
 
                 if (IsConnected(entry.TcpClient))
                     continue;
-                
+
                 try {
                     entry.TcpClient.Close();
                 } catch (ObjectDisposedException) { }
@@ -223,7 +222,7 @@ namespace CLibSocket {
             var bufferTable = Marshal.AllocHGlobal(bufferSize);
 
             try {
-                var ret = GetExtendedUdpTable(bufferTable, ref bufferSize, false, AF_INET, UDP_TABLE_CLASS.UDP_TABLE_OWNER_PID);
+                var ret = GetExtendedUdpTable(bufferTable, ref bufferSize, false, (int)AddressFamily.InterNetwork, UDP_TABLE_CLASS.UDP_TABLE_OWNER_PID);
                 if (ret != 0) {
                     return ports;
                 }
@@ -233,7 +232,7 @@ namespace CLibSocket {
 
                 for (var i = 0; i < numberOfEntries; i++) {
                     var row = (MIB_UDPROW_OWNER_PID)Marshal.PtrToStructure(rowPtr, typeof(MIB_UDPROW_OWNER_PID));
-                    rowPtr = rowPtr + Marshal.SizeOf(row);
+                    rowPtr += Marshal.SizeOf(row);
 
                     if (row.PID == Process.GetCurrentProcess().Id && row.LocalAddress == 0)
                         ports.Add(row.LocalPort);

@@ -40,7 +40,9 @@ namespace CLib {
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once UnusedMember.Global
         // ReSharper disable once UnusedParameter.Global
+#pragma warning disable IDE0060 // Remove unused parameter
         public static void RVExtensionVersion(StringBuilder output, int outputSize) {
+#pragma warning restore IDE0060 // Remove unused parameter
             output.Append(GetVersion());
         }
 
