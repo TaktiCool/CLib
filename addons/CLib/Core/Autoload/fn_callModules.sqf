@@ -16,6 +16,7 @@
     Example:
     call CFUNC(callModules);
 */
+
 private _init = [];
 private _serverInit = [];
 private _postInit = [];
@@ -29,7 +30,7 @@ private _thread = 0 spawn {
         if (_time <= time) then {
             [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
             disableUserInput false;
-            waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
+            waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
             private _errorText = "Warning A Script Error that Crashed Autoload has appeared the Loading Screen got Terminated Automaticly!";
             [
                 _errorText,
@@ -112,7 +113,6 @@ private _thread = 0 spawn {
     }, _this select 1] call CFUNC(execNextFrame);
 
 }, [_postInit, _thread]] call CFUNC(execNextFrame);
-
 
 if (didJIP) then {
     QGVAR(jipQueue) addPublicVariableEventHandler {
