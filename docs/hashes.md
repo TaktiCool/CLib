@@ -4,64 +4,21 @@
 
 The Hashes Modules is a Module to handle Hash Arrays.
 
-
-## CLib_fnc_getHash
-
-Parameter(s):
-* [`<Type>`] TODO text here
-
-Returns:
-* [`<Type>`] TODO text here
-
-Gets a Hash Value from a Key out of a Hashlist
-
-Examples:
-
-```sqf
-TODO Example here
-```
-
-## CLib_fnc_setHash
-
-Parameter(s):
-* [`<Type>`] TODO text here
-
-Returns:
-* [`<Type>`] TODO text here
-
-Sets a Hash Value to a Key in a Hashlist
-
-Examples:
-
-```sqf
-TODO Example here
-```
-
-## CLib_fnc_createHash
-
-Parameter(s):
-* [`<Type>`] TODO text here
-
-Returns:
-* [`<Type>`] TODO text here
-
-TODO text here
-
-Examples:
-
-```sqf
-TODO Example here
-```
+## HashSet
+Hash Sets are Array of Array of Any Data
+* [`<Array>`] Array of Keys
+* [`<Array>`] Array of Values
 
 ## CLib_fnc_containsKey
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<HashSet>`] The HashSet to Check in
+* [`<Anything>`] The Key to Check for
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Bool>`] Found the Searched Key
 
-TODO text here
+Checks if a Hashset Contains a Key
 
 Examples:
 
@@ -72,28 +29,63 @@ TODO Example here
 ## CLib_fnc_containsValue
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<HashSet>`] The HashSet to Check in
+* [`<Anything>`] The Valude to Check for
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Bool>`] Found the Searched Valude
 
-TODO text here
+Checks if a Hashset Contains a Value
 
 Examples:
 
 ```sqf
 TODO Example here
+```
+
+## CLib_fnc_countHash
+
+Parameter(s):
+* [`<HashSet>`] The HashSet to Count
+
+Returns:
+* [`<Number>`] Amount of Hashes in Hashset
+
+Counts amount of Hashes in Hash set
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_createHash
+
+Parameter(s):
+None
+
+Returns:
+* [`<HashSet>`] New HashSet
+
+Creates a New Hashset
+
+Examples:
+
+```sqf
+MyAwsomeHashSet = call CLib_fnc_createHash;
 ```
 
 ## CLib_fnc_forEachHash
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<HashSet>`] HashSet to Loop through
+* [`<Code>`] Code to Execute on every Item of the HashSet
+* [`<Anything>`] Arguments that gets Passed to the Code
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Loops though all Entrys in a HashSet
 
 Examples:
 
@@ -101,10 +93,27 @@ Examples:
 TODO Example here
 ```
 
+## CLib_fnc_getHash
+
+Parameter(s):
+* [`<HashSet>`] HashSet to get Value from
+* [`<Anything>`] Key to get from [`HashSet`]
+
+Returns:
+* [`<Anything>`] Value from HashSet
+
+Get a Value from the Hashset
+
+Examples:
+
+```sqf
+private _isBanana = [MyAwsomeHashSet, "isbanana"] call CLib_fnc_getHash;
+```
+
 ## CLib_fnc_hashToNamespace
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Namespace>`] TODO text here
 
 Returns:
 * [`<Type>`] TODO text here
@@ -132,6 +141,25 @@ Examples:
 ```sqf
 TODO Example here
 ```
+
+## CLib_fnc_setHash
+
+Parameter(s):
+* [`<Type>`] TODO text here
+
+Returns:
+* [`<Type>`] TODO text here
+
+Sets a Hash Value to a Key in a Hashlist
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+[`<HashSet>`]: #HashSet
+[`HashSet`]: #HashSet
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything

@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Creates a New Hashset
+    Loops Though all Entrys in a HashSet
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
