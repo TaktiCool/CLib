@@ -113,33 +113,38 @@ private _isBanana = [MyAwsomeHashSet, "isbanana"] call CLib_fnc_getHash;
 ## CLib_fnc_hashToNamespace
 
 Parameter(s):
-* [`<Namespace>`] TODO text here
+* [`<Namespace>`, `<Location>`, `<Object>`, ] Namespace
+* [`<HashSet>`] HashSet
+* [`<Bool>`] Publish Variables
+* [`<String>`] AllVarNames Cache Name
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Converts a HashSet into a Namespace
 
 Examples:
 
 ```sqf
-TODO Example here
+[MyNewNamespace, MyAwsomeHashSet, true, "AllVariables"] call CLib_fnc_hashToNamespace
 ```
 
 ## CLib_fnc_namespaceToHash
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Namespace>`, `<Location>`, `<Object>`, ] Namespace
+* [`<HashSet>`] HashSet
+* [`<String>`] AllVarNames Cache Name
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<HashSet>`] the HashSet
 
-TODO text here
+Converts a Namespace into a HashSet
 
 Examples:
 
 ```sqf
-TODO Example here
+[MyNewNamespace, MyAwsomeHashSet, "AllVariables"] call CLib_fnc_namespaceToHash
 ```
 
 ## CLib_fnc_setHash

@@ -42,7 +42,7 @@ params [
     ["_dynamicArguments", [], [[]], []]
 ];
 
-private _args = [];
+private _args = nil;
 private _priority = 1.5;
 private _showWindow = true;
 private _hideOnUse = true;
@@ -57,41 +57,81 @@ private _selection = "";
 private _argName = "";
 {
     if (_argName == "") then {
-        _argName = _x;
+        _argName = toLower _x;
     } else {
         switch (_argName) do {
             case ("arguments"): {
                 _args = _x;
             };
             case ("priority"): {
-                _priority = _x;
+                if (_x isEqualtype _priority) then {
+                    _priority = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("showWindow"): {
-                _showWindow = _x;
+            case ("showwindow"): {
+                if (_x isEqualtype _showWindow) then {
+                    _showWindow = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("hideOnUse"): {
-                _hideOnUse = _x;
+            case ("hideonuse"): {
+                if (_x isEqualtype _hideOnUse) then {
+                    _hideOnUse = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("shortcut"): {
-                _shortcut = _x;
+                if (_x isEqualtype _shortcut) then {
+                    _shortcut = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("radius"): {
-                _radius = _x;
+                if (_x isEqualtype _radius) then {
+                    _radius = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("unconscious"): {
-                _unconscious = _x;
+                if (_x isEqualtype _unconscious) then {
+                    _unconscious = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("selection"): {
-                _selection = _x;
+                if (_x isEqualtype _selection) then {
+                    _selection = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("memorypoint"): {
-                _memorypoint = _x;
+                if (_x isEqualtype _memorypoint) then {
+                    _memorypoint = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("onActionAdded"): {
-                _onActionAdded = _x;
+            case ("onactionadded"): {
+                if (_x isEqualtype _onActionAdded) then {
+                    _onActionAdded = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("ignoredCanInteractConditions"): {
-                _ignoredCanInteractConditions = _x;
+            case ("ignoredcaninteractconditions"): {
+                if (_x isEqualtype _ignoredCanInteractConditions) then {
+                    _ignoredCanInteractConditions = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
         };
         _argName = "";
