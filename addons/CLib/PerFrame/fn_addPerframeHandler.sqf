@@ -13,7 +13,7 @@
     2: Arguments <Any> (Default: [])
 
     Returns:
-    The ID of the created PFH
+    The ID of the created PFH <Number>
 */
 
 EXEC_ONLY_UNSCHEDULED;

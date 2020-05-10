@@ -13,9 +13,10 @@
     Returns:
     None
 */
+
 GVAR(frameCount) = 64;
 if (isNumber (missionConfigFile >> "CLib" >> "FrameGraphSize")) then {
-    GVAR(frameCount)= (getNumber (missionConfigFile >> "CLib" >> "FrameGraphSize") max 8);
+    GVAR(frameCount) = (getNumber (missionConfigFile >> "CLib" >> "FrameGraphSize") max 8);
 };
 
 GVAR(topFPS) = 0;
@@ -76,7 +77,6 @@ DFUNC(toggleFrameInfo) = [{
     private _ctrlGroup = uiNamespace getVariable [QGVAR(ctrlGroup), controlNull];
     _ctrlGroup ctrlShow true;
     _ctrlGroup ctrlCommit 0;
-
 }] call CFUNC(compileFinal);
 
 ["missionStarted", {
