@@ -35,7 +35,7 @@
 
 params [
     ["_text", "MISSING TITLE", ["", {}]],
-    ["_target", objNull, [objNull, [], ""], []],
+    ["_target", objNull, [objNull, "", []], []],
     ["_distance", 10, [0]],
     ["_condition", "true", ["", {}]],
     ["_callback", {}, [{}]],

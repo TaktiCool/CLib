@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Adds a Hold Action to a Object, Object Type ,or A Array of Both, or Overrides Vanilla Action with Hold Action
+    Adds a Hold Action to objects or types of object or overrides a vanilla action with Hold Action
 
     Parameter(s):
     0: Target <Object, String, Array> (Default: objNull)
