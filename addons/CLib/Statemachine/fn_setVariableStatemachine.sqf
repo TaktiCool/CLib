@@ -19,7 +19,7 @@
 params [
     ["_stateMachine", locationNull, [locationNull]],
     ["_varName", "", [""]],
-    ["_var", nil, []]
+    "_var"
 ];
 
 [_stateMachine, format [SMVAR(%1), _varName], _var, QGVAR(allStatemachineVariables), false] call CFUNC(setVariable);

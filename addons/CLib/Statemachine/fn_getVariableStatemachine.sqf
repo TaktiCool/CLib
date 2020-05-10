@@ -19,7 +19,7 @@
 params [
     ["_stateMachine", locationNull, [locationNull]],
     ["_varName", "", [""]],
-    ["_default", nil, []]
+    "_default"
 ];
 
 _stateMachine getVariable [format [SMVAR(%1), _varName], _default];
