@@ -52,5 +52,4 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
     nil
 } count GVAR(3dGraphicsCache);
 
-
 RUNTIME("3dGraphics")
