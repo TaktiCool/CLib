@@ -40,15 +40,6 @@ Examples:
 Docs_awsomeLocalNamespace call CLib_fnc_deleteNamespace;
 ```
 
-## CLib_fnc_getLogicGroup
-DEPRECATED FUCNTION
-
-## CLib_fnc_getVariable
-DEPRECATED FUCNTION
-
-## CLib_fnc_setVar
-DEPRECATED FUCNTION
-
 ## CLib_fnc_setVariable
 
 Parameter(s):
