@@ -7,90 +7,85 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <!-- Theme: Simple Dark -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
-<style>
-  :root {
-    /* Reduce the font size */
-    --base-font-size: 14px;
 
-    /* Change the theme color hue */
-    --theme-hue: 150;
+  <style>
+    :root {
+      /* Reduce the font size */
+      --base-font-size: 14px;
 
-    /* Plugin: Search
-    ============================================================================= */
-    --search-background                      : ;
-    --search-margin                          : 1.5rem 0 0;
-    --search-padding                         : ;
+      /* Change the theme color hue */
+      --theme-hue: 150;
 
-    /* Clear Button */
-    --search-clear-icon-color1               : ;
-    --search-clear-icon-color2               : ;
+      /* Plugin: Search
+      ============================================================================= */
+      --search-background                      : ;
+      --search-margin                          : 1.5rem 0 0;
+      --search-padding                         : ;
 
-    /* Input */
-    --search-input-background-color          : ;
-    --search-input-background-color--focus   : ;
-    --search-input-background-image          : ;
-    --search-input-background-image--focus   : ;
-    --search-input-background-position       : ;
-    --search-input-background-position--focus: ;
-    --search-input-background-repeat         : no-repeat;
-    --search-input-background-size           : ;
-    --search-input-background-size--focus    : ;
-    --search-input-border-color              : var(--mono-tint1);
-    --search-input-border-radius             : ;
-    --search-input-border-width              : 1px;
-    --search-input-color                     : ;
-    --search-input-font-size                 : ;
-    --search-input-margin                    : ;
-    --search-input-padding                   : 0.5em;
-    --search-input-placeholder-color         : ;
-    --search-input-transition                : ;
+      /* Clear Button */
+      --search-clear-icon-color1               : ;
+      --search-clear-icon-color2               : ;
 
-    /* Order */
-    --search-flex-order                      : 1;
+      /* Input */
+      --search-input-background-color          : ;
+      --search-input-background-color--focus   : ;
+      --search-input-background-image          : ;
+      --search-input-background-image--focus   : ;
+      --search-input-background-position       : ;
+      --search-input-background-position--focus: ;
+      --search-input-background-repeat         : no-repeat;
+      --search-input-background-size           : ;
+      --search-input-background-size--focus    : ;
+      --search-input-border-color              : var(--mono-tint1);
+      --search-input-border-radius             : ;
+      --search-input-border-width              : 1px;
+      --search-input-color                     : ;
+      --search-input-font-size                 : ;
+      --search-input-margin                    : ;
+      --search-input-padding                   : 0.5em;
+      --search-input-placeholder-color         : ;
+      --search-input-transition                : ;
 
-    /* Results */
-    --search-result-heading-color            : var(--heading-color);
-    --search-result-heading-font-size        : var(--base-font-size);
-    --search-result-heading-font-weight      : normal;
-    --search-result-heading-margin           : 0 0 0.25em;
-    --search-result-item-border-color        : var(--mono-tint2);
-    --search-result-item-border-style        : solid;
-    --search-result-item-border-width        : 0 0 1px 0;
-    --search-result-item-color               : ;
-    --search-result-item-font-size           : ;
-    --search-result-item-font-weight         : normal;
-    --search-result-item-margin              : ;
-    --search-result-item-padding             : 1em 0;
-    --search-result-keyword-background       : var(--mark-background);
-    --search-result-keyword-border-radius    : var(--border-radius-s);
-    --search-result-keyword-color            : var(--mark-color);
-    --search-result-keyword-font-weight      : normal;
-    --search-result-keyword-margin           : 0 0.1em;
-    --search-result-keyword-padding          : 0.2em 0;
+      /* Order */
+      --search-flex-order                      : 1;
 
-    /* Plugin: Docsify Tabs
-    ============================================================================= */
-    /* Tab blocks */
-    --docsifytabs-border-color    : var(--mono-tint2);
-    --docsifytabs-border-radius-px: var(--border-radius-s);
+      /* Results */
+      --search-result-heading-color            : var(--heading-color);
+      --search-result-heading-font-size        : var(--base-font-size);
+      --search-result-heading-font-weight      : normal;
+      --search-result-heading-margin           : 0 0 0.25em;
+      --search-result-item-border-color        : var(--mono-tint2);
+      --search-result-item-border-style        : solid;
+      --search-result-item-border-width        : 0 0 1px 0;
+      --search-result-item-color               : ;
+      --search-result-item-font-size           : ;
+      --search-result-item-font-weight         : normal;
+      --search-result-item-margin              : ;
+      --search-result-item-padding             : 1em 0;
+      --search-result-keyword-background       : var(--mark-background);
+      --search-result-keyword-border-radius    : var(--border-radius-s);
+      --search-result-keyword-color            : var(--mark-color);
+      --search-result-keyword-font-weight      : normal;
+      --search-result-keyword-margin           : 0 0.1em;
+      --search-result-keyword-padding          : 0.2em 0;
 
-    /* Tabs */
-    --docsifytabs-tab-background  : var(--mono-tint3);
-    --docsifytabs-tab-color       : var(--mono-tint1);
+      /* Plugin: Docsify Tabs
+      ============================================================================= */
+      /* Tab blocks */
+      --docsifytabs-border-color    : var(--mono-tint2);
+      --docsifytabs-border-radius-px: var(--border-radius-s);
 
-    /* Flexable Alerts */
-    --altert-callout-border : var(--mono-tint3);
-    --altert-callout-background : var(--mono-tint1);
-  }
-  .alert.callout {
-    background: var(--blockquote-background) !important;
-    border-width: var(--blockquote-border-width, 0) !important;
-    border-radius: var(--blockquote-border-radius) !important;
-  }
-</style>
-
+      /* Tabs */
+      --docsifytabs-tab-background  : var(--mono-tint3);
+      --docsifytabs-tab-color       : var(--mono-tint1);
+    }
+    .alert.callout {
+      background: var(--blockquote-background) !important;
+      border-width: var(--blockquote-border-width, 0) !important;
+      border-radius: var(--blockquote-border-radius) !important;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
@@ -129,14 +124,12 @@
       pagination: {
         crossChapter: true,
         crossChapterText: true,
-      }
-
+      },
     }
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
-
 </body>
 </html>
