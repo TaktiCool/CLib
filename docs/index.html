@@ -79,6 +79,15 @@
     /* Tabs */
     --docsifytabs-tab-background  : var(--mono-tint3);
     --docsifytabs-tab-color       : var(--mono-tint1);
+
+    /* Flexable Alerts */
+    --altert-callout-border : var(--mono-tint3);
+    --altert-callout-background : var(--mono-tint1);
+  }
+  .alert.callout {
+    background: var(--blockquote-background) !important;
+    border-width: var(--blockquote-border-width, 0) !important;
+    border-radius: var(--blockquote-border-radius) !important;
   }
 </style>
 
@@ -120,9 +129,6 @@
       pagination: {
         crossChapter: true,
         crossChapterText: true,
-      },
-      'flexible-alerts': {
-        style: 'flat'
       }
 
     }
