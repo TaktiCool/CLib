@@ -23,7 +23,11 @@ Call extension on the server. When the server finished the return value gets pas
 Examples:
 
 ```sqf
-    ["CLibLogging", "Log", "mylogFile.log:This is My Log Content i want to send over to the extension and in to the file"] call CLib_fnc_callExtension
+[
+    "CLibLogging",
+    "Log",
+    "mylogFile.log:This is My Log Content i want to Log."
+] call CLib_fnc_callExtension
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

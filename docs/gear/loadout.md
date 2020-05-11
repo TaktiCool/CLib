@@ -56,7 +56,13 @@ Returns loadout details
 Examples:
 
 ```sqf
-["Rifleman_Opfor", [["removeAllWeapons", 0], ["linkedItems", [["myLinkedItems"]]]]] call CLib_fnc_getLoadoutDetails;
+[
+    "Rifleman_Opfor",
+    [
+        ["removeAllWeapons", 0],
+        ["linkedItems", [["myLinkedItems"]]]
+    ]
+] call CLib_fnc_getLoadoutDetails;
 ```
 
 ## CLib_fnc_loadLoadout

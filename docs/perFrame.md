@@ -23,7 +23,9 @@ Add a handler that will execute every frame or every x number of seconds.
 
 Examples:
 ```sqf
-private _id = [{hintSilent format ["FRAME! %1", _this]}, 0, ["Awesome", "parameter"]] call CLib_fnc_addPerframeHandler;
+private _id = [{
+    hintSilent format ["FRAME! %1", _this]
+},0, ["Awesome", "parameter"]] call CLib_fnc_addPerframeHandler;
 ```
 
 ## CLib_fnc_removePerframeHandler
@@ -58,7 +60,9 @@ Executes a code once in an unscheduled environment with a given game time delay.
 
 Examples:
 ```sqf
-[{hintSilent format ["This is 10 Seconds Delayed %1", _this]}, 10 ,"Awesome 10s Delay"] call CLib_fnc_wait;
+[{
+    hintSilent format ["This is 10 Seconds Delayed %1", _this]
+}, 10 ,"Awesome 10s Delay"] call CLib_fnc_wait;
 ```
 ## CLib_fnc_waitUntil
 
@@ -77,7 +81,9 @@ Executes a code once in the unscheduled environment after a condition is true. M
 
 Examples:
 ```sqf
-[{hintSilent format ["This is Delayed %1", _this]}, {time == 1000}, "Awesome Delay"] call CLib_fnc_waitUntil;
+[{
+    hintSilent format ["This is Delayed %1", _this]
+}, {time == 1000}, "Awesome Delay"] call CLib_fnc_waitUntil;
 ```
 
 ## CLib_fnc_execNextFrame
@@ -96,7 +102,9 @@ Executes a code once in an unscheduled environment on the next frame.
 
 Examples:
 ```sqf
-[{hintSilent format ["This is 1 Frame Delayed %1", _this]}, "Awesome 1f Delay"] call CLib_fnc_execNextFrame;
+[{
+    hintSilent format ["This is 1 Frame Delayed %1", _this]
+}, "Awesome 1f Delay"] call CLib_fnc_execNextFrame;
 ```
 ## CLib_fnc_skipFrames
 
@@ -114,7 +122,9 @@ Returns:
 Executes a code once in an unscheduled environment with a given game Frame delay.
 Examples:
 ```sqf
-[{hintSilent format ["This is 10 Frames Delayed %1", _this]}, 10 ,"Awesome 10s Delay"] call CLib_fnc_skipFrames;
+[{
+    hintSilent format ["This is 10 Frames Delayed %1", _this]
+}, 10 ,"Awesome 10s Delay"] call CLib_fnc_skipFrames;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

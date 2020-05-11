@@ -15,14 +15,17 @@ Parameter(s):
 Returns:
 * [`<Number>`] the ID of the Current Eventhandler
 
-In the Code you can Access the Event call parameter via  `_this select 0;` and the Event Arguments via `_this select 1;`
+In the Code you can Access the Event call parameter via `_this select 0;` and the Event Arguments via `_this select 1;`
 
 Examples:
 
 ```sqf
 ["myAwsomeEvent", {
+    params ["_eventArguement", "_staticArgument"];
+    systemChat format ["This Argument get Passed into the Event call", _eventArguement];
+    systemChat format ["This Argument get Passed into AddEventHandler", _staticArgument];
     hint "this is my Awesome Event";
-}] call CLib_fnc_addEventHandler;
+}, "this is a static Argument"] call CLib_fnc_addEventHandler;
 ```
 
 ## CLib_fnc_addIgnoredEventLog
@@ -59,6 +62,7 @@ Examples:
 
 ```sqf
 "myAwsomeEvent" call CLib_fnc_globalEvent;
+["myAwsomeEvent", "Some Argument"] call CLib_fnc_globalEvent;
 ```
 
 ## CLib_fnc_invokePlayerChanged
@@ -95,6 +99,7 @@ Examples:
 
 ```sqf
 "myAwsomeEvent" call CLib_fnc_localEvent;
+["myAwsomeEvent", "Some Argument"] call CLib_fnc_localEvent;
 ```
 
 ## CLib_fnc_serverEvent
@@ -112,6 +117,8 @@ Examples:
 
 ```sqf
 "myAwsomeEvent" call CLib_fnc_serverEvent;
+["myAwsomeEvent", "Some Argument"] call CLib_fnc_serverEvent;
+
 ```
 
 ## CLib_fnc_targetEvent
@@ -130,6 +137,7 @@ Examples:
 
 ```sqf
 ["myAwsomeEvent", [cursorTarget, 2, 1337]] call CLib_fnc_targetEvent;
+["myAwsomeEvent", [cursorTarget, 2, 1337], "Some Argument"] call CLib_fnc_targetEvent;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

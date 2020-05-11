@@ -32,7 +32,8 @@ https://community.bistudio.com/wiki/BIS_fnc_returnParents
 
 Examples:
 ```sqf
-private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F"), true] call CLib_fnc_returnParents;
+private _config = configFile >> "CfgVehicles" >> "Land_FirePlace_F";
+private _return = [_config, true] call CLib_fnc_returnParents;
 ```
 
 ## CLib_fnc_getConfigData
@@ -49,7 +50,8 @@ Get a Config Value.
 
 Examples:
 ```sqf
-private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getConfigData;
+private _config = configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBanana";
+private _return = [_config, 0, false] call CLib_fnc_getConfigData;
 ```
 
 ## CLib_fnc_getConfigDataCached
@@ -66,7 +68,8 @@ Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
 Examples:
 ```sqf
-private _return = [(configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBananaPower"), 0, false] call CLib_fnc_getConfigDataCached;
+private _config = configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBanana";
+private _return = [_config, 0, false] call CLib_fnc_getConfigDataCached;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

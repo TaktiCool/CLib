@@ -2,23 +2,25 @@
 
 > Maintainer: joko // Jonas
 
-TODO text here
+The Remote Exec is Meant to be a Fallback system for ServerAdmins that want to Disable vanilla's RemoteExec/RemoteExecCall
 
-
-## CLib_fnc_
+## CLib_fnc_remoteExec
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Anything>`] Arguments for the function or command
+* [`<String>`] Function or command that get executed on the remote clients
+* [`<Number>`, `<Object>`, `<Side>`, `<Group>`, `<Array>`] Target who should receive the event
+* [`<Bool>`] Forced to use fallback version
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Check if the RemoteExecFall Back is used and handle after that the Data and share it to the server
 
 Examples:
 
 ```sqf
-TODO Example here
+[nil, "Docs_fnc_DoThingsRemote", 0, true] call CLib_fnc_remoteExec;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

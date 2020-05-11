@@ -72,7 +72,18 @@ Adds a Hold Action to a Object, Object Type, or A Array of Both, or Overrides Va
 Examples:
 
 ```sqf
-    [cursorTarget, "TestHold", "", "", {true}, {true}, {StartTime = time;}, {(time - StartTime)/10},{hint "COMPLETED";},{hint "INTERRUPTED"}] call CLib_fnc_addHoldAction;
+[
+    cursorTarget,
+    "TestHold",
+    "",
+    "",
+    {true},
+    {true},
+    {StartTime = time;},
+    {(time - StartTime)/10},
+    {hint "COMPLETED";},
+    {hint "INTERRUPTED"}
+] call CLib_fnc_addHoldAction;
 ```
 
 ### CLib_fnc_overrideAction

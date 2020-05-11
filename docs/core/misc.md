@@ -39,7 +39,13 @@ Calls a function and Caches the Return for a certain amount of time or until a c
 Examples:
 
 ```sqf
-["Am_I_Dead", {alive _this}, CLib_player, 5, "I_Know_That_I_Am_Dead"] call CLib_fnc_cachedCall;
+[
+    "Am_I_Dead",
+    {alive _this},
+    CLib_player,
+    5,
+    "I_Know_That_I_Am_Dead"
+] call CLib_fnc_cachedCall;
 ```
 
 ## CLib_fnc_codeToString
@@ -203,7 +209,7 @@ Finds a save position for a unit. This function always returns a position.
 Examples:
 
 ```sqf
-private _spawnPos = [getPos CLib_Player, 100, 5, "B_Truck_01_mover_F"] call CLib_fnc_findSavePosition;
+private _pos = [getPos player, 100, 5, "B_Truck_F"] call CLib_fnc_findSavePosition;
 ```
 
 ## CLib_fnc_fixFloating
@@ -512,7 +518,7 @@ Examples:
 
 ```sqf
 [
-    parseText "<img size='15' color='#ffffff' shadow='false' image='images\pawLogo.paa'/>",
+    parseText "<img size='15' color='#ffffff' shadow='false' image='images\Logo.paa'/>",
     [0.1,0.2,1,0.5],
     [10,3],
     3,

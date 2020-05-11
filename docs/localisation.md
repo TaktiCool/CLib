@@ -40,7 +40,10 @@ Format localisation wrapper
 Examples:
 
 ```sqf
-["%1 %2 %3 %4", "STR_This", "STR_Could", "STR_Be", "STR_Localized] call CLib_fnc_formatLocalisation
+[
+    "%1 %2 %3 %4",
+    "STR_This", "STR_Could", "STR_Be", "STR_Localize"
+] call CLib_fnc_formatLocalisation
 ```
 
 ## CLib_fnc_isLocalised

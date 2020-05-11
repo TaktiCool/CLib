@@ -15,9 +15,6 @@
 
 #define QUOTE(var) #var
 
-#define FUNCPATH(var) \##PATH\##PREFIX\addons\##MOD\##MODULE\fn_##var.sqf
-#define FFNCPATH(subModule,var) \##PATH\##PREFIX\addons\##MOD\##MODULE\##subModule\fn_##var.sqf
-
 // Global Varible Macros
 #define EGVAR(var1,var2) TRIPLE(PREFIX,var1,var2)
 #define QEGVAR(var1,var2) QUOTE(EGVAR(var1,var2))

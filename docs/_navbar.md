@@ -1,5 +1,7 @@
 - [About](/)
 - [Function Overview](functionoverview.md)
+- **Macros**
+- [Macros](macros.md)
 - **Modules**
 - [3dGraphics](3dGraphics.md)
 - [Advanced State Machine](advancedStateMachine.md)
@@ -32,6 +34,5 @@
 - [Simple Object Framework](simpleObjectFramework.md)
 - [State Machine](stateMachine.md)
 - [Status Effects](statusEffects.md)
-- [Macros](macros.md)
 - **Links**
 - [GitHub](https://github.com/TaktiCool/CLib)
