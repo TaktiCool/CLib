@@ -77,7 +77,7 @@ private _thread = 0 spawn {
             private _time = diag_tickTime;
             _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
             _time = diag_tickTime - _time;
-            private _strTime = (_time*1000) call CFUNC(toFixedNumber);
+            private _strTime = (_time * 1000) call CFUNC(toFixedNumber);
             LOG("Addon Module Call: " + _x + " (" + _strTime + " ms)");
             nil
         } count (_x select 0);
@@ -90,7 +90,7 @@ private _thread = 0 spawn {
         private _time = diag_tickTime;
         _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
         _time = diag_tickTime - _time;
-        private _strTime = (_time*1000) call CFUNC(toFixedNumber);
+        private _strTime = (_time * 1000) call CFUNC(toFixedNumber);
         LOG("Addon Module Call: " + _x + " (" + _strTime + " ms)");
 
         nil
@@ -111,7 +111,6 @@ private _thread = 0 spawn {
             nil
         } count CGVAR(entryPointQueue);
     }, _this select 1] call CFUNC(execNextFrame);
-
 }, [_postInit, _thread]] call CFUNC(execNextFrame);
 
 if (didJIP) then {

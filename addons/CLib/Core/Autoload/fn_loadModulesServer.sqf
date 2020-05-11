@@ -8,7 +8,7 @@
     Server module loader used on server and when CLib is present on client. Prepares the functions for transmission to clients. Should run before client register with server.
 
     Parameter(s):
-    ARRAY - server only: the names of the requested modules
+    0: The names of the requested modules <Array>
 
     Returns:
     None

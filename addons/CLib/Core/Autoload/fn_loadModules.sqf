@@ -119,7 +119,9 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                         [
                             format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
                             "[CLib Anti Cheat Warning]",
-                            nil,nil,nil
+                            nil,
+                            nil,
+                            nil
                         ] spawn BIS_fnc_guiMessage;
                         GVAR(unregisterClient) = player;
                         publicVariableServer QGVAR(unregisterClient);

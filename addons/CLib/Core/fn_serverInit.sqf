@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 private _modCredits = [];
 
 private _fnc_readAuthorData = {
@@ -50,7 +51,7 @@ private _mods = [];
 private _modules = [];
 private _fnc_addModules = {
     params ["_mod", "_module"];
-    private _index =  _mods find _mod;
+    private _index = _mods find _mod;
     if (_index == -1) then {
         _index = _mods pushback _mod;
         _modules pushBack [];
