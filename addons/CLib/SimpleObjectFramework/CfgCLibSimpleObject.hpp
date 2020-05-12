@@ -6,7 +6,7 @@ class CfgCLibSimpleObject {
             path = "a3\supplies_f_heli\cargonets\cargonet_01_ammo_f.p3d";
             offset[] = {-0.262329, 0.00878906, 0.825303};
             dirVector[] = {0, 1, 0};
-            upVector[] = {0, 0, 1}; 
+            upVector[] = {0, 0, 1};
         };
         class item1 {
             path = "a3\props_f_exp\military\camps\satelliteantenna_01_f.p3d";
@@ -42,7 +42,6 @@ class CfgCLibSimpleObject {
         offset[] = {1, 1, 1};
         dirVector[] = {0, 1, 0}; // Direction Vector
         upVector[] = {0, 0, 1}; // Up Vector
-
     };
     // this is a Way where Multible SO can get Create with SOF
     class testSimpleObject_Multiple {
