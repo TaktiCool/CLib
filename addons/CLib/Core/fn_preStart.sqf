@@ -54,14 +54,15 @@ call compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFrame
 CGVAR(playerUID) = "";
 
 #ifndef ISDEV
-if (isNil {parsingNamespace getVariable QCGVAR(allFunctionNamesCached)}) then {
+    if (isNil {parsingNamespace getVariable QCGVAR(allFunctionNamesCached)}) then {
 #endif
-    call CFUNC(readAllModules);
-    call CFUNC(buildDependencyGraph);
-    call CFUNC(readAllFunctions);
+call CFUNC(readAllModules);
+call CFUNC(buildDependencyGraph);
+call CFUNC(readAllFunctions);
 #ifndef ISDEV
-};
+    };
 #endif
+
 call CFUNC(compileAllFunctions);
 private _strTime = ((diag_tickTime - _startTime) * 1000) call CFUNC(toFixedNumber);
 LOG("Reading and Compiling all Function and Modules Required: " +  _strTime + " ms")
