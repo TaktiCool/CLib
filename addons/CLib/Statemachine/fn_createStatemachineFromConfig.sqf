@@ -8,15 +8,17 @@
     Create Statemachine from Config
 
     Parameter(s):
-    0: Config Path <Config>
+    0: Config Path <Config> (Default: configNull)
 
     Returns:
-    0: Statemachine Object <Location>
+    Statemachine Object <Location>
 */
-params ["_configPath"];
+
+params [
+    ["_configPath", configNull, [configNull]]
+];
 
 private _stateMachine = call CFUNC(createStatemachine);
-
 
 {
     private _code = getText (_x >> "stateCode");

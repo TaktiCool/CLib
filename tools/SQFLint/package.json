@@ -1,0 +1,19 @@
+{
+  "name": "SQFLint",
+  "private": true,
+  "version": "0.1",
+  "description": "Validator for SQF scripting language",
+  "bugs": {
+    "url": "https://github.com/netfusion/SQFLint/issues",
+    "email": "netfusion@atwar-mod.com"
+  },
+  "license": "UNLICENSED",
+  "author": "NetFusion <netfusion@atwar-mod.com> (https://github.com/netfusion)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netfusion/SQFLint.git"
+  },
+  "scripts": {
+    "travis": "node travis.js"
+  }
+}

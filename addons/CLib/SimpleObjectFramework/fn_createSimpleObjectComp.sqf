@@ -8,14 +8,39 @@
     Description
 
     Parameter(s):
-    0: ClassName/ConfigPath/SimpleObjectStructure <String, Config, Array>
-    1: Position <Array>
-    2: Rotation <Array>
+    0: Unique identifier <String> (Default: "")
+    1: ClassName configPath or simpleObjectStructure <String, Config, Array> (Default: "")
+    2: Position3D <Array> (Default: [0, 0, 0])
+    3: Rotation <Array> (Default: [0, 0, 0])
+    4: Ignored Object <Object> (Default: objNull)
+    5: Ignored Object <Object> (Default: objNull)
+    6: Callback <Array> (Default: [])
 
     Returns:
-    All SimpleObjects <Array<Objects>>
+    None
 */
-params ["_input", "_pos", "_dir", ["_ignoreObj1", objNull], ["_ignoreObj2", objNull]];
+
+params [
+    ["_uid", "", [""]],
+    ["_input", "", ["", configNull, []], 2],
+    ["_pos", [0, 0, 0], [[]], 3],
+    ["_dir", [0, 0, 0], [[]], 3],
+    ["_ignoreObj1", objNull, [objNull]],
+    ["_ignoreObj2", objNull, [objNull]],
+    ["_callback", [], [[]], []]
+];
+
+if !(isServer) exitWith {
+    [QGVAR(createSimpleObjectComp), _this] call CFUNC(serverEvent);
+};
+
+if (_uid isEqualTo "") exitWith {
+    LOG("ERROR: Unique identifier is not valid");
+};
+
+if !(isNil {GVAR(compNamespace) getVariable _uid}) then {
+    LOG("WARNING: the UID is already in use");
+};
 
 _input = switch (typeName _input) do {
     case "STRING": {
@@ -23,21 +48,22 @@ _input = switch (typeName _input) do {
     };
     case "CONFIG": {
         if (!isServer) then {
-            LOG("Error: you Try to Load a Config form a Client that is Not the Server");
+            LOG("Warning: you Try to Load a Config form a Client that is Not the Server");
         };
-        if (isNil "_input" || {_input isEqualTo []}) then {
+        private _temp = GVAR(namespace) getVariable (configName _input);
+        if (isNil "_temp") then {
             _input call CFUNC(readSimpleObjectComp)
         } else {
-            GVAR(namespace) getVariable (configName _input)
-        }
+            _temp
+        };
     };
 };
 
 _input params ["_alignOnSurface", "_objects"];
 
 if (isNil "_input" || {_input isEqualTo []}) exitWith {
-    LOG("ERROR SimpleObjectComp Dont exist: " + _input);
-    []
+    LOG("ERROR: SimpleObjectComp does not exist: " + _input);
+    nil
 };
 private _intersections = lineIntersectsSurfaces [
     AGLToASL _pos,
@@ -63,11 +89,16 @@ private _originPosASL = AGLToASL _originPosAGL;
 
 private _return = [];
 {
-    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray", "_setObjectTextureArray"];
+    _x params ["_path", "_posOffset", "_dirOffset", "_upOffset", "_hideSelectionArray", "_animateArray", "_setObjectTextureArray", ["_fullObject", 0]];
 
     private _obj = objNull;
 
-    _obj = createSimpleObject [_path, AGLToASL (_originObj modelToWorld _posOffset)];
+    if (_fullObject == 0) then {
+        _obj = createSimpleObject [_path, AGLToASL (_originObj modelToWorld _posOffset)];
+    } else {
+        _obj = createVehicle [_path, (_originObj modelToWorld _posOffset), [], 0, "CAN_COLLIDE"];
+    };
+
     _obj setVariable [QGVAR(isSimpleObject), true, true];
     _obj setVectorDirAndUp [AGLToASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL, AGLToASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
@@ -101,22 +132,11 @@ private _return = [];
 
 deleteVehicle _originObj;
 
-_return;
-/* return
-[
-    [
-        "PATH",
-        [offset],
-        [rotation],
-        [ // this array can be replace with a Simple FALSE what mean that this gets ignored
-            ["hideSelectionName1", true],
-            ["hideSelectionName2", fase]
-        ],
-        [ // this array can be replace with a Simple FALSE what mean that this gets ignored
-            [
-                ["AnimName", phase, speed]
-            ]
-        ]
-    ]
-]
-*/
+GVAR(compNamespace) setVariable [_uid, _return, true];
+
+if !(_callback isEqualTo []) then {
+    _callback params [["_target", objNull], ["_code", {}], ["_parameter", []]];
+    if !(_code isEqualTo [] || isNull _target) then {
+        [QGVAR(simpleObjectsCreated), _target, [_uid, _code, _parameter]] call CFUNC(targetEvent);
+    };
+};

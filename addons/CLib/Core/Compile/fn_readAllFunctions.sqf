@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(allFunctionNamesCached) = [];
 
 private _fnc_checkNext = {
@@ -45,7 +46,7 @@ private _fnc_readFunction = {
     private _name = configName _config;
     private _api = (getNumber (_config >> "api") isEqualTo 1);
     private _onlyServer = (getNumber (_config >> "serverOnly") isEqualTo 1);
-    if (((toLower _name) find "serverinit") > -1) then {
+    if ("serverinit" in (toLower _name)) then {
         _onlyServer = true;
     };
 
@@ -56,7 +57,6 @@ private _fnc_readFunction = {
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer);
 };
-
 
 DUMP("--------------------------Start CLib Function Search---------------------------------");
 {

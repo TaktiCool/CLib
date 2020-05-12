@@ -8,30 +8,52 @@
     Adds a Status Effect Type to the System
 
     Parameter(s):
-    0: Status Effect ID <String>
-    1: Reason <String>
-    2: Parameter <Any>
+    0: Unit <Object> (Default: objNull)
+    1: Status effect id <String> (Default: "")
+    2: Reason <String> (Default: "unknown")
+    3: Parameter <Any> (Default: [])
 
     Returns:
-    Current Status Effect <Any>
+    None
 */
 
-EXEC_ONLY_UNSCHEDULED
-params ["_id", "_reason", "_parameter"];
+EXEC_ONLY_UNSCHEDULED;
 
-private _allParameters = GVAR(StatusEffectsNamespace) getVariable ["Parameter_" + _id, []];
-private _allReasons = GVAR(StatusEffectsNamespace) getVariable ["Reason_" + _id, []];
+params [
+    ["_unit", objNull, [objNull]],
+    ["_id", "", [""]],
+    ["_reason", "", [""]],
+    ["_parameter", [], []]
+];
 
-private _ind = _allReasons pushBackUnique _reason;
-if (_ind < 0) then {
-    _ind = _allReasons find _reason;
+if (isNull _unit) exitWith {
+    LOG("Invalid unit passed to setStatusEffect");
 };
 
-if (_ind < 0) exitWith {};
+if (_id == "") exitWith {
+    LOG("Invalid id passed to setStatusEffect");
+};
 
-_allParameters set [_ind, _parameter];
+if (_reason == "") exitWith {
+    LOG("Empty reason passed to setStatusEffect");
+};
 
-GVAR(StatusEffectsNamespace) setVariable ["Parameter_" + _id, _allParameters];
-GVAR(StatusEffectsNamespace) setVariable ["Reason_" + _id, _allReasons];
-private _code = GVAR(StatusEffectsNamespace) getVariable ["Code_" + _id, []];
-[_allParameters] call _code;
+private _parametersVarName = format [QGVAR(Parameters_%1), _id];
+private _reasonVarName = format [QGVAR(Reasons_%1), _id];
+
+private _allParameters = _unit getVariable [_parametersVarName, []];
+private _allReasons = _unit getVariable [_reasonVarName, []];
+
+private _index = _allReasons pushBackUnique _reason;
+if (_index < 0) then {
+    _index = _allReasons find _reason;
+};
+if (_index < 0) exitWith {};
+
+_allParameters set [_index, _parameter];
+
+_unit setVariable [_parametersVarName, _allParameters];
+_unit setVariable [_reasonVarName, _allReasons];
+
+private _code = GVAR(StatusEffectsNamespace) getVariable [QGVAR(Code_) + _id, []];
+[_unit, _allParameters] call _code;

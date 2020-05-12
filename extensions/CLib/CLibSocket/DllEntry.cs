@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -63,6 +63,16 @@ namespace CLibSocket
         }
 
 #if WIN64
+        [DllExport("RVExtensionVersion")]
+#else
+        [DllExport("_RVExtensionVersion@8", CallingConvention.StdCall)]
+#endif
+        public static void RVExtensionVersion(StringBuilder output, int outputSize)
+        {
+            output.Append(DllEntry.GetVersion());
+        }
+
+#if WIN64
         [DllExport("RVExtension")]
 #else
         [DllExport("_RVExtension@12", CallingConvention.StdCall)]
@@ -71,15 +81,21 @@ namespace CLibSocket
             if (input != "version")
                 return;
 
+            output.Append(DllEntry.GetVersion());
+        }
+
+        private static string GetVersion()
+        {
             var executingAssembly = Assembly.GetExecutingAssembly();
-            try {
-                var location = executingAssembly.Location;
+            try
+            {
+                string location = executingAssembly.Location;
                 if (location == null)
                     throw new Exception("Assembly location not found");
-                output.Append(FileVersionInfo.GetVersionInfo(location).FileVersion);
-            } catch (Exception e) {
-                output.Append(e.Message);
+                return FileVersionInfo.GetVersionInfo(location).FileVersion;
             }
+            catch (Exception) { }
+            return "0.0.0.0";
         }
 
         [DllExport("Connect")]

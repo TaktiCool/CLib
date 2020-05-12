@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace CLib
             InitializeComponent();
 
 #if Debug
-            this.Show()
+            this.Show();
 #else 
             this.Hide();
 #endif

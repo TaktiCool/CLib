@@ -8,10 +8,13 @@
     Adds a new group to the MapGraphics system
 
     Parameter(s):
-    0: Group Name <String>
-    1: Group Data <Array>
-    2: Group Layer <Number>
-    3: State <String>
+    0: Group Name <String> (Default: "")
+    1: Group Data <Array> (Default: ["RECTANGLE"])
+    2: State <String> (Default: "normal")
+    3: Group Layer <Number> (Default: 0)
+
+    Returns:
+    None
 
     Remarks:
     Group Data is defined as <ARRAY> of GraphicsElements of following Structure:
@@ -54,15 +57,21 @@
         1: Positions <Array> of MapGraphicsPosition
         2: Line Color <Array> [r,g,b,a]
     last element: Code <Code> called every frame
-
+    Class = "TRIANGLE"
+        1: Positions <Array> of <Array> of MapGraphicsPosition
+        2: Line Color <Array> [r,g,b,a]
+        3: Fill Color <Array> [r,g,b,a]
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
-
-    Returns:
-    None
 */
-params ["_groupName", "_groupData", ["_state", "normal"], ["_layer", 0]];
+
+params [
+    ["_groupName", "", [""]],
+    ["_groupData", ["RECTANGLE"], [[]], []],
+    ["_state", "normal", [""]],
+    ["_layer", 0, [0]]
+];
 
 // Compete the data for the map graphics cache
 private _completeGroupData = [];
@@ -136,6 +145,15 @@ private _completeGroupData = [];
                 ["_code", {}]
             ];
             _completeGroupData pushBack [_class, _polygon, _color, _code];
+        };
+        case ("TRIANGLE"): {
+            _attributes params [
+                ["_tris", []],
+                ["_lineColor", [0, 0, 0, 1]],
+                ["_fillColor", ""],
+                ["_code", {}]
+            ];
+            _completeGroupData pushBack [_class, _tris, _lineColor, _fillColor, _code];
         };
     };
 

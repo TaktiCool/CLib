@@ -5,40 +5,59 @@
     Author: joko // Jonas
 
     Description:
-    try to get a Object from a Object Pool.
+    Get a unit from a unit pool
 
     Parameter(s):
-    0: Requested Object Type <String>
-    1: Time to be locked after use <Number>
-    2: should the Object be Local <Bool>
+    0: Requested Object Type <String> (Default: "")
+    1: Locked condition <Code> (Default: {false})
+    2: Unit Parameter <Array> (Default: [grpNull, "", 0.5, "PRIVATE"])
 
     Returns:
     Requested Object <Object>
-*/
-params [["_unitClass", "", [""]], ["_lockedCondition", {}, [{}]], ["_unitParams", [[0,0,0], grpNull, "", 0.5, "PRIVATE"]]];
 
-private _varName = _objClass + "_unit";
+    Remarks:
+    Unit parameter structure:
+        0: Group <Group> (Default: grpNull)
+        1: Init Code executed on the unit <String, Code> (Default: "")
+        2: Skill <Number> (Default: 0.5)
+        3: Rank <String> (Default: "PRIVATE")
+*/
+
+params [
+    ["_unitClass", "", [""]],
+    ["_condition", {false}, [{}]],
+    ["_unitParams", [grpNull, {}, 0.5, "PRIVATE"], [[]], 4]
+];
+
+private _varName = _unitClass + "_unit";
 
 private _unitsData = GVAR(objPool) getVariable [_varName, [[-999, objNull]]];
 private _unit = objNull;
 {
-    param ["_lockedCondition", "_obj"];
+    _x params ["_lockedCondition", "_obj"];
     if (alive _obj && !(call _lockedCondition)) then {
-        _unitsData  _forEachIndex;
+        _unitsData deleteAt _forEachIndex;
         _unit = _obj;
         breakTo SCRIPTSCOPENAME;
     };
 } forEach _unitsData;
+_unitParams params [["_grp", grpNull], ["_init", {}], ["_skill", 0.5], ["_rank", "PRIVATE"]];
 if (isNull _unit) then {
-    _unit _unitClass createUnit _unitParams;
+    _unit = _grp createUnit [_unitClass, [0, 0, 0]];
 } else {
-    _unitParams params ["_pos", "_grp", "_init", "_skill", "_rank"];
-    _unit setPos _pos;
     [_unit] joinSilent _grp;
-    
+    _unit setDamage 0;
+    _unit allowDamage true;
+    ["enableSimulation", [_unit, true]] call CFUNC(serverEvent);
+};
+if (_init isEqualType "") then {
+    _init = compile _init;
 };
 
-_unitsData pushBack [time + _lockingTime, _obj];
-_objs sort true;
+_unit call _init;
+_unit setSkill _skill;
+_unit setRank _rank;
+
+_unitsData pushBack [_condition, _unit];
 GVAR(objPool) setVariable [_varName, _unitsData, true];
-_obj
+_unit

@@ -5,18 +5,27 @@
     Author: BadGuy
 
     Description:
-    Adds a Status Effect Type to the System
+    Adds a Status Effect Type to the system
 
     Parameter(s):
-    0: Status Effect ID <String>
-    1: Executed Code <Code>
+    0: Status effect id <String> (Default: "")
+    1: Executed code <Code> (Default: {})
 
     Returns:
     None
 */
 
-params [["_id", ""], ["_code", {}]];
+params [
+    ["_id", "", [""]],
+    ["_code", {}, [{}]]
+];
 
-if (_id == "") exitWith {};
+if (_id == "") exitWith {
+    LOG("Invalid id passed to addStatusEffectType");
+};
 
-GVAR(StatusEffectsNamespace) setVariable [("Code_" + _id), _code];
+if (_code isEqualTo {}) exitWith {
+    LOG("Empty code passed to addStatusEffectType");
+};
+
+GVAR(StatusEffectsNamespace) setVariable [QGVAR(Code_) + _id, _code];

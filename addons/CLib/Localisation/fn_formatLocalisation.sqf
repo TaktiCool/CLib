@@ -5,22 +5,19 @@
     Author: joko // Jonas
 
     Description:
-    Localisation format Wrapper
+    Format localisation wrapper
 
     Parameter(s):
-    0: FormatString <String>
-    1: Var1 <Any>
-    2: Var2 <Any>
-    ...
+    https://community.bistudio.com/wiki/format
 
     Returns:
-    Formated and Localised String
+    Formated and localised string <String>
 */
 
-private _array = +_this;
-{
+format (_this apply {
     if (_x isEqualType "" && {_x call CFUNC(isLocalised)}) then {
-        _array set [_forEachIndex, LOC(_x)];
+        LOC(_x)
+    } else {
+        _x
     };
-} forEach _array;
-format _array;
+});

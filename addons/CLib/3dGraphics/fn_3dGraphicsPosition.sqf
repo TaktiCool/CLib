@@ -8,13 +8,15 @@
     Converts a 3dGraphicsPosition into PositionAGL
 
     Parameter(s):
-    0: 3dGraphicsPosition <Array>
+    0: GraphicsPosition <Array, Object> (Default: [0, 0, 0])
 
     Returns:
-    0: Position AGL <PositionAGL>
+    PositionAGL <Array>
 */
 
-params ["_positionIn"];
+params [
+    ["_positionIn", [0, 0, 0], [[], objNull], [1, 2, 3, 4]]
+];
 
 if (_positionIn isEqualType objNull) exitWith {
     _positionIn modelToWorldVisual [0, 0, 0]; // Return

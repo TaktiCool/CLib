@@ -68,19 +68,19 @@ private _hcInit = [];
     call {
         private _name = toLower _x;
         // Client only functions.
-        if (_name find "_fnc_clientinit" > 0) exitWith {
+        if ("_fnc_clientinit" in _name) exitWith {
             _clientInit pushBack _x;
         };
         // Server only functions.
-        if (_name find "_fnc_serverinit" > 0) exitWith {
+        if ("_fnc_serverinit" in _name) exitWith {
             _serverInit pushBack _x;
         };
         // HC only functions.
-        if (_name find "_fnc_hcinit" > 0) exitWith {
+        if ("_fnc_hcinit" in _name) exitWith {
             _hcInit pushBack _x;
         };
         // Functions for both.
-        if (_name find "_fnc_init" > 0) exitWith {
+        if ("_fnc_init" in _name) exitWith {
             _init pushBack _x;
         };
     };
@@ -94,7 +94,7 @@ private _hcInit = [];
             private _time = diag_tickTime;
             _x call (missionNamespace getVariable [_x, {LOG("fail to Call Function: " + _this)}]);
             _time = diag_tickTime - _time;
-            private _strTime = (_time*1000) call CFUNC(toFixedNumber);
+            private _strTime = (_time * 1000) call CFUNC(toFixedNumber);
             LOG("Mission Module Call: " + _x + " (" + _strTime + " ms)");
             nil
         } count (_x select 0);

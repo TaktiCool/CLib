@@ -8,12 +8,17 @@
     This function fixes an issue occuring when using str on a config without appending the complete file path
 
     Parameter(s):
-    0: Argument <Type>
+    0: Config Path <Config> (Default: configNull)
+    1: Seperator <String> (Default: "")
 
     Returns:
-
+    Path in a String from <String>
 */
-params ["_configPath", ["_separator", "/", [""]]];
+
+params [
+    ["_configPath", configNull, [configNull]],
+    ["_separator", "/", [""]]
+];
 
 private _return = [];
 

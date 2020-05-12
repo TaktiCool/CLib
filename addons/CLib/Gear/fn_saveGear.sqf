@@ -8,12 +8,14 @@
     Save Gear
 
     Parameter(s):
-    0: Source Unit <Object>
+    0: Source Unit <Object> (Default: player)
 
     Returns:
     None
 */
 
-params ["_u1"];
+params [
+    ["_unit", player, [objNull]]
+];
 
-[[_u1] call CFUNC(getAllGear), magazinesAmmoFull _u1]
+[[_unit] call CFUNC(getAllGear), magazinesAmmoFull _unit]

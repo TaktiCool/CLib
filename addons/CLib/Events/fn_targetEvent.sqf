@@ -5,29 +5,34 @@
     Author: joko // Jonas
 
     Description:
-    Trigger Event on a Target
+    Trigger Event on a target
 
     Parameter(s):
-    0: Event Name <String>
-    1: Target <Object, Number, String, Array>
-    2: Arguments <Any> (Default: nil)
+    0: Event Name <String> (Default: "EventError")
+    1: Target <Array, Group, Number, Object, Side, String> (Default: objNull)
+    2: Arguments <Any> (Default: [])
 
     Returns:
     None
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
-params [["_event", "EventError", [""]], ["_target", objNull, ["", objNull, 0, [], grpNull, sideUnknown]], ["_args", []]];
-// exit if the Unit is Local
+params [
+    ["_event", "EventError", [""]],
+    ["_target", objNull, [[], grpNull, 0, objNull, sideUnknown, ""], []],
+    ["_args", [], []]
+];
+
+// Exit if the Unit is Local
 if (_target isEqualType objNull && {local _target}) exitWith {
     [_event, _args] call CFUNC(localEvent);
 };
 
-// exit if the target is a string
+// Exit if the target is a string
 if (_target isEqualType "") exitWith {
     private _targets = [];
-    // if the string a Class in CfgVehicles then get all objects of the kind and send the code it them
+    // If the string a Class in CfgVehicles then get all objects of the kind and send the code it them
     if ((toLower _target) in ["west", "east", "resistance", "civilian"]) then {
         {
             if (_target isEqualTo (str (side (group _x)))) then {

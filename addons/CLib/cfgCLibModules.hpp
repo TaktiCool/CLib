@@ -28,21 +28,23 @@ class CfgCLibModules {
             APIFNC(doAnimation);
             APIFNC(getDeathAnimation);
             APIFNC(getDefaultAnimation);
+            FNC(init);
         };
 
         MODULE(ConfigCaching) {
             dependency[] = {"CLib/Namespaces"};
             APIFNC(configProperties);
+            APIFNC(getConfigDataCached);
+            APIFNC(getConfigData);
             FNC(init);
             APIFNC(returnParents);
-            FNC(arrayToPath);
-            APIFNC(getDataCached);
         };
 
         MODULE(Core) {
             dependency[] = {"CLib/Events"};
 
             FNC(init);
+            FNC(serverInit);
 
             MODULE(Autoload) {
                 FNCSERVER(autoloadEntryPoint);
@@ -57,7 +59,7 @@ class CfgCLibModules {
                 FNCSERVER(checkAllFunctionCompression);
                 FNCSERVER(checkCompression);
                 FNCSERVER(compressString);
-                FNCSERVER(decompressString);
+                APIFNCSERVER(decompressString);
             };
 
             MODULE(ExtensionFramework) {
@@ -69,15 +71,15 @@ class CfgCLibModules {
             };
 
             MODULE(Misc) {
-                APIFNC(addPerformanceCounter);
                 APIFNC(blurScreen);
                 APIFNC(cachedCall);
                 APIFNC(codeToString);
+                APIFNC(compatibleMagazines);
+                APIFNC(compileFinal);
                 APIFNC(createPPEffect);
                 APIFNC(deleteAtEntry);
                 APIFNC(directCall);
                 APIFNC(disableUserInput);
-                // APIFNC(dumpPerformanceInformation); // FIXME
                 APIFNC(getPos);
                 APIFNC(fileExist);
                 APIFNC(flatConfigPath);
@@ -91,11 +93,15 @@ class CfgCLibModules {
                 FNC(initVoiceDetection);
                 APIFNC(isKindOfArray);
                 APIFNC(log);
+                APIFNC(messageBox);
+                APIFNC(modLoaded);
+                APIFNC(moduleLoaded);
                 APIFNC(name);
+                APIFNC(registerEntryPoint);
                 APIFNC(sanitizeString);
                 APIFNC(shuffleArray);
-                FNC(dumpPerformanceInformation);
                 APIFNC(setVariablePublic);
+                APIFNC(textTiles);
                 APIFNC(toFixedNumber);
             };
 
@@ -147,6 +153,7 @@ class CfgCLibModules {
         MODULE(Hashes) {
             APIFNC(containsKey);
             APIFNC(containsValue);
+            APIFNC(countHash);
             APIFNC(createHash);
             APIFNC(forEachHash);
             APIFNC(getHash);
@@ -163,7 +170,7 @@ class CfgCLibModules {
             APIFNC(canInteractWith);
             FNC(clientInitCanInteractWith);
             FNC(clientInitInteraction);
-            APIFNC(holdActionCallback);
+            FNC(holdActionCallback);
             APIFNC(inRange);
             FNC(onCursorObjectChanged);
             APIFNC(overrideAction);
@@ -171,7 +178,6 @@ class CfgCLibModules {
 
         MODULE(lnbData) {
             dependency[] = {"CLib/Namespaces", "CLib/PerFrame"};
-            FNC(init);
             APIFNC(lnbLoad);
             APIFNC(lnbSave);
         };
@@ -194,6 +200,7 @@ class CfgCLibModules {
             FNC(clientInit);
             APIFNC(drawMapGraphics);
             APIFNC(mapGraphicsMouseButtonClick);
+            APIFNC(mapGraphicsMouseButtonDblClick);
             APIFNC(mapGraphicsMouseMoving);
             APIFNC(mapGraphicsPosition);
             APIFNC(nearestMapGraphicsGroup);
@@ -215,20 +222,20 @@ class CfgCLibModules {
             APIFNC(allVariables);
             APIFNC(createNamespace);
             APIFNC(deleteNamespace);
-            APIFNC(getLogicGroup);
-            APIFNC(getVariable);
-            APIFNC(setVar);
             APIFNC(setVariable);
         };
 
         MODULE(ObjectPooling) {
-            APIFNC(getPoolObject);
+            APIFNC(getPooledObject);
+            APIFNC(getPooledObjectCondition);
+            APIFNC(getPooledUnit);
             FNCSERVER(init);
         };
 
         MODULE(PerformanceInfo) {
             dependency[] = {"CLib/Events"};
             FNC(clientInit);
+            APIFNC(dumpPerformanceInfo);
         };
 
         MODULE(PerFrame) {
@@ -245,33 +252,30 @@ class CfgCLibModules {
         MODULE(RemoteExecution) {
             FNC(execute);
             FNC(init);
-            FNC(handleIncomeData) { serverOnly = 1; };
+            FNCSERVER(handleIncomeData);
             APIFNC(remoteExec);
             FNC(serverInit);
         };
 
         MODULE(Settings) {
             dependency[] = {"CLib/Namespaces"};
-            FNC(serverInit);
-            FNC(clientInit);
             FNC(init);
-            APIFNC(getSettingOld);
             APIFNC(getSetting);
             APIFNC(getSettings);
             APIFNC(getSettingSubClasses);
-            APIFNC(loadSettings);
             APIFNC(registerSettings);
         };
 
         MODULE(SimpleObjectFramework) {
             dependency[] = {"CLib/Namespaces", "CLib/Events"};
             APIFNC(createSimpleObjectComp);
+            APIFNC(deleteSimpleObjectComp);
             FNC(init);
             APIFNC(readSimpleObjectComp);
             APIFNCSERVER(exportSimpleObjectComp);
         };
 
-        MODULE(Statemachine) {
+        MODULE(StateMachine) {
             dependency[] = {"CLib/Events"};
             APIFNC(addStatemachineState);
             APIFNC(copyStatemachine);

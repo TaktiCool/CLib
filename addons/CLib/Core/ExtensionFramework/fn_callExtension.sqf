@@ -12,13 +12,13 @@
     0: Action name <String>
     2: Data <Any> (optional)
     3: Callback <Code> (optional)
-    3: Arguments <Any> (optional)
+    3: Callback Arguments <Any> (optional)
 
     Returns:
     None
 */
 
-EXEC_ONLY_UNSCHEDULED
+EXEC_ONLY_UNSCHEDULED;
 
 params ["_extensionName", "_actionName", ["_data", ""], ["_callback", {}], ["_args", []]];
 

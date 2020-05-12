@@ -8,7 +8,7 @@
     Server module loader used on server and when CLib is present on client. Prepares the functions for transmission to clients. Should run before client register with server.
 
     Parameter(s):
-    ARRAY - server only: the names of the requested modules
+    0: The names of the requested modules <Array>
 
     Returns:
     None
@@ -40,10 +40,12 @@ private _fnc_addRequiredModule = {
 _requiredModules = _requiredModules apply {toLower _x};
 
 LOG("Loaded Modules: " + str _this);
-
+GVAR(LoadedModules) = _requiredModules;
+publicVariable QGVAR(LoadedModules);
 {
-    private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
-    private _fullFunctionModName = (parsingNamespace getVariable (_x + "_data")) select 3;
+    private _data = parsingNamespace getVariable (_x + "_data");
+    private _fullFunctionModuleName = _data select 1;
+    private _fullFunctionModName = _data select 3;
     // Push the function name on the array if its in the requested module list.
     if (_fullFunctionModuleName in _requiredModules || _fullFunctionModName in _requiredModules) then {
         GVAR(requiredFunctions) pushBackUnique _x;
@@ -59,12 +61,12 @@ GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {!((parsingNamespace ge
 GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
 
 QGVAR(registerClient) addPublicVariableEventHandler {
-
+    (_this select 1) params ["_unit", "_didJip"];
     // Determine client id by provided object (usually the player object).
-    private _clientID = owner (_this select 1);
+    private _clientID = owner _unit;
 
     // send all Functions if mission Started was not triggered jet
-    if (time < 100) exitWith {
+    if (!_didJip && time > 1) exitWith {
         {
             [_x, _clientID, _forEachIndex] call FUNC(sendFunctions);
         } forEach GVAR(RequiredFncClient);
@@ -87,6 +89,7 @@ QGVAR(unregisterClient) addPublicVariableEventHandler {
 
     GVAR(SendFunctionsUnitCache) = GVAR(SendFunctionsUnitCache) - [objNull];
 };
+
 // Call all required function on the server.
 call FUNC(callModules);
 

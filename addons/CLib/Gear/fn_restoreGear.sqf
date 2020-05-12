@@ -8,13 +8,18 @@
     Restore gear from saveGear Function to destination
 
     Parameter(s):
-    0: Gear <Array>
-    1: Destination Unit <Object>
+    0: Gear <Array> (Default: [[], []])
+    1: Destination Unit <Object> (Default: player)
 
     Returns:
     None
 */
-params ["_gear", "_u2"];
+
+params [
+    ["_gear", [[], []], [[]], 2],
+    ["_unit", player, [objNull]]
+];
+
 _gear params ["_allGear", "_magazinesAmmoFull"];
 
 _allGear params [
@@ -23,72 +28,67 @@ _allGear params [
     "_uniform", "_uniformItems",
     "_vest", "_vestItems",
     "_backpack", "_backpackItems",
-    "_primaryWeapon", "_primaryWeaponItems", "_primaryWeaponMagazine",
-    "_secondaryWeapon", "_secondaryWeaponItems", "_secondaryWeaponMagazine",
-    "_handgun", "_handgunItems", "_handgunMagazine",
+    "_primaryWeapon", "_primaryWeaponItems", "",
+    "_secondaryWeapon", "_secondaryWeaponItems", "",
+    "_handgun", "_handgunItems", "",
     "_assignedItems",
     "_binocular"
 ];
 
-// DUMP(_allGear)
-// DUMP(_magazinesAmmoFull)
+removeAllAssignedItems _unit;
+removeAllWeapons _unit;
+removeHeadgear _unit;
+removeGoggles _unit;
 
-removeAllAssignedItems _u2;
-removeAllWeapons _u2;
-removeHeadgear _u2;
-removeGoggles _u2;
-
-[_u2, _uniform, 0] call CFUNC(addContainer);
-[_u2, _vest, 1] call CFUNC(addContainer);
-[_u2, _backpack, 2] call CFUNC(addContainer);
-_u2 addHeadgear _headgear;
-
+[_unit, _uniform, 0] call CFUNC(addContainer);
+[_unit, _vest, 1] call CFUNC(addContainer);
+[_unit, _backpack, 2] call CFUNC(addContainer);
+_unit addHeadgear _headgear;
+_unit addGoggles _goggles;
 
 _primaryWeapon = [_primaryWeapon] call BIS_fnc_baseWeapon;
 _secondaryWeapon = [_secondaryWeapon] call BIS_fnc_baseWeapon;
 _handgun = [_handgun] call BIS_fnc_baseWeapon;
 
-
 _assignedItems = _assignedItems - [_binocular];
-
 
 {
     _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];
 
     if (_isLoaded && _type > 0) then {
-        _u2 addMagazine [_magazine, _count];
+        _unit addMagazine [_magazine, _count];
     };
     nil
 } count _magazinesAmmoFull;
 
 {
     if (_x != "") then {
-        _u2 addWeapon _x;
+        _unit addWeapon _x;
     };
     nil
 } count [_primaryWeapon, _secondaryWeapon, _handgun, _binocular];
 
 {
-    _x params ["_magazine", "_count", "_isLoaded", "_type", "_location"];
+    _x params ["_magazine", "_count", "_isLoaded", "", "_location"];
 
     if (!_isLoaded) then {
         private _container = objNull;
         if (_location == "Uniform") then {
-            _container = uniformContainer _u2;
+            _container = uniformContainer _unit;
             private _ind = _uniformItems find _magazine;
             if (_ind != -1) then {
                 _uniformItems deleteAt _ind;
             };
         };
         if (_location == "Vest") then {
-            _container = vestContainer _u2;
+            _container = vestContainer _unit;
             private _ind = _vestItems find _magazine;
             if (_ind != -1) then {
                 _vestItems deleteAt _ind;
             };
         };
         if (_location == "Backpack") then {
-            _container = backpackContainer _u2;
+            _container = backpackContainer _unit;
             private _ind = _backpackItems find _magazine;
             if (_ind != -1) then {
                 _backpackItems deleteAt _ind;
@@ -102,34 +102,34 @@ _assignedItems = _assignedItems - [_binocular];
 } count _magazinesAmmoFull;
 
 {
-    _u2 addItemToUniform _x;
+    _unit addItemToUniform _x;
     nil
 } count _uniformItems;
 {
-    _u2 addItemToVest _x;
+    _unit addItemToVest _x;
     nil
 } count _vestItems;
 {
-    _u2 addItemToBackpack _x;
+    _unit addItemToBackpack _x;
     nil
 } count _backpackItems;
 
 {
-    _u2 linkItem _x;
+    _unit linkItem _x;
     nil
 } count _assignedItems;
 
 {
-    _u2 addPrimaryWeaponItem _x;
+    _unit addPrimaryWeaponItem _x;
     nil
 } count _primaryWeaponItems;
 
 {
-    _u2 addHandgunItem _x;
+    _unit addHandgunItem _x;
     nil
 } count _handgunItems;
 
 {
-    _u2 addSecondaryWeaponItem _x;
+    _unit addSecondaryWeaponItem _x;
     nil
 } count _secondaryWeaponItems;

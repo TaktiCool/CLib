@@ -58,3 +58,9 @@ extensions/CLib/packages
 *.bikey
 
 *.bisign
+
+CLibDataBaseEditor\.exe\.config
+releases/*
+*.biprivatekey
+keys/*
+build.bat

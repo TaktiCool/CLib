@@ -11,13 +11,15 @@
     Fixes position of an object. Moves object above ground and adjusts to terrain slope. Requires local object.
 
     Parameter(s):
-    0: Object <Object>
+    0: Object <Object> (Default: objNull)
 
     Returns:
     None
 */
 
-params ["_object"];
+params [
+    ["_object", objNull, [objNull]]
+];
 
 private _position = getPosATL _object;
 if ((getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "simulation")) == "house") then {

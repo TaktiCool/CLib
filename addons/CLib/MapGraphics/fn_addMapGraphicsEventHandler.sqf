@@ -8,16 +8,21 @@
     Adds an eventhandler to a MapGraphics draw
 
     Parameter(s):
-    0: Icon Id <String>
-    1: Event name <String>
-    2: Code that gets executed on event <Code, String>
-    3: Arguments passed to the event <Any>
+    0: Icon Id <String> (Default: "")
+    1: Event name <String> (Default: "")
+    2: Code that gets executed on event <Code, String> (Default: {})
+    3: Arguments passed to the event <Any> (Default: [])
 
     Returns:
     ID of the Event <Number>
 */
 
-params [["_uid", "", [""]], ["_eventName", "", [""]], ["_code", {}, ["", {}]], ["_args", []]];
+params [
+    ["_uid", "", [""]],
+    ["_eventName", "", [""]],
+    ["_code", {}, [{}, ""]],
+    ["_args", [], []]
+];
 
 // build Namespace Variablename
 private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];

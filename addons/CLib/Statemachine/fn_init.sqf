@@ -13,4 +13,5 @@
     Returns:
     None
 */
+
 EGVAR(Statemachine,exitStateNames) = ["exit", "cancel", "kill"];

@@ -11,16 +11,21 @@
     Blur the Screen
 
     Parameter(s):
-    0: ID <NUMBER>
-    1: Show? <BOOL, NUMBER>
+    0: ID <Number> (Default: 0)
+    1: Blur <Bool, Number> (Default: false)
+    2: Commit time <Number> (Default: 0.5)
 
     Returns:
     None
 */
 
-if (!hasInterface) exitWith {};
+params [
+    ["_id", 0, [0]],
+    ["_show", false, [true, 0]],
+    ["_commitTime", 0.5, [0]]
+];
 
-params ["_id", ["_show", false], ["_commitTime", 0.5]];
+if (!hasInterface) exitWith {};
 
 if (_show isEqualType 0) then {
     _show = _show == 1;

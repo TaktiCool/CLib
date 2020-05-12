@@ -8,14 +8,19 @@
     Removes a MapGraphics draw event
 
     Parameter(s):
-    0: Group name <String>
-    1: Event name <String>
+    0: Group name <String> (Default: "")
+    1: Event name <String> (Default: "")
     2: Event ID <Number> (Default: -1)
 
     Returns:
     None
 */
-params [["_uid", "", [""]], ["_eventName", "", [""]], ["_id", -1, [-1]]];
+
+params [
+    ["_uid", "", [""]],
+    ["_eventName", "", [""]],
+    ["_id", -1, [0]]
+];
 
 // build Namespace Variablename
 private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
@@ -25,9 +30,7 @@ if (isNull _namespace) exitWith {};
 
 private _eventArray = _namespace getVariable [_uid, []];
 if (_id == -1) then {
-    {
-        _eventArray set [_forEachIndex, nil];
-    } forEach _eventArray;
+    _namespace setVariable [_uid, nil];
 } else {
     if ((count _eventArray) <= _id) exitWith {};
     _eventArray set [_id, nil];

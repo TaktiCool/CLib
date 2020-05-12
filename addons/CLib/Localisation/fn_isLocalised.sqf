@@ -8,13 +8,16 @@
     Checks if a string is localized
 
     Parameter(s):
-    0: Localisation Name <String>
+    0: Localisation Name <String> (Default: "STR_CLib_ERROR")
 
     Returns:
-    is Localised <Bool>
+    Is Localised <Bool>
 */
 
-params [["_locaName", "STR_CLib_ERROR"]];
-private _temp = GVAR(ClientNamespace) getVariable _locaName;
+params [
+    ["_locaName", "STR_CLib_ERROR", [""]]
+];
 
-!isNil "_temp";
+private _temp = GVAR(Namepace) getVariable _locaName;
+
+!isNil "_temp" || isLocalised _locaName;

@@ -17,23 +17,25 @@
 GVAR(allCustomNamespaces) = [];
 
 GVAR(cachedCall) = call CFUNC(createNamespace);
+
 if (hasInterface) then {
     CLib_Player setVariable [QGVAR(playerName), profileName, true];
-};
-
-if (hasInterface) then {
     // functions for disabling user input
     DFUNC(onButtonClickEndStr) = {
-        closeDialog 0;
-        failMission "LOSER";
-        [false] call CFUNC(disableUserInput);
-    } call CFUNC(codeToString);
+        {
+            closeDialog 0;
+            failMission "LOSER";
+            [false] call CFUNC(disableUserInput);
+        } call CFUNC(codeToString)
+    } call CFUNC(CompileFinal);
 
     DFUNC(onButtonClickRespawnStr) = {
-        closeDialog 0;
-        forceRespawn CLib_Player;
-        [false] call CFUNC(disableUserInput);
-    } call CFUNC(codeToString);
+        {
+            closeDialog 0;
+            forceRespawn CLib_Player;
+            [false] call CFUNC(disableUserInput);
+        } call CFUNC(codeToString)
+    } call CFUNC(CompileFinal);
 
     // this fixes an issue that static guns and cars don't have proper damage on lower LODs meaning that you can't hit a unit in a static gun.
     // this fixes the issue until BI fixes this issue and prevents false reports
@@ -51,3 +53,20 @@ if (hasInterface) then {
         GVAR(staticVehicleFix) = GVAR(staticVehicleFix) - [objNull];
     }] call CFUNC(addEventhandler);
 };
+
+["playerChanged", {
+    (_this select 0) params ["_new"];
+    if (_new diarySubjectExists "CLib") exitWith {};
+
+    _new createDiarySubject ["CLib", "CLib - Server Mod"];
+    _new createDiaryRecord ["CLib", ["Modules", GVAR(textModules)]];
+    _new createDiaryRecord ["CLib", ["Mods", GVAR(textMods)]];
+}] call CFUNC(addEventhandler);
+
+["missionStarted", {
+    if (player diarySubjectExists "CLib") exitWith {};
+
+    player createDiarySubject ["CLib", "CLib - Server Mod"];
+    player createDiaryRecord ["CLib", ["Modules", GVAR(textModules)]];
+    player createDiaryRecord ["CLib", ["Mods", GVAR(textMods)]];
+}] call CFUNC(addEventhandler);

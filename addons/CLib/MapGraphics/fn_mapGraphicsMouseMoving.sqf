@@ -8,14 +8,19 @@
     Handles mouse moving event
 
     Parameter(s):
-    0: Control <Control>
-    1: Mouse x position <Number>
-    2: Mouse y position <Number>
+    0: Control <Control> (Default: controlNull)
+    1: Mouse x position <Number> (Default: 0)
+    2: Mouse y position <Number> (Default: 0)
 
     Returns:
     None
 */
-params ["_control", "_xPos", "_yPos"];
+
+params [
+    ["_control", controlNull, [controlNull]],
+    ["_xPos", 0, [0]],
+    ["_yPos", 0, [0]]
+];
 
 private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGroup);
 {

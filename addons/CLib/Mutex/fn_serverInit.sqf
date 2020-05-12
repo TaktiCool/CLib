@@ -5,7 +5,7 @@
     Author: NetFusion
 
     Description:
-    Init for Mutex System on Server
+    Init for mutex system on server
 
     Parameter(s):
     None
@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 // Queue of clients who requested mutex executing
 GVAR(mutexes) = false call CFUNC(createNamespace); // Entries are [currentClient, clientQueue, currentMutexTime]
 
@@ -35,7 +36,9 @@ DFUNC(checkNextMutexClient) = {
 };
 
 // Handle disconnect of client
-[QGVAR(mutex), "onPlayerDisconnected", {
+addMissionEventHandler ["PlayerDisconnected", {
+    params ["", "", "", "", "_owner"];
+
     {
         private _mutex = GVAR(mutexes) getVariable [_x, [0, []]];
         _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
@@ -56,7 +59,7 @@ DFUNC(checkNextMutexClient) = {
     } count ([GVAR(mutexes), QGVAR(mutexesCache)] call CFUNC(allVariables));
 
     false
-}] call BIS_fnc_addStackedEventHandler;
+}];
 
 // EH which fires if a client requests mutex executing
 [QGVAR(mutexRequest), {

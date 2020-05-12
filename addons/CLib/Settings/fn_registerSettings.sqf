@@ -5,16 +5,18 @@
     Author: BadGuy
 
     Description:
-    Registers config class (from configFile) to settings framework
+    Registers config class from configFile to settings framework
 
     Parameter(s):
-    0: Array with config path <Array>
+    0: Array with config path <Array> (Default: [])
 
     Returns:
     None
 */
-params ["_basePath"];
-//params ["_configClass"];
+
+params [
+    ["_basePath", [], [[]], []]
+];
 
 private _configClasses = [configFile, missionConfigFile] apply {
     private _temp = _x;

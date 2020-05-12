@@ -5,20 +5,28 @@
     Author: joko // Jonas
 
     Description:
-    is Kind Of Array
+    Wrapper for isKindOf of multiple types
 
     Parameter(s):
-    https://community.bistudio.com/wiki/isKindOf
-    exect that 2nd Parameter is a Array with Multible Types/Checks Posible
+    0: Object or type <Object, String> (Default: objNull)
+    1: Types to check <Array> (Default: [])
+    2: Config <Config> (Default: configNull)
 
     Returns:
-    Bool is Kind Of Input1
+    Found <Bool>
+
+    Remarks:
+    https://community.bistudio.com/wiki/isKindOf
 */
-params ["_input1", "_inputs"];
-{
-    if (_input1 isKindOf _x) then {
-        true breakOut SCRIPTSCOPENAME;
-    };
-    nil
-} count _inputs;
-false
+
+params [
+    ["_inputObjOrType", objNull, [objNull, ""]],
+    ["_typesToCheck", [], [[]], []],
+    ["_config", configNull, [configNull]]
+];
+
+if (isNull _config) then {
+    (_typesToCheck findIf {_inputObjOrType isKindOf _x}) != -1;
+} else {
+    (_typesToCheck findIf {_inputObjOrType isKindOf [_x, _config]}) != -1;
+};

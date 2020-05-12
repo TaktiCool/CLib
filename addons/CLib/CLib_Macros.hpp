@@ -3,16 +3,15 @@
 #define MOD CLib
 
 #define MAJOR 0
-#define MINOR 9
-#define PATCHLVL 0
-#define BUILD 606
+#define MINOR 0
+#define BUILD 0
+#define BUILD 0
 
-// dont release with this setting enabled
-// #define DEBUGFULL // enable all Debug Methods
+// don't release with these settings enabled
+// #define DEBUGFULL // enable all debug methods
 #define ISDEV // enable better logging
-// #define ENABLEPERFORMANCECOUNTER // enable Performance counter for Function calls
-// #define ENABLEFUNCTIONTRACE // enable SQF based Function Tracer (Later Maybe Replace with ChromeTrace Repalced)
+// #define ENABLEPERFORMANCECOUNTER // enable performance counter for function calls
+// #define ENABLEFUNCTIONTRACE // enable SQF based function tracer (might get replace with ChromeTrace at some point)
 // #define DISABLECOMPRESSION
 // Base Includes
 #include "macros.hpp"
-#include "InternalMacros.hpp"

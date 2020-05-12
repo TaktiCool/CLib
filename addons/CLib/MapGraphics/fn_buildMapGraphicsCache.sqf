@@ -14,7 +14,11 @@
     None
 
 */
-params ["_map"];
+
+with uiNamespace do {
+    GVAR(MapGraphicsMapControls) = GVAR(MapGraphicsMapControls) - [displayNull, controlNull];
+};
+
 private _cache = [];
 
 {

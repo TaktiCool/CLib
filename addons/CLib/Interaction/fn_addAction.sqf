@@ -8,12 +8,18 @@
     Add an action to an object or types of objects
 
     Parameter(s):
-    0: Title of the action <String, Code>
-    1: Object or type which the action should be added to <Object, Array, String>
-    2: Distance in which the action is visible <Number>
-    3: Condition which is evaluated on every frame if player is in range to determine if the action is visible <String, Code>
-    4: Callback which gets called when the action is activated <Code>
-    5: Optional named parameters <Array>
+    0: Title of the action <String, Code> (Default: "MISSING TITLE")
+    1: Object or type which the action should be added to <Object, String, Array> (Default: objNull)
+    2: Distance in which the action is visible <Number> (Default: 10)
+    3: Condition which is evaluated on every frame if player is in range to determine if the action is visible <String, Code> (Default: "true")
+    4: Callback which gets called when the action is activated <Code> (Default: {})
+    5: Optional named parameters <Array> (Default: [])
+
+    Returns:
+    None
+
+    Remarks:
+    Named parameters:
         "arguments": Arguments which get passed to the callback <Array> (Default: [])
         "priority": Priority of the action <Number> (Default: 1.5)
         "showWindow": Players see title text in mid screen <Bool> (Default: true)
@@ -21,16 +27,22 @@
         "shortcut": Key name to add binding for action <String> (Default: "")
         "radius": Distance in meters the unit activating the action must be within to activate it <Number> (Default: 15)
         "unconscious": Visible to incapacitated player <Bool> (Default: false)
-        "onActionAdded": Code which will be executed when action was added <Code>
+        "onActionAdded": Code which will be executed when action was added <Code> (Default: {})
         "ignoredCanInteractConditions": Interact conditions that will be ignored <Array> (Default: [])
-
-    Returns:
-    None
+        "selection": named selection in Geometry LOD to which the action is attached <String> (Default: "")
+        "memoryPoint": memory point on the object to which the action is attached. If parameter selection is supplied, parameter memoryPoint is not used <String> (Default: "")
 */
 
-params ["_text", "_onObject", "_distance", "_condition", "_callback", ["_dynamicArguments", []]];
+params [
+    ["_text", "MISSING TITLE", ["", {}]],
+    ["_target", objNull, [objNull, "", []], []],
+    ["_distance", 10, [0]],
+    ["_condition", "true", ["", {}]],
+    ["_callback", {}, [{}]],
+    ["_dynamicArguments", [], [[]], []]
+];
 
-private _args = [];
+private _args = nil;
 private _priority = 1.5;
 private _showWindow = true;
 private _hideOnUse = true;
@@ -39,39 +51,87 @@ private _radius = 15;
 private _unconscious = false;
 private _onActionAdded = {};
 private _ignoredCanInteractConditions = [];
+private _memorypoint = "";
+private _selection = "";
 
 private _argName = "";
 {
     if (_argName == "") then {
-        _argName = _x;
+        _argName = toLower _x;
     } else {
         switch (_argName) do {
             case ("arguments"): {
                 _args = _x;
             };
             case ("priority"): {
-                _priority = _x;
+                if (_x isEqualtype _priority) then {
+                    _priority = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("showWindow"): {
-                _showWindow = _x;
+            case ("showwindow"): {
+                if (_x isEqualtype _showWindow) then {
+                    _showWindow = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("hideOnUse"): {
-                _hideOnUse = _x;
+            case ("hideonuse"): {
+                if (_x isEqualtype _hideOnUse) then {
+                    _hideOnUse = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("shortcut"): {
-                _shortcut = _x;
+                if (_x isEqualtype _shortcut) then {
+                    _shortcut = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("radius"): {
-                _radius = _x;
+                if (_x isEqualtype _radius) then {
+                    _radius = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
             case ("unconscious"): {
-                _unconscious = _x;
+                if (_x isEqualtype _unconscious) then {
+                    _unconscious = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("onActionAdded"): {
-                _onActionAdded = _x;
+            case ("selection"): {
+                if (_x isEqualtype _selection) then {
+                    _selection = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
-            case ("ignoredCanInteractConditions"): {
-                _ignoredCanInteractConditions = _x;
+            case ("memorypoint"): {
+                if (_x isEqualtype _memorypoint) then {
+                    _memorypoint = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
+            };
+            case ("onactionadded"): {
+                if (_x isEqualtype _onActionAdded) then {
+                    _onActionAdded = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
+            };
+            case ("ignoredcaninteractconditions"): {
+                if (_x isEqualtype _ignoredCanInteractConditions) then {
+                    _ignoredCanInteractConditions = _x;
+                } else {
+                    DUMP(_argName + " wrong Type");
+                };
             };
         };
         _argName = "";
@@ -79,42 +139,41 @@ private _argName = "";
     nil
 } count _dynamicArguments;
 
-
 GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
 _condition = _condition call CFUNC(codeToString);
-
-_condition = "[_this, _target, " + str _ignoredCanInteractConditions + "] call " + QCFUNC(canInteractWith) + " && " + _condition;
-
-_condition = if (_distance > 0 && !(_onObject isEqualTo CLib_Player)) then {"[_target, " + (str _distance) + "] call " + QCFUNC(inRange) + " &&" + _condition} else {_condition};
+private _format = [
+    "[_this, _target, %1] call %2 && {_this call {%3}}",
+    "[_this, _target, %1] call %2 && {[_target, %4] call %5} && {_this call {%3}}"
+] select (_distance > 0 && !(_target isEqualTo CLib_Player));
+_condition = format [_format, _ignoredCanInteractConditions, QCFUNC(canInteractWith), _condition, _distance, QCFUNC(inRange)];
 
 _callback = _callback call CFUNC(codeToString);
 _callback = compile (format ["[{%1}, _this] call %2;", _callback, QCFUNC(directCall)]);
 if (_text isEqualType "") then {_text = compile ("format [""" + _text + """]")};
-if (_onObject isEqualType "") then {_onObject = [_onObject]};
+if (_target isEqualType "") then {_target = [_target]};
 
-if (_onObject isEqualType []) then {
+if (_target isEqualType []) then {
     {
-        GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
         false
-    } count _onObject;
+    } count _target;
 };
 
-if (_onObject isEqualType objNull) then {
-    if (_onObject isEqualTo CLib_Player) then {
+if (_target isEqualType objNull) then {
+    if (_target isEqualTo CLib_Player) then {
         if (_text isEqualType {}) then {
-            private _target = _onObject;
             _text = call _text;
         };
         if (_text call CFUNC(isLocalised)) then {
             _text = _text call CFUNC(readLocalisation);
         };
-        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
-        private _id = _onObject addAction _argArray;
-        [_id, _onObject, _argArray] call _onActionAdded;
-        GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
+        private _id = _target addAction _argArray;
+        [_id, _target, _argArray] call _onActionAdded;
+        GVAR(PlayerInteraction_Actions) pushBackUnique [_id, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
     } else {
-        GVAR(Interaction_Actions) pushBackUnique [_onObject, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _onActionAdded, GVAR(currentActionID)];
+        GVAR(Interaction_Actions) pushBackUnique [_target, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
     };
-    DUMP("addAction to " + str _onObject)
+    DUMP("addAction to " + str _target)
 };

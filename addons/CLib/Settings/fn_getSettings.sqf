@@ -8,10 +8,14 @@
     Get all settings of a settings-path
 
     Parameter(s):
-    0: path <STRING>
+    0: Path <String> (Default: "")
 
     Returns:
-    <ARRAY> (Array of strings)
+    Array of strings <Array>
 */
-params [["_path", ""]];
+
+params [
+    ["_path", "", [""]]
+];
+
 GVAR(allSettings) getVariable ["SETTINGS:" + _path, []];

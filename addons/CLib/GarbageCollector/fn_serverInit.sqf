@@ -16,9 +16,11 @@
 
 if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarbageCollector") isEqualTo 0) exitWith {};
 
-DFUNC(pushbackInQueue) = {
+DFUNC(pushbackInQueue) = [{
     params ["_object"];
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {_object setVariable [QCGVAR(noClean), true, true];}; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {
+        _object setVariable [QCGVAR(noClean), true, true]; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    };
     if !(_object getVariable [QCGVAR(noClean), false]) then {
         if !(isNull attachedTo _object) exitWith {}; // exit if the Object is attached to a object. we then ignore it because it could be used by a script
         if (!(_object getVariable [QGVAR(queued), false])) then {
@@ -28,12 +30,14 @@ DFUNC(pushbackInQueue) = {
             }, GVAR(waitTime), _object] call CFUNC(wait);
         };
     };
-};
+}] call CFUNC(compileFinal);
 
-DFUNC(removeMissionObject) = {
+DFUNC(removeMissionObject) = [{
     params [["_object", objNull]];
     if (isNull _object) exitWith {};
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {_object getVariable [QCGVAR(noClean), true, true];}; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {
+        _object getVariable [QCGVAR(noClean), true, true]; // Dont Pushback Vehciles that are handled by BIS Respawn Module
+    };
     if (_object getVariable [QCGVAR(noClean), false]) exitWith {};
     // Disable collision with the surface.
     _object enableSimulationGlobal false;
@@ -57,7 +61,7 @@ DFUNC(removeMissionObject) = {
 
         (_position select 2) < (0 - _height)
     }, [_object, _height, getPos _object]] call CFUNC(waitUntil);
-};
+}] call CFUNC(compileFinal);
 
 GVAR(statemachine) = call CFUNC(createStatemachine);
 
@@ -72,7 +76,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
     GVAR(loopTime) = if (isNumber (_configPath >> "GarbageCollectorLoopTime")) then {
         getNumber (_configPath >> "GarbageCollectorLoopTime")
     } else {
-        GVAR(waitTime)/5;
+        GVAR(waitTime) / 5;
     };
     "fillGrenades"
 }] call CFUNC(addStatemachineState);
@@ -84,7 +88,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
         // Cycle through all near shells.
         {
             // If the shell is not queued yet push it on the storage.
-            _x call DFUNC(pushbackInQueue);
+            _x call FUNC(pushbackInQueue);
             nil
         } count (getPos _x nearObjects ["GrenadeHand", 100]);
         nil
@@ -94,7 +98,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 
 [GVAR(statemachine), "fillWeaponHolder", {
     {
-        _x call DFUNC(pushbackInQueue);
+        _x call FUNC(pushbackInQueue);
         nil
     } count (allMissionObjects "WeaponHolder");
     "fillGroundWeaponHolder"
@@ -102,7 +106,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 
 [GVAR(statemachine), "fillGroundWeaponHolder", {
     {
-        _x call DFUNC(pushbackInQueue);
+        _x call FUNC(pushbackInQueue);
         nil
     } count (allMissionObjects "GroundWeaponHolder");
     "fillWeaponHolderSimulated"
@@ -110,7 +114,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 
 [GVAR(statemachine), "fillWeaponHolderSimulated", {
     {
-        _x call DFUNC(pushbackInQueue);
+        _x call FUNC(pushbackInQueue);
         nil
     } count (allMissionObjects "WeaponHolderSimulated");
     "fillDeadUnits"
@@ -118,7 +122,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
 
 [GVAR(statemachine), "fillDeadUnits", {
     {
-        _x call DFUNC(pushbackInQueue);
+        _x call FUNC(pushbackInQueue);
         nil
     } count allDead;
     "checkGroups"

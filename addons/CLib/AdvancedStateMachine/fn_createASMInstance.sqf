@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: State machine <Location> (Default: locationNull)
-    1: Data <Anything> (Default: [])
+    1: Data <Anything> (Default: nil)
     2: Initial state <String> (Default: "init")
 
     Returns:
@@ -18,7 +18,7 @@
 
 params [
     ["_stateMachine", locationNull, [locationNull]],
-    ["_data", [], []],
+    "_data",
     ["_initialStateName", "init", [""]]
 ];
 

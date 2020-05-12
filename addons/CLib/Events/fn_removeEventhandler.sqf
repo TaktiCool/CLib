@@ -8,13 +8,17 @@
     Remove Eventhandler
 
     Parameter(s):
-    0: Event name <String>
-    1: ID <Number>
+    0: Event name <String> (Default: "")
+    1: ID <Number> (Default: -1)
 
     Returns:
-    is Removed <Bool>
+    Removed <Bool>
 */
-params [["_event", "", [""]], ["_id", -1, [-1]]];
+
+params [
+    ["_event", "", [""]],
+    ["_id", -1, [0]]
+];
 
 DUMP("Eventhandler Removed: "+ _event);
 private _eventArray = GVAR(EventNamespace) getVariable [_event, []];

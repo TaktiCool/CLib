@@ -15,9 +15,6 @@
 
 #define QUOTE(var) #var
 
-#define FUNCPATH(var) \##PATH\##PREFIX\addons\##MOD\##MODULE\fn_##var.sqf
-#define FFNCPATH(subModule,var) \##PATH\##PREFIX\addons\##MOD\##MODULE\##subModule\fn_##var.sqf
-
 // Global Varible Macros
 #define EGVAR(var1,var2) TRIPLE(PREFIX,var1,var2)
 #define QEGVAR(var1,var2) QUOTE(EGVAR(var1,var2))
@@ -30,11 +27,13 @@
 
 #define UIVAR(var1) QEGVAR(UI,var1)
 
-#define SYSLOGGING(var1,var2) if (isNil "CLib_fnc_log") then {\
-    private _CLib_loggingVar = format ["(%1) [%2 %3 - %4]: %5 %6:%7", diag_frameNo, QUOTE(PREFIX), var1, QUOTE(MODULE), var2, __FILE__, __LINE__];\
-    diag_log text _CLib_loggingVar;\
-} else {\
-    [var1 ,QUOTE(PREFIX), QUOTE(MODULE), var2, __FILE__, __LINE__] call CLib_fnc_log;\
+#define SYSLOGGING(var1,var2) isNil {\
+    if (isNil "CLib_fnc_log") then {\
+        private _CLib_loggingVar = format ["(%1) [%2 %3 - %4]: %5 %6:%7", diag_frameNo, QUOTE(PREFIX), var1, QUOTE(MODULE), var2, __FILE__, __LINE__];\
+        diag_log text _CLib_loggingVar;\
+    } else {\
+        [var1, QUOTE(PREFIX), QUOTE(MODULE), var2, __FILE__, __LINE__, _fnc_scriptName, _fnc_scriptNameParent, _fnc_scriptMap] call CLib_fnc_log;\
+    };\
 };
 
 // Logging/Dumping macros
@@ -46,6 +45,7 @@
 
 #define LOG(var) SYSLOGGING("Log", var)
 
+#define ERROR_LOG(var) SYSLOGGING("Error", var)
 
 // Function macros
 #define EDFUNC(var1,var2) TRIPLE(PREFIX,var1,DOUBLE(fnc,var2))
@@ -83,7 +83,7 @@
 #ifdef ISDEV
     #define CFUNC(var) (currentNamespace getVariable [QCFUNC(var), {if (time > 0) then {["Error function %1 dont exist or isNil", QCFUNC(var)] call BIS_fnc_errorMsg;}; DUMP(QCFUNC(var) + " Dont Exist")}])
 #else
-    #define CFUNC(var) TRIPLE(CLib,fnc,var)
+    #define CFUNC(var) DCFUNC(var)
 #endif
 
 // #define PREP(fncName) [QUOTE(FUNCPATH(fncName)), QFUNC(fncName)] call CFUNC(compile);

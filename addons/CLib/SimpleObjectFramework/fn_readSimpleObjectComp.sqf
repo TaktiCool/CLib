@@ -8,17 +8,22 @@
     Read a Simple object out of the config and make a Avable over the SOF
 
     Parameter(s):
-    0: Config Path <Config>
-    1: Name <String> (Default: ConfigName of the ConfigPath)
-
-    Remarks:
-    this function only work properly on the Server on Mod Config
+    0: Config Path <Config> (Default: configNull)
+    1: Name <String> (Default: config name of the config)
 
     Returns:
     SimpleObjectStructure <Array>
+
+    Remarks:
+    this function only work properly on the Server on Mod Config
 */
-params [["_config", configNull, [configNull]], "_name"];
-if (isNil "_name" || {_name isEqualTo ""}) then {
+
+params [
+    ["_config", configNull, [configNull]],
+    ["_name", "", [""]]
+];
+
+if (_name isEqualTo "") then {
     _name = configName _config;
 };
 
@@ -26,6 +31,7 @@ private _fnc_readSimpleObjectClass = {
     params ["_config"];
 
     private _path = getText (_config >> "path");
+    private _fullObject = getNumber (_config >> "fullObject");
     private _offset = getArray (_config >> "offset");
     private _dir = getArray (_config >> "dirVector");
     private _up = getArray (_config >> "upVector");
@@ -88,7 +94,7 @@ private _fnc_readSimpleObjectClass = {
         _setObjectTextureArray = false;
     };
 
-    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray, _setObjectTextureArray]
+    [_path, _offset, _dir, _up, _hideSelectionArray, _animateArray, _setObjectTextureArray, _fullObject]
 };
 
 private _return = [];

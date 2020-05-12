@@ -13,7 +13,9 @@
     Returns:
     None
 */
+
 if (isServer) then {
+    GVAR(compNamespace) = true call CFUNC(createNamespace);
     GVAR(namespace) = true call CFUNC(createNamespace); // we need a Global Namespace because Only the Server have the Mod Config Classes
     {
         {
@@ -23,19 +25,19 @@ if (isServer) then {
         nil
     } count [configFile, campaignConfigFile, missionConfigFile];
     publicVariable QGVAR(namespace);
+    publicVariable QGVAR(compNamespace);
 };
 
-["InventoryOpened", {
-    (_this select 0) params ["", "_container", ["_subContainer", objNull]];
-    if (_container getVariable [QGVAR(isSimpleObject), false] || _subContainer getVariable [QGVAR(isSimpleObject), false]) exitWith {
-        [{
-            (findDisplay 602) closeDisplay 0;
-            [{
-                CLib_Player action ["Gear", objNull];
-            }, 1] call CFUNC(wait);
-        }, {
-            !isNull (findDisplay 602)
-        }] call CFUNC(waitUntil);
-        _CLib_EventReturn = true;
-    };
+[QGVAR(simpleObjectsCreated), {
+    (_this select 0) params ["_uid", "_code", "_parameter"];
+
+    [_uid, _parameter] call _code;
+}] call CFUNC(addEventhandler);
+
+[QGVAR(createSimpleObjectComp), {
+    (_this select 0) call CFUNC(createSimpleObjectComp);
+}] call CFUNC(addEventhandler);
+
+[QGVAR(deleteSimpleObjectComp), {
+    (_this select 0) call CFUNC(deleteSimpleObjectComp);
 }] call CFUNC(addEventhandler);

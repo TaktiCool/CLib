@@ -19,16 +19,15 @@ if !(hasInterface) exitWith {};
 GVAR(currentActionID) = -1;
 GVAR(Interaction_Actions) = [];
 GVAR(PlayerInteraction_Actions) = [];
-["cursorObjectChanged", FUNC(onCursorObjectChanged)] call CFUNC(addEventhandler);
+["cursorObjectChanged", {(_this select 0) call FUNC(onCursorObjectChanged)}] call CFUNC(addEventhandler);
 ["playerChanged", {
-    params ["_data", "_params"];
-    _data params ["_currentPlayer", "_oldPlayer"];
+    (_this select 0) params ["_currentPlayer", "_oldPlayer"];
     // Posible Fix for Double Squad Menu Entry
     if (_currentPlayer isEqualTo _oldPlayer) exitWith {};
     {
-        _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_onActionAdded"];
+        _x params ["_id", "_text", "_condition", "_callback", "_args", "_priority", "_showWindow", "_hideOnUse", "_shortcut", "_radius", "_unconscious", "_selection", "_memorypoint", "_onActionAdded"];
         _oldPlayer removeAction _id;
-        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious];
+        private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
         _id = _currentPlayer addAction _argArray;
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
@@ -72,8 +71,8 @@ for "_i" from 0 to 11 do {
     GVAR(HoldActionIdleBackground) pushBack (format ["<img size='3' shadow='0' color='%1' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/>", _color]);
 };
 
-DFUNC(IdleAnimation) = {
+DFUNC(IdleAnimation) = [{
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
     params ["_title", "_iconIdle", "_hint"];
     _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
-};
+}] call CFUNC(compileFinal);

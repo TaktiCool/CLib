@@ -1,7 +1,9 @@
-﻿﻿﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace CLibLogging
 {
@@ -14,16 +16,40 @@ namespace CLibLogging
         }
 
 #if WIN64
+        [DllExport("RVExtensionVersion")]
+#else
+        [DllExport("_RVExtensionVersion@8", CallingConvention.StdCall)]
+#endif
+        public static void RVExtensionVersion(StringBuilder output, int outputSize)
+        {
+            output.Append(DllEntry.GetVersion());
+        }
+
+#if WIN64
         [DllExport("RVExtension")]
 #else
         [DllExport("_RVExtension@12", CallingConvention.StdCall)]
 #endif
         public static void RVExtension(StringBuilder output, int outputSize, [MarshalAs(UnmanagedType.LPStr)] string input)
         {
-            if (input.ToLower() == "version")
+            if (input.ToLower() != "version")
+                return;
+
+            output.Append(DllEntry.GetVersion());
+        }
+
+        private static string GetVersion()
+        {
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            try
             {
-                output.Append("0.2");
+                string location = executingAssembly.Location;
+                if (location == null)
+                    throw new Exception("Assembly location not found");
+                return FileVersionInfo.GetVersionInfo(location).FileVersion;
             }
+            catch (Exception) { }
+            return "0.0.0.0";
         }
 
         [DllExport("Log")]

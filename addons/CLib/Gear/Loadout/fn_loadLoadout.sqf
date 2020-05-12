@@ -5,17 +5,18 @@
     Author: joko // Jonas
 
     Description:
-    Load and Assign loadout to Unit
+    Load loadout to Unit
 
     Parameter(s):
-    0: Unit that get the Loadout <Unit>
-    1: Classname what Loadout the unit will get <String>
+    0: Classname or config of loadout <Config, String> (Default: "")
 
     Returns:
     None
 */
 
-params [["_cfg", "", ["", configNull]]];
+params [
+    ["_cfg", "", [configNull, ""]]
+];
 
 private _loadoutName = _cfg;
 if (_cfg isEqualType configNull) then {
@@ -29,36 +30,33 @@ if !(isNil {GVAR(loadoutsNamespace) getVariable _varName}) exitWith {
 };
 
 if (_cfg isEqualType "") then {
-    _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
-    if (isClass _cfg) exitWith {};
-
     _cfg = missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _loadoutName;
+    if (isClass _cfg) exitWith {};
+    _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
 };
 if (!isClass _cfg) exitWith {};
 
-private _loadout = [];
-private _loadoutVars = [];
+private _loadout = call CFUNC(createHash);
+private _loadoutVars = call CFUNC(createHash);
 
 private _fnc_assignValue = {
-    params ["_name", "_value"];
-    _name = toLower _name;
-    if (_name in GVAR(defaultLoadoutValues)) then {
-        if (_name in _loadout) then {
-            private _i = _loadout find _name;
-            private _v2 = _loadout select (_i + 1);
-            _value append _v2;
-            _loadout set [_i + 1, _value];
+    params ["_key", "_value"];
+    _key = toLower _key;
+    if (_key in GVAR(defaultLoadoutValues)) then {
+        if ([_loadout, _key] call CFUNC(containsKey)) then {
+            private _data = [_loadout, _key] call CFUNC(getHash);
+            _data append _value;
+            [_loadout, _key, _data] call CFUNC(setHash);
         } else {
-            _loadout append [_name, _value];
+            [_loadout, _key, _value] call CFUNC(setHash);
         };
     } else {
-        if (_name in _loadoutVars) then {
-            private _i = _loadoutVars find _name;
-            private _v2 = _loadoutVars select (_i + 1);
-            _value append _v2;
-            _loadoutVars set [_i + 1, _value];
+        if ([_loadoutVars, _key] call CFUNC(containsKey)) then {
+            private _data = [_loadoutVars, _key] call CFUNC(getHash);
+            _data append _value;
+            [_loadoutVars, _key, _data] call CFUNC(setHash);
         } else {
-            _loadoutVars append [_name, _value];
+            [_loadoutVars, _key, _value] call CFUNC(setHash);
         };
     };
 };
@@ -85,12 +83,12 @@ private _fnc_readData = {
 private _fnc_readClass = {
     params ["_config"];
     {
-        _x call ([_fnc_readData, _fnc_readClass] select isClass _x);
+        _x call ([_fnc_readData, _fnc_readClass] select (isClass _x));
         nil
     } count configProperties [_config, "true", true];
 };
 
 _cfg call _fnc_readClass;
-private _return = [_loadout, _loadoutVars];
-[GVAR(loadoutsNamespace), _varName, _return, QGVAR(allLoadouts)] call CFUNC(setVariable);
+private _return = [_loadoutVars, _loadout];
+[GVAR(loadoutsNamespace), _varName, _return, QGVAR(allLoadouts), true] call CFUNC(setVariable);
 _return

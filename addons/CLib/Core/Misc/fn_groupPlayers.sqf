@@ -5,15 +5,17 @@
     Author: BadGuy
 
     Description:
-    Gets all players of a group. Compareable to units command.
+    Gets all players of a group. Comparable to units command.
 
     Parameter(s):
-    0: group or unit
+    0: Group or unit <Group, Object> (Default: player)
 
     Returns:
-    0: array of units <Array>
+    Units <Array>
 */
 
-params ["_group"];
+params [
+    ["_group", player, [grpNull, objNull]]
+];
 
 (units _group) select {_x in allPlayers};

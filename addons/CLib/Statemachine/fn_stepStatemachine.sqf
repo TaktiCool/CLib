@@ -8,12 +8,15 @@
     Trigger 1 Step in 1 Statemachine.
 
     Parameter(s):
-    0: Statemachine Object <Location>
+    0: Statemachine Object <Location> (Default: locationNull)
 
     Returns:
     Next Statename <String>
 */
-params ["_stateMachine"];
+
+params [
+    ["_stateMachine", locationNull, [locationNull]]
+];
 
 private _currentState = _stateMachine getVariable SMSVAR(nextStateData);
 // check if current state exist in Namespace.

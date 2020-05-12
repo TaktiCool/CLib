@@ -8,13 +8,17 @@
     Draws the map icons on map
 
     Parameter(s):
-    0: Map <Control>
+    0: Map <Control> (Default: controlNull)
 
     Returns:
     None
 */
-PERFORMANCECOUNTER_START(DRAWMapIcons);
-params ["_map"];
+
+params [
+    ["_map", controlNull, [controlNull]]
+];
+
+RUNTIMESTART;
 
 private _mapScale = ctrlMapScale _map;
 private _cache = [];
@@ -106,12 +110,24 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             };
 
             _map drawPolygon [_temp, _lineColor];
+            _cache pushBack [_groupId, _positions, nil, nil, nil, false, true];
+        };
+        case ("TRIANGLE"): {
+            _iconData params ["_type", "_positions", "_lineColor", "_fillColor", "_code"];
+            call _code;
+            private _temp = _positions apply {
+                _x params ["_p0", "_p1", "_p2"];
+                _p0 = [_p0, _map] call CFUNC(mapGraphicsPosition);
+                _p1 = [_p1, _map] call CFUNC(mapGraphicsPosition);
+                _p2 = [_p2, _map] call CFUNC(mapGraphicsPosition);
+                [_p0, _p1, _p2];
+            };
+            _map drawTriangle [_temp, _lineColor, _fillColor];
+            _cache pushBack [_groupId, _positions, nil, nil, nil, false, true];
         };
     };
-
-
     nil
 } count GVAR(MapGraphicsCache);
 
 GVAR(MapGraphicsGeometryCache) = _cache;
-PERFORMANCECOUNTER_END(DRAWMapIcons);
+RUNTIME("DrawMapIcons");
