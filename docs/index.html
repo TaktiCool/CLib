@@ -92,7 +92,7 @@
     }
     .scroll-down a {
       position: absolute;
-      bottom: -50px;
+      bottom: calc( -45vh + 100px ); ;
       left: 50%;
       z-index: 2;
       display: inline-block;
@@ -113,19 +113,32 @@
         border-left: 1px solid #fff;
         border-bottom: 1px solid #fff;
         transform: rotateZ(-45deg);
-        animation: sdb06 1.5s infinite;
+        animation: sdb05 2s infinite;
         box-sizing: border-box;
     }
-    @keyframes sdb06 {
+    @-webkit-keyframes sdb05 {
       0% {
-        transform: rotateY(0) rotateZ(-45deg) translate(0, 0);
+        -webkit-transform: rotate(-45deg) translate(0, 0);
         opacity: 0;
       }
       50% {
         opacity: 1;
       }
       100% {
-        transform: rotateY(720deg) rotateZ(-45deg) translate(-20px, 20px);
+        -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+        opacity: 0;
+      }
+    }
+    @keyframes sdb05 {
+      0% {
+        transform: rotate(-45deg) translate(0, 0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(-45deg) translate(-20px, 20px);
         opacity: 0;
       }
     }
@@ -174,7 +187,7 @@
       const element = document.querySelector('.cover-main');
       const div = document.createElement('div');
       const a = document.createElement('a');
-      a.innerHTML = '<span></span>Scroll';
+      a.innerHTML = '<span></span>';
       a.href='#/?id=about-this-documentation';
       div.classList.add('scroll-down');
       div.append(a);
