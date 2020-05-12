@@ -25,7 +25,7 @@ class Params {
     class CLibSettingsTest_simpleValueNumber {
         title = "SimpleTestValue";
         values[] = {0,1,2};
-        texts[] = {"Test 1","test 2","test 3"};
+        texts[] = {"0","1","2"};
         default = 1;
     };
     class CLibSettingsTest_simpleValueText {
