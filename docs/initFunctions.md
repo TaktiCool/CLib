@@ -1,5 +1,5 @@
 # MODULE is not Active and is not Working at the Moment
-this Module will be improving server loading times when its done by improving the initFunctions that BI uses to compile and load Functions.
+This Module will be improving server loading times when its done by improving the initFunctions that BI uses to compile and load Functions.
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything

@@ -17,7 +17,6 @@ Returns:
 Blurs the Players Screen
 
 Examples:
-
 ```sqf
 [1337, true] call CLib_fnc_blurScreen;
 ```
@@ -37,7 +36,6 @@ Returns:
 Calls a function and Caches the Return for a certain amount of time or until a clear Event is called
 
 Examples:
-
 ```sqf
 [
     "Am_I_Dead",
@@ -59,7 +57,6 @@ Returns:
 Converts the given code to a string which is needed for some EventHandler
 
 Examples:
-
 ```sqf
 {hint "this is Needed for some Eventhandler!";} call CLib_fnc_codeToString;
 ```
@@ -76,11 +73,9 @@ Returns:
 Returns a Array of All Compatible Magazines for Weapon/Muzzle
 
 Examples:
-
 ```sqf
-TODO Example here
+private _compatibleMagazines = (primaryWeapon player) call CLib_fnc_compatibleMagazines
 ```
-
 
 ## CLib_fnc_compileFinal
 
@@ -95,7 +90,6 @@ Compiles a Function Final and Saves them in a namespace
 if Variable Name is not set it will only return the function as Final Compiled Code
 
 Examples:
-
 ```sqf
 MY_fnc_Function = {hint "Compiled Final Function"} call CLib_fnc_compileFinal;
 
@@ -117,7 +111,6 @@ Returns:
 This function creates an post processor effect.
 
 Examples:
-
 ```sqf
 TODO Example here
 ```
@@ -136,7 +129,6 @@ Deletes an entry out of an array
 This function works with the given reference!
 
 Examples:
-
 ```sqf
 TODO Example here
 ```
@@ -153,7 +145,6 @@ Returns:
 Calls a function directly and changes the Environment to Unscheduled
 
 Examples:
-
 ```sqf
 {hint "this Runs in a Unscheduled Environment"} call CLib_fnc_directCall;
 ```
@@ -169,7 +160,6 @@ Returns:
 Disables key input. ESC can still be pressed to open the menu.
 
 Examples:
-
 ```sqf
 true call CLib_fnc_disabledUserInput;
 
@@ -187,9 +177,8 @@ Returns:
 Very dirty solution to check if a file exists. Every file type need to be added at allowedHTMLLoadExtensions in the server config file.
 
 Examples:
-
 ```sqf
-TODO Example here
+private _exists = "image.paa" call CLib_fnc_fileExist
 ```
 
 ## CLib_fnc_findSavePosition
@@ -309,7 +298,7 @@ Wrapper for getPos if you are not sure if you get an object array or string
 Examples:
 
 ```sqf
-TODO Example here
+private _pos = (group player) call CLib_fnc_getPos;
 ```
 
 ## CLib_fnc_groupPlayers
@@ -343,7 +332,7 @@ checks if a Position is in FOV of a Object
 Examples:
 
 ```sqf
-TODO Example here
+private _inVew = [CLib_Player, _target, 1.55] call CLib_fnc_inFOV;
 ```
 
 ## CLib_fnc_isKindOfArray
@@ -360,7 +349,10 @@ is Kind Of Array
 Examples:
 
 ```sqf
-TODO Example here
+private _isKindOf = [
+    vehicle CLib_Player,
+    ["Air", "Tank", "Wheeled_APC_F"]
+] call CLib_fnc_isKindOfArray;
 ```
 
 ## CLib_fnc_isSpeaking
@@ -386,6 +378,27 @@ This Function Should not be called by hand. use DUMP or LOG Macro for that!
 ## CLib_fnc_modLoaded
 
 Parameter(s):
+* [`<String>`, `<Text>`] Text
+* [`<String>`] Header
+* [`<Code>`, `Array>`] Button 1 Callback
+* [`<Code>`, `<Array>`] Button 2 Callback
+* [`<Code>`] onClose
+* [`<Anything>`] Arguments
+
+Returns:
+* None
+
+Creates a two-option message box in a new dialogue.
+
+Examples:
+
+```sqf
+TODO Example here
+```
+
+## CLib_fnc_modLoaded
+
+Parameter(s):
 * [`<String>`] Mod Name
 
 Returns:
@@ -396,7 +409,7 @@ Checks if a Mod or Parts of it are Loaded
 Examples:
 
 ```sqf
-TODO Example here
+["Streamator"] call CLib_fnc_moduleLoaded;
 ```
 
 ## CLib_fnc_moduleLoaded
@@ -412,7 +425,7 @@ Checks if a Module is Loaded
 Examples:
 
 ```sqf
-TODO Example here
+["CLib/PerFrame"] call CLib_fnc_moduleLoaded;
 ```
 
 ## CLib_fnc_name
@@ -445,7 +458,9 @@ Function that allows to execute code from the mission direct without using Missi
 Examples:
 
 ```sqf
-[{}, "Arguments"] call CLib_fnc_registerEntryPoint;
+[{
+    hintSilent "When this Code runs Every CLib function is Avaliable";
+}, "Arguments"] call CLib_fnc_registerEntryPoint;
 ```
 
 ## CLib_fnc_sanitizeString
@@ -459,9 +474,8 @@ Returns:
 Removes all special characters from a string that could be displayed in a weird way or cause other problems
 
 Examples:
-
 ```sqf
-TODO Example here
+["<Docs>ItsDocs"] call ace_common_fnc_sanitizeString;
 ```
 
 ## CLib_fnc_setVariablePublic
@@ -478,7 +492,6 @@ Returns:
 Publish a variable but wait a certain amount of time before allowing it to be published it again.
 
 Examples:
-
 ```sqf
 [CLib_Player, "TestVariable", str (random 1000), 5] call CLib_fnc_setVariablePublic;
 ```
@@ -494,7 +507,6 @@ Returns:
 Returns a shuffled array.
 
 Examples:
-
 ```sqf
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shuffleArray;
 ```

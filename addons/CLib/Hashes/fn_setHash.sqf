@@ -5,12 +5,12 @@
     Author: joko // Jonas
 
     Description:
-    Sets a Value on to a Hash
+    Sets a Hash Value to a Key in a Hashlist
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
     1: Key <Any> (Default: "")
-    2: Value <Anything> (Default: objNull)
+    2: Value <Any> (Default: objNull)
 
     Returns:
     HashSet <Array>

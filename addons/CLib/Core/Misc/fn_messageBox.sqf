@@ -8,12 +8,12 @@
     Creates a two-option message box in a new dialogue.
 
     Parameter(s):
-    0: Text <String, Text> (Default: "testText")
+    0: Text <String, Structured Text> (Default: "testText")
     1: Header <String> (Default: "header")
     2: Button 1 CallBack <Code, Array> (Default: {})
     3: Button 2 CallBack <Code, Array> (Default: {})
     4: OnClose <Code> (Default: {})
-    5: Arguments <Anything> (Default: nil)
+    5: Arguments <Any> (Default: nil)
 
     Returns:
     None

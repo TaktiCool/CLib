@@ -46,6 +46,7 @@
 - [CLib_fnc_isKindOfArray](core/misc.md#CLib_fnc_isKindOfArray)
 - [CLib_fnc_isSpeaking](core/misc.md#CLib_fnc_isSpeaking)
 - [CLib_fnc_log](core/misc.md#CLib_fnc_log)
+- [CLib_fnc_messageBox](core/misc.md#CLib_fnc_messageBox)
 - [CLib_fnc_modLoaded](core/misc.md#CLib_fnc_modLoaded)
 - [CLib_fnc_moduleLoaded](core/misc.md#CLib_fnc_moduleLoaded)
 - [CLib_fnc_name](core/misc.md#CLib_fnc_name)

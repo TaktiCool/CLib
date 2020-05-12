@@ -150,17 +150,19 @@ Examples:
 ## CLib_fnc_setHash
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<HashSet>`] HashSet
+* [`<Anything>`] Key
+* [`<Anything>`] Value
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Array>`] HashSet
 
 Sets a Hash Value to a Key in a Hashlist
 
 Examples:
 
 ```sqf
-TODO Example here
+[MyAwsomeHashSet, "isbanana", true] call CLib_fnc_getHash;
 ```
 
 [`<HashSet>`]: #HashSet
