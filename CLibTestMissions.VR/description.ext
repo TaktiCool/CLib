@@ -21,6 +21,24 @@ respawn = 3;
 respawnDelay = 3;
 respawnDialog = 0;
 
+class Params {
+    class CLibSettingsTest_simpleValueNumber {
+        title = "SimpleTestValue";
+        values[] = {0,1,2};
+        texts[] = {"Test 1","test 2","test 3"};
+        default = 1;
+    };
+    class CLibSettingsTest_simpleValueText {
+        title = "SimpleTestValue Value Data";
+        values[] = {0,1,2};
+        texts[] = {"Test 1","test 2","test 3"};
+        valueData[] = {"test1", "test2", "test3"};
+        default = 1;
+
+    }
+};
+
+
 class CLib {
     // CLib Mission Config Entrys
     class CfgCLibLocalisation {
