@@ -8,11 +8,11 @@
     Call extension on the server. When the server finished the return value gets passed to the callback as a parameter.
 
     Parameter(s):
-    0: Extension name <String>
-    0: Action name <String>
-    2: Data <Any> (optional)
-    3: Callback <Code> (optional)
-    3: Callback Arguments <Any> (optional)
+    0: Extension name <String> (Default: nil)
+    1: Action name <String> (Default: "")
+    2: Data <Any> (Default: "")
+    3: Callback <Code> (Default: {})
+    4: Callback Arguments <Any> (Default: [])
 
     Returns:
     None
@@ -20,7 +20,13 @@
 
 EXEC_ONLY_UNSCHEDULED;
 
-params ["_extensionName", "_actionName", ["_data", ""], ["_callback", {}], ["_args", []]];
+params [
+    ["_extensionName", nil, [""]],
+    ["_actionName", "", [""]],
+    ["_data", "", []],
+    ["_callback", {}, [{}]],
+    ["_args", [], []]
+];
 
 private _id = GVAR(taskIds) find objNull;
 if (_id == -1) then {

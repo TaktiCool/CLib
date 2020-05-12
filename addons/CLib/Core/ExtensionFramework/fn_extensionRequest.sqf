@@ -9,10 +9,10 @@
     See https://tools.ietf.org/pdf/rfc20.pdf for details.
 
     Parameter(s):
-    0: Task ID <Number>
-    1: Extension name <String>
-    2: Action name <String>
-    3: Data <Any>
+    0: Task ID <Number> (Default: -1)
+    1: Extension name <String> (Default: nil)
+    2: Action name <String> (Default: "")
+    3: Data <Anything> (Default: nil)
 
     Returns:
     None or <String>
@@ -20,9 +20,14 @@
 
 EXEC_ONLY_UNSCHEDULED;
 
-#define TRANSMISSIONSIZE 7000
+params [
+    ["_taskId", -1, [0]],
+    ["_extensionName", nil, [""]],
+    ["_actionName", "", [""]],
+    "_data"
+];
 
-params ["_taskId", "_extensionName", "_actionName", "_data"];
+#define TRANSMISSIONSIZE 7000
 
 // Make sure data is a string
 if (!(_data isEqualType "")) then {

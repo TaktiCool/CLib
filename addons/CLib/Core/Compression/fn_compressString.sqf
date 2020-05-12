@@ -8,13 +8,15 @@
     String Compression
 
     Parameter(s):
-    0: input string <String>
+    0: Input string <String> (Default: "")
 
     Returns:
-    0: compressed String <String>
+    Compressed string <String>
 */
 
-params ["_input"];
+params [
+    ["_input", "", [""]]
+];
 
 private _rawInput = toArray _input;
 private _rawOutput = [];
