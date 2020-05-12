@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Description
+    Creates a Simple Object Composition
 
     Parameter(s):
     0: Unique identifier <String> (Default: "")
@@ -15,6 +15,11 @@
     4: Ignored Object <Object> (Default: objNull)
     5: Ignored Object <Object> (Default: objNull)
     6: Callback <Array> (Default: [])
+
+    Callback Format:
+    0: Target Object
+    1: Callback Code
+    2: Callback Parameters
 
     Returns:
     None
@@ -27,7 +32,7 @@ params [
     ["_dir", [0, 0, 0], [[]], 3],
     ["_ignoreObj1", objNull, [objNull]],
     ["_ignoreObj2", objNull, [objNull]],
-    ["_callback", [], [[]], []]
+    ["_callback", [], [[]], [[]]]
 ];
 
 if !(isServer) exitWith {

@@ -20,7 +20,7 @@
 
 params [
     ["_pos", [0, 0, 0], [[]], 2],
-    ["_radius", 0, [0]],
+    ["_minRadius", 0, [0]],
     ["_distance", 0, [0]],
     ["_type", nil, [""]]
 ];
@@ -34,9 +34,9 @@ private _retPos = if (_hasType) then {
 
 if (_retPos isEqualTo []) exitWith {
     if (_hasType) then {
-        [_pos, _distance + 10, _minRadius] call (missionNamespace getVariable [_fnc_scriptName, {}]);
+        [_pos, _minRadius, _distance + 10] call (missionNamespace getVariable [_fnc_scriptName, {}]);
     } else {
-        [_pos, _distance + 10, _minRadius, _type] call (missionNamespace getVariable [_fnc_scriptName, {}]);
+        [_pos, _minRadius, _distance + 10, _type] call (missionNamespace getVariable [_fnc_scriptName, {}]);
     };
 };
 

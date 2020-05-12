@@ -25,7 +25,7 @@ params [
 // Create the effect and apply the initial parameters.
 private _effect = ppEffectCreate [_type, _layer];
 _effect ppEffectForceInNVG true;
-_effect ppEffectAdjust _default;
+_effect ppEffectAdjust _settings;
 _effect ppEffectCommit 0;
 
 // Return the handle.

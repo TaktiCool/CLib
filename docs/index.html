@@ -85,12 +85,68 @@
       border-width: var(--blockquote-border-width, 0) !important;
       border-radius: var(--blockquote-border-radius) !important;
     }
+    .scroll-down {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .scroll-down a {
+      position: absolute;
+      bottom: calc( -45vh + 100px ); ;
+      left: 50%;
+      z-index: 2;
+      display: inline-block;
+      transform: translate(0, -50%);
+      color: #fff;
+      font: normal 400 20px/1 'Josefin Sans', sans-serif;
+      letter-spacing: .1em;
+      text-decoration: none;
+      transition: opacity .3s;
+    }
+    .scroll-down a span {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        margin-left: -12px;
+        border-left: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        transform: rotateZ(-45deg);
+        animation: sdb05 2s infinite;
+        box-sizing: border-box;
+    }
+    @-webkit-keyframes sdb05 {
+      0% {
+        -webkit-transform: rotate(-45deg) translate(0, 0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+        opacity: 0;
+      }
+    }
+    @keyframes sdb05 {
+      0% {
+        transform: rotate(-45deg) translate(0, 0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(-45deg) translate(-20px, 20px);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
   <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sqf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="https://unpkg.com/docsify-edit-on-github/index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
@@ -127,9 +183,22 @@
       },
     }
 
+    window.onload = () => {
+      const element = document.querySelector('.cover-main');
+      const div = document.createElement('div');
+      const a = document.createElement('a');
+      a.innerHTML = '<span></span>';
+      a.href='#/?id=about-this-documentation';
+      div.classList.add('scroll-down');
+      div.append(a);
+      element.parentNode.insertBefore(div, element.nextSibling);
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sqf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
+
 </body>
 </html>

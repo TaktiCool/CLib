@@ -8,7 +8,7 @@ Empty Groups will be deleted Directly after they are empty and not flagged
 
 ## Settings
 the Settings can get set in the missionConfigFile
-```sqf
+```csharp
 class CLib {
     class GarbageCollector {
         EnableGarbageCollector = 1;
