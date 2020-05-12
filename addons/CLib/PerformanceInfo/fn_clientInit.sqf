@@ -73,7 +73,7 @@ DFUNC(toggleFrameInfo) = [{
 
         (_display displayCtrl 9501) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round GVAR(topFPS)];
         (_display displayCtrl 9502) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round _currentFPS];
-    }, 0, _display] call CFUNC(addPerFrameHandler);
+    }, 0] call CFUNC(addPerFrameHandler);
     private _ctrlGroup = uiNamespace getVariable [QGVAR(ctrlGroup), controlNull];
     _ctrlGroup ctrlShow true;
     _ctrlGroup ctrlCommit 0;
