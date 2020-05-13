@@ -8,14 +8,17 @@
     Compile and Compress a function
 
     Parameter(s):
-    0: Path to Function <STRING>
-    1: Function Name <STRING>
+    0: Path to Function <String> (Default: "")
+    1: Function Name <String> (Default: "")
 
     Returns:
     None
 */
 
-params [["_functionPath", "", [""]], ["_functionName", "", [""]]];
+params [
+    ["_functionPath", "", [""]],
+    ["_functionName", "", [""]]
+];
 
 private _header = format ["\
 private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {

@@ -8,13 +8,19 @@
     Build a recieveFunctionVariable and transfers it to the client
 
     Parameter(s):
-    0: Client UID <Number>
+    0: Function name <String> (Default: "")
+    1: Client UID <Number> (Default: -1)
+    2: Index <Number> (Default: 0)
 
     Returns:
     None
 */
 
-params [["_functionName", ""], ["_clientID", -1], ["_index", 0]];
+params [
+    ["_functionName", "", [""]],
+    ["_clientID", -1, [0]],
+    ["_index", 0, [0]]
+];
 
 private _functionCode = if (USE_COMPRESSION(true)) then {
     parsingNamespace getVariable [_functionName + "_Compressed", ""];
