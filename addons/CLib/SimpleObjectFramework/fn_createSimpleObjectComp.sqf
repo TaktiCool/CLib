@@ -16,13 +16,14 @@
     5: Ignored Object <Object> (Default: objNull)
     6: Callback <Array> (Default: [])
 
-    Callback Format:
-    0: Target Object
-    1: Callback Code
-    2: Callback Parameters
-
     Returns:
     None
+
+    Remarks:
+    Callback Format
+        0: Target Object <Object>
+        1: Callback Code <Code>
+        2: Callback Parameters <Anything>
 */
 
 params [

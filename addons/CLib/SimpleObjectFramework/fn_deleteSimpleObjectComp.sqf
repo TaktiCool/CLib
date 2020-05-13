@@ -11,13 +11,14 @@
     0: Unique identifier <String> (Default: "")
     1: Callback <Array> (Default: [])
 
-    Callback Format:
-    0: Target Object <Object>
-    1: Callback Code <Code>
-    2: Callback Parameters <Any>
-
     Returns:
     None
+
+    Remarks:
+    Callback Format
+        0: Target Object <Object>
+        1: Callback Code <Code>
+        2: Callback Parameters <Anything>
 */
 
 params [
