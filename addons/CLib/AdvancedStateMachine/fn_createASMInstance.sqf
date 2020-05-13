@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: State machine <Location> (Default: locationNull)
-    1: Data <Anything> (Default: nil)
+    1: Data <Anything>
     2: Initial state <String> (Default: "init")
 
     Returns:

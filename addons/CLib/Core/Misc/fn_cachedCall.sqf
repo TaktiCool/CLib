@@ -13,7 +13,7 @@
     Parameter(s):
     0: Cache ID <String> (Default: "")
     1: Function whose return value gets cached <Code> (Default: {})
-    2: Arguments <Any> (Default: [])
+    2: Arguments <Anything> (Default: [])
     3: Time until the cached values are being obsolet <Number> (Default: 0)
     4: Event that clears the cache <String> (Default: nil)
 

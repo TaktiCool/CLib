@@ -12,7 +12,7 @@
     0: Task ID <Number> (Default: -1)
     1: Extension name <String> (Default: nil)
     2: Action name <String> (Default: "")
-    3: Data <Anything> (Default: nil)
+    3: Data <Anything>
 
     Returns:
     None or <String>

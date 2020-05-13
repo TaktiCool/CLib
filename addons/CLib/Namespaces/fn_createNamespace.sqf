@@ -8,7 +8,7 @@
     Create a Location
 
     Parameter(s):
-    0: Global <Any> (Default: false)
+    0: Global <Anything> (Default: false)
 
     Returns:
     Namespace <Location, Object>

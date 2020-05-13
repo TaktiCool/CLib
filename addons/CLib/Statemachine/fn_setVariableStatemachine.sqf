@@ -10,7 +10,7 @@
     Parameter(s):
     0: Statemachine Object <Location> (Default: locationNull)
     1: Variable Name <String> (Default: "")
-    2: Value <Anything> (Default: nil)
+    2: Value <Anything>
 
     Returns:
     None

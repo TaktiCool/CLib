@@ -10,7 +10,7 @@
     Parameter(s):
     0: Code that get executed if the conditon is true <Code> (Default: {})
     1: Number of frames to skip <Number> (Default: 0)
-    2: Paramter <Any> (Default: [])
+    2: Paramter <Anything> (Default: [])
 
     Returns:
     None

@@ -10,7 +10,7 @@
     Parameter(s):
     0: Function that get called <Code, String> (Default: {})
     1: Delay <Number> (Default: 0)
-    2: Arguments <Any> (Default: [])
+    2: Arguments <Anything> (Default: [])
 
     Returns:
     The ID of the created PFH <Number>

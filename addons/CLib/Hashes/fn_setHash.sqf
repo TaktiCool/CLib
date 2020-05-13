@@ -9,8 +9,8 @@
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
-    1: Key <Any> (Default: "")
-    2: Value <Any> (Default: objNull)
+    1: Key <Anything> (Default: "")
+    2: Value <Anything>
 
     Returns:
     HashSet <Array>

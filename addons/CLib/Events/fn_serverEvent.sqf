@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Event Name <String> (Default: "EventError")
-    1: Arguments <Any> (Default: [])
+    1: Arguments <Anything> (Default: [])
 
     Returns:
     None

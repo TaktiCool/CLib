@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Code To Execute when CLib is Loaded <Code, String> (Default: {})
-    1: Arguments that get passed to Code <Anything> (Default: nil)
+    1: Arguments that get passed to Code <Anything> (Default: [])
 
     Returns:
     None
@@ -17,7 +17,7 @@
 
 params [
     ["_code", {}, [{}, ""]],
-    "_arguments"
+    ["_arguments", [], []]
 ];
 
 isNil {

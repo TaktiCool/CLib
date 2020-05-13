@@ -10,7 +10,7 @@
     Parameter(s):
     0: Event Name <String> (Default: "EventError")
     1: Target <Array, Group, Number, Object, Side, String> (Default: objNull)
-    2: Arguments <Any> (Default: [])
+    2: Arguments <Anything> (Default: [])
 
     Returns:
     None

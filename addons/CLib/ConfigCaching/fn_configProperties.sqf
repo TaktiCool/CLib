@@ -8,12 +8,10 @@
     Caches values from config properties
 
     Parameter(s):
-    0: Config <Config>
-    1: Condition <String>
-    2: Inherit <Bool>
+    https://community.bistudio.com/wiki/configProperties
 
     Returns:
-    configProperties Return
+    https://community.bistudio.com/wiki/configProperties
 */
 
 private _ret = GVAR(configCache) getVariable format [QGVAR(configProperties_%1), _this];

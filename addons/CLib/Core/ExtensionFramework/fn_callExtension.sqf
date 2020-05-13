@@ -10,9 +10,9 @@
     Parameter(s):
     0: Extension name <String> (Default: nil)
     1: Action name <String> (Default: "")
-    2: Data <Any> (Default: "")
+    2: Data <Anything> (Default: "")
     3: Callback <Code> (Default: {})
-    4: Callback Arguments <Any> (Default: [])
+    4: Callback arguments <Anything> (Default: [])
 
     Returns:
     None

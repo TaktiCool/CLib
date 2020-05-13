@@ -13,7 +13,7 @@
     Parameter(s):
     0: Object the variable should be assigned to <Object> (Default: objNull)
     1: Name of the variable <String> (Default: "")
-    2: Value of the variable <Anything> (Default: nil)
+    2: Value of the variable <Anything>
     3: Embargo delay <Number> (Default: 1)
 
     Returns:

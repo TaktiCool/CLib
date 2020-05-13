@@ -11,7 +11,7 @@
     0: Unit <Object> (Default: objNull)
     1: Status effect id <String> (Default: "")
     2: Reason <String> (Default: "unknown")
-    3: Parameter <Any> (Default: [])
+    3: Parameter <Anything> (Default: [])
 
     Returns:
     None

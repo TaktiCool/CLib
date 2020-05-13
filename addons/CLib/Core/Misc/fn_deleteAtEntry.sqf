@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Array reference <Array> (Default: [])
-    1: Entry to delete <Anything> (Default: nil)
+    1: Entry to delete <Anything>
     2: Delete every entry <Bool> (Default: false)
 
     Returns:

@@ -8,15 +8,15 @@
     Write Log
 
     Parameter(s):
-    0: Name <Anything> (Default: nil)
+    0: Name <Anything>
     1: Mod name <String> (Default: "CLib")
     2: Module name <String> (Default: "")
-    3: Variable name <Anything> (Default: nil)
+    3: Variable name <Anything>
     4: File name <String> (Default: "")
     5: Line number <Number> (Default: 0)
-    6: Script name <Anything> (Default: nil)
-    7: Parent script name <Anything> (Default: nil)
-    8: Script map <Anything> (Default: nil)
+    6: Script name <Anything>
+    7: Parent script name <Anything>
+    8: Script map <Anything>
 
     Returns:
     None

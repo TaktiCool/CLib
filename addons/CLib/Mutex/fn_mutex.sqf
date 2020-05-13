@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Code which gets executed <Code> (Default: {})
-    1: Aruments for the Code <Any> (Default: [])
+    1: Aruments for the Code <Anything> (Default: [])
     2: Mutex identifier <String> (Default: main)
 
     Returns:

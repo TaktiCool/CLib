@@ -13,7 +13,7 @@
     Parameter(s):
     0: Code that gets executed <Code> (Default: {})
     1: Time to Wait <Number> (Default: 0)
-    2: Paramter <Any> (Default: [])
+    2: Paramter <Anything> (Default: [])
 
     Returns:
     None

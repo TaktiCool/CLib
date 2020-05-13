@@ -8,7 +8,7 @@
     Check if the RemoteExecFall Back is used and handle after that the Data and share it to the server
 
     Parameter(s):
-    0: Arguments for the function or command <Any> (Default: [])
+    0: Arguments for the function or command <Anything> (Default: [])
     1: Function or command that get executed on the remote clients <String> (Default: "")
     2: Target who should receive the event <Number, Object, Side, Group, Array> (Default: 0)
     3: Forced to use fallback version <Bool> (Default: false)

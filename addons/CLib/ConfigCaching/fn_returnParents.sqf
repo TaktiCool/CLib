@@ -8,11 +8,10 @@
     Returns all parents of a ConfigClass and caches them in a namespace
 
     Parameter(s):
-    0: Config <Config>
-    1: Return names <Bool>
+    https://community.bistudio.com/wiki/BIS_fnc_returnParents
 
     Returns:
-    All Parent Classes <Array<ConfigPath>>
+    https://community.bistudio.com/wiki/BIS_fnc_returnParents
 */
 
 private _ret = GVAR(configCache) getVariable format [QGVAR(returnParents_%1), _this];

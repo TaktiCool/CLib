@@ -9,10 +9,10 @@
 
     Parameter(s):
     0: Code or Function that gets called <Code> (Default: {})
-    1: Arguments <Any> (Default: [])
+    1: Arguments <Anything> (Default: [])
 
     Returns:
-    Return of the Function <Any>
+    Return of the Function <Anything>
 */
 
 params [
