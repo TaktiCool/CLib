@@ -8,11 +8,15 @@
     Entry point for module loading. Must be called within mission script for client and server. Start transfer of functions.
 
     Parameter(s):
-    The names of the requested modules <ARRAY> (optional)
+    0: The names of the requested modules <Array>
 
     Returns:
     None
 */
+
+if !(_this isEqualType []) then {
+    _this = nil;
+};
 
 // Skip the briefing by pressing the continue button on behalf of the user
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/

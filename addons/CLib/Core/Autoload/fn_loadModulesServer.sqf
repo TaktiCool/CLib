@@ -8,7 +8,7 @@
     Server module loader used on server and when CLib is present on client. Prepares the functions for transmission to clients. Should run before client register with server.
 
     Parameter(s):
-    0: The names of the requested modules <Array>
+    0: The names of the requested modules <Array> (Default: [])
 
     Returns:
     None
@@ -16,6 +16,11 @@
     Example:
     ["Module1", "Module2"] call CFUNC(loadModulesServer);
 */
+
+if !(_this isEqualType []) then {
+    _this = [];
+};
+
 // Find all functions which are part of the requested modules and store them in an array.
 GVAR(requiredFunctions) = [];
 
