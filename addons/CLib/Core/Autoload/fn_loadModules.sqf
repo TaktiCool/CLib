@@ -14,10 +14,6 @@
     None
 */
 
-if !(_this isEqualType []) then {
-    _this = nil;
-};
-
 // Skip the briefing by pressing the continue button on behalf of the user
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
