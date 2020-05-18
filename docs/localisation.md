@@ -77,6 +77,7 @@ Examples:
 ```sqf
 "STR_LocalisedString" call CLib_fnc_readLocalisation
 ```
+
 [`CfgCLibLocalisation`]: #CfgCLibLocalisation
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

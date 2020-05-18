@@ -132,7 +132,7 @@ class cfgCLibSimpleObject {
 
 Parameter(s):
 * [`<String>`] Unique identifier
-* [`<String>`, `<Config>`, `<Array>`] ClassName configPath or simpleObjectStructure
+* [`<String>`], [`<Config>`], [`<Array>`] ClassName configPath or simpleObjectStructure
 * [`<Array>`] Position3D
 * [`<Array>`] Rotation
 * [`<Object>`] Ignored Object
@@ -177,7 +177,13 @@ Deletes safly a Previos created Object Composition.
 Examples:
 
 ```sqf
-"FOB_UID" call CLib_fnc_deleteObjectComp);
+["FOB_UID", [
+    CLib_player,
+    {
+        params ["_uid"];
+        hintSilient format ["Destroyed FOB with UID %2", _uid];
+    }
+]] call CLib_fnc_deleteObjectComp);
 ```
 
 ## CLib_fnc_exportSimpleObjectComp

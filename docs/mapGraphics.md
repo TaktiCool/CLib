@@ -10,7 +10,7 @@ TODO text here
 Parameter(s):
 * [`<String>`] Icon ID
 * [`<String>`] Event Name
-* [`<Code>`, `<String>`] Code that gets executed on event
+* [`<Code>`], [`<String>`] Code that gets executed on event
 * [`<Type>`] Arguments passed to the event
 
 Returns:

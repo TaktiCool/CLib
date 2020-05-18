@@ -71,7 +71,7 @@ TODO Example here
 ## CLib_fnc_addMagazine
 
 ### MagazineData
-* [`<String>`] or [`<MagData>`] Magazine Classname
+* [`<String>`], [`<MagData>`] Magazine Classname
 * [`<Number>`] Amount of Magazines get Added
 
 or

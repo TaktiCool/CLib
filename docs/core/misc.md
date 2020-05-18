@@ -380,8 +380,8 @@ This Function Should not be called by hand. use DUMP or LOG Macro for that!
 Parameter(s):
 * [`<String>`, `<Text>`] Text
 * [`<String>`] Header
-* [`<Code>`, `Array>`] Button 1 Callback
-* [`<Code>`, `<Array>`] Button 2 Callback
+* [`<Code>`], [`Array>`] Button 1 Callback
+* [`<Code>`], [`<Array>`] Button 2 Callback
 * [`<Code>`] onClose
 * [`<Anything>`] Arguments
 

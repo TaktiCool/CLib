@@ -25,10 +25,10 @@ Types:
 ### CLib_fnc_addAction
 
 Parameter(s):
-* [`<Code>`, `<String>`] Title of the action
-* [`<Object>`, `<String>`, `<Array>`] Object or type which the action should be added to
+* [`<Code>`], [`<String>`] Title of the action
+* [`<Object>`], [`<String>`], [`<Array>`] Object or type which the action should be added to
 * [`<Number>`] Distance in which the action is visible
-* [`<Code>`, `<String>`] Condition which is evaluated on every frame if player is in range to determine if the action is visible
+* [`<Code>`], [`<String>`] Condition which is evaluated on every frame if player is in range to determine if the action is visible
 * [`<Code>`] Callback which gets called when the action is activated
 * [`<Array>`] Optional named parameters
 
@@ -46,10 +46,10 @@ TODO Example here
 ### CLib_fnc_addHoldAction
 
 Parameter(s):
-* [`<Object>`, `<String>`, `<Array>`] Target
+* [`<Object>`, [`<String>`], [`<Array>`] Target
 * [`<String>`] Title
-* [`<Code>`, `<String>`] Idle icon
-* [`<Code>`, `<String>`] Progress icon
+* [`<Code>`], [`<String>`] Idle icon
+* [`<Code>`], [`<String>`] Progress icon
 * [`<Code>`] Show condition
 * [`<Code>`] Progress condition
 * [`<Code>`] Start code

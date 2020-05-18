@@ -113,7 +113,7 @@ private _isBanana = [MyAwsomeHashSet, "isbanana"] call CLib_fnc_getHash;
 ## CLib_fnc_hashToNamespace
 
 Parameter(s):
-* [`<Namespace>`, `<Location>`, `<Object>`, ] Namespace
+* [`<Namespace>`], [`<Location>`], [`<Object>`], [`<Group>`] Namespace
 * [`<HashSet>`] HashSet
 * [`<Boolean>`] Publish Variables
 * [`<String>`] AllVarNames Cache Name
@@ -132,7 +132,7 @@ Examples:
 ## CLib_fnc_namespaceToHash
 
 Parameter(s):
-* [`<Namespace>`, `<Location>`, `<Object>`, ] Namespace
+* [`<Namespace>`], [`<Location>`], [`<Object>`], [`<Group>`] Namespace
 * [`<HashSet>`] HashSet
 * [`<String>`] AllVarNames Cache Name
 

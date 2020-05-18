@@ -9,7 +9,7 @@ The Remote Exec is Meant to be a Fallback system for ServerAdmins that want to D
 Parameter(s):
 * [`<Anything>`] Arguments for the function or command
 * [`<String>`] Function or command that get executed on the remote clients
-* [`<Number>`, `<Object>`, `<Side>`, `<Group>`, `<Array>`] Target who should receive the event
+* [`<Number>`], [`<Object>`], [`<Side>`], [`<Group>`], [`<Array>`] Target who should receive the event
 * [`<Bool>`] Forced to use fallback version
 
 Returns:
