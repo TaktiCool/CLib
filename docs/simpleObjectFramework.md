@@ -140,14 +140,27 @@ Parameter(s):
 * [`<Callback>`] Callback
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
 Creates a Simple Object Composition
 
 Examples:
 
 ```sqf
-TODO Example here
+[
+    "FOB_UID",
+    "FOBTest", 
+    getPos CLib_Player,
+    vectorDirVisual CLib_Player,
+    CLib_player, objNull,
+    [
+        CLib_player,
+        {
+            params ["_uid"];
+            hintSilient format ["Placed FOB with UID %2", _uid];
+        }
+    ]
+] call CLib_fnc_createObjectComp;
 ```
 
 ## CLib_fnc_deleteObjectComp
@@ -164,7 +177,7 @@ Deletes safly a Previos created Object Composition.
 Examples:
 
 ```sqf
-TODO Example here
+"FOB_UID" call CLib_fnc_deleteObjectComp);
 ```
 
 ## CLib_fnc_exportSimpleObjectComp
