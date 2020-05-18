@@ -10,7 +10,7 @@
     Parameter(s):
     0: Statemachine Object <Location> (Default: locationNull)
     1: Statename <String> (Default: "")
-    2: StateCode <Code, String> (Default: {})
+    2: StateCode <Code> (Default: {})
     3: Arguments <Anything> (Default: [])
 
     Returns:
@@ -20,7 +20,7 @@
 params [
     ["_stateMachine", locationNull, [locationNull]],
     ["_stateName", "", [""]],
-    ["_stateCode", {}, [{}, ""]],
+    ["_stateCode", {}, [{}]],
     ["_args", [], []]
 ];
 

@@ -2,18 +2,27 @@
 
 > Maintainer: joko // Jonas
 
-TODO text here
+Statemachine is a simplifed Statemachine. it is missing features like transitions, Entry and Exit State Actions, and Conditions. It is based around Returns of the State. 
+
+## Statemachine
+The Statemachine is Stored on a Object of Type [`<Location>`]
+
+## Statemachine Config
 
 
 ## CLib_fnc_addStatemachineState
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
+* [`<String>`] Statename
+* [`<Code>`] State Code
+* [`<Arguments>`] State Arguments
+
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Add State to Statemachine. Every State should return the Next State that should be executed.
 
 Examples:
 
@@ -24,12 +33,12 @@ TODO Example here
 ## CLib_fnc_copyStatemachine
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object to Copy from
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object Copy
 
-TODO text here
+Copy a Statemachine and create a New one with the same States
 
 Examples:
 
@@ -40,12 +49,12 @@ TODO Example here
 ## CLib_fnc_createStatemachine
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* None
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
 
-TODO text here
+Create a New Statemachine Object.
 
 Examples:
 
@@ -56,12 +65,12 @@ TODO Example here
 ## CLib_fnc_createStatemachineFromConfig
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Config>`] Config Path
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
 
-TODO text here
+Create Statemachine from Config
 
 Examples:
 
@@ -72,12 +81,14 @@ TODO Example here
 ## CLib_fnc_getVariableStatemachine
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
+* [`<String>`] Variable Name
+* [`<Anything>`] Default Value
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Anything>`] Variable Value
 
-TODO text here
+Get Variable for Statemachine.
 
 Examples:
 
@@ -88,12 +99,14 @@ TODO Example here
 ## CLib_fnc_setVariableStatemachine
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
+* [`<String>`] Variable Name
+* [`<Anything>`] Value
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Set Variable for Statemachine
 
 Examples:
 
@@ -104,12 +117,14 @@ TODO Example here
 ## CLib_fnc_startStatemachine
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
+* [`<String>`] Init Statename
+* [`<Number>`] Tick Time
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Number>`] Index of the Statemachine PFH
 
-TODO text here
+Starts a Statemachine Automatic Ticks.
 
 Examples:
 
@@ -120,18 +135,20 @@ TODO Example here
 ## CLib_fnc_stepStatemachine
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Statemachine>`] Statemachine Object
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<String>`] Next Statename
 
-TODO text here
+Manualy Triggers a Step in a Statemachine 
 
 Examples:
 
 ```sqf
 TODO Example here
 ```
+
+[`<Statemachine>`]: #statemachine
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
