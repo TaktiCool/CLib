@@ -18,11 +18,6 @@ diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)]
 diag_log text format ["[CLib]: isServer: %1 isDedicated: %2 hasInterface: %3 isMultiplayer: %4 isMultiplayerSolo: %5", isServer, isDedicated, hasInterface, isMultiplayer, isMultiplayerSolo];
 diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2 useExperimentalAutoload: %3", CGVAR(useCompression), CGVAR(useRemoteFallback), CGVAR(useExperimentalAutoload)];
 
-if (!isNil QGVAR(CLibLoaded)) exitWith {
-    diag_log text format ["[CLib]: CLib got Loaded twice. Please check calls"];
-};
-GVAR(CLibLoaded) = true;
-
 // Skip the briefing by pressing the continue button on behalf of the user
 // http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
@@ -153,5 +148,5 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
 };
 
 // Register client at the server to start transmission of function codes.
-GVAR(registerClient) = [player, didJip];
+GVAR(registerClient) = player;
 publicVariableServer QGVAR(registerClient);

@@ -63,16 +63,17 @@ GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {!((parsingNamespace ge
 GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
 
 QGVAR(registerClient) addPublicVariableEventHandler {
-    (_this select 1) params ["_unit", "_didJip"];
     // Determine client id by provided object (usually the player object).
-    private _clientID = owner _unit;
+    private _clientID = owner (_this select 1);
 
     // send all Functions if mission Started was not triggered jet
-    if (!_didJip && time > 1) exitWith {
+    /*
+    if (time < 100) exitWith {
         {
             [_x, _clientID, _forEachIndex] call FUNC(sendFunctions);
         } forEach GVAR(RequiredFncClient);
     };
+    */
 
     if (isNil QGVAR(SendFunctionsUnitCache)) then {
         GVAR(SendFunctionsUnitCache) = [[_clientID, +GVAR(RequiredFncClient), 0]];
