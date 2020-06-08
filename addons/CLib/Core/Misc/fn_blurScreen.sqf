@@ -19,13 +19,13 @@
     None
 */
 
+if (!hasInterface) exitWith {};
+
 params [
     ["_id", 0, [0]],
     ["_show", false, [true, 0]],
     ["_commitTime", 0.5, [0]]
 ];
-
-if (!hasInterface) exitWith {};
 
 if (_show isEqualType 0) then {
     _show = _show == 1;

@@ -16,6 +16,8 @@
     A handle for the created effect <Number>
 */
 
+if (!hasInterface) exitWith {};
+
 params [
     ["_type", "", [""]],
     ["_layer", 0, [0]],

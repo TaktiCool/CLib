@@ -12,9 +12,6 @@
 
     Returns:
     Shuffled array <Array>
-
-    Remarks:
-    https://en.wikipedia.org/wiki/Fisher-Yates_shuffle
 */
 
 params [

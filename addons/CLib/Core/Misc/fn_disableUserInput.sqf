@@ -17,6 +17,8 @@
     None
 */
 
+if (!hasInterface) exitWith {};
+
 EXEC_ONLY_UNSCHEDULED;
 
 params [
