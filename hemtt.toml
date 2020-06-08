@@ -58,14 +58,14 @@ steps_linux = [
     "sed -i -r -s 's/#define MAJOR {{semver.major}}/#define MAJOR 0/g' addons/CLib/CLib_Macros.hpp",
     "sed -i -r -s 's/#define MINOR {{semver.minor}}/#define MINOR 0/g' addons/CLib/CLib_Macros.hpp",
     "sed -i -r -s 's/#define PATCHLVL {{semver.patch}}/#define PATCHLVL 0/g' addons/CLib/CLib_Macros.hpp",
-    "sed -i -r -s 's/#define PATCHLVL {{semver.build}}/#define BUILD 0/g' addons/CLib/CLib_Macros.hpp",
+    "sed -i -r -s 's/#define BUILD {{semver.build}}/#define BUILD 0/g' addons/CLib/CLib_Macros.hpp",
 ]
 steps_windows = [
     "echo 'Unsetting version'",
     "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define MAJOR {{semver.major}}', '#define MAJOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
     "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define MINOR {{semver.minor}}', '#define MINOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
     "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define PATCHLVL {{semver.patch}}', '#define PATCHLVL 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
-    "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define PATCHLVL {{semver.build}}', '#define BUILD 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+    "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define BUILD {{semver.build}}', '#define BUILD 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
 ]
 
 only_release = true
