@@ -15,7 +15,7 @@
 */
 
 params [
-    ["_positionIn", [0, 0, 0], [[], objNull], [1, 2, 3, 4]]
+    ["_positionIn", [0, 0, 0], [[], objNull]]
 ];
 
 if (_positionIn isEqualType objNull) exitWith {

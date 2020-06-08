@@ -19,7 +19,7 @@
 
 params [
     ["_namespace", locationNull, [locationNull, missionNamespace, objNull, grpNull]],
-    ["_hashSet", [[], []], [[]], 2],
+    ["_hashSet", [[], []], [[]]],
     ["_public", false, [true]],
     ["_allVarName", EGVAR(Namespaces,allVariableCache), [""]]
 ];

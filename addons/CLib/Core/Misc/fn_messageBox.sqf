@@ -24,8 +24,8 @@ EXEC_ONLY_UNSCHEDULED;
 params [
     ["_text", "testText", ["", text ""]],
     ["_header", "header", [""]],
-    ["_button1Callback", {}, [{}, []], 2],
-    ["_button2Callback", {}, [{}, []], 2],
+    ["_button1Callback", {}, [{}, []]],
+    ["_button2Callback", {}, [{}, []]],
     ["_onClose", {}, [{}]],
     "_args"
 ];

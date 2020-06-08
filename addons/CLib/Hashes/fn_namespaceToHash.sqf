@@ -18,7 +18,7 @@
 
 params [
     ["_namespace", locationNull, [locationNull, missionNamespace, objNull, grpNull]],
-    ["_hashSet", [[], []], [[]], 2],
+    ["_hashSet", [[], []], [[]]],
     ["_allVarName", EGVAR(Namespaces,allVariableCache), [""]]
 ];
 

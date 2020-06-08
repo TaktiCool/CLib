@@ -19,7 +19,7 @@
 */
 
 params [
-    ["_position", objNull, [[], objNull], [2, 3]],
+    ["_position", objNull, [[], objNull]],
     ["_map", controlNull, [controlNull]]
 ];
 

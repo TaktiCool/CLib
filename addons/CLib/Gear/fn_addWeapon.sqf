@@ -19,7 +19,7 @@
 params [
     ["_unit", objNull, [objNull]],
     ["_className", "", [""]],
-    ["_magazineData", ["", 0], [[]], 2]
+    ["_magazineData", ["", 0], [[]]]
 ];
 
 if (_className != "") then {

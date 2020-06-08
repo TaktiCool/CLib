@@ -22,7 +22,7 @@
 
 params [
     ["_unit", objNull, [objNull]],
-    ["_itemData", ["", 0], ["", []], 2]
+    ["_itemData", ["", 0], ["", []]]
 ];
 
 if (_itemData isEqualType "") then {

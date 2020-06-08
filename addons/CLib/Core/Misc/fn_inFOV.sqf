@@ -18,7 +18,7 @@
 
 params [
     ["_obj", objNull, [objNull]],
-    ["_target", objNull, [objNull, []], [2, 3]],
+    ["_target", objNull, [objNull, []]],
     ["_width", 0, [0]]
 ];
 
