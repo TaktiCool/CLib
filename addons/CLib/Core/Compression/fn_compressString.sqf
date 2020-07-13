@@ -18,12 +18,12 @@ params [
     ["_input", "", [""]]
 ];
 
-private _rawInput = toArray _input;
-private _rawOutput = [];
-
 if (true) exitWith { //TODO Check if extension exists
     [-1, "CLibCompression", "Compress", _input] call CFUNC(extensionRequest);
 };
+
+private _rawInput = toArray _input;
+private _rawOutput = [];
 
 // 18/5 would be optimal but may take a lot more time, 11/4 is faster but not that efficient
 #define WINDOWSIZE 2048

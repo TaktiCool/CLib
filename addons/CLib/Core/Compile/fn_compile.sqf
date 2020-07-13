@@ -67,20 +67,22 @@ DUMP("Compile Function: " + _functionName);
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
-if (USE_COMPRESSION(isNil {parsingNamespace getVariable (_functionName + "_Compressed")})) then {
+if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")}) then {
     if (isNil "_functionString") then {
         _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
     };
     private _compressedString = _functionString call CFUNC(compressString);
-    parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
-
-    #ifdef ISDEV
-        private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
-        DUMP(_str);
-    #endif
-    #ifdef DEBUGFULL
-        private _var = _compressedString call CFUNC(decompressString);
-        DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
-    #endif
+    // check if Compression was successful else we dont save the string and the Transmision system uses the normal version
+    if (_compressedString != "" && _compressedString != GVAR(ACK)) then {
+        parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
+        #ifdef ISDEV
+            private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
+            DUMP(_str);
+        #endif
+        #ifdef DEBUGFULL
+            private _var = _compressedString call CFUNC(decompressString);
+            DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
+        #endif
+    };
 };
 nil

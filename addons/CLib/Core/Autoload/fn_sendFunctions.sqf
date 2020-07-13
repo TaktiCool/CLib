@@ -22,7 +22,7 @@ params [
     ["_index", 0, [0]]
 ];
 
-private _functionCode = if (USE_COMPRESSION(true)) then {
+private _functionCode = if (USE_COMPRESSION(!isNil {parsingNamespace getVariable _functionName + "_Compressed"})) then {
     parsingNamespace getVariable [_functionName + "_Compressed", ""];
 } else {
     private _code = parsingNamespace getVariable [_functionName, {}];
@@ -32,7 +32,15 @@ private _functionCode = if (USE_COMPRESSION(true)) then {
 
 // Transfers the function name, code and progress to the client.
 GVAR(receiveFunction) = [_functionName, _functionCode, _index / GVAR(countRequiredFnc)];
+if (isNil QGVAR(TransmisionSize)) then {
+    GVAR(TransmisionSize) = 0;
+};
+private _size = count _functionCode/1024;
+GVAR(TransmisionSize) = GVAR(TransmisionSize) + _size;
 
-DUMP("sendFunction: " + _functionName + ", " + str (GVAR(receiveFunction) select 2));
+#ifdef ISDEV
+private _str = format ["SendFunctions: %1, Size: %2KB", _functionName, _size, GVAR(receiveFunction) select 2];
+DUMP(_str);
+#endif
 
 _clientID publicVariableClient QGVAR(receiveFunction);
