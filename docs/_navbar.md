@@ -4,7 +4,6 @@
   - [Mission Creators](gettingStarted/MissionCreators.md)
   - [Server Provider](gettingStarted/Admins.md)
 - [Function Overview](functionoverview.md)
-- [About](/#about-this-documentation)
 - **Macros**
 - [Macros](macros.md)
 - **Modules**

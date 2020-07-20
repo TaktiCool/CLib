@@ -117,8 +117,6 @@
 - [CLib_fnc_deleteNamespace](namespaces.md#CLib_fnc_deleteNamespace)
 - [CLib_fnc_allVariable](namespaces.md#CLib_fnc_allVariable)
 - [CLib_fnc_setVariable](namespaces.md#CLib_fnc_setVariable)
-## [Object Pooling](objectPooling.md)
-- TODO
 ## [Performance Info](performanceInfo.md)
 ## [Per Frame](perFrame.md)
 - [CLib_fnc_addPerframeHandler](perFrame.md#CLib_fnc_addPerframeHandler)

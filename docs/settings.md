@@ -1,28 +1,119 @@
 # Settings
 
-> Maintainer: BadGuy, joko // Jonas
+> Maintainer: BadGuy
 
-TODO text here
+TODO
+
+## Usage
+
+TODO
 
 ## CfgSettings
-TODO
-## Settings
-TODO
+
+```csharp
+class CfgCLibSettings {
+    CLib_test[] = {"CLibSettingsTest"}; // Registers class CLibSettingsTest in Settings System
+};
+```
+
+## User Settings Class
+
+```csharp
+class CLibSettingsTest {
+    simpleValueNumber = 1;
+    simpleValueText = "This is a Text";
+    simpleValueArray[] = {"Element A", "Element B", "Element C"};
+    class ComplexSetting {
+        value = 1;
+        description = "This is a description";
+    };
+
+    class ComplexSettingForced {
+        value = 1;
+        description = "This is a description";
+        force = 1;
+    };
+
+    class ComplexSettingClient {
+        value = 1;
+        description = "This is a description";
+        client = 0;
+    };
+
+    class SubClass {
+        simpleValueNumber = 1;
+        simpleValueText = "This is a Text";
+        simpleValueArray[] = {"Element A", "Element B", "Element C"};
+        class ComplexSetting {
+            value = 1;
+            description = "This is a description";
+        };
+
+        class ComplexSettingForced {
+            value = 1;
+            description = "This is a description";
+            force = 1;
+        };
+
+        class ComplexSettingClient {
+            value = 1;
+            description = "This is a description";
+            client = 0;
+        };
+    };
+};
+```
+
 ## Functions
-### CLib_fnc_
+
+### CLib_fnc_getSetting
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<String>`] Path
+* [`<Array>`], [`<String>`], [`<Number>`] Default
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Array>`], [`<String>`], [`<Number>`] Setting Value
 
-TODO text here
+Get a settings value
 
 Examples:
 
 ```sqf
-TODO Example here
+private _setting = ["CLibSettingsTest/simpleValueNumber", 0] call CLib_fnc_getSetting;
+```
+
+### CLib_fnc_getSettings
+
+Parameter(s):
+* [`<String>`] Path
+
+Returns:
+* [`<Array>`] of strings
+
+Get all settings of a settings-path
+
+Examples:
+
+```sqf
+private _allSettings = "CLibSettingsTest" call Clib_fnc_getSettings;
+```
+
+### CLib_fnc_getSettingSubClasses
+
+Parameter(s):
+* [`<String>`] Path
+
+Returns:
+* [`<Array>`] of strings
+
+Get all subclasses of settings-path
+
+Examples:
+
+```sqf
+private _allSubSettings = "CLibSettingsTest" call CLib_fnc_getSettingSubClasses;
+
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
