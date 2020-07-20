@@ -4,8 +4,8 @@
 
 The Config Caching Module is a system build around Vanilla Config functions/commands that caches the static Config values to reduce Config accesses
 
-
-## CLib_fnc_configProperties
+## Functions
+### CLib_fnc_configProperties
 
 Parameter(s):
 * https://community.bistudio.com/wiki/configProperties
@@ -20,7 +20,7 @@ Examples:
 private _return = [(configFile), "isClass _x", true] call CLib_fnc_configProperties;
 ```
 
-## CLib_fnc_returnParents
+### CLib_fnc_returnParents
 
 Parameter(s):
 * https://community.bistudio.com/wiki/BIS_fnc_returnParents
@@ -36,7 +36,7 @@ private _config = configFile >> "CfgVehicles" >> "Land_FirePlace_F";
 private _return = [_config, true] call CLib_fnc_returnParents;
 ```
 
-## CLib_fnc_getConfigData
+### CLib_fnc_getConfigData
 
 Parameter(s):
 * [`<Config>`], [`<Array>`] Path to Data
@@ -54,7 +54,7 @@ private _config = configFile >> "CfgVehicles" >> "Land_FirePlace_F" >> "hasBanan
 private _return = [_config, 0, false] call CLib_fnc_getConfigData;
 ```
 
-## CLib_fnc_getConfigDataCached
+### CLib_fnc_getConfigDataCached
 
 Parameter(s):
 * [`<Config>`], [`<Array>`] Path to Data

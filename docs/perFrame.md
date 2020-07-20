@@ -4,8 +4,8 @@
 
 The PerFrame Module is a Module to improve Writing Code in an unscheduled environment with functions that imitate normal scheduled functions, like sleep, waitUntil and Unlimited Loops that only should run every X Seconds
 
-
-## CLib_fnc_addPerframeHandler
+## Functions
+### CLib_fnc_addPerframeHandler
 
 Parameter(s):
 * [`<Code>`] The Code you wish to execute.
@@ -28,7 +28,7 @@ private _id = [{
 },0, ["Awesome", "parameter"]] call CLib_fnc_addPerframeHandler;
 ```
 
-## CLib_fnc_removePerframeHandler
+### CLib_fnc_removePerframeHandler
 
 Parameter(s):
 * [`<Number>`] Perframe Handler ID
@@ -43,7 +43,7 @@ Examples:
 _id call CLib_fnc_removePerframeHandler;
 ```
 
-## CLib_fnc_wait
+### CLib_fnc_wait
 
 Parameter(s):
 * [`<Code>`] The Code you wish to execute.
@@ -64,7 +64,7 @@ Examples:
     hintSilent format ["This is 10 Seconds Delayed %1", _this]
 }, 10 ,"Awesome 10s Delay"] call CLib_fnc_wait;
 ```
-## CLib_fnc_waitUntil
+### CLib_fnc_waitUntil
 
 Parameter(s):
 * [`<Code>`] The Callback Code that gets executed when the Condition is true
@@ -86,7 +86,7 @@ Examples:
 }, {time == 1000}, "Awesome Delay"] call CLib_fnc_waitUntil;
 ```
 
-## CLib_fnc_execNextFrame
+### CLib_fnc_execNextFrame
 
 Parameter(s):
 * [`<Code>`] The Code you wish to execute.
@@ -106,7 +106,7 @@ Examples:
     hintSilent format ["This is 1 Frame Delayed %1", _this]
 }, "Awesome 1f Delay"] call CLib_fnc_execNextFrame;
 ```
-## CLib_fnc_skipFrames
+### CLib_fnc_skipFrames
 
 Parameter(s):
 * [`<Code>`] The Code you wish to execute.

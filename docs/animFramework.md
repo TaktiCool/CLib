@@ -4,8 +4,8 @@
 
 The Animation Framework is Build around the build in Animation System in Arma 3 to make it easier to Sync Animations over the network and on multiple Clients.
 
-
-## CLib_fnc_doAnimation
+## Functions
+### CLib_fnc_doAnimation
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -22,7 +22,7 @@ Examples:
 [player, "AmovPercMstpSrasWrflDnon_Salute"] call CLib_fnc_doAnimation;
 ```
 
-## CLib_fnc_getDeathAnimation
+### CLib_fnc_getDeathAnimation
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -37,7 +37,7 @@ Examples:
 private _deathAnimation = [player] call CLib_fnc_getDeathAnimation;
 ```
 
-## CLib_fnc_getDefaultAnimation
+### CLib_fnc_getDefaultAnimation
 
 Parameter(s):
 * [`<Object>`] Unit

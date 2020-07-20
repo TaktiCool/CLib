@@ -4,13 +4,13 @@
 
 The 3dGraphics module is a system built around the SQF commands [`drawIcon3D`] and [`drawLine3D`].
 
-
-## Graphics Data
+## Data structures
+### Graphics Data
 
 Graphics data is an array representing an 3d graphic. Currently there are two types of graphics supported: [`ICON`] and [`LINE`].
 The required data is different depending on the graphic type.
 
-### Icon data
+#### Icon data
 
 * [`<String>`] Graphics type (should be `"ICON"`)
 * [`<String>`] Texture
@@ -50,7 +50,7 @@ Example:
 ]
 ```
 
-### Line data
+#### Line data
 
 * [`<String>`] Graphics type (should be `"LINE"`)
 * [`<3dGraphicsPosition>`] Start position
@@ -71,7 +71,7 @@ Example:
 ]
 ```
 
-## Graphics position
+### Graphics position
 
 The graphics position can be given in multiple ways. The easiest is to use the normal [`<Position>`].
 
@@ -81,7 +81,9 @@ If you want to attach the graphic to an object, its also possible to pass an [`<
 * [`<Position>`] Selection offset (model space)
 * [`<Position>`] Position offset (world space)
 
-## CLib_fnc_add3dGraphics
+
+## Functions
+### CLib_fnc_add3dGraphics
 
 Parameter(s):
 * [`<String>`] Identifier
@@ -114,7 +116,7 @@ Examples:
 ]] call CLib_fnc_add3dGraphics;
 ```
 
-## CLib_fnc_remove3dGraphics
+### CLib_fnc_remove3dGraphics
 
 Parameter(s):
 * [`<String>`] Identifier

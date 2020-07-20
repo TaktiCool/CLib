@@ -3,8 +3,9 @@
 > Maintainer: joko // Jonas
 
 The Remote Exec is Meant to be a Fallback system for ServerAdmins that want to Disable vanilla's RemoteExec/RemoteExecCall
+## Functions
 
-## CLib_fnc_remoteExec
+### CLib_fnc_remoteExec
 
 Parameter(s):
 * [`<Anything>`] Arguments for the function or command

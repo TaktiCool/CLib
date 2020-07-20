@@ -2,15 +2,16 @@
 
 > Maintainer: joko // Jonas
 
-Statemachine is a simplifed Statemachine. it is missing features like transitions, Entry and Exit State Actions, and Conditions. It is based around Returns of the State. 
+Statemachine is a simplifed Statemachine. it is missing features like transitions, Entry and Exit State Actions, and Conditions. It is based around Returns of the State.
 
 ## Statemachine
 The Statemachine is Stored on a Object of Type [`<Location>`]
 
 ## Statemachine Config
+TODO
 
-
-## CLib_fnc_addStatemachineState
+## Functions
+### CLib_fnc_addStatemachineState
 
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object
@@ -30,7 +31,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_copyStatemachine
+### CLib_fnc_copyStatemachine
 
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object to Copy from
@@ -46,7 +47,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_createStatemachine
+### CLib_fnc_createStatemachine
 
 Parameter(s):
 * None
@@ -62,7 +63,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_createStatemachineFromConfig
+### CLib_fnc_createStatemachineFromConfig
 
 Parameter(s):
 * [`<Config>`] Config Path
@@ -78,7 +79,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_getVariableStatemachine
+### CLib_fnc_getVariableStatemachine
 
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object
@@ -96,7 +97,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_setVariableStatemachine
+### CLib_fnc_setVariableStatemachine
 
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object
@@ -114,7 +115,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_startStatemachine
+### CLib_fnc_startStatemachine
 
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object
@@ -132,7 +133,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_stepStatemachine
+### CLib_fnc_stepStatemachine
 
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object
@@ -140,7 +141,7 @@ Parameter(s):
 Returns:
 * [`<String>`] Next Statename
 
-Manualy Triggers a Step in a Statemachine 
+Manualy Triggers a Step in a Statemachine
 
 Examples:
 

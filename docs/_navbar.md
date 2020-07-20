@@ -1,6 +1,10 @@
-- [About](/)
-- [Development Enviroment](developmentEnviroment.md)
+
+- [Getting Started](/)
+  - [Developers](gettingStarted/Developers.md)
+  - [Mission Creators](gettingStarted/MissionCreators.md)
+  - [Server Provider](gettingStarted/Admins.md)
 - [Function Overview](functionoverview.md)
+- [About](/#about-this-documentation)
 - **Macros**
 - [Macros](macros.md)
 - **Modules**
@@ -20,8 +24,7 @@
 - [Gear](gear.md)
   - [Loadout](gear/loadout.md)
 - [Hashes](hashes.md)
-- [Init Functions](initFunctions.md)
-- [Initeraction](interaction.md)
+- [Interaction](interaction.md)
 - [lnbData](lnbData.md)
 - [Localisation](localisation.md)
 - [Map Graphics](mapGraphics.md)

@@ -5,8 +5,8 @@
 The Namespace Module is a Module to handle Local and Global Variable Namespaces.
 Its also allows to setVariables and save them in a later readable Array.
 
-
-## CLib_fnc_createNamespace
+## Functions
+### CLib_fnc_createNamespace
 
 Parameter(s):
 * [`<Boolean>`] Namespace is Global
@@ -24,7 +24,7 @@ Docs_awsomeGlobalNamespace = true call CLib_fnc_createNamespace;
 publicVariable "Docs_awsomeGlobalNamespace";
 ```
 
-## CLib_fnc_deleteNamespace
+### CLib_fnc_deleteNamespace
 
 Parameter(s):
 * [`<Object>`], [`<Location>`] Namespace

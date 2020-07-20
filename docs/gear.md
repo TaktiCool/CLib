@@ -4,7 +4,25 @@
 
 TODO text here
 
-## AllGearData
+## Data Types
+
+### MagazineData
+* [`<String>`], [`<MagData>`] Magazine Classname
+* [`<Number>`] Amount of Magazines get Added (optional)
+
+### MagData
+* [`<String>`] Item Classname
+* [`<Number>`] Amount of Bullets in the Magazine (optional)
+
+### ItemData
+* [`<String>`] Item Classname
+* [`<Number>`] Amount of Items get Added
+
+### RestoreGearData
+* [`<AllGearData>`] AllGearData
+* [`<magazinesAmmoFull>`] magazinesAmmoFull Return
+
+### AllGearData
 * [`<String>`] Headgear
 * [`<String>`] Googgles
 * [`<String>`] Uniform
@@ -25,7 +43,9 @@ TODO text here
 * [`<Array>`] of [`<String>`] Assigned Items
 * [`<String>`] Binoculars
 
-## CLib_fnc_addContainer
+## Functions
+
+### CLib_fnc_addContainer
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -43,15 +63,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_addItem
-
-### ItemData
-* [`<String>`] Item Classname
-* [`<Number>`] Amount of Items get Added
-
-or
-
-* [`<String>`] Item Classname
+### CLib_fnc_addItem
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -68,23 +80,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_addMagazine
-
-### MagazineData
-* [`<String>`], [`<MagData>`] Magazine Classname
-* [`<Number>`] Amount of Magazines get Added
-
-or
-
-* [`<String>`] Item Classname
-
-### MagData
-* [`<String>`] Item Classname
-* [`<Number>`] Amount of Bullets in the Magazine  
-
-or  
-
-* [`<String>`] Item Classname
+### CLib_fnc_addMagazine
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -101,7 +97,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_addWeapon
+### CLib_fnc_addWeapon
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -119,7 +115,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_copyGear
+### CLib_fnc_copyGear
 
 Parameter(s):
 * [`<Object>`] Source Unit
@@ -136,7 +132,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_getAllGear
+### CLib_fnc_getAllGear
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -152,11 +148,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_restoreGear
-
-### RestoreGearData
-* [`<AllGearData>`] AllGearData
-* [`<magazinesAmmoFull>`] magazinesAmmoFull Return
+### CLib_fnc_restoreGear
 
 Parameter(s):
 * [`<Object>`] Unit
@@ -173,7 +165,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_saveGear
+### CLib_fnc_saveGear
 
 Parameter(s):
 * [`<Object>`] Unit

@@ -26,7 +26,7 @@ params [
 ];
 
 _magazineData params [
-    ["_className", "", [""]],
+    ["_className", "", ["", []]],
     ["_count", 1, [0]]
 ];
 

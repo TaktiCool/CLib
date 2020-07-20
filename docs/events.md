@@ -4,8 +4,8 @@
 
 The Events Module is Responsible for the Events and Event Methods.
 It Contains code for Build in Events and also Custom build Events.
-
-## CLib_fnc_addEventHandler
+## Functions
+### CLib_fnc_addEventHandler
 
 Parameter(s):
 * [`<String>`] Event ID
@@ -28,7 +28,7 @@ Examples:
 }, "this is a static Argument"] call CLib_fnc_addEventHandler;
 ```
 
-## CLib_fnc_addIgnoredEventLog
+### CLib_fnc_addIgnoredEventLog
 
 Parameter(s):
 * [`<String>`] Name
@@ -46,7 +46,7 @@ Examples:
 ["myAwsomeEvent3", 0] call CLib_fnc_addIgnoredEventLog;
 ```
 
-## CLib_fnc_globalEvent
+### CLib_fnc_globalEvent
 
 Parameter(s):
 * [`<String>`] Event name
@@ -65,7 +65,7 @@ Examples:
 ["myAwsomeEvent", "Some Argument"] call CLib_fnc_globalEvent;
 ```
 
-## CLib_fnc_invokePlayerChanged
+### CLib_fnc_invokePlayerChanged
 
 Parameter(s):
 * [`<Object>`] New Player Object
@@ -84,7 +84,7 @@ selectPlayer _newUnit;
 _newUnit call CLib_fnc_invokePlayerChanged;
 ```
 
-## CLib_fnc_localEvent
+### CLib_fnc_localEvent
 
 Parameter(s):
 * [`<String>`] Event name
@@ -102,7 +102,7 @@ Examples:
 ["myAwsomeEvent", "Some Argument"] call CLib_fnc_localEvent;
 ```
 
-## CLib_fnc_serverEvent
+### CLib_fnc_serverEvent
 
 Parameter(s):
 * [`<String>`] Event name
@@ -121,7 +121,7 @@ Examples:
 
 ```
 
-## CLib_fnc_targetEvent
+### CLib_fnc_targetEvent
 
 Parameter(s):
 * [`<String>`] Event name

@@ -6,8 +6,8 @@ Status effects is a module which manages effects on units which depend on multip
 For example, if a unit is forced to walk it could have several reasons. It could be due to an injured leg or a heavy box he is carrying.
 If the status changes (e.g. the unit drops the box) the status effects module will check if there are any other conditions preventing the unit to walk normally again and apply the effect accordingly.
 
-
-## CLib_fnc_addStatusEffectType
+## Functions
+### CLib_fnc_addStatusEffectType
 
 Parameter(s):
 * [`<String>`] Identifier
@@ -28,7 +28,7 @@ Examples:
 }] call CLib_fnc_addStatusEffectType;
 ```
 
-## CLib_fnc_setStatusEffect
+### CLib_fnc_setStatusEffect
 
 Parameter(s):
 * [`<Object>`] Unit

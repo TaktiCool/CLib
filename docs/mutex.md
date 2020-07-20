@@ -4,8 +4,8 @@
 
 The Mutex Module is built around the Idea of Giving Tokens to Clients so that the client can execute code without other clients Interfering with the data the client may modify.
 
-
-## CLib_fnc_mutex
+## Funtions
+### CLib_fnc_mutex
 
 Parameter(s):
 * [`<Code>`] Code

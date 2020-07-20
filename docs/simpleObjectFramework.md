@@ -122,13 +122,14 @@ class cfgCLibSimpleObject {
 };
 ```
 
-
-## Callback
+## Data Types
+### Callback
 * [`<Object>`] Target Object
 * [`<Code>`]  Callback Code
 * [`<Anything>`]  Callback Parameters
 
-## CLib_fnc_createObjectComp
+## Functions
+### CLib_fnc_createObjectComp
 
 Parameter(s):
 * [`<String>`] Unique identifier
@@ -149,7 +150,7 @@ Examples:
 ```sqf
 [
     "FOB_UID",
-    "FOBTest", 
+    "FOBTest",
     getPos CLib_Player,
     vectorDirVisual CLib_Player,
     CLib_player, objNull,
@@ -163,7 +164,7 @@ Examples:
 ] call CLib_fnc_createObjectComp;
 ```
 
-## CLib_fnc_deleteObjectComp
+### CLib_fnc_deleteObjectComp
 
 Parameter(s):
 * [`<String>`] UID to Delete
@@ -186,7 +187,7 @@ Examples:
 ]] call CLib_fnc_deleteObjectComp);
 ```
 
-## CLib_fnc_exportSimpleObjectComp
+### CLib_fnc_exportSimpleObjectComp
 
 Parameter(s):
 * None

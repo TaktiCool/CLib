@@ -5,8 +5,8 @@
 The advanced state machine is a module which provides basic functions to create a basic state machine with states and transitions.
 Its design allows running managing multiple instances of a machine. This makes it ideal to use with AI or similar things.
 
-
-## CLib_fnc_addASMState
+## Functions
+### CLib_fnc_addASMState
 
 Parameter(s):
 * [`<Location>`] State machine
@@ -29,7 +29,7 @@ Examples:
 [_stateMachine, "attackGroup", {}, {}, {}] call CLib_fnc_addASMState;
 ```
 
-## CLib_fnc_addASMTransition
+### CLib_fnc_addASMTransition
 
 Parameter(s):
 * [`<Location>`] State machine
@@ -57,7 +57,7 @@ Examples:
 }] call CLib_fnc_addASMTransition;
 ```
 
-## CLib_fnc_createASM
+### CLib_fnc_createASM
 
 Parameter(s):
 * None
@@ -73,7 +73,7 @@ Examples:
 private _stateMachine = call CLib_fnc_createASM;
 ```
 
-## CLib_fnc_createASMInstance
+### CLib_fnc_createASMInstance
 
 Parameter(s):
 * [`<Location>`] State machine

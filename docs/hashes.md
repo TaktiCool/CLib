@@ -4,12 +4,17 @@
 
 The Hashes Modules is a Module to handle Hash Arrays.
 
-## HashSet
+
+## Data Types
+
+### HashSet
 Hash Sets are Array of Array of Any Data
 * [`<Array>`] Array of Keys
 * [`<Array>`] Array of Values
 
-## CLib_fnc_containsKey
+## Functions
+
+### CLib_fnc_containsKey
 
 Parameter(s):
 * [`<HashSet>`] The HashSet to Check in
@@ -26,7 +31,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_containsValue
+### CLib_fnc_containsValue
 
 Parameter(s):
 * [`<HashSet>`] The HashSet to Check in
@@ -43,7 +48,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_countHash
+### CLib_fnc_countHash
 
 Parameter(s):
 * [`<HashSet>`] The HashSet to Count
@@ -59,7 +64,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_createHash
+### CLib_fnc_createHash
 
 Parameter(s):
 None
@@ -75,7 +80,7 @@ Examples:
 MyAwsomeHashSet = call CLib_fnc_createHash;
 ```
 
-## CLib_fnc_forEachHash
+### CLib_fnc_forEachHash
 
 Parameter(s):
 * [`<HashSet>`] HashSet to Loop through
@@ -93,7 +98,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_getHash
+### CLib_fnc_getHash
 
 Parameter(s):
 * [`<HashSet>`] HashSet to get Value from
@@ -110,7 +115,7 @@ Examples:
 private _isBanana = [MyAwsomeHashSet, "isbanana"] call CLib_fnc_getHash;
 ```
 
-## CLib_fnc_hashToNamespace
+### CLib_fnc_hashToNamespace
 
 Parameter(s):
 * [`<Namespace>`], [`<Location>`], [`<Object>`], [`<Group>`] Namespace
@@ -129,7 +134,7 @@ Examples:
 [MyNewNamespace, MyAwsomeHashSet, true, "AllVariables"] call CLib_fnc_hashToNamespace
 ```
 
-## CLib_fnc_namespaceToHash
+### CLib_fnc_namespaceToHash
 
 Parameter(s):
 * [`<Namespace>`], [`<Location>`], [`<Object>`], [`<Group>`] Namespace
@@ -147,7 +152,7 @@ Examples:
 [MyNewNamespace, MyAwsomeHashSet, "AllVariables"] call CLib_fnc_namespaceToHash
 ```
 
-## CLib_fnc_setHash
+### CLib_fnc_setHash
 
 Parameter(s):
 * [`<HashSet>`] HashSet

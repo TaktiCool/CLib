@@ -4,7 +4,9 @@
 
 The Interaction System allows to add Interactions, Hold Actions and Overrite Vanilla Actions, it also Adds the CanInteractWith Framework
 
-## Named Parameters
+
+## Data Types
+### Named Parameters
 The Named Parameters are build so that the User does not need to input all data and only the onces needed.
 
 Types:
@@ -20,7 +22,7 @@ Types:
 * `"selection"`: named selection in Geometry LOD to which the action is attached [`<String>`]
 * `"memorypoint"`: memory point on the object to which the action is attached. If parameter selection is supplied, parameter memoryPoint is not used [`<String>`]
 
-## Actions Framework
+## Functions
 
 ### CLib_fnc_addAction
 
@@ -101,8 +103,6 @@ Examples:
 ```sqf
 TODO Example here
 ```
-
-## Can Interact with Framework
 
 ### CLib_fnc_addCanInteractWith
 

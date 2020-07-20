@@ -4,8 +4,9 @@
 
 lnbData is a Module that adds the Possibility to save all Type of Data on an lnb Control
 
+## Functions
 
-## CLib_fnc_lnbSave
+### CLib_fnc_lnbSave
 
 Parameter(s):
 * [`<Control>`] Control
@@ -22,7 +23,7 @@ Examples:
 [_control, [1,4], "nice Bananas"] call CLib_fnc_lnbSave;
 ```
 
-## CLib_fnc_lnbLoad
+### CLib_fnc_lnbLoad
 
 Parameter(s):
 * [`<Control>`] Control

@@ -27,7 +27,9 @@ class CLib {
 };
 ```
 
-## CLib_fnc_formatLocalisation
+## Functions
+
+### CLib_fnc_formatLocalisation
 
 Parameter(s):
 * Same Paramter as [format](https://community.bistudio.com/wiki/format)
@@ -46,7 +48,7 @@ Examples:
 ] call CLib_fnc_formatLocalisation
 ```
 
-## CLib_fnc_isLocalised
+### CLib_fnc_isLocalised
 
 Parameter(s):
 * [`<String>`] String to Check
@@ -62,7 +64,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_readLocalisation
+### CLib_fnc_readLocalisation
 
 Parameter(s):
 * [`<String>`] String to Localise

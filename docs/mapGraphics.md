@@ -4,8 +4,8 @@
 
 TODO text here
 
-
-## CLib_fnc_addMapGraphicsEventHandler
+## Functions
+### CLib_fnc_addMapGraphicsEventHandler
 
 Parameter(s):
 * [`<String>`] Icon ID
@@ -24,7 +24,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_addMapGraphicsGroup
+### CLib_fnc_addMapGraphicsGroup
 
 Parameter(s):
 * [`<Type>`] TODO text here
@@ -40,7 +40,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_removeMapGraphicsEventhandler
+### CLib_fnc_removeMapGraphicsEventhandler
 
 Parameter(s):
 * [`<Type>`] TODO text here
@@ -56,7 +56,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_removeMapGraphicsGroup
+### CLib_fnc_removeMapGraphicsGroup
 
 Parameter(s):
 * [`<Type>`] TODO text here
@@ -72,7 +72,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_registerMapControl
+### CLib_fnc_registerMapControl
 
 Parameter(s):
 * [`<Type>`] TODO text here
@@ -88,7 +88,7 @@ Examples:
 TODO Example here
 ```
 
-## CLib_fnc_unregisterMapControl
+### CLib_fnc_unregisterMapControl
 
 Parameter(s):
 * [`<Type>`] TODO text here
