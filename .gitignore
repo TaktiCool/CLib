@@ -64,3 +64,4 @@ releases/*
 *.biprivatekey
 keys/*
 build.bat
+hemtt.exe

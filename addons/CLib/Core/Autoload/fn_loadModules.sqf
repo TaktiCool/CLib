@@ -27,7 +27,7 @@ diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2
 
     private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isServer)) >> "idd");
     waitUntil {
-        if (getClientState == "BRIEFING READ") exitWith {true};
+        if (getClientStateNumber >= 10) exitWith {true};
 
         disableSerialization;
         private _display = findDisplay _displayIdd;
