@@ -17,9 +17,10 @@
 params [
     ["_input", "", [""]]
 ];
-
-if (true) exitWith { //TODO Check if extension exists
-    [-1, "CLibCompression", "Compress", _input] call CFUNC(extensionRequest);
+private _output = [-1, "CLibCompression", "Compress", _input] call CFUNC(extensionRequest);
+// if !(_output in ["", GVAR(ACK)]) exitWith { // currently disabled to reduce loading times on Linux!
+if (true) exitWith {
+    _output
 };
 
 private _rawInput = toArray _input;

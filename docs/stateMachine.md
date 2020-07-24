@@ -2,13 +2,27 @@
 
 > Maintainer: joko // Jonas
 
-Statemachine is a simplifed Statemachine. it is missing features like transitions, Entry and Exit State Actions, and Conditions. It is based around Returns of the State.
+Statemachine is a simplifed Statemachine. It is missing features like transitions, Entry and Exit State Actions, and Conditions. It is based around Returns of the State.
 
 ## Statemachine
 The Statemachine is Stored on a Object of Type [`<Location>`]
 
 ## Statemachine Config
-TODO
+```csharp
+class MyStateMachine {
+    entryPoint = "Start"; // The State where the Statemachine Enters
+    autostart = 1; // Autostart after Creation
+    class Start { // State
+        stateCode = "Docs_AllPlayers = allPlayers; Docs_Index = -1; 'IsInArea'";
+    };
+    class IsInArea {
+        stateCode = "Docs_Index = (Docs_Index + 1) mod (count allPlayers); if ((Docs_allPlayers select Docs_Index) inArea MyTrigger) then {'InArea'} else {'IsInArea'};";
+    };
+    class InArea {
+        stateCode = "private _target = Docs_allPlayers select Docs_Index; _target setDamage ((damage _target) + 0.01); 'IsInArea'";
+    };
+};
+```
 
 ## Functions
 ### CLib_fnc_addStatemachineState
@@ -28,7 +42,7 @@ Add State to Statemachine. Every State should return the Next State that should 
 Examples:
 
 ```sqf
-TODO Example here
+[_statemachine, "HasBanana", {}, []] call CLib_fnc_addStatemachineState
 ```
 
 ### CLib_fnc_copyStatemachine
@@ -44,7 +58,7 @@ Copy a Statemachine and create a New one with the same States
 Examples:
 
 ```sqf
-TODO Example here
+private _statemachine2 = _statemachine call CLib_fnc_copyStatemachine;
 ```
 
 ### CLib_fnc_createStatemachine
@@ -60,7 +74,7 @@ Create a New Statemachine Object.
 Examples:
 
 ```sqf
-TODO Example here
+private _statemachine = call CLib_fnc_createStatemachine;
 ```
 
 ### CLib_fnc_createStatemachineFromConfig
@@ -76,7 +90,7 @@ Create Statemachine from Config
 Examples:
 
 ```sqf
-TODO Example here
+private _configStatemachine call CLib_fnc_createStatemachineFromConfig;
 ```
 
 ### CLib_fnc_getVariableStatemachine
@@ -94,7 +108,7 @@ Get Variable for Statemachine.
 Examples:
 
 ```sqf
-TODO Example here
+private _variable = [_statemachine, "Yellow"] call CLib_fnc_getVariableStatemachine;
 ```
 
 ### CLib_fnc_setVariableStatemachine
@@ -112,7 +126,7 @@ Set Variable for Statemachine
 Examples:
 
 ```sqf
-TODO Example here
+[_statemachine, "MyImportentVariable", "Are Bananas yellow?"] call CLib_fnc_setVariableStatemachine;
 ```
 
 ### CLib_fnc_startStatemachine
@@ -120,7 +134,7 @@ TODO Example here
 Parameter(s):
 * [`<Statemachine>`] Statemachine Object
 * [`<String>`] Init Statename
-* [`<Number>`] Tick Time
+* [`<Number>`] Tick Time (in seconds)
 
 Returns:
 * [`<Number>`] Index of the Statemachine PFH
@@ -130,7 +144,7 @@ Starts a Statemachine Automatic Ticks.
 Examples:
 
 ```sqf
-TODO Example here
+[_statemachine, "start", 0.1] call CLib_fnc_startStatemachine
 ```
 
 ### CLib_fnc_stepStatemachine
@@ -146,7 +160,7 @@ Manualy Triggers a Step in a Statemachine
 Examples:
 
 ```sqf
-TODO Example here
+private _nextState = _statemachine call CLib_fnc_stepStatemachine;
 ```
 
 [`<Statemachine>`]: #statemachine

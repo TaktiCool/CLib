@@ -1,4 +1,3 @@
-
 - [Getting Started](/)
   - [Developers](gettingStarted/Developers.md)
   - [Mission Creators](gettingStarted/MissionCreators.md)
@@ -38,4 +37,5 @@
 - [State Machine](stateMachine.md)
 - [Status Effects](statusEffects.md)
 - **Links**
+- [Releases](https://github.com/TaktiCool/CLib/releases/latest)
 - [GitHub](https://github.com/TaktiCool/CLib)

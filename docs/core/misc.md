@@ -453,7 +453,7 @@ Parameter(s):
 Returns:
 * None
 
-Function that allows to execute code from the mission direct without using Mission Modules.
+Function that allows to execute code from the mission direct without using [Mission Modules](core/missionModuleLoader).
 
 Examples:
 
