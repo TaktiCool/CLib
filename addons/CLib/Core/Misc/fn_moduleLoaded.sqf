@@ -18,4 +18,4 @@ params [
     ["_module", "", [""]]
 ];
 
-_module in GVAR(LoadedModules);
+toLower(_module) in GVAR(LoadedModules);
