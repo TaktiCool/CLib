@@ -90,7 +90,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
             // If the shell is not queued yet push it on the storage.
             _x call FUNC(pushbackInQueue);
             nil
-        } count (getPos _x nearObjects ["GrenadeHand", 100]);
+        } count ((getPos _x) nearObjects ["GrenadeHand", 100]);
         nil
     } count allUnits;
     "fillWeaponHolder"

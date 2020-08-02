@@ -55,6 +55,10 @@ class CfgCLibModules {
                 FNCSERVER(sendFunctionsLoop);
             };
 
+            MODULE(ClientAddonModuleLoader) {
+                FNC(postInit);
+            };
+
             MODULE(Compression) {
                 FNCSERVER(checkAllFunctionCompression);
                 FNCSERVER(checkCompression);
