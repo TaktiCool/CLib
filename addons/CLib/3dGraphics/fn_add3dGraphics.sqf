@@ -8,9 +8,14 @@
     Adds a 3D icon to the system
 
     Parameter(s):
-    0: Id <String>
-    1: GraphicsData <Array>
+    0: Id <String> (Default: "")
+    1: GraphicsData <Array> (Default: [])
 
+    Returns:
+    None
+
+    Remarks:
+    GraphicsData array
         0: Class <STRING> (ICON | LINE)
         Class = "ICON":
             1: Texture <String>
@@ -30,17 +35,12 @@
             2: End <MapGraphicsPosition>
             3: Line Color <Array> [r,g,b,a]
         last element (13 | 4): Code <Code> called every frame (returns visibility <boolean>)
-
-    Remarks:
-    TYPE <3dGraphicsPosition>:
-    OBJECT | POSITIONAGL | [OBJECT, [ObjectOffsetX, ObjectOffsetY, ObjectOffsetZ]]
-
-
-    Returns:
-    None
 */
 
-params ["_id", "_graphicsData"];
+params [
+    ["_id", "", [""]],
+    ["_graphicsData", [], [[]]]
+];
 
 private _completeGraphicsData = [];
 

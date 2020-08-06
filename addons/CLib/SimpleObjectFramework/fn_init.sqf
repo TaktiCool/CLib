@@ -30,9 +30,12 @@ if (isServer) then {
 
 [QGVAR(simpleObjectsCreated), {
     (_this select 0) params ["_uid", "_code", "_parameter"];
-
     [_uid, _parameter] call _code;
+}] call CFUNC(addEventhandler);
 
+[QGVAR(simpleObjectsDeleted), {
+    (_this select 0) params ["_uid", "_code", "_parameter"];
+    [_uid, _parameter] call _code;
 }] call CFUNC(addEventhandler);
 
 [QGVAR(createSimpleObjectComp), {

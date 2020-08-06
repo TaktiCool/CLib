@@ -6,30 +6,22 @@
 
     Description:
     Returns a shuffled array.
-    See https://en.wikipedia.org/wiki/Fisher-Yates_shuffle for details.
 
     Parameter(s):
-    <Array>
+    0: Array <Array> (Default: [])
 
     Returns:
-    <Array>
+    Shuffled array <Array>
 */
 
-// Create a copy to prevent modifying the original array.
-private _returnArray = +_this;
+params [
+    ["_this", [], [[]], []]
+];
 
-// Cycle through all elements of the array...
-{
-    // Pick a random element...
-    private _randomIndex = floor random _forEachIndex;
-
-    // If the chosen element differs we replace it.
-    if (_randomIndex != _forEachIndex) then {
-        _returnArray set [_forEachIndex, _returnArray select _randomIndex];
-    };
-
-    // Place the current element at the free position.
-    _returnArray set [_randomIndex, _this select _forEachIndex];
-} forEach _this;
-
-_returnArray
+_this = +_this;
+private _res = [];
+for "_i" from count _this to 1 step -1 do {
+    _res pushBack (_this deleteAt floor random _i);
+};
+_res append _this;
+_res

@@ -11,7 +11,7 @@
     None
 
     Returns:
-    -
+    None
 */
 
 private _cache = [];

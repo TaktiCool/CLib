@@ -8,18 +8,18 @@
     Entry point for module loading. Must be called within mission script for client and server. Start transfer of functions.
 
     Parameter(s):
-    The names of the requested modules <ARRAY> (optional)
+    0: The names of the requested modules <Array>
 
     Returns:
     None
 */
 
-// Skip the briefing by pressing the continue button on behalf of the user
-// http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
-
 diag_log text format ["[CLib - Version]: Server Version %1", CGVAR(VersionInfo)];
 diag_log text format ["[CLib]: isServer: %1 isDedicated: %2 hasInterface: %3 isMultiplayer: %4 isMultiplayerSolo: %5", isServer, isDedicated, hasInterface, isMultiplayer, isMultiplayerSolo];
 diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2 useExperimentalAutoload: %3", CGVAR(useCompression), CGVAR(useRemoteFallback), CGVAR(useExperimentalAutoload)];
+
+// Skip the briefing by pressing the continue button on behalf of the user
+// http://killzonekid.com/arma-scripting-tutorials-how-to-skip-briefing-screen-in-mp/
 
 0 spawn {
     if (!isNumber (missionConfigFile >> "briefing")) exitWith {};
@@ -27,7 +27,7 @@ diag_log text format ["[CLib]: useCompression: %1 useFallbackRemoteExecution: %2
 
     private _displayIdd = getNumber (configFile >> (["RscDisplayClientGetReady", "RscDisplayServerGetReady"] select (isServer)) >> "idd");
     waitUntil {
-        if (getClientState == "BRIEFING READ") exitWith {true};
+        if (getClientStateNumber >= 10) exitWith {true};
 
         disableSerialization;
         private _display = findDisplay _displayIdd;
@@ -58,7 +58,7 @@ if (hasInterface) then {
 
 private _cfg = missionConfigFile >> QPREFIX >> "Modules";
 if (!(isArray _cfg) && (isNil "_this" || {_this isEqualTo []})) exitWith {
-    endLoadingScreen;
+    [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
     disableUserInput false;
     diag_log text "No CLib Modules loaded in the mission";
 };
@@ -110,16 +110,18 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
                     _functionVarName spawn {
-                        waitUntil {missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]] isEqualTo []};
+                        waitUntil {missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
                         [
                             format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
                             "[CLib Anti Cheat Warning]",
-                            nil,nil,nil
+                            nil,
+                            nil,
+                            nil
                         ] spawn BIS_fnc_guiMessage;
                         GVAR(unregisterClient) = player;
                         publicVariableServer QGVAR(unregisterClient);
                         GVAR(loadingCanceled) = true;
-                        endLoadingScreen;
+                        [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
                         disableUserInput false;
                         endMission "LOSER";
                     };

@@ -11,7 +11,7 @@
     0: Unit <Object> (Default: objNull)
     1: Status effect id <String> (Default: "")
     2: Reason <String> (Default: "unknown")
-    3: Parameter <Any> (Default: [])
+    3: Parameter <Anything> (Default: [])
 
     Returns:
     None
@@ -55,5 +55,5 @@ _allParameters set [_index, _parameter];
 _unit setVariable [_parametersVarName, _allParameters];
 _unit setVariable [_reasonVarName, _allReasons];
 
-private _code = GVAR(StatusEffectsNamespace) getVariable ["Code_" + _id, []];
+private _code = GVAR(StatusEffectsNamespace) getVariable [QGVAR(Code_) + _id, []];
 [_unit, _allParameters] call _code;

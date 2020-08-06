@@ -12,7 +12,7 @@
 
     Parameter(s):
     0: Code to execute <Code> (Default: {})
-    1: Parameters to run the code with <Any> (Default: [])
+    1: Parameters to run the code with <Anything> (Default: [])
 
     Returns:
     None

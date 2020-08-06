@@ -15,7 +15,7 @@
 */
 
 params [
-    ["_hashSet", [[], []], [[]], 2]
+    ["_hashSet", [[], []], [[]]]
 ];
 
 count (_hashSet select HASH_KEYS);

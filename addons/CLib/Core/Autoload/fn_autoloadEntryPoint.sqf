@@ -18,7 +18,7 @@
 // Transfers entry function from server to all clients.
 if (isServer) then {
     CGVAR(useRemoteFallback) = getNumber (missionConfigFile >> QPREFIX >> "useFallbackRemoteExecution") isEqualTo 1;
-    CGVAR(useCompression) = getNumber (missionConfigFile >> QPREFIX >> "useCompression") isEqualTo 1;
+    CGVAR(useCompression) = getNumber (missionConfigFile >> QPREFIX >> "useCompressedFunction") isEqualTo 1;
     CGVAR(useExperimentalAutoload) = (getNumber (missionConfigFile >> QPREFIX >> "useExperimentalAutoload")) isEqualTo 1;
     CGVAR(loadingIsFinished) = false;
 

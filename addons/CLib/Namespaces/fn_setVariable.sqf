@@ -10,7 +10,7 @@
     Parameter(s):
     0: Namespace to set variable on <Location, Namespace, Object> (Default: locationNull)
     1: Variable name <String> (Default: "")
-    2: Variable content <Anything> (Default: nil)
+    2: Variable content <Anything>
     3: Cache name <String> (Default: QGVAR(allVariableCache))
     4: Global <Bool> (Default: false)
 

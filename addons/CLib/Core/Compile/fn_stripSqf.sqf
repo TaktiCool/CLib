@@ -8,13 +8,15 @@
     Strips all whitespaces and lower case all variables in code
 
     Parameter(s):
-    0: input <String>
+    0: Input <String> (Default: "")
 
     Returns:
-    0: output <String>
+    Output <String>
 */
 
-params [["_inputStr", ""]];
+params [
+    ["_inputStr", "", [""]]
+];
 
 private _sqString = false;
 private _dqString = false;

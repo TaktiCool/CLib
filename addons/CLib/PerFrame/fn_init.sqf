@@ -32,7 +32,7 @@ GVAR(nextFrameNo) = diag_frameNo;
 
 CGVAR(deltaTime) = diag_deltaTime max 0.000001;
 GVAR(lastFrameTime) = time;
-DFUNC(onEachFrameHandler) = {
+DFUNC(onEachFrameHandler) = [{
     if (getClientState == "GAME FINISHED") exitWith {
         removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
     };
@@ -118,6 +118,6 @@ DFUNC(onEachFrameHandler) = {
     GVAR(nextFrameNo) = diag_frameNo + 1;
 
     RUNTIME("PFHCounter");
-};
+}] call CFUNC(compileFinal);
 
 GVAR(OnEachFrameID) = addMissionEventHandler ["EachFrame", {call FUNC(onEachFrameHandler)}];

@@ -10,7 +10,7 @@
     Parameter(s):
     0: Statemachine Object <Location> (Default: locationNull)
     1: Variable Name <String> (Default: "")
-    2: Value <Anything> (Default: nil)
+    2: Value <Anything>
 
     Returns:
     None
@@ -19,7 +19,7 @@
 params [
     ["_stateMachine", locationNull, [locationNull]],
     ["_varName", "", [""]],
-    ["_var", nil, []]
+    "_var"
 ];
 
 [_stateMachine, format [SMVAR(%1), _varName], _var, QGVAR(allStatemachineVariables), false] call CFUNC(setVariable);

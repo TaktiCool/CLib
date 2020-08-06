@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 private _allModulesNames = [];
 DUMP("--------------------------Start CLib Module Search---------------------------------");
 private _allMods = configProperties [configFile >> "CfgCLibModules", "isClass _x", true];

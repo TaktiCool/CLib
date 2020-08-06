@@ -56,7 +56,7 @@ private _fnc_readSimpleObjectClass = {
                     (getNumber (_x >> "speed")) isEqualTo 1
                 };
                 default {
-                    if (isNumber (_x >> "speed")) then {getNumber (_x >> "speed")};
+                    if (isNumber (_x >> "speed") || isText (_x >> "speed")) then {getNumber (_x >> "speed")};
                 };
             };
             if (isNil "_speed") then {

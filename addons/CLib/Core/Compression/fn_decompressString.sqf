@@ -8,13 +8,15 @@
     Decompression of a String
 
     Parameter(s):
-    0: compressed string <String>
+    0: Compressed string <String> (Default: "")
 
     Returns:
-    0: uncompressed string <String>
+    Uncompressed string <String>
 */
 
-params ["_input"];
+params [
+    ["_input", "", [""]]
+];
 
 private _rawInput = toArray _input;
 private _rawOutput = [];

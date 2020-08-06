@@ -9,7 +9,7 @@
     See https://tools.ietf.org/pdf/rfc20.pdf for details.
 
     Parameter(s):
-    0: Result <String>
+    0: Result <String> (Default: "")
 
     Returns:
     None
@@ -17,7 +17,9 @@
 
 EXEC_ONLY_UNSCHEDULED;
 
-params ["_result"];
+params [
+    ["_result", "", [""]]
+];
 
 // If there is more data acknowledge and collect more
 while {_result select [count _result - 1] != GVAR(EOT)} do {

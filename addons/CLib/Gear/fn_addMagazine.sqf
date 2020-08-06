@@ -22,11 +22,11 @@
 
 params [
     ["_unit", objNull, [objNull]],
-    ["_magazineData", ["", 0], [[]], 2]
+    ["_magazineData", ["", 0], [[]]]
 ];
 
 _magazineData params [
-    ["_className", "", [""]],
+    ["_className", "", ["", []]],
     ["_count", 1, [0]]
 ];
 

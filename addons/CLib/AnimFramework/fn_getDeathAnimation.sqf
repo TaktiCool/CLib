@@ -8,15 +8,18 @@
     Gets the death animation for a unit
 
     Parameter(s):
-    0: Unit <Object>
+    0: Unit <Object> (Default: objNull)
 
     Returns:
     Death Animation <String>
 
+    Remarks:
     TODO Cache config Reads
 */
 
-params ["_unit"];
+params [
+    ["_unit", objNull, [objNull]]
+];
 
 private _animState = animationState _unit;
 private _isInVehicle = isNull (objectParent _unit);

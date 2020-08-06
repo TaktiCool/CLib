@@ -1,19 +1,25 @@
 #include "macros.hpp"
 /*
-    Streamator
+    Community Lib - CLib
 
     Author: joko // Jonas
 
     Description:
-    Compatible Magazines for Weapon/Muzzle
+    Compatible magazines for weapon and muzzle
 
     Parameter(s):
-    None
+    0: Weapon Name <String> (Default: "")
+    1: Muzzle Name <String> (Default: "")
 
     Returns:
-    None
+    List of all Compatible Magazines of a Weapons Muzzle <Array> 
 */
-params ["_weapon", "_muzzle"];
+
+params [
+    ["_weapon", "", [""]],
+    ["_muzzle", "", [""]]
+];
+
 private _if = if (_muzzle != "");
 private _varName = format ["%1_%2_%3", QGVAR(mags), _weapon];
 _if then {
@@ -25,7 +31,7 @@ if (isNil QGVAR(compatibleMagazinesNamespace)) then {
 };
 
 private _mags = GVAR(compatibleMagazinesNamespace) getVariable _varName;
-if !(isNil "_mags") exitWith { _mags };
+if !(isNil "_mags") exitWith {_mags};
 private _cfgWeapons = configFile >> "CfgWeapons" >> _weapon;
 _if then {
     _cfgWeapons = _cfgWeapons >> _muzzle;

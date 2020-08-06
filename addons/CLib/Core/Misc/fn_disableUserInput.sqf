@@ -11,13 +11,19 @@
     Disables key input. ESC can still be pressed to open the menu.
 
     Parameter(s):
-    0: True to disable key inputs, false to re-enable them <Bool>
+    0: Disable user input <Bool> (Default: true)
 
     Returns:
     None
 */
+
+if (!hasInterface) exitWith {};
+
 EXEC_ONLY_UNSCHEDULED;
-params ["_state"];
+
+params [
+    ["_state", true, [true]]
+];
 
 if (_state) then {
     if (!isNil QGVAR(disableUserInputKeyEventHandler)) exitWith {};
@@ -45,13 +51,13 @@ if (_state) then {
             };
 
             private _ctrl = _dlg displayctrl 103;
-            _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickEndStr)];
+            _ctrl ctrlSetEventHandler ["buttonClick", call FUNC(onButtonClickEndStr)];
             _ctrl ctrlEnable true;
             _ctrl ctrlSetText "ABORT";
             _ctrl ctrlSetTooltip "Abort.";
 
             _ctrl = _dlg displayctrl ([104, 1010] select isMultiplayer);
-            _ctrl ctrlSetEventHandler ["buttonClick", DFUNC(onButtonClickRespawnStr)];
+            _ctrl ctrlSetEventHandler ["buttonClick", call FUNC(onButtonClickRespawnStr)];
             _ctrl ctrlEnable call {
                 private _config = missionConfigFile >> "respawnButton";
                 !isNumber _config || {getNumber _config == 1}

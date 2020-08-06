@@ -16,6 +16,7 @@
 
 // This is needed to provide a player object for zeus controlled units. Important to ensure that player is not null here (which is done in autoload).
 CLib_Player = player;
+CGVAR(PauseMenuOpen) = false;
 uiNamespace setVariable ["CLib_Player", player];
 parsingNamespace setVariable ["CLib_Player", player];
 GVAR(lastZeusStatus) = false;
@@ -66,8 +67,10 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["groupUnits", {units CLib_Player}],
     ["assignedTeam", {assignedTeam CLib_Player}],
     ["cameraView", {cameraView}],
+    ["allMapMarkers", {allMapMarkers}],
     ["inCurator", {isNull curatorCamera}],
-    ["inEGSpectator", {isNil "BIS_EGSpectator_initialized"}]
+    ["inEGSpectator", {isNil "BIS_EGSpectator_initialized"}],
+    ["pauseMenuVisible", {!isNull (findDisplay 49)}]
 ];
 
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);
@@ -104,6 +107,10 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     "HandleDamage"
 ];
 
+["pauseMenuVisibleChanged", {
+    (_this select 0) params ["_open"];
+    CGVAR(PauseMenuOpen) = _open;
+}] call CFUNC(addEventHandler);
 // Fix an Arma bug
 ["vehicleChanged", {
     (_this select 0) params ["_newVehicle"];

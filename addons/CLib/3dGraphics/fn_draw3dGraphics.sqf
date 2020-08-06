@@ -15,7 +15,7 @@
 */
 
 // Dont Render 3d Icons if a UI is Open.
-if (!isNull (findDisplay 49) || dialog) exitWith {};
+if (!isNull (findDisplay 49) || dialog || isGamePaused) exitWith {};
 
 RUNTIMESTART;
 
@@ -51,6 +51,5 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
     };
     nil
 } count GVAR(3dGraphicsCache);
-
 
 RUNTIME("3dGraphics")

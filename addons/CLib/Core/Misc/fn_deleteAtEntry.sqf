@@ -8,18 +8,25 @@
     Deletes an entry out of an array
 
     Parameter(s):
-    0: Array reference <Array>
-    1: Entry to delete <Any>
-    2: Delete every entry <Bool>(default: false)
+    0: Array reference <Array> (Default: [])
+    1: Entry to delete <Anything>
+    2: Delete every entry <Bool> (Default: false)
+
+    Returns:
+    Deleted Index <Array>
 
     Remarks:
     This function works with the given reference!
-
-    Returns:
-    Deleted Index <Array<Numbers>>
 */
+
 EXEC_ONLY_UNSCHEDULED;
-params ["_array", "_entry", ["_deleteAll", false]];
+
+params [
+    ["_array", [], [[]], []],
+    "_entry",
+    ["_deleteAll", false, [true]]
+];
+
 private "_index";
 private _return = [];
 if (_deleteAll) then {
@@ -31,7 +38,6 @@ if (_deleteAll) then {
     _index = _array find _entry;
     if (_index != -1) then {
         _array deleteAt _index;
-
     };
     _return pushBack _index;
 };

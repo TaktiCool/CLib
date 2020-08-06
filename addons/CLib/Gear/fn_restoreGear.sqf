@@ -16,7 +16,7 @@
 */
 
 params [
-    ["_gear", [[], []], [[]], 2],
+    ["_gear", [[], []], [[]]],
     ["_unit", player, [objNull]]
 ];
 

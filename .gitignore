@@ -63,3 +63,5 @@ CLibDataBaseEditor\.exe\.config
 releases/*
 *.biprivatekey
 keys/*
+build.bat
+hemtt.exe

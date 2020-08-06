@@ -8,7 +8,7 @@
     Converts a hash to a Namespace
 
     Parameter(s):
-    0: Namespace <Location, Namespace, Object> (Default: locationNull)
+    0: Namespace <Location, Namespace, Object, Group> (Default: locationNull)
     1: HashSet <Array> (Default: [[], []])
     2: Publish Variables <Bool> (Default: false)
     3: AllVarNames Cache <String> (Default: EGVAR(Namespaces,allVariableCache))
@@ -18,8 +18,8 @@
 */
 
 params [
-    ["_namespace", locationNull, [locationNull, missionNamespace, objNull]],
-    ["_hashSet", [[], []], [[]], 2],
+    ["_namespace", locationNull, [locationNull, missionNamespace, objNull, grpNull]],
+    ["_hashSet", [[], []], [[]]],
     ["_public", false, [true]],
     ["_allVarName", EGVAR(Namespaces,allVariableCache), [""]]
 ];

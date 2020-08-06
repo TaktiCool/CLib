@@ -26,7 +26,7 @@
 params [
     ["_unitClass", "", [""]],
     ["_condition", {false}, [{}]],
-    ["_unitParams", [grpNull, {}, 0.5, "PRIVATE"], [[]], 4]
+    ["_unitParams", [grpNull, {}, 0.5, "PRIVATE"], [[]]]
 ];
 
 private _varName = _unitClass + "_unit";

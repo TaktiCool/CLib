@@ -5,19 +5,19 @@
     Author: joko // Jonas
 
     Description:
-    Sets a Value on to a Hash
+    Sets a Hash Value to a Key in a Hashlist
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
-    1: Key <Any> (Default: "")
-    2: Value <Anything> (Default: objNull)
+    1: Key <Anything> (Default: "")
+    2: Value <Anything>
 
     Returns:
     HashSet <Array>
 */
 
 params [
-    ["_hashSet", [[], []], [[]], 2],
+    ["_hashSet", [[], []], [[]]],
     ["_key", "", []],
     "_value"
 ];

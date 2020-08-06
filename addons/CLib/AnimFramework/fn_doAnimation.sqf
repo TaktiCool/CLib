@@ -8,14 +8,19 @@
     Do a Animation for a Unit
 
     Parameter(s):
-    0: Unit <Object>
-    1: Animation <String>
-    2: Priority <Number>
+    0: Unit <Object> (Default: objNull)
+    1: Animation <String> (Default: "")
+    2: Priority <Number> (Default: 0)
 
     Returns:
     None
 */
-params ["_unit", "_anim", ["_priority", 0]];
+
+params [
+    ["_unit", objNull, [objNull]],
+    ["_anim", "", [""]],
+    ["_priority", 0, [0]]
+];
 
 if (_anim == "") then {
     _anim = _unit call CFUNC(getDefaultAnimation);
@@ -30,6 +35,10 @@ if (isNull (objectParent _unit)) then {
     [_case, [_unit, _anim]] call CFUNC(globalEvent);
 };
 
-if (_priority >= 2 && {animationState _unit != _anim}) then {
-    ["switchMove", [_unit, _anim]] call CFUNC(globalEvent);
+if (_priority >= 2) then {
+    [{
+        if (animationState _unit != _anim) then {
+            ["switchMove", [_unit, _anim]] call CFUNC(globalEvent);
+        };
+    }, 0.1] call CFUNC(wait);
 };

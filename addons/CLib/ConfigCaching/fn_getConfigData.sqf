@@ -8,14 +8,20 @@
     Get a Config Value and Cache the Value to reduce config accesses while runtime.
 
     Parameter(s):
-    0: Config path <Config, Array>
+    0: Config path <Config> (Default: configNull)
     1: Default return <String, Number, Array> (Default: "")
     2: Force return type <Bool> (Default: false)
 
     Returns:
-    Config Value <Sring, Number, Array>
+    Config Value <String, Number, Array>
 */
-params [["_path", configNull, [configNull]], ["_default", "", [[], "", 0]], ["_forceDefaultType", false, [true]]];
+
+params [
+    ["_path", configNull, [configNull]],
+    ["_default", "", ["", 0, []], []],
+    ["_forceDefaultType", false, [true]]
+];
+
 private _ret = _default;
 if (_forceDefaultType) then {
     switch (typeName _default) do {

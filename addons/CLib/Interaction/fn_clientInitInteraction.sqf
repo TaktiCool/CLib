@@ -71,8 +71,8 @@ for "_i" from 0 to 11 do {
     GVAR(HoldActionIdleBackground) pushBack (format ["<img size='3' shadow='0' color='%1' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/>", _color]);
 };
 
-DFUNC(IdleAnimation) = {
+DFUNC(IdleAnimation) = [{
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
     params ["_title", "_iconIdle", "_hint"];
     _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
-};
+}] call CFUNC(compileFinal);

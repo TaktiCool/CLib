@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Event name <String> (Default: "EventError")
-    1: Arguments <Any> (Default: [])
+    1: Arguments <Anything> (Default: [])
     2: Persistent <String, Bool> (Default: false)
 
     Returns:

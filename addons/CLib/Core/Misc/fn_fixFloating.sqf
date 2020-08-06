@@ -12,13 +12,15 @@
     Handles the fixFloating event
 
     Parameter(s):
-    0: PhysX object <Object>
+    0: PhysX object <Object> (Default: objNull)
 
     Returns:
     None
 */
 
-params ["_object"];
+params [
+    ["_object", objNull, [objNull]]
+];
 
 // Ensure locality and ignore men
 if (!local _object || _object isKindOf "CAManBase") exitWith {};

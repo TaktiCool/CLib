@@ -38,7 +38,6 @@ if (isNil QCFUNC(compressString)) then {
 };
 if (isNil QCFUNC(decompressString)) then {
     DCFUNC(decompressString) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compression\fn_decompressString.sqf";
-
 };
 if (isNil QCFUNC(checkCompression)) then {
     DCFUNC(checkCompression) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Compression\fn_checkCompression.sqf";
@@ -54,17 +53,16 @@ call compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFrame
 
 CGVAR(playerUID) = "";
 
-#ifdef ISDEV
-    call CFUNC(readAllModules);
-    call CFUNC(buildDependencyGraph);
-    call CFUNC(readAllFunctions);
-#else
+#ifndef ISDEV
     if (isNil {parsingNamespace getVariable QCGVAR(allFunctionNamesCached)}) then {
-        call CFUNC(readAllModules);
-        call CFUNC(buildDependencyGraph);
-        call CFUNC(readAllFunctions);
+#endif
+call CFUNC(readAllModules);
+call CFUNC(buildDependencyGraph);
+call CFUNC(readAllFunctions);
+#ifndef ISDEV
     };
 #endif
+
 call CFUNC(compileAllFunctions);
 private _strTime = ((diag_tickTime - _startTime) * 1000) call CFUNC(toFixedNumber);
 LOG("Reading and Compiling all Function and Modules Required: " +  _strTime + " ms")

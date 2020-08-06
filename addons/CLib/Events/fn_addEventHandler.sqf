@@ -10,7 +10,7 @@
     Parameter(s):
     0: Event ID <String> (Default: "EventError")
     1: Callback <Code, String> (Default: {})
-    2: Arguments <Any> (Default: [])
+    2: Arguments <Anything> (Default: [])
 
     Returns:
     ID of the Current Eventhandler <Number>

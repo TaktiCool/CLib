@@ -10,7 +10,7 @@
     Parameter(s):
     0: Icon Id <String> (Default: "")
     1: Icon Event Name <String> (Default: "")
-    2: Arguments <Any> (Default: [])
+    2: Arguments <Anything> (Default: [])
 
     Returns:
     None

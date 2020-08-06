@@ -13,4 +13,5 @@
     Returns:
     None
 */
+
 GVAR(animDeathNamespace) = false call CFUNC(createNamespace);

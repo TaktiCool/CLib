@@ -33,7 +33,6 @@ if (_cfg isEqualType "") then {
     _cfg = missionConfigFile >> "CLib" >> "CfgCLibLoadouts" >> _loadoutName;
     if (isClass _cfg) exitWith {};
     _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
-
 };
 if (!isClass _cfg) exitWith {};
 

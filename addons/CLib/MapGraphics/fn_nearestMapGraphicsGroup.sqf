@@ -36,7 +36,7 @@ private _nearestIcon = "";
             private _count = count _pos;
             {
                 _centerPos = _centerPos vectorAdd (_x vectorMultiply (1 / _count));
-                private _temp1 = _x distance _mousePosition;
+                private _temp1 = _x distance2D _mousePosition;
                 if (_temp1 < _r) then {
                     _nearestIcon = _iconId;
                     _r = _temp1;
@@ -44,7 +44,7 @@ private _nearestIcon = "";
                 nil
             } count _pos;
 
-            private _temp1 = _centerPos distance _mousePosition;
+            private _temp1 = _centerPos distance2D _mousePosition;
             if (_temp1 < _r) then {
                 _nearestIcon = _iconId;
                 _r = _temp1;
@@ -52,7 +52,7 @@ private _nearestIcon = "";
         };
     } else {
         if (_mousePosition inArea [_pos, _w, _h, _angle, _isRectangle]) then {
-            private _temp1 = _pos distance _mousePosition;
+            private _temp1 = _pos distance2D _mousePosition;
             if (_temp1 < _r) then {
                 _nearestIcon = _iconId;
                 _r = _temp1;

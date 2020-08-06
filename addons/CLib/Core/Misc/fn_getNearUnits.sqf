@@ -8,17 +8,27 @@
     Gets all near units. Includes units in vehicles.
 
     Parameter(s):
-    0: Postion <Position, Object>
-    1: Radius <Number>
+    0: Postion <Array, Object> (Default: [0, 0, 0])
+    1: Radius <Number> (Default: 0)
+
+    Returns:
+    All near units <Array>
 
     Remarks:
     The cache can be reset with the Event CLib_clearUnits
-
-    Returns:
-    All near units <Array<Object>>
 */
-params ["_postion", "_radius"];
+
+params [
+    ["_postion", [0, 0, 0], [[], objNull], [2, 3]],
+    ["_radius", 0, [0]]
+];
+
 [format [QGVAR(nearUnits_%1_%2), _radius, _postion], {
+    params [
+        ["_postion", [0, 0, 0], [[], objNull], [2, 3]],
+        ["_radius", 0, [0]]
+    ];
+
     private _nearObjects = _postion nearObjects _radius;
 
     private _return = _nearObjects select {

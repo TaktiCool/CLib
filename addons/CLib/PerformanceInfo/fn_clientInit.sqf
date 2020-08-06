@@ -14,16 +14,19 @@
     None
 */
 
-#define FRAMECOUNT 40
+GVAR(frameCount) = 64;
+if (isNumber (missionConfigFile >> "CLib" >> "FrameGraphSize")) then {
+    GVAR(frameCount) = (getNumber (missionConfigFile >> "CLib" >> "FrameGraphSize") max 8);
+};
+
 GVAR(topFPS) = 0;
 GVAR(FPSStorage) = [];
-GVAR(FPSStorage) resize FRAMECOUNT;
+GVAR(FPSStorage) resize GVAR(frameCount);
 GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
 uiNamespace setVariable [QGVAR(ctrlGroup), controlNull];
 
 GVAR(pfhID) = -1;
-
-DFUNC(toggleFrameInfo) = {
+DFUNC(toggleFrameInfo) = [{
     if (GVAR(pfhID) != -1) exitWith {
         GVAR(pfhID) call CFUNC(removePerFrameHandler);
         GVAR(pfhID) = -1;
@@ -33,7 +36,7 @@ DFUNC(toggleFrameInfo) = {
         _ctrlGroup ctrlCommit 0;
 
         GVAR(topFPS) = 0;
-        GVAR(FPSStorage) resize FRAMECOUNT;
+        GVAR(FPSStorage) resize GVAR(frameCount);
         GVAR(FPSStorage) = GVAR(FPSStorage) apply {0};
     };
 
@@ -50,7 +53,7 @@ DFUNC(toggleFrameInfo) = {
 
         private _prevFrameFPS = 0;
         private _maxFPS = 0;
-        for "_i" from 0 to (FRAMECOUNT - 1) do {
+        for "_i" from 0 to (GVAR(frameCount) - 1) do {
             private _control = _display displayCtrl (9503 + _i);
             private _position = ctrlPosition _control;
             private _frameFPS = GVAR(FPSStorage) select _i;
@@ -70,16 +73,17 @@ DFUNC(toggleFrameInfo) = {
 
         (_display displayCtrl 9501) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round GVAR(topFPS)];
         (_display displayCtrl 9502) ctrlSetStructuredText parseText format ["<t align='right' size='%1'>%2</t>", PY(1.5) / 0.035, round _currentFPS];
-    }, 0, _display] call CFUNC(addPerFrameHandler);
+    }, 0] call CFUNC(addPerFrameHandler);
     private _ctrlGroup = uiNamespace getVariable [QGVAR(ctrlGroup), controlNull];
     _ctrlGroup ctrlShow true;
     _ctrlGroup ctrlCommit 0;
-};
+}] call CFUNC(compileFinal);
+
 ["missionStarted", {
     params ["_display"];
     // Create all controls
     private _ctrlGroup = _display ctrlCreate ["RscControlsGroupNoScrollbars", 9500];
-    _ctrlGroup ctrlSetPosition [safeZoneX + safeZoneW - PX(FRAMECOUNT * 0.2 + 5), 0.5 + PY(3.4), PX(FRAMECOUNT * 0.2 + 4), PY(5)];
+    _ctrlGroup ctrlSetPosition [safeZoneX + safeZoneW - PX(GVAR(frameCount) * 0.2 + 5), 1 + PY(3.4), PX(GVAR(frameCount) * 0.2 + 4), PY(5)];
     _ctrlGroup ctrlCommit 0;
 
     uiNamespace setVariable [QGVAR(ctrlGroup), _ctrlGroup];
@@ -94,7 +98,7 @@ DFUNC(toggleFrameInfo) = {
     _control ctrlSetFont "PuristaMedium";
     _control ctrlCommit 0;
 
-    for "_i" from 0 to (FRAMECOUNT - 1) do {
+    for "_i" from 0 to (GVAR(frameCount) - 1) do {
         private _control = _display ctrlCreate ["RscPicture", 9503 + _i, _ctrlGroup];
         _control ctrlSetPosition [PX(_i * 0.2 + 4), PY(0), PX(0.2), PY(5)];
         _control ctrlSetText "#(argb,8,8,3)color(1,1,1,1)";

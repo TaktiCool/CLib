@@ -8,7 +8,7 @@
     Server module loader used on server and when CLib is present on client. Prepares the functions for transmission to clients. Should run before client register with server.
 
     Parameter(s):
-    ARRAY - server only: the names of the requested modules
+    0: The names of the requested modules <Array> (Default: [])
 
     Returns:
     None
@@ -16,6 +16,8 @@
     Example:
     ["Module1", "Module2"] call CFUNC(loadModulesServer);
 */
+
+
 // Find all functions which are part of the requested modules and store them in an array.
 GVAR(requiredFunctions) = [];
 
@@ -43,8 +45,9 @@ LOG("Loaded Modules: " + str _this);
 GVAR(LoadedModules) = _requiredModules;
 publicVariable QGVAR(LoadedModules);
 {
-    private _fullFunctionModuleName = (parsingNamespace getVariable (_x + "_data")) select 1;
-    private _fullFunctionModName = (parsingNamespace getVariable (_x + "_data")) select 3;
+    private _data = parsingNamespace getVariable (_x + "_data");
+    private _fullFunctionModuleName = _data select 1;
+    private _fullFunctionModName = _data select 3;
     // Push the function name on the array if its in the requested module list.
     if (_fullFunctionModuleName in _requiredModules || _fullFunctionModName in _requiredModules) then {
         GVAR(requiredFunctions) pushBackUnique _x;
@@ -60,7 +63,6 @@ GVAR(RequiredFncClient) = GVAR(requiredFunctions) select {!((parsingNamespace ge
 GVAR(countRequiredFnc) = count GVAR(RequiredFncClient) - 1;
 
 QGVAR(registerClient) addPublicVariableEventHandler {
-
     // Determine client id by provided object (usually the player object).
     private _clientID = owner (_this select 1);
 
@@ -88,6 +90,7 @@ QGVAR(unregisterClient) addPublicVariableEventHandler {
 
     GVAR(SendFunctionsUnitCache) = GVAR(SendFunctionsUnitCache) - [objNull];
 };
+
 // Call all required function on the server.
 call FUNC(callModules);
 

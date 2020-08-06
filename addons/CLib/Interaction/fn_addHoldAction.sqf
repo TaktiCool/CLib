@@ -5,7 +5,7 @@
     Author: BadGuy
 
     Description:
-    Hold Action Handler
+    Adds a Hold Action to objects or types of object or overrides a vanilla action with Hold Action
 
     Parameter(s):
     0: Target <Object, String, Array> (Default: objNull)
@@ -18,7 +18,7 @@
     7: Progress code <Code> (Default: {})
     8: Completed code <Code> (Default: {})
     9: Interrupted code <Code> (Default: {})
-    10: Arguments <Any> (Default: [])
+    10: Arguments <Anything> (Default: [])
     11: Priority <Number> (Default: 1000)
     12: Remove on complete <Bool> (Default: true)
     13: Show unconscious <Bool> (Default: false)

@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Event name <String> (Default: "")
-    1: Arguments <Any> (Default: [])
+    1: Arguments <Anything> (Default: [])
 
     Returns:
     Return of Last set on _CLib_EventReturn <Anything>

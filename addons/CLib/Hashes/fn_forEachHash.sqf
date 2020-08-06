@@ -5,19 +5,19 @@
     Author: joko // Jonas
 
     Description:
-    Creates a New Hashset
+    Loops Though all Entrys in a HashSet
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
     1: Code to Execute on every Items of the Hash set <Code> (Default: {})
-    2: Arguments that get Passed to the Code <Any> (Default: [])
+    2: Arguments that get Passed to the Code <Anything> (Default: [])
 
     Returns:
     None
 */
 
 params [
-    ["_hashSet", [[], []], [[]], 2],
+    ["_hashSet", [[], []], [[]]],
     ["_code", {}, [{}]],
     ["_args", [], []]
 ];

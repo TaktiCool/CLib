@@ -28,4 +28,4 @@ if (_code isEqualTo {}) exitWith {
     LOG("Empty code passed to addStatusEffectType");
 };
 
-GVAR(StatusEffectsNamespace) setVariable ["Code_" + _id, _code];
+GVAR(StatusEffectsNamespace) setVariable [QGVAR(Code_) + _id, _code];

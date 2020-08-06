@@ -9,15 +9,15 @@
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
-    1: Key <Any> (Default: "")
+    1: Key <Anything>
 
     Returns:
     Contains Key in Hash set <Bool>
 */
 
 params [
-    ["_hashSet", [[], []], [[]], 2],
-    ["_key", "", []]
+    ["_hashSet", [[], []], [[]]],
+    "_key"
 ];
 
 _key in (_hashSet select HASH_KEYS);
