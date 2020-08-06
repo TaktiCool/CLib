@@ -4,7 +4,7 @@ modname = "CLib"
 prefix = ""
 author = "CLib Team"
 sig_version = 3
-version = "0.9.0.952"
+version = "0.10.0.1030"
 reuse_private_key = false
 files = [
     "mod.cpp",
