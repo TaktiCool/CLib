@@ -13,7 +13,7 @@ class CLib {
 
     useFallbackRemoteExecution = 0; // Force Enables Fallback Remote Execution system if for Server Owners that disallow remoteExec/remoteExecCall (Default: 0)
     useCompressedFunction = 0; // Enable Compression of Functions that get Transmitted over network currently only Available on Windows (Default: 0)
-    Modules[] = {"CLib"};
+    Modules[] = {"CLib"}; // Modules CLib Should Load
 };
 ```
 
