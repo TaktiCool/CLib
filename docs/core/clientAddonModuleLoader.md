@@ -1,18 +1,32 @@
-# Core
+# Client Addon Module Loader
 
-> Maintainer: NetFusion, BadGuy, joko // Jonas
+> Maintainer: joko // Jonas
 
-The Core Module Contains all Main Parts that allows CLib to Load and Run. It Also Contains some Misc Functions and Functionalitys that are not fitting in to there own or other Modules
+The Client Addon Loader is a Module where you are able to use a CLib Entry Point from the Client Addon side.
 
-## Sub Modules
+The Script files are Required to be called fn_functionName.sqf.  
+Sub Modules and Dependency's are not Supported!  
+Supported Entry Points are init(all clients and server), serverInit(isServer), clientInit(hasInterface), hcInit(not hasInterface and not isServer).  
+All Client Addon Modules are always loaded.
+All CLib Modules are available at the point of calling.
 
- - [Autoload](core/autoload.md)
- - [Client Addon Module Loader](core/clientAddonModuleLoader.md)
- - [Compile](core/compile.md)
- - [Compression](core/compression.md)
- - [Extension Framework](core/extensionFramework.md)
- - [Misc](core/misc.md)
- - [Mission Module Loader](core/missionModuleLoader.md)
+## Mission Side Implementation
+Examples:
+```sqf
+class CLib {
+    class CfgCLibAddonModules {
+        tag = "Test";
+        class testModule {
+            class clientInit;
+            class hcInit;
+            class init;
+            class serverInit;
+            class testFnc;
+        };
+    };
+};
+```
+
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config
