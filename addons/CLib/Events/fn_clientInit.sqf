@@ -59,7 +59,6 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     ["getConnectedUAV", {getConnectedUAV CLib_Player}],
     ["currentVisionMode", {currentVisionMode CLib_Player}],
     ["playerInventory", {CLib_Player call CFUNC(getAllGear)}],
-    ["visibleMap", {visibleMap}],
     ["visibleGPS", {visibleGPS}],
     ["playerSide", {playerSide}],
     ["cursorTarget", {cursorTarget}],
@@ -74,6 +73,11 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
 ];
 
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);
+
+addMissionEventHandler ["Map", {
+    params ["_mapVisible"];
+    ["visibleMapChanged", [_mapVisible, !_mapVisible]] call CFUNC(localEvent);
+}];
 
 // Import the vanilla events in the event system.
 {
