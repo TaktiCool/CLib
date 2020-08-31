@@ -67,7 +67,9 @@ DUMP("Compile Function: " + _functionName);
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
+#ifndef ISDEV
 if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")}) then {
+#endif
     if (isNil "_functionString") then {
         _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
     };
@@ -84,5 +86,7 @@ if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")}) then {
             DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
         #endif
     };
+#ifndef ISDEV
 };
+#endif
 nil
