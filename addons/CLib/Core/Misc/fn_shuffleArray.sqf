@@ -14,10 +14,6 @@
     Shuffled array <Array>
 */
 
-params [
-    ["_this", [], [[]], []]
-];
-
 _this = +_this;
 private _res = [];
 for "_i" from count _this to 1 step -1 do {
