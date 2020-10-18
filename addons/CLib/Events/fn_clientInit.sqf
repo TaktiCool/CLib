@@ -75,8 +75,8 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
 [compile _codeStr, 0] call CFUNC(addPerFrameHandler);
 
 addMissionEventHandler ["Map", {
-    params ["_mapVisible"];
-    ["visibleMapChanged", [_mapVisible, !_mapVisible]] call CFUNC(localEvent);
+    params ["_mapVisible", "_mapIsForced"];
+    ["visibleMapChanged", [_mapVisible, !_mapVisible, _mapIsForced]] call CFUNC(localEvent);
 }];
 
 // Import the vanilla events in the event system.
@@ -108,7 +108,8 @@ addMissionEventHandler ["Map", {
     "Killed",
     "Respawn",
     "AnimStateChanged",
-    "HandleDamage"
+    "HandleDamage",
+    "GetInMan"
 ];
 
 ["pauseMenuVisibleChanged", {

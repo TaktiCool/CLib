@@ -5,17 +5,15 @@
     Author: joko // Jonas
 
     Description:
-    Counts amount of Hashes in Hash set
+    Returns all Values Contained in Hashset
 
     Parameter(s):
     0: HashSet <Array> (Default: [[], []])
 
     Returns:
-    Amount of Hashes in Hashset <Number>
+    All Keys from Hash <Array>
 */
 
-params [
-    ["_hashSet", HASH_NULL, [[]]]
-];
+params [["_hashSet", HASH_NULL, [[]]]];
 
-count (_hashSet select HASH_KEYS);
+[] + _hashSet select HASH_VALUES;
