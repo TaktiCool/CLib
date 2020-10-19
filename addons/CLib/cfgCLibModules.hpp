@@ -163,7 +163,7 @@ class CfgCLibModules {
             APIFNC(getHash);
             APIFNC(hashKeys);
             APIFNC(hashToNamespace);
-            APIFNC(hashVaules);
+            APIFNC(hashValues);
             APIFNC(hashToTuple);
             APIFNC(isHash);
             APIFNC(namespaceToHash);
