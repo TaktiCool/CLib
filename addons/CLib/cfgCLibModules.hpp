@@ -214,7 +214,7 @@ class CfgCLibModules {
             APIFNC(nearestMapGraphicsGroup);
             APIFNC(removeMapGraphicsEventhandler);
             APIFNC(removeMapGraphicsGroup);
-            APIFNC(TriggerMapGraphicsEvent);
+            APIFNC(triggerMapGraphicsEvent);
             APIFNC(registerMapControl);
             APIFNC(unregisterMapControl);
         };

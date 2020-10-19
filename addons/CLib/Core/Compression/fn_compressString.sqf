@@ -15,11 +15,13 @@
 */
 
 params [
-    ["_input", "", [""]]
+    ["_input", "", [""]],
+    ["_useSQF", false]
 ];
-private _output = [-1, "CLibCompression", "Compress", _input] call CFUNC(extensionRequest);
+
 // if !(_output in ["", GVAR(ACK)]) exitWith { // currently disabled to reduce loading times on Linux!
-if (true) exitWith {
+if (!_useSQF) exitWith {
+    private _output = [-1, "CLibCompression", "Compress", _input] call CFUNC(extensionRequest);
     _output
 };
 

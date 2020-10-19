@@ -126,7 +126,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
             };
         #endif
         nil
-    } count [missionNamespace, uiNamespace, parsingNamespace];
+    } count [missionNamespace, localNamespace, uiNamespace, parsingNamespace];
 
     // Update the loading screen with the progress.
     _progress call BIS_fnc_progressloadingscreen;

@@ -15,10 +15,11 @@
 */
 
 params [
-    ["_string", "", [""]]
+    ["_string", "", [""]],
+    ["_useSQF", false]
 ];
 
-private _compressedFunction = _string call CFUNC(compressString);
+private _compressedFunction = [_string, _useSQF] call CFUNC(compressString);
 private _decompFunction = _compressedFunction call CFUNC(decompressString);
 
 _decompFunction isEqualTo _string
