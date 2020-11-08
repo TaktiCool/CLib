@@ -12,14 +12,14 @@
     1: Muzzle Name <String> (Default: "")
 
     Returns:
-    List of all Compatible Magazines of a Weapons Muzzle <Array> 
+    List of all Compatible Magazines of a Weapons Muzzle <Array>
 */
 
 params [
     ["_weapon", "", [""]],
     ["_muzzle", "", [""]]
 ];
-
+if (toLower _muzzle == "this") then { _muzzle = ""; };
 private _if = if (_muzzle != "");
 private _varName = format ["%1_%2_%3", QGVAR(mags), _weapon];
 _if then {
