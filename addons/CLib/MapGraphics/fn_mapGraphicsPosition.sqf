@@ -8,11 +8,11 @@
     Converts a Position from MapGraphicsPosition into a position
 
     Parameter(s):
-    0: Position <Array, Object> (MapGraphicsPosition) (Default: objNull)
+    0: MapGraphicsPosition <Array, Object> (Default: objNull)
     1: Map <Control> (Default: controlNull)
 
     Returns:
-    Position <Array> (Position3D)
+    Position3D <Array>
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
