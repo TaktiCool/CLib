@@ -34,7 +34,7 @@ if (_position isEqualType []) then {
         _pos = [(_pos select 0) + (_offset select 0) / 640, (_pos select 1) + (_offset select 1) / 480];
         _pos = _map ctrlMapScreenToWorld _pos;
         _position = _pos;
-    }
+    };
 
     // Make sure the returned position is Position3D
     private _originalLength = count _position;
