@@ -12,7 +12,7 @@
     1: Map <Control> (Default: controlNull)
 
     Returns:
-    Position <Position3D>
+    Position <Array> (Position3D)
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
@@ -37,13 +37,14 @@ if (_position isEqualType []) then {
     };
 
     // Make sure the returned position is Position3D
-    private _originalLength = count _position;
-    _position resize 3;
-    
-    // If the original position did contain fewer than 3 entries, replace the nil values inserted by the resize commands
-    // with zeros
-    for "_i" from _originalLength to 3 do {
-        _position set [_i, 0];
+    private _size = count _position;
+    if (_size != 3) then {
+        if (_size > 3) then {
+            _position resize 3;
+        } else {
+            // Array size is 2 as the only other valid option at this point is Position2D
+            _position pushBack 0;
+        };
     };
 };
 
