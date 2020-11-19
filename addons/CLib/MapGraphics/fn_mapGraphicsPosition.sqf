@@ -8,7 +8,7 @@
     Converts a Position from MapGraphicsPosition into a position
 
     Parameter(s):
-    0: Position <MapGraphicsPosition> (Default: objNull)
+    0: Position <Array, Object> (MapGraphicsPosition) (Default: objNull)
     1: Map <Control> (Default: controlNull)
 
     Returns:
