@@ -24,6 +24,8 @@ params [
 
 private _mousePosition = [_xPos, _yPos];
 _mousePosition = _map ctrlMapScreenToWorld _mousePosition;
+// ctrlMapScreenToWorld yields Position2D, but we want a Position3D (e.g. inPolygon requires it)
+_mousePosition pushBack 0;
 
 private _r = 100000;
 private _nearestIcon = "";
