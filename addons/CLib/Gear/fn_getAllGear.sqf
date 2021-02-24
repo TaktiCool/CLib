@@ -18,16 +18,16 @@
 
     Remarks:
     Loadout
-     0: Headgear <String>
-     1: Goggles <String>
-     2: Uniform <String>
-     3: Uniform Items <ARRAY>
-     4: Vest <String>
-     5: Vest Items <ARRAY>
-     6: Backback <String>
-     7: Backpack Items <ARRAY>
-     8: Rifle <String>
-     9: Rifle Items <ARRAY>
+    0: Headgear <String>
+    1: Goggles <String>
+    2: Uniform <String>
+    3: Uniform Items <ARRAY>
+    4: Vest <String>
+    5: Vest Items <ARRAY>
+    6: Backback <String>
+    7: Backpack Items <ARRAY>
+    8: Rifle <String>
+    9: Rifle Items <ARRAY>
     10: Rifle Magazines <ARRAY>
     11: Launcher <String>
     12: Launcher Items <ARRAY>
