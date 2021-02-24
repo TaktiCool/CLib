@@ -92,7 +92,7 @@ _rawOutput append (_rawInput select [0, MINMATCHLENGTH]);
     nil
 } count _rawInput;
 
-if (!(_writeCache isEqualTo [])) then {
+if (_writeCache isNotEqualTo []) then {
     _rawOutput pushBack _encodeFlag;
     _rawOutput append _writeCache;
 };

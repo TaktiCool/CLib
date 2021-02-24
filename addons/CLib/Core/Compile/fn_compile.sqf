@@ -55,9 +55,9 @@ scopeName (_fnc_scriptName + '_Main');
 #endif
 
 {
-    if !((_x getVariable [_functionName, {}]) isEqualTo _functionCode) then {
+    if ((_x getVariable [_functionName, {}]) isNotEqualTo _functionCode) then {
         _x setVariable [_functionName, _functionCode];
-        if !(_x getVariable [_functionName, {}] isEqualTo _functionCode) then {
+        if (_x getVariable [_functionName, {}] isNotEqualTo _functionCode) then {
             LOG("Error: " + _functionName + " could not get overwritten but is different from the current version!");
         };
     };
@@ -84,7 +84,7 @@ if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")}) then {
         #endif
         #ifdef DEBUGFULL
             private _var = _compressedString call CFUNC(decompressString);
-            DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
+            DUMP("Compressed Functions is Damaged: " + str (_var isNotEqualTo _functionString));
         #endif
     };
 #ifndef ISDEV

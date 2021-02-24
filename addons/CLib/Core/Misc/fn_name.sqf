@@ -30,7 +30,7 @@ if (isNil "_ret") then {
     if (_object isKindOf "CAManBase") then {
         _ret = name _object;
         if (_ret != "Error: No vehicle") exitWith {};
-        _ret = getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName");
+        _ret = getText (configOf _object >> "displayName");
         _object setVariable [QGVAR(waitForNameIsRunning), true];
         [{
             if (_this getVariable [QGVAR(objectName), ""] != "") exitWith {
@@ -41,7 +41,7 @@ if (isNil "_ret") then {
              || _this getVariable [QGVAR(objectName), ""] != ""
         }, _object] call CFUNC(waitUntil);
     } else {
-        _ret = getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName");
+        _ret = getText (configOf _object >> "displayName");
         _object setVariable [QGVAR(objectName), _ret];
     };
 };

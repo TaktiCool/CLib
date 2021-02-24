@@ -48,7 +48,7 @@ _object setVariable [format [QGVAR(onEmbargo_%1), _varName], _object];
     private _curValue = _object getVariable _varName;
 
     //If value at start of embargo doesn't equal current, then broadcast and start new embargo
-    if (!(_value isEqualTo _curValue)) then {
+    if (_value isNotEqualTo _curValue) then {
         [_object, _varName, _curValue, _delay] call CFUNC(setVariablePublic);
     };
 }, _delay, _this] call CFUNC(wait);

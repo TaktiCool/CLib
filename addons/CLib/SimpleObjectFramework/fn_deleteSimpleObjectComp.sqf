@@ -37,9 +37,9 @@ private _objs = GVAR(compNamespace) getVariable [_uid, []];
 } count _objs;
 GVAR(compNamespace) setVariable [_uid, nil, true];
 
-if !(_callback isEqualTo []) then {
+if (_callback isNotEqualTo []) then {
     _callback params [["_target", objNull], ["_code", {}], ["_parameter", []]];
-    if !(_code isEqualTo [] || isNull _target) then {
+    if (_code isNotEqualTo [] || isNull _target) then {
         [QGVAR(simpleObjectsDeleted), _target, [_uid, _code, _parameter]] call CFUNC(targetEvent);
     };
 };

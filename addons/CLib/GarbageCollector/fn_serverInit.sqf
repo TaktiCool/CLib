@@ -18,7 +18,7 @@ if (getNumber (missionConfigFile >> QPREFIX >> "GarbageCollector" >> "EnableGarb
 
 DFUNC(pushbackInQueue) = [{
     params ["_object"];
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {
+    if (_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isNotEqualTo []) exitWith {
         _object setVariable [QCGVAR(noClean), true, true]; // Dont Pushback Vehciles that are handled by BIS Respawn Module
     };
     if !(_object getVariable [QCGVAR(noClean), false]) then {
@@ -35,7 +35,7 @@ DFUNC(pushbackInQueue) = [{
 DFUNC(removeMissionObject) = [{
     params [["_object", objNull]];
     if (isNull _object) exitWith {};
-    if !(_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isEqualTo []) exitWith {
+    if (_object getVariable ["BIS_fnc_moduleRespawnVehicle_data", []] isNotEqualTo []) exitWith {
         _object getVariable [QCGVAR(noClean), true, true]; // Dont Pushback Vehciles that are handled by BIS Respawn Module
     };
     if (_object getVariable [QCGVAR(noClean), false]) exitWith {};

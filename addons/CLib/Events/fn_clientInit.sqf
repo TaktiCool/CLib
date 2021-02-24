@@ -45,7 +45,7 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
     // Build a name for the variable where we store the data. Fill it with the initial value.
     private _varName = format [QGVAR(EventData_%1), _name];
     GVAR(EventNamespace) setVariable [_varName, call _code];
-    _codeStr = _codeStr + format ["_oldValue = %4 getVariable '%2'; _currentValue = call %1; if (!(_oldValue isEqualTo _currentValue)) then { ['%5Changed', [_currentValue, _oldValue]] call %3; _oldValue = %4 setVariable ['%2', _currentValue]; };", _code, _varName, QCFUNC(localEvent), QGVAR(EventNamespace), _name];
+    _codeStr = _codeStr + format ["_oldValue = %4 getVariable '%2'; _currentValue = call %1; if (_oldValue isNotEqualTo _currentValue) then { ['%5Changed', [_currentValue, _oldValue]] call %3; _oldValue = %4 setVariable ['%2', _currentValue]; };", _code, _varName, QCFUNC(localEvent), QGVAR(EventNamespace), _name];
     nil
 } count [
     ["player", {missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player]}],
@@ -108,7 +108,6 @@ addMissionEventHandler ["Map", {
     "Killed",
     "Respawn",
     "AnimStateChanged",
-    "HandleDamage",
     "GetInMan"
 ];
 

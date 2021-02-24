@@ -22,7 +22,7 @@ params [
 ];
 
 private _position = getPosATL _object;
-if ((getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "simulation")) == "house") then {
+if ((getText (configOf _object >> "simulation")) == "house") then {
     // Houses don't have gravity/physics, so make sure they are not floating
     if (_position select 2 > 0) then {
         _object setVehiclePosition [_position, [], 0, "CAN_COLLIDE"];

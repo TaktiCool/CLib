@@ -75,7 +75,7 @@ if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
         compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.sqf"; // Crashes Client to Desktop
     };
 
-    if (!(isNil "_this") && {!(_this isEqualTo [])}) then {
+    if (!(isNil "_this") && {_this isNotEqualTo []}) then {
         [FUNC(loadModulesServer), _this] call CFUNC(directCall);
     } else {
         [FUNC(loadModulesServer), getArray _cfg] call CFUNC(directCall);

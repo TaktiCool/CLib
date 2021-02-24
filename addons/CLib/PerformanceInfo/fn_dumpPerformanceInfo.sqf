@@ -87,7 +87,7 @@ name = %3",
 ];
 _text call _fnc_outputText;
 
-if !(GVAR(FPSStorage) isEqualTo []) then {
+if (GVAR(FPSStorage) isNotEqualTo []) then {
     _text = "------Last Client Frames------
     ";
     {
