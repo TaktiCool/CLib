@@ -115,6 +115,22 @@ Examples:
 private _isBanana = [MyAwsomeHashSet, "isbanana"] call CLib_fnc_getHash;
 ```
 
+### CLib_fnc_hashKeys
+
+Parameter(s):
+* [`<HashSet>`] HashSet to get all keys from
+
+Returns:
+* [`<Array>`] all keys from the HashSet
+
+Gets all Keys from a HashSet
+
+Examples:
+
+```sqf
+private _keys = [MyAwsomeHashSet] call CLib_fnc_hashKeys;
+```
+
 ### CLib_fnc_hashToNamespace
 
 Parameter(s):
@@ -132,6 +148,54 @@ Examples:
 
 ```sqf
 [MyNewNamespace, MyAwsomeHashSet, true, "AllVariables"] call CLib_fnc_hashToNamespace
+```
+
+### CLib_fnc_hashValues
+
+Parameter(s):
+* [`<HashSet>`] HashSet to get Value from
+
+Returns:
+* [`<Array>`] All Values from the HashSet
+
+Gets all Values from a HashSet
+
+Examples:
+
+```sqf
+private _keys = [MyAwsomeHashSet] call CLib_fnc_hashKeys;
+```
+
+### CLib_fnc_hashToTuple
+
+Parameter(s):
+* [`<HashSet>`] HashSet
+
+Returns:
+* [`<Array>`] Tuple Array representation of the HashSet
+
+Tuple Array representation of the HashSet
+
+Examples:
+
+```sqf
+private _keys = [MyAwsomeHashSet] call CLib_fnc_hashToTuple;
+```
+
+### CLib_fnc_isHash
+
+Parameter(s):
+* [`<HashSet>`] HashSet to get Value from
+
+Returns:
+* [`<Boolean>`] Array is a Hashset
+
+Checks if Array is a Hashset
+
+Examples:
+
+```sqf
+private _keys = [MyAwsomeHashSet] call CLib_fnc_hashKeys;
 ```
 
 ### CLib_fnc_namespaceToHash

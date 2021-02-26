@@ -48,6 +48,9 @@ if (isNil QCFUNC(checkAllFunctionCompression)) then {
 if (isNil QCFUNC(log)) then {
     DCFUNC(log) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Misc\fn_log.sqf";
 };
+if (isNil QCFUNC(codeToString)) then {
+    DCFUNC(codeToString) = compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Misc\fn_codeToString.sqf";
+};
 
 call compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_preStart.sqf";
 

@@ -140,9 +140,9 @@ deleteVehicle _originObj;
 
 GVAR(compNamespace) setVariable [_uid, _return, true];
 
-if !(_callback isEqualTo []) then {
+if (_callback isNotEqualTo []) then {
     _callback params [["_target", objNull], ["_code", {}], ["_parameter", []]];
-    if !(_code isEqualTo [] || isNull _target) then {
+    if (_code isNotEqualTo [] || isNull _target) then {
         [QGVAR(simpleObjectsCreated), _target, [_uid, _code, _parameter]] call CFUNC(targetEvent);
     };
 };

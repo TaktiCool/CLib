@@ -66,7 +66,7 @@ private _targets = [];
 } count _target;
 
 // exit with no targets are applyed
-if !(_targets isEqualTo []) then {
+if (_targets isNotEqualTo []) then {
     // make Targets Unique
     _targets = _targets arrayIntersect _targets;
 

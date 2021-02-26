@@ -47,12 +47,13 @@ class CLib {
         };
     };
 
+    TransmissionBlockSize = 3;
+
     useExperimentalAutoload = 0;
 
     useFallbackRemoteExecution = 0;
     useCompressedFunction = 0;
     Modules[] = {"CLib"};
-    IgnoredAddons[] = {"CLib"};
 
     class CfgCLibMissionModules {
         tag = "Test";

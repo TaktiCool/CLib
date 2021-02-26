@@ -17,7 +17,7 @@
 */
 
 params [
-    ["_hashSet", [[], []], [[]]],
+    ["_hashSet", HASH_NULL, [[]]],
     ["_code", {}, [{}]],
     ["_args", [], []]
 ];

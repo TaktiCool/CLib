@@ -9,7 +9,7 @@
 
     Parameter(s):
     0: Group Name <String> (Default: "")
-    1: Group Data <Array> (Default: ["RECTANGLE"])
+    1: Group Data <Array> (Default: [])
     2: State <String> (Default: "normal")
     3: Group Layer <Number> (Default: 0)
 
@@ -18,49 +18,49 @@
 
     Remarks:
     Group Data is defined as <ARRAY> of GraphicsElements of following Structure:
-    0: Class <STRING> (ICON | RECTANGLE | ELLIPSE | LINE | ARROW | POLYGON)
-    Class = "ICON":
-        1: Texture <String>
-        2: Color <Array> [r,g,b,a]
-        3: Position <MapGraphicsPosition>
-        4: Width <Number>
-        5: Height <Number>
-        6: Angle <Number>
-        7: Text <String>
-        8: Shadow <Boolean/Number>
-        9: Text Size <Number>
-        10: Font <String>
-        11: Align <String>
-    Class = "RECTANGLE":
-        1: Center Position <MapGraphicsPosition>
-        2: Width <Number | ['m','screen', NUMBER]>
-        3: Height <Number | ['m','screen', NUMBER]>
-        4: Angle <Number>
-        5: Line Color <Array> [r,g,b,a]
-        6: Fill Color <Array> [r,g,b,a]
-    Class = "ELLIPSE":
-        1: Center Position <MapGraphicsPosition>
-        2: Width <Number | ['m','screen', NUMBER]>
-        3: Height <Number | ['m','screen', NUMBER]>
-        4: Angle <Number>
-        5: Line Color <Array> [r,g,b,a]
-        6: Fill Color <Array> [r,g,b,a]
-    Class = "LINE":
-        1: Position 1 <MapGraphicsPosition>
-        2: Position 2 <MapGraphicsPosition>
-        3: Line Color <Array> [r,g,b,a]
-    Class = "ARROW":
-        1: Position 1 <MapGraphicsPosition>
-        2: Position 2 <MapGraphicsPosition>
-        3: Line Color <Array> [r,g,b,a]
-    Class = "POLYGON":
-        1: Positions <Array> of MapGraphicsPosition
-        2: Line Color <Array> [r,g,b,a]
-    last element: Code <Code> called every frame
-    Class = "TRIANGLE"
-        1: Positions <Array> of <Array> of MapGraphicsPosition
-        2: Line Color <Array> [r,g,b,a]
-        3: Fill Color <Array> [r,g,b,a]
+        0: Class <STRING> (ICON | RECTANGLE | ELLIPSE | LINE | ARROW | POLYGON)
+        Class = "ICON":
+            1: Texture <String>
+            2: Color <Array> [r,g,b,a]
+            3: Position <MapGraphicsPosition>
+            4: Width <Number>
+            5: Height <Number>
+            6: Angle <Number>
+            7: Text <String>
+            8: Shadow <Boolean/Number>
+            9: Text Size <Number>
+            10: Font <String>
+            11: Align <String>
+        Class = "RECTANGLE":
+            1: Center Position <MapGraphicsPosition>
+            2: Width <Number | ['m','screen', NUMBER]>
+            3: Height <Number | ['m','screen', NUMBER]>
+            4: Angle <Number>
+            5: Line Color <Array> [r,g,b,a]
+            6: Fill Color <Array> [r,g,b,a]
+        Class = "ELLIPSE":
+            1: Center Position <MapGraphicsPosition>
+            2: Width <Number | ['m','screen', NUMBER]>
+            3: Height <Number | ['m','screen', NUMBER]>
+            4: Angle <Number>
+            5: Line Color <Array> [r,g,b,a]
+            6: Fill Color <Array> [r,g,b,a]
+        Class = "LINE":
+            1: Position 1 <MapGraphicsPosition>
+            2: Position 2 <MapGraphicsPosition>
+            3: Line Color <Array> [r,g,b,a]
+        Class = "ARROW":
+            1: Position 1 <MapGraphicsPosition>
+            2: Position 2 <MapGraphicsPosition>
+            3: Line Color <Array> [r,g,b,a]
+        Class = "POLYGON":
+            1: Positions <Array> of MapGraphicsPosition
+            2: Line Color <Array> [r,g,b,a]
+        last element: Code <Code> called every frame
+        Class = "TRIANGLE"
+            1: Positions <Array> of <Array> of MapGraphicsPosition
+            2: Line Color <Array> [r,g,b,a]
+            3: Fill Color <Array> [r,g,b,a]
 
     TYPE <MapGraphicsPosition>:
     OBJECT | POSITION3D | POSITION2D | [OBJECT | POSITION3D | POSITION2D,[ScreenOffsetX,ScreenOffsetY]]
@@ -68,7 +68,7 @@
 
 params [
     ["_groupName", "", [""]],
-    ["_groupData", ["RECTANGLE"], [[]], []],
+    ["_groupData", [], [[]], []],
     ["_state", "normal", [""]],
     ["_layer", 0, [0]]
 ];

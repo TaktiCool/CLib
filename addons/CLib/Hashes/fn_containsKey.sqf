@@ -16,7 +16,7 @@
 */
 
 params [
-    ["_hashSet", [[], []], [[]]],
+    ["_hashSet", HASH_NULL, [[]]],
     "_key"
 ];
 

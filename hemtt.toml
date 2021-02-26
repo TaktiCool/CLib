@@ -4,7 +4,7 @@ modname = "CLib"
 prefix = ""
 author = "CLib Team"
 sig_version = 3
-version = "0.10.0.1030"
+version = "0.11.0.1055"
 reuse_private_key = false
 files = [
     "mod.cpp",
@@ -16,11 +16,13 @@ files = [
 include = ["./include"]
 
 check = [
-    "!version_set"
+    "!version_set",
+    "!comment_isdev"
 ]
 
 postbuild = [
-    "!version_unset"
+    "!version_unset",
+    "!uncomment_isdev"
 ]
 
 releasebuild = [
@@ -66,6 +68,32 @@ steps_windows = [
     "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define MINOR {{semver.minor}}', '#define MINOR 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
     "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define PATCHLVL {{semver.patch}}', '#define PATCHLVL 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
     "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define BUILD {{semver.build}}', '#define BUILD 0' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+]
+
+only_release = true
+show_output = true
+
+[scripts.comment_isdev]
+steps_linux = [
+    "echo 'Commenting out #define ISDEV'",
+    "sed -i -r -s 's:#define ISDEV:// #define ISDEV:g' addons/CLib/CLib_Macros.hpp",
+]
+steps_windows = [
+    "echo 'Commenting out #define ISDEV'",
+    "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '#define ISDEV', '// #define ISDEV' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
+]
+
+only_release = true
+show_output = true
+
+[scripts.uncomment_isdev]
+steps_linux = [
+    "echo 'Uncommenting #define ISDEV'",
+    "sed -i -r -s 's:// #define ISDEV:#define ISDEV:g' addons/CLib/CLib_Macros.hpp",
+]
+steps_windows = [
+    "echo 'Uncommenting #define ISDEV'",
+    "powershell -Command foreach ($f in 'addons/CLib/CLib_Macros.hpp') {(Get-Content $f) -replace '// #define ISDEV', '#define ISDEV' -join \"`n\" ^| Set-Content -NoNewline $f; Add-Content -NoNewline \"`n\" $f}",
 ]
 
 only_release = true

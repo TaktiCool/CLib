@@ -32,11 +32,11 @@ private _functionCode = if (USE_COMPRESSION(!isNil {parsingNamespace getVariable
 
 // Transfers the function name, code and progress to the client.
 GVAR(receiveFunction) = [_functionName, _functionCode, _index / GVAR(countRequiredFnc)];
-if (isNil QGVAR(TransmisionSize)) then {
-    GVAR(TransmisionSize) = 0;
+if (isNil QGVAR(TransmissionSize)) then {
+    GVAR(TransmissionSize) = 0;
 };
 private _size = count _functionCode/1024;
-GVAR(TransmisionSize) = GVAR(TransmisionSize) + _size;
+GVAR(TransmissionSize) = GVAR(TransmissionSize) + _size;
 
 #ifdef ISDEV
 private _str = format ["SendFunctions: %1, Size: %2KB", _functionName, _size, GVAR(receiveFunction) select 2];

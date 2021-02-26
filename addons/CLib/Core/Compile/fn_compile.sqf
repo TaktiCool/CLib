@@ -54,12 +54,10 @@ scopeName (_fnc_scriptName + '_Main');
     };
 #endif
 
-DUMP("Compile Function: " + _functionName);
-
 {
-    if !((_x getVariable [_functionName, {}]) isEqualTo _functionCode) then {
+    if ((_x getVariable [_functionName, {}]) isNotEqualTo _functionCode) then {
         _x setVariable [_functionName, _functionCode];
-        if !(_x getVariable [_functionName, {}] isEqualTo _functionCode) then {
+        if (_x getVariable [_functionName, {}] isNotEqualTo _functionCode) then {
             LOG("Error: " + _functionName + " could not get overwritten but is different from the current version!");
         };
     };
@@ -67,22 +65,29 @@ DUMP("Compile Function: " + _functionName);
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
+#ifndef ISDEV
 if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")}) then {
+#endif
+    #ifdef ISDEV
+        private _startTime = diag_tickTime;
+    #endif
     if (isNil "_functionString") then {
-        _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
+        _functionString = (_functionCode call CFUNC(codeToString)) call CFUNC(stripSqf);
     };
     private _compressedString = _functionString call CFUNC(compressString);
     // check if Compression was successful else we dont save the string and the Transmision system uses the normal version
     if (_compressedString != "" && _compressedString != GVAR(ACK)) then {
         parsingNamespace setVariable [_functionName + "_Compressed", _compressedString];
         #ifdef ISDEV
-            private _str = format ["Compress Functions: %1 %2 %3", _functionName, str ((count _compressedString / count _functionString) * 100), "%"];
+            private _str = format ["Compress Functions: %1 %2%4 %3", _functionName, str ((count _compressedString / count _functionString) * 100), (diag_tickTime - _startTime) * 1000, "%"];
             DUMP(_str);
         #endif
         #ifdef DEBUGFULL
             private _var = _compressedString call CFUNC(decompressString);
-            DUMP("Compressed Functions is Damaged: " + str (!(_var isEqualTo _functionString)));
+            DUMP("Compressed Functions is Damaged: " + str (_var isNotEqualTo _functionString));
         #endif
     };
+#ifndef ISDEV
 };
+#endif
 nil

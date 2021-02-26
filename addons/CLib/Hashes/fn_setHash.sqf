@@ -17,7 +17,7 @@
 */
 
 params [
-    ["_hashSet", [[], []], [[]]],
+    ["_hashSet", HASH_NULL, [[]]],
     ["_key", "", []],
     "_value"
 ];
@@ -45,7 +45,11 @@ switch (true) do {
         (_hashSet select HASH_VALUES) set [_i, _value];
         _hashSet
     };
+    case (!_contain && _delete): {
+        _hashSet
+    };
     default {
         DUMP("ERROR: Something went wrong");
+        _hashSet
     };
 };

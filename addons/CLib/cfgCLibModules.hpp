@@ -161,7 +161,11 @@ class CfgCLibModules {
             APIFNC(createHash);
             APIFNC(forEachHash);
             APIFNC(getHash);
+            APIFNC(hashKeys);
             APIFNC(hashToNamespace);
+            APIFNC(hashValues);
+            APIFNC(hashToTuple);
+            APIFNC(isHash);
             APIFNC(namespaceToHash);
             APIFNC(setHash);
         };
@@ -210,7 +214,7 @@ class CfgCLibModules {
             APIFNC(nearestMapGraphicsGroup);
             APIFNC(removeMapGraphicsEventhandler);
             APIFNC(removeMapGraphicsGroup);
-            APIFNC(TriggerMapGraphicsEvent);
+            APIFNC(triggerMapGraphicsEvent);
             APIFNC(registerMapControl);
             APIFNC(unregisterMapControl);
         };

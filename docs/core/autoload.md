@@ -4,8 +4,22 @@
 
 Autoload is the Sub Module that is responsible for the Loading and Transferring process of the Mod Data to the Client.
 
+## Config
+```csharp
+class CLib {
+    TransmissionBlockSize = 3; // The amount of Function the Transmission System Sends Per Tick after the Mission Runs 100 seconds (Default: 3)
 
-## CLib_fnc_loadModules
+    useExperimentalAutoload = 0; // Enables Experimental Autoload System (Default: 0)
+
+    useFallbackRemoteExecution = 0; // Force Enables Fallback Remote Execution system if for Server Owners that disallow remoteExec/remoteExecCall (Default: 0)
+    useCompressedFunction = 0; // Enable Compression of Functions that get Transmitted over network currently only Available on Windows (Default: 0)
+    Modules[] = {"CLib"}; // Modules CLib Should Load
+};
+```
+
+## Functions
+
+### CLib_fnc_loadModules
 
 Parameter(s):
 * None

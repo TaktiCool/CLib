@@ -3,3 +3,5 @@
 
 #define HASH_KEYS 0
 #define HASH_VALUES 1
+
+#define HASH_NULL [[], []]

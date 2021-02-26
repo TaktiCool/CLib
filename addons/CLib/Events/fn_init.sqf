@@ -28,8 +28,8 @@ GVAR(ignoredLogEventNames_1) = [];
     ["cursortargetchanged", 1],
     ["cursorobjectchanged", 1],
     ["playerinventorychanged", 1],
-    [QEGVAR(ExtensionFramework,extensionRequest), 0],
-    [QEGVAR(ExtensionFramework,extensionResult), 0]
+    [QEGVAR(Core,extensionRequest), 0],
+    [QEGVAR(Core,extensionResult), 0]
 ];
 
 // EventHandler to ensure that missionStarted EH get triggered if the missionStarted event already fired
