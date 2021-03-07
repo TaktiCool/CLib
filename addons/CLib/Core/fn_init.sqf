@@ -20,6 +20,7 @@ GVAR(cachedCall) = call CFUNC(createNamespace);
 
 if (hasInterface) then {
     CLib_Player setVariable [QGVAR(playerName), profileName, true];
+    CLib_Player setVariable [QGVAR(objectName), profileName, true];
     // functions for disabling user input
     DFUNC(onButtonClickEndStr) = {
         {
