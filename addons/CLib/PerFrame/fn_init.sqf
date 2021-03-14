@@ -21,7 +21,7 @@ GVAR(waitUntilArray) = [];
 
 GVAR(perFrameHandlerArray) = [];
 GVAR(PFHhandles) = [];
-GVAR(deletedIndexes) = [];
+GVAR(deletedIndices) = [];
 
 GVAR(skipFrameArray) = [];
 GVAR(sortSkipFrameArray) = false;
