@@ -61,48 +61,44 @@ if (_className != "" && _count > 0) then {
     for "_i" from 1 to _count do {
         switch (_container) do {
             case (0): {
-                if (_unit canAddItemToUniform _className) then {
-                    _unit addItemToUniform _className;
-                } else {
+                if !(_unit canAddItemToUniform _className) then {
                     private _message = format ["Item %1 can't added because Gear is Full", _className];
                     LOG(_message);
                     #ifdef ISDEV
                     hintSilent _message;
                     #endif
                 };
+                _unit addItemToUniform _className;
             };
             case (1): {
-                if (_unit canAddItemToVest _className) then {
-                    _unit addItemToVest _className;
-                } else {
+                if !(_unit canAddItemToVest _className) then {
                     private _message = format ["Item %1 can't added because Gear is Full", _className];
                     LOG(_message);
                     #ifdef ISDEV
                     hintSilent _message;
                     #endif
                 };
+                _unit addItemToVest _className;
             };
             case (2): {
-                if (_unit canAddItemToBackpack _className) then {
-                    _unit addItemToBackpack _className;
-                } else {
+                if !(_unit canAddItemToBackpack _className) then {
                     private _message = format ["Item %1 can't added because Gear is Full", _className];
                     LOG(_message);
                     #ifdef ISDEV
                     hintSilent _message;
                     #endif
                 };
+                _unit addItemToBackpack _className;
             };
             default {
-                if (_unit canAdd _className) then {
-                    _unit addItem _className;
-                } else {
+                if !(_unit canAdd _className) then {
                     private _message = format ["Item %1 can't added because Gear is Full", _className];
                     LOG(_message);
                     #ifdef ISDEV
                     hintSilent _message;
                     #endif
                 };
+                _unit addItem _className;
             };
         };
 
