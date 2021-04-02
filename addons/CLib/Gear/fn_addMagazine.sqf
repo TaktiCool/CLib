@@ -46,6 +46,9 @@ if (_className != "" && _count > 0) then {
         } else {
             private _message = format ["Magazine %1 can't added because Gear is Full", _className];
             LOG(_message);
+            #ifdef ISDEV
+            hintSilent _message;
+            #endif
         };
     };
 };
