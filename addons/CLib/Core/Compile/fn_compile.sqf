@@ -20,7 +20,7 @@ params [
     ["_functionName", "", [""]]
 ];
 
-private _header = format ["\
+private _header = format ["
 private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {
     '%1'
 } else {
@@ -33,8 +33,8 @@ scopeName (_fnc_scriptName + '_Main');
 ", _functionName];
 
 #ifdef DEBUGFULL
-    _header = _header + "\
-    if (isNil '_fnc_scriptMap') then {\
+    _header = _header + "
+    if (isNil '_fnc_scriptMap') then {
         _fnc_scriptMap = [_fnc_scriptName];
     } else {
         _fnc_scriptMap pushBack _fnc_scriptName;
@@ -43,14 +43,11 @@ scopeName (_fnc_scriptName + '_Main');
 #endif
 
 #ifdef ISDEV
-    private _functionString = _header + preprocessFileLineNumbers _functionPath;
-    private _functionCode = compile _functionString;
+    private _functionCode = compileScript [_functionPath, false, _header];
 #else
-    private "_functionString";
     private _functionCode = parsingNamespace getVariable _functionName;
     if (isNil "_functionCode") then {
-        _functionString = (_header + preprocessFileLineNumbers _functionPath) call CFUNC(stripSqf);
-        _functionCode = compileFinal _functionString;
+        _functionCode = compileScript [_functionPath, true, _header];
     };
 #endif
 
@@ -66,14 +63,12 @@ scopeName (_fnc_scriptName + '_Main');
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
 #ifndef ISDEV
-if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")}) then {
+if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")} && (toLower (productVersion select 6)) isNotEqualTo "linux") then {
 #endif
     #ifdef ISDEV
         private _startTime = diag_tickTime;
     #endif
-    if (isNil "_functionString") then {
-        _functionString = (_functionCode call CFUNC(codeToString)) call CFUNC(stripSqf);
-    };
+    private _functionString = (_functionCode call CFUNC(codeToString)) call CFUNC(stripSqf);
     private _compressedString = _functionString call CFUNC(compressString);
     // check if Compression was successful else we dont save the string and the Transmision system uses the normal version
     if (_compressedString != "" && _compressedString != GVAR(ACK)) then {
