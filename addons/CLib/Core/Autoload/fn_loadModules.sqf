@@ -89,12 +89,13 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
     (_this select 1) params ["_functionVarName", "_functionCode", "_progress"];
 
     DUMP("Function Recieved: " + _functionVarName);
-
-    // Compile the function code and assign it.
-    if (USE_COMPRESSION(true)) then {
-        _functionCode = _functionCode call CFUNC(decompressString);
+    if (_functionCode isEqualType "") then {
+        // Compile the function code and assign it.
+        if (USE_COMPRESSION(true)) then {
+            _functionCode = _functionCode call CFUNC(decompressString);
+        };
+        _functionCode = CMP(_functionCode);
     };
-    _functionCode = CMP(_functionCode);
 
     {
         #ifdef ISDEV
