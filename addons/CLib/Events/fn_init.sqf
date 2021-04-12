@@ -13,7 +13,8 @@
     Returns:
     None
 */
-
+GVAR(sideEnum) = [west, east, independent, civilian, sideEmpty, sideFriendly, sideEnemy, sideUnknown, sideLogic, sideAmbientLife];
+GVAR(sideEnumStr) = GVAR(sideEnum) apply {toLower str _x};
 GVAR(EventNamespace) = false call CFUNC(createNamespace);
 
 GVAR(ignoredLogEventNames_0) = [];

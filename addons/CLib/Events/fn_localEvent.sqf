@@ -18,7 +18,7 @@
 EXEC_ONLY_UNSCHEDULED;
 
 params [
-    ["_eventName", "", [""]],
+    ["_eventName", "EventError", [""]],
     ["_args", [], []]
 ];
 
