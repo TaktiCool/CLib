@@ -22,14 +22,11 @@ params [
     ["_index", 0, [0]]
 ];
 
-
 private _functionCode =  if (getNumber (missionConfigFile >> "CLib" >> "OptimiseForSize") == 1) then {
     if (USE_COMPRESSION(!isNil {parsingNamespace getVariable _functionName + "_Compressed"})) then {
         parsingNamespace getVariable [_functionName + "_Compressed", ""];
     } else {
-        private _code = parsingNamespace getVariable [_functionName, {}];
-        // Remove leading and trailing braces from the code.
-        _code call CFUNC(codeToString);
+        parsingNamespace getVariable [_functionName, {}];
     };
 } else {
     parsingnamespace getVariable [_functionName, {}];

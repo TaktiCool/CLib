@@ -34,7 +34,7 @@ if (_target isEqualType "") then {
     // If the string a Class in CfgVehicles then get all objects of the kind and send the code it them
     private _index = GVAR(sideEnumStr) find toLower _target;
     if (_index != -1) exitWith {
-        _target =GVAR(sideEnum) select _index;
+        _target = GVAR(sideEnum) select _index;
     };
     if (isClass (configOf _target)) exitWith {
         _target = allMissionObjects _target;
