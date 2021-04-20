@@ -14,5 +14,5 @@
     State machine <Location>
 */
 
-private _stateMachine = [false] call CFUNC(createNamespace);
+private _stateMachine = false call CFUNC(createNamespace);
 _stateMachine

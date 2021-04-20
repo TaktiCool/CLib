@@ -16,16 +16,6 @@
 
 GVAR(allFunctionNamesCached) = [];
 
-private _fnc_checkNext = {
-    params ["_modPath", "_modName", "_moduleName", "_modulePath", "_config"];
-    private _children = configProperties [_config, "isClass _x", true];
-    if (_children isEqualTo []) then {
-        [_modPath, _modName, _moduleName, _modulePath, _config] call _fnc_readFunction;
-    } else {
-        [_modPath, _modName, _moduleName, _modulePath, _config, _children] call _fnc_readSubModule;
-    };
-};
-
 private _fnc_readSubModule = {
     params ["_modPath", "_modName", "_moduleName", "_modulePath", "_config", "_children"];
     DUMP("SubModule Found: " + configName _config);
@@ -56,6 +46,16 @@ private _fnc_readFunction = {
     parsingNamespace setVariable [_functionName + "_data", [_folderPath, format ["%1/%2", _modName, _moduleName], _onlyServer, _modName]];
     GVAR(allFunctionNamesCached) pushBackUnique _functionName;
     DUMP("Function Found: " + _functionName + " in Path: " + _folderPath + " isServer: " + str _onlyServer);
+};
+
+private _fnc_checkNext = {
+    params ["_modPath", "_modName", "_moduleName", "_modulePath", "_config"];
+    private _children = configProperties [_config, "isClass _x", true];
+    if (_children isEqualTo []) then {
+        [_modPath, _modName, _moduleName, _modulePath, _config] call _fnc_readFunction;
+    } else {
+        [_modPath, _modName, _moduleName, _modulePath, _config, _children] call _fnc_readSubModule;
+    };
 };
 
 DUMP("--------------------------Start CLib Function Search---------------------------------");

@@ -26,11 +26,12 @@ private _fnc_scriptNameParent = if (isNil '_fnc_scriptName') then {
 } else {
     _fnc_scriptName
 };
+private _CLib_fileName = '%2';
 
 private _fnc_scriptName = '%1';
 scriptName _fnc_scriptName;
 scopeName (_fnc_scriptName + '_Main');
-", _functionName];
+", _functionName, _functionPath];
 
 #ifdef DEBUGFULL
     _header = _header + "
