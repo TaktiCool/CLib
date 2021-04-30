@@ -30,36 +30,24 @@ if (_target isEqualType objNull && {local _target}) exitWith {
 };
 
 // Exit if the target is a string
-if (_target isEqualType "") exitWith {
-    private _targets = [];
+if (_target isEqualType "") then {
     // If the string a Class in CfgVehicles then get all objects of the kind and send the code it them
-    if ((toLower _target) in ["west", "east", "resistance", "civilian"]) then {
-        {
-            if (_target isEqualTo (str (side (group _x)))) then {
-                _targets pushBack _x;
-            };
-            nil
-        } count allPlayers;
-    } else {
-        if (isClass (configFile >> "CfgVehicles" >> _target)) then {
-            _targets = allMissionObjects _target;
-        } else {
-            // check all Players if the target String is not a Class
-            {
-                if (getPlayerUID _x isEqualTo _target) then {
-                    _targets pushBack _x;
-                };
-                nil
-            } count allPlayers;
+    private _index = GVAR(sideEnumStr) find toLower _target;
+    if (_index != -1) exitWith {
+        _target = GVAR(sideEnum) select _index;
+    };
+    if (isClass (configOf _target)) exitWith {
+        _target = allMissionObjects _target;
+    };
+
+    private _targets = [];
+    // check all Players if the target String is not a Class
+    {
+        if ((getPlayerUID _x) isEqualTo _target) then {
+            _targets pushBack _x;
         };
-    };
-    if (count _targets != 0) then {
-        #ifdef ISDEV
-            [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QCFUNC(localEvent), _targets] call CFUNC(remoteExec);
-        #else
-            [[_event, _args], QCFUNC(localEvent), _targets] call CFUNC(remoteExec);
-        #endif
-    };
+    } forEach allPlayers;
+    _target = _targets;
 };
 #ifdef ISDEV
     [[_event, _args, (if (isDedicated) then {"2"} else {(format ["%1:%2", profileName, CGVAR(playerUID)])})], QCFUNC(localEvent), _target] call CFUNC(remoteExec);

@@ -28,14 +28,14 @@ private _fnc_addRequiredModule = {
     if (_i != -1) then {
         private _dependencies = parsingNamespace getVariable [format [QCGVAR(%1_dependency), _moduleName], []];
         {
-            [_x] call _fnc_addRequiredModule;
+            _x call _fnc_addRequiredModule;
             nil
         } count _dependencies;
     };
 };
 
 {
-    [_x] call _fnc_addRequiredModule;
+    _x call _fnc_addRequiredModule;
     nil
 } count _this;
 

@@ -35,11 +35,8 @@ parsingNamespace setVariable [QGVAR(allModsNamesCached), _allMods];
         _allModulesNames pushBackUnique _fullModuleName;
 
         DUMP("Module Found: " + _moduleName);
-
-        nil
-    } count _modModules;
-    nil
-} count _allMods;
+    } forEach _modModules;
+} forEach _allMods;
 
 // Update Mod Dependency
 {
@@ -51,16 +48,13 @@ parsingNamespace setVariable [QGVAR(allModsNamesCached), _allMods];
             private _modModules = parsingNamespace getVariable (format [QCGVAR(%1_ModModules), _x]);
             {
                 _dependency pushBackUnique format ["%1/%2", _mod, _x];
-                nil
-            } count _modModules;
+            } forEach _modModules;
             _dependency = _dependency - [_x];
             DUMP("Update Module Dependency with Mod: " + _x + " " + str _dependency);
         };
-        nil
-    } count _allMods;
+    } forEach _allMods;
     parsingNamespace setVariable [_varName, _dependency];
-    nil
-} count _allModulesNames;
+} forEach _allModulesNames;
 
 parsingNamespace setVariable [QGVAR(allModuleNamesCached), _allModulesNames];
 DUMP("allModuleNamesCached: " + str _allModulesNames);

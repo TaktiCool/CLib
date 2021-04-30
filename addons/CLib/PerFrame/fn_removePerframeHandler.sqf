@@ -39,7 +39,7 @@ if (GVAR(deletedIndices) isEqualTo []) then {
         GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
 
         {
-            _x params ["", "", "", "", "", "_handle"];
+            _x params ["", "", "", "", "_handle"];
             GVAR(PFHhandles) set [_handle, _forEachIndex];
         } forEach GVAR(perFrameHandlerArray);
         GVAR(deletedIndices) = [];

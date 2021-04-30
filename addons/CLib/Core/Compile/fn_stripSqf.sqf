@@ -72,8 +72,7 @@ private _outStr = "";
             };
         };
     };
-    nil
-} count toArray _inputStr;
+} forEach toArray _inputStr;
 
 _outStr = _outStr + toLower toString _token;
 _outStr

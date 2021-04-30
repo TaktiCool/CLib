@@ -39,11 +39,11 @@ private _targets = [];
         */
         case ("SIDE"): {
             // if _var is Side get all Units From on side and apply the Owner on it
-            _targets append ((allUnits select {_x == _var}) apply {owner _x});
+            _targets append ((units _var) apply {owner _x});
         };
         case ("OBJECT"): {
             // if _var is Object pushback the Owner netID
-            _targets pushBack (owner _x);
+            _targets pushBack (owner _var);
         };
         case ("NUMBER"): {
             // if _var is Number 0 than Add All Units as Targets
@@ -59,7 +59,7 @@ private _targets = [];
         };
         case ("GROUP"): {
             // if _var is Gruop get all Units from group with netID
-            _targets append ((units _x) apply {owner _x});
+            _targets append ((units _var) apply {owner _x});
         };
     };
     nil

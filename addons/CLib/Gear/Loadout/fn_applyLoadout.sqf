@@ -133,62 +133,27 @@ private _fnc_do = {
 
 // Items to Uniform
 ["itemsUniform", {
-    if (_this isEqualType []) then {
-        for "_i" from 1 to (_this select 1) do {
-            _unit addItemToUniform (_this select 0);
-        };
-    };
-    if (_this isEqualType "") then {
-        _unit addItemToUniform _this;
-    };
+    [_unit, _this, 0] call CFUNC(addItem);
 }, false] call _fnc_do;
 
 // Items to Vest
 ["itemsVest", {
-    if (_this isEqualType []) then {
-        for "_i" from 1 to (_this select 1) do {
-            _unit addItemToVest (_this select 0);
-        };
-    };
-    if (_this isEqualType "") then {
-        _unit addItemToVest _this;
-    };
+    [_unit, _this, 1] call CFUNC(addItem);
 }, false] call _fnc_do;
 
 // Items to Backpack
 ["itemsBackpack", {
-    if (_this isEqualType []) then {
-        for "_i" from 1 to (_this select 1) do {
-            _unit addItemToBackpack (_this select 0);
-        };
-    };
-    if (_this isEqualType "") then {
-        _unit addItemToBackpack _this;
-    };
-    nil
+    [_unit, _this, 2] call CFUNC(addItem);
 }, false] call _fnc_do;
 
 // Magazines
 ["magazines", {
-    if (_this isEqualType []) then {
-        _unit addMagazines _this;
-    };
-    if (_this isEqualType "") then {
-        _unit addMagazine _this;
-    };
-    nil
+    [_unit, _this] call CFUNC(addMagazine);
 }, false] call _fnc_do;
 
 // Items
 ["items", {
-    if (_this isEqualType []) then {
-        for "_i" from 1 to (_this select 1) do {
-            _unit addItem (_this select 0);
-        };
-    };
-    if (_this isEqualType "") then {
-        _unit addItem _this;
-    };
+    [_unit, _this, -1] call CFUNC(addItem);
 }, false] call _fnc_do;
 
 // Linked Items

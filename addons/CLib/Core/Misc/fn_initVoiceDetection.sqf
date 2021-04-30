@@ -33,7 +33,7 @@ switch (true) do {
         LOG("ACRE Detected.");
         DCFUNC(isSpeaking) = {
             params [["_unit", objNull, [objNull]]];
-            [_unit] call ACRE_api_fnc_isSpeaking;
+            _unit call ACRE_api_fnc_isSpeaking;
         };
     };
     case (isClass (_cfg >> "task_force_radio")): {

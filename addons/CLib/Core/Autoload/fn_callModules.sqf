@@ -28,7 +28,7 @@ private _thread = 0 spawn {
     private _time = time + 6;
     while {isNil QGVAR(AutoLoad_loadingScreenDone)} do {
         if (_time <= time) then {
-            [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
+            QCGVAR(loadModules) call BIS_fnc_endLoadingScreen;
             disableUserInput false;
             waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
             private _errorText = "Warning A Script Error that Crashed Autoload has appeared the Loading Screen got Terminated Automaticly!";
@@ -68,8 +68,7 @@ private _thread = 0 spawn {
         };
     };
     DUMP("Read requiredFunctions: " + _x);
-    nil
-} count GVAR(requiredFunctions);
+} forEach GVAR(requiredFunctions);
 
 {
     if (_x select 1) then {
@@ -79,11 +78,9 @@ private _thread = 0 spawn {
             _time = diag_tickTime - _time;
             private _strTime = (_time * 1000) call CFUNC(toFixedNumber);
             LOG("Addon Module Call: " + _x + " (" + _strTime + " ms)");
-            nil
-        } count (_x select 0);
+        } forEach (_x select 0);
     };
-    nil
-} count [[_init, true], [_serverInit, isServer], [_clientInit, hasInterface], [_hcInit, !hasInterface && !isServer]];
+} forEach [[_init, true], [_serverInit, isServer], [_clientInit, hasInterface], [_hcInit, !hasInterface && !isServer]];
 
 [{
     {
@@ -92,9 +89,7 @@ private _thread = 0 spawn {
         _time = diag_tickTime - _time;
         private _strTime = (_time * 1000) call CFUNC(toFixedNumber);
         LOG("Addon Module Call: " + _x + " (" + _strTime + " ms)");
-
-        nil
-    } count (_this select 0);
+    } forEach (_this select 0);
 
     [{
         [QCGVAR(loadModules)] call BIS_fnc_endLoadingScreen;
