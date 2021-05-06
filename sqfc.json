@@ -9,8 +9,9 @@
     "missions_f_beta",
     "showcases\\showcase",
     "\\unitplay\\",
-    "\\backups\\"
+    "\\backups\\",
+    "fn_crashToDesktop.sqf"
   ],
   "outputDir": "P:/",
-  "workerThreads": 12
+  "workerThreads": 0
 }

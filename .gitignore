@@ -65,3 +65,5 @@ releases/*
 keys/*
 build.bat
 hemtt.exe
+
+*.sqfc
