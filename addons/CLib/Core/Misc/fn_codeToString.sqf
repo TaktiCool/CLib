@@ -17,8 +17,7 @@
 params [
     ["_code", {}, [{}, ""]]
 ];
-
-if (_code isEqualType "") exitWith {_code};
-_code = str _code;
-_code = _code select [1, count _code - 2];
-_code
+if (_code isEqualType "") exitWith {
+    _code
+};
+toString _code;
