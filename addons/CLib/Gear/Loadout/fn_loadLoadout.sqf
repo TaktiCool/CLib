@@ -34,29 +34,29 @@ if (_cfg isEqualType "") then {
     if (isClass _cfg) exitWith {};
     _cfg = configFile >> "CfgCLibLoadouts" >> _loadoutName;
 };
-if (!isClass _cfg) exitWith {};
+if !(isClass _cfg) exitWith {};
 
-private _loadout = call CFUNC(createHash);
-private _loadoutVars = call CFUNC(createHash);
+private _loadout = createHashMap;
+private _loadoutVars = createHashMap;
 
 private _fnc_assignValue = {
     params ["_key", "_value"];
     _key = toLower _key;
     if (_key in GVAR(defaultLoadoutValues)) then {
-        if ([_loadout, _key] call CFUNC(containsKey)) then {
-            private _data = [_loadout, _key] call CFUNC(getHash);
+        if (_key in _loadout) then {
+            private _data = _loadout get _key;
             _data append _value;
-            [_loadout, _key, _data] call CFUNC(setHash);
+            _loadout set [_key, _data];
         } else {
-            [_loadout, _key, _value] call CFUNC(setHash);
+            _loadout set [_key, _value];
         };
     } else {
-        if ([_loadoutVars, _key] call CFUNC(containsKey)) then {
-            private _data = [_loadoutVars, _key] call CFUNC(getHash);
+        if (_key in _loadoutVars) then {
+            private _data = _loadoutVars get _key;
             _data append _value;
-            [_loadoutVars, _key, _data] call CFUNC(setHash);
+            _loadoutVars set [_key, _data];
         } else {
-            [_loadoutVars, _key, _value] call CFUNC(setHash);
+            _loadoutVars set [_key, _value];
         };
     };
 };

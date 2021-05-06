@@ -34,7 +34,7 @@ DUMP(str _loadout);
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _items = [_loadout, toLower _find, nil] call CFUNC(getHash);
+    private _items = _loadout get _find;
     DUMP(_find + ": " + format [str _items]);
     if (isNil "_items") exitWith {};
     switch (true) do {
@@ -178,7 +178,7 @@ private _fnc_do = {
     _unit setUnitTrait [_type, _state, _custom];
 }, false] call _fnc_do;
 DUMP(str _loadoutVars);
-[_loadoutVars, {
-    params ["_key", "_value"];
-    _unit setVariable [_key, _value, true];
-}] call CFUNC(forEachHash);
+
+{
+    _unit setVariable [_x, _y, true];
+} forEach _loadoutVars;
