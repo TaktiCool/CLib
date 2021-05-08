@@ -31,6 +31,12 @@ class CfgCLibModules {
             FNC(init);
         };
 
+        MODULE(ChatCommands) {
+            dependency[] = {"CLib/Namespaces"};
+            APIFNC(RegisterChatCommand);
+            FNC(init);
+        };
+
         MODULE(ConfigCaching) {
             dependency[] = {"CLib/Namespaces"};
             APIFNC(configProperties);

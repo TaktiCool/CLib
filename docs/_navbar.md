@@ -9,6 +9,7 @@
 - [3dGraphics](3dGraphics.md)
 - [Advanced State Machine](advancedStateMachine.md)
 - [Anim Framework](animFramework.md)
+- [Chat Commands](chatCommands.md)
 - [Config Caching](configCaching.md)
 - [Core](core.md)
   - [Autoload](core/autoload.md)
