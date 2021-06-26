@@ -30,29 +30,24 @@ private _loadoutArray = _class call CFUNC(loadLoadout);
 
 private _loadout = _loadoutArray select 1;
 private _loadoutVars = _loadoutArray select 0;
-DUMP(str _loadout);
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
     private _items = _loadout get toLower(_find);
-    DUMP(_find + ": " + format [str _items]);
     if (isNil "_items") exitWith {};
     switch (true) do {
         case (_isRandom && _allowRandom): {
-            DUMP("Random");
             private _item = selectRandom _items;
             if (isNil "_item") exitWith {};
             _item call _do;
         };
         case (_isRandom && !_allowRandom): {
-            DUMP("Random Not Allowed");
             private _item = _items select 0;
             if (isNil "_item") exitWith {};
             _item call _do;
         };
         case (!_isRandom);
         default {
-            DUMP("Not Random");
             if (_items isEqualType []) then {
                 {
                     _x call _do;
@@ -177,7 +172,6 @@ private _fnc_do = {
     };
     _unit setUnitTrait [_type, _state, _custom];
 }, false] call _fnc_do;
-DUMP(str _loadoutVars);
 
 {
     _unit setVariable [_x, _y, true];
