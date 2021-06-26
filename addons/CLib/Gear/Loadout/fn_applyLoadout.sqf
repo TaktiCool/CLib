@@ -34,7 +34,7 @@ DUMP(str _loadout);
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _items = _loadout get _find;
+    private _items = _loadout get toLower(_find);
     DUMP(_find + ": " + format [str _items]);
     if (isNil "_items") exitWith {};
     switch (true) do {
