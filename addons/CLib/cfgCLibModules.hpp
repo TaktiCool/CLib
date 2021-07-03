@@ -239,6 +239,16 @@ class CfgCLibModules {
             APIFNC(setVariable);
         };
 
+        MODULE(Notification) {
+            dependency[] = {"CLib/PerFrame", "CLib/Events"};
+            FNC(clientInitNotification);
+            APIFNC(displayNotification);
+            APIFNC(displayHint);
+            FNC(drawNotification);
+            FNC(drawHint);
+            APIFNC(registerDisplayNotification);
+        };
+
         MODULE(ObjectPooling) {
             APIFNC(getPooledObject);
             APIFNC(getPooledObjectCondition);
