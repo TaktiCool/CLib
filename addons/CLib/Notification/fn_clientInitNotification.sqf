@@ -26,5 +26,22 @@ GVAR(CurrentHint) = [];
 }] call CFUNC(addEventhandler);
 
 ["missionStarted", {
-    [findDisplay 46] call CFUNC(registerDisplayNotification)
+    [findDisplay 46] call CFUNC(registerDisplayNotification);
+}] call CFUNC(addEventhandler);
+
+["inEGSpectatorChanged", {
+    [{
+        [findDisplay 60492] call CFUNC(registerDisplayNotification); // EG
+    }, {
+        !(isNull findDisplay 60492)
+    }] call CFUNC(waitUntil);
+
+}] call CFUNC(addEventhandler);
+
+["inCuratorChanged", {
+    [{
+        [findDisplay 312] call CFUNC(registerDisplayNotification); // Curator
+    }, {
+        !(isNull findDisplay 312)
+    }] call CFUNC(waitUntil);
 }] call CFUNC(addEventhandler);
