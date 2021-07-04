@@ -148,5 +148,9 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
         _groupContent ctrlCommit (random _fadeOut);
         nil
     } count _grids;
+    [{
+        private _display = uiNamespace getVariable "RscTilesGroup";
+        _display closeDisplay 0;
+    }, _fadeOut] call CFUNC(wait);
     call _onFadeOut;
 }, _fadeIn + _duration, [_grids, _contentIsStructuredText, _sizeW, _sizeH, _posW, _posH, _fadeOut, _onFadeOut]] call CFUNC(wait);
