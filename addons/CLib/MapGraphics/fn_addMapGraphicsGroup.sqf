@@ -92,9 +92,10 @@ private _completeGroupData = [];
                 ["_textSize", 0.08],
                 ["_font", "PuristaMedium"],
                 ["_align", "right"],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _code];
+            _completeGroupData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _code, _customCodeArgs];
         };
         case ("RECTANGLE"): {
             _attributes params [
@@ -104,9 +105,10 @@ private _completeGroupData = [];
                 ["_angle", 0, [0, objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
                 ["_fillColor", ""],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code];
+            _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code, _customCodeArgs];
         };
         case ("ELLIPSE"): {
             _attributes params [
@@ -116,44 +118,49 @@ private _completeGroupData = [];
                 ["_angle", 0, [0, objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
                 ["_fillColor", ""],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code];
+            _completeGroupData pushBack [_class, _position, _width, _height, _angle, _lineColor, _fillColor, _code, _customCodeArgs];
         };
         case ("LINE"): {
             _attributes params [
                 ["_position1", objNull, [[], objNull]],
                 ["_position2", objNull, [[], objNull]],
                 ["_color", [0, 0, 0, 1]],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _position1, _position2, _color, _code];
+            _completeGroupData pushBack [_class, _position1, _position2, _color, _code, _customCodeArgs];
         };
         case ("ARROW"): {
             _attributes params [
                 ["_position1", objNull, [[], objNull]],
                 ["_position2", objNull, [[], objNull]],
                 ["_color", [0, 0, 0, 1]],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _position1, _position2, _color, _code];
+            _completeGroupData pushBack [_class, _position1, _position2, _color, _code, _customCodeArgs];
         };
         case ("POLYGON"): {
             _attributes params [
                 ["_polygon", []],
                 ["_color", [0, 0, 0, 1]],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _polygon, _color, _code];
+            _completeGroupData pushBack [_class, _polygon, _color, _code, _customCodeArgs];
         };
         case ("TRIANGLE"): {
             _attributes params [
                 ["_tris", []],
                 ["_lineColor", [0, 0, 0, 1]],
                 ["_fillColor", ""],
-                ["_code", {}]
+                ["_code", {}],
+                ["_customCodeArgs", []]
             ];
-            _completeGroupData pushBack [_class, _tris, _lineColor, _fillColor, _code];
+            _completeGroupData pushBack [_class, _tris, _lineColor, _fillColor, _code, _customCodeArgs];
         };
     };
 

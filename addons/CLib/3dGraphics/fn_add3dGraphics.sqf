@@ -62,18 +62,20 @@ private _completeGraphicsData = [];
                 ["_font", "PuristaSemiBold"],
                 ["_align", "center"],
                 ["_drawSideArrows", false],
-                ["_code", {true}]
+                ["_code", {true}],
+                ["_customCodeArgs", []]
             ];
-            _completeGraphicsData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows, _code];
+            _completeGraphicsData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows, _code, _customCodeArgs];
         };
         case "LINE": {
             _attributes params [
                 ["_start", objNull, [[], objNull]],
                 ["_end", objNull, [[], objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
-                ["_code", {true}]
+                ["_code", {true}],
+                ["_customCodeArgs", []]
             ];
-            _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code];
+            _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code, _customCodeArgs];
         };
     };
     nil
