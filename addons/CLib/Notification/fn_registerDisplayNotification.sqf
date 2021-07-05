@@ -18,14 +18,18 @@ params [["_display", displayNull], ["_offset", [0,0]], ["_offsetHint", [0,0]]];
 
 private _idx = GVAR(NotificationDisplays) pushBackUnique [_display, _offset, _offsetHint];
 
-private _deletableDisplays = [];
+private _deleted = false;
 {
     params ["_display"];
     if (isNull _display) then {
-        _deletableDisplays pushBack _x;
+        _deleted = true;
+        GVAR(NotificationDisplays) set [_forEachIndex, objNull];
     };
 } forEach GVAR(NotificationDisplays);
-GVAR(NotificationDisplays) = GVAR(NotificationDisplays) - _deletableDisplays;
+
+if (_deleted) then {
+    GVAR(NotificationDisplays) = GVAR(NotificationDisplays) - [objNull];
+};
 
 if (_idx < 0) exitWith {};
 

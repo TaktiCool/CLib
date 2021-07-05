@@ -45,7 +45,7 @@ if (_description isEqualType []) then {
 };
 
 private _controlGroups = [];
-private _deletableDisplays = [];
+private _deleted = false;
 
 {
     _x params ["_display", "_offset"];
@@ -62,11 +62,14 @@ private _deletableDisplays = [];
         _ctrlGrp ctrlCommit 0.3;
         _controlGroups pushBack [_ctrlGrp, _oldPos];
     } else {
-        _deletableDisplays pushBack _this;
+        _deleted = true;
+        GVAR(NotificationDisplays) set [_forEachIndex, objNull];
     };
 } forEach GVAR(NotificationDisplays);
 
-GVAR(NotificationDisplays) =  GVAR(NotificationDisplays) - _deletableDisplays;
+if (_deleted) then {
+    GVAR(NotificationDisplays) = GVAR(NotificationDisplays) - [objNull];
+};
 
 {
     _x params ["_parameter", "_groups"];

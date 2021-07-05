@@ -60,7 +60,6 @@ if (_description isEqualType []) then {
 }, 0.5, GVAR(CurrentHint)] call CFUNC(wait);
 
 private _controlGroups = [];
-private _deletableDisplays = [];
 GVAR(CurrentHint) = [];
 
 if (_playSound isEqualType true && {_playSound}) then {
@@ -70,6 +69,7 @@ if (_playSound isEqualType true && {_playSound}) then {
         playSound _playSound;
     };
 };
+private _deleted = false;
 
 {
     _x params ["_display", "_offset", "_offsetHint"];
@@ -77,11 +77,14 @@ if (_playSound isEqualType true && {_playSound}) then {
         private _ctrlGrp = [_header, _description, _icons, _display, 0, _offsetHint] call FUNC(drawHint);
         GVAR(CurrentHint) pushBack _ctrlGrp;
     } else {
-        _deletableDisplays pushBack _x;
+        _deleted = true;
+        GVAR(NotificationDisplays) set [_forEachIndex, objNull];
     };
 } forEach GVAR(NotificationDisplays);
 
-GVAR(NotificationDisplays) = GVAR(NotificationDisplays) - _deletableDisplays;
+if (_deleted) then {
+    GVAR(NotificationDisplays) = GVAR(NotificationDisplays) - [objNull];
+};
 
 [{
     {
