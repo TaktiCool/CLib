@@ -20,10 +20,8 @@ if (isServer) then {
     {
         {
             _x call CFUNC(readSimpleObjectComp);
-            nil
-        } count (configProperties [_x >> "CfgCLibSimpleObject", "isClass _x", true]);
-        nil
-    } count [configFile, campaignConfigFile, missionConfigFile];
+        } forEach (configProperties [_x >> "CfgCLibSimpleObject", "isClass _x", true]);
+    } forEach [configFile, campaignConfigFile, missionConfigFile];
     publicVariable QGVAR(namespace);
     publicVariable QGVAR(compNamespace);
 };

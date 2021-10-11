@@ -26,16 +26,6 @@
         2: Callback Parameters <Anything>
 */
 
-params [
-    ["_uid", "", [""]],
-    ["_input", "", ["", configNull, []], 2],
-    ["_pos", [0, 0, 0], [[]], 3],
-    ["_dir", [0, 0, 0], [[]], 3],
-    ["_ignoreObj1", objNull, [objNull]],
-    ["_ignoreObj2", objNull, [objNull]],
-    ["_callback", [], [[]], [[]]]
-];
-
 if !(isServer) exitWith {
     [QGVAR(createSimpleObjectComp), _this] call CFUNC(serverEvent);
 };
@@ -44,18 +34,28 @@ if (_uid isEqualTo "") exitWith {
     LOG("ERROR: Unique identifier is not valid");
 };
 
+params [
+    ["_uid", "", [""]],
+    ["_input", "", ["", configNull, []], 2],
+    ["_pos", [0, 0, 0], [[]], 3],
+    ["_dir", [0, 0, 0], [[]], 3],
+    ["_ignoreObj1", objNull, [objNull]],
+    ["_ignoreObj2", objNull, [objNull]],
+    ["_callback", [], [[]], []]
+];
+
 if !(isNil {GVAR(compNamespace) getVariable _uid}) then {
     LOG("WARNING: the UID is already in use");
 };
 
 _input = switch (typeName _input) do {
+    case "ARRAY": {
+        _input;
+    };
     case "STRING": {
         GVAR(namespace) getVariable _input
     };
     case "CONFIG": {
-        if (!isServer) then {
-            LOG("Warning: you Try to Load a Config form a Client that is Not the Server");
-        };
         private _temp = GVAR(namespace) getVariable (configName _input);
         if (isNil "_temp") then {
             _input call CFUNC(readSimpleObjectComp)
@@ -65,12 +65,12 @@ _input = switch (typeName _input) do {
     };
 };
 
-_input params ["_alignOnSurface", "_objects"];
-
 if (isNil "_input" || {_input isEqualTo []}) exitWith {
     LOG("ERROR: SimpleObjectComp does not exist: " + _input);
-    nil
 };
+
+_input params ["_alignOnSurface", "_objects"];
+
 private _intersections = lineIntersectsSurfaces [
     AGLToASL _pos,
     AGLToASL _pos vectorAdd [0, 0, -100],
@@ -111,14 +111,12 @@ private _return = [];
     if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
         {
             _obj hideSelection _x;
-            nil
-        } count _hideSelectionArray;
+        } forEach _hideSelectionArray;
     };
     if (_animateArray isEqualType [] && {!(_animateArray isEqualTo [])}) then {
         {
             _obj animate _x;
-            nil
-        } count _animateArray;
+        } forEach _animateArray;
     };
 
     if (_setObjectTextureArray isEqualType [] && {!(_setObjectTextureArray isEqualTo [])}) then {
@@ -129,12 +127,10 @@ private _return = [];
             } else {
                 _obj setObjectTextureGlobal [_id, _path];
             };
-            nil
-        } count _setObjectTextureArray;
+        } forEach _setObjectTextureArray;
     };
     _return pushBack _obj;
-    nil
-} count _objects;
+} forEach _objects;
 
 deleteVehicle _originObj;
 

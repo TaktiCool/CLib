@@ -33,8 +33,7 @@ if !(isServer) exitWith {
 private _objs = GVAR(compNamespace) getVariable [_uid, []];
 {
     deleteVehicle _x;
-    nil
-} count _objs;
+} forEach _objs;
 GVAR(compNamespace) setVariable [_uid, nil, true];
 
 if (_callback isNotEqualTo []) then {
