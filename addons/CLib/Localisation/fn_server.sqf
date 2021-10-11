@@ -32,10 +32,6 @@ private _fnc_setLanguageKey = {
 
     private _locName = format ["STR_%1", _name];
     private _var = GVAR(Namepace) getVariable [_locName, []];
-    if (USE_COMPRESSION(true)) then {
-        _data = _data call CFUNC(compressString);
-    };
-
     _var set [_index, _data];
 
     [GVAR(Namepace), _locName, _var, QGVAR(allLocalisations), true] call CFUNC(setVariable);
