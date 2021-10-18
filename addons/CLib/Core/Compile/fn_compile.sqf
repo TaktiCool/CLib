@@ -62,6 +62,10 @@ scopeName (_fnc_scriptName + '_Main');
     nil
 } count [missionNamespace, uiNamespace, parsingNamespace];
 
+#ifdef DISABLECOMPRESSION
+if (true) exitWith {};
+#endif
+
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
 #ifndef ISDEV
 if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")} && (toLower (productVersion select 6)) isNotEqualTo "linux") then {
