@@ -9,6 +9,11 @@
     #undef DISABLECOMPRESSION
 #endif
 
+// Allow ISDEV to be enabled over Startup Parameter -preprocDefine=CLIB_ISDEV or -preprocDefine=CMD__CLIB_ISDEV
+#ifdef CMD__CLIB_ISDEV
+    #define ISDEV
+#endif
+
 // Predefines for easy Macro work
 #define DOUBLE(var1,var2) var1##_##var2
 #define TRIPLE(var1,var2,var3) DOUBLE(var1,DOUBLE(var2,var3))
