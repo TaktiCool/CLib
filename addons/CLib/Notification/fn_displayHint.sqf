@@ -1,15 +1,15 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
-    Author: BadGuy, joko
+    Author: BadGuy, joko // Jonas
 
     Description:
     Displays a Notification
 
     Parameter(s):
-    0: Header text <String|Array>
-    1: Description text <String|Array>
+    0: Header text <Array, String>
+    1: Description text <String, Array>
     2: Icon stack <Array of <Icon>>
 
     Returns:
@@ -21,6 +21,7 @@
         1: size <Number>
         2: color <Array>
 */
+
 params [
     ["_header", "", ["", []]],
     ["_description", "", ["", []]],
@@ -43,7 +44,6 @@ if (_description isEqualType []) then {
         _description = LOC(_description);
     };
 };
-
 
 {
     if (!isNull _x) then {

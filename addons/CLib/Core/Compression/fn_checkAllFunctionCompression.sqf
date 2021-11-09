@@ -26,7 +26,7 @@ private _count = count _allFunctions;
     } else {
         ERROR_LOG("Compression Check ERROR: " + _fncName + " compression does not work correct")
     };
-    [_forEachIndex/_count] call BIS_fnc_progressLoadingScreen;
+    [_forEachIndex / _count] call BIS_fnc_progressLoadingScreen;
 } forEach _allFunctions;
 "CheckAllFunctionCompression" call BIS_fnc_endLoadingScreen;
 LOG("Done with all Checks");

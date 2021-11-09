@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 private _startTime = diag_tickTime;
 
 if (isNil QCFUNC(compile)) then {

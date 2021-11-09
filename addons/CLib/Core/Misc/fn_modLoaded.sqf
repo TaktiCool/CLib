@@ -23,4 +23,4 @@ private _loadedMods = [];
     _loadedMods pushbackUnique ((_x splitString "/\") select 0);
     nil
 } count GVAR(LoadedModules);
-toLower(_mod) in _loadedMods;
+(toLower _mod) in _loadedMods;

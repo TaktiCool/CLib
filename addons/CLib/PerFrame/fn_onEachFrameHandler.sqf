@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 if (getClientState == "GAME FINISHED") exitWith {
     removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
 };

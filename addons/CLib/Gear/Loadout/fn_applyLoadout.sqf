@@ -33,7 +33,7 @@ private _loadoutVars = _loadoutArray select 0;
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _items = _loadout get toLower(_find);
+    private _items = _loadout get (toLower _find);
     if (isNil "_items") exitWith {};
     switch (true) do {
         case (_isRandom && _allowRandom): {

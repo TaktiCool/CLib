@@ -1,6 +1,6 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
     Author: joko // Jonas
 
@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 GVAR(AllNotifications) = [];
 GVAR(NotificationDisplays) = [];
 GVAR(CurrentHint) = [];
@@ -35,12 +36,11 @@ GVAR(CurrentHint) = [];
     }, {
         !(isNull findDisplay 60492)
     }] call CFUNC(waitUntil);
-
 }] call CFUNC(addEventhandler);
 
 ["inCuratorChanged", {
     [{
-        [findDisplay 312, [-(12 * (((safezoneW / safezoneH) min 1.2) / 40)),0]] call CFUNC(registerDisplayNotification); // Curator
+        [findDisplay 312, [-(12 * (((safezoneW / safezoneH) min 1.2) / 40)), 0]] call CFUNC(registerDisplayNotification); // Curator
     }, {
         !(isNull findDisplay 312)
     }] call CFUNC(waitUntil);

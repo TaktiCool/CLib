@@ -17,7 +17,6 @@
     ["Module1", "Module2"] call CFUNC(loadModulesServer);
 */
 
-
 // Find all functions which are part of the requested modules and store them in an array.
 GVAR(requiredFunctions) = [];
 

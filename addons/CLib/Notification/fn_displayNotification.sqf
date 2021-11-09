@@ -1,15 +1,15 @@
 #include "macros.hpp"
 /*
-    Comunity Lib - CLib
+    Community Lib - CLib
 
-    Author: BadGuy, joko
+    Author: BadGuy, joko // Jonas
 
     Description:
     Displays a Notification
 
     Parameter(s):
-    0: Header text <String|Array>
-    1: Description text <String|Array>
+    0: Header text <String, Array>
+    1: Description text <String, Array>
     2: Icon stack <Array of <Icon>>
 
     Returns:
@@ -21,15 +21,16 @@
         1: size <Number>
         2: color <Array>
 */
+
 params [
     ["_header", "Error No Notification Text", ["", []]],
-    ["_description", "Error No Notification Text",    ["", []]],
+    ["_description", "Error No Notification Text", ["", []]],
     ["_icons", []],
     ["_playSound", false, [false, [], ""]]
 ];
 
 if (_header isEqualType []) then {
-    _header = _header call CFUNC(formatLocalisation);;
+    _header = _header call CFUNC(formatLocalisation);
 } else {
     if (_header call CFUNC(isLocalised)) then {
         _header = LOC(_header);
@@ -112,6 +113,6 @@ private _idx = GVAR(AllNotifications) pushBack _item;
                 ctrlDelete _group;
             };
         } forEach _controlsGroup;
-        GVAR(AllNotifications) = GVAR(AllNotifications)  - [_this];
+        GVAR(AllNotifications) = GVAR(AllNotifications) - [_this];
     }, 0.5, _this] call CFUNC(wait);
 }, 10, _item] call CFUNC(wait);
