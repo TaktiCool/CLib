@@ -22,7 +22,7 @@ params [
     if (isLocalized _locaName) exitWith {
         localize _locaName;
     };
-    private _text = GVAR(Namepace) getVariable [_locaName, _locaName];
+    private _text = GVAR(Namespace) getVariable [_locaName, _locaName];
     if (_text isEqualTo _locaName) then {
         LOG("Error Localization not Found: " + _locaName);
     };
@@ -31,5 +31,5 @@ params [
     if (isLocalized _locaName) exitWith {
         localize _locaName;
     };
-    GVAR(Namepace) getVariable [_locaName, _locaName];
+    GVAR(Namespace) getVariable [_locaName, _locaName];
 #endif

@@ -18,6 +18,6 @@ params [
     ["_locaName", "STR_CLib_ERROR", [""]]
 ];
 
-private _temp = GVAR(Namepace) getVariable _locaName;
+private _temp = GVAR(Namespace) getVariable _locaName;
 
 !isNil "_temp" || isLocalized _locaName;

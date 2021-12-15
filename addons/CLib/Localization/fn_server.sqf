@@ -14,7 +14,7 @@
     None
 */
 
-GVAR(Namepace) = true call CFUNC(createNamespace);
+GVAR(Namespace) = true call CFUNC(createNamespace);
 GVAR(supportedLanguages) = [];
 
 private _fnc_languageIndex = {
@@ -31,10 +31,10 @@ private _fnc_setLanguageKey = {
     _index = _index call _fnc_languageIndex;
 
     private _locName = format ["STR_%1", _name];
-    private _var = GVAR(Namepace) getVariable [_locName, []];
+    private _var = GVAR(Namespace) getVariable [_locName, []];
     _var set [_index, _data];
 
-    [GVAR(Namepace), _locName, _var, QGVAR(allLocalizations), true] call CFUNC(setVariable);
+    [GVAR(Namespace), _locName, _var, QGVAR(allLocalizations), true] call CFUNC(setVariable);
 };
 
 private _fnc_readLocalization = {
@@ -66,5 +66,5 @@ private _fnc_readLocalizationClass = {
     nil
 } count [campaignConfigFile, missionConfigFile >> "CLib", configFile];
 
-publicVariable QGVAR(Namepace);
+publicVariable QGVAR(Namespace);
 publicVariable QGVAR(supportedLanguages);
