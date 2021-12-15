@@ -8,10 +8,10 @@
     Checks if a string is localized
 
     Parameter(s):
-    0: Localisation Name <String> (Default: "STR_CLib_ERROR")
+    0: Localization Name <String> (Default: "STR_CLib_ERROR")
 
     Returns:
-    Is Localised <Bool>
+    Is Localized <Bool>
 */
 
 params [

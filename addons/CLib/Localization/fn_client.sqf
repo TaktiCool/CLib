@@ -28,4 +28,4 @@ if (_index == -1) then {
     DUMP("L10N Varfound: " + str _x + " Content: " + str _var);
     GVAR(Namepace) setVariable [_x, _var];
     nil
-} count ([GVAR(Namepace), QGVAR(allLocalisations)] call CFUNC(allVariables));
+} count ([GVAR(Namepace), QGVAR(allLocalizations)] call CFUNC(allVariables));

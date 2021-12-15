@@ -5,17 +5,17 @@
     Author: joko // Jonas
 
     Description:
-    Format localisation wrapper
+    Format localization wrapper
 
     Parameter(s):
     https://community.bistudio.com/wiki/format
 
     Returns:
-    Formated and localised string <String>
+    Formated and localized string <String>
 */
 
 format (_this apply {
-    if (_x isEqualType "" && {_x call CFUNC(isLocalised)}) then {
+    if (_x isEqualType "" && {_x call CFUNC(isLocalized)}) then {
         LOC(_x)
     } else {
         _x

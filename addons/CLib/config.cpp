@@ -17,7 +17,7 @@ class CfgPatches {
 
 #include "cfgFunctions.hpp"
 
-#include "cfgCLibLocalisation.hpp"
+#include "cfgCLibLocalization.hpp"
 
 #include "cfgCLibModules.hpp"
 

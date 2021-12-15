@@ -5,7 +5,7 @@
     Author: joko // Jonas
 
     Description:
-    Init for Localisation
+    Init for Localization
 
     Parameter(s):
     None

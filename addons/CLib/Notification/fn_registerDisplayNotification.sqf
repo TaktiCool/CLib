@@ -42,7 +42,7 @@ private _numberOfNotifications = count GVAR(AllNotifications);
 
 {
     _x params ["_parameter", "_controlGroups"];
-    _parameter params [["_header", "Error No Notification Text", ["", []]], ["_description", "Error No Notification Text", ["", []]], ["_icons", []]];
+    _parameter params [["_header", "Error No Notification Text", [""]], ["_description", "Error No Notification Text", [""]], ["_icons", []]];
     private _ctrlGrp = [_header, _description, _icons, _display, (_numberOfNotifications - 1) - _forEachIndex, _offset] call FUNC(drawNotification);
     _ctrlGrp ctrlSetFade 0;
     _ctrlGrp ctrlCommit 0;

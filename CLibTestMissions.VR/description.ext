@@ -41,7 +41,7 @@ class Params {
 
 class CLib {
     // CLib Mission Config Entrys
-    class CfgCLibLocalisation {
+    class CfgCLibLocalization {
         class STR_CLib_TestMission {
             English = "Test Mission";
         };

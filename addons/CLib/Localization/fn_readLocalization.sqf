@@ -5,13 +5,13 @@
     Author: joko // Jonas
 
     Description:
-    Read the Localisation if the String is Localised
+    Read the Localization if the String is Localized
 
     Parameter(s):
-    0: Localisation Name <String> (Default: "STR_CLib_ERROR")
+    0: Localization Name <String, Array> (Default: "STR_CLib_ERROR")
 
     Returns:
-    Localisted Text <String>
+    Localized Text <String>
 */
 
 params [
@@ -24,7 +24,7 @@ params [
     };
     private _text = GVAR(Namepace) getVariable [_locaName, _locaName];
     if (_text isEqualTo _locaName) then {
-        LOG("Error Localisation not Found: " + _locaName);
+        LOG("Error Localization not Found: " + _locaName);
     };
     _text
 #else

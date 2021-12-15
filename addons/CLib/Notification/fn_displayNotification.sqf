@@ -23,27 +23,11 @@
 */
 
 params [
-    ["_header", "Error No Notification Text", ["", []]],
-    ["_description", "Error No Notification Text", ["", []]],
+    ["_header", "Error No Notification Text", [""]],
+    ["_description", "Error No Notification Text", [""]],
     ["_icons", []],
     ["_playSound", false, [false, [], ""]]
 ];
-
-if (_header isEqualType []) then {
-    _header = _header call CFUNC(formatLocalisation);
-} else {
-    if (_header call CFUNC(isLocalised)) then {
-        _header = LOC(_header);
-    };
-};
-
-if (_description isEqualType []) then {
-    _description = _description call CFUNC(formatLocalisation);
-} else {
-    if (_description call CFUNC(isLocalised)) then {
-        _description = LOC(_description);
-    };
-};
 
 private _controlGroups = [];
 private _deleted = false;

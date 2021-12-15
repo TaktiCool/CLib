@@ -25,7 +25,7 @@
 - [Hashes](hashes.md)
 - [Interaction](interaction.md)
 - [lnbData](lnbData.md)
-- [Localisation](localisation.md)
+- [Localization](localization.md)
 - [Map Graphics](mapGraphics.md)
 - [Mutex](mutex.md)
 - [Namespaces](namespaces.md)

@@ -196,14 +196,14 @@ class CfgCLibModules {
             APIFNC(lnbSave);
         };
 
-        MODULE(Localisation) {
+        MODULE(Localization) {
             dependency[] = {"CLib/Events"};
             FNC(init);
             FNC(client);
             FNCSERVER(server);
-            APIFNC(isLocalised);
-            APIFNC(readLocalisation);
-            APIFNC(formatLocalisation);
+            APIFNC(isLocalized);
+            APIFNC(readLocalization);
+            APIFNC(formatLocalization);
         };
 
         MODULE(MapGraphics) {

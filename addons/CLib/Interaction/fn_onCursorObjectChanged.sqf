@@ -30,10 +30,6 @@ if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
         _text = call _text;
     };
 
-    if (_text call CFUNC(isLocalised)) then {
-        _text = _text call CFUNC(readLocalisation);
-    };
-
     if !(_actionID in _actionIDs) then {
         if (_onObject isEqualType "") then {
             if (_target isKindOf _onObject) then {

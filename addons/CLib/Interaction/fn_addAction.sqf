@@ -165,9 +165,6 @@ if (_target isEqualType objNull) then {
         if (_text isEqualType {}) then {
             _text = call _text;
         };
-        if (_text call CFUNC(isLocalised)) then {
-            _text = _text call CFUNC(readLocalisation);
-        };
         private _argArray = [_text, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _condition, _radius, _unconscious, _selection, _memorypoint];
         private _id = _target addAction _argArray;
         [_id, _target, _argArray] call _onActionAdded;

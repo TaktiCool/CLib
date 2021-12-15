@@ -1,11 +1,11 @@
-# Localisation
+# Localization
 
 > Maintainer: joko // Jonas
 
-A Localisation system for the Server Side Nature of the CLib framework. The system Reads Eather from the Stringtable or the [`CfgCLibLocalisation`] config class
+A Localization system for the Server Side Nature of the CLib framework. The system Reads Eather from the Stringtable or the [`CfgCLibLocalization`] config class
 
 
-## CfgCLibLocalisation
+## CfgCLibLocalization
 ```sqf
 class CLib {
     class TestTranslation { // Translation is accassable as STR_CLib_TestTranslation
@@ -29,15 +29,15 @@ class CLib {
 
 ## Functions
 
-### CLib_fnc_formatLocalisation
+### CLib_fnc_formatLocalization
 
 Parameter(s):
 * Same Paramter as [format](https://community.bistudio.com/wiki/format)
 
 Returns:
-* [`<String>`] Formated and localised string
+* [`<String>`] Formated and localized string
 
-Format localisation wrapper
+Format localization wrapper
 
 Examples:
 
@@ -45,18 +45,18 @@ Examples:
 [
     "%1 %2 %3 %4",
     "STR_This", "STR_Could", "STR_Be", "STR_Localize"
-] call CLib_fnc_formatLocalisation
+] call CLib_fnc_formatLocalization
 ```
 
-### CLib_fnc_isLocalised
+### CLib_fnc_isLocalized
 
 Parameter(s):
 * [`<String>`] String to Check
 
 Returns:
-* [`<Boolean>`] String is Localisation Key
+* [`<Boolean>`] String is Localization Key
 
-Checks of a String is a Localisation Key
+Checks of a String is a Localization Key
 
 Examples:
 
@@ -64,23 +64,23 @@ Examples:
 TODO Example here
 ```
 
-### CLib_fnc_readLocalisation
+### CLib_fnc_readLocalization
 
 Parameter(s):
-* [`<String>`] String to Localise
+* [`<String>`] String to Localize
 
 Returns:
-* [`<String>`] Localised String
+* [`<String>`] Localized String
 
 TODO text here
 
 Examples:
 
 ```sqf
-"STR_LocalisedString" call CLib_fnc_readLocalisation
+"STR_LocalizedString" call CLib_fnc_readLocalization
 ```
 
-[`CfgCLibLocalisation`]: #CfgCLibLocalisation
+[`CfgCLibLocalization`]: #CfgCLibLocalization
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
