@@ -73,6 +73,11 @@ for "_i" from 0 to 11 do {
 
 DFUNC(IdleAnimation) = [{
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
-    params ["_title", "_iconIdle", "_hint"];
-    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
+    params ["_title", "_keyName", "_iconIdle"];
+    _target setUserActionText [
+        _actionID,
+        format ["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>", _title, _keyName],
+        GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12),
+        format ["<img size='3' shadow='0' color='#ffffff' image='%1'/><br/><br/><t font='RobotoCondensedBold'>%2</t>", call _iconIdle, format [localize "STR_A3_HoldKeyTo", format ["<t color='#ffae00'>%1</t>", _keyName], _title]]
+    ];
 }] call CFUNC(compileFinal);

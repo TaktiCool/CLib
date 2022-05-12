@@ -70,7 +70,7 @@
 #define QLSTRING(var) QUOTE(LSTRING(var))
 #define QELSTRING(var1,var2) QUOTE(ELSTRING(var1,var2))
 
-#define LOC(var) var call CFUNC(readLocalisation)
+#define LOC(var) var call CFUNC(readLocalization)
 #define MLOC(var) LOC(QLSTRING(var))
 
 #define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith { LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment from "+ _fnc_scriptNameParent); [missionNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall);}
