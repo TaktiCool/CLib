@@ -60,7 +60,7 @@
     #define RUNTIMESTART private _CLib_Debug_debugStartTime = diag_tickTime
     #define RUNTIME(var) DUMP(var + " Needed: " + ((diag_tickTime - _CLib_Debug_debugStartTime) call CFUNC(toFixedNumber)) + " ms")
 #else
-    #define RUNTIMESTART /*Disabled*/
+    #define RUNTIMESTART ; /*Disabled*/
     #define RUNTIME(var) /*Disabled*/
 #endif
 
