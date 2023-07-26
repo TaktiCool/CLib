@@ -9,7 +9,7 @@ class CfgPatches {
         authors[] = {"joko // Jonas", "NetFusion", "BadGuy"};
         authorUrl = "https://takticool.github.io/CLib/";
         version = VERSION;
-        versionStr = QUOTE(VERSION);
+        versionStr = VERSION;
         versionAr[] = {VERSION_AR};
         requiredAddons[] = {"A3_Data_F_Oldman_Loadorder", "A3_Data_F_Mod_Loadorder"};
     };

@@ -1,0 +1,30 @@
+name = "CLib"
+mainprefix = "tc"
+modname = "CLib"
+prefix = "TC"
+author = "CLib Team"
+include = ["./include"]
+
+[version]
+path = "addons/CLib/CLib_Macros.hpp"
+
+[asc]
+enabled = true
+exclude = [
+    "addons/CLib/Core/Autoload/fn_crashToDesktop.sqf",
+]
+
+[hemtt.signing]
+authority = "CLib"
+
+[hemtt.release]
+folder = "CLib"
+
+[files]
+include = [
+    "mod.cpp",
+    "*.paa",
+    "LICENSE",
+    "*.dll",
+    "CLibDataBaseEditor.exe"
+]
