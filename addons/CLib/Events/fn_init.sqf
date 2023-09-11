@@ -30,6 +30,7 @@ GVAR(ignoredLogEventNames_1) = [];
     ["cursortargetchanged", 1],
     ["cursorobjectchanged", 1],
     ["playerinventorychanged", 1],
+    ["animstatechanged", 0],
     [QEGVAR(Core,extensionRequest), 0],
     [QEGVAR(Core,extensionResult), 0]
 ];
