@@ -9,8 +9,8 @@
     #undef DISABLECOMPRESSION
 #endif
 
-// Allow DISABLECOMPRESSION to be enabled over Startup Parameter -preprocDefine=CLIB_DISABLECOMPRESSION or -preprocDefine=CMD_CLIB_DISABLECOMPRESSION
-#ifdef CMD_CLIB_DISABLECOMPRESSION
+// Allow DISABLECOMPRESSION to be enabled over Startup Parameter -preprocDefine=CLIB_DISABLECOMPRESSION or -preprocDefine=CMD__CLIB_DISABLECOMPRESSION
+#ifdef CMD__CLIB_DISABLECOMPRESSION
     #define DISABLECOMPRESSION
 #endif
 
