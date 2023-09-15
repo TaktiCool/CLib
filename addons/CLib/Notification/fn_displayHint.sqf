@@ -11,7 +11,7 @@
     0: Header text <Array, String>
     1: Description text <String, Array>
     2: Icon stack <Array of <Icon>>
-
+    3: Sound <String, Array, Bool>
     Returns:
     None
 
@@ -46,13 +46,16 @@ params [
 private _controlGroups = [];
 GVAR(CurrentHint) = [];
 
-if (_playSound isEqualType true && {_playSound}) then {
-    playSound "Hint";
-} else {
-    if (_playSound isEqualType [] || _playSound isEqualType "") then {
+switch (typeName _playSound) do {
+    case "BOOL": {
+        playSound "Hint";
+    };
+    case "STRING": {
         playSound _playSound;
     };
+    default { };
 };
+
 private _deleted = false;
 
 {

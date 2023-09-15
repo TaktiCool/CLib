@@ -11,6 +11,7 @@
     0: Header text <String, Array>
     1: Description text <String, Array>
     2: Icon stack <Array of <Icon>>
+    3. Play Sound <Boolean, String, Array>
 
     Returns:
     None
@@ -24,13 +25,17 @@
 
 params [
     ["_header", "Error No Notification Text", [""]],
-    ["_description", "Error No Notification Text", [""]],
+    ["_description", "Error No Notification Text", ["", []]],
     ["_icons", []],
     ["_playSound", false, [false, [], ""]]
 ];
 
 private _controlGroups = [];
 private _deleted = false;
+
+if (_description isEqualType []) then {
+    _description = _description call CFUNC(formatLocalization);
+};
 
 {
     _x params ["_display", "_offset"];
@@ -68,19 +73,28 @@ if (_deleted) then {
     } forEach _groups;
 } forEach GVAR(AllNotifications);
 
-private _item = [[_header, _description, _icons], _controlGroups];
+private _item = [[_header, _description, _icons, _playSound], _controlGroups];
 
-if (_playSound isEqualType true && {_playSound}) then {
-    playSound "HintExpand";
-} else {
-    if (_playSound isEqualType [] || _playSound isEqualType "") then {
+switch (typeName _playSound) do {
+    case "BOOL": {
+        playSound "HintExpand";    
+    };
+    case "STRING": {
         playSound _playSound;
     };
+    case "ARRAY": {
+        _playSound params [["_sound", ""]];
+        if (_sound != "") then {
+            playSound _sound;
+        };
+    };
+    default { };
 };
 
 private _idx = GVAR(AllNotifications) pushBack _item;
 [{
     params ["_parameter", "_controlsGroup"];
+    _parameter params ["", "", "", "_playSound"];
     {
         _x params ["_group", "_committedPosition"];
         if (!isNull _group) then {
@@ -88,7 +102,22 @@ private _idx = GVAR(AllNotifications) pushBack _item;
             _group ctrlCommit 0.3;
         };
     } forEach _controlsGroup;
-    // playSound "HintCollapse";
+
+    switch (typeName _playSound) do {
+        case "BOOL": {
+            playSound "HintCollapse";    
+        };
+        case "STRING": {
+            playSound _playSound;
+        };
+        case "ARRAY": {
+        _playSound params ["", ["_sound", ""]];
+        if (_sound != "") then {
+            playSound _sound;
+        };        };
+        default { };
+    };
+
     [{
         params ["_parameter", "_controlsGroup"];
         {
