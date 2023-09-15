@@ -58,6 +58,14 @@ switch (typeName _playSound) do {
 
 private _deleted = false;
 
+if (_header isEqualType []) then {
+    _header = _header call CFUNC(formatLocalization);
+};
+
+if (_description isEqualType []) then {
+    _description = _description call CFUNC(formatLocalization);
+};
+
 {
     _x params ["_display", "_offset", "_offsetHint"];
     if (!isNull _display) then {

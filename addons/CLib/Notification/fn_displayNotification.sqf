@@ -24,7 +24,7 @@
 */
 
 params [
-    ["_header", "Error No Notification Text", [""]],
+    ["_header", "Error No Notification Text", ["", []]],
     ["_description", "Error No Notification Text", ["", []]],
     ["_icons", []],
     ["_playSound", false, [false, [], ""]]
@@ -32,6 +32,10 @@ params [
 
 private _controlGroups = [];
 private _deleted = false;
+
+if (_header isEqualType []) then {
+    _header = _header call CFUNC(formatLocalization);
+};
 
 if (_description isEqualType []) then {
     _description = _description call CFUNC(formatLocalization);
