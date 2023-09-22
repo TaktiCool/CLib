@@ -21,7 +21,13 @@ params [
     ["_offsetHint", [0, 0]]
 ];
 
-private _idx = GVAR(NotificationDisplays) pushBackUnique [_display, _offset, _offsetHint];
+
+private _idx = GVAR(NotificationDisplays) findIf { (_x select 0) == _display };
+if (_idx == -1) then {
+    _idx = GVAR(NotificationDisplays) pushBackUnique [_display, _offset, _offsetHint];
+} else {
+    GVAR(NotificationDisplays) set [_idx, [_display, _offset, _offsetHint]];
+};
 
 private _deleted = false;
 {
