@@ -17,7 +17,7 @@ Passed Arguments
 * [`<Anything>`] Parameters passed by this function. Same as the second item from above
 
 Returns:
-* [`<Number>`] A number representing the ID of the Handlöer.  Use this to remove the ID.
+* [`<Number>`] A number representing the ID of the Handler.  Use this to remove the ID.
 
 Add a handler that will execute every frame or every x number of seconds.
 
