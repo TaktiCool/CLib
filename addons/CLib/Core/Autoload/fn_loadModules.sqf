@@ -72,7 +72,7 @@ if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
 
         disableUserInput false;
 
-        compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.sqf"; // Crashes Client to Desktop
+        compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.notsqf"; // Crashes Client to Desktop
     };
 
     if (!(isNil "_this") && {_this isNotEqualTo []}) then {

@@ -48,14 +48,14 @@
 
 // Logging/Dumping macros
 #ifdef ISDEV
-    #define DUMP(var) SYSLOGGING("DUMP", var)
+    #define DUMP(var) SYSLOGGING("DUMP",var)
 #else
     #define DUMP(var) /* disabled */
 #endif
 
-#define LOG(var) SYSLOGGING("Log", var)
+#define LOG(var) SYSLOGGING("Log",var)
 
-#define ERROR_LOG(var) SYSLOGGING("Error", var)
+#define ERROR_LOG(var) SYSLOGGING("Error",var)
 
 // Function macros
 #define EDFUNC(var1,var2) TRIPLE(PREFIX,var1,DOUBLE(fnc,var2))

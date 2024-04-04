@@ -22,4 +22,4 @@ params [
     ["_width", 0, [0]]
 ];
 
-(abs RELDIR(_obj, _target) < (_width atan2 (_obj distance _target)));
+(abs RELDIR(_obj,_target) < (_width atan2 (_obj distance _target)));
