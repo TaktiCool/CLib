@@ -8,12 +8,6 @@ include = ["./include"]
 [version]
 path = "addons/CLib/CLib_Macros.hpp"
 
-[asc]
-enabled = true
-exclude = [
-    "addons/CLib/Core/Autoload/fn_crashToDesktop.sqf",
-]
-
 [hemtt.signing]
 authority = "CLib"
 
