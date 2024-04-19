@@ -33,8 +33,7 @@ if (GVAR(deletedIndices) isEqualTo []) then {
     [{
         {
             GVAR(perFrameHandlerArray) set [_x, objNull];
-            nil
-        } count GVAR(deletedIndices);
+        } forEach GVAR(deletedIndices);
 
         GVAR(perFrameHandlerArray) = GVAR(perFrameHandlerArray) - [objNull];
 

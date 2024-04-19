@@ -37,9 +37,7 @@ private _cache = [];
         };
         _cache append _cData;
     };
-
-    nil;
-} count ([GVAR(MapGraphicsGroup)] call CFUNC(allVariables));
+} forEach GVAR(MapGraphicsGroup);
 
 _cache sort true;
 

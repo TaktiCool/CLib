@@ -31,8 +31,7 @@ switch (true) do {
         private _i = (_hashSet select HASH_KEYS) find _key;
         {
             _x deleteAt _i;
-            nil
-        } count _hashSet;
+        } forEach _hashSet;
         _hashSet
     };
     case (_contain && !_delete): {

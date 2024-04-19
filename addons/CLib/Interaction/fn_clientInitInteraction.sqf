@@ -32,8 +32,7 @@ GVAR(PlayerInteraction_Actions) = [];
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
         DUMP("add Real Action to Object Player " + str _text);
-        nil
-    } count GVAR(PlayerInteraction_Actions);
+    } forEach GVAR(PlayerInteraction_Actions);
 }] call CFUNC(addEventhandler);
 
 // fix issue that Action dont get readded after setRespawnTime respawn, because Variables get copyed from the old Unit via Engine command

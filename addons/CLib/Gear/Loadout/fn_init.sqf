@@ -27,10 +27,8 @@ if (isServer) then {
     {
         {
             (configName _x) call CFUNC(loadLoadout);
-            nil
-        } count configProperties [_x >> "CfgCLibLoadouts", "isClass _x", true];
-        nil
-    } count [missionConfigFile >> "CLib", configFile];
+        } forEach configProperties [_x >> "CfgCLibLoadouts", "isClass _x", true];
+    } forEach [missionConfigFile >> "CLib", configFile];
     GVAR(loadoutsLoaded) = true;
 }, {
     !isNil QGVAR(defaultLoadoutValues) && !isNil QGVAR(loadoutsNamespace)

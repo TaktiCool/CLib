@@ -163,9 +163,7 @@ private _completeGroupData = [];
             _completeGroupData pushBack [_class, _tris, _lineColor, _fillColor, _code, _customCodeArgs];
         };
     };
-
-    nil
-} count _groupData;
+} forEach _groupData;
 
 // select the correct state
 private _stateNum = 0 max (["normal", "hover", "selected"] find _state);

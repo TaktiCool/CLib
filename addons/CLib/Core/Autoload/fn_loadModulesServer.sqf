@@ -29,14 +29,13 @@ private _fnc_addRequiredModule = {
         {
             _x call _fnc_addRequiredModule;
             nil
-        } count _dependencies;
+        } forEach _dependencies;
     };
 };
 
 {
     _x call _fnc_addRequiredModule;
-    nil
-} count _this;
+} forEach _this;
 
 _requiredModules = _requiredModules apply {toLower _x};
 
@@ -51,8 +50,7 @@ publicVariable QGVAR(LoadedModules);
     if (_fullFunctionModuleName in _requiredModules || _fullFunctionModName in _requiredModules) then {
         GVAR(requiredFunctions) pushBackUnique _x;
     };
-    nil
-} count (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
+} forEach (parsingNamespace getVariable QCGVAR(allFunctionNamesCached));
 
 // EH for client registration. Starts transmission of function code.
 // required Function that the Client needed

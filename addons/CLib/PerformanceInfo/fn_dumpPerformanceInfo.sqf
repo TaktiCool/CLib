@@ -92,7 +92,7 @@ if (GVAR(FPSStorage) isNotEqualTo []) then {
     ";
     {
         _text = _text + _x + " ";
-    } count GVAR(FPSStorage);
+    } forEach GVAR(FPSStorage);
     _text call _fnc_outputText;
 };
 
@@ -132,8 +132,8 @@ private _temp = [];
     } count (allVariables _space);
     _text = format ["%1 have %2 Varialbe", _space, _count];
     _text call _fnc_outputText;
-} count _searchSpaces;
+} forEach _searchSpaces;
 
 {
     _x call _fnc_outputText;
-} count _temp;
+} forEach _temp;

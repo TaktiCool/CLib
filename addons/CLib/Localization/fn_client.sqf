@@ -27,5 +27,4 @@ if (_index == -1) then {
     };
     DUMP("L10N Varfound: " + str _x + " Content: " + str _var);
     GVAR(Namespace) setVariable [_x, _var];
-    nil
-} count ([GVAR(Namespace), QGVAR(allLocalizations)] call CFUNC(allVariables));
+} forEach ([GVAR(Namespace), QGVAR(allLocalizations)] call CFUNC(allVariables));

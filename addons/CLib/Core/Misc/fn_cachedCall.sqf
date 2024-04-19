@@ -51,8 +51,7 @@ if (_timestamp < time) then {
                 // Erase all the cached results
                 {
                     GVAR(cachedCall) setVariable [_x, nil];
-                    nil
-                } count _cacheList;
+                } forEach _cacheList;
                 // Empty the list
                 GVAR(cachedCall) setVariable [_varName, []];
             }] call CFUNC(addEventhandler);

@@ -62,8 +62,7 @@ private _targets = [];
             _targets append ((units _var) apply {owner _x});
         };
     };
-    nil
-} count _target;
+} forEach _target;
 
 // exit with no targets are applyed
 if (_targets isNotEqualTo []) then {
@@ -78,8 +77,7 @@ if (_targets isNotEqualTo []) then {
         } else {
             _x publicVariableClient QGVAR(remoteExecCode);
         };
-        nil
-    } count _targets;
+    } forEach _targets;
 };
 
 nil // this function should return Nothing

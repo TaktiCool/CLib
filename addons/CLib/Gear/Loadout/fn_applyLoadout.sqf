@@ -51,8 +51,7 @@ private _fnc_do = {
             if (_items isEqualType []) then {
                 {
                     _x call _do;
-                    nil
-                } count _items;
+                } forEach _items;
             } else {
                 _items call _do;
             };
@@ -105,26 +104,22 @@ private _fnc_do = {
 // Weapons
 {
     [_x, {_unit addWeapon _this}, false] call _fnc_do;
-    nil
-} count ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
+} forEach ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
 
 // Primary Weapon Items
 {
     [_x, {_unit addPrimaryWeaponItem _this}, false] call _fnc_do;
-    nil
-} count ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
+} forEach ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
 
 // Secondary Weapon Items
 {
     [_x, {_unit addSecondaryWeaponItem _this}, false] call _fnc_do;
-    nil
-} count ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
+} forEach ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
 
 // Handgun Items
 {
     [_x, {_unit addHandgunItem _this}, false] call _fnc_do;
-    nil
-} count ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
+} forEach ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
 
 // Items to Uniform
 ["itemsUniform", {

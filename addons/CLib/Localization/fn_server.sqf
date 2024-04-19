@@ -41,8 +41,7 @@ private _fnc_readLocalization = {
     params ["_config", "_name"];
     {
         [_name, configName _x, getText _x] call _fnc_setLanguageKey;
-        nil
-    } count configProperties [_config, "isText _x", true];
+    } forEach configProperties [_config, "isText _x", true];
 };
 
 private _fnc_readLocalizationClass = {
@@ -53,18 +52,15 @@ private _fnc_readLocalizationClass = {
     } else {
         {
             [_x, _name + "_" + configName _x] call _fnc_readLocalizationClass;
-            nil
-        } count _childs;
+        } forEach _childs;
     };
 };
 
 {
     {
         [_x, configName _x] call _fnc_readLocalizationClass;
-        nil
-    } count configProperties [_x >> "CfgCLibLocalization", "isClass _x", true];
-    nil
-} count [campaignConfigFile, missionConfigFile >> "CLib", configFile];
+    } forEach configProperties [_x >> "CfgCLibLocalization", "isClass _x", true];
+} forEach [campaignConfigFile, missionConfigFile >> "CLib", configFile];
 
 publicVariable QGVAR(Namespace);
 publicVariable QGVAR(supportedLanguages);

@@ -24,8 +24,7 @@ private _fnc_readSubModule = {
         private _modulePath = +_modulePath;
         _modulePath pushBack _subModuleName;
         [_modPath, _modName, _moduleName, _modulePath, _x] call _fnc_checkNext;
-        nil
-    } count _children;
+    } forEach _children;
 };
 
 private _fnc_readFunction = {
@@ -65,10 +64,8 @@ DUMP("--------------------------Start CLib Function Search----------------------
 
     {
         [_modPath, _modName, _moduleName, [_moduleName], _x] call _fnc_checkNext;
-        nil
-    } count (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
+    } forEach (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
 
-    nil
-} count (parsingNamespace getVariable QGVAR(allModuleNamesCached));
+} forEach (parsingNamespace getVariable QGVAR(allModuleNamesCached));
 parsingNamespace setVariable [QCGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
 DUMP("--------------------------End CLib Function Search---------------------------------");

@@ -33,7 +33,6 @@ private _allVar = if (_allVarName == "") then {
     if !(isNil "_var") then {
         [_hashSet, _x, _var] call CFUNC(setHash);
     };
-    nil
-} count _allVar;
+} forEach _allVar;
 
 _hashSet

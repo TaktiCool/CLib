@@ -24,11 +24,9 @@ private _allStates = [_stateMachine, QGVAR(allStatemachineStates)] call CFUNC(al
 
 {
     [_stateMachineNew, _x, _stateMachine getVariable _x, QGVAR(allStatemachineVariables), false] call CFUNC(setVariable);
-    nil
-} count _allVar;
+} forEach _allVar;
 
 {
     [_stateMachineNew, _x, _stateMachine getVariable _x, QGVAR(allStatemachineStates), false] call CFUNC(setVariable);
-    nil
-} count _allStates;
+} forEach _allStates;
 _stateMachineNew

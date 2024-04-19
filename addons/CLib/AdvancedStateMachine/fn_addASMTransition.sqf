@@ -46,5 +46,4 @@ if (_sourceStateNames isEqualType "") then {
     } else {
         LOG("Invalid source state name passed to addASMTransition");
     };
-    nil
-} count _sourceStateNames;
+} forEach _sourceStateNames;

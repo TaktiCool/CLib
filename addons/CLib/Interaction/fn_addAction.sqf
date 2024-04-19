@@ -136,8 +136,7 @@ private _argName = "";
         };
         _argName = "";
     };
-    nil
-} count _dynamicArguments;
+} forEach _dynamicArguments;
 
 GVAR(currentActionID) = GVAR(currentActionID) + 1;
 // Convert Condition to String
@@ -156,8 +155,7 @@ if (_target isEqualType "") then {_target = [_target]};
 if (_target isEqualType []) then {
     {
         GVAR(Interaction_Actions) pushBackUnique [_x, _text, _condition, _callback, _args, _priority, _showWindow, _hideOnUse, _shortcut, _radius, _unconscious, _selection, _memorypoint, _onActionAdded, GVAR(currentActionID)];
-        false
-    } count _target;
+    } forEach _target;
 };
 
 if (_target isEqualType objNull) then {

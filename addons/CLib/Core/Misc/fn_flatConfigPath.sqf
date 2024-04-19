@@ -40,7 +40,6 @@ private _hierarchy = configHierarchy (_configPath);
         };
     };
     _return pushBack _name;
-    nil
-} count _hierarchy;
+} forEach _hierarchy;
 
 _return joinString _separator;

@@ -124,8 +124,7 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
     ];
     _groupContent ctrlSetFade 0;
     _groupContent ctrlCommit (random _fadeIn);
-    nil
-} count _grids;
+} forEach _grids;
 
 [{
     params ["_grids", "_contentIsStructuredText", "_sizeW", "_sizeH", "_posW", "_posH", "_fadeOut", "_onFadeOut"];
@@ -146,8 +145,7 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
         ];
         _groupContent ctrlSetFade 1;
         _groupContent ctrlCommit (random _fadeOut);
-        nil
-    } count _grids;
+    } forEach _grids;
     [{
         private _display = uiNamespace getVariable "RscTilesGroup";
         _display closeDisplay 0;

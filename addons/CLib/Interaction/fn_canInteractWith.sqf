@@ -39,7 +39,6 @@ params [
                 false breakOut "canInteractWithScope";
             };
         };
-        nil
-    } count GVAR(canInteractWithTypes);
+    } forEach GVAR(canInteractWithTypes);
     true
 }, _this, 1, QGVAR(clearCanInteractWith)] call CFUNC(cachedCall);

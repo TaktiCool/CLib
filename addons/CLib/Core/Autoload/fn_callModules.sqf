@@ -103,8 +103,7 @@ private _thread = 0 spawn {
                 _code = missionNamespace getVariable [_code, {LOG("Code not Found")}];
             };
             _args call _code;
-            nil
-        } count CGVAR(entryPointQueue);
+        } forEach CGVAR(entryPointQueue);
     }, _this select 1] call CFUNC(execNextFrame);
 }, [_postInit, _thread]] call CFUNC(execNextFrame);
 
@@ -123,8 +122,7 @@ if (didJIP) then {
                     [_event, _args] call CFUNC(localEvent);
                 };
             };
-            nil
-        } count (_this select 1);
+        } forEach (_this select 1);
     };
     ["loadJIPQueue", CLib_Player] call CFUNC(serverEvent);
 };

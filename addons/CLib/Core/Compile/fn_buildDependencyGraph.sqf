@@ -39,8 +39,7 @@ while {_modulesToSort isNotEqualTo []} do {
                 };
             };
             if (!_dependenciesLoaded) exitWith {};
-            nil
-        } count _dependencies;
+        } forEach _dependencies;
 
         if (_dependenciesLoaded) then {
             _sortedModuleNames pushBack _moduleName;

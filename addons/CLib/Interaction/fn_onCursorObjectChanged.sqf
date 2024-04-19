@@ -51,7 +51,6 @@ if (_currentID isEqualTo GVAR(currentActionID)) exitWith {};
             };
         };
     };
-    nil
-} count GVAR(Interaction_Actions);
+} forEach GVAR(Interaction_Actions);
 
 _target setVariable [QGVAR(ActionIDs), _actionIDs];

@@ -59,8 +59,7 @@ scopeName (_fnc_scriptName + '_Main');
             LOG("Error: " + _functionName + " could not get overwritten but is different from the current version!");
         };
     };
-    nil
-} count [missionNamespace, uiNamespace, parsingNamespace];
+} forEach [missionNamespace, uiNamespace, parsingNamespace];
 
 #ifdef DISABLECOMPRESSION
 if (true) exitWith {};

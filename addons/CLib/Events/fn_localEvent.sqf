@@ -38,8 +38,7 @@ if !(isNil "_eventArray") then {
             };
             [_args, _data] call _eventFunctions;
         };
-        nil
-    } count _eventArray;
+    } forEach _eventArray;
 };
 
 #ifdef ISDEV

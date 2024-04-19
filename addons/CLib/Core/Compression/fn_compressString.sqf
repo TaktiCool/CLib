@@ -89,8 +89,7 @@ _rawOutput append (_rawInput select [0, MINMATCHLENGTH]);
     };
 
     if (_inputPosition == _inputLength) exitWith {};
-    nil
-} count _rawInput;
+} forEach _rawInput;
 
 if (_writeCache isNotEqualTo []) then {
     _rawOutput pushBack _encodeFlag;

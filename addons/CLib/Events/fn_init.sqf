@@ -23,8 +23,7 @@ GVAR(ignoredLogEventNames_1) = [];
 
 {
     _x call CFUNC(addIgnoredEventLog);
-    nil
-} count [
+} forEach [
     ["drawmapgraphics", 0],
     ["eventadded", 1],
     ["cursortargetchanged", 1],
@@ -48,8 +47,7 @@ GVAR(ignoredLogEventNames_1) = [];
             };
             {
                 [_x, _args] call _function;
-                nil
-            } count GVAR(entitiesCached);
+            } forEach GVAR(entitiesCached);
         };
     };
 

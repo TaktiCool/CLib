@@ -21,7 +21,7 @@ if (isServer) then {
 
     {
         [(getArray _x)] call CFUNC(registerSettings);
-    } count configProperties [configFile >> "CfgClibSettings", "isArray _x", true];
+    } forEach configProperties [configFile >> "CfgClibSettings", "isArray _x", true];
 };
 
 if (hasInterface) then {
@@ -35,7 +35,7 @@ if (hasInterface) then {
                 GVAR(allSettings) setVariable [_x, _var];
             };
         };
-    } count allVariables GVAR(allSettings);
+    } forEach allVariables GVAR(allSettings);
 };
 
 #ifdef ISDEV
@@ -46,5 +46,5 @@ if (hasInterface) then {
             private _t = format ["%1: %2,%3,%4", _x, _value, _force, _isClient];
             LOG(_t);
         };
-    } count allVariables GVAR(allSettings);
+    } forEach allVariables GVAR(allSettings);
 #endif

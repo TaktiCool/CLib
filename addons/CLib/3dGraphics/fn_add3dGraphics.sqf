@@ -78,8 +78,7 @@ private _completeGraphicsData = [];
             _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code, _customCodeArgs];
         };
     };
-    nil
-} count _graphicsData;
+} forEach _graphicsData;
 
 [GVAR(3dGraphicsNamespace), _id, _completeGraphicsData] call CFUNC(setVariable);
 GVAR(3dGraphicsCacheBuildFlag) = GVAR(3dGraphicsCacheBuildFlag) + 1;

@@ -126,8 +126,7 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             _cache pushBack [_groupId, _positions, nil, nil, nil, false, true];
         };
     };
-    nil
-} count GVAR(MapGraphicsCache);
+} forEach GVAR(MapGraphicsCache);
 
 GVAR(MapGraphicsGeometryCache) = _cache;
 RUNTIME("DrawMapIcons");

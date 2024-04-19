@@ -34,8 +34,7 @@ GVAR(mutexCaches) = false call CFUNC(createNamespace);
         if (_code isEqualType {}) then {
             _args call _code;
         };
-        nil
-    } count +_mutexCache;
+    } forEach +_mutexCache;
 
     // Empty the cache
     GVAR(mutexCaches) setVariable [_mutexId, []];

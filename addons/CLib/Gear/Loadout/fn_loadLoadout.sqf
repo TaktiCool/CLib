@@ -84,8 +84,7 @@ private _fnc_readClass = {
     params ["_config"];
     {
         _x call ([_fnc_readData, _fnc_readClass] select (isClass _x));
-        nil
-    } count configProperties [_config, "true", true];
+    } forEach configProperties [_config, "true", true];
 };
 
 _cfg call _fnc_readClass;

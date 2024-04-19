@@ -39,6 +39,5 @@ if (isNil "_eventArray") exitWith {};
         };
         [_args, _data] call _code;
     };
-    nil
-} count _eventArray;
+} forEach _eventArray;
 nil
