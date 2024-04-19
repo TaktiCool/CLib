@@ -24,7 +24,8 @@ params [
     ["_mutexId", "main", [""]]
 ];
 
-private _mutexCache = GVAR(mutexCaches) getVariable [_mutexId, []];
+_mutexId = toLower _mutexId;
+private _mutexCache = GVAR(mutexCaches) get [_mutexId, []];
 
 // Cache the function and args
 private _index = _mutexCache pushBackUnique [_code, _args];
@@ -32,7 +33,7 @@ private _index = _mutexCache pushBackUnique [_code, _args];
 // Exit if there was an duplicate detected
 if (_index == -1) exitWith {};
 
-GVAR(mutexCaches) setVariable [_mutexId, _mutexCache];
+GVAR(mutexCaches) set [_mutexId, _mutexCache];
 
 // Tell the server that there is something to execute
 [QGVAR(mutexRequest), [CLib_Player, _mutexId]] call CFUNC(serverEvent);

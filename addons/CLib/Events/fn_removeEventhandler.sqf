@@ -21,10 +21,11 @@ params [
 ];
 
 DUMP("Eventhandler Removed: "+ _event);
-private _eventArray = GVAR(EventNamespace) getVariable [_event, []];
+_event = toLower _event;
+private _eventArray = GVAR(EventNamespace) getOrDefault [_event, []];
 if (count _eventArray >= _id) then {
     _eventArray set [_id, nil];
-    GVAR(EventNamespace) setVariable [_event, _eventArray];
+    GVAR(EventNamespace) set [_event, _eventArray];
     true
 } else {
     false

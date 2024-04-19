@@ -22,7 +22,7 @@ with uiNamespace do {
 };
 
 //Namespace for Layer
-GVAR(MapGraphicsGroup) = call CFUNC(createNamespace);
+GVAR(MapGraphicsGroup) = createHashMap;
 
 //Render Cache
 GVAR(MapGraphicsCacheBuildFlag) = 0; // Should be incremented for each rebuild

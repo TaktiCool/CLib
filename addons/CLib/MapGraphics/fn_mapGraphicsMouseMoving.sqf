@@ -24,23 +24,22 @@ params [
 
 private _nearestIcon = [_control, _xPos, _yPos] call CFUNC(nearestMapGraphicsGroup);
 {
-    private _icon = GVAR(MapGraphicsGroup) getVariable _x;
+    private _icon = _y;
     if ((_icon select 2) == 1 && _nearestIcon != _x) then {
         _icon set [2, 0];
-        GVAR(MapGraphicsGroup) setVariable [_x, _icon];
+        GVAR(MapGraphicsGroup) set [_x, _icon];
         [_x, "hoverout", [_control, _xPos, _yPos]] call CFUNC(triggerMapGraphicsEvent);
         GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
     };
-    nil;
-} count ([GVAR(MapGraphicsGroup)] call CFUNC(allVariables));
+} forEach GVAR(MapGraphicsGroup);
 
 if (_nearestIcon == "") exitWith {};
 
-private _icon = GVAR(MapGraphicsGroup) getVariable _nearestIcon;
+private _icon = GVAR(MapGraphicsGroup) get _nearestIcon;
 
 if ((_icon select 2) < 1) then {
     _icon set [2, 1];
-    GVAR(MapGraphicsGroup) setVariable [_nearestIcon, _icon];
+    GVAR(MapGraphicsGroup) set [_nearestIcon, _icon];
     [_nearestIcon, "hoverin", [_control, _xPos, _yPos]] call CFUNC(triggerMapGraphicsEvent);
     GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
 };

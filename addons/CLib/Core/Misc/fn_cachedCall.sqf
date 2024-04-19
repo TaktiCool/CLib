@@ -29,31 +29,32 @@ params [
     ["_event", nil, [""]]
 ];
 
-private _timestamp = (GVAR(cachedCall) getVariable [_uid, [-999999999]]) select 0;
+_uid = toLower _uid;
+private _timestamp = (GVAR(cachedCall) getOrDefault [_uid, [-999999999]]) select 0;
 if (_timestamp < time) then {
-    GVAR(cachedCall) setVariable [_uid, [time + _duration, _args call _fnc]];
+    GVAR(cachedCall) set [_uid, [time + _duration, _args call _fnc]];
 
     // Does the cache need to be cleared on an event?
     if (!isNil "_event") then {
         private _varName = format [QGVAR(clearCache_%1), _event];
-        private _cacheList = GVAR(cachedCall) getVariable _varName;
+        private _cacheList = GVAR(cachedCall) get _varName;
 
         // If there was no EH to clear these caches, add one
         if (isNil "_cacheList") then {
             _cacheList = [];
-            GVAR(cachedCall) setVariable [_varName, _cacheList];
+            GVAR(cachedCall) set [_varName, _cacheList];
 
             [_event, {
                 // _eventName is defined on the function that calls the event
                 // Get the list of caches to clear
                 private _varName = format [QGVAR(clearCache_%1), _eventName];
-                private _cacheList = GVAR(cachedCall) getVariable [_varName, []];
+                private _cacheList = GVAR(cachedCall) getOrDefault [_varName, []];
                 // Erase all the cached results
                 {
-                    GVAR(cachedCall) setVariable [_x, nil];
+                    GVAR(cachedCall) deleteAt _x;
                 } forEach _cacheList;
                 // Empty the list
-                GVAR(cachedCall) setVariable [_varName, []];
+                GVAR(cachedCall) set [_varName, []];
             }] call CFUNC(addEventhandler);
         };
 
@@ -62,4 +63,4 @@ if (_timestamp < time) then {
     };
 };
 
-(GVAR(cachedCall) getVariable _uid) select 1
+(GVAR(cachedCall) get _uid) select 1

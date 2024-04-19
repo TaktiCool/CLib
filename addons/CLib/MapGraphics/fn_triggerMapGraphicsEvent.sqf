@@ -27,7 +27,8 @@ private _namespace = missionNamespace getVariable _eventNameSpace;
 
 if (isNil "_namespace") exitWith {};
 
-private _eventArray = _namespace getVariable _uid;
+ 
+private _eventArray = _namespace get (toLower _uid);
 
 if (isNil "_eventArray") exitWith {};
 

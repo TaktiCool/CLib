@@ -168,11 +168,12 @@ private _completeGroupData = [];
 // select the correct state
 private _stateNum = 0 max (["normal", "hover", "selected"] find _state);
 
+_groupName = toLower _groupName;
 // save the data
-private _currentIcon = GVAR(MapGraphicsGroup) getVariable [_groupName, [_layer, 0, 0, [], [], []]];
+private _currentIcon = GVAR(MapGraphicsGroup) getOrDefault [_groupName, [_layer, 0, 0, [], [], []]];
 _currentIcon set [_stateNum + 3, _completeGroupData];
 _currentIcon set [1, time];
-[GVAR(MapGraphicsGroup), _groupName, _currentIcon] call CFUNC(setVariable);
+GVAR(MapGraphicsGroup) set [_groupName, _currentIcon];
 // increment map graphics cache
 GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;
 nil

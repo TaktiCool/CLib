@@ -41,7 +41,7 @@ GVAR(PlayerInteraction_Actions) = [];
     _newUnit setVariable [QGVAR(ActionIDs), []];
 }] call CFUNC(addEventhandler);
 
-GVAR(InGameUIEventHandler) = call CFUNC(createNamespace);
+GVAR(InGameUIEventHandler) = createHashMap;
 GVAR(DisablePrevAction) = false;
 GVAR(DisableNextAction) = false;
 GVAR(DisableAction) = false;
@@ -52,7 +52,7 @@ private _inGameUiEventHandler = {
     if (GVAR(DisablePrevAction) && {_eventName == "PrevAction"} || (GVAR(DisableNextAction) && {_eventName == "NextAction"}) || (GVAR(DisableAction) && {_eventName == "Action"})) then {
         true
     } else {
-        private _ehData = GVAR(InGameUIEventHandler) getVariable [format ["%1_%2", _eventName, _id], []];
+        private _ehData = GVAR(InGameUIEventHandler) getOrDefault [toLower (format ["%1_%2", _eventName, _id]), []];
         _ehData params [["_code", {}], ["_args", []]];
         [_target, _caller, _id, _args] call _code;
     };

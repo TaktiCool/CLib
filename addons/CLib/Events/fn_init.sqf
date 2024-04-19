@@ -16,7 +16,7 @@
 
 GVAR(sideEnum) = [west, east, independent, civilian, sideEmpty, sideFriendly, sideEnemy, sideUnknown, sideLogic, sideAmbientLife];
 GVAR(sideEnumStr) = GVAR(sideEnum) apply {toLower str _x};
-GVAR(EventNamespace) = false call CFUNC(createNamespace);
+GVAR(EventNamespace) = createHashMap;
 
 GVAR(ignoredLogEventNames_0) = [];
 GVAR(ignoredLogEventNames_1) = [];
@@ -259,7 +259,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventhandler);
 ["setDynamicSimulationDistance", {
     (_this select 0) params ["_category", "_distance"];
-    _category setDynamicSimulationDistance _distance
+    call compile "_category setDynamicSimulationDistance _distance"
 }] call CFUNC(addEventhandler);
 ["setDynamicSimulationDistanceCoef", {
     (_this select 0) params ["_class", "_multiplier"];
