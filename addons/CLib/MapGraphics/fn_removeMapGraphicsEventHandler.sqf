@@ -24,9 +24,9 @@ params [
 
 // build Namespace Variablename
 private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
-private _namespace = missionNamespace getVariable [_eventNameSpace, objNull];
+private _namespace = missionNamespace getVariable _eventNameSpace;
 
-if (isNull _namespace) exitWith {};
+if (isNil "_namespace") exitWith {};
 
 _uid = toLower _uid;
 
