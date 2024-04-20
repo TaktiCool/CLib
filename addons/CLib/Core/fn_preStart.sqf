@@ -16,44 +16,49 @@
 
 private _startTime = diag_tickTime;
 
+#ifdef ISDEV
+    #define COMPILE_FILE(script) compile preprocessFileLineNumbers script
+#else
+    #define COMPILE_FILE(script) compileScript [script, false]
+#endif
 if (isNil QCFUNC(compile)) then {
-    DCFUNC(compile) = compileScript ["\tc\CLib\addons\CLib\Core\Compile\fn_compile.sqf", false];
+    DCFUNC(compile) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compile\fn_compile.sqf");
 };
 if (isNil QCFUNC(stripSqf)) then {
-    DCFUNC(stripSqf) = compileScript ["\tc\CLib\addons\CLib\Core\Compile\fn_stripSqf.sqf", false];
+    DCFUNC(stripSqf) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compile\fn_stripSqf.sqf");
 };
 if (isNil QCFUNC(readAllModules)) then {
-    DCFUNC(readAllModules) = compileScript ["\tc\CLib\addons\CLib\Core\Compile\fn_readAllModules.sqf", false];
+    DCFUNC(readAllModules) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compile\fn_readAllModules.sqf");
 };
 if (isNil QCFUNC(readAllFunctions)) then {
-    DCFUNC(readAllFunctions) = compileScript ["\tc\CLib\addons\CLib\Core\Compile\fn_readAllFunctions.sqf", false];
+    DCFUNC(readAllFunctions) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compile\fn_readAllFunctions.sqf");
 };
 if (isNil QCFUNC(compileAllFunctions)) then {
-    DCFUNC(compileAllFunctions) = compileScript ["\tc\CLib\addons\CLib\Core\Compile\fn_compileAllFunctions.sqf", false];
+    DCFUNC(compileAllFunctions) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compile\fn_compileAllFunctions.sqf");
 };
 if (isNil QCFUNC(buildDependencyGraph)) then {
-    DCFUNC(buildDependencyGraph) = compileScript ["\tc\CLib\addons\CLib\Core\Compile\fn_buildDependencyGraph.sqf", false];
+    DCFUNC(buildDependencyGraph) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compile\fn_buildDependencyGraph.sqf");
 };
 if (isNil QCFUNC(compressString)) then {
-    DCFUNC(compressString) = compileScript ["\tc\CLib\addons\CLib\Core\Compression\fn_compressString.sqf", false];
+    DCFUNC(compressString) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compression\fn_compressString.sqf");
 };
 if (isNil QCFUNC(decompressString)) then {
-    DCFUNC(decompressString) = compileScript ["\tc\CLib\addons\CLib\Core\Compression\fn_decompressString.sqf", false];
+    DCFUNC(decompressString) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compression\fn_decompressString.sqf");
 };
 if (isNil QCFUNC(checkCompression)) then {
-    DCFUNC(checkCompression) = compileScript ["\tc\CLib\addons\CLib\Core\Compression\fn_checkCompression.sqf", false];
+    DCFUNC(checkCompression) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compression\fn_checkCompression.sqf");
 };
 if (isNil QCFUNC(checkAllFunctionCompression)) then {
-    DCFUNC(checkAllFunctionCompression) = compileScript ["\tc\CLib\addons\CLib\Core\Compression\fn_checkAllFunctionCompression.sqf", false];
+    DCFUNC(checkAllFunctionCompression) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Compression\fn_checkAllFunctionCompression.sqf");
 };
 if (isNil QCFUNC(log)) then {
-    DCFUNC(log) = compileScript ["\tc\CLib\addons\CLib\Core\Misc\fn_log.sqf", false];
+    DCFUNC(log) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Misc\fn_log.sqf");
 };
 if (isNil QCFUNC(codeToString)) then {
-    DCFUNC(codeToString) = compileScript ["\tc\CLib\addons\CLib\Core\Misc\fn_codeToString.sqf", false];
+    DCFUNC(codeToString) = COMPILE_FILE("\tc\CLib\addons\CLib\Core\Misc\fn_codeToString.sqf");
 };
 
-call (compileScript ["\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_preStart.sqf", false]);
+call (COMPILE_FILE("\tc\CLib\addons\CLib\Core\ExtensionFramework\fn_preStart.sqf"));
 
 CGVAR(playerUID) = "";
 

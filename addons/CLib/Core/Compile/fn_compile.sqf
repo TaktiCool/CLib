@@ -44,7 +44,7 @@ scopeName (_fnc_scriptName + '_Main');
 #endif
 
 #ifdef ISDEV
-    private _functionCode = compileScript [_functionPath, false, _header];
+    private _functionCode = compile (_header + preprocessFileLineNumbers _functionPath);
 #else
     private _functionCode = parsingNamespace getVariable _functionName;
     if (isNil "_functionCode") then {
