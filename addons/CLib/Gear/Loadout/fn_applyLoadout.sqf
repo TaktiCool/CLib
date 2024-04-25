@@ -70,6 +70,23 @@ private _fnc_do = {
     if (_this isEqualTo 1) then {removeAllAssignedItems _unit};
 }, false] call _fnc_do;
 
+// Force Remove Actions
+["forceRemoveGoggle", {
+    if (_this isEqualTo 1) then {removeGoggles _unit};
+}, false] call _fnc_do;
+["forceRemoveHeadgear", {
+    if (_this isEqualTo 1) then {removeHeadgear _unit};
+}, false] call _fnc_do;
+["forceRemoveUniform", {
+    if (_this isEqualTo 1) then {removeUniform _unit};
+}] call _fnc_do;
+["forceRemoveVest", {
+    if (_this isEqualTo 1) then {removeVest _unit};
+}] call _fnc_do;
+["forceRemoveBackpack", {
+    if (_this isEqualTo 1) then {removeBackpack _unit};
+}] call _fnc_do;
+
 // Uniform
 ["uniform", {
     [_unit, _this, 0] call CFUNC(addContainer);
