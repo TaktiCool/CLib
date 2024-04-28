@@ -1,7 +1,7 @@
 name = "CLib"
 mainprefix = "tc"
 modname = "CLib"
-prefix = "TC"
+prefix = "CLib"
 author = "CLib Team"
 include = ["./include"]
 
