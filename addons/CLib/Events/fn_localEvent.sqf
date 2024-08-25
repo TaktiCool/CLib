@@ -27,7 +27,7 @@ params [
     private _Clib_EventTime = diag_tickTime;
 #endif
 
-_eventName = toLower _eventName;
+_eventName = toLowerANSI _eventName;
 
 private _eventArray = GVAR(EventNamespace) get _eventName;
 private _CLib_EventReturn = nil;

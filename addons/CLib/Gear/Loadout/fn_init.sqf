@@ -19,7 +19,7 @@ if (isServer) then {
     publicVariable QGVAR(loadoutsNamespace);
 
     GVAR(defaultLoadoutValues) = configProperties [configFile >> "CfgCLibLoadoutsClassBase", "true", true];
-    GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLower (configName _x)};
+    GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLowerANSI (configName _x)};
     publicVariable QGVAR(defaultLoadoutValues);
 };
 

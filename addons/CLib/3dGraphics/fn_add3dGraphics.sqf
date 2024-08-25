@@ -80,5 +80,5 @@ private _completeGraphicsData = [];
     };
 } forEach _graphicsData;
 
-GVAR(3dGraphicsNamespace) set [toLower _id, _completeGraphicsData];
+GVAR(3dGraphicsNamespace) set [toLowerANSI _id, _completeGraphicsData];
 GVAR(3dGraphicsCacheBuildFlag) = GVAR(3dGraphicsCacheBuildFlag) + 1;

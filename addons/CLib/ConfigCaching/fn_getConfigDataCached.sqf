@@ -22,6 +22,6 @@ params [
     ["_forceDefaultType", false, [true]]
 ];
 
-GVAR(configCache) getOrDefaultCall [toLower (format [QGVAR(getCachedData_%1), _path]), {
+GVAR(configCache) getOrDefaultCall [toLowerANSI (format [QGVAR(getCachedData_%1), _path]), {
 [_path, _default, _forceDefaultType] call CFUNC(getConfigData);
 }];

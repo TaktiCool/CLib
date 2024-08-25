@@ -67,7 +67,7 @@ if (true) exitWith {};
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
 #ifndef ISDEV
-if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")} && (toLower (productVersion select 6)) isNotEqualTo "linux") then {
+if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")} && (toLowerANSI (productVersion select 6)) isNotEqualTo "linux") then {
 #endif
     #ifdef ISDEV
         private _startTime = diag_tickTime;

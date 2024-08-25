@@ -29,7 +29,7 @@ params [
     ["_event", nil, [""]]
 ];
 
-_uid = toLower _uid;
+_uid = toLowerANSI _uid;
 private _timestamp = (GVAR(cachedCall) getOrDefault [_uid, [-999999999]]) select 0;
 if (_timestamp < time) then {
     GVAR(cachedCall) set [_uid, [time + _duration, _args call _fnc]];

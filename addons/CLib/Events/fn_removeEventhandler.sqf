@@ -21,7 +21,7 @@ params [
 ];
 
 DUMP("Eventhandler Removed: "+ _event);
-_event = toLower _event;
+_event = toLowerANSI _event;
 private _eventArray = GVAR(EventNamespace) getOrDefault [_event, []];
 if (count _eventArray >= _id) then {
     _eventArray set [_id, nil];

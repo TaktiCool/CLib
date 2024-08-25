@@ -57,7 +57,7 @@ private _selection = "";
 private _argName = "";
 {
     if (_argName == "") then {
-        _argName = toLower _x;
+        _argName = toLowerANSI _x;
     } else {
         switch (_argName) do {
             case ("arguments"): {

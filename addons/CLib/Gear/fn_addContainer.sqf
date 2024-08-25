@@ -23,7 +23,7 @@ params [
 ];
 
 if (_containerType isEqualType "") then {
-    switch (toLower (_containerType)) do {
+    switch (toLowerANSI (_containerType)) do {
         case ("uniform"): {
             _containerType = 0;
         };

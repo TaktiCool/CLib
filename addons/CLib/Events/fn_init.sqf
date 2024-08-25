@@ -15,7 +15,7 @@
 */
 
 GVAR(sideEnum) = [west, east, independent, civilian, sideEmpty, sideFriendly, sideEnemy, sideUnknown, sideLogic, sideAmbientLife];
-GVAR(sideEnumStr) = GVAR(sideEnum) apply {toLower str _x};
+GVAR(sideEnumStr) = GVAR(sideEnum) apply {toLowerANSI str _x};
 GVAR(EventNamespace) = createHashMap;
 
 GVAR(ignoredLogEventNames_0) = [];
@@ -237,7 +237,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["setMimic", {
     (_this select 0) params ["_unit", "_mimic"];
-    if !(toLower _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
+    if !(toLowerANSI _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
         _mimic = "neutral";
     };
     _unit setMimic _mimic;

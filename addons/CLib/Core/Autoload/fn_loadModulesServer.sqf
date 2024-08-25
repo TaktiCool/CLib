@@ -37,7 +37,7 @@ private _fnc_addRequiredModule = {
     _x call _fnc_addRequiredModule;
 } forEach _this;
 
-_requiredModules = _requiredModules apply {toLower _x};
+_requiredModules = _requiredModules apply {toLowerANSI _x};
 
 LOG("Loaded Modules: " + str _this);
 GVAR(LoadedModules) = _requiredModules;

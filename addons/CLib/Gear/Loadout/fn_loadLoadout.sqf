@@ -41,7 +41,7 @@ private _loadoutVars = createHashMap;
 
 private _fnc_assignValue = {
     params ["_key", "_value"];
-    _key = toLower _key;
+    _key = toLowerANSI _key;
     if (_key in GVAR(defaultLoadoutValues)) then {
         if (_key in _loadout) then {
             private _data = _loadout get _key;

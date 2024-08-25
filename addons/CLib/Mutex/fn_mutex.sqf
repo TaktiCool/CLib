@@ -24,7 +24,7 @@ params [
     ["_mutexId", "main", [""]]
 ];
 
-_mutexId = toLower _mutexId;
+_mutexId = toLowerANSI _mutexId;
 private _mutexCache = GVAR(mutexCaches) get [_mutexId, []];
 
 // Cache the function and args

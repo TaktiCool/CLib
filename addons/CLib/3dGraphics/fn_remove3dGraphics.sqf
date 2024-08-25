@@ -18,5 +18,5 @@ params [
     ["_id", "", [""]]
 ];
 
-GVAR(3dGraphicsNamespace) deleteAt (toLower _id);
+GVAR(3dGraphicsNamespace) deleteAt (toLowerANSI _id);
 GVAR(3dGraphicsCacheBuildFlag) = GVAR(3dGraphicsCacheBuildFlag) + 1;

@@ -28,7 +28,7 @@ private _namespace = missionNamespace getVariable _eventNameSpace;
 
 if (isNil "_namespace") exitWith {};
 
-_uid = toLower _uid;
+_uid = toLowerANSI _uid;
 
 private _eventArray = _namespace getOrDefault [_uid, []];
 if (_id == -1) then {

@@ -14,6 +14,6 @@
     https://community.bistudio.com/wiki/configProperties
 */
 
-GVAR(configCache) getOrDefaultCall [toLower (format [QGVAR(configProperties_%1), _this]), {
+GVAR(configCache) getOrDefaultCall [toLowerANSI (format [QGVAR(configProperties_%1), _this]), {
     configProperties _this
 }];

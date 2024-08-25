@@ -23,7 +23,7 @@ params [
     ["_callback", {}, [{}, ""]],
     ["_args", [], []]
 ];
-_event = toLower _event;
+_event = toLowerANSI _event;
 // Add this so we get can get sure some events that only gets triggered once get right
 ["eventAdded", [_event, _callback, _args]] call CFUNC(localEvent);
 

@@ -63,7 +63,7 @@ private _hcInit = [];
 // Cycle through all available functions and determine whether to call them or not.
 {
     call {
-        private _name = toLower _x;
+        private _name = toLowerANSI _x;
         // Client only functions.
         if ("_fnc_clientinit" in _name) exitWith {
             _clientInit pushBack _x;

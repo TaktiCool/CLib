@@ -22,4 +22,4 @@ private _loadedMods = [];
 {
     _loadedMods pushbackUnique ((_x splitString "/\") select 0);
 } forEach GVAR(LoadedModules);
-(toLower _mod) in _loadedMods;
+(toLowerANSI _mod) in _loadedMods;

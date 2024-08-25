@@ -35,7 +35,7 @@ private _fnc_readFunction = {
     private _name = configName _config;
     private _api = (getNumber (_config >> "api") isEqualTo 1);
     private _onlyServer = (getNumber (_config >> "serverOnly") isEqualTo 1);
-    if ("serverinit" in (toLower _name)) then {
+    if ("serverinit" in (toLowerANSI _name)) then {
         _onlyServer = true;
     };
 

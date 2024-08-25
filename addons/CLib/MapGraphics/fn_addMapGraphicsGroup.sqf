@@ -168,7 +168,7 @@ private _completeGroupData = [];
 // select the correct state
 private _stateNum = 0 max (["normal", "hover", "selected"] find _state);
 
-_groupName = toLower _groupName;
+_groupName = toLowerANSI _groupName;
 // save the data
 private _currentIcon = GVAR(MapGraphicsGroup) getOrDefault [_groupName, [_layer, 0, 0, [], [], []]];
 _currentIcon set [_stateNum + 3, _completeGroupData];

@@ -34,7 +34,7 @@ if (isNil "_namespace") then {
     missionNamespace setVariable [_eventNameSpace, _namespace];
 };
 
-_uid = toLower _uid;
+_uid = toLowerANSI _uid;
 
 private _eventArray = _namespace getOrDefault [_uid, []];
 

@@ -14,6 +14,6 @@
     https://community.bistudio.com/wiki/BIS_fnc_returnParents
 */
 
-GVAR(configCache) getOrDefaultCall [toLower (format [QGVAR(returnParents_%1), _this]), {
+GVAR(configCache) getOrDefaultCall [toLowerANSI (format [QGVAR(returnParents_%1), _this]), {
     _this call BIS_fnc_returnParents
 }];

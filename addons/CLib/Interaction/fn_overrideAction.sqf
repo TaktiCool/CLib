@@ -22,4 +22,4 @@ params [
     ["_arguments", [], []]
 ];
 
-GVAR(InGameUIEventHandler) set [toLower (format ["Action_%1", _actionName]), [_code, _arguments]]
+GVAR(InGameUIEventHandler) set [toLowerANSI (format ["Action_%1", _actionName]), [_code, _arguments]]

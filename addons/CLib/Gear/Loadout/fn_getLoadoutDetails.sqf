@@ -33,7 +33,7 @@ _request apply {
     ];
 
     {
-        _ret = _x getOrDefault [toLower _findData, _ret];
+        _ret = _x getOrDefault [toLowerANSI _findData, _ret];
     } forEach _loadout;
     _ret;
 };
