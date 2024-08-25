@@ -57,10 +57,10 @@ DFUNC(removeMissionObject) = [{
         _position set [2, (_position select 2) - 0.02];
 
         // Apply the position change.
-        _object setPos _position;
+        _object setPosATL _position;
 
         (_position select 2) < (0 - _height)
-    }, [_object, _height, getPos _object]] call CFUNC(waitUntil);
+    }, [_object, _height, getPosATL _object]] call CFUNC(waitUntil);
 }] call CFUNC(compileFinal);
 
 GVAR(statemachine) = call CFUNC(createStatemachine);
