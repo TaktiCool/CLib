@@ -154,11 +154,11 @@ if !(createDialog "RscDisplayCommonMessage") exitWith {
         };
     }];
 
-    _ctrlButtonOK ctrlAddEventHandler ["buttonClick", {
+    _ctrlButtonOK ctrlAddEventHandler ["ButtonClick", {
         [ctrlParent (_this select 0), QGVAR(callBack_Button1)] call FUNC(MessageBoxCallback);
     }];
 
-    _ctrlButtonCancel ctrlAddEventHandler ["buttonClick", {
+    _ctrlButtonCancel ctrlAddEventHandler ["ButtonClick", {
         [ctrlParent (_this select 0), QGVAR(callBack_Button2)] call FUNC(MessageBoxCallback);
     }];
 }, {
