@@ -20,6 +20,6 @@ params [
 
 private _loadedMods = [];
 {
-    _loadedMods pushbackUnique ((_x splitString "/\") select 0);
+    _loadedMods pushBackUnique ((_x splitString "/\") select 0);
 } forEach GVAR(LoadedModules);
 (toLowerANSI _mod) in _loadedMods;

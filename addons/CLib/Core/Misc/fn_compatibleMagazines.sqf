@@ -22,9 +22,9 @@ params [
 
 if (toLowerANSI _muzzle == "this") then {_muzzle = ""};
 private _if = if (_muzzle != "");
-private _varName = format ["%1_%2_%3", QGVAR(mags), _weapon];
+private _varName = format ["%1_%2", QGVAR(mags), _weapon];
 _if then {
-    _varName = format ["%1_%2_%3_%4", QGVAR(mags), _weapon, _muzzle];
+    _varName = format ["%1_%2_%3", QGVAR(mags), _weapon, _muzzle];
 };
 
 _varName = toLowerANSI _varName;

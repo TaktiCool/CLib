@@ -52,7 +52,7 @@ if (_pos isEqualType true) then {
             IGUI_GRID_MISSION_HAbs / IGUI_GRID_MISSION_H
         ];
     } else {
-        _pos = [safezoneX, safezoneY, safezoneW, safezoneH];
+        _pos = [safeZoneX, safeZoneY, safeZoneW, safeZoneH];
     };
 };
 

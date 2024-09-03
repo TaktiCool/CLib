@@ -44,4 +44,4 @@ if (GVAR(deletedIndices) isEqualTo []) then {
         GVAR(deletedIndices) = [];
     }] call CFUNC(execNextFrame);
 };
-GVAR(deletedIndices) pushback _index;
+GVAR(deletedIndices) pushBack _index;

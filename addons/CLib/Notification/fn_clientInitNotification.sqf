@@ -40,7 +40,7 @@ GVAR(CurrentHint) = [];
 
 ["inCuratorChanged", {
     [{
-        [findDisplay 312, [-(12 * (((safezoneW / safezoneH) min 1.2) / 40)), 0]] call CFUNC(registerDisplayNotification); // Curator
+        [findDisplay 312, [-(12 * (((safeZoneW / safeZoneH) min 1.2) / 40)), 0]] call CFUNC(registerDisplayNotification); // Curator
     }, {
         !(isNull findDisplay 312)
     }] call CFUNC(waitUntil);

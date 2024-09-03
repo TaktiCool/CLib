@@ -35,7 +35,7 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
                 private _isVisible = _customCodeArgs call _code;
                 if (_isVisible) then {
                     _position = [_position] call FUNC(3dGraphicsPosition);
-                    drawIcon3d [_texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows];
+                    drawIcon3D [_texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows];
                 };
             };
             case ("LINE"): {
@@ -44,7 +44,7 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
                 if (_isVisible) then {
                     _start = [_start] call FUNC(3dGraphicsPosition);
                     _end = [_end] call FUNC(3dGraphicsPosition);
-                    drawLine3d [_start, _end, _lineColor];
+                    drawLine3D [_start, _end, _lineColor];
                 };
             };
         };

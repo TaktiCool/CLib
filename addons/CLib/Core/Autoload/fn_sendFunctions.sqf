@@ -29,7 +29,7 @@ private _functionCode =  if (getNumber (missionConfigFile >> "CLib" >> "Optimise
         parsingNamespace getVariable [_functionName, {}];
     };
 } else {
-    parsingnamespace getVariable [_functionName, {}];
+    parsingNamespace getVariable [_functionName, {}];
 };
 
 
@@ -44,7 +44,7 @@ if (_functionCode isEqualType "") then {
 };
 
 #ifdef ISDEV
-private _str = format ["SendFunctions: %1, Size: %2KB", _functionName, _size, GVAR(receiveFunction) select 2];
+private _str = format ["SendFunctions: %1, Size: %2KB, Process: %3%4", _functionName, _size, GVAR(receiveFunction) select 2, "%"];
 DUMP(_str);
 #endif
 

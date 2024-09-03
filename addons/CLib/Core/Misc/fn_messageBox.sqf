@@ -60,15 +60,15 @@ if !(createDialog "RscDisplayCommonMessage") exitWith {
 
     private _display = uiNamespace getVariable ["RscDisplayCommonMessage_display", displayNull];
 
-    private _ctrlRscMessageBox = _display displayctrl 2351;
-    private _ctrlBcgCommonTop = _display displayctrl 235100;
-    private _ctrlBcgCommon = _display displayctrl 235101;
-    private _ctrlText = _display displayctrl 235102;
-    private _ctrlBackgroundButtonOK = _display displayctrl 235103;
-    private _ctrlBackgroundButtonMiddle = _display displayctrl 235104;
-    private _ctrlBackgroundButtonCancel = _display displayctrl 235105;
-    private _ctrlButtonOK = _display displayctrl 235106;
-    private _ctrlButtonCancel = _display displayctrl 235107;
+    private _ctrlRscMessageBox = _display displayCtrl 2351;
+    private _ctrlBcgCommonTop = _display displayCtrl 235100;
+    private _ctrlBcgCommon = _display displayCtrl 235101;
+    private _ctrlText = _display displayCtrl 235102;
+    private _ctrlBackgroundButtonOK = _display displayCtrl 235103;
+    private _ctrlBackgroundButtonMiddle = _display displayCtrl 235104;
+    private _ctrlBackgroundButtonCancel = _display displayCtrl 235105;
+    private _ctrlButtonOK = _display displayCtrl 235106;
+    private _ctrlButtonCancel = _display displayCtrl 235107;
 
     //--- Calculate spacing
     private _ctrlButtonOKPos = ctrlPosition _ctrlButtonOK;
@@ -108,7 +108,7 @@ if !(createDialog "RscDisplayCommonMessage") exitWith {
         _xPos set [1, _bottomPosY];
         _x ctrlSetPosition _xPos;
         _x ctrlCommit 0;
-    } foreach [
+    } forEach [
         _ctrlBackgroundButtonOK,
         _ctrlBackgroundButtonMiddle,
         _ctrlBackgroundButtonCancel,

@@ -111,7 +111,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
                     _functionVarName spawn {
-                        waitUntil {missionnamespace getVariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
+                        waitUntil {missionNamespace getVariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
                         [
                             format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
                             "[CLib Anti Cheat Warning]"

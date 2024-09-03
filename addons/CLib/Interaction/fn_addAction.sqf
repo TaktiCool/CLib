@@ -64,70 +64,70 @@ private _argName = "";
                 _args = _x;
             };
             case ("priority"): {
-                if (_x isEqualtype _priority) then {
+                if (_x isEqualType _priority) then {
                     _priority = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("showwindow"): {
-                if (_x isEqualtype _showWindow) then {
+                if (_x isEqualType _showWindow) then {
                     _showWindow = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("hideonuse"): {
-                if (_x isEqualtype _hideOnUse) then {
+                if (_x isEqualType _hideOnUse) then {
                     _hideOnUse = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("shortcut"): {
-                if (_x isEqualtype _shortcut) then {
+                if (_x isEqualType _shortcut) then {
                     _shortcut = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("radius"): {
-                if (_x isEqualtype _radius) then {
+                if (_x isEqualType _radius) then {
                     _radius = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("unconscious"): {
-                if (_x isEqualtype _unconscious) then {
+                if (_x isEqualType _unconscious) then {
                     _unconscious = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("selection"): {
-                if (_x isEqualtype _selection) then {
+                if (_x isEqualType _selection) then {
                     _selection = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("memorypoint"): {
-                if (_x isEqualtype _memorypoint) then {
+                if (_x isEqualType _memorypoint) then {
                     _memorypoint = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("onactionadded"): {
-                if (_x isEqualtype _onActionAdded) then {
+                if (_x isEqualType _onActionAdded) then {
                     _onActionAdded = _x;
                 } else {
                     DUMP(_argName + " wrong Type");
                 };
             };
             case ("ignoredcaninteractconditions"): {
-                if (_x isEqualtype _ignoredCanInteractConditions) then {
+                if (_x isEqualType _ignoredCanInteractConditions) then {
                     _ignoredCanInteractConditions = _x;
                 } else {
                     DUMP(_argName + " wrong Type");

@@ -30,7 +30,7 @@ private _thread = 0 spawn {
         if (_time <= time) then {
             QCGVAR(loadModules) call BIS_fnc_endLoadingScreen;
             disableUserInput false;
-            waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
+            waitUntil {uiSleep 1; missionNamespace getVariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
             private _errorText = "Warning A Script Error that Crashed Autoload has appeared the Loading Screen got Terminated Automaticly!";
             [
                 _errorText,
@@ -39,7 +39,7 @@ private _thread = 0 spawn {
             LOG("ERROR: " + _errorText);
             breakOut "LoadingScreenFailCheck";
         };
-        UIsleep 1;
+        uiSleep 1;
     };
 };
 

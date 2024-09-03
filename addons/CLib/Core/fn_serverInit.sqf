@@ -51,7 +51,7 @@ private _fnc_addModules = {
     params ["_mod", "_module"];
     private _index = _mods find _mod;
     if (_index == -1) then {
-        _index = _mods pushback _mod;
+        _index = _mods pushBack _mod;
         _modules pushBack [];
     };
     private _moduleList = _modules select _index;
@@ -92,7 +92,7 @@ GVAR(textMods) = "Loaded Mods: <br/>";
         _authors = _authors + format ["%1, ", _x];
     } forEach _authorsArr;
     if (_authors == _author) then {
-        GVAR(textMods) = GVAR(textMods) + format ["<br/><a href='%4'>%1</a> by %2 Version: %5<br/>", _name, _author, _url, _version];
+        GVAR(textMods) = GVAR(textMods) + format ["<br/><a href='%3'>%1</a> by %2 Version: %4<br/>", _name, _author, _url, _version];
     } else {
         GVAR(textMods) = GVAR(textMods) + format ["<br/><a href='%4'>%1</a> by %2: %3 Version: %5<br/>", _name, _author, _authors select [0, (count _authors) - 2], _url, _version];
     };

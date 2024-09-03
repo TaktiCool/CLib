@@ -119,7 +119,7 @@ private _temp = [];
                     _text = format ["%1;%2: %3", _space, _x, _var];
                     _temp pushBack _text;
                 } else {
-                    _text = format ["%1;%2: %3 ... %4", _space, _x, _var select [0, 4] count _var];
+                    _text = format ["%1;%2: %3 ... %4", _space, _x, _var select [0, 4], count _var];
                 };
             } else {
                 _text = format ["%1;%2: %3", _space, _x, _var];
