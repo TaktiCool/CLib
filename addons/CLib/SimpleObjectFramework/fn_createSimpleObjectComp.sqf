@@ -30,9 +30,6 @@ if !(isServer) exitWith {
     [QGVAR(createSimpleObjectComp), _this] call CFUNC(serverEvent);
 };
 
-if (_uid isEqualTo "") exitWith {
-    LOG("ERROR: Unique identifier is not valid");
-};
 
 params [
     ["_uid", "", [""]],
@@ -43,6 +40,10 @@ params [
     ["_ignoreObj2", objNull, [objNull]],
     ["_callback", [], [[]], []]
 ];
+
+if (_uid isEqualTo "") exitWith {
+    LOG("ERROR: Unique identifier is not valid");
+};
 
 if !(isNil {GVAR(compNamespace) getVariable _uid}) then {
     LOG("WARNING: the UID is already in use");

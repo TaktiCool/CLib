@@ -87,3 +87,5 @@
 #define SCRIPTSCOPENAME (FUNCTIONNAME + "_Main")
 
 #define RELDIR(pos1,pos2) (((pos1 getRelDir pos2) + 180) % 360 - 180)
+
+//IGNORE_PRIVATE_WARNING ["_fnc_scriptName", "_fnc_scriptNameParent", "_fnc_scriptMap"];

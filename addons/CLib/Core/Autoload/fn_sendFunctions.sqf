@@ -39,13 +39,17 @@ if (_functionCode isEqualType "") then {
     if (isNil QGVAR(TransmissionSize)) then {
         GVAR(TransmissionSize) = 0;
     };
+
     private _size = count _functionCode/1024;
     GVAR(TransmissionSize) = GVAR(TransmissionSize) + _size;
-};
 
 #ifdef ISDEV
-private _str = format ["SendFunctions: %1, Size: %2KB, Process: %3%4", _functionName, _size, GVAR(receiveFunction) select 2, "%"];
-DUMP(_str);
+    private _str = format ["SendFunctions: %1, Size: %2KB, Process: %3%4", _functionName, _size, GVAR(receiveFunction) select 2, "%"];
+    DUMP(_str);
 #endif
+
+};
+
+
 
 _clientID publicVariableClient QGVAR(receiveFunction);
