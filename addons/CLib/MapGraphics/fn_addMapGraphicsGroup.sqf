@@ -129,9 +129,10 @@ private _completeGroupData = [];
                 ["_position2", objNull, [[], objNull]],
                 ["_color", [0, 0, 0, 1]],
                 ["_code", {}],
-                ["_customCodeArgs", []]
+                ["_customCodeArgs", []],
+                ["_width", 3]
             ];
-            _completeGroupData pushBack [_class, _position1, _position2, _color, _code, _customCodeArgs];
+            _completeGroupData pushBack [_class, _position1, _position2, _color, _code, _customCodeArgs, _width];
         };
         case ("ARROW"): {
             _attributes params [

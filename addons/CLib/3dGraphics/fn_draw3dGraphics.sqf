@@ -39,12 +39,12 @@ if (GVAR(3dGraphicsCacheVersion) != GVAR(3dGraphicsCacheBuildFlag)) then {
                 };
             };
             case ("LINE"): {
-                _x params ["_type", "_start", "_end", "_lineColor", "_code", "_customCodeArgs"];
+                _x params ["_type", "_start", "_end", "_lineColor", "_code", "_customCodeArgs", "_width"];
                 private _isVisible = _customCodeArgs call _code;
                 if (_isVisible) then {
                     _start = [_start] call FUNC(3dGraphicsPosition);
                     _end = [_end] call FUNC(3dGraphicsPosition);
-                    drawLine3D [_start, _end, _lineColor];
+                    drawLine3D [_start, _end, _lineColor, _width];
                 };
             };
         };

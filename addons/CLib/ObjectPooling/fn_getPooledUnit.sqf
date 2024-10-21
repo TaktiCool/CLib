@@ -43,7 +43,7 @@ private _unit = objNull;
 } forEach _unitsData;
 _unitParams params [["_grp", grpNull], ["_init", {}], ["_skill", 0.5], ["_rank", "PRIVATE"]];
 if (isNull _unit) then {
-    _unit = _grp createUnit [_unitClass, [0, 0, 0]];
+    _unit = _grp createUnit [_unitClass, [0, 0, 0], [], 0, "NONE"];
 } else {
     [_unit] joinSilent _grp;
     _unit setDamage 0;

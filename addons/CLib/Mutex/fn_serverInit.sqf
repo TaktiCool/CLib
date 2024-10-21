@@ -31,7 +31,7 @@ DFUNC(checkNextMutexClient) = {
         [QGVAR(mutexLock), _currentClient, _mutexId] call CFUNC(targetEvent);
     } else {
         // Reset current client because no next client available
-        GVAR(mutexes) set [_mutexId, [0, [], 0]] call CFUNC(setVariable);
+        GVAR(mutexes) set [_mutexId, [0, [], 0]]
     };
 };
 
@@ -85,7 +85,7 @@ addMissionEventHandler ["PlayerDisconnected", {
 GVAR(TimeOutSM) = call CFUNC(createStatemachine);
 
 [GVAR(TimeOutSM), "init", {
-    private _mutexIds = +([GVAR(mutexes), QGVAR(mutexesCache)] call CFUNC(allVariables));
+    private _mutexIds = keys GVAR(mutexes);
     [["checkMutex", _mutexIds], "init"] select (_mutexIds isEqualTo []);
 }] call CFUNC(addStatemachineState);
 

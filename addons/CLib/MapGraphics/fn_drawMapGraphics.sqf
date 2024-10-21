@@ -85,13 +85,13 @@ if (GVAR(MapGraphicsCacheVersion) != GVAR(MapGraphicsCacheBuildFlag)) then {
             _cache pushBack [_groupId, _position, _width, _height, _angle, false];
         };
         case ("LINE"): {
-            _iconData params ["_type", "_pos1", "_pos2", "_lineColor", "_code", "_customCodeArgs"];
+            _iconData params ["_type", "_pos1", "_pos2", "_lineColor", "_code", "_customCodeArgs", "_width"];
             _customCodeArgs call _code;
 
             _pos1 = [_pos1, _map] call CFUNC(mapGraphicsPosition);
             _pos2 = [_pos2, _map] call CFUNC(mapGraphicsPosition);
 
-            _map drawLine [_pos1, _pos2, _lineColor];
+            _map drawLine [_pos1, _pos2, _lineColor, _width];
         };
         case ("ARROW"): {
             _iconData params ["_type", "_pos1", "_pos2", "_lineColor", "_code", "_customCodeArgs"];

@@ -37,8 +37,10 @@ if (isNull (objectParent _unit)) then {
 
 if (_priority >= 2) then {
     [{
+        params ["_unit", "_anim"];
+
         if (animationState _unit != _anim) then {
             ["switchMove", [_unit, _anim]] call CFUNC(globalEvent);
         };
-    }, 0.1] call CFUNC(wait);
+    }, 0.1, [_unit, _anim]] call CFUNC(wait);
 };

@@ -73,9 +73,10 @@ private _completeGraphicsData = [];
                 ["_end", objNull, [[], objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
                 ["_code", {true}],
-                ["_customCodeArgs", []]
+                ["_customCodeArgs", []],
+                ["_width", 3]
             ];
-            _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code, _customCodeArgs];
+            _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code, _customCodeArgs, _width];
         };
     };
 } forEach _graphicsData;
