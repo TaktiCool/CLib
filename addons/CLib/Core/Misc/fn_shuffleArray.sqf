@@ -14,10 +14,10 @@
     Shuffled array <Array>
 */
 
-_this = +_this;
+_arr = +_this;
 private _res = [];
-for "_i" from count _this to 1 step -1 do {
-    _res pushBack (_this deleteAt floor random _i);
+for "_i" from count _arr to 1 step -1 do {
+    _res pushBack (_arr deleteAt floor random _i);
 };
-_res append _this;
+_res append _arr;
 _res
