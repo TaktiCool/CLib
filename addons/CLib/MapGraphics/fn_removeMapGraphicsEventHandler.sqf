@@ -24,16 +24,19 @@ params [
 
 // build Namespace Variablename
 private _eventNameSpace = format [QGVAR(MapIcon_%1_EventNamespace), _eventName];
-private _namespace = missionNamespace getVariable [_eventNameSpace, objNull];
+private _namespace = missionNamespace getVariable _eventNameSpace;
 
-if (isNull _namespace) exitWith {};
+if (isNil "_namespace") exitWith {};
 
-private _eventArray = _namespace getVariable [_uid, []];
+_uid = toLowerANSI _uid;
+
+private _eventArray = _namespace getOrDefault [_uid, []];
 if (_id == -1) then {
-    _namespace setVariable [_uid, nil];
+    _namespace set [_uid, nil];
 } else {
     if ((count _eventArray) <= _id) exitWith {};
     _eventArray set [_id, nil];
 };
 
+_namespace set [_uid, _eventArray];
 GVAR(MapGraphicsCacheBuildFlag) = GVAR(MapGraphicsCacheBuildFlag) + 1;

@@ -31,6 +31,12 @@ class CfgCLibModules {
             FNC(init);
         };
 
+        MODULE(ChatCommands) {
+            dependency[] = {"CLib/Namespaces"};
+            APIFNC(RegisterChatCommand);
+            FNC(init);
+        };
+
         MODULE(ConfigCaching) {
             dependency[] = {"CLib/Namespaces"};
             APIFNC(configProperties);
@@ -190,14 +196,14 @@ class CfgCLibModules {
             APIFNC(lnbSave);
         };
 
-        MODULE(Localisation) {
+        MODULE(Localization) {
             dependency[] = {"CLib/Events"};
             FNC(init);
             FNC(client);
             FNCSERVER(server);
-            APIFNC(isLocalised);
-            APIFNC(readLocalisation);
-            APIFNC(formatLocalisation);
+            APIFNC(isLocalized);
+            APIFNC(readLocalization);
+            APIFNC(formatLocalization);
         };
 
         MODULE(MapGraphics) {
@@ -231,6 +237,16 @@ class CfgCLibModules {
             APIFNC(createNamespace);
             APIFNC(deleteNamespace);
             APIFNC(setVariable);
+        };
+
+        MODULE(Notification) {
+            dependency[] = {"CLib/PerFrame", "CLib/Events"};
+            FNC(clientInitNotification);
+            APIFNC(displayNotification);
+            APIFNC(displayHint);
+            FNC(drawNotification);
+            FNC(drawHint);
+            APIFNC(registerDisplayNotification);
         };
 
         MODULE(ObjectPooling) {

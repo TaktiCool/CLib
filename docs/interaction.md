@@ -48,7 +48,7 @@ TODO Example here
 ### CLib_fnc_addHoldAction
 
 Parameter(s):
-* [`<Object>`, [`<String>`], [`<Array>`] Target
+* [`<Object>`], [`<String>`], [`<Array>`] Target
 * [`<String>`] Title
 * [`<Code>`], [`<String>`] Idle icon
 * [`<Code>`], [`<String>`] Progress icon

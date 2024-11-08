@@ -1,5 +1,5 @@
 #include "macros.hpp"
-#include "\A3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\defineCommonGrids.inc"
 /*
     Community Lib - CLib
 
@@ -52,7 +52,7 @@ if (_pos isEqualType true) then {
             IGUI_GRID_MISSION_HAbs / IGUI_GRID_MISSION_H
         ];
     } else {
-        _pos = [safezoneX, safezoneY, safezoneW, safezoneH];
+        _pos = [safeZoneX, safeZoneY, safeZoneW, safeZoneH];
     };
 };
 
@@ -124,8 +124,7 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
     ];
     _groupContent ctrlSetFade 0;
     _groupContent ctrlCommit (random _fadeIn);
-    nil
-} count _grids;
+} forEach _grids;
 
 [{
     params ["_grids", "_contentIsStructuredText", "_sizeW", "_sizeH", "_posW", "_posH", "_fadeOut", "_onFadeOut"];
@@ -146,7 +145,10 @@ private _contentIsStructuredText = _content isEqualType (parseText "");
         ];
         _groupContent ctrlSetFade 1;
         _groupContent ctrlCommit (random _fadeOut);
-        nil
-    } count _grids;
+    } forEach _grids;
+    [{
+        private _display = uiNamespace getVariable "RscTilesGroup";
+        _display closeDisplay 0;
+    }, _fadeOut] call CFUNC(wait);
     call _onFadeOut;
 }, _fadeIn + _duration, [_grids, _contentIsStructuredText, _sizeW, _sizeH, _posW, _posH, _fadeOut, _onFadeOut]] call CFUNC(wait);

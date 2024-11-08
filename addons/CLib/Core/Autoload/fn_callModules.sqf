@@ -30,7 +30,7 @@ private _thread = 0 spawn {
         if (_time <= time) then {
             QCGVAR(loadModules) call BIS_fnc_endLoadingScreen;
             disableUserInput false;
-            waitUntil {UIsleep 1; missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
+            waitUntil {uiSleep 1; missionNamespace getVariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
             private _errorText = "Warning A Script Error that Crashed Autoload has appeared the Loading Screen got Terminated Automaticly!";
             [
                 _errorText,
@@ -39,14 +39,14 @@ private _thread = 0 spawn {
             LOG("ERROR: " + _errorText);
             breakOut "LoadingScreenFailCheck";
         };
-        UIsleep 1;
+        uiSleep 1;
     };
 };
 
 // Cycle through all available functions and determine whether to call them or not.
 {
     call {
-        private _name = toLower _x;
+        private _name = toLowerANSI _x;
         // Client only functions.
         if ("_fnc_clientinit" in _name) exitWith {
             _clientInit pushBack _x;
@@ -103,8 +103,7 @@ private _thread = 0 spawn {
                 _code = missionNamespace getVariable [_code, {LOG("Code not Found")}];
             };
             _args call _code;
-            nil
-        } count CGVAR(entryPointQueue);
+        } forEach CGVAR(entryPointQueue);
     }, _this select 1] call CFUNC(execNextFrame);
 }, [_postInit, _thread]] call CFUNC(execNextFrame);
 
@@ -123,8 +122,7 @@ if (didJIP) then {
                     [_event, _args] call CFUNC(localEvent);
                 };
             };
-            nil
-        } count (_this select 1);
+        } forEach (_this select 1);
     };
     ["loadJIPQueue", CLib_Player] call CFUNC(serverEvent);
 };

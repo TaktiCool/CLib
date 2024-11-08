@@ -58,15 +58,13 @@ _assignedItems = _assignedItems - [_binocular];
     if (_isLoaded && _type > 0) then {
         _unit addMagazine [_magazine, _count];
     };
-    nil
-} count _magazinesAmmoFull;
+} forEach _magazinesAmmoFull;
 
 {
     if (_x != "") then {
         _unit addWeapon _x;
     };
-    nil
-} count [_primaryWeapon, _secondaryWeapon, _handgun, _binocular];
+} forEach [_primaryWeapon, _secondaryWeapon, _handgun, _binocular];
 
 {
     _x params ["_magazine", "_count", "_isLoaded", "", "_location"];
@@ -98,38 +96,30 @@ _assignedItems = _assignedItems - [_binocular];
             _container addMagazineAmmoCargo [_magazine, 1, _count];
         };
     };
-    nil
-} count _magazinesAmmoFull;
+} forEach _magazinesAmmoFull;
 
 {
     _unit addItemToUniform _x;
-    nil
-} count _uniformItems;
+} forEach _uniformItems;
 {
     _unit addItemToVest _x;
-    nil
-} count _vestItems;
+} forEach _vestItems;
 {
     _unit addItemToBackpack _x;
-    nil
-} count _backpackItems;
+} forEach _backpackItems;
 
 {
     _unit linkItem _x;
-    nil
-} count _assignedItems;
+} forEach _assignedItems;
 
 {
     _unit addPrimaryWeaponItem _x;
-    nil
-} count _primaryWeaponItems;
+} forEach _primaryWeaponItems;
 
 {
     _unit addHandgunItem _x;
-    nil
-} count _handgunItems;
+} forEach _handgunItems;
 
 {
     _unit addSecondaryWeaponItem _x;
-    nil
-} count _secondaryWeaponItems;
+} forEach _secondaryWeaponItems;

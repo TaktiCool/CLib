@@ -20,7 +20,6 @@ params [
 
 private _loadedMods = [];
 {
-    _loadedMods pushbackUnique ((_x splitString "/\") select 0);
-    nil
-} count GVAR(LoadedModules);
-toLower(_mod) in _loadedMods;
+    _loadedMods pushBackUnique ((_x splitString "/\") select 0);
+} forEach GVAR(LoadedModules);
+(toLowerANSI _mod) in _loadedMods;

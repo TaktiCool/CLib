@@ -19,7 +19,7 @@ if (isServer) then {
     publicVariable QGVAR(loadoutsNamespace);
 
     GVAR(defaultLoadoutValues) = configProperties [configFile >> "CfgCLibLoadoutsClassBase", "true", true];
-    GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLower (configName _x)};
+    GVAR(defaultLoadoutValues) = GVAR(defaultLoadoutValues) apply {toLowerANSI (configName _x)};
     publicVariable QGVAR(defaultLoadoutValues);
 };
 
@@ -27,10 +27,8 @@ if (isServer) then {
     {
         {
             (configName _x) call CFUNC(loadLoadout);
-            nil
-        } count configProperties [_x >> "CfgCLibLoadouts", "isClass _x", true];
-        nil
-    } count [missionConfigFile >> "CLib", configFile];
+        } forEach configProperties [_x >> "CfgCLibLoadouts", "isClass _x", true];
+    } forEach [missionConfigFile >> "CLib", configFile];
     GVAR(loadoutsLoaded) = true;
 }, {
     !isNil QGVAR(defaultLoadoutValues) && !isNil QGVAR(loadoutsNamespace)

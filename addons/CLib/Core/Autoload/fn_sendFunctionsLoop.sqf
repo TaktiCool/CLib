@@ -15,7 +15,6 @@
 */
 
 if (isNil QGVAR(PFHSendFunctions)) exitWith {
-
     GVAR(TransmissionBlockSize) = 3;
     if (isNumber (missionConfigFile >> "CLib" >> "TransmissionBlockSize")) then {
         GVAR(TransmissionBlockSize) = (getNumber (missionConfigFile >> "CLib" >> "TransmissionBlockSize")) max 1;

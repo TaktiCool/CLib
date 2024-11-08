@@ -19,4 +19,4 @@ params [
 ];
 
 ["playerChanged", [_newPlayer, CLib_Player]] call CFUNC(localEvent);
-GVAR(EventNamespace) setVariable [QGVAR(EventData_player), _newPlayer];
+GVAR(EventNamespace) set [QGVAR(EventData_player), _newPlayer];

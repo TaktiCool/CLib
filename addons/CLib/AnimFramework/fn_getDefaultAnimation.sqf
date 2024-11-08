@@ -20,7 +20,7 @@ params [
     ["_unit", objNull, [objNull]]
 ];
 
-private _animState = toLower (animationState _unit);
+private _animState = toLowerANSI (animationState _unit);
 
 // stances are broken for some Animations
 private _stance = switch (_animState select [4, 4]) do {

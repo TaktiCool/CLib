@@ -72,7 +72,7 @@ if (isClass (configFile >> "CfgPatches" >> QPREFIX)) exitWith {
 
         disableUserInput false;
 
-        compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.sqf"; // Crashes Client to Desktop
+        compile preprocessFileLineNumbers "\tc\CLib\addons\CLib\Core\Autoload\fn_crashToDesktop.notsqf"; // Crashes Client to Desktop
     };
 
     if (!(isNil "_this") && {_this isNotEqualTo []}) then {
@@ -111,7 +111,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                     GVAR(sendlogfile) = [_log, "CLib_SecurityLog"];
                     publicVariableServer QGVAR(sendlogfile);
                     _functionVarName spawn {
-                        waitUntil {missionnamespace getVariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
+                        waitUntil {missionNamespace getVariable ["BIS_fnc_startLoadingScreen_ids", []] isEqualTo []};
                         [
                             format ["Warning function %1 is corrupted on your client, please restart your client.", _this],
                             "[CLib Anti Cheat Warning]"
@@ -126,8 +126,7 @@ QGVAR(receiveFunction) addPublicVariableEventHandler {
                 };
             };
         #endif
-        nil
-    } count [missionNamespace, localNamespace, uiNamespace, parsingNamespace];
+    } forEach [missionNamespace, localNamespace, uiNamespace, parsingNamespace];
 
     // Update the loading screen with the progress.
     _progress call BIS_fnc_progressloadingscreen;

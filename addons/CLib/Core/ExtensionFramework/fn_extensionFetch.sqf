@@ -42,6 +42,5 @@ if (_result select [0, 1] == GVAR(SOH)) exitWith {
 
         [QGVAR(extensionResult), _sender, [_senderId, _result]] call CFUNC(targetEvent);
         GVAR(pendingTasks) = GVAR(pendingTasks) - 1;
-        nil
-    } count _results;
+    } forEach _results;
 };

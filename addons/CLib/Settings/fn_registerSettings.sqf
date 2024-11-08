@@ -22,8 +22,7 @@ private _configClasses = [configFile, missionConfigFile] apply {
     private _temp = _x;
     {
         _temp = (_temp >> _x);
-        nil;
-    } count _basePath;
+    } forEach _basePath;
     _temp
 };
 
@@ -99,10 +98,8 @@ private _fnc_getSettingsValue = {
         } else {
             _subClasses pushBackUnique _name;
         };
-        nil;
-    } count configProperties [_x, "true", true];
-    nil;
-} count _configClasses;
+    } forEach configProperties [_x, "true", true];
+} forEach _configClasses;
 
 GVAR(allSettings) setVariable ["classes:" + _prefix, _subClasses, true];
 GVAR(allSettings) setVariable ["settings:" + _prefix, _settings, true];

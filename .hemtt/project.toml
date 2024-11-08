@@ -1,0 +1,24 @@
+name = "CLib"
+mainprefix = "tc"
+modname = "CLib"
+prefix = "CLib"
+author = "CLib Team"
+include = ["./include"]
+
+[version]
+path = "addons/CLib/CLib_Macros.hpp"
+
+[hemtt.signing]
+authority = "CLib"
+
+[hemtt.release]
+folder = "CLib"
+
+[files]
+include = [
+    "mod.cpp",
+    "*.paa",
+    "LICENSE",
+    "*.dll",
+    "CLibDataBaseEditor.exe"
+]

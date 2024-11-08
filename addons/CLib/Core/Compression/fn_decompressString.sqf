@@ -62,7 +62,6 @@ private _inputPosition = MINMATCHLENGTH;
     };
 
     if (_inputPosition == _inputLength) exitWith {};
-    nil
-} count _rawInput;
+} forEach _rawInput;
 
 toString _rawOutput

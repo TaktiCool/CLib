@@ -43,8 +43,7 @@ private _nearestIcon = "";
                     _nearestIcon = _iconId;
                     _r = _temp1;
                 };
-                nil
-            } count _pos;
+            } forEach _pos;
 
             private _temp1 = _centerPos distance2D _mousePosition;
             if (_temp1 < _r) then {
@@ -61,7 +60,6 @@ private _nearestIcon = "";
             };
         };
     };
-    nil;
-} count GVAR(MapGraphicsGeometryCache);
+} forEach GVAR(MapGraphicsGeometryCache);
 
 _nearestIcon;

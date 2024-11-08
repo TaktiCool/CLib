@@ -1,4 +1,4 @@
-class CfgCLibLocalisation {
+class CfgCLibLocalization {
 
     supportedLanguages[] = {"English", "German", "Spanish", "French", "Polish", "Czech", "Italian", "Hungarian", "Portuguese", "Russian", "Japanese", "Korean"};
     class CLib {

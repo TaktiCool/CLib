@@ -42,7 +42,7 @@ _itemData params [
     ["_count", 1]
 ];
 if (_container isEqualType "") then {
-    switch (toLower (_container)) do {
+    switch (toLowerANSI (_container)) do {
         case ("uniform"): {
             _container = 0;
         };

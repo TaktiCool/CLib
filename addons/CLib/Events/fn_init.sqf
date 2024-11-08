@@ -13,22 +13,23 @@
     Returns:
     None
 */
+
 GVAR(sideEnum) = [west, east, independent, civilian, sideEmpty, sideFriendly, sideEnemy, sideUnknown, sideLogic, sideAmbientLife];
-GVAR(sideEnumStr) = GVAR(sideEnum) apply {toLower str _x};
-GVAR(EventNamespace) = false call CFUNC(createNamespace);
+GVAR(sideEnumStr) = GVAR(sideEnum) apply {toLowerANSI str _x};
+GVAR(EventNamespace) = createHashMap;
 
 GVAR(ignoredLogEventNames_0) = [];
 GVAR(ignoredLogEventNames_1) = [];
 
 {
     _x call CFUNC(addIgnoredEventLog);
-    nil
-} count [
+} forEach [
     ["drawmapgraphics", 0],
     ["eventadded", 1],
     ["cursortargetchanged", 1],
     ["cursorobjectchanged", 1],
     ["playerinventorychanged", 1],
+    ["animstatechanged", 0],
     [QEGVAR(Core,extensionRequest), 0],
     [QEGVAR(Core,extensionResult), 0]
 ];
@@ -46,8 +47,7 @@ GVAR(ignoredLogEventNames_1) = [];
             };
             {
                 [_x, _args] call _function;
-                nil
-            } count GVAR(entitiesCached);
+            } forEach GVAR(entitiesCached);
         };
     };
 
@@ -237,7 +237,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventHandler);
 ["setMimic", {
     (_this select 0) params ["_unit", "_mimic"];
-    if !(toLower _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
+    if !(toLowerANSI _mimic in ["agresive", "angry", "cynic", "default", "hurt", "ironic", "normal", "sad", "smile", "surprised"]) then {
         _mimic = "neutral";
     };
     _unit setMimic _mimic;
@@ -259,7 +259,7 @@ GVAR(ignoredLogEventNames_1) = [];
 }] call CFUNC(addEventhandler);
 ["setDynamicSimulationDistance", {
     (_this select 0) params ["_category", "_distance"];
-    _category setDynamicSimulationDistance _distance
+    call compile "_category setDynamicSimulationDistance _distance"
 }] call CFUNC(addEventhandler);
 ["setDynamicSimulationDistanceCoef", {
     (_this select 0) params ["_class", "_multiplier"];

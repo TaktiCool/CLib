@@ -24,7 +24,7 @@ params [
 private _animState = animationState _unit;
 private _isInVehicle = isNull (objectParent _unit);
 private _varName = format ["%1_%2", _animState, _isInVehicle];
-private _return = GVAR(animDeathNamespace) getVariable [_varName, ""];
+private _return = GVAR(animDeathNamespace) getOrDefault [toLowerANSI _varName, ""];
 
 if (_return != "") exitWith {_return};
 private _animConfig = configFile >> "CfgMovesMaleSdr" >> "States";
@@ -48,5 +48,5 @@ if (getNumber (_unitAnimCfg >> "terminal") isEqualTo 1) then {
 if (_return == "") then {
     _return = "Unconscious";
 };
-GVAR(animDeathNamespace) setVariable [_varName, _return];
+GVAR(animDeathNamespace) set [toLowerANSI _varName, _return];
 _return

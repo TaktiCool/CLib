@@ -19,18 +19,20 @@ params [
     ["_weapon", "", [""]],
     ["_muzzle", "", [""]]
 ];
-if (toLower _muzzle == "this") then { _muzzle = ""; };
+
+if (toLowerANSI _muzzle == "this") then {_muzzle = ""};
 private _if = if (_muzzle != "");
-private _varName = format ["%1_%2_%3", QGVAR(mags), _weapon];
+private _varName = format ["%1_%2", QGVAR(mags), _weapon];
 _if then {
-    _varName = format ["%1_%2_%3_%4", QGVAR(mags), _weapon, _muzzle];
+    _varName = format ["%1_%2_%3", QGVAR(mags), _weapon, _muzzle];
 };
 
+_varName = toLowerANSI _varName;
 if (isNil QGVAR(compatibleMagazinesNamespace)) then {
-    GVAR(compatibleMagazinesNamespace) = false call CFUNC(createNamespace);
+    GVAR(compatibleMagazinesNamespace) = createHashMap;
 };
 
-private _mags = GVAR(compatibleMagazinesNamespace) getVariable _varName;
+private _mags = GVAR(compatibleMagazinesNamespace) get _varName;
 if !(isNil "_mags") exitWith {_mags};
 private _cfgWeapons = configFile >> "CfgWeapons" >> _weapon;
 _if then {
@@ -43,10 +45,8 @@ private _cfgMagazineWells = configFile >> "CfgMagazineWells";
 {
     {
         _mags append (getArray _x);
-        nil
-    } count configProperties [_cfgMagazineWells >> _x, "isArray _x", true];
-    nil
-} count (getArray (_cfgWeapons >> "magazineWell"));
+    } forEach configProperties [_cfgMagazineWells >> _x, "isArray _x", true];
+} forEach (getArray (_cfgWeapons >> "magazineWell"));
 
 {
     scopeName "loop";
@@ -58,16 +58,14 @@ private _cfgMagazineWells = configFile >> "CfgMagazineWells";
             _inGroup = true;
             breakTo "loop";
         };
-        nil
-    } count (getArray (_cfgWeapons >> "magazines"));
+    } forEach (getArray (_cfgWeapons >> "magazines"));
 
     if (_inGroup) then {
         _mags pushBackUnique _class;
     };
-    nil
-} count configProperties [configFile >> "CfgMagazines", "isClass _x", true];
+} forEach configProperties [configFile >> "CfgMagazines", "isClass _x", true];
 
 _mags = _mags arrayIntersect _mags;
 _mags = _mags - ["this"];
-GVAR(compatibleMagazinesNamespace) setVariable [_varName, _mags];
+GVAR(compatibleMagazinesNamespace) set [_varName, _mags];
 _mags

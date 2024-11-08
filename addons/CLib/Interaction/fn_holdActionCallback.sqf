@@ -26,7 +26,7 @@ params [
 
 _actionArguments params [
     "_title",
-    "_hint",
+    "_keyName",
     "_iconIdle",
     "_iconProgress",
     "_condShow",
@@ -67,7 +67,7 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
     _args params ["_target", "_caller", "_id", "_actionArguments"];
     _actionArguments params [
         "_title",
-        "_hint",
+        "_keyName",
         "_iconIdle",
         "_iconProgress",
         "_condShow",
@@ -135,7 +135,12 @@ if (isNull (uiNamespace getVariable [UIVAR(HoldAction), displayNull])) then {
         (_display displayCtrl 6001) ctrlCommit 0;
 
         if (_id isEqualType 123) then {
-            _target setUserActionText [_id, _title, "<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/>" + _hint, format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", (call _iconProgress)]];
+            _target setUserActionText [
+                _id,
+                _title,
+                format ["<img size='3' shadow='0' color='#ffffff' image='\A3\Ui_f\data\IGUI\Cfg\HoldActions\in\in_0_ca.paa'/><br/><br/><t font='RobotoCondensedBold'>%1</t>", format [localize "STR_A3_HoldKeyTo", format ["<t color='#ffae00'>%1</t>", _keyName], _title]],
+                format ["<img size='3' shadow='0' color='#ffffffff' image='%1'/>", call _iconProgress]
+            ];
         };
         _handle call CFUNC(removePerFrameHandler);
     };

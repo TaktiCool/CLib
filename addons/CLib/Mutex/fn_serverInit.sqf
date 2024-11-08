@@ -15,23 +15,23 @@
 */
 
 // Queue of clients who requested mutex executing
-GVAR(mutexes) = false call CFUNC(createNamespace); // Entries are [currentClient, clientQueue, currentMutexTime]
+GVAR(mutexes) = createHashMap; // Entries are [currentClient, clientQueue, currentMutexTime]
 
 DFUNC(checkNextMutexClient) = {
     params ["_mutexId"];
 
-    private _mutex = GVAR(mutexes) getVariable [_mutexId, [0, [], 0]];
+    private _mutex = GVAR(mutexes) getOrDefault [_mutexId, [0, [], 0]];
     _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 
     if (!(_clientQueue isEqualTo [])) then {
         // Next client in queue
         _currentMutexTime = time;
         _currentClient = _clientQueue deleteAt 0;
-        [GVAR(mutexes), _mutexId, [_currentClient, _clientQueue, _currentMutexTime], QGVAR(mutexesCache)] call CFUNC(setVariable);
+        GVAR(mutexes) set [_mutexId, [_currentClient, _clientQueue, _currentMutexTime]];
         [QGVAR(mutexLock), _currentClient, _mutexId] call CFUNC(targetEvent);
     } else {
         // Reset current client because no next client available
-        [GVAR(mutexes), _mutexId, [0, [], 0], QGVAR(mutexesCache)] call CFUNC(setVariable);
+        GVAR(mutexes) set [_mutexId, [0, [], 0]]
     };
 };
 
@@ -40,23 +40,21 @@ addMissionEventHandler ["PlayerDisconnected", {
     params ["", "", "", "", "_owner"];
 
     {
-        private _mutex = GVAR(mutexes) getVariable [_x, [0, []]];
+        private _mutex = _y;
         _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 
         // Clean the queue
         private _index = _clientQueue find _owner;
         if (_index != -1) then {
             _clientQueue deleteAt _index;
-            [GVAR(mutexes), _x, [_currentClient, _clientQueue, _currentMutexTime], QGVAR(mutexesCache)] call CFUNC(setVariable);
+            GVAR(mutexes) set [_x, [_currentClient, _clientQueue, _currentMutexTime], QGVAR(mutexesCache)];
         };
 
         // If the client is currently executing reset the lock
         if (_currentClient == _owner) then {
             _x call FUNC(checkNextMutexClient);
         };
-
-        nil
-    } count ([GVAR(mutexes), QGVAR(mutexesCache)] call CFUNC(allVariables));
+    } forEach GVAR(mutexes);
 
     false
 }];
@@ -65,12 +63,12 @@ addMissionEventHandler ["PlayerDisconnected", {
 [QGVAR(mutexRequest), {
     (_this select 0) params ["_clientObject", "_mutexId"];
 
-    private _mutex = GVAR(mutexes) getVariable [_mutexId, [0, [], 0]];
+    private _mutex = GVAR(mutexes) getOrDefault [_mutexId, [0, [], 0]];
     _mutex params ["_currentClient", "_clientQueue", "_currentMutexTime"];
 
     // We enqueue the value in the queue
     _clientQueue pushBackUnique (owner _clientObject);
-    [GVAR(mutexes), _mutexId, [_currentClient, _clientQueue, _currentMutexTime], QGVAR(mutexesCache)] call CFUNC(setVariable);
+    GVAR(mutexes) set [_mutexId, [_currentClient, _clientQueue, _currentMutexTime]];
 
     if (_currentClient == 0) then {
         // Tell the client that he can start and remove him from the queue
@@ -87,14 +85,14 @@ addMissionEventHandler ["PlayerDisconnected", {
 GVAR(TimeOutSM) = call CFUNC(createStatemachine);
 
 [GVAR(TimeOutSM), "init", {
-    private _mutexIds = +([GVAR(mutexes), QGVAR(mutexesCache)] call CFUNC(allVariables));
+    private _mutexIds = keys GVAR(mutexes);
     [["checkMutex", _mutexIds], "init"] select (_mutexIds isEqualTo []);
 }] call CFUNC(addStatemachineState);
 
 [GVAR(TimeOutSM), "checkMutex", {
     params ["", "_mutexIds"];
     private _mutexId = _mutexIds deleteAt 0;
-    private _mutex = GVAR(mutexes) getVariable [_mutexId, [0, [], 0]];
+    private _mutex = GVAR(mutexes) getOrDefault [_mutexId, [0, [], 0]];
     _mutex params ["", "_clientQueue", "_currentMutexTime"];
     if (!(_clientQueue isEqualTo []) && (time - _currentMutexTime) > 3) then {
         _mutexId call FUNC(checkNextMutexClient);

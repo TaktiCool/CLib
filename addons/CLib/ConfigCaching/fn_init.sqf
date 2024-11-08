@@ -14,4 +14,4 @@
     None
 */
 
-GVAR(configCache) = call CFUNC(createNamespace);
+GVAR(configCache) = createHashMap;

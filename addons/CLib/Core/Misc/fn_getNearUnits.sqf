@@ -41,8 +41,7 @@ params [
 
     {
         _return append (crew _x);
-        nil
-    } count _vehicles;
+    } forEach _vehicles;
 
     [_return, CLib_Player] call CFUNC(deleteAtEntry);
 

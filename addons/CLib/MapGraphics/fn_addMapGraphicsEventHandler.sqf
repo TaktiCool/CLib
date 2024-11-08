@@ -30,14 +30,16 @@ private _namespace = missionNamespace getVariable _eventNameSpace;
 
 // Check if namespace exist and if not create and save it
 if (isNil "_namespace") then {
-    _namespace = call CFUNC(createNamespace);
+    _namespace = createHashMap;
     missionNamespace setVariable [_eventNameSpace, _namespace];
 };
 
-private _eventArray = _namespace getVariable [_uid, []];
+_uid = toLowerANSI _uid;
+
+private _eventArray = _namespace getOrDefault [_uid, []];
 
 private _id = _eventArray pushBack [_code, _args];
 
-_namespace setVariable [_uid, _eventArray];
+_namespace set [_uid, _eventArray];
 
 _id

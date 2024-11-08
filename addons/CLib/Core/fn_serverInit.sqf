@@ -35,15 +35,13 @@ private _fnc_readAuthorData = {
             _version = str (getNumber (_configPath >> "version"));
         };
         _modCredits pushBackUnique [_name, _author, _authors, _url, _version];
-        nil
-    } count configSourceAddonList _this;
+    } forEach configSourceAddonList _this;
 };
 private _modClassNames = [];
 {
     _x call _fnc_readAuthorData;
     _modClassNames pushBackUnique (configName _x);
-    nil
-} count configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
+} forEach configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
 
 (configFile >> "CfgCLibModules") call _fnc_readAuthorData;
 
@@ -53,7 +51,7 @@ private _fnc_addModules = {
     params ["_mod", "_module"];
     private _index = _mods find _mod;
     if (_index == -1) then {
-        _index = _mods pushback _mod;
+        _index = _mods pushBack _mod;
         _modules pushBack [];
     };
     private _moduleList = _modules select _index;
@@ -65,13 +63,11 @@ private _fnc_addModules = {
     if (_module == "") then {
         {
             [_mod, configName _x] call _fnc_addModules;
-            nil
-        } count configProperties [(configFile >> "CfgCLibModules" >> _mod), "isClass _x", true];
+        } forEach configProperties [(configFile >> "CfgCLibModules" >> _mod), "isClass _x", true];
     } else {
         [_mod, _module] call _fnc_addModules;
     };
-    nil
-} count GVAR(LoadedModules);
+} forEach GVAR(LoadedModules);
 
 GVAR(textModules) = "Loaded Modules: <br/>";
 {
@@ -84,8 +80,7 @@ GVAR(textModules) = "Loaded Modules: <br/>";
     GVAR(textModules) = GVAR(textModules) + format ["<br/> %1", _name];
     {
         GVAR(textModules) = GVAR(textModules) + format ["<br/>  -  %1", _x];
-        nil
-    } count (_modules select _forEachIndex);
+    } forEach (_modules select _forEachIndex);
     GVAR(textModules) = GVAR(textModules) + "<br/>";
 } forEach _mods;
 
@@ -95,14 +90,13 @@ GVAR(textMods) = "Loaded Mods: <br/>";
     private _authors = "";
     {
         _authors = _authors + format ["%1, ", _x];
-        nil
-    } count _authorsArr;
+    } forEach _authorsArr;
     if (_authors == _author) then {
-        GVAR(textMods) = GVAR(textMods) + format ["<br/><a href='%4'>%1</a> by %2 Version: %5<br/>", _name, _author, _url, _version];
+        GVAR(textMods) = GVAR(textMods) + format ["<br/><a href='%3'>%1</a> by %2 Version: %4<br/>", _name, _author, _url, _version];
     } else {
         GVAR(textMods) = GVAR(textMods) + format ["<br/><a href='%4'>%1</a> by %2: %3 Version: %5<br/>", _name, _author, _authors select [0, (count _authors) - 2], _url, _version];
     };
-} count _modCredits;
+} forEach _modCredits;
 
 publicVariable QGVAR(textMods);
 publicVariable QGVAR(textModules);

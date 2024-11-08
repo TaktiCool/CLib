@@ -60,7 +60,7 @@
     #define RUNTIMESTART private _CLib_Debug_debugStartTime = diag_tickTime
     #define RUNTIME(var) DUMP(var + " Needed: " + ((diag_tickTime - _CLib_Debug_debugStartTime) call CFUNC(toFixedNumber)) + " ms")
 #else
-    #define RUNTIMESTART /*Disabled*/
+    #define RUNTIMESTART ; /*Disabled*/
     #define RUNTIME(var) /*Disabled*/
 #endif
 
@@ -70,7 +70,7 @@
 #define QLSTRING(var) QUOTE(LSTRING(var))
 #define QELSTRING(var1,var2) QUOTE(ELSTRING(var1,var2))
 
-#define LOC(var) var call CFUNC(readLocalisation)
+#define LOC(var) var call CFUNC(readLocalization)
 #define MLOC(var) LOC(QLSTRING(var))
 
 #define EXEC_ONLY_UNSCHEDULED if (canSuspend) exitWith { LOG("WARNING: " + _fnc_scriptName + " was called in SCHEDULED Enviroment from "+ _fnc_scriptNameParent); [missionNamespace getVariable _fnc_scriptName, _this] call CFUNC(directCall);}
@@ -87,3 +87,5 @@
 #define SCRIPTSCOPENAME (FUNCTIONNAME + "_Main")
 
 #define RELDIR(pos1,pos2) (((pos1 getRelDir pos2) + 180) % 360 - 180)
+
+//IGNORE_PRIVATE_WARNING ["_fnc_scriptName", "_fnc_scriptNameParent", "_fnc_scriptMap"];

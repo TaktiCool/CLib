@@ -14,7 +14,7 @@
     None
 */
 
-GVAR(Namepace) = true call CFUNC(createNamespace);
+GVAR(Namespace) = true call CFUNC(createNamespace);
 GVAR(supportedLanguages) = [];
 
 private _fnc_languageIndex = {
@@ -31,44 +31,36 @@ private _fnc_setLanguageKey = {
     _index = _index call _fnc_languageIndex;
 
     private _locName = format ["STR_%1", _name];
-    private _var = GVAR(Namepace) getVariable [_locName, []];
-    if (USE_COMPRESSION(true)) then {
-        _data = _data call CFUNC(compressString);
-    };
-
+    private _var = GVAR(Namespace) getVariable [_locName, []];
     _var set [_index, _data];
 
-    [GVAR(Namepace), _locName, _var, QGVAR(allLocalisations), true] call CFUNC(setVariable);
+    [GVAR(Namespace), _locName, _var, QGVAR(allLocalizations), true] call CFUNC(setVariable);
 };
 
-private _fnc_readLocalisation = {
+private _fnc_readLocalization = {
     params ["_config", "_name"];
     {
         [_name, configName _x, getText _x] call _fnc_setLanguageKey;
-        nil
-    } count configProperties [_config, "isText _x", true];
+    } forEach configProperties [_config, "isText _x", true];
 };
 
-private _fnc_readLocalisationClass = {
+private _fnc_readLocalizationClass = {
     params ["_config", "_name"];
     private _childs = configProperties [_config, "isClass _x", true];
     if (count _childs == 0) then {
-        [_config, _name] call _fnc_readLocalisation;
+        [_config, _name] call _fnc_readLocalization;
     } else {
         {
-            [_x, _name + "_" + configName _x] call _fnc_readLocalisationClass;
-            nil
-        } count _childs;
+            [_x, _name + "_" + configName _x] call _fnc_readLocalizationClass;
+        } forEach _childs;
     };
 };
 
 {
     {
-        [_x, configName _x] call _fnc_readLocalisationClass;
-        nil
-    } count configProperties [_x >> "CfgCLibLocalisation", "isClass _x", true];
-    nil
-} count [campaignConfigFile, missionConfigFile >> "CLib", configFile];
+        [_x, configName _x] call _fnc_readLocalizationClass;
+    } forEach configProperties [_x >> "CfgCLibLocalization", "isClass _x", true];
+} forEach [campaignConfigFile, missionConfigFile >> "CLib", configFile];
 
-publicVariable QGVAR(Namepace);
+publicVariable QGVAR(Namespace);
 publicVariable QGVAR(supportedLanguages);

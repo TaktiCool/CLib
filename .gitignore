@@ -55,13 +55,20 @@ extensions/CLib/packages
 # IDEA files
 .idea/
 *.iml
-*.bikey
 
-*.bisign
+# VSCode Files
+.vscode/
 
-CLibDataBaseEditor\.exe\.config
+# HEMTT Files
 releases/*
 *.biprivatekey
 keys/*
+.hemtt/local
 build.bat
 hemtt.exe
+
+CLibDataBaseEditor\.exe\.config
+
+*.bikey
+*.bisign
+.hemttout

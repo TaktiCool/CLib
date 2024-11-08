@@ -15,7 +15,7 @@
 */
 
 //Namespace for Layer
-GVAR(3dGraphicsNamespace) = call CFUNC(createNamespace);
+GVAR(3dGraphicsNamespace) = createHashMap;
 
 GVAR(3dGraphicsCache) = [];
 GVAR(3dGraphicsCacheBuildFlag) = 0; // Should be incremented for each rebuild

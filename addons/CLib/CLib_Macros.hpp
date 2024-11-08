@@ -3,9 +3,9 @@
 #define MOD CLib
 
 #define MAJOR 0
-#define MINOR 0
+#define MINOR 15
 #define PATCHLVL 0
-#define BUILD 0
+#define BUILD 1117
 
 // dont release with this setting enabled
 // #define DEBUGFULL // enable all Debug Methods

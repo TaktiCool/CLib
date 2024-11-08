@@ -57,10 +57,10 @@ DFUNC(removeMissionObject) = [{
         _position set [2, (_position select 2) - 0.02];
 
         // Apply the position change.
-        _object setPos _position;
+        _object setPosATL _position;
 
         (_position select 2) < (0 - _height)
-    }, [_object, _height, getPos _object]] call CFUNC(waitUntil);
+    }, [_object, _height, getPosATL _object]] call CFUNC(waitUntil);
 }] call CFUNC(compileFinal);
 
 GVAR(statemachine) = call CFUNC(createStatemachine);
@@ -89,42 +89,36 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
         {
             // If the shell is not queued yet push it on the storage.
             _x call FUNC(pushbackInQueue);
-            nil
-        } count ((getPos _x) nearObjects ["GrenadeHand", 100]);
-        nil
-    } count allUnits;
+        } forEach ((getPos _x) nearObjects ["GrenadeHand", 100]);
+    } forEach allUnits;
     "fillWeaponHolder"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillWeaponHolder", {
     {
         _x call FUNC(pushbackInQueue);
-        nil
-    } count (allMissionObjects "WeaponHolder");
+    } forEach (allMissionObjects "WeaponHolder");
     "fillGroundWeaponHolder"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillGroundWeaponHolder", {
     {
         _x call FUNC(pushbackInQueue);
-        nil
-    } count (allMissionObjects "GroundWeaponHolder");
+    } forEach (allMissionObjects "GroundWeaponHolder");
     "fillWeaponHolderSimulated"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillWeaponHolderSimulated", {
     {
         _x call FUNC(pushbackInQueue);
-        nil
-    } count (allMissionObjects "WeaponHolderSimulated");
+    } forEach (allMissionObjects "WeaponHolderSimulated");
     "fillDeadUnits"
 }] call CFUNC(addStatemachineState);
 
 [GVAR(statemachine), "fillDeadUnits", {
     {
         _x call FUNC(pushbackInQueue);
-        nil
-    } count allDead;
+    } forEach allDead;
     "checkGroups"
 }] call CFUNC(addStatemachineState);
 
@@ -136,8 +130,7 @@ GVAR(statemachine) = call CFUNC(createStatemachine);
                 ["deleteGroup", groupOwner _x, _x] call CFUNC(targetEvent);
             };
         };
-        nil
-    } count allGroups;
+    } forEach allGroups;
     "wait"
 }] call CFUNC(addStatemachineState);
 

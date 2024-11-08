@@ -32,7 +32,7 @@ if (_target isEqualType objNull && {local _target}) exitWith {
 // Exit if the target is a string
 if (_target isEqualType "") then {
     // If the string a Class in CfgVehicles then get all objects of the kind and send the code it them
-    private _index = GVAR(sideEnumStr) find toLower _target;
+    private _index = GVAR(sideEnumStr) find toLowerANSI _target;
     if (_index != -1) exitWith {
         _target = GVAR(sideEnum) select _index;
     };

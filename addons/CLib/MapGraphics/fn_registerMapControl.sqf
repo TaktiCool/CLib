@@ -34,8 +34,8 @@ _map setVariable [QGVAR(DrawEHId), _drawEHId];
 _map setVariable [QGVAR(MouseMovingEHId), _mmEHId];
 _map setVariable [QGVAR(MouseButtonClickEHId), _mcEHId];
 _map setVariable [QGVAR(MouseButtonDblClickEHId), _mdcEHId];
-_map setVariable [QGVAR(MouseButtonDownEHId), _mdcEHId];
-_map setVariable [QGVAR(MouseButtonUpEHId), _mdcEHId];
+_map setVariable [QGVAR(MouseButtonDownEHId), _mbdEHId];
+_map setVariable [QGVAR(MouseButtonUpEHId), _mbuEHId];
 
 with uiNamespace do {
     GVAR(MapGraphicsMapControls) pushBackUnique _map;

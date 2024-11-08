@@ -31,8 +31,7 @@ private _fnc_compileMissionFunction = {
 
     {
         _x setVariable [_functionVarName, _fncCode];
-        nil
-    } count [missionNamespace, uiNamespace, parsingNamespace];
+    } forEach [missionNamespace, uiNamespace, parsingNamespace];
 };
 
 private _allMissionModules = [];
@@ -53,10 +52,8 @@ private _functionTag = getText (_config >> "tag");
         DUMP("Read Mission Module: " + _moduleName);
         _allMissionModules pushBackUnique _fncName;
         [_filePath, _fncName] call _fnc_compileMissionFunction;
-        nil
-    } count configProperties [_x, "isClass _x", true];
-    nil
-} count configProperties [_config, "isClass _x", true];
+    } forEach configProperties [_x, "isClass _x", true];
+} forEach configProperties [_config, "isClass _x", true];
 
 private _init = [];
 private _serverInit = [];
@@ -66,7 +63,7 @@ private _hcInit = [];
 // Cycle through all available functions and determine whether to call them or not.
 {
     call {
-        private _name = toLower _x;
+        private _name = toLowerANSI _x;
         // Client only functions.
         if ("_fnc_clientinit" in _name) exitWith {
             _clientInit pushBack _x;
@@ -85,8 +82,7 @@ private _hcInit = [];
         };
     };
     DUMP("Read Mission Function: " + _x);
-    nil
-} count _allMissionModules;
+} forEach _allMissionModules;
 
 {
     if (_x select 1) then {
@@ -96,8 +92,6 @@ private _hcInit = [];
             _time = diag_tickTime - _time;
             private _strTime = (_time * 1000) call CFUNC(toFixedNumber);
             LOG("Mission Module Call: " + _x + " (" + _strTime + " ms)");
-            nil
-        } count (_x select 0);
+        } forEach (_x select 0);
     };
-    nil
-} count [[_init, true], [_serverInit, isServer], [_clientInit, hasInterface], [_hcInit, !hasInterface && !isServer]];
+} forEach [[_init, true], [_serverInit, isServer], [_clientInit, hasInterface], [_hcInit, !hasInterface && !isServer]];

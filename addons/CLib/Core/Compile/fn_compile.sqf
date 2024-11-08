@@ -44,7 +44,7 @@ scopeName (_fnc_scriptName + '_Main');
 #endif
 
 #ifdef ISDEV
-    private _functionCode = compileScript [_functionPath, false, _header];
+    private _functionCode = compile (_header + preprocessFileLineNumbers _functionPath);
 #else
     private _functionCode = parsingNamespace getVariable _functionName;
     if (isNil "_functionCode") then {
@@ -59,12 +59,15 @@ scopeName (_fnc_scriptName + '_Main');
             LOG("Error: " + _functionName + " could not get overwritten but is different from the current version!");
         };
     };
-    nil
-} count [missionNamespace, uiNamespace, parsingNamespace];
+} forEach [missionNamespace, uiNamespace, parsingNamespace];
+
+#ifdef DISABLECOMPRESSION
+if (true) exitWith {};
+#endif
 
 // save Compressed Version Only in Parsing Namespace if the Variable not exist
 #ifndef ISDEV
-if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")} && (toLower (productVersion select 6)) isNotEqualTo "linux") then {
+if (isNil {parsingNamespace getVariable (_functionName + "_Compressed")} && (toLowerANSI (productVersion select 6)) isNotEqualTo "linux") then {
 #endif
     #ifdef ISDEV
         private _startTime = diag_tickTime;

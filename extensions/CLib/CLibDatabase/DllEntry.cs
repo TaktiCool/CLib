@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -148,6 +149,15 @@ namespace CLibDatabase
             }
         }
 
+        [DllExport("GetAllKeys")]
+        public static string GetAllKeys(string _)
+        {
+            if (database == null) return "[]";
+            return ToSQFArray(database.Keys.ToList());
+        }
+
+        private static string ToSQFArray(List<string> list) => $"[{string.Join(",", list)}]";
+
         private static JSONNode ConvertToJson()
         {
             JSONNode json = new JSONObject();
@@ -178,6 +188,7 @@ namespace CLibDatabase
             }
             return xml;
         }
+
         #region Import/Export
 
         [DllExport("ExportJson")]

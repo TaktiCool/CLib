@@ -13,6 +13,7 @@
     Returns:
     None
 */
+
 if (getClientState == "GAME FINISHED") exitWith {
     removeMissionEventHandler ["EachFrame", GVAR(OnEachFrameID)];
 };
@@ -33,8 +34,7 @@ GVAR(lastFrameTime) = time;
         };
         [_args, _handle] call _function;
     };
-    nil
-} count GVAR(perFrameHandlerArray);
+} forEach GVAR(perFrameHandlerArray);
 
 if (GVAR(sortWaitArray)) then {
     GVAR(waitArray) sort true;
@@ -89,8 +89,7 @@ if (_delete) then {
 //Handle the execNextFrame array:
 {
     (_x select 0) call (_x select 1);
-    nil
-} count GVAR(currentFrameBuffer);
+} forEach GVAR(currentFrameBuffer);
 
 //Swap double-buffer:
 GVAR(currentFrameBuffer) = GVAR(nextFrameBuffer);

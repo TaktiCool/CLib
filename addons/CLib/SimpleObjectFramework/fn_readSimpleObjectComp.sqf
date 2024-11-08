@@ -64,9 +64,7 @@ private _fnc_readSimpleObjectClass = {
             } else {
                 _animateArray pushBack [configName _x, _phase, _speed];
             };
-
-            nil
-        } count (configProperties [_config >> "animate", "isClass _x", true]);
+        } forEach (configProperties [_config >> "animate", "isClass _x", true]);
     };
     if (_animateArray isEqualTo []) then {
         _animateArray = false;
@@ -76,8 +74,7 @@ private _fnc_readSimpleObjectClass = {
     if (isClass (_config >> "hideSelection")) then {
         {
             _hideSelectionArray pushBack [configName _x, getNumber _x];
-            nil
-        } count (configProperties [_config >> "hideSelection", "true", true]);
+        } forEach (configProperties [_config >> "hideSelection", "true", true]);
     };
     if (_hideSelectionArray isEqualTo []) then {
         _hideSelectionArray = false;
@@ -87,8 +84,7 @@ private _fnc_readSimpleObjectClass = {
     if (isClass (_config >> "setTexture")) then {
         {
             _setObjectTextureArray pushBack [getNumber (_x >> "isMaterial"), getNumber (_x >> "id"), getText (_x >> "texture")];
-            nil
-        } count (configProperties [_config >> "setTexture", "true", true]);
+        } forEach (configProperties [_config >> "setTexture", "true", true]);
     };
     if (_setObjectTextureArray isEqualTo []) then {
         _setObjectTextureArray = false;
@@ -107,8 +103,7 @@ if (_childs isEqualTo []) then {
 } else {
     {
         _return pushBack (_x call _fnc_readSimpleObjectClass);
-        nil
-    } count _childs;
+    } forEach _childs;
 };
 _return = [_alignOnSurface, _return];
 

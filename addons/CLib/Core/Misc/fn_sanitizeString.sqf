@@ -25,7 +25,6 @@ private _symbols = toArray "\/*""?<>|:";
     if !(_x in _symbols) then {
         _array pushBack _x;
     };
-    nil
-} count (toArray _string);
+} forEach (toArray _string);
 
 toString _array

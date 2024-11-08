@@ -16,7 +16,7 @@
 
 GVAR(allCustomNamespaces) = [];
 
-GVAR(cachedCall) = call CFUNC(createNamespace);
+GVAR(cachedCall) = createHashMap;
 
 if (hasInterface) then {
     CLib_Player setVariable [QGVAR(playerName), profileName, true];

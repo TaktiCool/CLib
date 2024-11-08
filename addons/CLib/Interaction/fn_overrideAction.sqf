@@ -22,4 +22,4 @@ params [
     ["_arguments", [], []]
 ];
 
-[GVAR(InGameUIEventHandler), format ["Action_%1", _actionName], [_code, _arguments]] call CFUNC(setVariable);
+GVAR(InGameUIEventHandler) set [toLowerANSI (format ["Action_%1", _actionName]), [_code, _arguments]]

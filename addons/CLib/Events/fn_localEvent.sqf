@@ -27,7 +27,9 @@ params [
     private _Clib_EventTime = diag_tickTime;
 #endif
 
-private _eventArray = GVAR(EventNamespace) getVariable _eventName;
+_eventName = toLowerANSI _eventName;
+
+private _eventArray = GVAR(EventNamespace) get _eventName;
 private _CLib_EventReturn = nil;
 if !(isNil "_eventArray") then {
     {
@@ -38,14 +40,13 @@ if !(isNil "_eventArray") then {
             };
             [_args, _data] call _eventFunctions;
         };
-        nil
-    } count _eventArray;
+    } forEach _eventArray;
 };
 
 #ifdef ISDEV
-    if (!(toLower _eventName in GVAR(ignoredLogEventNames_0))) then {
+    if !(_eventName in GVAR(ignoredLogEventNames_0)) then {
         _Clib_EventTime = ((diag_tickTime - _Clib_EventTime) * 1000) call CFUNC(toFixedNumber);
-        private _text = format ["Local Event: %1 (%2ms) sent from %3: %4", _eventName, _Clib_EventTime, _CLib_sender, [_args, ""] select ((toLower _eventName) in GVAR(ignoredLogEventNames_1))];
+        private _text = format ["Local Event: %1 (%2ms) sent from %3: %4", _eventName, _Clib_EventTime, _CLib_sender, [_args, ""] select (_eventName in GVAR(ignoredLogEventNames_1))];
         DUMP(_text);
     };
 #endif

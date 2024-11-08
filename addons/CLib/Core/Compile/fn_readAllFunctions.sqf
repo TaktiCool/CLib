@@ -24,8 +24,7 @@ private _fnc_readSubModule = {
         private _modulePath = +_modulePath;
         _modulePath pushBack _subModuleName;
         [_modPath, _modName, _moduleName, _modulePath, _x] call _fnc_checkNext;
-        nil
-    } count _children;
+    } forEach _children;
 };
 
 private _fnc_readFunction = {
@@ -36,7 +35,7 @@ private _fnc_readFunction = {
     private _name = configName _config;
     private _api = (getNumber (_config >> "api") isEqualTo 1);
     private _onlyServer = (getNumber (_config >> "serverOnly") isEqualTo 1);
-    if ("serverinit" in (toLower _name)) then {
+    if ("serverinit" in (toLowerANSI _name)) then {
         _onlyServer = true;
     };
 
@@ -65,10 +64,8 @@ DUMP("--------------------------Start CLib Function Search----------------------
 
     {
         [_modPath, _modName, _moduleName, [_moduleName], _x] call _fnc_checkNext;
-        nil
-    } count (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
+    } forEach (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
 
-    nil
-} count (parsingNamespace getVariable QGVAR(allModuleNamesCached));
+} forEach (parsingNamespace getVariable QGVAR(allModuleNamesCached));
 parsingNamespace setVariable [QCGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];
 DUMP("--------------------------End CLib Function Search---------------------------------");

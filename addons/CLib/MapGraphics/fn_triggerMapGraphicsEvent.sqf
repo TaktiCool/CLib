@@ -27,7 +27,8 @@ private _namespace = missionNamespace getVariable _eventNameSpace;
 
 if (isNil "_namespace") exitWith {};
 
-private _eventArray = _namespace getVariable _uid;
+ 
+private _eventArray = _namespace get (toLowerANSI _uid);
 
 if (isNil "_eventArray") exitWith {};
 
@@ -39,6 +40,5 @@ if (isNil "_eventArray") exitWith {};
         };
         [_args, _data] call _code;
     };
-    nil
-} count _eventArray;
+} forEach _eventArray;
 nil

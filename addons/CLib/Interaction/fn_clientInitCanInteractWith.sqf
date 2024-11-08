@@ -42,7 +42,7 @@ GVAR(reloadMutex) = false;
 ["missionStarted", {
     private _fnc_reloadMutex = {
         GVAR(reloadMutex) = false;
-        (findDisplay 46) displayAddEventHandler ["keyDown", {
+        (findDisplay 46) displayAddEventHandler ["KeyDown", {
             if ((_this select 1) in actionKeys "ReloadMagazine") then {
                 private _weapon = currentWeapon CLib_Player;
 

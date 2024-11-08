@@ -23,12 +23,12 @@ params [
     ["_callback", {}, [{}, ""]],
     ["_args", [], []]
 ];
-
+_event = toLowerANSI _event;
 // Add this so we get can get sure some events that only gets triggered once get right
 ["eventAdded", [_event, _callback, _args]] call CFUNC(localEvent);
 
-private _eventArray = GVAR(EventNamespace) getVariable [_event, []];
+private _eventArray = GVAR(EventNamespace) getOrDefault [_event, []];
 private _id = _eventArray pushBack [_callback, _args];
-GVAR(EventNamespace) setVariable [_event, _eventArray];
+GVAR(EventNamespace) set [_event, _eventArray];
 
 _id

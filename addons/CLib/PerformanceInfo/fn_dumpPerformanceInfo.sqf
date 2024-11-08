@@ -92,7 +92,7 @@ if (GVAR(FPSStorage) isNotEqualTo []) then {
     ";
     {
         _text = _text + _x + " ";
-    } count GVAR(FPSStorage);
+    } forEach GVAR(FPSStorage);
     _text call _fnc_outputText;
 };
 
@@ -119,7 +119,7 @@ private _temp = [];
                     _text = format ["%1;%2: %3", _space, _x, _var];
                     _temp pushBack _text;
                 } else {
-                    _text = format ["%1;%2: %3 ... %4", _space, _x, _var select [0, 4] count _var];
+                    _text = format ["%1;%2: %3 ... %4", _space, _x, _var select [0, 4], count _var];
                 };
             } else {
                 _text = format ["%1;%2: %3", _space, _x, _var];
@@ -132,8 +132,8 @@ private _temp = [];
     } count (allVariables _space);
     _text = format ["%1 have %2 Varialbe", _space, _count];
     _text call _fnc_outputText;
-} count _searchSpaces;
+} forEach _searchSpaces;
 
 {
     _x call _fnc_outputText;
-} count _temp;
+} forEach _temp;

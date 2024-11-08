@@ -62,22 +62,24 @@ private _completeGraphicsData = [];
                 ["_font", "PuristaSemiBold"],
                 ["_align", "center"],
                 ["_drawSideArrows", false],
-                ["_code", {true}]
+                ["_code", {true}],
+                ["_customCodeArgs", []]
             ];
-            _completeGraphicsData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows, _code];
+            _completeGraphicsData pushBack [_class, _texture, _color, _position, _width, _height, _angle, _text, _shadow, _textSize, _font, _align, _drawSideArrows, _code, _customCodeArgs];
         };
         case "LINE": {
             _attributes params [
                 ["_start", objNull, [[], objNull]],
                 ["_end", objNull, [[], objNull]],
                 ["_lineColor", [0, 0, 0, 1]],
-                ["_code", {true}]
+                ["_code", {true}],
+                ["_customCodeArgs", []],
+                ["_width", 3]
             ];
-            _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code];
+            _completeGraphicsData pushBack [_class, _start, _end, _lineColor, _code, _customCodeArgs, _width];
         };
     };
-    nil
-} count _graphicsData;
+} forEach _graphicsData;
 
-[GVAR(3dGraphicsNamespace), _id, _completeGraphicsData] call CFUNC(setVariable);
+GVAR(3dGraphicsNamespace) set [toLowerANSI _id, _completeGraphicsData];
 GVAR(3dGraphicsCacheBuildFlag) = GVAR(3dGraphicsCacheBuildFlag) + 1;

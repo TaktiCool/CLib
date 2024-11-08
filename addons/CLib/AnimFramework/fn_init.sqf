@@ -14,4 +14,4 @@
     None
 */
 
-GVAR(animDeathNamespace) = false call CFUNC(createNamespace);
+GVAR(animDeathNamespace) = createHashMap;

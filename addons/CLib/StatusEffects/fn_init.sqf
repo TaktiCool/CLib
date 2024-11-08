@@ -14,7 +14,7 @@
     None
 */
 
-GVAR(StatusEffectsNamespace) = call CFUNC(createNamespace);
+GVAR(StatusEffectsNamespace) = createHashMap;
 
 if (hasInterface) then {
     ["forceWalk", {

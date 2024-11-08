@@ -44,10 +44,9 @@ private _codeStr = "private ['_oldValue', '_currentValue'];";
 
     // Build a name for the variable where we store the data. Fill it with the initial value.
     private _varName = format [QGVAR(EventData_%1), _name];
-    GVAR(EventNamespace) setVariable [_varName, call _code];
-    _codeStr = _codeStr + format ["_oldValue = %4 getVariable '%2'; _currentValue = call %1; if (_oldValue isNotEqualTo _currentValue) then { ['%5Changed', [_currentValue, _oldValue]] call %3; _oldValue = %4 setVariable ['%2', _currentValue]; };", _code, _varName, QCFUNC(localEvent), QGVAR(EventNamespace), _name];
-    nil
-} count [
+    GVAR(EventNamespace) set [_varName, call _code];
+    _codeStr = _codeStr + format ["_oldValue = %4 get '%2'; _currentValue = call %1; if (_oldValue isNotEqualTo _currentValue) then { ['%5Changed', [_currentValue, _oldValue]] call %3; _oldValue = %4 set ['%2', _currentValue]; };", _code, _varName, QCFUNC(localEvent), QGVAR(EventNamespace), _name];
+} forEach [
     ["player", {missionNamespace getVariable ["bis_fnc_moduleRemoteControl_unit", player]}],
     ["currentThrowable", {currentThrowable CLib_Player}],
     ["currentWeapon", {currentWeapon CLib_Player}],
@@ -102,8 +101,7 @@ addMissionEventHandler ["Map", {
         // Bind a new one and update the index in the params.
         _params set [2, _currentPlayer addEventHandler [_name, _code]];
     }, [_x, _code, _index]] call CFUNC(addEventHandler);
-    nil
-} count [
+} forEach [
     "InventoryOpened",
     "Killed",
     "Respawn",

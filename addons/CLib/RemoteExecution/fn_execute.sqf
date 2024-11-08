@@ -26,7 +26,7 @@ if (isNil {currentNamespace getVariable _function} || {!((currentNamespace getVa
     if (!isClass (configFile >> "CfgRemoteExecCommands" >> _function) || {!isClass (missionConfigFile >> "CfgRemoteExecCommands" >> _function)} || {!isClass (campaignConfigFile >> "CfgRemoteExecCommands" >> _function)}) exitWith {
         LOG("ERROR: Command '" + _function + "' is not allowed to be Executed over Network.");
     };
-    if (_args isKindOf []) then { // if the Command has Arguments that are not array it only can be Unary
+    if (_args isEqualType []) then { // if the Command has Arguments that are not array it only can be Unary
         switch (count _args) do {
             // Nular Command
             case 0: {

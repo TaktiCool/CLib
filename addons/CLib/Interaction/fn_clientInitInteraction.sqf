@@ -32,8 +32,7 @@ GVAR(PlayerInteraction_Actions) = [];
         [_id, _currentPlayer, _argArray] call _onActionAdded;
         _x set [0, _id];
         DUMP("add Real Action to Object Player " + str _text);
-        nil
-    } count GVAR(PlayerInteraction_Actions);
+    } forEach GVAR(PlayerInteraction_Actions);
 }] call CFUNC(addEventhandler);
 
 // fix issue that Action dont get readded after setRespawnTime respawn, because Variables get copyed from the old Unit via Engine command
@@ -42,7 +41,7 @@ GVAR(PlayerInteraction_Actions) = [];
     _newUnit setVariable [QGVAR(ActionIDs), []];
 }] call CFUNC(addEventhandler);
 
-GVAR(InGameUIEventHandler) = call CFUNC(createNamespace);
+GVAR(InGameUIEventHandler) = createHashMap;
 GVAR(DisablePrevAction) = false;
 GVAR(DisableNextAction) = false;
 GVAR(DisableAction) = false;
@@ -53,7 +52,7 @@ private _inGameUiEventHandler = {
     if (GVAR(DisablePrevAction) && {_eventName == "PrevAction"} || (GVAR(DisableNextAction) && {_eventName == "NextAction"}) || (GVAR(DisableAction) && {_eventName == "Action"})) then {
         true
     } else {
-        private _ehData = GVAR(InGameUIEventHandler) getVariable [format ["%1_%2", _eventName, _id], []];
+        private _ehData = GVAR(InGameUIEventHandler) getOrDefault [toLowerANSI (format ["%1_%2", _eventName, _id]), []];
         _ehData params [["_code", {}], ["_args", []]];
         [_target, _caller, _id, _args] call _code;
     };
@@ -73,6 +72,11 @@ for "_i" from 0 to 11 do {
 
 DFUNC(IdleAnimation) = [{
     if (GVAR(HoldActionStartTime) >= 0) exitWith {};
-    params ["_title", "_iconIdle", "_hint"];
-    _target setUserActionText [_actionID, _title, GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12), format ["<img size='3' shadow='0' color='#ffffff' image='%1'/>", ([] call _iconIdle)] + "<br/><br/>" + _hint];
+    params ["_title", "_keyName", "_iconIdle"];
+    _target setUserActionText [
+        _actionID,
+        format ["<t color='#FFFFFF' align='left'>%1</t>        <t color='#83ffffff' align='right'>%2     </t>", _title, _keyName],
+        GVAR(HoldActionIdleBackground) select floor ((time / 0.065) % 12),
+        format ["<img size='3' shadow='0' color='#ffffff' image='%1'/><br/><br/><t font='RobotoCondensedBold'>%2</t>", call _iconIdle, format [localize "STR_A3_HoldKeyTo", format ["<t color='#ffae00'>%1</t>", _keyName], _title]]
+    ];
 }] call CFUNC(compileFinal);

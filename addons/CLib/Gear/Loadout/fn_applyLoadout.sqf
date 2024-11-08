@@ -30,34 +30,28 @@ private _loadoutArray = _class call CFUNC(loadLoadout);
 
 private _loadout = _loadoutArray select 1;
 private _loadoutVars = _loadoutArray select 0;
-DUMP(str _loadout);
 private _fnc_do = {
     params ["_find", "_do", ["_isRandom", false]];
 
-    private _items = [_loadout, toLower _find, nil] call CFUNC(getHash);
-    DUMP(_find + ": " + format [str _items]);
+    private _items = _loadout get (toLowerANSI _find);
     if (isNil "_items") exitWith {};
     switch (true) do {
         case (_isRandom && _allowRandom): {
-            DUMP("Random");
             private _item = selectRandom _items;
             if (isNil "_item") exitWith {};
             _item call _do;
         };
         case (_isRandom && !_allowRandom): {
-            DUMP("Random Not Allowed");
             private _item = _items select 0;
             if (isNil "_item") exitWith {};
             _item call _do;
         };
         case (!_isRandom);
         default {
-            DUMP("Not Random");
             if (_items isEqualType []) then {
                 {
                     _x call _do;
-                    nil
-                } count _items;
+                } forEach _items;
             } else {
                 _items call _do;
             };
@@ -75,6 +69,23 @@ private _fnc_do = {
 ["removeAllAssignedItems", {
     if (_this isEqualTo 1) then {removeAllAssignedItems _unit};
 }, false] call _fnc_do;
+
+// Force Remove Actions
+["forceRemoveGoggle", {
+    if (_this isEqualTo 1) then {removeGoggles _unit};
+}, false] call _fnc_do;
+["forceRemoveHeadgear", {
+    if (_this isEqualTo 1) then {removeHeadgear _unit};
+}, false] call _fnc_do;
+["forceRemoveUniform", {
+    if (_this isEqualTo 1) then {removeUniform _unit};
+}] call _fnc_do;
+["forceRemoveVest", {
+    if (_this isEqualTo 1) then {removeVest _unit};
+}] call _fnc_do;
+["forceRemoveBackpack", {
+    if (_this isEqualTo 1) then {removeBackpack _unit};
+}] call _fnc_do;
 
 // Uniform
 ["uniform", {
@@ -110,26 +121,22 @@ private _fnc_do = {
 // Weapons
 {
     [_x, {_unit addWeapon _this}, false] call _fnc_do;
-    nil
-} count ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
+} forEach ["primaryWeapon", "secondaryWeapon", "handgun", "binocular"];
 
 // Primary Weapon Items
 {
     [_x, {_unit addPrimaryWeaponItem _this}, false] call _fnc_do;
-    nil
-} count ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
+} forEach ["primaryWeaponOptic", "primaryWeaponMuzzle", "primaryWeaponBarrel", "primaryWeaponResting", "primaryWeaponLoadedMagazine"];
 
 // Secondary Weapon Items
 {
     [_x, {_unit addSecondaryWeaponItem _this}, false] call _fnc_do;
-    nil
-} count ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
+} forEach ["secondaryWeaponOptic", "secondaryWeaponMuzzle", "secondaryWeaponBarrel", "secondaryWeaponResting", "secondaryWeaponLoadedMagazine"];
 
 // Handgun Items
 {
     [_x, {_unit addHandgunItem _this}, false] call _fnc_do;
-    nil
-} count ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
+} forEach ["handgunOptic", "handgunMuzzle", "handgunBarrel", "handgunResting", "handgunLoadedMagazine"];
 
 // Items to Uniform
 ["itemsUniform", {
@@ -177,8 +184,7 @@ private _fnc_do = {
     };
     _unit setUnitTrait [_type, _state, _custom];
 }, false] call _fnc_do;
-DUMP(str _loadoutVars);
-[_loadoutVars, {
-    params ["_key", "_value"];
-    _unit setVariable [_key, _value, true];
-}] call CFUNC(forEachHash);
+
+{
+    _unit setVariable [_x, _y, true];
+} forEach _loadoutVars;

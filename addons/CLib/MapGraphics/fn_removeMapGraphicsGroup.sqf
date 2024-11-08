@@ -18,7 +18,7 @@ params [
     ["_groupName", "", [""]]
 ];
 
-[GVAR(MapGraphicsGroup), _groupName, nil] call CFUNC(setVariable);
+GVAR(MapGraphicsGroup) deleteAt (toLowerANSI _groupName);
 
 [_groupName, "hoverin"] call CFUNC(removeMapGraphicsEventHandler);
 [_groupName, "hoverout"] call CFUNC(removeMapGraphicsEventHandler);

@@ -17,8 +17,7 @@
 private _cache = [];
 
 {
-    _cache append (GVAR(3dGraphicsNamespace) getVariable _x);
-    nil;
-} count ([GVAR(3dGraphicsNamespace)] call CFUNC(allVariables));
+    _cache append _y;
+} forEach (values GVAR(3dGraphicsNamespace));
 
 GVAR(3dGraphicsCache) = +_cache;

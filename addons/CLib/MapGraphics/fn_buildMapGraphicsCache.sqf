@@ -23,7 +23,7 @@ private _cache = [];
 
 {
     private _graphicsGroupId = _x;
-    private _graphicsGroup = GVAR(MapGraphicsGroup) getVariable _graphicsGroupId;
+    private _graphicsGroup = _y;
     if (!isNil "_graphicsGroup") then {
         _graphicsGroup params ["_layer", "_timestamp", "_state"];
         private _graphicsData = _graphicsGroup select (3 + _state);
@@ -37,9 +37,7 @@ private _cache = [];
         };
         _cache append _cData;
     };
-
-    nil;
-} count ([GVAR(MapGraphicsGroup)] call CFUNC(allVariables));
+} forEach GVAR(MapGraphicsGroup);
 
 _cache sort true;
 
