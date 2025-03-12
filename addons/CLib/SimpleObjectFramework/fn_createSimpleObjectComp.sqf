@@ -109,18 +109,18 @@ private _return = [];
     _obj setVariable [QGVAR(isSimpleObject), true, true];
     _obj setVectorDirAndUp [AGLToASL (_originObj modelToWorld _dirOffset) vectorDiff _originPosASL, AGLToASL (_originObj modelToWorld _upOffset) vectorDiff _originPosASL];
 
-    if (_hideSelectionArray isEqualType [] && {!(_hideSelectionArray isEqualTo [])}) then {
+    if (_hideSelectionArray isEqualType [] && {_hideSelectionArray isNotEqualTo []}) then {
         {
             _obj hideSelection _x;
         } forEach _hideSelectionArray;
     };
-    if (_animateArray isEqualType [] && {!(_animateArray isEqualTo [])}) then {
+    if (_animateArray isEqualType [] && {_animateArray isNotEqualTo []}) then {
         {
             _obj animate _x;
         } forEach _animateArray;
     };
 
-    if (_setObjectTextureArray isEqualType [] && {!(_setObjectTextureArray isEqualTo [])}) then {
+    if (_setObjectTextureArray isEqualType [] && {_setObjectTextureArray isNotEqualTo []}) then {
         {
             _x params ["_type", "_id", "_path"];
             if (_type isEqualTo 1) then {
