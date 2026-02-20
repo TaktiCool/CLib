@@ -20,7 +20,7 @@ if (isServer) then {
     {
         {
             _x call CFUNC(readSimpleObjectComp);
-        } forEach (configProperties [_x >> "CfgCLibSimpleObject", "isClass _x", true]);
+        } forEach ("true" configClasses (_x >> "CfgCLibSimpleObject"));
     } forEach [configFile, campaignConfigFile, missionConfigFile];
     publicVariable QGVAR(namespace);
     publicVariable QGVAR(compNamespace);

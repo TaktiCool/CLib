@@ -31,11 +31,11 @@ while {_modulesToSort isNotEqualTo []} do {
         private _dependenciesLoaded = true;
         {
             if !(_x in _sortedModuleNames) then {
-                if (!(_x in _modulesToSort)) then {
+                if (_x in _modulesToSort) then {
+                    _dependenciesLoaded = false;
+                } else {
                     private _str = format ["Missing Dependency in Module: %1, %2", _moduleName, _x];
                     LOG(_str);
-                } else {
-                    _dependenciesLoaded = false
                 };
             };
             if (!_dependenciesLoaded) exitWith {};

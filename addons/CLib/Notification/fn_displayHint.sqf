@@ -43,7 +43,6 @@ params [
     } forEach _this;
 }, 0.5, GVAR(CurrentHint)] call CFUNC(wait);
 
-private _controlGroups = [];
 GVAR(CurrentHint) = [];
 
 switch (typeName _playSound) do {
@@ -68,12 +67,12 @@ if (_description isEqualType []) then {
 
 {
     _x params ["_display", "_offset", "_offsetHint"];
-    if (!isNull _display) then {
-        private _ctrlGrp = [_header, _description, _icons, _display, 0, _offsetHint] call FUNC(drawHint);
-        GVAR(CurrentHint) pushBack _ctrlGrp;
-    } else {
+    if (isNull _display) then {
         _deleted = true;
         GVAR(NotificationDisplays) set [_forEachIndex, objNull];
+    } else {
+        private _ctrlGrp = [_header, _description, _icons, _display, 0, _offsetHint] call FUNC(drawHint);
+        GVAR(CurrentHint) pushBack _ctrlGrp;
     };
 } forEach GVAR(NotificationDisplays);
 

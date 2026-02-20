@@ -113,7 +113,9 @@ private _temp = [];
     private _space = _x;
     private _count = {
         private _var = _space getVariable [_x, {}];
-        if !(_var isEqualType {}) then {
+        if (_var isEqualType {}) then {
+            false
+        } else {
             if (_var isEqualType []) then {
                 if ((count _var) < 5) then {
                     _text = format ["%1;%2: %3", _space, _x, _var];
@@ -126,8 +128,6 @@ private _temp = [];
                 _temp pushBack _text;
             };
             true
-        } else {
-            false
         };
     } count (allVariables _space);
     _text = format ["%1 have %2 Varialbe", _space, _count];

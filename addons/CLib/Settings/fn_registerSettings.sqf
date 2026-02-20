@@ -92,11 +92,11 @@ private _fnc_getSettingsValue = {
             };
         };
 
-        if (!isNil "_value") then {
+        if (isNil "_value") then {
+            _subClasses pushBackUnique _name;
+        } else {
             _settings pushBackUnique _name;
             GVAR(allSettings) setVariable [_pathString, [_value, _force, _isClient, _description], true];
-        } else {
-            _subClasses pushBackUnique _name;
         };
     } forEach configProperties [_x, "true", true];
 } forEach _configClasses;

@@ -46,8 +46,8 @@ private _fnc_readLocalization = {
 
 private _fnc_readLocalizationClass = {
     params ["_config", "_name"];
-    private _childs = configProperties [_config, "isClass _x", true];
-    if (count _childs == 0) then {
+    private _childs = "true" configClasses _config;
+    if (_childs isEqualTo []) then {
         [_config, _name] call _fnc_readLocalization;
     } else {
         {
@@ -59,7 +59,7 @@ private _fnc_readLocalizationClass = {
 {
     {
         [_x, configName _x] call _fnc_readLocalizationClass;
-    } forEach configProperties [_x >> "CfgCLibLocalization", "isClass _x", true];
+    } forEach ("true" configClasses (_x >> "CfgCLibLocalization"));
 } forEach [campaignConfigFile, missionConfigFile >> "CLib", configFile];
 
 publicVariable QGVAR(Namespace);

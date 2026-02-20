@@ -82,25 +82,33 @@ addMissionEventHandler ["Map", {
 {
     // The event has the same name and data as the vanilla version.
     private _code = compile format ["[""%1"", _this] call %2", _x, QCFUNC(localEvent)];
-
+    private _key = format [QGVAR(vanillaEvent_%1), _x];
     // Bind it to the current player and store the index to delete it.
     private _index = CLib_Player addEventHandler [_x, _code];
+    CLib_Player setVariable [_key, _index];
     DUMP("Eventhandler Added: " + _x);
     // If the player changes remove the old EH and bind a new one.
     ["playerChanged", {
         params ["_data", "_params"];
         _data params ["_currentPlayer", "_oldPlayer"];
-        _params params ["_name", "_code", "_index"];
+        _params params ["_name", "_code", "_key"];
 
-        // Remove the old one.
-        _oldPlayer removeEventHandler [_name, _index];
+        if !(_oldPlayer isNil _key) then {
+            // Remove the old one.
+            _oldPlayer removeEventHandler [_name, _oldPlayer getVariable _key];
+            _oldPlayer setVariable [_key, nil];
+        };
 
         // Some EH get rebound automatically on death. To prevent double EH we remove EH from new player first.
-        _currentPlayer removeEventHandler [_name, _index];
+        if !(_currentPlayer isNil _key) then {
+            _currentPlayer removeEventHandler [_name, _currentPlayer getVariable _key];
+        };
+        
         DUMP("Eventhandler Added To New Player: " + _name);
         // Bind a new one and update the index in the params.
-        _params set [2, _currentPlayer addEventHandler [_name, _code]];
-    }, [_x, _code, _index]] call CFUNC(addEventHandler);
+        private _index = _currentPlayer addEventHandler [_name, _code];
+        _currentPlayer setVariable [_key, _index];
+    }, [_x, _code, _key]] call CFUNC(addEventHandler);
 } forEach [
     "InventoryOpened",
     "Killed",

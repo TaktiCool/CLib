@@ -2,3 +2,6 @@
 options.ignore = [
     "addPublicVariableEventHandler", # Alt syntax is broken, we are using main syntax
 ]
+
+[sqf]
+function_undefined = false

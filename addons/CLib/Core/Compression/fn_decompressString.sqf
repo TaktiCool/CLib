@@ -18,6 +18,11 @@ params [
     ["_input", "", [""]]
 ];
 
+if (true) exitWith {
+    private _output = controlNull ctrlWebBrowserAction ["Inflate", _input];
+    _output;
+};
+
 private _rawInput = toArray _input;
 private _rawOutput = [];
 

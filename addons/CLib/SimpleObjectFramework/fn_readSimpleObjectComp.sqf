@@ -56,7 +56,11 @@ private _fnc_readSimpleObjectClass = {
                     (getNumber (_x >> "speed")) isEqualTo 1
                 };
                 default {
-                    if (isNumber (_x >> "speed") || isText (_x >> "speed")) then {getNumber (_x >> "speed")};
+                    if (isNumber (_x >> "speed") || isText (_x >> "speed")) then {
+                        getNumber (_x >> "speed")
+                    } else {
+                        nil
+                    };
                 };
             };
             if (isNil "_speed") then {
@@ -64,7 +68,7 @@ private _fnc_readSimpleObjectClass = {
             } else {
                 _animateArray pushBack [configName _x, _phase, _speed];
             };
-        } forEach (configProperties [_config >> "animate", "isClass _x", true]);
+        } forEach ("true" configClasses (_config >> "animate"));
     };
     if (_animateArray isEqualTo []) then {
         _animateArray = false;
@@ -94,7 +98,7 @@ private _fnc_readSimpleObjectClass = {
 };
 
 private _return = [];
-private _childs = configProperties [_config, "isClass _x", true];
+private _childs = "true" configClasses _config;
 _childs = _childs select {!((configName _x) in ["animate", "hideSelection", "setTexture"])};
 private _alignOnSurface = getNumber (_config >> "alignOnSurface");
 

@@ -41,7 +41,7 @@ private _modClassNames = [];
 {
     _x call _fnc_readAuthorData;
     _modClassNames pushBackUnique (configName _x);
-} forEach configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
+} forEach ("true" configClasses (configFile >> "CfgCLibModules"));
 
 (configFile >> "CfgCLibModules") call _fnc_readAuthorData;
 
@@ -63,7 +63,7 @@ private _fnc_addModules = {
     if (_module == "") then {
         {
             [_mod, configName _x] call _fnc_addModules;
-        } forEach configProperties [(configFile >> "CfgCLibModules" >> _mod), "isClass _x", true];
+        } forEach ("true" configClasses (configFile >> "CfgCLibModules" >> _mod));
     } else {
         [_mod, _module] call _fnc_addModules;
     };

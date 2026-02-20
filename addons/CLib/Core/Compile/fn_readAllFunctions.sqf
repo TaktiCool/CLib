@@ -49,7 +49,7 @@ private _fnc_readFunction = {
 
 private _fnc_checkNext = {
     params ["_modPath", "_modName", "_moduleName", "_modulePath", "_config"];
-    private _children = configProperties [_config, "isClass _x", true];
+    private _children = "true" configClasses _config;
     if (_children isEqualTo []) then {
         [_modPath, _modName, _moduleName, _modulePath, _config] call _fnc_readFunction;
     } else {
@@ -64,7 +64,7 @@ DUMP("--------------------------Start CLib Function Search----------------------
 
     {
         [_modPath, _modName, _moduleName, [_moduleName], _x] call _fnc_checkNext;
-    } forEach (configProperties [configFile >> "CfgCLibModules" >> _modName >> _moduleName, "isClass _x", true]);
+    } forEach ("true" configClasses (configFile >> "CfgCLibModules" >> _modName >> _moduleName));
 
 } forEach (parsingNamespace getVariable QGVAR(allModuleNamesCached));
 parsingNamespace setVariable [QCGVAR(allFunctionNamesCached), GVAR(allFunctionNamesCached)];

@@ -19,6 +19,12 @@ params [
     ["_useSQF", false]
 ];
 
+if (true) exitWith {
+    private _output = controlNull ctrlWebBrowserAction ["Deflate", _input];
+    _output
+};
+
+
 // if !(_output in ["", GVAR(ACK)]) exitWith { // currently disabled to reduce loading times on Linux!
 if (!_useSQF) exitWith {
     private _output = [-1, "CLibCompression", "Compress", _input] call CFUNC(extensionRequest);
@@ -50,8 +56,8 @@ _rawOutput append (_rawInput select [0, MINMATCHLENGTH]);
     private _windowPosition = 1;
     private _searchSteps = WINDOWSIZE min _inputPosition;
     private _currentMatchLength = 0;
-    private _bestMatchLength = 0;
-    private _bestMatchOffset = 0;
+    _bestMatchLength = 0;
+    _bestMatchOffset = 0;
 
     while {_windowPosition <= _searchSteps} do { // TODO kmp optimization
         if (_char == (_rawInput select (_inputPosition - _windowPosition))) then {

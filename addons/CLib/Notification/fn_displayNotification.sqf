@@ -43,7 +43,10 @@ if (_description isEqualType []) then {
 
 {
     _x params ["_display", "_offset"];
-    if (!isNull _display) then {
+    if (isNull _display) then {
+        _deleted = true;
+        GVAR(NotificationDisplays) set [_forEachIndex, objNull];
+    } else {
         private _ctrlGrp = [_header, _description, _icons, _display, 0, _offset] call FUNC(drawNotification);
         private _pos = ctrlPosition _ctrlGrp;
         private _oldPos = +_pos;
@@ -55,9 +58,6 @@ if (_description isEqualType []) then {
         _ctrlGrp ctrlSetFade 0;
         _ctrlGrp ctrlCommit 0.3;
         _controlGroups pushBack [_ctrlGrp, _oldPos];
-    } else {
-        _deleted = true;
-        GVAR(NotificationDisplays) set [_forEachIndex, objNull];
     };
 } forEach GVAR(NotificationDisplays);
 
@@ -95,7 +95,7 @@ switch (typeName _playSound) do {
     default { };
 };
 
-private _idx = GVAR(AllNotifications) pushBack _item;
+GVAR(AllNotifications) pushBack _item;
 [{
     params ["_parameter", "_controlsGroup"];
     _parameter params ["", "", "", "_playSound"];

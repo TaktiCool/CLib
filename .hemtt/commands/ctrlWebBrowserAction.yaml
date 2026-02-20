@@ -1,0 +1,25 @@
+name: ctrlWebBrowserAction
+description: Executes an action on a web browser control
+groups:
+- GUI Control
+syntax:
+- call: !Binary [control, [action, data]]
+  ret:
+  - Anything
+  - Nothing
+  params:
+  - name: control
+    type: Control
+  - name: action
+    type: String
+  - name: data
+    type: String
+argument_loc: Local
+effect_loc: Local
+since:
+  arma_3:
+    major: 2
+    minor: 2
+examples:
+  - <sqf>_control ctrlWebBrowserAction ["ExecJS", "document.getElementById('test').innerHTML = 'Hello World!'"];</sqf>
+  - <sqf>_control ctrlWebBrowserAction ["LoadURL", "https://community.bistudio.com"];</sqf>

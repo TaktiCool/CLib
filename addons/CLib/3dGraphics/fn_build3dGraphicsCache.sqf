@@ -17,7 +17,7 @@
 private _cache = [];
 
 {
-    _cache append _y;
+    _cache append _x;
 } forEach (values GVAR(3dGraphicsNamespace));
 
 GVAR(3dGraphicsCache) = +_cache;

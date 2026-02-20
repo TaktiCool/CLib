@@ -63,7 +63,7 @@ private _cfgMagazineWells = configFile >> "CfgMagazineWells";
     if (_inGroup) then {
         _mags pushBackUnique _class;
     };
-} forEach configProperties [configFile >> "CfgMagazines", "isClass _x", true];
+} forEach ("true" configClasses (configFile >> "CfgMagazines"));
 
 _mags = _mags arrayIntersect _mags;
 _mags = _mags - ["this"];

@@ -53,8 +53,8 @@ private _functionTag = getText (_config >> "tag");
         DUMP("Read Client Addon Module: " + _moduleName);
         _allClientModules pushBackUnique _fncName;
         [_filePath, _fncName] call _fnc_compileClientFunction;
-    } forEach configProperties [_x, "isClass _x", true];
-} forEach configProperties [_config, "isClass _x", true];
+    } forEach ("true" configClasses _x);
+} forEach ("true" configClasses _config);
 
 private _init = [];
 private _serverInit = [];

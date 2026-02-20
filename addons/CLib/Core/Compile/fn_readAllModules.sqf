@@ -16,13 +16,13 @@
 
 private _allModulesNames = [];
 DUMP("--------------------------Start CLib Module Search---------------------------------");
-private _allMods = configProperties [configFile >> "CfgCLibModules", "isClass _x", true];
+private _allMods = "true" configClasses (configFile >> "CfgCLibModules");
 _allMods = _allMods apply {toLowerANSI (configName _x)};
 parsingNamespace setVariable [QGVAR(allModsNamesCached), _allMods];
 {
     private _modName = _x;
     DUMP("Mod Found: " + _modName);
-    private _modModules = configProperties [configFile >> "CfgCLibModules" >> _modName, "isClass _x", true];
+    private _modModules = "true" configClasses (configFile >> "CfgCLibModules" >> _modName);
     _modModules = _modModules apply {toLowerANSI (configName _x)};
     private _modDependency = (getArray (configFile >> "CfgCLibModules" >> _modName >> "dependency")) apply {toLowerANSI _x};
     parsingNamespace setVariable [format [QCGVAR(%1_ModModules), _modName], _modModules];

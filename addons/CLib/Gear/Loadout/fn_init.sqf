@@ -27,7 +27,7 @@ if (isServer) then {
     {
         {
             (configName _x) call CFUNC(loadLoadout);
-        } forEach configProperties [_x >> "CfgCLibLoadouts", "isClass _x", true];
+        } forEach ("true" configClasses (_x >> "CfgCLibLoadouts"));
     } forEach [missionConfigFile >> "CLib", configFile];
     GVAR(loadoutsLoaded) = true;
 }, {

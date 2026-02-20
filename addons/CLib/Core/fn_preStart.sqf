@@ -13,7 +13,6 @@
     Returns:
     None
 */
-
 private _startTime = diag_tickTime;
 
 #ifdef ISDEV

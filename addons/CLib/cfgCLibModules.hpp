@@ -229,6 +229,7 @@ class CfgCLibModules {
             dependency[] = {"CLib/Events"};
             FNC(clientInit);
             APIFNC(mutex);
+            FNCSERVER(checkNextMutexClient);
             FNC(serverInit);
         };
 

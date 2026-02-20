@@ -14,7 +14,7 @@
     Shuffled array <Array>
 */
 
-_arr = +_this;
+private _arr = +_this;
 private _res = [];
 for "_i" from count _arr to 1 step -1 do {
     _res pushBack (_arr deleteAt floor random _i);

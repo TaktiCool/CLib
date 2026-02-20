@@ -25,7 +25,7 @@ params [
 ];
 
 _mutexId = toLowerANSI _mutexId;
-private _mutexCache = GVAR(mutexCaches) get [_mutexId, []];
+private _mutexCache = GVAR(mutexCaches) getOrDefault [_mutexId, []];
 
 // Cache the function and args
 private _index = _mutexCache pushBackUnique [_code, _args];
