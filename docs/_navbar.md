@@ -29,6 +29,7 @@
 - [Map Graphics](mapGraphics.md)
 - [Mutex](mutex.md)
 - [Namespaces](namespaces.md)
+- [Notification](notification.md)
 - [Object Pooling](objectPooling.md)
 - [Performance Info](performanceInfo.md)
 - [Per Frame](perFrame.md)

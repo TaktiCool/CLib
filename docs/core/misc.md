@@ -149,7 +149,7 @@ Examples:
 {hint "this Runs in a Unscheduled Environment"} call CLib_fnc_directCall;
 ```
 
-## CLib_fnc_disabledUserInput
+## CLib_fnc_disableUserInput
 
 Parameter(s):
 * [`<Boolean>`] True to disable key inputs, false to re-enable them
@@ -161,9 +161,9 @@ Disables key input. ESC can still be pressed to open the menu.
 
 Examples:
 ```sqf
-true call CLib_fnc_disabledUserInput;
+true call CLib_fnc_disableUserInput;
 
-[{ false call CLib_fnc_disabledUserInput; }, 10] CLib_fnc_wait;
+[{ false call CLib_fnc_disableUserInput; }, 10] CLib_fnc_wait;
 ```
 
 ## CLib_fnc_fileExist
@@ -511,7 +511,7 @@ Examples:
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] call CLib_fnc_shuffleArray;
 ```
 
-## CLib_fnc_textTile
+## CLib_fnc_textTiles
 
 Parameter(s):
 * [`<String>`], [`<Structured Text>`] Content

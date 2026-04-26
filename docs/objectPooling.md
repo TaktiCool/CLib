@@ -2,24 +2,50 @@
 
 > Maintainer: joko // Jonas
 
-TODO text here
+Reuse objects and units from pools to avoid repeated creation overhead.
 
 ## Functions
-### CLib_fnc_
+### CLib_fnc_getPooledObject
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<String>`] Object classname
+* [`<Number>`] Lock time in seconds after checkout (default: 10)
+* [`<Boolean>`] Local object flag (default: true)
 
 Returns:
-* [`<Type>`] TODO text here
+* [`<Object>`] Pooled object
 
-TODO text here
+Gets a pooled object for the given class.
 
-Examples:
+### CLib_fnc_getPooledObjectCondition
 
-```sqf
-TODO Example here
-```
+Parameter(s):
+* [`<String>`] Object classname
+* [`<Code>`] Lock condition code (default: `{false}`)
+* [`<Boolean>`] Local object flag (default: true)
+
+Returns:
+* [`<Object>`] Pooled object
+
+Gets a pooled object using a lock condition callback.
+
+### CLib_fnc_getPooledUnit
+
+Parameter(s):
+* [`<String>`] Unit classname
+* [`<Code>`] Lock condition code (default: `{false}`)
+* [`<Array>`] Unit parameters (default: `[grpNull, {}, 0.5, "PRIVATE"]`)
+
+Returns:
+* [`<Object>`] Unit
+
+Gets a pooled unit or creates one if required.
+
+## Unit Parameter Structure
+* [`<Group>`] Group
+* [`<String>`], [`<Code>`] Init code
+* [`<Number>`] Skill
+* [`<String>`] Rank
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything

@@ -1,35 +1,49 @@
-# Chat Commands
+# Notification
 
-> Maintainer: joko // Jonas
+> Maintainer: BadGuy, joko // Jonas
 
-Adds Ability to Register Chat Commands.
-
+Display CLib notifications and hints on registered displays.
 
 ## Functions
-### CLib_fnc_registerChatCommand
+### CLib_fnc_displayNotification
 
 Parameter(s):
-* [`<String>`] Command
-* [`<Code>`] Callback
-* [`<Anything>`] Arguments <Anything> (default: [])
-* [`<Array>`] of [`<String>`] Available For (default: ["all"])
-* [`<Array>`] of [`<Number>`] Channels (default: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
+* [`<String>`], [`<Array>`] Header text
+* [`<String>`], [`<Array>`] Description text
+* [`<Array>`] Icon stack
+* [`<Boolean>`], [`<String>`], [`<Array>`] Sound configuration
 
 Returns:
 * None
 
-Examples:
-```sqf
-["setPos", {
-    params ["_commandData", "_args", "_messageData"];
-    
-    player setPos (_commandData apply {parseNumber _x});
-    ["Sever", "Position Updated"];
-}, ["admin", getPlayerUID player]] call CLib_fnc_registerChatCommand;
+Displays a timed notification entry.
 
-// type ""!setPos 0 0 0" to Set the players position to 0,0,0
-```
+### CLib_fnc_displayHint
 
+Parameter(s):
+* [`<String>`], [`<Array>`] Header text
+* [`<String>`], [`<Array>`] Description text
+* [`<Array>`] Icon stack
+* [`<Boolean>`], [`<String>`], [`<Array>`] Sound configuration
+
+Returns:
+* None
+
+Displays a short hint overlay.
+
+### CLib_fnc_registerDisplayNotification
+
+Parameter(s):
+* [`<Display>`] Display to register
+* [`<Array>`] Notification offset
+* [`<Array>`] Hint offset
+
+Returns:
+* None
+
+Registers a display for notification and hint rendering.
+
+[`<Display>`]: https://community.bistudio.com/wiki/display
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config

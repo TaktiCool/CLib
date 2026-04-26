@@ -142,6 +142,23 @@ Examples:
 TODO Example here
 ```
 
+### CLib_fnc_inRange
+
+Parameter(s):
+* [`<Object>`] Object which should be checked
+* [`<Number>`] Range to check (default: 10)
+
+Returns:
+* [`<Boolean>`] True if the object is in interaction range
+
+Checks if an object can be interacted with in the configured range.
+
+Examples:
+
+```sqf
+[cursorTarget, 10] call CLib_fnc_inRange;
+```
+
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config

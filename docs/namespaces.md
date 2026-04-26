@@ -53,7 +53,7 @@ Returns:
 * None
 
 Sets a Varaible on a Object/Namespace and
-Saves the Varaible Name in a Array on this Namespace for later use with [`CLib_fnc_allVariable`]
+Saves the Varaible Name in a Array on this Namespace for later use with [`CLib_fnc_allVariables`]
 
 Examples:
 
@@ -61,7 +61,7 @@ Examples:
 [Docs_namespace, "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CLib_fnc_setVariable;
 ```
 
-## CLib_fnc_allVariable
+## CLib_fnc_allVariables
 
 Parameter(s):
 * [`<Object>`], [`<Location>`] Namespace
@@ -76,10 +76,10 @@ Examples:
 
 ```sqf
 [Docs_namespace, "whereIsTheBanana", "Banana?","BananasAreAwsome", false] call CLib_fnc_setVariable;
-private _return = [Docs_namespace, "BananasAreAwsome"] call CLib_fnc_allVariable;
+private _return = [Docs_namespace, "BananasAreAwsome"] call CLib_fnc_allVariables;
 ```
 
-[`CLib_fnc_allVariable`]: ##CLib_fnc_allVariable
+[`CLib_fnc_allVariables`]: ##CLib_fnc_allVariables
 [`CLib_fnc_setVariable`]: ##CLib_fnc_setVariable
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control

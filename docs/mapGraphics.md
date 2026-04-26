@@ -2,107 +2,167 @@
 
 > Maintainer: BadGuy
 
-TODO text here
+Draw custom map graphics and attach interaction events to map elements.
 
 ## Functions
 ### CLib_fnc_addMapGraphicsEventHandler
 
 Parameter(s):
 * [`<String>`] Icon ID
-* [`<String>`] Event Name
-* [`<Code>`], [`<String>`] Code that gets executed on event
-* [`<Type>`] Arguments passed to the event
+* [`<String>`] Event name
+* [`<Code>`], [`<String>`] Handler code
+* [`<Anything>`] Custom arguments passed to the handler
 
 Returns:
-* [`<Number>`] ID of the Event
+* [`<Number>`] Event handler ID
 
-TODO text here
-
-Examples:
-
-```sqf
-TODO Example here
-```
+Adds an event handler for a map graphics group.
 
 ### CLib_fnc_addMapGraphicsGroup
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<String>`] Group name
+* [`<Array>`] Group data
+* [`<String>`] State (`normal`, `hover`, `selected`)
+* [`<Number>`] Layer
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Adds or updates a map graphics group with ICON, RECTANGLE, ELLIPSE, LINE, ARROW, POLYGON, or TRIANGLE elements.
 
-Examples:
-
-```sqf
-TODO Example here
-```
-
-### CLib_fnc_removeMapGraphicsEventhandler
+### CLib_fnc_buildMapGraphicsCache
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* None
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Rebuilds the internal draw cache from registered map graphic groups.
 
-Examples:
-
-```sqf
-TODO Example here
-```
-
-### CLib_fnc_removeMapGraphicsGroup
+### CLib_fnc_drawMapGraphics
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Control>`] Map control
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Draw callback for registered map controls.
 
-Examples:
+### CLib_fnc_mapGraphicsMouseButtonClick
 
-```sqf
-TODO Example here
-```
+Parameter(s):
+* [`<Array>`] Mouse event arguments
+* [`<String>`] Event name (default: `clicked`)
+
+Returns:
+* None
+
+Dispatches click-like map mouse events (`clicked`, `down`, `up`) to the nearest map graphic group.
+
+### CLib_fnc_mapGraphicsMouseButtonDblClick
+
+Parameter(s):
+* [`<Control>`] Map control
+* [`<Number>`] Mouse button
+* [`<Number>`] X position
+* [`<Number>`] Y position
+
+Returns:
+* None
+
+Dispatches double-click events to the nearest map graphic group.
+
+### CLib_fnc_mapGraphicsMouseMoving
+
+Parameter(s):
+* [`<Control>`] Map control
+* [`<Number>`] X position
+* [`<Number>`] Y position
+
+Returns:
+* None
+
+Updates hover state and triggers `hoverin` or `hoverout` events.
+
+### CLib_fnc_mapGraphicsPosition
+
+Parameter(s):
+* [`<Array>`], [`<Object>`] MapGraphics position value
+* [`<Control>`] Map control
+
+Returns:
+* [`<Array>`] Position3D
+
+Converts a MapGraphics position descriptor into a world position.
+
+### CLib_fnc_nearestMapGraphicsGroup
+
+Parameter(s):
+* [`<Control>`] Map control
+* [`<Number>`] X position
+* [`<Number>`] Y position
+
+Returns:
+* [`<String>`] Group identifier
+
+Gets the nearest map graphics group under the cursor.
 
 ### CLib_fnc_registerMapControl
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Control>`] Map control
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
+Registers a map control and binds all required draw/mouse handlers for Map Graphics.
 
-Examples:
+### CLib_fnc_removeMapGraphicsEventhandler
 
-```sqf
-TODO Example here
-```
+Parameter(s):
+* [`<String>`] Group name
+* [`<String>`] Event name
+* [`<Number>`] Event ID (`-1` removes all handlers)
+
+Returns:
+* None
+
+Removes one or all event handlers for a group and event.
+
+### CLib_fnc_removeMapGraphicsGroup
+
+Parameter(s):
+* [`<String>`] Group name
+
+Returns:
+* None
+
+Removes a map graphics group and its bound events.
+
+### CLib_fnc_triggerMapGraphicsEvent
+
+Parameter(s):
+* [`<String>`] Group name
+* [`<String>`] Event name
+* [`<Anything>`] Event arguments
+
+Returns:
+* None
+
+Triggers handlers for a map graphics group event.
 
 ### CLib_fnc_unregisterMapControl
 
 Parameter(s):
-* [`<Type>`] TODO text here
+* [`<Control>`] Map control
 
 Returns:
-* [`<Type>`] TODO text here
+* None
 
-TODO text here
-
-Examples:
-
-```sqf
-TODO Example here
-```
+Unregisters a map control and removes bound draw/mouse handlers.
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything

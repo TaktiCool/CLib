@@ -102,6 +102,23 @@ Examples:
 ["myAwsomeEvent", "Some Argument"] call CLib_fnc_localEvent;
 ```
 
+### CLib_fnc_removeEventhandler
+
+Parameter(s):
+* [`<String>`] Event name
+* [`<Number>`] Event handler ID
+
+Returns:
+* [`<Boolean>`] True if the event handler was removed
+
+Removes an event handler previously returned by `CLib_fnc_addEventHandler`.
+
+Examples:
+
+```sqf
+["myAwsomeEvent", 0] call CLib_fnc_removeEventhandler;
+```
+
 ### CLib_fnc_serverEvent
 
 Parameter(s):

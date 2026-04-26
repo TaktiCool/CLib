@@ -129,7 +129,7 @@ class cfgCLibSimpleObject {
 * [`<Anything>`]  Callback Parameters
 
 ## Functions
-### CLib_fnc_createObjectComp
+### CLib_fnc_createSimpleObjectComp
 
 Parameter(s):
 * [`<String>`] Unique identifier
@@ -161,10 +161,10 @@ Examples:
             hintSilient format ["Placed FOB with UID %2", _uid];
         }
     ]
-] call CLib_fnc_createObjectComp;
+] call CLib_fnc_createSimpleObjectComp;
 ```
 
-### CLib_fnc_deleteObjectComp
+### CLib_fnc_deleteSimpleObjectComp
 
 Parameter(s):
 * [`<String>`] UID to Delete
@@ -184,7 +184,24 @@ Examples:
         params ["_uid"];
         hintSilient format ["Destroyed FOB with UID %2", _uid];
     }
-]] call CLib_fnc_deleteObjectComp);
+]] call CLib_fnc_deleteSimpleObjectComp;
+```
+
+### CLib_fnc_readSimpleObjectComp
+
+Parameter(s):
+* [`<Config>`] Config path
+* [`<String>`] Name (default: config class name)
+
+Returns:
+* [`<Array>`] SimpleObjectStructure
+
+Reads a simple object composition from config and caches it for the framework.
+
+Examples:
+
+```sqf
+private _structure = [configFile >> "cfgCLibSimpleObject" >> "FOBTest"] call CLib_fnc_readSimpleObjectComp;
 ```
 
 ### CLib_fnc_exportSimpleObjectComp

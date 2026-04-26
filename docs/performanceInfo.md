@@ -2,10 +2,27 @@
 
 > Maintainer: NetFuison, joko // Jonas
 
-TODO text here
+Tools for collecting CLib runtime and performance diagnostics.
 
-## Settings
+## Functions
+### CLib_fnc_dumpPerformanceInfo
 
+Parameter(s):
+* [`<Object>`] Unit to inspect (default: `objNull`)
+* [`<Number>`], [`<Object>`], [`<String>`], [`<Side>`], [`<Group>`], [`<Array>`] Target receiving the dump
+
+Returns:
+* None
+
+Dumps CLib performance/debug information and sends the output through CLib events.
+
+Examples:
+
+```sqf
+[player, player] call CLib_fnc_dumpPerformanceInfo;
+```
+
+[`<Side>`]: https://community.bistudio.com/wiki/Side
 [`<Control>`]: https://community.bistudio.com/wiki/Control
 [`<Anything>`]: https://community.bistudio.com/wiki/Anything
 [`<Config>`]: https://community.bistudio.com/wiki/Config

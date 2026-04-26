@@ -2,11 +2,11 @@
 
 > Maintainer: BadGuy
 
-TODO
+The settings module lets missions and addons register hierarchical settings and read them at runtime.
 
 ## Usage
 
-TODO
+Register your settings classes via `CfgCLibSettings` and read values with the provided API functions.
 
 ## CfgSettings
 
@@ -96,7 +96,7 @@ Get all settings of a settings-path
 Examples:
 
 ```sqf
-private _allSettings = "CLibSettingsTest" call Clib_fnc_getSettings;
+private _allSettings = "CLibSettingsTest" call CLib_fnc_getSettings;
 ```
 
 ### CLib_fnc_getSettingSubClasses
@@ -114,6 +114,22 @@ Examples:
 ```sqf
 private _allSubSettings = "CLibSettingsTest" call CLib_fnc_getSettingSubClasses;
 
+```
+
+### CLib_fnc_registerSettings
+
+Parameter(s):
+* [`<Array>`] Base path to settings classes
+
+Returns:
+* None
+
+Registers settings classes from configFile and missionConfigFile for the given path.
+
+Examples:
+
+```sqf
+["CfgCLibSettings", "CLib_test"] call CLib_fnc_registerSettings;
 ```
 
 [`<Control>`]: https://community.bistudio.com/wiki/Control
